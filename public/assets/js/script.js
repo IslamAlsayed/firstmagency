@@ -119,9 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const header = document.getElementById('header');
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('navbar');
-
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', (e) => {
             navLinks.classList.toggle('active');
@@ -130,36 +130,80 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener("click", (e) => {
         if (!e.target.closest("#header")) {
-            navLinks.classList.remove("active");
+            if (navLinks.classList.contains("active")) {
+                navLinks.classList.remove("active");
+            }
             return;
         }
     });
 
-    window.addEventListener("scroll", (e) => {
-        navLinks.classList.remove("active");
+    let currentScroll = window.scrollY || document.documentElement.scrollTop;
+    if (currentScroll <= 7) {
+        header.classList.remove('scrolled');
+    } else {
+        header.classList.add('scrolled');
+    }
+
+    window.addEventListener('scroll', () => {
+        if (header) {
+            let currentScroll = window.scrollY || document.documentElement.scrollTop;
+            if (currentScroll <= 7) {
+                header.classList.remove('scrolled');
+            } else {
+                header.classList.add('scrolled');
+            }
+        }
     });
 
-    // onscroll = function () {
-    //     // Scroll Background
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
 
-    //     if (scrollY <= 125) {
-    //         // 0%
-    //         header.style.background = "#005d4e00";
-    //     } else if (scrollY <= 300) {
-    //         // 25%
-    //         header.style.background = "#005d4e61";
-    //     } else if (scrollY <= 665) {
-    //         // 75%
-    //         header.style.background = "#005d4ebf";
-    //     } else {
-    //         // 100%
-    //         header.style.background = "var(--main-color)";
-    //     }
+    // Mapping من filter IDs إلى أسماء الـ tags الفعلية
+    const tagFilterMap = {
+        'website_design': 'Web Design',
+        'graphic_design': 'Graphic Design'
+    };
 
-    //     // Start Scroll Up
-    //     this.scrollY >= 1480 ? up.classList.add("show") : up.classList.remove("show");
+    // تهيئة جميع العناصر بـ fade-up و opacity 1
+    projectItems.forEach(item => {
+        item.classList.add('fade-up');
+        item.style.opacity = '1';
+    });
 
-    //     bars.classList.remove("active");
-    //     nav.classList.add("show");
-    // };
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                projectItems.forEach(item => {
+                    const tagsString = item.getAttribute('data-tags');
+                    const tags = tagsString ? tagsString.split(',').map(tag => tag.trim()) : [];
+                    const searchTag = filter === 'all' ? null : tagFilterMap[filter];
+
+                    const shouldShow = filter === 'all' || (searchTag && tags.includes(searchTag));
+
+                    if (shouldShow) {
+                        // إظهار العنصر
+                        item.style.display = 'block';
+                        item.classList.remove('fade-down');
+                        item.classList.add('fade-up');
+                        item.style.opacity = '1';
+                    } else {
+                        // إخفاء العنصر
+                        item.classList.remove('fade-up');
+                        item.classList.add('fade-down');
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                            if (item.classList.contains('fade-down')) {
+                                item.style.display = 'none';
+                            }
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
 });

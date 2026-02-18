@@ -10,11 +10,16 @@ return [
     'read_more' => 'Read More',
     'hello' => 'Hello',
     'welcome' => 'Welcome',
+    'all' => 'All',
+    'website_design' => 'Website Design',
+    'graphic_design' => 'Graphic Design',
 
     // ==================== Navigation ====================
     'home' => 'Home',
     'about_us' => 'About Us',
-    'portfolio' => 'Our portfolio',
+    'portfolio' => 'Portfolio',
+    'our_works' => 'Our Works',
+    'our_services' => 'Our Services',
     'articles' => 'Articles',
     'clients' => 'Clients Area',
     'contact' => 'Contact Us',
@@ -42,10 +47,10 @@ return [
     'service_website_design_desc' => 'We offer professional website design service that combines modern style, fast performance and smooth user experience. We design your website with a strong identity and 100% responsive.',
 
     // ==================== Clients ====================
-    'clients_title' => 'Reviews',
+    'clients_title' => 'Clients',
     'clients_client_reviews' => 'Client Reviews',
     'clients_subtitle' => 'First Marketing Clients',
-    'clients_description' => 'Examples of reviews we received from clients who implemented some of our services.',
+    'clients_description' => 'Clients who have trusted First Marketing over the years.',
     'clients_list' => 'Clients list',
     'clients_area' => 'Clients Area',
     'clients_review_by' => 'Review by',
@@ -125,29 +130,119 @@ return [
     'hero_title' => 'First Marketing',
     'hero_description' => 'Your ideal partner in providing digital services from creating websites, mobile applications, designing identity and branding, electronic marketing and all different digital media - executing your idea professionally.',
     'contact_button' => 'Contact Us',
+    'write_review' => 'Write a Review',
 
     // ==================== About Section ====================
     'about_title' => 'About Us',
     'about_description' => 'First Marketing is an integrated web solutions company specialized in marketing work, website design, hosting services, servers and internet site management and e-commerce stores. We also provide other services that provide suitable services for everyone and represent a fertile environment for the growth of ideas and projects on the Internet. Today we are proud to present different hosting services for more than a thousand sites, starting from small and large blogs to large business sites, our services carry a lot of values ​​that generate a feeling of happiness for our clients. Contact us now to book one of our services through a team of technical support ready to listen, understand your request and provide you with an appropriate quotation.',
 
+    'our_works_data' => [
+        [
+            'title' => 'الفــــهد للدعاية والاعلان',
+            'description' => 'شركة الفهد للدعاية والاعلان',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'فاطمة لتحفيظ القران',
+            'description' => 'فاطمة لتحفيظ القران للكبار والصغار',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة الدوليــــة',
+            'description' => 'شركة الدوليــــة للخدمات المتنوعة',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'الوصل للذبائح',
+            'description' => 'شركة لبيع منتجات الذبائح بالامارات',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة ميديا للاجهزه',
+            'description' => 'شركة ميديا للاجهزه المنزلية',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'بالعافية للذبائح',
+            'description' => 'شركة بيع منتجات الذبائح بالامارات',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'كونسبت ميديا',
+            'description' => 'شركة كونسبت ميديا للانتاج الفني',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شــركة ATA',
+            'description' => 'بيع منتجات الاجهزه الكهربائية والمنزلية',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'توب وان كلين',
+            'description' => 'شركة مكافحة حشرات بالكويت',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'شركة دهانات',
+            'description' => 'شركة دهانات جي ال سي',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'البصرة لايف 25',
+            'description' => 'منصة بث لايف وبودكاست البصرة 25',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة هوم لايف',
+            'description' => 'شركة هوم لايف لتنسيق الحدائق بالرياض',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'منصة الالفية التعليمية',
+            'description' => 'منصة كورسات تعليمية بالاردن',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'الطيب للذبائح',
+            'description' => 'شركة الطيب للذبائح بدولة الامارات',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'مباردة بنك السعادة',
+            'description' => 'مؤسسة رسمية بدولة الامارات',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة العز اكسبريس',
+            'description' => 'موقع وسيستم شحن – العز اكسبريس',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'الرحمة لتصدير المنتجات',
+            'description' => 'شركة استيرداد وتصدير منتجات زراعية',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'كيمت التطوير العقاري',
+            'description' => 'شركة متخصصة في التطوير العقاري والمشروعات العقارية',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'سمارت بور',
+            'description' => 'موقع خاص بالمعدات الصناعية للمصانع واصحاب المهن',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'الحدث اليوم نيوز',
+            'description' => 'موقع اخباري متميز',
+            'tags' => ['Web Design'],
+        ],
+    ],
+
     // ==================== Projects Section ====================
     'projects_main_title' => 'Our Work Portfolio',
     'projects_main_badge' => 'FirstMarketing',
     'projects_main_description' => 'Examples of our professional projects for clients in various fields.',
-    'projects_companies' => [
-        'Media Equipment Company',
-        'Bel Afiya for Slaughtering',
-        'Concept Media',
-        'ATA Company',
-        'Top One Clean',
-        'Paint Company',
-        'Al-Basra Life 25',
-        'Home Life Company',
-        'Millennia Educational Platform',
-        'Al-Tayyib for Slaughtering',
-        'Bank of Happiness Initiative',
-        'Al-Ezz Express Company',
-    ],
     'project_view' => 'View',
     'project_eyes' => 'Views',
     'project_search' => 'Search',

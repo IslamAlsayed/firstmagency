@@ -1,0 +1,264 @@
+.contact-sections {
+    margin: 0;
+    padding: 140px 30px 30px;
+    background-color: var(--articles-background-color);
+
+    background-image: url(https://firstmagency.com/wp-content/uploads/2024/07/White-logo.png);
+    background-size: 5% auto;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+
+    & .text {
+        padding-block: 30px;
+        text-align: center;
+    }
+
+    & .contact-form {
+        border-radius: 15px;
+        margin-bottom: 30px;
+        background-color: var(--light-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        & h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        & .groups {
+            padding: 15px;
+
+            & .group:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+            & .group {
+                gap: 15px;
+                padding: 5px;
+
+                &>div {
+                    width: 100%;
+
+                    & label {
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+
+                    & .input {
+                        /* overflow: hidden; */
+                        padding: 5px;
+                        direction: ltr;
+                        border-radius: 10px;
+                        border: 1px solid var(--light-muted-color);
+
+                        & input,
+                        & select,
+                        & textarea {
+                            width: 100%;
+                            text-align: end;
+                            padding-inline-end: 10px;
+
+                            &:focus {
+                                outline: none;
+                                border: 1px solid var(--main-color);
+                            }
+                        }
+
+                        & .icon {
+                            width: 37px;
+                            height: 35px;
+                            padding: 7px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 10px;
+                            position: relative;
+                            z-index: 1;
+
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                opacity: 0.2;
+                                z-index: -1;
+                                border-radius: 10px;
+                                transition: opacity 0.3s;
+                                background-color: var(--main-color);
+                            }
+                        }
+                    }
+                }
+
+                & .add-attachment-input {
+                    width: fit-content;
+                    font-weight: bold;
+                    cursor: pointer;
+                    text-align: center;
+                    padding: 10px 20px;
+                    margin-top: 20px;
+                    border-radius: 10px;
+                    color: var(--light-main-color);
+                    z-index: 5;
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 1;
+                        opacity: 0.3;
+                        border-radius: 10px;
+                        background-color: var(--light-main-color);
+                    }
+                }
+            }
+
+            & .verification {
+                padding: 15px;
+                border-radius: 10px;
+                border: 1px dashed var(--light-muted-color);
+
+                & .rotate {
+                    width: 45px;
+                    height: 45px;
+                    padding: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 3;
+                    color: var(--light-main-color);
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        opacity: 0.3;
+                        z-index: 1;
+                        border-radius: 10px;
+                        transition: opacity 0.3s;
+                        background-color: var(--light-main-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tickets-section {
+    text-align: center;
+    padding-block: 170px 100px;
+
+    & .title {
+        font-size: 22px;
+        color: var(--light-main-color);
+    }
+
+    & .tickets-form {
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        background-color: var(--light-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        &>h2 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-block: 15px;
+        }
+
+        & .group-tickets {
+
+            & label {
+                display: block;
+                text-align: start;
+                margin-bottom: 10px;
+            }
+
+            & input {
+                width: 100%;
+                outline: none;
+                border-radius: 50px;
+                padding: 10px 20px;
+                border: 1px solid var(--light-muted-color);
+
+                &:focus {
+                    border: 1px solid var(--light-main-color);
+                }
+            }
+
+            & button {
+                margin: 30px 0 15px;
+                transition: all 0.1s ease;
+                box-shadow: 0 8px 20px -5px var(--light-main-color);
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 20px -5px var(--light-main-color), 0 12px 40px -10px var(--light-main-color);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-sections {
+        padding: 110px 0px 0px;
+
+        & .text {
+            padding-block: 15px;
+        }
+
+        & .contact-form {
+            & .groups {
+                & .group {
+                    flex-direction: column;
+                }
+
+                & .verification {
+                    &>div {
+                        flex-direction: column-reverse;
+                    }
+
+                    & .inter,
+                    & .inter>div {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .tickets-section {
+        & .title {
+            font-size: 18px;
+        }
+
+        & .tickets-form {
+            &>h2 {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .tickets-section {
+        & .title {
+            font-size: 16px;
+        }
+
+        & .tickets-form {
+            &>h2 {
+                font-size: 18px;
+            }
+        }
+    }
+}

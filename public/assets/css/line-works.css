@@ -1,0 +1,103 @@
+.line-works-section {
+    text-align: center;
+    text-wrap: balance;
+    background-color: var(--muted-background-color);
+    counter-reset: step-counter;
+
+    & .info {
+        padding-block: 30px;
+    }
+
+    & .title {
+        font-size: 48px;
+        color: var(--light-main-color);
+    }
+
+    & .description {
+        color: var(--muted-color);
+    }
+
+    & .steps {
+        padding-block: 30px;
+
+        & .step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            counter-increment: step-counter;
+
+            &:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            &:nth-child(3) {
+                & .image {
+                    transform: scaleX(-1);
+                }
+            }
+
+            &::before {
+                content: '';
+                width: 2px;
+                position: absolute;
+                top: 0;
+                right: 50%;
+                bottom: 0;
+                z-index: 50;
+                border-left: 2px dashed var(--light-main-color);
+            }
+
+            &::after {
+                content: counter(step-counter);
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top: 50%;
+                right: calc(50% - 30px);
+                transform: translateY(-50%);
+                color: var(--dark-color);
+                background-color: var(--light-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                z-index: 51;
+                line-height: 1;
+                transition: 0.1s ease;
+                box-shadow: 0 2px 16px -6px var(--light-muted-color);
+            }
+
+            &:hover::after {
+                box-shadow: 0 0 1px 1px var(--light-main-color);
+            }
+
+            &>div {
+                width: 35%;
+                margin: auto;
+            }
+
+            & .heading {
+                font-size: 36px;
+            }
+
+            & .details {
+                color: var(--muted-color);
+            }
+
+            & .image {
+                transition: all 0.3s ease;
+            }
+
+            & .image:hover {
+                transform: translateY(-5px) scale(1.01);
+                box-shadow: 0 2px 16px -6px var(--light-muted-color);
+            }
+
+            &:nth-child(3) .image:hover {
+                transform: translateY(-5px) scale(1.01) scaleX(-1);
+            }
+        }
+    }
+}

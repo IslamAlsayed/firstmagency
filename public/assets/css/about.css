@@ -1,0 +1,133 @@
+/* Start About Section */
+.about-section {
+    height: 600px;
+    margin-top: 100px;
+    color: var(--light-color);
+
+    &>div {
+        width: 50%;
+        height: 100%;
+    }
+
+    & .text {
+        height: 100%;
+        max-height: 600px;
+        padding-inline: 80px 30px;
+        font-size: 17px;
+        text-wrap: balance;
+        line-height: 1.8;
+        position: relative;
+        align-content: center;
+        background-color: var(--main-color);
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.1;
+            background-image: url('../images/about/text-bg.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        &>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        & .title {
+            width: fit-content;
+            font-size: 28px;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: calc(100% + 35px);
+                height: 2px;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                background-color: var(--light-color);
+            }
+        }
+
+        & button {
+            margin-top: 50px;
+            padding-block: 5px;
+            position: relative;
+            border: 1px solid var(--light-muted-color);
+
+            &:hover {
+                color: var(--main-color);
+                background-color: var(--light-color);
+                box-shadow: 0 0 4px var(--light-color);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.5;
+                top: 50%;
+                left: 50%;
+                z-index: -1;
+                border-radius: 50px;
+                transform: translate(-50%, -50%);
+                background-color: var(--light-color);
+            }
+        }
+    }
+
+    & .image {
+        height: 100%;
+        overflow: hidden;
+
+        & img {
+            object-fit: cover;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .about-section {
+        height: auto;
+        text-align: center;
+        flex-direction: column;
+
+        &>div {
+            width: 100%;
+        }
+
+        & .text {
+            font-size: 12px;
+            padding: 30px;
+        }
+
+        & .image {
+            height: auto;
+            max-height: 400px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    /* .about-section {} */
+}
+
+@media (max-width: 425px) {
+    .about-section {
+        margin-top: 30px;
+    }
+}
+
+/* End About Section */

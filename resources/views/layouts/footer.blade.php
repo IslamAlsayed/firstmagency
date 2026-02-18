@@ -8,29 +8,19 @@
 
             <div class="social">
                 <button class="btn-link main-color dark-hover font-semibold">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-facebook"></i>
-                    </a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
                 </button>
                 <button class="btn-link main-color dark-hover font-semibold">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
+                    <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
                 </button>
                 <button class="btn-link main-color dark-hover font-semibold">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
                 </button>
                 <button class="btn-link main-color dark-hover font-semibold">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+                    <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </button>
                 <button class="btn-link main-color dark-hover font-semibold">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-telegram"></i>
-                    </a>
+                    <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
                 </button>
             </div>
         </div>

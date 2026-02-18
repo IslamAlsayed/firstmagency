@@ -1,0 +1,158 @@
+/* Start Projects Section */
+.projects-section {
+    padding: 30px;
+    margin-top: 0;
+    position: relative;
+    min-height: 600px;
+    background-image: url('../images/projects/projects-bg.jpg');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.9;
+        z-index: -9;
+        background-color: var(--light-color);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        z-index: -7;
+        background-color: var(--light-main-color);
+    }
+
+    & .our-projects-wrapper {
+        margin-top: 10px;
+    }
+
+    & .project-item {
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+
+        & .project-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            z-index: 1;
+            transition: 0.1s linear;
+            background-color: var(--dark-color);
+        }
+
+        & .project-text {
+            text-align: start;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            left: auto;
+            z-index: 3;
+            opacity: 0;
+            visibility: hidden;
+            color: var(--light-color);
+        }
+
+        & .project-action {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            left: auto;
+            z-index: 7;
+            opacity: 0;
+            visibility: hidden;
+
+            & button {
+                padding: 8px 16px;
+                border-radius: 12px;
+                text-align: center;
+                align-content: center;
+                color: var(--dark-color);
+                background-color: var(--light-color);
+            }
+        }
+
+        &:hover {
+            & .project-image img {
+                transform: scale(1.05);
+                transition: 0.1s linear;
+            }
+
+            & .project-image::after {
+                opacity: 0.8;
+            }
+
+            & .project-text,
+            & .project-action {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}
+
+.work-section {
+    background-image: none;
+    background-color: transparent;
+
+    &>h2 {
+        font-size: 30px;
+        text-align: start;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+.our-works {
+    padding: 140px 50px 50px;
+    position: relative;
+    /* min-height: 600px; */
+    background-color: var(--light-muted-color);
+    background-image: url('../images/reviews-bg.jpg');
+    background-position: top left;
+    background-size: 18%;
+    background-repeat: repeat;
+
+    & .our-projects-wrapper {
+        gap: 15px;
+    }
+
+    & .project-item {
+        border-radius: 10px;
+
+        &:hover {
+            & .project-image::after {
+                opacity: 0.5;
+            }
+        }
+
+        & .project-text {
+            & .project-description {
+                font-size: 12px;
+                font-weight: normal;
+            }
+        }
+
+        & .project-image {
+            height: 100%;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .projects-section {
+        padding: 20px;
+    }
+}
+
+/* End Projects Section */

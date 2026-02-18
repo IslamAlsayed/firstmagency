@@ -5,7 +5,7 @@
             {{ __('main.about_description') }}
         </div>
         <button class="btn-link main-color dark-hover font-semibold">
-            <a href="#contact">{{ __('main.contact_button') }}</a>
+            <a href="{{ route('contact') }}">{{ __('main.contact_button') }}</a>
         </button>
     </div>
     <div class="image">

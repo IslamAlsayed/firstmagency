@@ -1,0 +1,272 @@
+.articles-section {
+    margin: 0;
+    padding: 180px 30px 30px;
+    text-align: start;
+    background-color: var(--articles-background-color);
+
+    --border-radius: 15px;
+
+    & .heading {
+        padding: 10px;
+        padding-inline-start: 30px;
+        margin-bottom: 30px;
+        font-weight: bolder;
+        font-size: 18px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--light-muted-color);
+        background-color: var(--light-color);
+    }
+}
+
+.blog-show {
+    gap: 15px;
+    display: flex;
+    padding: 150px 30px 30px;
+    background-color: var(--blog-show-background-color);
+    --border-radius: 15px;
+
+    & .blog-content {
+        padding: 20px;
+        width: calc(100% - 310px);
+        border-radius: var(--border-radius);
+        background-color: var(--light-color);
+        border: 1px solid var(--light-muted-color);
+    }
+
+    & .side {
+        width: 310px;
+        height: fit-content;
+        border-radius: var(--border-radius);
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+
+        &>div {
+            padding: 15px;
+            background-color: var(--light-color);
+        }
+    }
+
+    & .blog-content {
+        & .image {
+            width: 88%;
+            margin: 0 auto;
+            max-height: auto;
+            height: 350px;
+            position: relative;
+
+            & img {
+                position: relative;
+                z-index: 9;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    & .heading {
+        font-size: 22px;
+        font-weight: bolder;
+        margin-block: 30px;
+    }
+
+    & .description {
+        line-height: 2;
+        color: var(--muted-color);
+    }
+
+    & .reviews-image {
+        border-radius: var(--border-radius);
+        border: 1px solid var(--light-muted-color);
+    }
+
+    & .reviews-image .reviews-image {
+        padding: 0;
+    }
+
+    & .categories {
+        font-size: 14px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--light-muted-color);
+
+        & .title {
+            margin-bottom: 10px;
+        }
+
+        & ul {
+            gap: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        & ul>li>a {
+            width: 100%;
+            gap: 10px;
+            padding: 10px 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: calc(var(--border-radius) - 5px);
+            border: 1px solid var(--light-muted-color);
+            transition: all 0.1s ease;
+
+            &:hover {
+                border: 1px solid #00ae40;
+            }
+        }
+
+        & ul>li span {
+            gap: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        & ul>li .icon {
+            padding: 6px 8px;
+            font-size: 12px;
+            border-radius: 7px;
+            border: 1px solid var(--light-muted-color);
+        }
+    }
+
+    & .articles {
+        & .title {
+            margin-top: 10px;
+        }
+
+        & .latest-articles {
+            gap: 15px;
+            display: flex;
+            margin-top: 10px;
+            flex-direction: column;
+
+            & .image {
+                width: 60px;
+                min-width: 60px;
+                height: 45px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+        }
+
+        & small {
+            color: var(--muted-color);
+        }
+    }
+}
+
+.main-articles {
+    & .article {
+        height: fit-content;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--light-muted-color);
+        background-color: var(--light-color);
+        position: relative;
+
+        & .image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+
+            & img {
+                position: relative;
+                z-index: 9;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                opacity: 1;
+                z-index: 6;
+                background: radial-gradient(circle at 20% 10%, var(--light-color), transparent 40%);
+                transition: opacity .25s ease;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                opacity: 1;
+                z-index: 5;
+                background-color: #E4FAEC;
+            }
+        }
+
+        & .visitor {
+            padding: 3px 10px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 14px;
+            border-radius: 25px;
+            pointer-events: none;
+            color: var(--light-color);
+            background-color: var(--light-main-color);
+        }
+
+        & .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .body {
+            padding: 10px;
+
+            & .title:hover {
+                text-decoration: underline var(--main-color);
+            }
+
+            & .description {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.actions {
+    gap: 10px;
+    display: grid;
+    padding: 15px;
+    grid-template-columns: repeat(2, 1fr);
+
+    & button {
+        border-radius: 12px;
+        padding-block: 7px;
+
+        &.details {
+            color: #1F7A3A;
+            background-color: #E4FAEC;
+            box-shadow: 0 0 1px 0 #1F7A3A;
+        }
+
+        &.whatsapp {
+            color: #C2410C;
+            background-color: #FEEEE3;
+            box-shadow: 0 0 1px 0 #C2410C;
+        }
+
+        &.more {
+            color: #C2410C;
+            background-color: #FEEEE3;
+            box-shadow: 0 0 1px 0 #C2410C;
+        }
+
+        &:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0px 10px 11px -4px var(--light-muted-color);
+
+            &.details {
+                border: 1px solid #7fffae;
+            }
+
+            &.whatsapp {
+                border: 1px solid #ffb381;
+            }
+        }
+    }
+}

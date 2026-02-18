@@ -68,9 +68,9 @@
             </div>
         </div>
         <div class="our-reviews-wrapper">
-            <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="4" navigation="true"
+            <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="3" navigation="true"
                 navigation-next-el=".swiper-button-next" navigation-prev-el=".swiper-button-prev"
-                breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 5, "spaceBetween": 15}}'>
+                breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 4, "spaceBetween": 15}}'>
                 @foreach ($reviewsReview as $review)
                     <swiper-slide class="review">
                         <div class="info flex items-center gap-2">
@@ -96,10 +96,10 @@
         </div>
     </div>
 
-    <div class="review-form text-center">
+    <div class="review-form text-center hidden">
         <button class="btn-link primary-color dark-hover font-semibold">
             <a href="#contact">
-                {{ __('main.msg_ok') }}
+                {{ __('main.write_review') }}
                 <i class="fas fa-circle-plus"></i>
             </a>
         </button>

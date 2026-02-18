@@ -18,4 +18,5 @@
 
     {{-- Clients Section --}}
     @include('sections.clients')
+    @include('sections.clients2')
 @endsection

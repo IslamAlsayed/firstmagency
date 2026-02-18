@@ -42,9 +42,9 @@
             breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 5, "spaceBetween": 15}}'>
             @foreach ($services as $service)
                 <swiper-slide class="service-item">
-                    <div class="service-image">
+                    <a href="#" class="service-image">
                         <img src="{{ asset('assets/images/services/' . $service['image']) }}" alt="{{ __('main.' . $service['title_key']) }}">
-                    </div>
+                    </a>
                     <div class="service-text">
                         <div class="icon">
                             <img src="{{ asset('assets/images/services/' . $service['icon']) }}" alt="{{ __('main.' . $service['title_key']) }}">

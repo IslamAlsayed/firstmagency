@@ -29,5 +29,19 @@
 <link href="{{ asset('assets/css/metronic.css') }}" rel="stylesheet" />
 {{-- font awesome icons --}}
 <link href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet" />
+
 {{-- custom css --}}
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+
+{{-- sections css --}}
+<link href="{{ asset('assets/css/hero.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/about.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/services.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/projects.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/reviews.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/clients.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/line-works.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/partners.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/articles.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/contact.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/work-show.css') }}" rel="stylesheet" />
