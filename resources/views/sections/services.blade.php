@@ -1,4 +1,4 @@
-<div class="container section services-section text-center">
+<div class="section services-section text-center">
     <div class="title font-semibold">{{ __('main.services_title') }} <span class="title-badge">{{ __('main.services_subtitle') }}</span></div>
     <div class="description">{{ __('main.services_description') }}</div>
 

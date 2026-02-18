@@ -1,6 +1,7 @@
 /* Start Services Section */
 .services-section,
 .reviews-section {
+    padding-inline: var(--inline-padding);
 
     & .our-services-wrapper,
     & .our-reviews-wrapper {

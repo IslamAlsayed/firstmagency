@@ -122,16 +122,66 @@ document.addEventListener('DOMContentLoaded', function () {
     const header = document.getElementById('header');
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('navbar');
+    const closeBtn = document.querySelector('.close');
+    const ourServicesItems = document.querySelectorAll('.our_services');
+
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', (e) => {
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'auto' : 'hidden';
+
             navLinks.classList.toggle('active');
+            ourServicesItems.forEach(item => item?.classList.remove('active'));
+            document.querySelector('.our_services .services')?.classList.remove('active');
+            navLinks?.classList.remove('scroll');
         });
     }
+
+    if (closeBtn && navLinks) {
+        closeBtn.addEventListener('click', (e) => {
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Handle services dropdown toggle on mobile
+    ourServicesItems.forEach(item => {
+        const toggleBtn = item.querySelector('.nav-link');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function (e) {
+                console.log('click', e.target, item);
+                // Check if screen is small (mobile/tablet)
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close other open menus
+                    ourServicesItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current menu
+                    item.classList.toggle('active');
+                    navLinks.classList.toggle('scroll');
+                }
+            });
+        }
+    });
 
     document.addEventListener("click", (e) => {
         if (!e.target.closest("#header")) {
             if (navLinks.classList.contains("active")) {
                 navLinks.classList.remove("active");
+            }
+            // Close services menu if clicking outside
+            if (window.innerWidth <= 768) {
+                ourServicesItems.forEach(item => {
+                    if (!item.contains(e.target)) {
+                        item.classList.remove('active');
+                    }
+                });
             }
             return;
         }

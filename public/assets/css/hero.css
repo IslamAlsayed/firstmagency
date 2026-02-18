@@ -162,4 +162,13 @@
     }
 }
 
+@media (max-width: 425px) {
+    .hero-section {
+        & .gallery {
+            max-width: 220px;
+            height: 350px;
+        }
+    }
+}
+
 /* End Hero Section */

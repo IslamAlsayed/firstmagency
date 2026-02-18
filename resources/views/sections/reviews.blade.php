@@ -55,7 +55,7 @@
         ];
     @endphp
 
-    <div class="container our-review-review-wrapper">
+    <div class="our-review-review-wrapper">
         <div class="relative">
             <div class="review-title">{{ __('main.reviews_title_review') }}</div>
             <div class="wrapper-actions">

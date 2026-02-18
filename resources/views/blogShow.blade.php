@@ -168,40 +168,85 @@
                 </div>
             </div>
 
-            <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                @foreach (config('articles') as $key => $article)
-                    @if ($key < 3)
-                        <div class="article">
-                            <div class="image">
-                                @if (rand(0, 1) == 1)
-                                    <img src="{{ asset('assets/images/projects/' . rand(1, 12) . '.png') }}" alt="">
-                                @endif
-                            </div>
-                            <div class="visitor">
-                                <i class="fas fa-eye"></i>
-                                {{ rand(254, 584) }}
-                            </div>
-                            <div class="content">
-                                <div class="body">
-                                    <a href="#" class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
-                                    <div class="description">{{ limitedText($article['description'], 60) }}</div>
-                                </div>
-                                <div class="actions">
-                                    <button class="btn-link font-semibold details">
-                                        <a href="{{ route('blog.show') }}">
-                                            التفاصيل
-                                        </a>
-                                    </button>
-                                    <button class="btn-link font-semibold whatsapp">
-                                        <a href="#contact">
-                                            واتساب
-                                        </a>
-                                    </button>
-                                </div>
-                            </div>
+            <div class="share-your-articles mb-4">
+                <div class="title">شارك مقالتك</div>
+
+                <div class="links grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                    <a href="#" class="link flex items-center justify-between gap-2">
+                        <div class="icon" data-color="#3b5998">
+                            <i class="fab fa-facebook-f"></i>
                         </div>
-                    @endif
-                @endforeach
+                        فيسبوك
+                        <i class="arrow fas fa-square-arrow-up-right"></i>
+                    </a>
+                    <a href="#" class="link flex items-center justify-between gap-2">
+                        <div class="icon" data-color="#000000">
+                            <i class="fab fa-x-twitter"></i>
+                        </div>
+                        X
+                        <i class="arrow fas fa-square-arrow-up-right"></i>
+                    </a>
+                    <a href="#" class="link flex items-center justify-between gap-2">
+                        <div class="icon" data-color="#0077B5">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        لينكدإن
+                        <i class="arrow fas fa-square-arrow-up-right"></i>
+                    </a>
+                    <a href="#" class="link flex items-center justify-between gap-2">
+                        <div class="icon" data-color="#25D366">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        واتساب
+                        <i class="arrow fas fa-square-arrow-up-right"></i>
+                    </a>
+                    <a href="#" class="link flex items-center justify-between gap-2">
+                        <div class="icon" data-color="#0088cc">
+                            <i class="fab fa-telegram-plane"></i>
+                        </div>
+                        تيليجرام
+                        <i class="arrow fas fa-square-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="main-articles-section border-custom" style="padding: var(--inline-padding);">
+                <div class="title">مقالات مشابهة</div>
+                <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                    @foreach (config('articles') as $key => $article)
+                        @if ($key < 3)
+                            <div class="article">
+                                <div class="image">
+                                    @if (rand(0, 1) == 1)
+                                        <img src="{{ asset('assets/images/projects/' . rand(1, 12) . '.png') }}" alt="">
+                                    @endif
+                                </div>
+                                <div class="visitor">
+                                    <i class="fas fa-eye"></i>
+                                    {{ rand(254, 584) }}
+                                </div>
+                                <div class="content">
+                                    <div class="body">
+                                        <a href="#" class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
+                                        <div class="description">{{ limitedText($article['description'], 60) }}</div>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="btn-link font-semibold details">
+                                            <a href="{{ route('blog.show') }}">
+                                                التفاصيل
+                                            </a>
+                                        </button>
+                                        <button class="btn-link font-semibold whatsapp">
+                                            <a href="#contact">
+                                                واتساب
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
 
@@ -274,3 +319,14 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.querySelectorAll('.icon').forEach(icon => {
+            const color = icon.getAttribute('data-color');
+            if (color) {
+                icon.style.setProperty('--icon-color', color);
+            }
+        });
+    </script>
+@endpush

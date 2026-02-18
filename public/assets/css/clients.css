@@ -1,12 +1,12 @@
 /* Start Clients Section */
 .clients-section {
-    padding-bottom: 50px;
+    padding: 0 var(--inline-padding) 50px;
 
     & .clients-items {
         gap: 15px;
         padding: 15px;
         border-radius: 15px;
-        background-color: var(--dark-muted-color);
+        background-color: var(--blog-show-background-color);
 
         & .client {
             /* padding: 15px; */

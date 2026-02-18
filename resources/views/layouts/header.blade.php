@@ -1,5 +1,5 @@
 <div class="header flex items-center justify-between py-4" id="header">
-    <div class="container inner">
+    <div class="inner">
         <div class="logo">
             <a href="{{ url('/') }}" class="shineEffect">
                 <img src="{{ asset('assets/images/logo.png.webp') }}" alt="{{ __('main.brand_name') }} Logo">
@@ -60,65 +60,139 @@
         @endphp
 
         <nav class="navbar" id="navbar" data-set="{{ $currentRoute }}" data-set2="{{ request()->url() }}">
-            <ul class="flex gap-4">
+            <div class="header-side flex items-center justify-between gap-4">
+                <div class="info flex items-center gap-2">
+                    <div class="pseudo-element-info"></div>
+                    <div class="">
+                        <p class="font-semibold">فرست للبرمجة والتسويق</p>
+                        <span>القائمة</span>
+                    </div>
+                </div>
+                <div class="close">
+                    <i class="fas fa-xmark"></i>
+                </div>
+            </div>
+
+            <div class="contact-actions flex items-center gap-4">
+                <button>
+                    <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
+                        class="flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i>
+                        واتساب
+                    </a>
+                </button>
+                <button>
+                    <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
+                        class="flex items-center gap-2">
+                        <i class="fa-solid fa-phone fa-flip"></i>
+                        اتصل الان
+                    </a>
+                </button>
+            </div>
+
+            <ul class="list-navbar flex gap-4">
                 <li class="flex items-center">
-                    <a href="/" class="btn-link font-semibold hover {{ $currentRoute == 'home' || $currentRoute == '' ? 'active' : '' }}">
-                        {{ __('main.home') }}
+                    <a href="/"
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'home' || $currentRoute == '' ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.home') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('about-us') }}" class="btn-link font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
-                        {{ __('main.about_us') }}
+                    <a href="{{ route('about-us') }}"
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.about_us') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center our_services">
-                    <div class="btn-link hover {{ $currentRoute == 'our_works' ? 'active' : '' }}">
-                        <span class="font-semibold">{{ __('main.our_services') }}</span>
-                        <i class="fas fa-chevron-down"></i>
-
-                        <div class="services">
-                            <a href="#" class="service-link">برمجة وتصميم المواقع</a>
-                            <a href="#" class="service-link">برمجة تطبيقات الموبيل</a>
-                            <a href="#" class="service-link">خدمات الاستضافة</a>
-                            <a href="#" class="service-link">حجز دومين</a>
-                            <a href="#" class="service-link">التسويق الالكتـــروني</a>
-                            <a href="#" class="service-link">خدمات السيـــــــو</a>
+                    <div
+                        class="nav-link btn-link flex items-center justify-between font-semibold gap-2 hover {{ $currentRoute == 'our_works' ? 'active' : '' }}">
+                        <div class="flex items-center gap-2">
+                            <div class="pseudo-element"></div>
+                            <span>{{ __('main.our_services') }}</span>
                         </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+
+                    <div class="services">
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>برمجة وتصميم المواقع</span>
+                        </a>
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>برمجة تطبيقات الموبيل</span>
+                        </a>
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>خدمات الاستضافة</span>
+                        </a>
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>حجز دومين</span>
+                        </a>
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>التسويق الالكتـــروني</span>
+                        </a>
+                        <a href="#" class="service-link">
+                            <div class="pseudo-element"></div>
+                            <span>خدمات السيـــــــو</span>
+                        </a>
                     </div>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('portfolio') }}" class="btn-link font-semibold hover {{ $currentRoute == 'portfolio' ? 'active' : '' }}">
-                        {{ __('main.our_works') }}
+                    <a href="{{ route('portfolio') }}"
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'portfolio' ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.our_works') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center">
                     <a href="{{ route('blog') }}"
-                        class="btn-link font-semibold hover {{ $currentRoute == 'blog' || Str::contains($currentRoute, 'blog') ? 'active' : '' }}">
-                        {{ __('main.articles') }}
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'blog' || Str::contains($currentRoute, 'blog') ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.articles') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center">
                     <a href="https://client.firstmagency.com"
-                        class="btn-link font-semibold hover {{ request()->url() == 'https://client.firstmagency.com' ? 'active' : '' }}">
-                        {{ __('main.clients') }}
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ request()->url() == 'https://client.firstmagency.com' ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.clients') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('contact') }}" class="btn-link font-semibold hover {{ $currentRoute == 'contact' ? 'active' : '' }}">
-                        {{ __('main.contact') }}
+                    <a href="{{ route('contact') }}"
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'contact' ? 'active' : '' }}">
+                        <div class="pseudo-element"></div>
+                        <span>{{ __('main.contact') }}</span>
                     </a>
                 </li>
             </ul>
+
+            <div class="social-links flex items-center justify-center gap-2">
+                <button class="btn-link main-color dark-hover font-semibold">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </button>
+                <button class="btn-link main-color dark-hover font-semibold">
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </button>
+                <button class="btn-link main-color dark-hover font-semibold">
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                </button>
+            </div>
         </nav>
         <div class="flex items-center justify-between gap-4">
-            <div class="language-selector" style="display: flex; gap: 8px;">
+            <div class="languages language-selector">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="arabic language">
+                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="english language">
                     </a>
                 @else
                     <a href="{{ route('locale.change', 'ar') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="english language">
+                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="arabic language">
                     </a>
                 @endif
             </div>
