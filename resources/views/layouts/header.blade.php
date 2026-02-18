@@ -196,12 +196,14 @@
                     </a>
                 @endif
             </div>
+
             <div class="btn-link main-color font-semibold whatsapp">
                 <a href="https://api.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0" class="whatsapp-link">
                     <span>{{ __('main.whatsapp_contact') }}</span>
                     <i class="icon fab fa-whatsapp"></i>
                 </a>
             </div>
+
             <div class="menu" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
