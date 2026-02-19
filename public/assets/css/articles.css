@@ -12,7 +12,7 @@
         margin-bottom: 30px;
         font-weight: bolder;
         font-size: 18px;
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius, 15px);
         border: 1px solid var(--light-muted-color);
         background-color: var(--light-color);
     }
@@ -28,7 +28,7 @@
     & .blog-content {
         padding: 20px;
         width: calc(100% - 310px);
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius, 15px);
         background-color: var(--light-color);
         border: 1px solid var(--light-muted-color);
 
@@ -40,7 +40,7 @@
     & .side {
         width: 310px;
         height: fit-content;
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius, 15px);
         display: flex;
         gap: 15px;
         flex-direction: column;
@@ -81,7 +81,7 @@
     }
 
     & .reviews-image {
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius, 15px);
         border: 1px solid var(--light-muted-color);
     }
 
@@ -91,7 +91,7 @@
 
     & .categories {
         font-size: 14px;
-        border-radius: var(--border-radius);
+        border-radius: var(--border-radius, 15px);
         border: 1px solid var(--light-muted-color);
 
         & .title {
@@ -167,14 +167,15 @@
     & .title {
         font-size: 20px;
         font-weight: bold;
-        margin-bottom: 15px;
+        display: block;
+        margin-bottom: 6px;
     }
 
     & .main-articles {
         & .article {
             height: fit-content;
             overflow: hidden;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius, 15px);
             border: 1px solid var(--light-muted-color);
             background-color: var(--light-color);
             position: relative;
@@ -229,6 +230,7 @@
 
             & .body {
                 padding: 10px;
+                text-align: start;
 
                 & .title:hover {
                     text-decoration: underline var(--main-color);

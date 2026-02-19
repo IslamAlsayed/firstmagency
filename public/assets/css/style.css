@@ -2,12 +2,15 @@
     --main-color: #d05423;
     --primary-color: #3B88C3;
     --blue-color: #1d55ed;
+    --purple-color: #6e2d9f;
     --light-main-color: #F97316;
     --light-color: #ffffff;
     --dark-color: #000000;
+    --dark2-color: #242424;
     --main-bg: #111827;
     --main-card: #ffffff;
     --main-text: #111827;
+    --bg-text: #2E3A3F;
     --muted-color: #6b7280;
     --light-muted-color: #cfd1d3;
     --dark-muted-color: #eae8e8;
@@ -15,6 +18,7 @@
     --light-background-color: #FFFCFC;
     --articles-background-color: #F9F9F9;
     --blog-show-background-color: #F4F4F4;
+    --order-background-color: #EAF5F8;
 
     --green-color: #00ae40;
     --middle-green-color: #7fffae;
@@ -275,6 +279,7 @@ html[lang=en] {
                 }
 
                 & .services {
+                    gap: 2px;
                     display: flex;
                     text-align: center;
                     border-radius: 15px;
@@ -300,6 +305,7 @@ html[lang=en] {
                         padding: 10px 25px;
                     }
 
+                    & a.active,
                     & a:hover {
                         color: var(--light-color);
                         background-color: var(--main-color);
@@ -329,7 +335,7 @@ html[lang=en] {
             & a {
                 width: 30px;
                 height: auto;
-                border-radius: 4px;
+                border-radius: 25px;
                 padding: 0 !important;
                 overflow: hidden;
                 position: relative;
@@ -965,6 +971,7 @@ html[lang=en] {
                                 transition: all 0.2s ease;
                             }
 
+                            &.active,
                             &:hover {
                                 background-color: var(--hover-color);
                                 color: var(--dark-color);

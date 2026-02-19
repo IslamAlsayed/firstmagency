@@ -45,3 +45,5 @@
 <link href="{{ asset('assets/css/articles.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/contact.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/work-show.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/website-developer.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/app-developer.css') }}" rel="stylesheet" />

@@ -174,12 +174,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!e.target.closest("#header")) {
             if (navLinks.classList.contains("active")) {
                 navLinks.classList.remove("active");
+                document.body.style.overflow = 'auto';
             }
             // Close services menu if clicking outside
             if (window.innerWidth <= 768) {
                 ourServicesItems.forEach(item => {
                     if (!item.contains(e.target)) {
                         item.classList.remove('active');
+                        document.body.style.overflow = 'auto';
                     }
                 });
             }
@@ -255,5 +257,104 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         });
+    }
+
+    // Developer Section Auto-Switch and Magnetic Effect
+    const developerInners = document.querySelectorAll('.website-developer .inner');
+    const magneticEffectImages = document.querySelectorAll('.magnetic-effect');
+
+    if (developerInners.length > 0) {
+        let currentDevIndex = 0;
+
+        // Auto-switch every 5 seconds
+        setInterval(() => {
+            developerInners.forEach(inner => inner.classList.add('hidden'));
+            currentDevIndex = (currentDevIndex + 1) % developerInners.length;
+            developerInners[currentDevIndex].classList.remove('hidden');
+        }, 7000);
+    }
+
+    // Magnetic effect on images
+    if (magneticEffectImages.length > 0) {
+        magneticEffectImages.forEach(img => {
+            const parent = img.closest('.image');
+
+            parent.addEventListener('mousemove', (e) => {
+                const rect = parent.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                // Calculate distance from center
+                const distX = (mouseX - centerX) / centerX;
+                const distY = (mouseY - centerY) / centerY;
+
+                // Apply magnetic effect (max 15px movement)
+                const moveX = distX * 15;
+                const moveY = distY * 15;
+
+                img.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+
+            parent.addEventListener('mouseleave', () => {
+                img.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    const faqToggles = document.querySelectorAll('[data-faq-toggle]');
+    if (faqToggles.length > 0) {
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', function () {
+                const item = this.closest('[data-faq-item]');
+                const answer = item.querySelector('[data-faq-answer]');
+                const icon = this.querySelector('i');
+
+                // Toggle active class
+                item.classList.toggle('active');
+
+                // Toggle icon
+                if (item.classList.contains('active')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+    }
+
+    const imagesContainer = document.querySelector('[data-random-images]');
+    const imageSlots = imagesContainer.querySelectorAll('[data-image-slot]');
+    const totalImages = 4;
+    const displayCount = 3;
+
+    if (imagesContainer && imageSlots.length > 0) {
+        function getRandomImages() {
+            const numbers = [];
+            while (numbers.length < displayCount) {
+                const num = Math.floor(Math.random() * totalImages) + 1;
+                if (!numbers.includes(num)) {
+                    numbers.push(num);
+                }
+            }
+            return numbers;
+        }
+
+        function updateImages() {
+            const randomImages = getRandomImages();
+            imageSlots.forEach((slot, index) => {
+                const img = slot.querySelector('img');
+                setTimeout(() => {
+                    img.src = "/assets/images/categories/" + randomImages[index] + ".png";
+                }, 250);
+            });
+        }
+
+        // تحديث عشوائي كل 3 ثوانٍ
+        setInterval(updateImages, 3000);
     }
 });

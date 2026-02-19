@@ -59,7 +59,7 @@
             $currentRoute = Route::currentRouteName();
         @endphp
 
-        <nav class="navbar" id="navbar" data-set="{{ $currentRoute }}" data-set2="{{ request()->url() }}">
+        <nav class="navbar" id="navbar">
             <div class="header-side flex items-center justify-between gap-4">
                 <div class="info flex items-center gap-2">
                     <div class="pseudo-element-info"></div>
@@ -116,11 +116,11 @@
                     </div>
 
                     <div class="services">
-                        <a href="#" class="service-link">
+                        <a href="{{ route('website.developer') }}" class="service-link {{ $currentRoute == 'website.developer' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
                             <span>برمجة وتصميم المواقع</span>
                         </a>
-                        <a href="#" class="service-link">
+                        <a href="{{ route('app.mobile') }}" class="service-link {{ $currentRoute == 'app.mobile' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
                             <span>برمجة تطبيقات الموبيل</span>
                         </a>

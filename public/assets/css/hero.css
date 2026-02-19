@@ -23,15 +23,15 @@
     &::before {
         content: '';
         position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        width: 170%;
+        height: 110%;
+        top: 50px;
+        right: -500px;
         z-index: -10;
         opacity: 0.5;
-        background-image: url('../images/hero/background.png');
-        background-position: 0;
-        background-size: 100% 100%;
+        background-image: url(../images/hero/background.png);
+        background-position: right;
+        background-size: cover;
         background-repeat: no-repeat;
     }
 

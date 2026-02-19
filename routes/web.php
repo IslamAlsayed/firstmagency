@@ -38,3 +38,11 @@ Route::get('/contact', function () {
 Route::get('/tickets', function () {
     return view('tickets');
 })->name('tickets');
+
+Route::get('/website-developer', function () {
+    return view('websiteDeveloper');
+})->name('website.developer');
+
+Route::get('/app-mobile', function () {
+    return view('appMobile');
+})->name('app.mobile');
