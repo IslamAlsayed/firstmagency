@@ -9,6 +9,7 @@
     padding-block: 180px 0;
     padding-inline: 30px;
     position: relative;
+    overflow: hidden;
     top: -50px;
 
     &::after {
