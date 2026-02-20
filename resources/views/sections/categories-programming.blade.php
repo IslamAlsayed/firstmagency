@@ -1,9 +1,9 @@
 <div class="section categories-programming-section">
-    <div class="content flex items-center justify-end">
+    <div class="content flex items-center justify-between">
         <div class="text">
-            <div class="title font-semibold">برمجة التطبيقات <span class="title-badge">فرست ماركتينج</span></div>
+            <div class="title font-semibold">{{ __('main.categories_title') }} <span class="title-badge">{{ __('main.brand_short') }}</span></div>
             <div class="description">
-                نقوم ببرمجة حميع تطبيقات الموبيل باحترافية عالية - نعمل في المجالات التالية
+                {{ __('main.categories_description') }}
             </div>
         </div>
 

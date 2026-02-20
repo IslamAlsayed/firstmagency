@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (toggleBtn) {
             toggleBtn.addEventListener('click', function (e) {
-                console.log('click', e.target, item);
                 // Check if screen is small (mobile/tablet)
                 if (window.innerWidth <= 992) {
                     e.preventDefault();

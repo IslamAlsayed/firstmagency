@@ -148,9 +148,9 @@
 </style>
 
 <section class="project-steps">
-    <h2 class="section-title">مراحل تنفيذ مشروعك</h2>
+    <h2 class="section-title">{{ __('main.project_steps_title') }}</h2>
     <p class="section-subtitle">
-        نشتغل بخطة واضحة من التحليل حتى التسليم… علشان نضمن نتيجة قوية.
+        {{ __('main.project_steps_subtitle') }}
     </p>
 
     <div class="timeline">
@@ -162,12 +162,11 @@
             </div>
 
             <div class="step-label">
-                التحليل <i class="fas fa-arrow-left"></i>
+                {{ __('main.step_work2_analysis_title') }} <i class="fas fa-arrow-left"></i>
             </div>
 
             <div class="timeline-content">
-                تحليل المشروع يعتبر من أهم المراحل حيث يتم فهم الفكرة والمتطلبات
-                بشكل دقيق وتحويلها لخطة واضحة تضمن تنفيذ المشروع بشكل احترافي.
+                {{ __('main.step_work2_analysis_description') }}
             </div>
         </div>
 
@@ -178,12 +177,11 @@
             </div>
 
             <div class="step-label">
-                <i class="fas fa-arrow-right"></i> التصميم
+                <i class="fas fa-arrow-right"></i> {{ __('main.step_work2_design_title') }}
             </div>
 
             <div class="timeline-content">
-                نقدم تصميم مواقع احترافي يعكس هوية نشاطك ويتميز بالمرونة
-                وسهولة الاستخدام لضمان تجربة مستخدم ممتازة.
+                {{ __('main.step_work2_design_description') }}
             </div>
         </div>
 
@@ -194,12 +192,11 @@
             </div>
 
             <div class="step-label">
-                البرمجة <i class="fas fa-arrow-left"></i>
+                {{ __('main.step_work2_programming_title') }} <i class="fas fa-arrow-left"></i>
             </div>
 
             <div class="timeline-content">
-                نقوم ببرمجة موقعك بأحدث التقنيات لضمان أداء سريع
-                وحماية عالية واستقرار تام بدون الاعتماد على سكربتات جاهزة.
+                {{ __('main.step_work2_programming_description') }}
             </div>
         </div>
 
@@ -210,12 +207,11 @@
             </div>
 
             <div class="step-label">
-                <i class="fas fa-arrow-right"></i> النتائج
+                <i class="fas fa-arrow-right"></i> {{ __('main.step_work2_results_title') }}
             </div>
 
             <div class="timeline-content">
-                بعد الاختبارات والمراجعة يتم تسليم المشروع جاهز بالكامل،
-                مع ضمان الجودة والدعم الفني المستمر.
+                {{ __('main.step_work2_results_description') }}
             </div>
         </div>
     </div>

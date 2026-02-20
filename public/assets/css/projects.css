@@ -1,7 +1,7 @@
 /* Start Projects Section */
 .projects-section {
-    padding: 20px;
     margin-top: 0;
+    padding: 20px var(--main-inline-padding);
     position: relative;
     min-height: 600px;
     background-image: url('../images/projects/projects-bg.jpg');
@@ -74,6 +74,20 @@
                 align-content: center;
                 color: var(--dark-color);
                 background-color: var(--light-color);
+
+                & i,
+                & svg {
+                    transition: 0.1s ease;
+                    transform: translateY(1px) scale(1);
+                }
+
+                &:hover {
+
+                    & i,
+                    & svg {
+                        transform: translateY(-2px) scale(1.01);
+                    }
+                }
             }
         }
 
@@ -113,9 +127,8 @@
     }
 }
 
-.our-works {
-    margin-top: 60px;
-    padding: 140px var(--inline-padding) 50px;
+.portfolio {
+    padding: 180px var(--main-inline-padding) 50px;
     position: relative;
     /* min-height: 600px; */
     background-color: var(--light-muted-color);
@@ -123,6 +136,14 @@
     background-position: top left;
     background-size: 18%;
     background-repeat: repeat;
+
+    &>.title {
+        font-size: 28px;
+
+        & .title-badge {
+            padding: 1px 15px;
+        }
+    }
 
     & .our-projects-wrapper {
         gap: 15px;

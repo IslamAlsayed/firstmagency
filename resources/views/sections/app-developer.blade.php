@@ -2,47 +2,45 @@
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
-                <h1 class="font-semibold">عرض التطبيقات</h1>
-                <div class="description">تطبيقات الموبايل هي أسرع طريق لتحويل فكرتك إلى تجربة يومية في يد العميل. بدل ما العميل يدوّر عليك كل مرة، تطبيقك بيكون
-                    قدامه بضغطة واحدة—سريع، منظم، وسهل الاستخدام. ومن خلال تصميم UI/UX احترافي، التطبيق مش بس بيعرض خدماتك… ده بيقود المستخدم خطوة بخطوة لشراء،
-                    حجز، أو تواصل مباشر.</div>
+                <h1 class="font-semibold">{{ __('main.app_developer_title') }}</h1>
+                <div class="description">{{ __('main.app_developer_description') }}</div>
             </div>
             <div class="tags">
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    تطبيق اندرويد + IOS
+                    {{ __('main.app_android_ios') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    لوحة تحكم عربــــــــي
+                    {{ __('main.app_arabic_dashboard') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    استضافة لمدة عـــام
+                    {{ __('main.app_one_year_hosting') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    دومين خاص بتطبيقك
+                    {{ __('main.app_custom_domain') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    دعم فني لمدة عام
+                    {{ __('main.app_one_year_support') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    تحديثات لمدة عــــام
+                    {{ __('main.app_one_year_updates') }}
                 </div>
             </div>
         </div>
@@ -53,47 +51,45 @@
     <div class="inner hidden flex items-center gap-4">
         <div class="content">
             <div class="text">
-                <h1 class="font-semibold">برمجة تطبيقات الموبيل</h1>
-                <div class="description">فرست ماركتينج ) هي شركة تصميم تطبيقات رائدة في جمهورية مصر العربية والامارات العربية المتحدة ، وتٌعد من أعرق شركات
-                    تصميم مواقع الإنترنت والتطبيقات في الدولتين قدمنا الكثير من خدمات تصميم وبرمجة الهواتف الذكية للعديد من الشركات والمنظمات والأنشطة التجارية
-                    في مختلف المجالات، مما جعلنا من أكثر الشركات</div>
+                <h1 class="font-semibold">{{ __('main.app_developer_title2') }}</h1>
+                <div class="description">{{ __('main.app_developer_description2') }}</div>
             </div>
             <div class="tags">
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    تطبيق اندرويد + IOS
+                    {{ __('main.app_android_ios') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    لوحة تحكم عربــــــــي
+                    {{ __('main.app_arabic_dashboard') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    استضافة لمدة عـــام
+                    {{ __('main.app_one_year_hosting') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    دومين خاص بتطبيقك
+                    {{ __('main.app_custom_domain') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    دعم فني لمدة عام
+                    {{ __('main.app_one_year_support') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    تحديثات لمدة عــــام
+                    {{ __('main.app_one_year_updates') }}
                 </div>
             </div>
         </div>

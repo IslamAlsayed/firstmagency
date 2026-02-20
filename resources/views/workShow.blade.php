@@ -17,7 +17,7 @@
         <div class="main-content">
             <div class="back">
                 <a href="/" class="btn-link font-semibold">
-                    عودة
+                    {{ __('main.work_back') }}
                 </a>
             </div>
             <div class="banner">
@@ -28,19 +28,19 @@
                 <div class="heading">البصرة لايف 25</div>
                 <div class="details flex item-center justify-between gap-4">
                     <div class="item">
-                        <span>العمل</span>
+                        <span>{{ __('main.work_title') }}</span>
                         <h5 class="font-semibold">البصرة لايف 25</h5>
                     </div>
                     <div class="item">
-                        <span>السنة</span>
+                        <span>{{ __('main.work_year') }}</span>
                         <h5 class="font-semibold">2025</h5>
                     </div>
                     <div class="item">
-                        <span>القطاع</span>
+                        <span>{{ __('main.work_category') }}</span>
                         <h5 class="font-semibold">الاخبار</h5>
                     </div>
                     <div class="item">
-                        <span>الموقع</span>
+                        <span>{{ __('main.work_location') }}</span>
                         <h5 class="font-semibold">البصرة - العراق</h5>
                     </div>
                 </div>
@@ -48,10 +48,8 @@
         </div>
 
         <div class="container">
-            <div class="heading-random">منصة بث لايف وبودكاست البصرة 25</div>
-
             <div class="section projects-section work-section text-center">
-                <h2 class="mb-8">مشاريع مشابهة</h2>
+                <h2 class="mb-8">{{ __('main.work_similar_projects') }}</h2>
                 <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                     @foreach (config('projects_companies') as $key => $company)
                         @if ($key < 6)

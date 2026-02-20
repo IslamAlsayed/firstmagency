@@ -1,6 +1,6 @@
 <div class="section faqs-section text-center">
-    <div class="title font-semibold">أسئلة <span class="title-badge">شائعة</span></div>
-    <div class="description">إجابات سريعة وواضحة لأكثر الأسئلة تكرارًا — لو محتاج مساعدة إضافية تواصل معنا في أي وقت.</div>
+    <div class="title font-semibold">{{ __('main.faqs_title') }} <span class="title-badge">{{ __('main.faqs_badge') }}</span></div>
+    <div class="description">{{ __('main.faqs_description') }}</div>
 
     <div class="questions-items flex flex-col gap-3">
         @if (isset($faqs) && !empty($faqs))

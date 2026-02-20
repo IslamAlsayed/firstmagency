@@ -1,6 +1,6 @@
 <div class="section important-articles text-center">
-    <div class="title font-semibold">مقالات وشروحات <span class="title-badge">تطبيقات الموبيل</span></div>
-    <div class="description">مقالات وشروحات عملية عن تطبيقات الموبايل: أفكار، تطوير، تحسين الأداء</div>
+    <div class="title font-semibold">{{ __('main.important_articles_title') }} <span class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div>
+    <div class="description">{{ __('main.important_articles_description') }}</div>
 
     <div class="main-articles-section">
         <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

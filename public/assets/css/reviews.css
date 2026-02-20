@@ -1,8 +1,7 @@
 /* Start Reviews Section */
 .reviews-section {
-    padding-block: 50px;
+    margin-top: 0;
     position: relative;
-    /* min-height: 600px; */
     background-color: var(--muted-background-color);
     background-image: url('../images/reviews-bg.jpg');
     background-position: top left;

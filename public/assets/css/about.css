@@ -18,6 +18,7 @@
         line-height: 1.8;
         position: relative;
         align-content: center;
+        filter: saturate(1.4) opacity(0.8);
         background-color: var(--main-color);
 
         &::before {
@@ -58,6 +59,10 @@
                 left: 0;
                 background-color: var(--light-color);
             }
+        }
+
+        & .description {
+            line-height: 2.2;
         }
 
         & button {

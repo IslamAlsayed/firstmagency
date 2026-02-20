@@ -77,7 +77,6 @@
 .app-developer {
     & .important-articles {
         margin-top: 50px;
-        padding-inline: var(--inline-padding);
 
         &>.title {
             font-size: 24px;
@@ -87,7 +86,9 @@
 
 .order-your-app-section {
     overflow: hidden;
-    padding: 50px 0 20px 50px;
+    padding-block: 50px;
+    padding-inline-start: 0;
+    padding-inline-end: 50px;
     background-color: var(--order-background-color);
 }
 
@@ -96,7 +97,7 @@
 }
 
 .order-your-app-section .image {
-    width: 550px;
+    width: 600px;
     min-width: auto;
     height: auto;
     position: relative;
@@ -114,6 +115,16 @@
         pointer-events: none;
         transform: translateY(-50%);
         background-color: var(--light-main-color);
+    }
+}
+
+html[lang=en] {
+    .order-your-app-section .image {
+        &::before {
+            top: 50%;
+            left: 0;
+            right: auto;
+        }
     }
 }
 
@@ -188,7 +199,7 @@
 }
 
 .categories-programming-section {
-    padding-inline: 70px 180px;
+    padding-inline: calc(var(--main-inline-padding) / 2);
     position: relative;
     background: #FAFAFA;
     background-image: url('../images/reviews-bg.jpg');
@@ -200,30 +211,49 @@
 
 .categories-programming-section .content {
     gap: 40px;
+    text-wrap: nowrap;
+    padding-block: 50px;
     position: relative;
     z-index: 50;
-    text-wrap: nowrap;
-    padding: 50px var(--inline-padding);
 }
 
 .categories-programming-section .text {
-    margin-top: 20px;
+    margin-top: 50px;
+}
+
+.categories-programming-section .text .title {
+    font-size: 28px;
+}
+
+.categories-programming-section .text .title .title-badge {
+    padding: 1px 10px;
 }
 
 .categories-programming-section .images {
     gap: 50px;
-    left: -70px;
-    position: relative;
-    justify-content: end;
 }
 
 .categories-programming-section .images .image {
-    min-width: 120px;
-    max-width: 190px;
+    min-width: 140px;
+    max-width: 210px;
     height: auto;
 }
 
 @media (max-width: 1080px) {
+    .categories-programming-section .images {
+        gap: 20px;
+    }
+
+    .categories-programming-section .images .image {
+        min-width: 120px;
+        max-width: 190px;
+    }
+
+    .categories-programming-section .text .title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
     .order-your-app-section .image {
         width: 350px;
     }
@@ -349,9 +379,24 @@
         min-width: 55px;
         max-width: 90px;
     }
+
+    .order-your-app-section .image {
+        &::before {
+            width: 300% !important;
+            top: -100px !important;
+            left: 50% !important;
+        }
+    }
 }
 
 @media (max-width: 425px) {
+    .app-developer-section {
+        & .inner {
+            gap: 80px;
+            padding-bottom: 20px;
+        }
+    }
+
     .developer-section {
         padding: 50px var(--inline-padding) 50px;
 
@@ -384,6 +429,8 @@
 
     .order-your-app-section {
         text-align: center;
+        margin-top: 0;
+        padding-bottom: 30px;
         padding-inline: var(--inline-padding);
 
         & .inner {
@@ -414,10 +461,12 @@
 
     .faqs-section {
         & .question-item {
+            padding: 12px;
+            border-radius: 10px;
 
             & .question,
             & .answer {
-                font-size: 12px;
+                font-size: 8px;
             }
         }
     }

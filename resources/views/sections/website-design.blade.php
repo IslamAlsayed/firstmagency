@@ -3,20 +3,19 @@
      <div class="content">
          <div class="text">
              <div class="title">
-                 موقعك عندنا - تصميم وبرمجة باحتراف
+                 {{ __('main.website_design_title') }}
              </div>
 
              <div class="heading">
-                 اطلب تصميم موقعك من
-                 <span class="title-badge">فرست ماركتينج</span>
+                 {{ __('main.website_design_heading') }}
+                 <span class="title-badge">{{ __('main.brand_short') }}</span>
              </div>
 
              <div class="description">
-                 فرست ماركتنج شركة متخصصة في
-                 <a href="#">تصميم وتطوير المواقع الإلكترونية</a>
-                 باحترافية عالية، بنحوّل أفكارك لهوية رقمية قوية وموقع سريع وجذاب يعبّر عن نشاطك ويخلي عميلك يثق فيك من أول زيارة.
-                 إحنا مش بنعمل “شكل حلو وخلاص” — إحنا بنبني موقع هدفه واضح:
-                 زيادة العملاء، رفع المبيعات، وتحسين ظهورك في نتائج بحث جوجل.
+                 {{ __('main.website_design_description_part1') }}
+                 <a href="#">{{ __('main.service_website_design_title') }}</a>
+                 {{ __('main.website_design_description_part2') }}
+                 {{ __('main.website_design_description_part3') }}
              </div>
 
              <div class="tags">
@@ -26,7 +25,7 @@
                      </div>
                      <div class="font-semibold">
                          <p>650</p>
-                         <span>عملائنا</span>
+                         <span>{{ __('main.website_design_clients') }}</span>
                      </div>
                  </div>
 
@@ -36,7 +35,7 @@
                      </div>
                      <div class="font-semibold">
                          <p>900</p>
-                         <span>مشاريعنا</span>
+                         <span>{{ __('main.website_design_projects') }}</span>
                      </div>
                  </div>
 
@@ -46,7 +45,7 @@
                      </div>
                      <div class="font-semibold">
                          <p>8</p>
-                         <span>سنوات الخبرة</span>
+                         <span>{{ __('main.website_design_years_experience') }}</span>
                      </div>
                  </div>
 

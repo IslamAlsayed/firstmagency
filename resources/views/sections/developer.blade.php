@@ -2,13 +2,9 @@
      <div class="inner flex items-center gap-4">
          <div class="content">
              <div class="text">
-                 <h1 class="font-semibold">برمجة المتاجر الالكترونية</h1>
+                 <h1 class="font-semibold">{{ __('main.developer_ecommerce_title') }}</h1>
                  <div class="description">
-                     برمجة المتاجر الإلكترونية هي عملية إنشاء وتطوير متاجر إلكترونية باستخدام لغات البرمجة المختلفة. وتشمل هذه العملية تصميم الواجهة الأمامية
-                     للمتجر
-                     (Frontend) وتصميم الواجهة الخلفية للمتجر (Backend) وتطوير ميزات ووظائف المتجر المختلفة. اطلب الان متجرك من شركة فرست ماركتينج واحصل علي خصم
-                     15%
-                     والعرض لمدة 10 ايام فقط
+                     {{ __('main.developer_ecommerce_description') }}
                  </div>
              </div>
              <div class="tags">
@@ -16,13 +12,13 @@
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     تصميم UI/UX حديث
+                     {{ __('main.developer_ecommerce_tag1') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     تجربة متجاوبة 100%
+                     {{ __('main.developer_ecommerce_tag2') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,12 +53,9 @@
      <div class="inner hidden flex items-center gap-4">
          <div class="content">
              <div class="text">
-                 <h1 class="font-semibold">شركة تصميم مواقع</h1>
+                 <h1 class="font-semibold">{{ __('main.developer_website_title') }}</h1>
                  <div class="description">
-                     تصميم المواقع هو عملية بناء واجهة رقمية احترافية تمثّل نشاطك وتحوّل الزائر لعميل، من خلال تجربة مستخدم سهلة وشكل بصري جذاب وأداء سريع على
-                     كل
-                     الأجهزة. نحن لا نصمّم “شكل فقط”، بل نصنع موقعًا واضح الهدف: يعرض خدماتك بطريقة مقنعة، ويبرز هويتك، ويقود الزائر لخطوة تواصل أو شراء بأقل
-                     عدد من النقرات.
+                     {{ __('main.developer_website_description') }}
                  </div>
              </div>
              <div class="tags">
@@ -70,31 +63,31 @@
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     تصميم UI/UX حديث
+                     {{ __('main.developer_website_tag1') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     تجربة متجاوبة 100%
+                     {{ __('main.developer_website_tag2') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     سرعة تحميل محسّنة
+                     {{ __('main.developer_website_tag3') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     تهيئة لمحركات البحث
+                     {{ __('main.developer_website_tag4') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     ربط ببوابات الدفـــــــع
+                     {{ __('main.developer_website_tag5') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

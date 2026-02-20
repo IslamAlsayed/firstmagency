@@ -1,12 +1,21 @@
 .partners-section {
     padding-bottom: 50px;
+    padding-inline: var(--main-inline-padding);
     background-color: var(--light-background-color);
+
+    &>.title {
+        font-size: 30px;
+
+        & .title-badge {
+            padding: 1px 15px;
+        }
+    }
 
     & .our-partners-wrapper {
         gap: 20px;
         display: flex;
-        flex-wrap: nowrap;
         padding: 20px;
+        flex-wrap: nowrap;
         border-radius: 15px;
         background-color: var(--light-color);
         border: 1px solid var(--dark-muted-color);

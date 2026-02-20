@@ -47,3 +47,4 @@
 <link href="{{ asset('assets/css/work-show.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/website-developer.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/app-developer.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/project-steps.css') }}" rel="stylesheet" />

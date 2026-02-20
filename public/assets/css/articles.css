@@ -1,6 +1,6 @@
 .articles-section {
     margin: 0;
-    padding: 180px var(--inline-padding) 30px;
+    padding: 180px var(--main-inline-padding) 30px;
     text-align: start;
     background-color: var(--articles-background-color);
 

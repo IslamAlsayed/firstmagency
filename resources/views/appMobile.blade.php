@@ -11,13 +11,13 @@
         {{-- Categories Programming Section --}}
         @include('sections.categories-programming')
 
-        {{-- Important Articles Section --}}
-        @include('sections.important-articles')
-
         {{-- Step Work Section --}}
-        @include('sections.step-work')
+        @include('sections.project-steps')
 
         {{-- Frequently Asked Questions Section --}}
         @include('sections.frequently-asked-questions', ['faqs' => config('apps-faqs')])
+
+        {{-- Important Articles Section --}}
+        @include('sections.important-articles')
     </div>
 @endsection

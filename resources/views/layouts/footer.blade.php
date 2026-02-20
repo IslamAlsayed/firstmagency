@@ -75,7 +75,7 @@
         </div>
 
         <div class="footer-footer flex items-center justify-between gap-4">
-            <div class="description">
+            <div class="description font-semibold">
                 {{ __('main.footer_copyright') }}
             </div>
             <div class="payments">

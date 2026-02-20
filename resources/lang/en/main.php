@@ -275,4 +275,179 @@ return [
     'footer_privacy_policy' => 'Privacy Policy',
     'footer_terms_conditions' => 'Terms & Conditions',
     'footer_copyright' => 'All Rights Reserved to First Marketing Company',
+
+    // ==================== Contact Form ====================
+    'contact_form_header' => 'Enter Your Information So We Can Contact You',
+    'contact_ticket_inquiry' => 'Ticket/Request Inquiry',
+    'contact_register_ticket' => 'Register Ticket',
+    'contact_enter_data' => 'Enter your information and we will contact you as soon as possible.',
+    'contact_form_name' => 'Name',
+    'contact_form_email' => 'Email',
+    'contact_form_phone' => 'Phone Number',
+    'contact_form_department' => 'Select Department',
+    'contact_form_department_choose' => 'Choose Department',
+    'contact_form_department_sales' => 'Sales',
+    'contact_form_department_support' => 'Technical Support',
+    'contact_form_department_general' => 'General',
+    'contact_form_subject' => 'Message Subject',
+    'contact_form_subject_placeholder' => 'Example: Booking appointment or inquiry',
+    'contact_form_message' => 'Message',
+    'contact_form_message_placeholder' => 'Write your message here',
+    'contact_form_attachment' => 'Attachment (Optional)',
+    'contact_form_add_attachment' => 'Add Another Attachment',
+    'contact_form_verification' => 'Verification',
+    'contact_form_answer' => 'Answer',
+    'contact_form_verification_text' => 'Verify: ? = ',
+
+    // ==================== Line Works Section ====================
+    'line_works_title' => 'How We Work',
+    'line_works_description' => 'We work with a clear plan from analysis to delivery.. to ensure a strong result.',
+    'line_work_step1_title' => 'Understanding and Analyzing the Project',
+    'line_work_step1_desc' => 'Before undertaking any work, we conduct a comprehensive analysis to identify the best approach to proceed in a way that aligns with the scope and goals of the project.',
+    'line_work_step2_title' => 'Setting Strategies and Planning',
+    'line_work_step2_desc' => 'We provide integrated solutions that include setting business development strategies and planning using the most advanced methods and comprehensive analysis.',
+    'line_work_step3_title' => 'Implementation Process',
+    'line_work_step3_desc' => 'We convert strategies into actionable steps and define tasks, responsibilities, and timelines to ensure the best results.',
+    'line_work_step4_title' => 'Measuring Performance Indicators',
+    'line_work_step4_desc' => 'We measure the effectiveness of actions and generate detailed reports to improve performance and develop plans and strategies to achieve the best results.',
+
+    // ==================== Partners Section ====================
+    'partners_title' => 'Partners',
+    'partners_description' => 'Partners and mutual cooperation with some companies in other services',
+    'partners_item' => 'Partner',
+
+    // ==================== Blog/Articles ====================
+    'blog_archive' => 'Archive',
+
+    // ==================== Tickets ====================
+    'tickets_header' => 'Enter your email registered with your tickets to inquire about your request',
+    'tickets_title' => 'Inquire About Your Request / Ticket',
+    'tickets_email' => 'Email',
+    'tickets_show' => 'Show Tickets',
+
+    // ==================== Work Show ====================
+    'work_back' => 'Back',
+    'work_title' => 'Project',
+    'work_year' => 'Year',
+    'work_category' => 'Category',
+    'work_location' => 'Location',
+    'work_similar_projects' => 'Similar Projects',
+
+    // ==================== Header ====================
+    'short_brand' => 'First - Programming & Marketing',
+    'header_brand' => 'First Marketing - Programming & Marketing',
+    'header_mobile' => 'Mobile',
+    'header_company' => 'Company',
+    'header_email_label' => 'Email',
+    'header_menu' => 'Menu',
+    'header_whatsapp' => 'WhatsApp',
+    'header_call_now' => 'Call Now',
+
+    // ==================== Services Menu ====================
+    'menu_website_design' => 'Website Programming & Design',
+    'menu_mobile_apps' => 'Mobile App Programming',
+    'menu_hosting' => 'Hosting Services',
+    'menu_domain' => 'Domain Reservation',
+    'menu_digital_marketing' => 'Digital Marketing',
+    'menu_seo' => 'SEO Services',
+
+    // ==================== App Developer ==================== 
+    'app_developer_title' => 'App Display',
+    'app_developer_description' => 'Mobile applications are the quickest way to transform your idea into a daily experience in the customer\'s hand. Instead of the customer searching for you every time, your app will be in front of them with one click—fast, organized, and easy to use. And through professional UI/UX design, the app not only displays your services… it guides the user step by step to buy, book, or contact you directly.',
+    'app_android_ios' => 'Android + iOS App',
+    'app_arabic_dashboard' => 'Arabic Control Panel',
+    'app_one_year_hosting' => 'One Year Hosting',
+    'app_custom_domain' => 'Custom Domain for Your App',
+    'app_one_year_support' => 'One Year Technical Support',
+    'app_one_year_updates' => 'One Year Updates',
+    'app_developer_title2' => 'Mobile App Development',
+    'app_developer_description2' => 'First Marketing is a leading application design company in the Arab Republic of Egypt and the United Arab Emirates, and is considered one of the most prestigious web design and application companies in both countries. We have provided many services for designing and programming smart phones for many companies, organizations and commercial activities in various fields.',
+
+    // ==================== Order Your App ==================== 
+    'order_app_title' => 'Mobile App Programming',
+    'order_app_description' => 'Mobile applications have become more effective in encouraging customers to request services and buy products. Whether you are a owner of a large or small business or your company size is large or small, you urgently need a mobile application that helps you manage your project accurately and organize your time and effort, prepare customer orders and set their delivery dates. Therefore, some customers prefer to order applications instead of websites as it is the closest method for some customers - we can also convert websites to Android and iPhone applications professionally.',
+    'order_app_button' => 'Order Your App Now',
+
+    // ==================== Categories Programming ====================
+    'categories_title' => 'App Programming',
+    'categories_subtitle' => 'First Marketing',
+    'categories_description' => 'We program all mobile applications professionally - we work in the following fields',
+
+    // ==================== Project Steps ====================
+    'project_steps_title' => 'Project Implementation Stages',
+    'project_steps_subtitle' => 'We work with a clear plan from analysis to delivery… to ensure a strong result.',
+    'project_step_analysis' => 'Analysis',
+    'project_step_analysis_content' => 'Project analysis is considered one of the most important stages of a software project as in this stage we get closer to the clients to understand the project and determine its requirements and eliminate illogical concepts and understand the project more, as it is considered a step to determine the demand',
+    'project_step_design' => 'Design',
+    'project_step_design_content' => 'We excel in providing website and application design with a special and distinctive character, and website design for us does not end at the delivery of the website, but we are always there to provide continuous support and we are happy to provide valuable advice for your project',
+    'project_step_programming' => 'Programming',
+    'project_step_programming_content' => 'First Marketing\'s software is characterized by precision and creativity and mastering strong programming that is always open to development. We do not use any templates, ready scripts or encrypted codes.',
+    'project_step_results' => 'Results',
+    'project_step_results_content' => 'What distinguishes First Marketing is the results. We do not review projects more than 3 times until the client receives their project ready without any problems.',
+
+    // ==================== Step Work 2 ====================
+    'step_work2_analysis_title' => 'Analysis',
+    'step_work2_analysis_description' => 'Project analysis is considered one of the most important stages as we understand the idea and requirements accurately and convert them into a clear plan that ensures professional project implementation.',
+    'step_work2_design_title' => 'Design',
+    'step_work2_design_description' => 'We provide professional website design that reflects your business identity and is characterized by flexibility and ease of use to ensure an excellent user experience.',
+    'step_work2_programming_title' => 'Programming',
+    'step_work2_programming_description' => 'We program your website using the latest technologies to ensure fast performance, high security and complete stability without relying on ready-made scripts.',
+    'step_work2_results_title' => 'Results',
+    'step_work2_results_description' => 'After testing and review, the project is delivered complete, with quality assurance and continuous technical support.',
+
+    // ==================== Frequently Asked Questions ====================
+    'faqs_title' => 'Frequently Asked Questions',
+    'faqs_badge' => 'Frequently Asked',
+    'faqs_description' => 'Quick and clear answers to the most frequently asked questions — if you need additional help, contact us anytime.',
+
+    // ==================== Programming Section ====================
+    'programming_title' => 'Programming',
+    'programming_subtitle' => 'Professional Websites',
+    'programming_description' => 'We program and develop websites at the highest level — modern design, excellent speed, and a user experience that builds customer confidence in your brand.',
+
+    // ==================== Blog Show ====================
+    'blog_categories' => 'Categories',
+    'blog_social_media_admin' => 'Social Media Admin',
+    'blog_website_design' => 'Website Design',
+    'blog_digital_marketing' => 'Digital Marketing',
+    'blog_seo' => 'Search Engine Optimization',
+    'blog_contact_info' => 'Contact Information',
+    'blog_whatsapp' => 'WhatsApp',
+    'blog_call' => 'Call',
+    'blog_latest_articles' => 'Latest 10 Articles',
+
+    // ==================== Website Design ====================
+    'website_design_title' => 'Your Website With Us - Professional Design and Programming',
+    'website_design_heading' => 'Request Your Website Design From',
+    'website_design_description_part1' => 'First Marketing is a company specialized in',
+    'website_design_description_part2' => ' website design and development with high professionalism, transforming your ideas into a strong digital identity, fast and attractive website that represents your business and makes your customer trust you from the first visit.',
+    'website_design_description_part3' => ' We are not making "nice looks and that\'s it" — we are building a website with a clear goal: increasing customers, boosting sales, and improving your visibility in Google search results.',
+    'website_design_clients' => 'Our Clients',
+    'website_design_projects' => 'Our Projects',
+    'website_design_years_experience' => 'Years of Experience',
+
+    // ==================== Blog Show Page ====================
+    'blog_share_article' => 'Share Article',
+    'blog_similar_articles' => 'Similar Articles',
+    'blog_most_read' => 'Most Read',
+
+    // ==================== Developer Section ====================
+    'developer_ecommerce_title' => 'E-commerce Store Programming',
+    'developer_ecommerce_description' => 'Programming e-commerce stores is the process of creating and developing electronic stores using different programming languages. This process includes designing the frontend and backend of the store and developing various features and functions. Order your store now from First Marketing and get 15% discount - offer valid for only 10 days.',
+    'developer_ecommerce_tag1' => 'Modern UI/UX Design',
+    'developer_ecommerce_tag2' => '100% Responsive Experience',
+    'developer_ecommerce_tag3' => 'Easy Control Panel',
+    'developer_website_title' => 'Website Design Company',
+    'developer_website_description' => 'Website design is the process of building a professional digital interface that represents your business and converts visitors into customers, through easy user experience, attractive visual design and fast performance on all devices. We don\'t design "just looks", we build a website with a clear purpose: displaying your services convincingly, highlighting your identity, and guiding the visitor to contact or purchase with minimal clicks.',
+    'developer_website_tag1' => 'Modern UI/UX Design',
+    'developer_website_tag2' => '100% Responsive Experience',
+    'developer_website_tag3' => 'Optimized Loading Speed',
+    'developer_website_tag4' => 'Search Engine Optimization',
+    'developer_website_tag5' => 'Payment Gateway Integration',
+    'developer_website_tag6' => 'Easy Control Panel',
+
+    // ==================== Important Articles ====================
+    'important_articles_title' => 'Articles and Guides',
+    'important_articles_subtitle' => 'Mobile Applications',
+    'important_articles_description' => 'Practical articles and guides about mobile applications: ideas, development, performance improvement',
 ];

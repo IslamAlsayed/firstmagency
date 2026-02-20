@@ -1,7 +1,6 @@
 <div class="section programming-section text-center">
-    <div class="title font-semibold">برمجة <span class="title-badge">المواقع الاحترافية</span></div>
-    <div class="description">نقوم ببرمجة وتطوير المواقع الإلكترونية على أعلى مستوى — تصميم عصري، سرعة ممتازة، وتجربة مستخدم ترفع ثقة العميل في علامتك
-        التجارية.</div>
+    <div class="title font-semibold">{{ __('main.programming_title') }} <span class="title-badge">{{ __('main.programming_subtitle') }}</span></div>
+    <div class="description">{{ __('main.programming_description') }}</div>
 
     <div class="websites-items grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @foreach (config('websites') as $website)

@@ -169,7 +169,7 @@
             </div>
 
             <div class="share-your-articles mb-4">
-                <div class="title">شارك مقالتك</div>
+                <div class="title">{{ __('main.blog_share_article') }}</div>
 
                 <div class="links grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                     <a href="#" class="link flex items-center justify-between gap-2">
@@ -211,7 +211,7 @@
             </div>
 
             <div class="main-articles-section border-custom" style="padding: var(--inline-padding);">
-                <div class="title">مقالات مشابهة</div>
+                <div class="title">{{ __('main.blog_similar_articles') }}</div>
                 <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                     @foreach (config('articles') as $key => $article)
                         @if ($key < 3)
@@ -258,26 +258,26 @@
             </div>
 
             <div class="categories">
-                <div class="title font-semibold">الاقسام</div>
+                <div class="title font-semibold">{{ __('main.blog_categories') }}</div>
 
                 <ul>
-                    <li><a href="#"><span>ادارة صفحات السوشيال ميديا</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>تصميم المواقع</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>التسويق الرقمي</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>تحسين محركات البحث</span> <strong>{{ rand(6, 64) }}</strong></a></li>
+                    <li><a href="#"><span>{{ __('main.blog_social_media_admin') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
+                    <li><a href="#"><span>{{ __('main.blog_website_design') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
+                    <li><a href="#"><span>{{ __('main.blog_digital_marketing') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
+                    <li><a href="#"><span>{{ __('main.blog_seo') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
                 </ul>
             </div>
 
             <div class="categories">
-                <div class="title font-semibold">بيانات التواصل</div>
+                <div class="title font-semibold">{{ __('main.blog_contact_info') }}</div>
 
                 <ul>
-                    <li><a href="#"><span><i class="icon fab fa-whatsapp"></i> واتساب</span> <strong>01212601601</strong></a></li>
-                    <li><a href="#"><span><i class="icon fas fa-phone"></i> اتصال</span> <strong>01212601601</strong></a></li>
+                    <li><a href="#"><span><i class="icon fab fa-whatsapp"></i> {{ __('main.blog_whatsapp') }}</span> <strong>01212601601</strong></a></li>
+                    <li><a href="#"><span><i class="icon fas fa-phone"></i> {{ __('main.blog_call') }}</span> <strong>01212601601</strong></a></li>
                 </ul>
 
                 <div class="articles">
-                    <div class="title font-semibold">آخر 10 مقالات</div>
+                    <div class="title font-semibold">{{ __('main.blog_latest_articles') }}</div>
 
                     <div class="latest-articles">
                         @foreach (config('articles') as $key => $article)
@@ -296,7 +296,7 @@
             </div>
 
             <div class="categories">
-                <div class="title font-semibold">الأكثر قراءة</div>
+                <div class="title font-semibold">{{ __('main.blog_most_read') }}</div>
 
                 <div class="articles">
                     <div class="latest-articles">

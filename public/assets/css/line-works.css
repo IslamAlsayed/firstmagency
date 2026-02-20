@@ -18,9 +18,10 @@
     }
 
     & .steps {
-        padding-block: 30px;
+        padding: 30px var(--main-inline-padding);
 
         & .step {
+            height: 430px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -88,6 +89,7 @@
 
             & .image {
                 transition: all 0.3s ease;
+                box-shadow: 0 2px 16px -6px var(--light-muted-color);
             }
 
             & .image:hover {

@@ -7,14 +7,14 @@
 
             <div class="contact-fast">
                 <div class="contact-area">
-                    <div class="heading font-semibold">فرست ماركيتنج للبرمجة والتسويق</div>
+                    <div class="heading font-semibold">{{ __('main.header_brand') }}</div>
                     <div class="childs flex flex-col gap-6">
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-4">
                                 <div class="icon">
                                     <i class="fas fa-phone"></i>
                                 </div>
-                                <span class="font-semibold">موبايل</span>
+                                <span class="font-semibold">{{ __('main.header_mobile') }}</span>
                             </div>
                             <div class="contact">01212601601</div>
                         </div>
@@ -23,7 +23,7 @@
                                 <div class="icon">
                                     <i class="fas fa-phone"></i>
                                 </div>
-                                <span class="font-semibold">الشركة</span>
+                                <span class="font-semibold">{{ __('main.header_company') }}</span>
                             </div>
                             <div class="contact">01212602602</div>
                         </div>
@@ -32,7 +32,7 @@
                                 <div class="icon">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <span class="font-semibold">البريد</span>
+                                <span class="font-semibold">{{ __('main.header_email_label') }}</span>
                             </div>
                             <div class="contact">info@firstmagency.com</div>
                         </div>
@@ -64,8 +64,8 @@
                 <div class="info flex items-center gap-2">
                     <div class="pseudo-element-info"></div>
                     <div class="">
-                        <p class="font-semibold">فرست للبرمجة والتسويق</p>
-                        <span>القائمة</span>
+                        <p class="font-semibold">{{ __('main.short_brand') }}</p>
+                        <span>{{ __('main.header_menu') }}</span>
                     </div>
                 </div>
                 <div class="close">
@@ -78,14 +78,14 @@
                     <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
                         class="flex items-center gap-2">
                         <i class="fab fa-whatsapp"></i>
-                        واتساب
+                        {{ __('main.header_whatsapp') }}
                     </a>
                 </button>
                 <button>
                     <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
                         class="flex items-center gap-2">
                         <i class="fa-solid fa-phone fa-flip"></i>
-                        اتصل الان
+                        {{ __('main.header_call_now') }}
                     </a>
                 </button>
             </div>
@@ -118,27 +118,27 @@
                     <div class="services">
                         <a href="{{ route('website.developer') }}" class="service-link {{ $currentRoute == 'website.developer' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
-                            <span>برمجة وتصميم المواقع</span>
+                            <span>{{ __('main.menu_website_design') }}</span>
                         </a>
                         <a href="{{ route('app.mobile') }}" class="service-link {{ $currentRoute == 'app.mobile' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
-                            <span>برمجة تطبيقات الموبيل</span>
+                            <span>{{ __('main.menu_mobile_apps') }}</span>
                         </a>
                         <a href="#" class="service-link">
                             <div class="pseudo-element"></div>
-                            <span>خدمات الاستضافة</span>
+                            <span>{{ __('main.menu_hosting') }}</span>
                         </a>
                         <a href="#" class="service-link">
                             <div class="pseudo-element"></div>
-                            <span>حجز دومين</span>
+                            <span>{{ __('main.menu_domain') }}</span>
                         </a>
                         <a href="#" class="service-link">
                             <div class="pseudo-element"></div>
-                            <span>التسويق الالكتـــروني</span>
+                            <span>{{ __('main.menu_digital_marketing') }}</span>
                         </a>
                         <a href="#" class="service-link">
                             <div class="pseudo-element"></div>
-                            <span>خدمات السيـــــــو</span>
+                            <span>{{ __('main.menu_seo') }}</span>
                         </a>
                     </div>
                 </li>
@@ -182,6 +182,18 @@
                 <button class="btn-link main-color dark-hover font-semibold">
                     <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
                 </button>
+            </div>
+
+            <div class="language-side">
+                @if (app()->getLocale() == 'ar')
+                    <a href="{{ route('locale.change', 'en') }}">
+                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="english language">
+                    </a>
+                @else
+                    <a href="{{ route('locale.change', 'ar') }}">
+                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="arabic language">
+                    </a>
+                @endif
             </div>
         </nav>
         <div class="flex items-center justify-between gap-4">
