@@ -118,7 +118,7 @@ img {
     height: auto;
     overflow: visible;
     position: relative;
-    margin-inline-end: 60px;
+    margin-inline-end: 100px;
 
     & .contact-fast {
         width: 280px;
@@ -268,7 +268,7 @@ html[lang=en] {
     & .inner {
         width: 100%;
         height: 100%;
-        margin: 0 100px 0;
+        margin: 0 150px 0;
         user-select: none;
         text-wrap: nowrap;
         z-index: 999;
@@ -576,6 +576,7 @@ html[lang=en] {
     .logo {
         width: 50px;
         min-width: 50px;
+        margin-inline-end: 70px;
     }
 
     .navbar {
@@ -1212,7 +1213,6 @@ swiper-slide img {
 }
 
 .section {
-    margin-top: 50px;
     position: relative;
     z-index: 500;
 }

@@ -327,33 +327,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const imagesContainer = document.querySelector('[data-random-images]');
-    const imageSlots = imagesContainer.querySelectorAll('[data-image-slot]');
-    const totalImages = 4;
-    const displayCount = 3;
 
-    if (imagesContainer && imageSlots.length > 0) {
-        function getRandomImages() {
-            const numbers = [];
-            while (numbers.length < displayCount) {
-                const num = Math.floor(Math.random() * totalImages) + 1;
-                if (!numbers.includes(num)) {
-                    numbers.push(num);
+    if (imagesContainer) {
+        const imageSlots = imagesContainer.querySelectorAll('[data-image-slot]');
+        const totalImages = 4;
+        const displayCount = 3;
+
+        if (imageSlots.length > 0) {
+            function getRandomImages() {
+                const numbers = [];
+                while (numbers.length < displayCount) {
+                    const num = Math.floor(Math.random() * totalImages) + 1;
+                    if (!numbers.includes(num)) {
+                        numbers.push(num);
+                    }
                 }
+                return numbers;
             }
-            return numbers;
-        }
 
-        function updateImages() {
-            const randomImages = getRandomImages();
-            imageSlots.forEach((slot, index) => {
-                const img = slot.querySelector('img');
-                setTimeout(() => {
-                    img.src = "/assets/images/categories/" + randomImages[index] + ".png";
-                }, 250);
-            });
-        }
+            function updateImages() {
+                const randomImages = getRandomImages();
+                imageSlots.forEach((slot, index) => {
+                    const img = slot.querySelector('img');
+                    setTimeout(() => {
+                        img.src = "/assets/images/categories/" + randomImages[index] + ".png";
+                    }, 250);
+                });
+            }
 
-        // تحديث عشوائي كل 3 ثوانٍ
-        setInterval(updateImages, 3000);
+            // تحديث عشوائي كل 3 ثوانٍ
+            setInterval(updateImages, 3000);
+        }
     }
 });

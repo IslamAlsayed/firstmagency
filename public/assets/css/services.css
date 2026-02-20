@@ -1,18 +1,19 @@
 /* Start Services Section */
 .services-section,
 .reviews-section {
-    padding-inline: var(--main-inline-padding);
+    padding: 50px var(--main-inline-padding);
 
     & .our-services-wrapper,
     & .our-reviews-wrapper {
         width: 100%;
         position: relative;
         overflow: hidden;
-        padding: 20px 0;
     }
 }
 
 .services-section {
+    padding: 50px var(--main-inline-padding) 30px;
+
     & .our-services {
         display: flex;
         gap: 30px;
@@ -149,8 +150,8 @@
 
     & .service-action {
         width: 100%;
-        font-size: 10px;
         padding: 10px;
+        font-size: 12px;
         border-top: 1px solid var(--dark-muted-color);
         margin-top: auto;
     }

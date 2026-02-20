@@ -2,7 +2,7 @@
     <div class="title font-semibold">{{ __('main.programming_title') }} <span class="title-badge">{{ __('main.programming_subtitle') }}</span></div>
     <div class="description">{{ __('main.programming_description') }}</div>
 
-    <div class="websites-items grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="websites-items grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @foreach (config('websites') as $website)
             <a href="#" class="website">
                 <div class="image">

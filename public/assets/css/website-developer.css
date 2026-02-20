@@ -14,7 +14,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 200%;
         z-index: 1;
         opacity: 0.7;
         background-color: var(--dark2-color);
@@ -192,7 +192,7 @@
 
 .website-design {
     position: relative;
-    padding: 70px var(--inline-padding) 70px;
+    padding: 70px var(--main-inline-padding) 70px;
     overflow: hidden;
 
     /* الخلفية اليمين */
@@ -483,7 +483,7 @@
             flex-direction: column-reverse;
 
             & .image {
-                width: 70%;
+                width: 50%;
             }
 
             & .content {
@@ -500,7 +500,7 @@
 
                 & .tags {
                     width: 100%;
-                    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
                 }
             }
         }
@@ -536,6 +536,29 @@
 }
 
 @media (max-width: 768px) {
+    .programming-section {
+        & .websites-items {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .programming-section {
+        &>.title {
+            font-size: 20px;
+        }
+    }
+
+    .important-articles {
+        &>.title {
+            font-size: 20px !important;
+        }
+    }
+
+    .website-design {
+        position: relative;
+        padding: 0px var(--main-inline-padding) 0px;
+    }
+
     .developer-section {
         padding: 100px var(--inline-padding) 50px;
 
@@ -560,6 +583,21 @@
 
         &>.main-articles-section {
             padding-inline: var(--inline-padding);
+        }
+    }
+
+    .programming-section {
+        &>.title {
+            font-size: 16px;
+
+            &>.title-badge {
+                font-size: 12px;
+                padding: 1px 10px;
+
+                &::before {
+                    border-radius: 8px;
+                }
+            }
         }
     }
 

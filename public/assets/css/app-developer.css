@@ -85,6 +85,7 @@
 }
 
 .order-your-app-section {
+    margin-top: 0;
     overflow: hidden;
     padding-block: 50px;
     padding-inline-start: 0;
@@ -390,6 +391,12 @@ html[lang=en] {
 }
 
 @media (max-width: 425px) {
+    .app-developer {
+        & .important-articles {
+            margin-top: 0;
+        }
+    }
+
     .app-developer-section {
         & .inner {
             gap: 80px;

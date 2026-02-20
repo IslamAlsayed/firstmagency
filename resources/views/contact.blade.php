@@ -5,7 +5,7 @@
         .header {
             background-color: var(--light-color);
             box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
-            background-image: url('../images/header-bg.png');
+            background-image: url('../assets/images/header-bg.png');
             background-position: center center;
             background-size: contain;
             background-repeat: repeat;
@@ -22,7 +22,7 @@
             </button>
         </div>
 
-        <div class="container contact-form">
+        <div class="contact-form">
             <div class="text">
                 <h2>{{ __('main.contact_register_ticket') }}</h2>
                 <p>{{ __('main.contact_enter_data') }}</p>

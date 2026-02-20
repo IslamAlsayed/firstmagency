@@ -1,7 +1,7 @@
 /* Start Projects Section */
 .projects-section {
     margin-top: 0;
-    padding: 20px var(--main-inline-padding);
+    padding: 50px var(--main-inline-padding);
     position: relative;
     min-height: 600px;
     background-image: url('../images/projects/projects-bg.jpg');
@@ -128,7 +128,7 @@
 }
 
 .portfolio {
-    padding: 180px var(--main-inline-padding) 50px;
+    padding: 170px var(--main-inline-padding) 50px;
     position: relative;
     /* min-height: 600px; */
     background-color: var(--light-muted-color);
@@ -171,9 +171,25 @@
     }
 }
 
+@media (max-width: 1080px) {
+    .portfolio {
+        padding: 140px var(--main-inline-padding) 50px;
+    }
+}
+
 @media (max-width: 425px) {
     .projects-section {
-        padding: 20px;
+        padding: 120px var(--main-inline-padding) 50px;
+    }
+
+    .portfolio {
+        &>.title {
+            font-size: 14px;
+
+            & .title-badge::before {
+                border-radius: 8px;
+            }
+        }
     }
 }
 

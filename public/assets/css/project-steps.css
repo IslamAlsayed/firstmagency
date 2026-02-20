@@ -318,7 +318,7 @@ html[lang=en] {
 
     .faqs-section {
         &>.title {
-            font-size: 12px;
+            font-size: 18px;
 
             &>.title-badge {
                 padding: 1px 15px;
@@ -327,6 +327,14 @@ html[lang=en] {
                     border-radius: 7px;
                 }
             }
+        }
+    }
+}
+
+@media(max-width: 425px) {
+    .faqs-section {
+        &>.title {
+            font-size: 12px;
         }
     }
 }
