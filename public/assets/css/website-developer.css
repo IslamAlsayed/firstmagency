@@ -587,6 +587,10 @@
     }
 
     .programming-section {
+        & .websites-items {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
         &>.title {
             font-size: 16px;
 

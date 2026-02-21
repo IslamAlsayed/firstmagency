@@ -7,12 +7,12 @@
             @foreach ($faqs as $faq)
                 <div class="question-item text-right" data-faq-item>
                     <div class="question font-semibold cursor-pointer" data-faq-toggle>
-                        {{ $faq['question'] }}
+                        {!! $faq['question'] !!}
                         <span class="open">
                             <i class="fas fa-plus"></i>
                         </span>
                     </div>
-                    <div class="answer text-sm text-gray-600" data-faq-answer>{{ $faq['answer'] }}</div>
+                    <div class="answer text-sm text-gray-600" data-faq-answer>{!! $faq['answer'] !!}</div>
                 </div>
             @endforeach
         @endif

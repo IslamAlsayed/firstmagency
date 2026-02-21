@@ -1,0 +1,16 @@
+<div class="section programming-section text-center">
+    <div class="title font-semibold">مميزات استضافة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
+    <div class="description">احصل علي جميع المميزات التالية عند حصولك علي باقة من باقات الاستضافة او السيرفرات</div>
+
+    <div class="websites-items grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        @foreach (config('features-hosting') as $feature)
+            <div class="website">
+                <div class="image cursor-pointer">
+                    <img src="{{ asset('assets/images/' . $feature['image']) }}" alt="{{ $feature['title'] }}">
+                </div>
+                <div class="title font-semibold">{{ $feature['title'] }}</div>
+                <div class="description">{{ $feature['description'] }}</div>
+            </div>
+        @endforeach
+    </div>
+</div>

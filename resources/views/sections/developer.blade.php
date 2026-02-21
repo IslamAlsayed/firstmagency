@@ -1,4 +1,4 @@
- <div class="developer-section">
+ <div class="developer-section effect-section">
      <div class="inner flex items-center gap-4">
          <div class="content">
              <div class="text">

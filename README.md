@@ -1,59 +1,384 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎨 First Marketing Agency
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+منصة ويب حديثة واحترافية لوكالة "First Marketing" متخصصة في تقديم خدمات التسويق الرقمي وتطوير الويب والتطبيقات.
 
-## About Laravel
+## ✨ المميزات الرئيسية
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🌍 تعدد اللغات
+- دعم ثنائي اللغة (العربية والإنجليزية)
+- تبديل سلس بين اللغات مع الحفاظ على البيانات
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📱 التصميم
+- **واجهة مستخدم حديثة** مبنية بـ Tailwind CSS
+- **استجابة كاملة** (Responsive) لجميع الأجهزة
+- **أداء عالي** مع Vite
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛍️ الخدمات المقدمة
+- **استضافة ويب** - باقات متعددة للاستضافة المشتركة
+- **خدمات الريسيلر** - لإعادة بيع الاستضافة
+- **خوادم VPS** - خوادم افتراضية مخصصة
+- **خوادم مخصصة** - حلول سيرفرات قوية
+- **تطوير المواقع** - خدمات تطوير ويب احترافية
+- **تطبيقات الجوال** - تطوير تطبيقات iOS و Android
 
-## Learning Laravel
+### 📄 المحتوى
+- **الصفحة الرئيسية** - عرض شامل للخدمات والمميزات
+- **من نحن** - معلومات عن الوكالة
+- **معرض الأعمال** - عرض المشاريع والنماذج
+- **المدونة** - مقالات وموارد تسويقية
+- **تواصل معنا** - نموذج للتواصل والاستفسارات
+- **فعاليات وتذاكر** - إدارة الفعاليات والحجوزات
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 البدء السريع
 
-## Laravel Sponsors
+### المتطلبات
+- PHP 8.2 أو أعلى
+- Node.js 18+ و npm
+- قاعدة بيانات (SQLite/MySQL)
+- Laravel 12
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### التثبيت
 
-### Premium Partners
+```bash
+# 1. استنساخ المشروع
+git clone <repository-url>
+cd firstmagency
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 2. تثبيت المكتبات
+composer install
+npm install
 
-## Contributing
+# 3. إعداد الملف البيئي
+cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 4. توليد مفتاح التطبيق
+php artisan key:generate
 
-## Code of Conduct
+# 5. تشغيل الترجيحات والبناء
+php artisan migrate
+npm run build
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 6. تشغيل السيرفر
+php artisan serve
+npm run dev  # (في نافذة منفصلة)
+```
 
-## Security Vulnerabilities
+**أو استخدم الأمر المدمج:**
+```bash
+composer run setup
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 📊 بنية المشروع
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+firstmagency/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Controller.php
+│   │   │   └── LocaleController.php    # إدارة تعدد اللغات
+│   │   └── Middleware/
+│   ├── Models/
+│   ├── Helpers/
+│   │   └── LocalizationHelper.php
+│   └── helpers.php
+│
+├── config/
+│   ├── packages-hosting.php            # تكوين باقات الاستضافة
+│   ├── app.php
+│   └── [تكوينات أخرى]
+│
+├── resources/
+│   ├── views/
+│   │   ├── welcome.blade.php          # الصفحة الرئيسية
+│   │   ├── about-us.blade.php
+│   │   ├── portfolio.blade.php
+│   │   ├── blog.blade.php
+│   │   ├── blogShow.blade.php
+│   │   ├── contact.blade.php
+│   │   ├── hosting.blade.php          # صفحة الاستضافة
+│   │   ├── websiteDeveloper.blade.php
+│   │   ├── appMobile.blade.php
+│   │   ├── tickets.blade.php
+│   │   ├── sections/                  # مكونات شاملة
+│   │   │   └── packages-hosting.blade.php  # عرض الباقات
+│   │   │   └── [مكونات أخرى]
+│   │   └── layouts/
+│   │
+│   ├── css/
+│   │   └── app.css                    # ملفات CSS
+│   │
+│   ├── js/
+│   │   ├── app.js
+│   │   └── bootstrap.js
+│   │
+│   └── lang/                          # ملفات الترجمة
+│       ├── ar/
+│       └── en/
+│
+├── routes/
+│   └── web.php                        # مسارات الويب
+│
+├── database/
+│   ├── migrations/
+│   ├── factories/
+│   │   └── UserFactory.php
+│   └── seeders/
+│
+├── public/
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── js/
+│   │   ├── images/                    # الصور والأيقونات
+│   │   │   └── [صور الباقات والمحتوى]
+│   │   └── webfonts/
+│   └── storage/                       # التخزين العام
+│
+├── composer.json
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## 🎯 الميزات الحالية
+
+### 1️⃣ صفحات متعددة
+- ✅ صفحة ترحيبية جذابة
+- ✅ معرض أعمال متكامل
+- ✅ مدونة تسويقية
+- ✅ نموذج اتصال
+- ✅ عرض الخدمات
+
+### 2️⃣ نظام الباقات (Packages System)
+نظام متطور لعرض وفلترة الباقات المختلفة:
+
+**الباقات المتاحة:**
+- 🖥️ **استضافة مشتركة** - 4 خطط (5$ - 15$/شهر)
+- 🔄 **خدمات الريسيلر** - 4 خطط (25$ - 45$/شهر)
+- ⚡ **خوادم VPS** - 4 خطط (28$ - 55$/شهر)
+- 🗂️ **خوادم مخصصة** - (100$/شهر)
+
+**المميزات:**
+- ✅ نظام فلترة ديناميكي (جانب العميل)
+- ✅ عرض الأسعار الشهرية والسنوية
+- ✅ قائمة شاملة بالميزات لكل باقة
+- ✅ صور توضيحية لكل باقة
+- ✅ دعم الاستجابة الكاملة
+
+### 3️⃣ نظام اللغات المتعدد
+- 🌐 تبديل ديناميكي بين العربية والإنجليزية
+- 📝 ملفات ترجمة منظمة لكل لغة
+- 🔄 الحفاظ على الجلسة عند تبديل اللغة
+
+### 4️⃣ التصميم الحديث
+- 🎨 CSS Tailwind v4 مع دعم كامل
+- 📱 تخطيطات Responsive لجميع الأجهزة
+- ✨ رسوم متحركة سلسة وجذابة
+- 🖼️ واجهة مستخدم متقدمة وسهلة الاستخدام
+
+---
+
+## 🛠️ الأدوات والتقنيات
+
+| الأداة | الإصدار | الاستخدام |
+|------|--------|----------|
+| Laravel | 12.x | إطار العمل الرئيسي |
+| PHP | 8.2+ | لغة البرمجة الأساسية |
+| Tailwind CSS | 4.x | تصميم واجهات المستخدم |
+| Vite | 7.x | بناء وتطوير الأصول |
+| Node.js | 18+ | إدارة الحزم والأتمتة |
+| Blade Template | - | نظام القوالب |
+| MySQL/SQLite | - | قاعدة البيانات |
+
+---
+
+## 📝 ملفات التكوين المهمة
+
+### `config/packages-hosting.php`
+يحتوي على تكوين شامل لجميع الباقات:
+
+```php
+'hosting' => [
+    [
+        'name' => 'البــاقة الاولي',
+        'month_price' => 5,
+        'year_price' => 60,
+        'image' => 'hosting/hosting-packages/plan-1.png',
+        'is_popular' => false,
+        'features' => [...]
+    ],
+    // ...
+],
+'reseller' => [...]
+'vps' => [...]
+'servers' => [...]
+```
+
+**محتويات كل باقة:**
+- ✅ الاسم والسعر (شهري/سنوي)
+- ✅ الصورة الخاصة بالباقة
+- ✅ علامة "الأكثر طلباً"
+- ✅ قائمة مفصلة بالميزات
+
+---
+
+## 🎨 المكونات الرئيسية
+
+### `LocaleController`
+مراقب تبديل اللغات:
+```php
+namespace App\Http\Controllers;
+
+class LocaleController extends Controller
+{
+    public function change($locale)
+    {
+        session(['locale' => $locale]);
+        return redirect()->back();
+    }
+}
+```
+
+### `packages-hosting.blade.php`
+مكون عرض الباقات مع:
+- نظام فلترة جانب العميل (JavaScript)
+- عرض الأسعار والميزات
+- صور الباقات مع Fallback
+- أنيميشن انتقالات سلسة
+
+### `app/helpers.php`
+دوال مساعدة مفيدة:
+```php
+// التحقق من وجود الصور
+checkExistFileInPublic($path)
+
+// تحديد نص إلى طول معين
+limitedText($text, $limit)
+```
+
+---
+
+## 🔄 مسارات التطبيق
+
+| المسار | الصفحة | الوصف |
+|------|------|-------|
+| `/` | welcome | الصفحة الرئيسية |
+| `/about-us` | about-us | من نحن |
+| `/portfolio` | portfolio | معرض الأعمال |
+| `/works/show` | workShow | عرض المشروع |
+| `/blog` | blog | المدونة |
+| `/blog/show` | blogShow | عرض المقالة |
+| `/contact` | contact | نموذج الاتصال |
+| `/hosting` | hosting | صفحة الاستضافة |
+| `/website-developer` | websiteDeveloper | خدمات تطوير المواقع |
+| `/app-mobile` | appMobile | خدمات التطبيقات |
+| `/tickets` | tickets | الفعاليات والتذاكر |
+| `/locale/{locale}` | - | تغيير اللغة (ar/en) |
+
+---
+
+## 🚦 حالة المشروع
+
+🟡 **قيد التطوير النشط**
+
+### ✅ المكتمل
+- ✅ الهيكل الأساسي للمشروع
+- ✅ نظام الباقات كاملاً
+- ✅ دعم تعدد اللغات
+- ✅ جميع الصفحات الأساسية
+- ✅ نظام الفلترة الديناميكي
+
+### 🔄 قيد العمل
+- 🔄 إضافة ميزات متقدمة
+- 🔄 تحسين الأداء
+- 🔄 تحسينات SEO
+
+### ⏳ المخطط له
+- ⏳ نظام الدفع (Stripe/PayPal)
+- ⏳ لوحة تحكم إدارية
+- ⏳ نظام حجز الفعاليات المتقدم
+- ⏳ أتمتة البريد الإلكتروني
+
+---
+
+## 🎓 أوامر مفيدة
+
+```bash
+# تشغيل الخادم
+php artisan serve
+
+# تشغيل Vite للتطوير
+npm run dev
+
+# بناء الأصول للإنتاج
+npm run build
+
+# تشغيل الاختبارات
+composer run test
+
+# مسح الكاش
+php artisan config:clear
+php artisan cache:clear
+
+# تشغيل الترجيحات
+php artisan migrate
+
+# إعادة تعيين قاعدة البيانات
+php artisan migrate:refresh
+```
+
+---
+
+## �‍💻 الفريق
+
+### Lead Developer
+<div align="center">
+
+**اسلام السيد** | Islam Alsayed  
+*Full Stack Developer*
+
+📧 [eslamalsayed8133@gmail.com](mailto:eslamalsayed8133@gmail.com)  
+🐙 [github.com/islamalsayed](https://github.com/islamalsayed)  
+💼 [linkedin.com/in/islamalsayed00](https://linkedin.com/in/islamalsayed00)
+
+</div>
+
+---
+
+## �📞 التواصل والدعم
+
+نحن نعمل على إضافة المزيد من الميزات والتحسينات. 
+
+| القناة | التفاصيل |
+|------|----------|
+| 📧 البريد الإلكتروني | info@firstmarketing.com |
+| 🌐 الموقع الرسمي | https://firstmagency.com |
+| 💬 الاستفسارات | من خلال نموذج الاتصال |
+
+---
+
+## 📄 الترخيص
+
+هذا المشروع مرخص تحت رخصة MIT. اطلع على ملف [LICENSE](LICENSE) للمزيد من التفاصيل.
+
+---
+
+## 🙏 شكراً
+
+شكراً لاستخدامك **First Marketing Agency Platform**!
+
+---
+
+<div align="center">
+
+**آخر تحديث:** 22 فبراير 2026  
+**الإصدار:** 1.0.0 (التطوير)  
+**الحالة:** 🟡 قيد التطوير النشط
+
+</div>

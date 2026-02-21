@@ -15,7 +15,7 @@
         @include('sections.project-steps')
 
         {{-- Frequently Asked Questions Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('apps-faqs')])
+        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-apps')])
 
         {{-- Important Articles Section --}}
         @include('sections.important-articles')

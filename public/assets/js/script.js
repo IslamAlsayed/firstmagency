@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterButtons = document.querySelectorAll('.projects-section .filter-btn');
     const projectItems = document.querySelectorAll('.project-item');
 
     // Mapping من filter IDs إلى أسماء الـ tags الفعلية
@@ -259,17 +259,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Developer Section Auto-Switch and Magnetic Effect
-    const developerInners = document.querySelectorAll('.website-developer .inner');
+    const effectSectionInners = document.querySelectorAll('.effect-section .inner');
     const magneticEffectImages = document.querySelectorAll('.magnetic-effect');
-
-    if (developerInners.length > 0) {
+    if (effectSectionInners.length > 0) {
         let currentDevIndex = 0;
 
-        // Auto-switch every 5 seconds
+        // Auto-switch every 7 seconds
         setInterval(() => {
-            developerInners.forEach(inner => inner.classList.add('hidden'));
-            currentDevIndex = (currentDevIndex + 1) % developerInners.length;
-            developerInners[currentDevIndex].classList.remove('hidden');
+            effectSectionInners.forEach(inner => inner.classList.add('hidden'));
+            currentDevIndex = (currentDevIndex + 1) % effectSectionInners.length;
+            effectSectionInners[currentDevIndex].classList.remove('hidden');
         }, 7000);
     }
 
@@ -358,5 +357,90 @@ document.addEventListener('DOMContentLoaded', function () {
             // تحديث عشوائي كل 3 ثوانٍ
             setInterval(updateImages, 3000);
         }
+    }
+
+    const buttons = document.querySelectorAll('.filter-btn-package');
+    const priceButtons = document.querySelectorAll('.price-packages .filter-btn-price');
+    const cards = document.querySelectorAll('.package-card');
+
+    if (cards.length > 0) {
+        if (priceButtons.length > 0) {
+            priceButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    btn.classList.add('active');
+                    priceButtons.forEach(b => {
+                        if (b !== btn) b.classList.remove('active');
+                    });
+                    const datasetPrice = this.getAttribute('data-filter');
+                    cards.forEach(card => {
+                        const priceElement = card.querySelectorAll('.main-price');
+                        priceElement.forEach(price => {
+                            if (price.classList.contains(datasetPrice)) {
+                                price.classList.remove('hidden');
+                            } else {
+                                price.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            });
+
+            if (buttons.length > 0) {
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const target = this.getAttribute('data-target');
+
+                        buttons.forEach(b => {
+                            b.classList.remove('bg-blue-50', 'text-blue-600', 'border', 'border-blue-100', 'shadow-inner');
+                            b.classList.add('text-gray-600');
+                        });
+                        this.classList.add('bg-blue-50', 'text-blue-600', 'border', 'border-blue-100', 'shadow-inner');
+                        this.classList.remove('text-gray-600');
+
+                        cards.forEach(card => {
+                            setTimeout(() => {
+                                if (card.getAttribute('data-category') === target) {
+                                    card.classList.add('active');
+                                    card.style.display = 'block';
+                                } else {
+                                    card.classList.remove('active');
+                                    setTimeout(() => {
+                                        card.style.display = 'none';
+                                    }, 50);
+                                }
+                            }, 300);
+                        });
+                    });
+                });
+            }
+
+            document.querySelector('[data-target="hosting"]').click();
+        }
+    }
+
+    const filterOperatingSystems = document.querySelectorAll('.filter-operating-systems');
+    const categories = document.querySelectorAll('[data-category]');
+
+    if (filterOperatingSystems.length > 0) {
+        filterOperatingSystems.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+
+                // Update active state of buttons
+                filterOperatingSystems.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Show/hide categories
+                if (categories.length > 0) {
+                    categories.forEach(category => {
+                        if (category.getAttribute('data-category') === filter) {
+                            category.classList.remove('hidden');
+                        } else {
+                            category.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        });
     }
 });

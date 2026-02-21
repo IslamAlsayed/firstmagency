@@ -28,6 +28,6 @@
         @include('sections.important-articles')
 
         {{-- Frequently Asked Questions Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('websites-faqs')])
+        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-websites')])
     </div>
 @endsection
