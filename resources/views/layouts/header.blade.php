@@ -128,7 +128,7 @@
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.menu_hosting') }}</span>
                         </a>
-                        <a href="#" class="service-link">
+                        <a href="{{ route('domains') }}" class="service-link {{ $currentRoute == 'domains' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.menu_domain') }}</span>
                         </a>

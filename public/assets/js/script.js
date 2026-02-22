@@ -443,4 +443,28 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    const officialToggles = document.querySelectorAll('[data-official-toggle]');
+    if (officialToggles.length > 0) {
+        const officialAnswers = document.querySelectorAll('[data-official-answer]');
+        officialToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const item = toggle.closest('[data-official-item]');
+                const answer = item.querySelector('[data-official-answer]');
+                item.classList.toggle('active');
+
+                if (officialAnswers.length > 0) {
+                    officialAnswers.forEach(el => {
+                        if (el !== answer) el.style.height = null;
+                    });
+                }
+
+                if (answer.style.height) {
+                    answer.style.height = null;
+                } else {
+                    answer.style.height = answer.scrollHeight + "px";
+                }
+            });
+        });
+    }
 });

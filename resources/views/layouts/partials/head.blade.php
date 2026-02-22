@@ -49,3 +49,4 @@
 <link href="{{ asset('assets/css/app-developer.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/project-steps.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/hosting.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/domains.css') }}" rel="stylesheet" />

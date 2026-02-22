@@ -18,26 +18,30 @@
     <div>
         <div data-category="operating-systems">
             <div class="content items-center">
-                @foreach (config('operating-systems') as $system)
-                    <div class="system-card p-3">
-                        <div class="image mb-4">
-                            <img src="{{ asset('assets/images/' . $system['icon']) }}" alt="">
+                @if (config('operating-systems') && count(config('operating-systems')) > 0)
+                    @foreach (config('operating-systems') as $system)
+                        <div class="system-card p-3">
+                            <div class="image mb-4">
+                                <img src="{{ asset('assets/images/' . $system['icon']) }}" alt="">
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">{{ $system['title'] }}</h3>
                         </div>
-                        <h3 class="font-semibold text-lg mb-2">{{ $system['title'] }}</h3>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="hidden" data-category="dashboards-and-apps">
             <div class="content items-center">
-                @foreach (config('dashboards-and-apps') as $item)
-                    <div class="system-card p-3">
-                        <div class="image mb-4">
-                            <img src="{{ asset('assets/images/' . $item['icon']) }}" alt="">
+                @if (config('dashboards-and-apps') && count(config('dashboards-and-apps')) > 0)
+                    @foreach (config('dashboards-and-apps') as $item)
+                        <div class="system-card p-3">
+                            <div class="image mb-4">
+                                <img src="{{ asset('assets/images/' . $item['icon']) }}" alt="">
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">{{ $item['title'] }}</h3>
                         </div>
-                        <h3 class="font-semibold text-lg mb-2">{{ $item['title'] }}</h3>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

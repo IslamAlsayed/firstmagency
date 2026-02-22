@@ -27,3 +27,7 @@ Route::get('/website-developer', fn() => view('websiteDeveloper'))->name('websit
 Route::get('/app-mobile', fn() => view('appMobile'))->name('app.mobile');
 
 Route::get('/hosting', fn() => view('hosting'))->name('hosting');
+
+Route::get('/domains', fn() => view('domains'))->name('domains');
+
+Route::post('/cart', fn() => dd(request()->all()))->name('cart');
