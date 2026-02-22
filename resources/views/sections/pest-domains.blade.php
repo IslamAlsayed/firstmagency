@@ -1,7 +1,7 @@
 <div class="section pest-domains-sections text-center">
     <div class="mb-8">
-        <div class="title font-semibold mb-4">أفضل عروض النطاقات</div>
-        <p class="description text-gray-600 font-semibold">اختار النطاق المناسب لعلامتك التجارية بأسعار تنافسية وخصومات قوية</p>
+        <div class="title font-semibold mb-4">{{ __('main.domain_best_offers') }}</div>
+        <p class="description text-gray-600 font-semibold">{{ __('main.domains_best_description') }}</p>
     </div>
 
     <div class="content items-center">

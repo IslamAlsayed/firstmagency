@@ -5,7 +5,7 @@
         text-align: center;
         padding: 200px var(--main-inline-padding) 50px;
         position: relative;
-        background-color: var(--light-color);
+        background-color: #F8F8F8;
 
         &::after {
             content: '';
@@ -15,7 +15,7 @@
             bottom: 0;
             left: 0;
             opacity: 0.05;
-            background-image: url('../assets/images/domains/hero-bg.png');
+            background-image: url('../images/domains/hero-bg.png');
             background-position: top left;
             background-size: 60% auto;
             background-repeat: repeat;
@@ -147,7 +147,7 @@
         padding: 50px var(--main-inline-padding);
 
         .title {
-            font-size: 40px;
+            font-size: 48px;
             font-weight: bolder;
         }
 
@@ -206,7 +206,14 @@
         }
     }
 
-    .pest-domains-sections {
+    .pest-domains-sections.official-domains {
+        background-color: #FFF9F2;
+
+        & .title,
+        & .description {
+            color: var(--dark-blue-color);
+        }
+
         & .question-item {
             height: fit-content;
             cursor: pointer;
@@ -239,6 +246,12 @@
                 height: 0;
                 overflow: hidden;
                 transition: 0.2s ease;
+
+                & .detail .kt-badge {
+                    font-weight: bold;
+                    color: var(--light-color);
+                    background-color: var(--dark-blue-color);
+                }
 
                 & .detail:not(:last-child) {
                     padding-bottom: 10px;
@@ -307,12 +320,88 @@
             }
         }
     }
+
+    .programming-section {
+        padding: 50px var(--main-inline-padding);
+        top: 0;
+        overflow: hidden;
+        position: relative;
+        background-color: var(--articles-background-color);
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: -30px;
+            right: -10px;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: url(../assets/images/domains/why-us-bg.png);
+            background-position: top right;
+            background-size: 20%;
+            background-repeat: no-repeat;
+
+            animation: fadeInUp 3s ease-in-out infinite alternate;
+        }
+
+        & .title {
+            font-size: 36px;
+        }
+
+        & .title,
+        & .description {
+            color: var(--dark-blue-color);
+        }
+
+        & .website {
+            height: auto !important;
+            max-height: fit-content;
+            text-align: start;
+            border: 1px solid var(--light-muted-color);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, .07);
+            background: radial-gradient(circle at 15% 15%, rgba(99, 102, 241, .14), transparent 55%),
+                radial-gradient(circle at 85% 25%, rgba(6, 182, 212, .10), transparent 55%),
+                radial-gradient(circle at 30% 90%, rgba(245, 158, 11, .10), transparent 55%);
+
+            &::before {
+                height: 300%;
+            }
+
+            &:hover {
+                box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
+            }
+
+            & .image {
+                padding: 9px;
+                margin: 0;
+
+                &::after {
+                    background-color: #7a99ff;
+                }
+            }
+
+            & .website-title {
+                margin-block: 10px;
+            }
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translate(0) rotate(5deg);
+    }
+
+    to {
+        transform: translate(-20px, 20px) rotate(5deg);
+    }
 }
 
 @media (max-width: 992px) {
     .domains {
         .your-domain-section {
-            padding: 100px var(--main-inline-padding) 50px;
+            padding: 150px var(--main-inline-padding) 50px;
 
             h2 {
                 font-size: 30px;
@@ -336,8 +425,6 @@
 @media (max-width: 768px) {
     .domains {
         .your-domain-section {
-            padding: 200px var(--main-inline-padding) 30px;
-
             .filter-domains {
                 & .filter-domain-button {
                     font-size: 12px;
@@ -369,6 +456,8 @@
 @media (max-width: 425px) {
     .domains {
         .your-domain-section {
+            padding: 120px var(--main-inline-padding) 30px;
+
             .text {
                 margin-bottom: 20px;
             }
@@ -413,6 +502,18 @@
                 .domain-extension {
                     width: 100%
                 }
+            }
+        }
+
+        & .programming-section {
+            & .title {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            & .description {
+                font-size: 10px;
+                margin-bottom: 10px;
             }
         }
     }

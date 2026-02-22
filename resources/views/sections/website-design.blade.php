@@ -55,7 +55,7 @@
                      </div>
                      <div class="font-semibold">
                          <p>15200</p>
-                         <span>تذاكر الدعم الفني</span>
+                         <span>{{ __('main.website_design_support_ticket') }}</span>
                      </div>
                  </div>
              </div>

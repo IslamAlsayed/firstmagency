@@ -132,11 +132,11 @@
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.menu_domain') }}</span>
                         </a>
-                        <a href="#" class="service-link">
+                        <a href="{{ route('services.marketing') }}" class="service-link {{ $currentRoute == 'services.marketing' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.menu_digital_marketing') }}</span>
                         </a>
-                        <a href="#" class="service-link">
+                        <a href="{{ route('seo') }}" class="service-link {{ $currentRoute == 'seo' ? 'active' : '' }}">
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.menu_seo') }}</span>
                         </a>

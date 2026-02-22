@@ -1,7 +1,7 @@
-<div class="section pest-domains-sections text-center">
+<div class="section pest-domains-sections official-domains text-center">
     <div class="mb-8">
-        <div class="title font-semibold mb-4">النطاقات الرسمية</div>
-        <p class="description text-gray-600 font-semibold">الأوراق المطلوبة والتفاصيل لكل نطاق رسمي</p>
+        <div class="title font-semibold mb-4">{{ __('main.domain_official_domains') }}</div>
+        <p class="description text-gray-600 font-semibold">{{ __('main.domain_official_domains_description') }}</p>
     </div>
 
     <div class="grid grid-cols-2 gap-4">
@@ -20,7 +20,7 @@
                         @foreach ($domain['children'] as $child)
                             {{-- <p>{{ $child['details'] }}</p> --}}
                             <div class="detail">
-                                <div class="kt-badge kt-badge-primary mt-4 mb-4">{{ $child['badge'] }}</div>
+                                <div class="kt-badge mt-4 mb-4">{{ $child['badge'] }}</div>
                                 <div class="answer text-sm text-gray-600" data-official-answer>{{ $child['details'] }}</div>
                             </div>
                         @endforeach

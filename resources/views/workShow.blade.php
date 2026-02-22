@@ -25,11 +25,11 @@
             </div>
 
             <div class="info">
-                <div class="heading">البصرة لايف 25</div>
+                <div class="heading">{{ __('main.work_heading') }}</div>
                 <div class="details flex item-center justify-between gap-4">
                     <div class="item">
                         <span>{{ __('main.work_title') }}</span>
-                        <h5 class="font-semibold">البصرة لايف 25</h5>
+                        <h5 class="font-semibold">{{ __('main.work_heading') }}</h5>
                     </div>
                     <div class="item">
                         <span>{{ __('main.work_year') }}</span>
@@ -37,11 +37,11 @@
                     </div>
                     <div class="item">
                         <span>{{ __('main.work_category') }}</span>
-                        <h5 class="font-semibold">الاخبار</h5>
+                        <h5 class="font-semibold">{{ __('main.work_category_title') }}</h5>
                     </div>
                     <div class="item">
                         <span>{{ __('main.work_location') }}</span>
-                        <h5 class="font-semibold">البصرة - العراق</h5>
+                        <h5 class="font-semibold">{{ __('main.work_location_title') }}</h5>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,8 @@
                 <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                     @foreach (config('projects_companies') as $key => $company)
                         @if ($key < 6)
-                            <div class="project-item" data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
+                            <div class="project-item"
+                                data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
                                 <a href="#">
                                     <div class="project-image">
                                         <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">

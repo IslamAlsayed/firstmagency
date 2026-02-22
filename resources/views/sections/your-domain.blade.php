@@ -5,19 +5,19 @@
 
         <div class="text mb-12 font-semibold">
             <h2 class="font-black text-[#1a2b50] mb-2 tracking-tight">
-                سجل دومين <span class="inline-block main-domain-badge">.com</span> الخاص بك
+                {{ __('main.domain_register_title') }} <span class="inline-block main-domain-badge">.com</span>
             </h2>
-            <p class="text-2xl text-[#1a2b50] opacity-90">توثيق رسمي واعتماد فوري!</p>
+            <p class="text-2xl text-[#1a2b50] opacity-90">{{ __('main.domain_register_subtitle') }}</p>
         </div>
 
         <div class="filter-domains">
             <div class="flex justify-center mb-10 font-semibold">
                 <label for="domain1" class="filter-domain-button active">
-                    احجز الآن
+                    {{ __('main.domain_register_now') }}
                     <input type="radio" name="domain" id="domain1" checked value="register">
                 </label>
                 <label for="domain2" class="filter-domain-button">
-                    انقل نطاقك
+                    {{ __('main.domain_transfer') }}
                     <input type="radio" name="domain" id="domain2" value="transfer">
                 </label>
             </div>
@@ -508,7 +508,7 @@
                 </div>
 
                 <div class="flex items-center gap-2 w-full">
-                    <input type="text" name="domain-url" placeholder="أدخل الدومين الذي تريد البحث عنه" class="w-full font-medium">
+                    <input type="text" name="domain-url" placeholder="{{ __('main.domain_search_placeholder') }}" class="w-full font-medium">
 
                     <button type="submit" class="search-button cursor-pointer">
                         <i class="fas fa-search"></i>
@@ -517,7 +517,7 @@
             </div>
 
             <p class="mt-6 text-gray-600 text-sm tracking-wide">
-                هام: يُرجى مراجعة الأوراق المطلوبة لكل امتداد دومين قبل الشراء
+                {{ __('main.domain_important_note') }}
             </p>
         </div>
     </form>
@@ -533,7 +533,7 @@
         const extension = document.querySelector('#domain-extension')?.value || '.com';
 
         if (!domainUrl.trim()) {
-            alert('يرجى إدخال اسم الدومين');
+            alert('{{ __("main.validation_domain_required") }}');
             return;
         }
 

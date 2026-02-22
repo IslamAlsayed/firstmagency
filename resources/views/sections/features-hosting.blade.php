@@ -1,6 +1,6 @@
 <div class="section programming-section text-center">
-    <div class="title font-semibold">مميزات استضافة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
-    <div class="description">احصل علي جميع المميزات التالية عند حصولك علي باقة من باقات الاستضافة او السيرفرات</div>
+    <div class="title font-semibold">{{ __('main.hosting_features_title') }} <span class="title-badge">{{ __('main.brand_name') }}</span></div>
+    <div class="description">{{ __('main.hosting_features_description') }}</div>
 
     <div class="websites-items grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @foreach (config('features-hosting') as $feature)

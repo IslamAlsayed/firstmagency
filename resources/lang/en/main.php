@@ -450,4 +450,124 @@ return [
     'important_articles_title' => 'Articles and Guides',
     'important_articles_subtitle' => 'Mobile Applications',
     'important_articles_description' => 'Practical articles and guides about mobile applications: ideas, development, performance improvement',
+
+    // ==================== Domain Sections ====================
+    'domain_register_title' => 'Register Your .com Domain',
+    'domain_register_subtitle' => 'Official documentation and instant approval!',
+    'domain_register_now' => 'Register Now',
+    'domain_transfer' => 'Transfer Your Domain',
+    'domain_search_placeholder' => 'Enter the domain you want to search for',
+    'domain_important_note' => 'Important: Please review the required documents for each domain extension before purchase',
+    'domain_please_enter_domain' => 'Please enter a domain name',
+    'domain_official_domains' => 'Official Domains',
+    'domain_official_domains_description' => 'Required documents and details for each official domain',
+    'domain_best_offers' => 'Best Domain Offers',
+
+    // ==================== Hosting Features ====================
+    'features_hosting_title' => 'Get All The Following Features',
+    'features_hosting_description' => 'Get all the following features when you get a hosting package or servers',
+    'hosting_benefits_title' => 'Already have a WordPress site?',
+    'hosting_benefits_subtitle' => 'Transfer your site for free with us!',
+    'hosting_domain_extension' => 'Domain .com-.net',
+    'marketing_ads_managed' => 'Paid Advertisements',
+    'marketing_followers' => 'Followers Growth',
+    'marketing_page_verification' => 'Page Verification',
+    'marketing_attractive_designs' => 'Attractive Designs',
+    'marketing_professional_content' => 'Professional Content',
+    'marketing_targeting_100' => '100% Targeting',
+    'marketing_company_header' => 'Digital Marketing Company',
+    'marketing_description' => 'We build your presence from scratch... professional content + attractive designs + full account management + effective advertising campaigns. Also content plans, designs, scheduling, engagement, and paid ads—all in one package that drives your sales forward.',
+    'marketing_social_media_header' => 'Social Media Services',
+    'marketing_social_media_desc' => 'Transform social media into your strongest customer source. We provide social media management, professional content creation, attractive post designs and visual identity, paid advertising campaigns, and continuous performance improvement to achieve leads and sales—with daily monitoring and monthly reports that help you grow and outpace competitors.',
+
+    // ==================== Various Sections ====================
+    'work_heading' => 'Al Basra Live 25',
+    'work_category_title' => 'News',
+    'work_location_title' => 'Al Basra - Iraq',
+    'portfolio_description_sample' => 'Successful social media management | and professional website design 2024',
+    'portfolio_date_sample' => 'April 20, 2024',
+    'seo_coming_soon' => 'Coming soon! Content is being added',
+
+    // ==================== Buttons and Elements ====================
+    'details_button' => 'Details',
+    'whatsapp_button' => 'WhatsApp',
+    'more_link' => 'More',
+
+    // ==================== Social Networks ====================
+    'social_facebook' => 'Facebook',
+    'social_twitter' => 'X',
+    'social_linkedin' => 'LinkedIn',
+    'social_whatsapp' => 'WhatsApp',
+    'social_telegram' => 'Telegram',
+
+    // ==================== Input Validation ====================
+    'validation_domain_required' => 'Please enter a domain name',
+
+    // ==================== Important Marketing Articles ====================
+    'important_marketing_articles_title' => 'Articles about the importance of',
+    'important_marketing_articles_subtitle' => 'Digital Marketing',
+    'important_marketing_articles_description' => 'A simplified explanation of digital marketing, its types, importance, and how to start with clear steps suitable for any business.',
+
+    // ==================== Hosting - Features ====================
+    'hosting_features_title' => 'Hosting Features',
+    'hosting_features_description' => 'Get all the following features when you get a hosting package or servers',
+
+    // ==================== Hosting - Hero ====================
+    'hosting_hero_title' => 'Website Hosting Company',
+    'hosting_vps_title' => 'VPS Hosting',
+
+    // ==================== Easy Management ====================
+    'easy_management_title' => 'Complete control of your clients accounts through the professional WHM panel',
+    'easy_management_description_1' => 'Enjoy smooth and secure management of hosting accounts through the WHM panel.',
+    'easy_management_description_2' => 'Allows you to create new accounts, monitor client performance, customize resources, and have complete control over all hosting details from one place.',
+
+    // ==================== No Worries ====================
+    'hosting_worry_label' => 'Do not worry about moving your site',
+    'hosting_worry_title' => 'Do you already have a WordPress site? Move your site for free with us!',
+    'hosting_worry_description_1' => 'We at First Marketing take care of transferring your site from the old hosting company to our platform with complete professionalism and without any additional fees.',
+    'hosting_worry_description_2' => 'We ensure that the site is transferred in most cases within just 30 minutes without any downtime or service interruption.',
+
+    // ==================== Marketing - Hero ====================
+    'marketing_services_title' => 'Social Media Services',
+    'marketing_services_description' => 'Turn social media into your strongest source of customers. We provide social media page management, professional content creation, post design and identity',
+
+    // ==================== Operating Systems ====================
+    'operating_systems_title' => 'Operating Systems',
+    'operating_systems_subtitle' => 'and Control Panels',
+    'operating_systems_description' => 'All programs, control panels, content management scripts and operating systems',
+
+    // ==================== Packages - Hosting ====================
+    'hosting_packages_description' => 'Choose from hosting packages, servers or reseller services',
+    'hosting_packages_monthly' => 'Monthly',
+    'hosting_packages_yearly' => 'Yearly',
+    'hosting_packages_shared' => 'Shared Hosting Packages',
+    'hosting_packages_reseller' => 'Reseller Packages',
+    'hosting_packages_vps' => 'VPS Packages',
+    'hosting_packages_dedicated' => 'Dedicated Server Packages',
+    'hosting_packages_popular' => 'Most Popular',
+    'hosting_packages_yearly_label' => 'Yearly',
+
+    // ==================== Domains ====================
+    'domains_best_description' => 'Choose the right domain for your brand at competitive prices and strong discounts',
+
+    // ==================== Website Design ====================
+    'website_design_support_ticket' => 'Support Tickets',
+
+    // ==================== Hosting Support ====================
+    'hosting_support_title' => 'Our specialist team is here to help you 24/7!',
+    'hosting_support_description' => 'We have a support team of professionals in solving problems. Contact us to get quick, effective and honest responses that really help you when you need it',
+    'hosting_support_stat_first_contact' => 'First contact problem resolution rate',
+    'hosting_support_stat_satisfaction' => 'Customer Satisfaction',
+    'hosting_support_stat_response_time' => 'Average response time to support requests',
+    'hosting_support_stat_requests' => 'Support Request',
+
+    // ==================== Why Us ====================
+    'why_us_description' => 'A package of global features that combines security, speed, and real support — to start your brand with confidence.',
+
+    // ==================== Buttons ====================
+    'btn_start_now' => 'Start Now',
+    'btn_transfer_now' => 'Start transferring your site now',
+    'btn_start_here' => 'Start Here',
+    'btn_request_now' => 'Request Now',
+    'btn_order_app' => 'Order Your App',
 ];

@@ -18,7 +18,7 @@
                     <div class="image">
                         <img src="{{ asset('assets/images/hosting/hosting-packages/icon.png') }}" alt="">
                     </div>
-                    <span class="font-semibold">باقات الاستضافة</span>
+                    <span class="font-semibold">{{ __('main.hosting_packages_shared') }}</span>
                 </div>
                 <i class="fas fa-chevron-down"></i>
             </button>
@@ -27,7 +27,7 @@
                     <div class="image">
                         <img src="{{ asset('assets/images/hosting/reseller-packages/icon.png') }}" alt="">
                     </div>
-                    <span class="font-semibold">باقات الريسيلر</span>
+                    <span class="font-semibold">{{ __('main.hosting_packages_reseller') }}</span>
                 </div>
                 <i class="fas fa-chevron-down"></i>
             </button>
@@ -36,14 +36,14 @@
                     <div class="image">
                         <img src="{{ asset('assets/images/hosting/vps-packages/icon.png') }}" alt="">
                     </div>
-                    <span class="font-semibold">باقات الـ VPS</span>
+                    <span class="font-semibold">{{ __('main.hosting_packages_vps') }}</span>
                 </div>
                 <i class="fas fa-chevron-down"></i>
             </button>
             <button data-target="servers" class="filter-btn-package flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <i class="fas fa-cloud"></i>
-                    <span class="font-semibold">باقات السيرفرات</span>
+                    <span class="font-semibold">{{ __('main.hosting_packages_dedicated') }}</span>
                 </div>
                 <i class="fas fa-chevron-down"></i>
             </button>
@@ -59,7 +59,7 @@
                         <div class="relative p-3">
 
                             @if ($package['is_popular'] ?? false)
-                                <div class="main-popular">الأكثر طلباً</div>
+                                <div class="main-popular">{{ __('main.hosting_packages_popular') }}</div>
                             @endif
 
                             <div class="mb-6">
@@ -79,7 +79,7 @@
                                     <span class="font-semibold main-price monthly_price hidden">{{ $package['month_price'] }}</span>
                                     <span class="font-semibold main-price yearly_price">{{ $package['year_price'] }}</span>
                                 </div>
-                                <p class="text-gray-600 text-sm mt-1">سنوياً</p>
+                                <p class="text-gray-600 text-sm mt-1">{{ __('main.hosting_packages_yearly_label') }}</p>
                             </div>
 
                             <ul class="space-y-4 mb-8">
@@ -101,7 +101,7 @@
                             </ul>
 
                             <button class="main-button w-full py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
-                                اطلب الآن
+                                {{ __('main.btn_request_now') }}
                             </button>
                         </div>
                     </div>

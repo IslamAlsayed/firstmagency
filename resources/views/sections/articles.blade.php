@@ -26,12 +26,12 @@
                                 <div class="actions">
                                     <button class="btn-link font-semibold details">
                                         <a href="{{ route('blog.show') }}">
-                                            التفاصيل
+                                            {{ __('main.details_button') }}
                                         </a>
                                     </button>
                                     <button class="btn-link font-semibold whatsapp">
                                         <a href="#contact">
-                                            واتساب
+                                            {{ __('main.whatsapp_button') }}
                                         </a>
                                     </button>
                                 </div>

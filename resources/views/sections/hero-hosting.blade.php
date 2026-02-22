@@ -2,7 +2,7 @@
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
-                <h1 class="font-semibold">شركة استضافه مواقع</h1>
+                <h1 class="font-semibold">{{ __('main.hosting_hero_title') }}</h1>
                 <div class="description">
                     الاستضافة السحابية (Cloud Hosting) هي طريقة حديثة لاستضافة موقعك تعتمد على شبكة من السيرفرات المتصلة ببعض بدل ما يكون موقعك على سيرفر واحد
                     فقط. ده بيخلي الموقع أسرع وأكثر استقرارًا لأن الموارد (CPU/RAM) بتتوزع وتزيد تلقائيًا حسب الضغط.
@@ -31,6 +31,7 @@
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
+                    <!-- AR: دومين .com-.net | EN: Domain .com-.net -->
                     دومين .com-.net
                 </div>
                 <div class="tag flex items-center gap-2">
@@ -54,7 +55,7 @@
     <div class="inner hidden flex items-center gap-4">
         <div class="content">
             <div class="text">
-                <h1 class="font-semibold">استضافة vps</h1>
+                <h1 class="font-semibold">{{ __('main.hosting_vps_title') }}</h1>
                 <div class="description">
                     مميزات استضافة VPS (سيرفر افتراضي خاص) إنها بتديك أداء وتحكم قريبين من السيرفر الكامل بس بتكلفة أقل، لأنك بتاخد جزء “معزول” من سيرفر قوي
                     بموارد مخصصة ليك.

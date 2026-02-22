@@ -8,18 +8,18 @@
 
         <div class="text">
             <div class="badge font-semibold mb-4">
-                إدارة سهلة
+                {{ __('main.easy_management_title') }}
             </div>
 
-            <h1 class="font-semibold">تحكم شامل في حسابات عملائك عبر لوحة WHM الاحترافية</h1>
+            <h1 class="font-semibold">{{ __('main.easy_management_title') }}</h1>
 
             <div class="descriptions">
-                <p>استمتع بإدارة سلسة وآمنة لحسابات الاستضافة من خلال لوحة WHM.</p>
-                <p>تتيح لك إنشاء حسابات جديدة، ومتابعة أداء العملاء، وتخصيص الموارد، والتحكم الكامل بكل تفاصيل الاستضافة من مكان واحد.</p>
+                <p>{{ __('main.easy_management_description_1') }}</p>
+                <p>{{ __('main.easy_management_description_2') }}</p>
             </div>
 
             <a href="#" class="btn-link main-color dark-hover font-semibold">
-                ابدأ الآن
+                {{ __('main.btn_start_now') }}
             </a>
         </div>
     </div>

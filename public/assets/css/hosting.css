@@ -2,22 +2,22 @@
     overflow: hidden;
 
     & .developer-section {
-        min-height: 650px;
+        min-height: 500px;
         padding: 150px var(--main-inline-padding) 50px;
-        background-image: url(../images/hosting/hero-bg.png);
-        top: 0;
+        background-color: var(--dark2-color);
         overflow: hidden;
         position: relative;
 
         &::after {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            background-color: var(--dark2-color);
+            position: absolute;
+            top: 0px;
+            left: 0;
+            z-index: 1;
+            opacity: 0.2;
+            background-image: url(../images/hosting/hero-bg.png);
         }
 
         & .inner {
@@ -29,6 +29,22 @@
 
     & .programming-section {
         padding: 50px var(--main-inline-padding);
+        position: relative;
+
+        &::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.5;
+            background-image: url(../images/reviews-bg.jpg);
+            background-position: top left;
+            background-size: 3.5%;
+            background-repeat: repeat;
+        }
 
         & .website {
             height: auto !important;
@@ -71,6 +87,7 @@
     & .packages-sections {
         padding: 50px var(--main-inline-padding);
         background-color: var(--projects-steps-background-color);
+        background-color: var(--light-color);
     }
 
     & .packages-sections .main-popular {
@@ -290,10 +307,21 @@
         padding: 70px var(--inline-padding);
         position: relative;
         background: #FAFAFA;
-        background-image: url('../assets/images/reviews-bg.jpg');
-        background-position: top left;
-        background-size: 15%;
-        background-repeat: repeat;
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.5;
+            background-image: url('../images/reviews-bg.jpg');
+            background-position: top left;
+            background-size: 15%;
+            background-repeat: repeat;
+        }
 
         &>div {
             gap: 80px;
@@ -343,12 +371,20 @@
                 padding: 10px 20px;
                 border-radius: 10px;
                 background-color: var(--light-main-color);
+
+                &:hover {
+                    background-color: var(--dark-color);
+                }
             }
         }
     }
 
     .operations-systems-sections {
         padding: 50px var(--main-inline-padding);
+
+        .title {
+            font-size: 28px;
+        }
 
         .content {
             gap: 20px;
@@ -405,6 +441,7 @@
 
         .operating-systems-filter {
             &>button {
+                font-size: 18px;
 
                 &,
                 &:hover,
@@ -495,6 +532,7 @@
 
         .image {
             width: 40%;
+            box-shadow: 0 7px 27px 4px rgba(0, 0, 0, 0.1);
         }
     }
 

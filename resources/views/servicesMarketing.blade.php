@@ -14,20 +14,14 @@
 @endpush
 
 @section('content')
-    <div class="domains effect-section">
-        {{-- Hero Section --}}
-        @include('sections.your-domain')
+    <div class="services-marketing effect-section">
+        {{-- Marketing Hero Section --}}
+        @include('sections.marketing-hero')
 
-        {{-- Pest Domains Section --}}
-        @include('sections.pest-domains')
-
-        {{-- Official Domains Section --}}
-        @include('sections.official-domains')
-
-        {{-- Why Us Section --}}
-        @include('sections.why-us')
+        {{-- Important Articles Section --}}
+        @include('sections.important-articles-marketing')
 
         {{-- Are You Ready Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-domains')])
+        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-services-marketing')])
     </div>
 @endsection

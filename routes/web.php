@@ -30,4 +30,8 @@ Route::get('/hosting', fn() => view('hosting'))->name('hosting');
 
 Route::get('/domains', fn() => view('domains'))->name('domains');
 
+Route::get('/services-marketing', fn() => view('servicesMarketing'))->name('services.marketing');
+
+Route::get('/seo', fn() => view('seo'))->name('seo');
+
 Route::post('/cart', fn() => dd(request()->all()))->name('cart');
