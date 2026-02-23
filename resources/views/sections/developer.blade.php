@@ -1,4 +1,4 @@
- <div class="developer-section effect-section">
+ <section class="developer-section effect-section">
      <div class="inner flex items-center gap-4">
          <div class="content">
              <div class="text">
@@ -102,4 +102,4 @@
              <img src="{{ asset('assets/images/developer/hero-2.png') }}" alt="شركة تصميم مواقع">
          </div>
      </div>
- </div>
+ </section>

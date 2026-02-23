@@ -325,8 +325,8 @@
     grid-template-columns: repeat(2, 1fr);
 
     & button {
-        border-radius: 12px;
-        padding-block: 7px;
+        padding: 7px 0;
+        border-radius: 10px;
         transition: all 0.1s ease;
 
         &.details {

@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="work-sections">
-        <div class="main-content">
+        <section class="main-content">
             <div class="back">
                 <a href="/" class="btn-link font-semibold">
                     {{ __('main.work_back') }}
@@ -45,29 +45,31 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="container">
+        <section class="container">
             <div class="section projects-section work-section text-center">
                 <h2 class="mb-8">{{ __('main.work_similar_projects') }}</h2>
                 <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                    @foreach (config('projects_companies') as $key => $company)
-                        @if ($key < 6)
-                            <div class="project-item"
-                                data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
-                                <a href="#">
-                                    <div class="project-image">
-                                        <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
-                                    </div>
-                                    <div class="project-text">
-                                        <div class="project-title font-semibold">{{ $company['title'] }}</div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endif
-                    @endforeach
+                    @if (config('projects_companies') && count(config('projects_companies')) > 0)
+                        @foreach (config('projects_companies') as $key => $company)
+                            @if ($key < 6)
+                                <div class="project-item"
+                                    data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
+                                    <a href="#">
+                                        <div class="project-image">
+                                            <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
+                                        </div>
+                                        <div class="project-text">
+                                            <div class="project-title font-semibold">{{ $company['title'] }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection

@@ -1,4 +1,4 @@
-<div class="section operations-systems-sections text-center">
+<section class="section operations-systems-sections text-center">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
             انظمة تشغيل <span class="title-badge">ولوحات تحكم</span>
@@ -45,4 +45,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

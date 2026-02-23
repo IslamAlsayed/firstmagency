@@ -1,4 +1,4 @@
-<div class="developer-section app-developer-section">
+<section class="developer-section app-developer-section">
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
@@ -97,4 +97,4 @@
             <img src="{{ asset('assets/images/app-developer/hero-2.png') }}" alt="{{ __('main.service_website_design_title') }}">
         </div>
     </div>
-</div>
+</section>

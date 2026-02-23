@@ -1,4 +1,4 @@
-<div class="developer-section app-developer-section marketing-hero">
+<section class="developer-section app-developer-section marketing-hero">
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
@@ -91,4 +91,4 @@
             <img src="{{ asset('assets/images/services-marketing/hero-2.png') }}" alt="شركة تصميم مواقع">
         </div>
     </div>
-</div>
+</section>

@@ -14,7 +14,7 @@
 @endpush
 
 @section('content')
-    <div class="contact-sections">
+    <section class="contact-sections">
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.contact_form_header') }}</div>
             <button class="btn-link light-main-color dark-hover font-semibold mb-8">
@@ -152,7 +152,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
 
 @section('scripts')

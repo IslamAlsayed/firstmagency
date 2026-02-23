@@ -18,6 +18,15 @@
         {{-- Marketing Hero Section --}}
         @include('sections.marketing-hero')
 
+        {{-- Operating Systems Section --}}
+        @include('sections.platform-management')
+
+        {{-- Work Line Section --}}
+        @include('sections.work-line')
+
+        {{-- Our Services Marketing Section --}}
+        @include('sections.our-services-marketing')
+
         {{-- Important Articles Section --}}
         @include('sections.important-articles-marketing')
 

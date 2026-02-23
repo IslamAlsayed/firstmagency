@@ -1,5 +1,4 @@
-<div class="section programming-section text-center">
-    <!-- AR: مميزات حجز الدومين | EN: Benefits of Domain Registration with First Marketing -->
+<section class="section programming-section text-center">
     <div class="title font-semibold">{{ sprintf(__('main.domain_register_title')) }} {{ __('main.contact_us') }}</div>
     <div class="description">{{ __('main.why_us_description') }}</div>
 
@@ -16,4 +15,4 @@
             @endforeach
         @endif
     </div>
-</div>
+</section>

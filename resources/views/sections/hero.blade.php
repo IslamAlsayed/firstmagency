@@ -1,4 +1,4 @@
-<div class="hero-section flex items-center justify-between gap-4">
+<section class="hero-section flex items-center justify-between gap-4">
     <div class="text">
         <div class="title font-semibold">{{ __('main.hero_title') }} <span class="title-badge">{{ __('main.hero_badge') }}</span></div>
         <div class="description">
@@ -22,4 +22,4 @@
             @endfor
         </div>
     </div>
-</div>
+</section>

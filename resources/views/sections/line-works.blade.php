@@ -1,4 +1,4 @@
-<div class="line-works-section">
+<section class="line-works-section">
     <div class="info">
         <div class="title font-semibold">{{ __('main.line_works_title') }}</div>
         <div class="description">
@@ -60,4 +60,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

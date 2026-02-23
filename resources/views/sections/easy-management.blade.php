@@ -1,4 +1,4 @@
-<div class="section easy-management">
+<section class="section easy-management">
     <div class="flex items-center">
         <div class="image-container">
             <div class="image">
@@ -23,4 +23,4 @@
             </a>
         </div>
     </div>
-</div>
+</section>

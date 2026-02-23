@@ -1,4 +1,4 @@
-<div class="section ready-hosting-sections text-center">
+<section class="section ready-hosting-sections text-center">
     <div class="content mx-auto px-4">
         <p class="font-semibold mb-4 opacity-95">
             احصل علي تجربة ممتازة مع اشتراك في باقات الاستضافة
@@ -17,4 +17,4 @@
             </a>
         </div>
     </div>
-</div>
+</section>

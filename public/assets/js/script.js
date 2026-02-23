@@ -467,4 +467,34 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    const steps = document.querySelectorAll('.work-lines-sections .step');
+    if (steps.length > 0) {
+        const stepInterval = 1000; // 1000ms بين كل خطوة
+        const totalDuration = stepInterval * steps.length + 1000; // المدة الكلية + 1 ثانية انتظار
+
+        function animateSteps() {
+            steps.forEach((step, index) => {
+                step.classList.remove('active');
+            });
+
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add('active');
+                }, 500 + (index * stepInterval));
+            });
+        }
+
+        // الحركة الأولى
+        animateSteps();
+
+        // تكرار لا نهائي
+        setInterval(animateSteps, totalDuration);
+    }
+
+    const icons = document.querySelectorAll('.icon[data-color]');
+    icons.forEach(icon => {
+        const color = icon.getAttribute('data-color');
+        if (color) icon.style.setProperty('--icon-color', color);
+    });
 });

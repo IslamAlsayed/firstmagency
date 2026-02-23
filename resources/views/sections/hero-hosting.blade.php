@@ -1,4 +1,4 @@
-<div class="developer-section shineSection">
+<section class="developer-section shineSection">
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
@@ -105,4 +105,4 @@
             <img src="{{ asset('assets/images/hosting/hero-2.png') }}" alt="شركة تصميم مواقع">
         </div>
     </div>
-</div>
+</section>

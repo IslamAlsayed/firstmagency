@@ -1,4 +1,4 @@
-<div class="section your-domain-section relative py-20 bg-slate-50 overflow-hidden">
+<section class="section your-domain-section relative py-20 bg-slate-50 overflow-hidden">
     {{-- <form action="https://client.firstmagency.com/cart.php" method="post" class="mx-auto px-4 relative z-10" id="domainForm"> --}}
     <form action="{{ route('cart') }}" method="post" class="mx-auto px-4 relative z-10" id="domainForm">
         @csrf
@@ -521,8 +521,8 @@
             </p>
         </div>
     </form>
-</div>
-{{-- 
+    </div>
+    {{-- 
 <script>
     document.getElementById('domainForm').addEventListener('submit', function(e) {
         e.preventDefault();

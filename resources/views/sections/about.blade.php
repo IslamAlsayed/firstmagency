@@ -1,4 +1,4 @@
-<div class="about-section flex items-center justify-center">
+<section class="about-section flex items-center justify-center">
     <div class="text">
         <div class="title font-semibold">{{ __('main.about_title') }}</div>
         <div class="description">
@@ -11,4 +11,4 @@
     <div class="image">
         <img src="{{ asset('assets/images/about/main-image.png') }}" alt="About Us Image" loading="lazy">
     </div>
-</div>
+</section>

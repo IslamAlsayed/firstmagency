@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="contact-sections tickets-section">
+    <section class="contact-sections tickets-section">
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.tickets_header') }}</div>
         </div>
@@ -27,5 +27,5 @@
                 </button>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

@@ -1,4 +1,4 @@
-<div class="articles-section">
+<section class="articles-section">
     @if (isset($title) && $title)
         <div class="heading">{{ $title }}</div>
     @endif
@@ -48,4 +48,4 @@
             المزيد
         </a>
     </button>
-</div>
+</section>

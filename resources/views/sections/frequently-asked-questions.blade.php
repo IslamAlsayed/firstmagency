@@ -1,4 +1,4 @@
-<div class="section faqs-section text-center">
+<section class="section faqs-section text-center">
     <div class="title font-semibold">{{ __('main.faqs_title') }} <span class="title-badge">{{ __('main.faqs_badge') }}</span></div>
     <div class="description">{{ __('main.faqs_description') }}</div>
 
@@ -17,4 +17,4 @@
             @endforeach
         @endif
     </div>
-</div>
+</section>
