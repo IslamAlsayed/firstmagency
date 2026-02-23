@@ -72,7 +72,11 @@
     & .heading {
         font-size: 22px;
         font-weight: bolder;
-        margin-block: 30px;
+        margin-block: 15px;
+    }
+
+    & .created_at {
+        margin-bottom: 15px;
     }
 
     & .description {
@@ -365,6 +369,15 @@
 @media (max-width: 992px) {
     .articles-section {
         padding: 140px var(--main-inline-padding) 30px;
+    }
+
+    .blog-show {
+        flex-direction: column;
+
+        & .blog-content,
+        & .side {
+            width: 100%;
+        }
     }
 }
 

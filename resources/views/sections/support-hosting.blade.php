@@ -6,7 +6,7 @@
             <div class="descriptions">
                 <p>{{ __('main.hosting_support_description') }}</p>
             </div>
-            <a href="#" class="btn-link light-main-color dark-hover font-semibold">
+            <a href="/" class="btn-link light-main-color dark-hover font-semibold">
                 {{ __('main.btn_start_here') }}
             </a>
         </div>

@@ -27,6 +27,9 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'whatsapp' => env('APP_WHATSAPP', '1234567890'),
+    'phone' => env('APP_PHONE', '1234567890'),
+    'email' => env('APP_EMAIL', 'info@example.com'),
 
     /*
     |--------------------------------------------------------------------------

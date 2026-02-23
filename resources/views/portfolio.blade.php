@@ -28,6 +28,7 @@
             @if (config('portfolio') && count(config('portfolio')) > 0)
                 @foreach (config('portfolio') as $key => $work)
                     <div class="project-item" data-tags="{{ isset($work['tags']) && is_array($work['tags']) ? implode(',', $work['tags']) : '' }}">
+                        {{-- ! here --}}
                         <a href="#">
                             <div class="project-image">
                                 <img src="{{ asset('assets/images/portfolio/' . ($key + 1) . '.jpg') }}" alt="{{ $work['title'] }}">

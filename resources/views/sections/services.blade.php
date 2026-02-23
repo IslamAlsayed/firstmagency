@@ -8,7 +8,7 @@
             @if (config('main-services') && count(config('main-services')) > 0)
                 @foreach (config('main-services') as $service)
                     <swiper-slide class="service-item">
-                        <a href="#" class="service-image">
+                        <a href="" class="service-image">
                             <img src="{{ asset('assets/images/services/' . $service['image']) }}" alt="{{ __('main.' . $service['title_key']) }}">
                         </a>
                         <div class="service-text">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="service-action">
                             <button class="btn-link main-color font-semibold">
-                                <a href="#contact">
+                                <a href="{{ route('services.marketing') }}">
                                     {{ __('main.request_now') }}
                                     <i class="icon fa-solid fa-square-arrow-up-right"></i>
                                 </a>

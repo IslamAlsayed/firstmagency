@@ -13,7 +13,7 @@
 
             <div class="description">
                 {{ __('main.website_design_description_part1') }}
-                <a href="#">{{ __('main.service_website_design_title') }}</a>
+                <a href="{{ route('website.developer') }}">{{ __('main.service_website_design_title') }}</a>
                 {{ __('main.website_design_description_part2') }}
                 {{ __('main.website_design_description_part3') }}
             </div>

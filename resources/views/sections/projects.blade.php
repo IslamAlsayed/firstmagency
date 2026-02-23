@@ -12,6 +12,7 @@
         @if (config('projects_companies') && count(config('projects_companies')) > 0)
             @foreach (config('projects_companies') as $key => $company)
                 <div class="project-item" data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
+                    {{-- ! here --}}
                     <a href="#">
                         <div class="project-image">
                             <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">

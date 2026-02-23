@@ -18,7 +18,7 @@
                 <p>{{ __('main.easy_management_description_2') }}</p>
             </div>
 
-            <a href="#" class="btn-link main-color dark-hover font-semibold">
+            <a href="/" class="btn-link main-color dark-hover font-semibold">
                 {{ __('main.btn_start_now') }}
             </a>
         </div>

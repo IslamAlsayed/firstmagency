@@ -101,9 +101,10 @@
                                     @endforeach
                                 </ul>
 
-                                <button class="main-button w-full py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
+                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                    class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
-                                </button>
+                                </a>
                             </div>
                         </div>
                     @endforeach

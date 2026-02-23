@@ -43,7 +43,7 @@ return [
     'service_hosting_services_title' => 'Hosting Services',
     'service_hosting_services_desc' => 'Fast and secure hosting ensures your website stability 24/7, with powerful performance and stable servers and ready technical support—for a smooth browsing experience and faster loading and improving your search results.',
 
-    'service_website_design_title' => 'Website Design',
+    'service_website_design_title' => 'Website Design and Development',
     'service_website_design_desc' => 'We offer professional website design service that combines modern style, fast performance and smooth user experience. We design your website with a strong identity and 100% responsive.',
 
     // ==================== Clients ====================

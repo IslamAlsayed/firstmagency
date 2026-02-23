@@ -20,17 +20,18 @@
                             </div>
                             <div class="content">
                                 <div class="body">
-                                    <a href="#" class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
+                                    <a href="{{ route('blog.show', ['id' => $key + 1]) }}"
+                                        class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
                                     <div class="description">{{ limitedText($article['description'], 60) }}</div>
                                 </div>
                                 <div class="actions">
                                     <button class="btn-link font-semibold details">
-                                        <a href="{{ route('blog.show') }}">
+                                        <a href="{{ route('blog.show', ['id' => $key + 1]) }}">
                                             {{ __('main.details_button') }}
                                         </a>
                                     </button>
                                     <button class="btn-link font-semibold whatsapp">
-                                        <a href="#contact">
+                                        <a href="{{ route('contact') }}">
                                             {{ __('main.whatsapp_button') }}
                                         </a>
                                     </button>

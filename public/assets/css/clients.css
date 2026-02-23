@@ -1,5 +1,6 @@
 /* Start Clients Section */
 .clients-section {
+    padding-top: 50px;
 
     & .clients-items {
         gap: 15px;

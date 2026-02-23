@@ -43,7 +43,7 @@ return [
     'service_hosting_services_title' => 'خــدمات الاستضافة',
     'service_hosting_services_desc' => 'استضافة سريعة وآمنة تضمن ثبات موقعك 24/7، بأداء قوي وسيرفرات مستقرة ودعم فني جاهز—لتجربة تصفح سلسة وتحميل أسرع وتحسين نتائجك على محركات البحث.',
 
-    'service_website_design_title' => 'تصميم مواقع',
+    'service_website_design_title' => 'تصميم وتطوير المواقع الالكترونية',
     'service_website_design_desc' => 'نقدّم خدمة تصميم مواقع احترافية تجمع بين الشكل العصري والأداء السريع وتجربة المستخدم السلسة. نصمّم موقعك بهوية قوية ومتجاوب 100%.',
 
     // ==================== Clients ====================
@@ -160,8 +160,8 @@ return [
     'footer_uae_address' => 'الشارقة - مركز الاعمال',
     'footer_important_links' => 'روابط هامة',
     'footer_home_page' => 'الصفحة الرئيسية',
-    'footer_about_company' => 'عـ الشـ ركة',
-    'footer_our_portfolio' => 'سـ ابقة اعمالنا',
+    'footer_about_company' => 'عن الشركة',
+    'footer_our_portfolio' => 'سابقة اعمالنا',
     'footer_articles_news' => 'مقالات واخبار الشركة',
     'footer_website_design' => 'تصميم مواقع الكترونية',
     'footer_digital_marketing' => 'التسويق الالكتروني',

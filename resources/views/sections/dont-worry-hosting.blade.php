@@ -7,7 +7,7 @@
                 <p>{{ __('main.hosting_worry_description_1') }}</p>
                 <p>{{ __('main.hosting_worry_description_2') }}</p>
             </div>
-            <a href="#" class="btn-link light-main-color dark-hover font-semibold">
+            <a href="{{ route('domains') }}" class="btn-link light-main-color dark-hover font-semibold">
                 {{ __('main.btn_transfer_now') }}
             </a>
         </div>

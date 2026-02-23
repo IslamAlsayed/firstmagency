@@ -16,7 +16,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_mobile') }}</span>
                             </div>
-                            <div class="contact">01212601601</div>
+                            <div class="contact">{{ config('app.whatsapp') }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-4">
@@ -25,7 +25,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_company') }}</span>
                             </div>
-                            <div class="contact">01212602602</div>
+                            <div class="contact">{{ config('app.phone') }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-4">
@@ -34,13 +34,13 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_email_label') }}</span>
                             </div>
-                            <div class="contact">info@firstmagency.com</div>
+                            <div class="contact">{{ config('app.email') }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="social">
                     <button class="btn-link main-color dark-hover font-semibold">
-                        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ config('app.whatsapp') }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </button>
                     <button class="btn-link main-color dark-hover font-semibold">
                         <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>

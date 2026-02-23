@@ -5,7 +5,7 @@
     <div class="websites-items grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @if (config('websites') && count(config('websites')) > 0)
             @foreach (config('websites') as $website)
-                <a href="#" class="website">
+                <a href="" class="website">
                     <div class="image">
                         <img src="{{ asset('assets/images/' . $website['image']) }}" alt="{{ $website['title'] }}">
                     </div>

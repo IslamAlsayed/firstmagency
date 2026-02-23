@@ -9,10 +9,10 @@
         </h1>
 
         <div class="ready-actions flex flex-row-reverse justify-center gap-4">
-            <a href="#" class="btn-outline-white text-lg font-semibold">
+            <a href="{{ route('hosting') }}" class="btn-outline-white text-lg font-semibold">
                 ابدء الان
             </a>
-            <a href="#" class="btn-outline-white text-lg font-semibold">
+            <a href="{{ route('contact') }}" class="btn-outline-white text-lg font-semibold">
                 اتصل بنــــــا
             </a>
         </div>

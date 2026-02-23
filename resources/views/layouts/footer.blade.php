@@ -50,18 +50,18 @@
             <div class="child">
                 <div class="title font-semibold">{{ __('main.footer_important_links') }}</div>
                 <ul>
-                    <li><a href="#"><i class="icon fas fa-home"></i>{{ __('main.footer_home_page') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-info-circle"></i>{{ __('main.footer_about_company') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-briefcase"></i>{{ __('main.footer_our_portfolio') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-newspaper"></i>{{ __('main.footer_articles_news') }}</a></li>
+                    <li><a href="/"><i class="icon fas fa-home"></i>{{ __('main.footer_home_page') }}</a></li>
+                    <li><a href="{{ route('about-us') }}"><i class="icon fas fa-info-circle"></i>{{ __('main.footer_about_company') }}</a></li>
+                    <li><a href="{{ route('portfolio') }}"><i class="icon fas fa-briefcase"></i>{{ __('main.footer_our_portfolio') }}</a></li>
+                    <li><a href="{{ route('blog') }}"><i class="icon fas fa-newspaper"></i>{{ __('main.footer_articles_news') }}</a></li>
                 </ul>
             </div>
             <div class="child">
                 <ul>
-                    <li><a href="#"><i class="icon fas fa-code"></i>{{ __('main.footer_website_design') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-bullhorn"></i>{{ __('main.footer_digital_marketing') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-mobile-alt"></i>{{ __('main.footer_mobile_apps') }}</a></li>
-                    <li><a href="#"><i class="icon fas fa-palette"></i>{{ __('main.footer_brand_design') }}</a></li>
+                    <li><a href="{{ route('website.developer') }}"><i class="icon fas fa-code"></i>{{ __('main.footer_website_design') }}</a></li>
+                    <li><a href="{{ route('services.marketing') }}"><i class="icon fas fa-bullhorn"></i>{{ __('main.footer_digital_marketing') }}</a></li>
+                    <li><a href="{{ route('app.mobile') }}"><i class="icon fas fa-mobile-alt"></i>{{ __('main.footer_mobile_apps') }}</a></li>
+                    <li><a href="{{ route('services.marketing') }}"><i class="icon fas fa-palette"></i>{{ __('main.footer_brand_design') }}</a></li>
                 </ul>
             </div>
             <div class="child">
