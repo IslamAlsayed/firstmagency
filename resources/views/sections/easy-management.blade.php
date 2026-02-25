@@ -8,7 +8,7 @@
 
         <div class="text">
             <div class="badge font-semibold mb-4">
-                {{ __('main.easy_management_title') }}
+                {{ __('main.easy_management_badge') }}
             </div>
 
             <h1 class="font-semibold">{{ __('main.easy_management_title') }}</h1>

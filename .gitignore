@@ -26,3 +26,4 @@ docs
 .github/workflows/deploy1.yml
 .github/workflows/deploy2.yml
 cloudflared.exe
+translation_extraction.json

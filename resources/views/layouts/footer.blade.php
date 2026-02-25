@@ -79,7 +79,7 @@
                 {{ __('main.footer_copyright') }}
             </div>
             <div class="payments">
-                <img src="{{ asset('assets/images/payments.png') }}" alt="Payments Methods">
+                <img src="{{ asset('assets/images/payments.png') }}" alt="{{ __('main.payments_methods') }}">
             </div>
         </div>
     </div>

@@ -30,6 +30,8 @@ return [
     'services_title' => 'Services',
     'services_subtitle' => 'FirstMarketing',
     'services_description' => 'Our services include website design, digital marketing, mobile application development, web hosting services',
+    'services_marketing_description' => 'Choose from the available services',
+    'our_services_title' => 'Our Service Packages in Digital Marketing',
 
     'service_domain_reservation_title' => 'Domain Reservation',
     'service_domain_reservation_desc' => 'Book a professional domain name that expresses your business and establishes your brand identity, with multiple options for popular extensions, easy renewal and full support—to start your online presence with confidence.',
@@ -452,11 +454,23 @@ return [
     'important_articles_description' => 'Practical articles and guides about mobile applications: ideas, development, performance improvement',
 
     // ==================== Domain Sections ====================
-    'domain_register_title' => 'Register Your .com Domain',
+    'domain_register_title' => 'Register Your <span class="inline-block main-domain-badge">.com</span> Domain',
     'domain_register_subtitle' => 'Official documentation and instant approval!',
     'domain_register_now' => 'Register Now',
     'domain_transfer' => 'Transfer Your Domain',
     'domain_search_placeholder' => 'Enter the domain you want to search for',
+    'domain_important_note' => 'Important: Please review the required documents for each domain extension before purchase',
+    'domain_please_enter_domain' => 'Please enter a domain name',
+    'domain_official_domains' => 'Official Domains',
+    'domain_official_domains_description' => 'Required documents and details for each official domain',
+    'domain_best_offers' => 'Best Domain Offers',
+
+    // ==================== WHY US ====================
+    'why_us_title' => 'Why Choose First Marketing?',
+    'why_us_description' => 'A package of global features combining security, speed, and real support — to start your brand with confidence.',
+    'why_us_contact_us' => 'Contact Us',
+    'why_us_learn_more' => 'Learn More',
+
     'domain_important_note' => 'Important: Please review the required documents for each domain extension before purchase',
     'domain_please_enter_domain' => 'Please enter a domain name',
     'domain_official_domains' => 'Official Domains',
@@ -492,6 +506,11 @@ return [
     'details_button' => 'Details',
     'whatsapp_button' => 'WhatsApp',
     'more_link' => 'More',
+    'support_hosting_image' => 'Support Image',
+    'dont_worry_image' => 'Peace of Mind Image',
+    'ecommerce_programming' => 'E-commerce Programming',
+    'website_design_company' => 'Website Design Company',
+    'secondary_title' => 'Secondary Title',
 
     // ==================== Social Networks ====================
     'social_facebook' => 'Facebook',
@@ -500,7 +519,21 @@ return [
     'social_whatsapp' => 'WhatsApp',
     'social_telegram' => 'Telegram',
 
-    // ==================== Input Validation ====================
+    // ==================== Blog & Articles ====================
+    'date_unavailable' => 'Date not available',
+    'important_articles_title' => 'Important Articles for',
+    'important_articles_description' => 'Articles and explanations for website design services and everything new in programming and development',
+    'ready_hosting_description' => 'Get an excellent experience with a subscription to our hosting packages',
+
+    // ==================== Work Line Section ====================
+    'work_line_description' => 'Steps of our work in social media marketing services.',
+    'performance_analysis' => 'Performance Analysis',
+    'strategy_planning' => 'Strategy Planning',
+    'start_work' => 'Start Work',
+    'content_planning' => 'Content Planning',
+    'content_development' => 'Content Development',
+    'competitor_research' => 'Competitor Research',
+    'more' => 'More',
     'validation_domain_required' => 'Please enter a domain name',
 
     // ==================== Important Marketing Articles ====================
@@ -515,9 +548,12 @@ return [
     // ==================== Hosting - Hero ====================
     'hosting_hero_title' => 'Website Hosting Company',
     'hosting_vps_title' => 'VPS Hosting',
+    'hosting_cloud_description' => 'Cloud Hosting is a modern way to host your website based on a network of interconnected servers instead of a single server. This makes the site faster and more stable because resources (CPU/RAM) are distributed and automatically increased based on demand.',
+    'hosting_vps_description' => 'VPS (Virtual Private Server) hosting benefits give you performance and control close to a full server at a lower cost, because you get an "isolated" portion of a powerful server with dedicated resources.',
 
     // ==================== Easy Management ====================
-    'easy_management_title' => 'Complete control of your clients accounts through the professional WHM panel',
+    'easy_management_badge' => 'Easy Management',
+    'easy_management_title' => 'Comprehensive control over your clients\' accounts through the professional WHM panel',
     'easy_management_description_1' => 'Enjoy smooth and secure management of hosting accounts through the WHM panel.',
     'easy_management_description_2' => 'Allows you to create new accounts, monitor client performance, customize resources, and have complete control over all hosting details from one place.',
 
@@ -531,10 +567,30 @@ return [
     'marketing_services_title' => 'Social Media Services',
     'marketing_services_description' => 'Turn social media into your strongest source of customers. We provide social media page management, professional content creation, post design and identity',
 
+    // ==================== Platform Management ====================
+    'platform_management_title' => 'Platform Management',
+    'advertising_platforms_badge' => 'Advertising',
+    'platform_management_description' => 'We prepare for you a strong presence and smart ads on the right platforms to achieve the best results at the lowest cost.',
+    'facebook_platform' => 'Facebook',
+    'facebook_description' => 'Precise targeting campaigns + content that increases engagement and converts followers into customers.',
+    'instagram_platform' => 'Instagram',
+    'instagram_description' => 'Attractive designs + reels and ads to raise awareness and sales quickly.',
+    'google_ads_platform' => 'Google Ads',
+    'google_ads_description' => 'Appear at the right time with powerful keywords and improve conversion rates.',
+    'snapchat_ads_platform' => 'Snapchat Ads',
+    'snapchat_ads_description' => 'Campaigns targeting youth with innovative ads and measurable results.',
+    'tiktok_platform' => 'TikTok',
+    'tiktok_description' => 'Fast-spreading video ads + content strategy to increase demand.',
+    'seo_platform_service' => 'SEO Services',
+    'seo_description' => 'Improve your ranking on Google with content strategy and technical page strengthening and smart links.',
+
     // ==================== Operating Systems ====================
     'operating_systems_title' => 'Operating Systems',
     'operating_systems_subtitle' => 'and Control Panels',
     'operating_systems_description' => 'All programs, control panels, content management scripts and operating systems',
+    'operating_systems_filter_label' => 'Operating Systems',
+    'control_panels_badge' => 'and Control Panels',
+    'control_panels_and_apps_label' => 'Control Panels and Applications',
 
     // ==================== Packages - Hosting ====================
     'hosting_packages_description' => 'Choose from hosting packages, servers or reseller services',
@@ -546,6 +602,10 @@ return [
     'hosting_packages_dedicated' => 'Dedicated Server Packages',
     'hosting_packages_popular' => 'Most Popular',
     'hosting_packages_yearly_label' => 'Yearly',
+    'packages_title' => 'Hosting Packages',
+    'packages_description' => 'Choose from hosting packages, servers or reseller services',
+    'monthly_label' => 'Monthly',
+    'yearly_label' => 'Yearly',
 
     // ==================== Domains ====================
     'domains_best_description' => 'Choose the right domain for your brand at competitive prices and strong discounts',
@@ -553,9 +613,47 @@ return [
     // ==================== Website Design ====================
     'website_design_support_ticket' => 'Support Tickets',
 
-    // ==================== Hosting Support ====================
+    // ==================== Hosting Features ====================
+    'ssd_storage' => 'SSD Storage Space',
+    'ssl_certificate' => 'SSL Security Certificate',
+    'cpanel_management' => 'cPanel Control Panel',
+    'domain_com_net' => 'Domain .com-.net',
+    'monthly_backup' => 'Monthly Backup',
+    'official_email' => 'Official Email',
+    'dedicated_resources' => 'Dedicated Resources',
+    'stable_fast_performance' => 'Stable Fast Performance',
+    'whm_panel' => 'WHM Control Panel',
+    'full_root_access' => 'Full ROOT Access',
+    'daily_backup' => 'Daily Backup',
+    'professional_responses' => 'Professional Responses',
+    'performance_reports' => 'Performance Reports',
+    'full_account_management' => 'Full Account Management',
+    'marketing_strategy' => 'Marketing Strategy',
+    'optimized_loading_speed' => 'Optimized Loading Speed',
+    'search_engine_optimization' => 'Search Engine Optimization',
+    'payment_gateway_integration' => 'Payment Gateway Integration',
+    'easy_control_panel' => 'Easy Control Panel',
+    'content_strategy_monthly' => 'Monthly Content Strategy',
+
+    // ==================== Features Hosting ====================
+    'feature_speed_title' => 'Fast Execution',
+    'feature_speed_description' => 'Fast execution with high quality and attention to detail.',
+    'feature_security_title' => 'Advanced Protection',
+    'feature_security_description' => 'Strong protection against hacking, spam and malicious files',
+    'feature_backup_daily_title' => 'Daily Backup',
+    'feature_backup_daily_description' => 'Automatic backup and quick recovery when needed.',
+    'feature_support_title' => 'Fast Technical Support',
+    'feature_support_description' => 'Follow up and solve problems first without delay.',
+    'feature_cpanel_title' => 'Easy Control Panel',
+    'feature_cpanel_description' => 'Manage domain, mail and files easily.',
+    'feature_ssl_title' => 'Free SSL Certificate',
+    'feature_ssl_description' => 'Secure your site and activate https with one click.',
+    'feature_performance_title' => 'Stable Performance',
+    'feature_performance_description' => 'Stable resources to run the site without interruption.',
+    'feature_wordpress_title' => 'WordPress Installation',
+    'feature_wordpress_description' => 'Install and set up WordPress quickly.',
     'hosting_support_title' => 'Our specialist team is here to help you 24/7!',
-    'hosting_support_description' => 'We have a support team of professionals in solving problems. Contact us to get quick, effective and honest responses that really help you when you need it',
+    'hosting_support_description' => 'We have a professional support team specialized in solving problems. Contact us for quick, effective, and honest responses that truly help you when you need assistance. Over the past years, we have helped more than 3000 clients with hosting and domain services, and we have made many updates and maintenance improvements',
     'hosting_support_stat_first_contact' => 'First contact problem resolution rate',
     'hosting_support_stat_satisfaction' => 'Customer Satisfaction',
     'hosting_support_stat_response_time' => 'Average response time to support requests',
@@ -567,7 +665,30 @@ return [
     // ==================== Buttons ====================
     'btn_start_now' => 'Start Now',
     'btn_transfer_now' => 'Start transferring your site now',
-    'btn_start_here' => 'Start Here',
+    'btn_start_here' => 'Start Here is Best',
     'btn_request_now' => 'Request Now',
     'btn_order_app' => 'Order Your App',
+    'start_now_btn' => 'Start Now',
+    'contact_us_btn' => 'Contact Us',
+    'ready_heading' => 'Are You Ready Now',
+    'seo_services_description' => 'SEO Services',
+    'package_heading_text' => 'Get an excellent experience with a subscription to our hosting packages',
+
+    // ==================== Missing Elements ====================
+    'logo' => 'Logo',
+    'english_language' => 'English Language',
+    'arabic_language' => 'Arabic Language',
+    'payments_methods' => 'Payment Methods',
+    'about_us_image' => 'About Us Image',
+    'client_image' => 'Client Image',
+    'design_title' => 'Design',
+    'hero_image' => 'Hero Image',
+    'placeholder' => 'Placeholder Image',
+    'blog_image' => 'Blog Image',
+    'first_marketing_logo' => 'First Marketing Logo',
+    'email_placeholder' => 'Example: example@domain.com',
+    'official_category' => 'Official',
+    'regular_category' => 'Regular',
+    'seconds' => 'Seconds',
+    'our_services_title' => 'Our Service Packages in Digital Marketing',
 ];

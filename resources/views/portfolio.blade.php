@@ -1,20 +1,7 @@
 @extends('layouts.master')
 
-@push('styles')
-    <style>
-        .header {
-            background-color: var(--light-color);
-            box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
-            background-image: url('../assets/images/header-bg.png');
-            background-position: center center;
-            background-size: contain;
-            background-repeat: repeat;
-        }
-    </style>
-@endpush
-
 @section('content')
-    <section class="section projects-section portfolio text-center">
+    <section class="section portfolio text-center section-with-filter">
         <div class="title font-semibold">{{ __('main.projects_main_title') }} <span class="title-badge">{{ __('main.projects_main_badge') }}</span></div>
         <div class="description">{{ __('main.projects_main_description') }}</div>
 
@@ -28,8 +15,7 @@
             @if (config('portfolio') && count(config('portfolio')) > 0)
                 @foreach (config('portfolio') as $key => $work)
                     <div class="project-item" data-tags="{{ isset($work['tags']) && is_array($work['tags']) ? implode(',', $work['tags']) : '' }}">
-                        {{-- ! here --}}
-                        <a href="#">
+                        <a href="{{ route('works.show', ['id' => $key]) }}">
                             <div class="project-image">
                                 <img src="{{ asset('assets/images/portfolio/' . ($key + 1) . '.jpg') }}" alt="{{ $work['title'] }}">
                             </div>
@@ -58,3 +44,13 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            header.setAttribute('data-force-scrolled', 'true');
+            header.classList.add('scrolled');
+        });
+    </script>
+@endpush

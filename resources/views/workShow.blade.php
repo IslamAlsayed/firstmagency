@@ -1,22 +1,10 @@
 @extends('layouts.master')
 
-@push('styles')
-    <style>
-        .heading-random {
-            padding: 30px;
-            margin-block: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            background-color: var(--light-color);
-        }
-    </style>
-@endpush
-
 @section('content')
     <div class="work-sections">
         <section class="main-content">
             <div class="back">
-                <a href="/" class="btn-link font-semibold">
+                <a href="/" class="btn-link cursor-pointer font-semibold">
                     {{ __('main.work_back') }}
                 </a>
             </div>
@@ -47,29 +35,27 @@
             </div>
         </section>
 
-        <section class="container">
-            <div class="section projects-section work-section text-center">
-                <h2 class="mb-8">{{ __('main.work_similar_projects') }}</h2>
-                <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                    @if (config('projects_companies') && count(config('projects_companies')) > 0)
-                        @foreach (config('projects_companies') as $key => $company)
-                            @if ($key < 6)
-                                <div class="project-item"
-                                    data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
-                                    <a href="#">
-                                        <div class="project-image">
-                                            <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
-                                        </div>
-                                        <div class="project-text">
-                                            <div class="project-title font-semibold">{{ $company['title'] }}</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
+        <div class="section works-show-section work-section text-center">
+            <h2 class="mb-8">{{ __('main.work_similar_projects') }}</h2>
+            <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                @if (config('projects_companies') && count(config('projects_companies')) > 0)
+                    @foreach (config('projects_companies') as $key => $company)
+                        @if ($key < 3)
+                            <div class="project-item"
+                                data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
+                                <a href="#">
+                                    <div class="project-image">
+                                        <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
+                                    </div>
+                                    <div class="project-text">
+                                        <div class="project-title font-semibold">{{ $company['title'] }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
             </div>
-        </section>
+        </div>
     </div>
 @endsection

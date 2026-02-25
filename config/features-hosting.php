@@ -2,43 +2,43 @@
 
 return [
     [
-        'title' => 'سرعة التنفيذ',
-        'description' => 'تنفيذ سريع مع جودة عالية واهتمام بالتفاصيل.',
+        'title_key' => 'feature_speed_title',
+        'description_key' => 'feature_speed_description',
         'image' => 'hosting/gifs/1.gif',
     ],
     [
-        'title' => 'حماية متقدمة ',
-        'description' => 'حماية قوية ضد الاختراق والسبام والملفات الضارة',
+        'title_key' => 'feature_security_title',
+        'description_key' => 'feature_security_description',
         'image' => 'hosting/gifs/2.gif',
     ],
     [
-        'title' => 'نسخ احتياطي يومي',
-        'description' => 'باك اب تلقائي واسترجاع سريع وقت الحاجة.',
+        'title_key' => 'feature_backup_daily_title',
+        'description_key' => 'feature_backup_daily_description',
         'image' => 'hosting/gifs/3.gif',
     ],
     [
-        'title' => 'دعم فني سريع',
-        'description' => 'متابعة وحل المشاكل أول بأول بدون تأخير.',
+        'title_key' => 'feature_support_title',
+        'description_key' => 'feature_support_description',
         'image' => 'hosting/gifs/4.gif',
     ],
     [
-        'title' => 'لوحة تحكم سهلة',
-        'description' => 'إدارة الدومين والبريد والملفات بسهولة.',
+        'title_key' => 'feature_cpanel_title',
+        'description_key' => 'feature_cpanel_description',
         'image' => 'hosting/gifs/5.gif',
     ],
     [
-        'title' => 'شهادة SSL مجانية',
-        'description' => 'تأمين الموقع وتفعيل https بضغطة واحدة.',
+        'title_key' => 'feature_ssl_title',
+        'description_key' => 'feature_ssl_description',
         'image' => 'hosting/gifs/6.gif',
     ],
     [
-        'title' => 'أداء ثابت',
-        'description' => 'موارد مستقرة لتشغيل الموقع بدون تقطيع.',
+        'title_key' => 'feature_performance_title',
+        'description_key' => 'feature_performance_description',
         'image' => 'hosting/gifs/7.gif',
     ],
     [
-        'title' => 'تركيب ووردبريس',
-        'description' => 'تثبيت ووردبريس وتجهيز الموقع بسرعة.',
+        'title_key' => 'feature_wordpress_title',
+        'description_key' => 'feature_wordpress_description',
         'image' => 'hosting/gifs/8.gif',
     ],
 ];

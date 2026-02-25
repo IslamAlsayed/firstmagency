@@ -5,7 +5,7 @@
     <div class="questions-items flex flex-col gap-3">
         @if (isset($faqs) && !empty($faqs))
             @foreach ($faqs as $faq)
-                <div class="question-item text-right" data-faq-item>
+                <div class="question-item text-right {{ $loop->first ? 'active' : '' }}" data-faq-item>
                     <div class="question font-semibold cursor-pointer" data-faq-toggle>
                         {!! $faq['question'] !!}
                         <span class="open">

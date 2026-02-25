@@ -1,6 +1,6 @@
 .contact-sections {
     margin: 0;
-    padding: 140px var(--main-inline-padding) 50px;
+    padding: 140px var(--contact-page-inline-padding) 50px;
     background-color: var(--articles-background-color);
 
     background-image: url(https://firstmagency.com/wp-content/uploads/2024/07/White-logo.png);

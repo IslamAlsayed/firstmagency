@@ -1,4 +1,4 @@
-<section class="section projects-section text-center">
+<section class="section projects-section text-center section-with-filter">
     <div class="title font-semibold">{{ __('main.projects_main_title') }} <span class="title-badge">{{ __('main.projects_main_badge') }}</span></div>
     <div class="description">{{ __('main.projects_main_description') }}</div>
 
@@ -12,8 +12,7 @@
         @if (config('projects_companies') && count(config('projects_companies')) > 0)
             @foreach (config('projects_companies') as $key => $company)
                 <div class="project-item" data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
-                    {{-- ! here --}}
-                    <a href="#">
+                    <a href="{{ route('works.show', ['id' => $key]) }}">
                         <div class="project-image">
                             <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
                         </div>
@@ -23,7 +22,7 @@
                     </a>
                     <div class="project-action">
                         <button class="btn-link main-color dark-hover font-semibold">
-                            <a href="{{ route('works.show') }}">
+                            <a href="{{ route('works.show', ['id' => $key]) }}">
                                 <i class="icon fa-solid fa-eye"></i>
                             </a>
                         </button>

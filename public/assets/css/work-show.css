@@ -1,7 +1,7 @@
 .work-sections {
     margin-top: 130px;
 
-    & .main-content {
+    .main-content {
         position: relative;
 
         &::before {
@@ -17,57 +17,164 @@
             pointer-events: none;
         }
     }
-}
 
-.work-sections .banner img {
-    width: 100%;
-    height: 90svh;
-    object-fit: cover;
-}
-
-.work-sections .back {
-    padding: 10px 0;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    margin-bottom: 16px;
-    border-radius: 25px;
-    border: 1px solid var(--light-color);
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .banner img {
         width: 100%;
-        height: 100%;
+        height: 90svh;
+        object-fit: cover;
+    }
+
+    .back {
+        padding: 10px 0;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        margin-bottom: 16px;
         border-radius: 25px;
-        background-color: var(--light-color);
-        opacity: 0.1;
+        border: 1px solid var(--light-color);
+
+        &:before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            opacity: 0.1;
+            z-index: -1;
+            border-radius: 25px;
+            transform: translate(-50%, -50%);
+            background-color: var(--light-color);
+        }
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    .main-content .info {
+        width: calc(100% - 400px);
+        position: absolute;
+        bottom: 0;
+        right: 200px;
+        padding-block: 30px;
+        color: var(--light-color);
+
+        & .heading {
+            font-size: 36px;
+            font-weight: bold;
+            border-bottom: 1px solid #ffffff50;
+        }
+
+        & .details {
+            color: var(--light-muted-color);
+            margin-top: 10px;
+
+            & .item {
+                width: 250px;
+            }
+        }
     }
 }
 
-.work-sections .main-content .info {
-    width: calc(100% - 400px);
-    position: absolute;
-    bottom: 0;
-    right: 200px;
-    padding-block: 30px;
-    color: var(--light-color);
+.works-show-section {
+    padding: 50px var(--main-inline-padding);
 
-    & .heading {
-        font-size: 36px;
-        font-weight: bold;
-        border-bottom: 1px solid #ffffff50;
-    }
+    .project-item {
+        max-height: 240px;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
 
-    & .details {
-        color: var(--light-muted-color);
-        margin-top: 10px;
+        & .project-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            z-index: 1;
+            transition: 0.1s linear;
+            background-color: var(--dark-color);
+        }
 
-        & .item {
-            width: 250px;
+        & .project-text {
+            text-align: start;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            left: auto;
+            z-index: 3;
+            opacity: 0;
+            visibility: hidden;
+            color: var(--light-color);
+        }
+
+        & .project-image {
+            max-height: 240px;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 2;
+                pointer-events: none;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+            }
+
+            & img {
+                height: calc(100% + 15px);
+                transform: translateY(-15px);
+            }
+        }
+
+        & .project-action {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            left: auto;
+            z-index: 7;
+            opacity: 0;
+            visibility: hidden;
+
+            & button {
+                padding: 8px 16px;
+                border-radius: 12px;
+                text-align: center;
+                align-content: center;
+                color: var(--dark-color);
+                background-color: var(--light-color);
+
+                & i,
+                & svg {
+                    transition: 0.1s ease;
+                    transform: translateY(1px) scale(1);
+                }
+
+                &:hover {
+
+                    & i,
+                    & svg {
+                        transform: translateY(-2px) scale(1.01);
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            & .project-image img {
+                transform: translateY(-15px) scale(1.05);
+                transition: 0.1s linear;
+            }
+
+            & .project-image::after {
+                opacity: 0.8;
+            }
+
+            & .project-text,
+            & .project-action {
+                opacity: 1;
+                visibility: visible;
+            }
         }
     }
 }

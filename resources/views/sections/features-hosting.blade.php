@@ -1,4 +1,4 @@
-<section class="section programming-section text-center">
+<section class="section programming-section feature-section text-center">
     <div class="title font-semibold">{{ __('main.hosting_features_title') }} <span class="title-badge">{{ __('main.brand_name') }}</span></div>
     <div class="description">{{ __('main.hosting_features_description') }}</div>
 
@@ -7,10 +7,10 @@
             @foreach (config('features-hosting') as $feature)
                 <div class="website">
                     <div class="image cursor-pointer">
-                        <img src="{{ asset('assets/images/' . $feature['image']) }}" alt="{{ $feature['title'] }}">
+                        <img src="{{ asset('assets/images/' . $feature['image']) }}" alt="{{ __('main.' . $feature['title_key']) }}">
                     </div>
-                    <div class="title font-semibold">{{ $feature['title'] }}</div>
-                    <div class="description">{{ $feature['description'] }}</div>
+                    <div class="title font-semibold">{{ __('main.' . $feature['title_key']) }}</div>
+                    <div class="description">{{ __('main.' . $feature['description_key']) }}</div>
                 </div>
             @endforeach
         @endif

@@ -1,18 +1,5 @@
 @extends('layouts.master')
 
-@push('styles')
-    <style>
-        .header {
-            background-color: var(--light-color);
-            box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
-            background-image: url('../assets/images/header-bg.png');
-            background-position: center center;
-            background-size: contain;
-            background-repeat: repeat;
-        }
-    </style>
-@endpush
-
 @section('content')
     {{-- About Section --}}
     @include('sections.about-us')
@@ -23,3 +10,13 @@
     {{-- Partners Section --}}
     @include('sections.partners')
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            header.setAttribute('data-force-scrolled', 'true');
+            header.classList.add('scrolled');
+        });
+    </script>
+@endpush

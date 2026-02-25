@@ -2,10 +2,15 @@
     overflow: hidden;
 
     .your-domain-section {
+        height: 100svh;
         text-align: center;
-        padding: 200px var(--main-inline-padding) 50px;
+        padding: 150px var(--your-domain-section-inline-padding) 0;
         position: relative;
         background-color: #F8F8F8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         &::after {
             content: '';
@@ -14,11 +19,15 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            opacity: 0.05;
+            opacity: 0.03;
             background-image: url('../images/domains/hero-bg.png');
             background-position: top left;
             background-size: 60% auto;
             background-repeat: repeat;
+        }
+
+        form {
+            width: 100%;
         }
 
         input::placeholder {
@@ -31,6 +40,7 @@
 
         h2 {
             font-size: 55px;
+            font-weight: 900;
         }
 
         .main-domain-badge {
@@ -87,8 +97,6 @@
         }
 
         .enter-domain {
-            width: 80%;
-            margin: auto;
             padding: 10px;
             border-radius: 10px;
             background-color: var(--light-color);
@@ -144,17 +152,18 @@
     }
 
     .pest-domains-sections {
-        padding: 50px var(--main-inline-padding);
+        padding: 50px var(--pest-domains-sections-inline-padding) 100px;
+        background-color: var(--pest-domains-background-color);
 
         .title {
             font-size: 48px;
-            font-weight: bolder;
+            font-weight: 900;
         }
 
         .content {
             gap: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            grid-template-columns: repeat(8, 1fr);
         }
 
         .domain-card {
@@ -228,7 +237,7 @@
                 font-size: 24px;
                 position: relative;
                 font-weight: bold;
-                color: var(--main-color);
+                color: var(--dark-main-color);
 
                 &::before {
                     content: '';
@@ -255,7 +264,7 @@
 
                 & .detail:not(:last-child) {
                     padding-bottom: 10px;
-                    border-bottom: 2px solid var(--orange-color);
+                    border-bottom: 2px solid var(--dark-main-color);
                 }
             }
 
@@ -321,8 +330,9 @@
         }
     }
 
-    .programming-section {
-        padding: 50px var(--main-inline-padding);
+    .programming-section,
+    .why-us-section {
+        padding: 50px var(--why-us-section-inline-padding);
         top: 0;
         overflow: hidden;
         position: relative;
@@ -337,7 +347,7 @@
             right: -10px;
             z-index: -1;
             opacity: 0.05;
-            background-image: url(../assets/images/domains/why-us-bg.png);
+            background-image: url(../images/domains/why-us-bg.png);
             background-position: top right;
             background-size: 20%;
             background-repeat: no-repeat;
@@ -384,6 +394,19 @@
             & .website-title {
                 margin-block: 10px;
             }
+        }
+    }
+
+    .why-us-section {
+        & .title {
+            font-size: 46px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        & .description {
+            font-size: 18px;
+            font-weight: bold;
         }
     }
 }

@@ -1,5 +1,5 @@
-<section class="section programming-section text-center">
-    <div class="title font-semibold">{{ sprintf(__('main.domain_register_title')) }} {{ __('main.contact_us') }}</div>
+<section class="section programming-section why-us-section text-center">
+    <div class="title font-semibold">{{ __('main.why_us_title') }}</div>
     <div class="description">{{ __('main.why_us_description') }}</div>
 
     <div class="websites-items grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

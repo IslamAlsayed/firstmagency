@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="logo">
             <a href="{{ url('/') }}" class="shineEffect">
-                <img src="{{ asset('assets/images/logo.png.webp') }}" alt="{{ __('main.brand_name') }} Logo">
+                <img src="{{ asset('assets/images/logo.png.webp') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
             </a>
 
             <div class="contact-fast">
@@ -107,7 +107,7 @@
                 </li>
                 <li class="flex items-center our_services">
                     <div
-                        class="nav-link btn-link flex items-center justify-between font-semibold gap-2 hover {{ $currentRoute == 'our_works' ? 'active' : '' }}">
+                        class="nav-link btn-link flex items-center justify-between font-semibold gap-2 hover {{ in_array($currentRoute, ['website.developer', 'app.mobile', 'hosting', 'domains', 'services.marketing', 'seo']) ? 'active' : '' }}">
                         <div class="flex items-center gap-2">
                             <div class="pseudo-element"></div>
                             <span>{{ __('main.our_services') }}</span>
@@ -187,11 +187,11 @@
             <div class="language-side">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}">
-                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="english language">
+                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
                     </a>
                 @else
                     <a href="{{ route('locale.change', 'ar') }}">
-                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="arabic language">
+                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
                     </a>
                 @endif
             </div>
@@ -200,11 +200,11 @@
             <div class="languages language-selector">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="english language">
+                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
                     </a>
                 @else
                     <a href="{{ route('locale.change', 'ar') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="arabic language">
+                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
                     </a>
                 @endif
             </div>

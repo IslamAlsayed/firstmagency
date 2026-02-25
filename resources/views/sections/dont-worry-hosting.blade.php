@@ -1,4 +1,4 @@
-<section class="section dont-worry-sections">
+<section class="section dont-worry-sections main-dont-worry-sections">
     <div class="content flex items-center justify-between gap-8">
         <div class="text">
             <div class="label font-semibold">{{ __('main.hosting_worry_label') }}</div>
@@ -12,7 +12,7 @@
             </a>
         </div>
         <div class="image">
-            <img src="{{ asset('assets/images/hosting/dont-worry-bg.png') }}" alt="Don't Worry Image" class="img-fluid">
+            <img src="{{ asset('assets/images/hosting/dont-worry-bg.png') }}" alt="{{ __('main.dont_worry_image') }}" class="img-fluid">
         </div>
     </div>
 </section>

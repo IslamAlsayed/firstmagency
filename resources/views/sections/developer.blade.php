@@ -24,31 +24,30 @@
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     سرعة تحميل محسّنة
+                     {{ __('main.optimized_loading_speed') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     <!-- AR: تهيئة لمحركات البحث | EN: Search Engine Optimization -->
-                     تهيئة لمحركات البحث
+                     {{ __('main.search_engine_optimization') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     ربط ببوابات الدفـــــــع
+                     {{ __('main.payment_gateway_integration') }}
                  </div>
                  <div class="tag flex items-center gap-2">
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     لــوحة تحـــكم ســــــهلة
+                     {{ __('main.easy_control_panel') }}
                  </div>
              </div>
          </div>
          <div class="image magnetic-effect">
-             <img src="{{ asset('assets/images/developer/hero-1.png') }}" alt="برمجة المتاجر الالكترونية">
+             <img src="{{ asset('assets/images/developer/hero-1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
          </div>
      </div>
      <div class="inner hidden flex items-center gap-4">
@@ -94,12 +93,12 @@
                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
-                     لــوحة تحـــكم ســــــهلة
+                     {{ __('main.easy_control_panel') }}
                  </div>
              </div>
          </div>
          <div class="image magnetic-effect">
-             <img src="{{ asset('assets/images/developer/hero-2.png') }}" alt="شركة تصميم مواقع">
+             <img src="{{ asset('assets/images/developer/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
          </div>
      </div>
  </section>

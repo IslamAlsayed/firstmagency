@@ -2,9 +2,9 @@
     <div class="content">
         <div class="mb-8">
             <div class="title font-semibold mb-4">
-                باقات خدماتنا في التسويق الالكتروني
+                {{ __('main.our_services_title') }}
             </div>
-            <p class="text-gray-600">اختر من ضمن الخدمات الموجودة</p>
+            <p class="text-gray-600">{{ __('main.services_marketing_description') }}</p>
         </div>
 
         <div class="section-svg">
@@ -12,7 +12,7 @@
             <div class="right-svg"></div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @if (config('our-services-marketing') && count(config('our-services-marketing')) > 0)
                 @foreach (config('our-services-marketing') as $service)
                     <div class="service-card p-4">

@@ -1,14 +1,17 @@
 :root {
     --main-color: #d05423;
+    --dark-main-color: #96310E;
+    --light-main-color: #F97316;
+
+    --light-color: #ffffff;
+    --dark-color: #000000;
+    --dark2-color: #242424;
+
     --orange-color: #F4B42A;
     --primary-color: #3B88C3;
     --blue-color: #1d55ed;
     --dark-blue-color: #1D2A66;
     --purple-color: #6e2d9f;
-    --light-main-color: #F97316;
-    --light-color: #ffffff;
-    --dark-color: #000000;
-    --dark2-color: #242424;
     --main-bg: #111827;
     --main-card: #ffffff;
     --main-text: #111827;
@@ -18,10 +21,18 @@
     --dark-muted-color: #eae8e8;
     --muted-background-color: #F3F3F3;
     --light-background-color: #FFFCFC;
+    --reviews-background-color: #F3F3F3;
     --articles-background-color: #F9F9F9;
     --blog-show-background-color: #F4F4F4;
     --order-background-color: #EAF5F8;
     --projects-steps-background-color: #f4f4f4;
+    --line-works-background-color: #FBFBFB;
+    --portfolio-background-color: #F5F5F5;
+    --website-articles-background-color: #F9F9F9;
+    --app-developer-hero-background-color: #F4F4F4;
+    --app-articles-background-color: #FAFAFA;
+    --app-dont-worry-background-color: #F8F6F6;
+    --pest-domains-background-color: #FBFBFB;
 
     --green-color: #00ae40;
     --middle-green-color: #7fffae;
@@ -35,10 +46,34 @@
     --inline-padding: 20px;
     --main-inline-padding: 120px;
     --home-hero-section-inline-padding: 120px;
-    --home-services-section-inline-padding: 120px;
-    --home-projects-section-inline-padding: 120px;
-    --home-reviews-section-inline-padding: 120px;
+    --home-services-section-inline-padding: 60px;
+    --home-projects-section-inline-padding: 20px;
+    --home-reviews-section-inline-padding: 60px;
     --home-clients-section-inline-padding: 120px;
+
+    --about-us-partners-inline-padding: 60px;
+
+    --portfolio-inline-padding: 60px;
+
+    --blog-articles-section-inline-padding: 60px;
+
+    --contact-page-inline-padding: 180px;
+
+    --website-programming-section-inline-padding: 60px;
+    --website-important-articles-inline-padding: 60px;
+    --faqs-section-inline-padding: 60px;
+    --app-important-articles-inline-padding: 60px;
+
+    --feature-section-inline-padding: 60px;
+    --packages-section-inline-padding: 60px;
+    --operations-systems-sections-inline-padding: 60px;
+    --your-domain-section-inline-padding: 240px;
+    --pest-domains-sections-inline-padding: 60px;
+    --why-us-section-inline-padding: 120px;
+
+    --platform-management-section-inline-padding: 60px;
+    --work-lines-sections-inline-padding: 120px;
+    --our-services-marketing-inline-padding: 120px;
 }
 
 * {
@@ -322,14 +357,15 @@ html[lang=en] {
     box-shadow: none;
     background-color: transparent;
     transition: 0.3s ease-in-out;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: repeat;
 
     &.scrolled {
-        background-color: var(--light-color);
+        background-color: #ffffffc4;
+        backdrop-filter: blur(15px);
         box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
         background-image: url('../images/header-bg.png');
-        background-position: center center;
-        background-size: contain;
-        background-repeat: repeat;
     }
 
     & .inner {
@@ -1287,11 +1323,11 @@ swiper-slide img {
 }
 
 .section .title {
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 20px;
 
     & .title-badge {
-        padding: 5px 10px;
+        padding: 2px 10px;
     }
 }
 

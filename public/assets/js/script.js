@@ -189,7 +189,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     let currentScroll = window.scrollY || document.documentElement.scrollTop;
-    if (currentScroll <= 7) {
+    const forceScrolled = header.getAttribute('data-force-scrolled') === 'true';
+    
+    if (currentScroll <= 7 && !forceScrolled) {
         header.classList.remove('scrolled');
     } else {
         header.classList.add('scrolled');
@@ -197,8 +199,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('scroll', () => {
         if (header) {
+            const forceScrolled = header.getAttribute('data-force-scrolled') === 'true';
             let currentScroll = window.scrollY || document.documentElement.scrollTop;
-            if (currentScroll <= 7) {
+            if (currentScroll <= 7 && !forceScrolled) {
                 header.classList.remove('scrolled');
             } else {
                 header.classList.add('scrolled');
@@ -206,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const filterButtons = document.querySelectorAll('.projects-section .filter-btn');
+    const filterButtons = document.querySelectorAll('.section-with-filter .filter-btn');
     const projectItems = document.querySelectorAll('.project-item');
 
     // Mapping من filter IDs إلى أسماء الـ tags الفعلية

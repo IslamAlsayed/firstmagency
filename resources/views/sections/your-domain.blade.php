@@ -5,7 +5,7 @@
 
         <div class="text mb-12 font-semibold">
             <h2 class="font-black text-[#1a2b50] mb-2 tracking-tight">
-                {{ __('main.domain_register_title') }} <span class="inline-block main-domain-badge">.com</span>
+                {!! __('main.domain_register_title') !!}
             </h2>
             <p class="text-2xl text-[#1a2b50] opacity-90">{{ __('main.domain_register_subtitle') }}</p>
         </div>
@@ -27,7 +27,7 @@
             <div class="flex items-center justify-between gap-4 enter-domain">
                 <div class="domain-extension cursor-pointer">
                     <select name="extension" id="domain-extension" class="w-full h-full">
-                        <optgroup label="Official / رسمي">
+                        <optgroup label="{{ __('main.official_category') }} / رسمي">
                             <option value=".eg">.eg</option>
                             <option value=".sa">.sa</option>
                             <option value=".com.sa">.com.sa</option>
@@ -113,7 +113,7 @@
                             <option value=".net.km">.net.km</option>
                             <option value=".org.km">.org.km</option>
                         </optgroup>
-                        <optgroup label="Regular / عادي">
+                        <optgroup label="{{ __('main.regular_category') }} / عادي">
                             <option value=".com" selected="">.com</option>
                             <option value=".net">.net</option>
                             <option value=".org">.org</option>
@@ -521,8 +521,9 @@
             </p>
         </div>
     </form>
-    </div>
-    {{-- 
+</section>
+
+{{-- 
 <script>
     document.getElementById('domainForm').addEventListener('submit', function(e) {
         e.preventDefault();

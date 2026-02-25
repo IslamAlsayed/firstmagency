@@ -1,10 +1,9 @@
 /* Start Hero Section */
 .hero-section {
-    padding-block: 180px 0;
+    padding-block: 120px 0;
     padding-inline: var(--main-inline-padding);
     position: relative;
     overflow: hidden;
-    top: -50px;
 
     &::after {
         content: "";
@@ -19,9 +18,9 @@
         content: '';
         position: absolute;
         width: 170%;
-        height: 110%;
-        top: 50px;
-        right: -500px;
+        height: 118%;
+        top: 0;
+        right: -528px;
         z-index: -10;
         opacity: 0.5;
         background-image: url(../images/hero/background.png);

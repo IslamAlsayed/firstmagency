@@ -1,18 +1,5 @@
 @extends('layouts.master')
 
-@push('styles')
-    <style>
-        .header {
-            background-color: var(--light-color);
-            box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
-            background-image: url('../assets/images/header-bg.png');
-            background-position: center center;
-            background-size: contain;
-            background-repeat: repeat;
-        }
-    </style>
-@endpush
-
 @section('content')
     <section class="contact-sections">
         <div class="text">
@@ -39,7 +26,7 @@
                         <div class="input flex">
                             <input type="text" id="name" placeholder="{{ __('main.contact_form_name') }}">
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/user.svg') }}" alt="user">
+                                <img src="{{ asset('assets/images/icons/user.svg') }}" alt="{{ __('main.contact_form_name') }}">
                             </div>
                         </div>
                     </div>
@@ -52,7 +39,7 @@
                         <div class="input flex">
                             <input type="email" id="email" placeholder="{{ __('main.contact_form_email') }}">
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/email.svg') }}" alt="email">
+                                <img src="{{ asset('assets/images/icons/email.svg') }}" alt="{{ __('main.contact_form_email') }}">
                             </div>
                         </div>
                     </div>
@@ -65,11 +52,11 @@
                         <div class="input flex">
                             <input type="text" id="phone" placeholder="{{ __('main.contact_form_phone') }}">
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/phone.svg') }}" alt="phone">
+                                <img src="{{ asset('assets/images/icons/phone.svg') }}" alt="{{ __('main.contact_form_phone') }}">
                             </div>
                         </div>
                     </div>
-                    {{-- اختيار القسم --}}
+                    {{-- Select Department --}}
                     <div>
                         <label for="department" class="font-semibold">
                             {{ __('main.contact_form_department') }}
@@ -83,14 +70,14 @@
                                 <option value="general">{{ __('main.contact_form_department_general') }}</option>
                             </select>
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/pin.svg') }}" alt="pin">
+                                <img src="{{ asset('assets/images/icons/pin.svg') }}" alt="{{ __('main.contact_form_department') }}">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="group flex items-center">
-                    {{-- موضوع الرسالة --}}
+                    {{-- Message Subject --}}
                     <div>
                         <label for="subject" class="font-semibold">
                             {{ __('main.contact_form_subject') }}
@@ -99,13 +86,13 @@
                         <div class="input flex">
                             <input type="text" id="subject" placeholder="{{ __('main.contact_form_subject_placeholder') }}">
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/sheet.svg') }}" alt="sheet">
+                                <img src="{{ asset('assets/images/icons/sheet.svg') }}" alt="{{ __('main.contact_form_subject') }}">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="group flex items-center">
-                    {{-- الرسالة --}}
+                    {{-- Message Content --}}
                     <div>
                         <label for="message" class="font-semibold">
                             {{ __('main.contact_form_message') }}
@@ -114,14 +101,14 @@
                         <div class="input flex">
                             <textarea id="message" rows="5" placeholder="{{ __('main.contact_form_message_placeholder') }}"></textarea>
                             <div class="icon">
-                                <img src="{{ asset('assets/images/icons/message.svg') }}" alt="message">
+                                <img src="{{ asset('assets/images/icons/message.svg') }}" alt="{{ __('main.contact_form_message') }}">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="group">
-                    {{-- مرفق (اختياري) --}}
+                    {{-- Optional Attachment --}}
                     <label for="attachment" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
                     <div class="attachments flex flex-col gap-4" id="attachments-container">
                         <div class="input flex">
@@ -135,7 +122,7 @@
                 </div>
 
                 <div class="group">
-                    {{-- تحقق --}}
+                    {{-- Verification --}}
                     <label for="verification" class="font-semibold block mb-2">{{ __('main.contact_form_verification') }}</label>
                     <div class="verification">
                         <div class="flex items-center justify-between gap-4">
@@ -155,7 +142,15 @@
     </section>
 @endsection
 
-@section('scripts')
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            header.setAttribute('data-force-scrolled', 'true');
+            header.classList.add('scrolled');
+        });
+    </script>
+
     <script>
         document.getElementById('add-attachment-btn').addEventListener('click', function() {
             const container = document.getElementById('attachments-container');

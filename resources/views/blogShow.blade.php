@@ -11,7 +11,7 @@
                     <span>{{ __('main.portfolio_date_sample') }}</span>•<span>{{ __('main.brand_name') }}</span>
                 </div>
                 <div class="image">
-                    <img src="{{ asset('assets/images/projects/1.png') }}" alt="Blog Image">
+                    <img src="{{ asset('assets/images/projects/1.png') }}" alt="{{ __('main.blog_image') }}">
                 </div>
                 <div class="description">
                     {{ __('articles.blog_intro') }}
@@ -184,7 +184,7 @@
         <aside class="side">
             <div class="reviews-image">
                 <div class="reviews-image">
-                    <img src="{{ asset('assets/images/dark-reviews-bg.jpg') }}" alt="First Marketing Logo">
+                    <img src="{{ asset('assets/images/dark-reviews-bg.jpg') }}" alt="{{ __('main.first_marketing_logo') }}">
                 </div>
             </div>
 
@@ -235,7 +235,7 @@
                                     </div>
                                     <div class="info">
                                         <p class="font-semibold">{{ $article['title'] }}</p>
-                                        <small>{{ $article['created_at'] ?? 'تاريخ غير متوفر' }}</small>
+                                        <small>{{ $article['created_at'] ?? __('main.date_unavailable') }}</small>
                                     </div>
                                 </a>
                             @endforeach
@@ -258,7 +258,7 @@
                                         </div>
                                         <div class="info">
                                             <p class="font-semibold">{{ $article['title'] }}</p>
-                                            <small>{{ $article['created_at'] ?? 'تاريخ غير متوفر' }}</small>
+                                            <small>{{ $article['created_at'] ?? __('main.date_unavailable') }}</small>
                                         </div>
                                     </a>
                                 @endif

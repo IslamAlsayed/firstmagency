@@ -32,9 +32,19 @@
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.95;
-        background-color: var(--light-color);
+        background-color: var(--app-developer-hero-background-color);
         z-index: 2;
+    }
+
+    & .background-layer {
+        position: absolute;
+        inset: 0;
+        background-image: url(../images/hero/background.png);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        z-index: 3;
     }
 
     & .inner {
@@ -76,10 +86,27 @@
 
 .app-developer {
     & .important-articles {
-        margin-top: 50px;
+        margin-top: 0;
+        position: relative;
+        padding-inline: var(--app-important-articles-inline-padding);
+        background-color: var(--app-articles-background-color);
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image: url('../images/reviews-bg.jpg');
+            background-size: 11% auto;
+        }
 
         &>.title {
-            font-size: 24px;
+            font-size: 26px;
+        }
+
+        &>.title+.description {
+            font-size: 16px;
+            margin-bottom: 50px;
         }
     }
 }
@@ -87,20 +114,20 @@
 .order-your-app-section {
     margin-top: 0;
     overflow: hidden;
-    padding-block: 50px;
     padding-inline-start: 0;
     padding-inline-end: 50px;
     background-color: var(--order-background-color);
 }
 
 .order-your-app-section .content {
-    gap: 70px;
+    gap: 50px;
 }
 
 .order-your-app-section .image {
-    width: 600px;
+    width: 650px;
     min-width: auto;
     height: auto;
+    padding-top: 50px;
     position: relative;
 
     &::before {
@@ -140,20 +167,21 @@ html[lang=en] {
 }
 
 .order-your-app-section .title {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 20px;
 }
 
 .order-your-app-section .description {
     font-size: 20px;
-    line-height: 1.8;
+    line-height: 2.2;
     margin-bottom: 30px;
     color: var(--main-text);
 }
 
 .order-your-app-section button {
-    border-radius: 7px;
-    padding-block: 5px;
+    border-radius: 10px;
+    padding-block: 8px;
+    filter: saturate(1.9);
 }
 
 @keyframes shineSection {
@@ -205,7 +233,7 @@ html[lang=en] {
     background: #FAFAFA;
     background-image: url('../images/reviews-bg.jpg');
     background-position: top left;
-    background-size: 15%;
+    background-size: 22%;
     background-repeat: repeat;
     z-index: 50;
 }
@@ -224,6 +252,10 @@ html[lang=en] {
 
 .categories-programming-section .text .title {
     font-size: 28px;
+}
+
+.categories-programming-section .description {
+    font-size: 16px;
 }
 
 .categories-programming-section .text .title .title-badge {

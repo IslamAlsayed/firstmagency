@@ -4,10 +4,13 @@
     @endif
 
     <div class="main-articles-section">
-        <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="articlesContainer">
             @if (isset($data) && !empty($data))
+                @php
+                    $paginate = 25;
+                @endphp
                 @foreach ($data as $key => $article)
-                    @if (isset($length) && $key < $length)
+                    @if (isset($paginate) && $key < $paginate)
                         <div class="article">
                             <div class="image">
                                 @if (rand(0, 1) == 1)
@@ -44,9 +47,83 @@
         </div>
     </div>
 
-    <button class="btn-link font-semibold more">
-        <a href="#">
-            المزيد
-        </a>
+    <button class="btn-link main-color font-semibold more" id="loadMoreBtn" type="button">
+        <span>{{ __('main.more') }}</span>
     </button>
+
+    @if (isset($data) && !empty($data))
+        <script>
+            const allArticles = @json($data);
+            let currentPage = 1;
+            const itemsPerPage = 25;
+            const detailsButtonText = "{{ __('main.details_button') }}";
+            const whatsappButtonText = "{{ __('main.whatsapp_button') }}";
+
+            function generateArticleHTML(article, index) {
+                const randomImage = Math.random() > 0.5 ? `<img src="{{ asset('assets/images/projects/') }}${Math.ceil(Math.random() * 12)}.png" alt="">` : '';
+                const randomVisitors = Math.floor(Math.random() * (584 - 254 + 1)) + 254;
+
+                return `
+                    <div class="article">
+                        <div class="image">
+                            ${randomImage}
+                        </div>
+                        <div class="visitor">
+                            <i class="fas fa-eye"></i>
+                            ${randomVisitors}
+                        </div>
+                        <div class="content">
+                            <div class="body">
+                                <a href="{{ route('blog.show', ['id' => '']) }}${index + 1}" class="title font-semibold">${article.title.substring(0, 30)}</a>
+                                <div class="description">${article.description.substring(0, 60)}</div>
+                            </div>
+                            <div class="actions">
+                                <button class="btn-link font-semibold details">
+                                    <a href="{{ route('blog.show', ['id' => '']) }}${index + 1}">
+                                        ${detailsButtonText}
+                                    </a>
+                                </button>
+                                <button class="btn-link font-semibold whatsapp">
+                                    <a href="{{ route('contact') }}">
+                                        ${whatsappButtonText}
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('loadMoreBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const container = document.getElementById('articlesContainer');
+                const startIndex = currentPage * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+
+                if (startIndex >= allArticles.length) {
+                    this.style.display = 'none';
+                    return;
+                }
+
+                const articlesToAdd = allArticles.slice(startIndex, endIndex);
+
+                articlesToAdd.forEach((article, i) => {
+                    const html = generateArticleHTML(article, startIndex + i);
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+
+                currentPage++;
+
+                if (endIndex >= allArticles.length) {
+                    this.style.display = 'none';
+                }
+            });
+
+            // إخفاء الزر إذا كانت المقالات أقل من 25
+            if (allArticles.length <= itemsPerPage) {
+                document.getElementById('loadMoreBtn').style.display = 'none';
+            }
+        </script>
+    @endif
 </section>

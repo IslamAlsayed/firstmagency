@@ -40,7 +40,7 @@
             left: 0;
             z-index: -2;
             opacity: 0.5;
-            background-image: url(../images/reviews-bg.jpg);
+            background-image: url(../images/transparent-logo.png);
             background-position: top left;
             background-size: 3.5%;
             background-repeat: repeat;
@@ -84,9 +84,18 @@
         }
     }
 
+    & .feature-section {
+        padding-inline: var(--feature-section-inline-padding);
+
+        & .title {
+            .title-badge::before {
+                transform: skewX(-12deg);
+            }
+        }
+    }
+
     & .packages-sections {
-        padding: 50px var(--main-inline-padding);
-        background-color: var(--projects-steps-background-color);
+        padding: 50px var(--packages-section-inline-padding);
         background-color: var(--light-color);
     }
 
@@ -259,7 +268,7 @@
             inset: 0;
             z-index: 1;
             opacity: 0.85;
-            filter: saturate(1.7);
+            filter: saturate(1.1);
             background-color: var(--main-color);
         }
 
@@ -304,7 +313,7 @@
     }
 
     .easy-management {
-        padding: 70px var(--inline-padding);
+        padding: 100px var(--inline-padding);
         position: relative;
         background: #FAFAFA;
 
@@ -333,35 +342,52 @@
             width: 50%;
             display: flex;
             overflow: hidden;
-            justify-content: end;
-            background-color: var(--light-color);
+            padding-block: 20px;
+            justify-content: flex-start;
+            /* background-color: var(--light-color); */
         }
 
         & .image-container .image {
             width: 90%;
+            margin: auto;
             border-radius: 15px;
             padding-inline: 100px;
-            box-shadow: 0 0px 20px -2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px -2px rgba(0, 0, 0, 0.1);
         }
 
         & .text {
             flex: 1;
+            padding-inline-end: 20px;
 
             & .badge {
                 display: inline-block;
                 padding: 4px 12px;
                 border-radius: 50px;
                 color: var(--main-color);
-                background-color: var(--color-blue-100);
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    opacity: 0.5;
+                    border-radius: inherit;
+                    background-color: var(--color-blue-100);
+                }
             }
 
             & h1 {
-                font-size: 44px;
+                font-size: 38px;
                 margin-bottom: 16px;
+                line-height: 1.2;
+                text-wrap: balance;
+                font-weight: 900;
             }
 
             & .descriptions {
                 line-height: 2;
+                font-size: 18px;
                 color: var(--muted-color);
             }
 
@@ -380,16 +406,17 @@
     }
 
     .operations-systems-sections {
-        padding: 50px var(--main-inline-padding);
+        padding: 50px var(--operations-systems-sections-inline-padding);
 
         .title {
             font-size: 28px;
         }
 
         .content {
-            gap: 20px;
+            gap: 30px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            /* grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); */
+            grid-template-columns: repeat(6, 1fr);
         }
 
         .system-card {
@@ -481,7 +508,8 @@
             }
 
             .descriptions {
-                width: 80%;
+                width: 90%;
+                font-size: 18px;
                 line-height: 2;
                 margin-bottom: 40px;
                 color: var(--muted-color);
@@ -489,6 +517,7 @@
 
             a {
                 border-radius: 10px;
+                filter: saturate(1.5);
 
                 &:hover {
                     background-color: var(--main-color);
@@ -497,8 +526,31 @@
         }
 
         .image {
-            width: 55%;
+            width: 60%;
             box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .main-dont-worry-sections {
+        padding-block: 70px;
+        position: relative;
+        background-color: var(--app-dont-worry-background-color);
+
+        &::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.9;
+            background-image: url(../images/reviews-bg.jpg);
+        }
+
+        .content {
+            padding-block: 50px;
+            background-color: var(--light-color);
         }
     }
 
@@ -532,6 +584,8 @@
 
         .image {
             width: 40%;
+            position: relative;
+            left: 50px;
             box-shadow: 0 7px 27px 4px rgba(0, 0, 0, 0.1);
         }
     }

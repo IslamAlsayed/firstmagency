@@ -1,15 +1,17 @@
 <section class="section packages-sections text-center">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
-            باقات استضافة <span class="title-badge">{{ __('main.brand_name') }}</span>
+            {{ __('main.packages_title') }} <span class="title-badge">{{ __('main.brand_name') }}</span>
         </div>
-        <p class="text-gray-600">اختر من باقات الاستضافة او السيرفرات او خدمات الموزع</p>
+        <p class="text-gray-600">{{ __('main.packages_description') }}</p>
     </div>
 
     <div class="">
         <div class="filter price-packages">
-            <button class="btn-link main-color dark-hover font-semibold filter-btn-style filter-btn-price" data-filter="monthly_price">شهري</button>
-            <button class="btn-link main-color dark-hover font-semibold filter-btn-style active filter-btn-price" data-filter="yearly_price">سنوي</button>
+            <button class="btn-link main-color dark-hover font-semibold filter-btn-style filter-btn-price"
+                data-filter="monthly_price">{{ __('main.monthly_label') }}</button>
+            <button class="btn-link main-color dark-hover font-semibold filter-btn-style active filter-btn-price"
+                data-filter="yearly_price">{{ __('main.yearly_label') }}</button>
         </div>
 
         <div class="filter-btn-packages flex items-center justify-between gap-4 bg-white p-2 shadow-sm border mx-auto mb-4 rounded-[9px]">
@@ -68,7 +70,8 @@
                                             <img src="{{ asset('assets/images/' . $package['image']) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package['name'] }}">
                                         @else
-                                            <img src="{{ asset('assets/images/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="Placeholder">
+                                            <img src="{{ asset('assets/images/placeholder.png') }}" class="w-16 mx-auto mb-4"
+                                                alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
                                     <h3 class="text-xl font-semibold">{{ $package['name'] }}</h3>

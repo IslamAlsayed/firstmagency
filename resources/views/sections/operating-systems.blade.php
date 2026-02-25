@@ -1,17 +1,17 @@
 <section class="section operations-systems-sections text-center">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
-            انظمة تشغيل <span class="title-badge">ولوحات تحكم</span>
+            {{ __('main.operating_systems_title') }} <span class="title-badge">{{ __('main.control_panels_badge') }}</span>
         </div>
-        <p class="text-gray-600">جميع البرامج ولوحات التحكم وسكربتات ادارة المحتوي وانظمة التشغيل</p>
+        <p class="text-gray-600">{{ __('main.operating_systems_description') }}</p>
     </div>
 
     <div class="filter operating-systems-filter">
         <button class="btn-link main-color dark-hover font-semibold filter-btn-style active filter-operating-systems" data-filter="operating-systems">
-            أنظمة تشغيل
+            {{ __('main.operating_systems_filter_label') }}
         </button>
         <button class="btn-link main-color dark-hover font-semibold filter-btn-style filter-operating-systems" data-filter="dashboards-and-apps">
-            لوحات تحكم وتطبيقات
+            {{ __('main.control_panels_and_apps_label') }}
         </button>
     </div>
 

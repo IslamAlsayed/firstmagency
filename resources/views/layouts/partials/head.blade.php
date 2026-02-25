@@ -20,10 +20,11 @@
 <meta content="First Magency" property="og:title" />
 <meta content="" property="og:description" />
 
-{{-- Google Fonts - Tajawal --}}
+{{-- Google Fonts - Tajawal + Cairo for bolder weights --}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800&family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap"
+    rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 {{-- metronic css --}}
 <link href="{{ asset('assets/css/metronic.css') }}" rel="stylesheet" />

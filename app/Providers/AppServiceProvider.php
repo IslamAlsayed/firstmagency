@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Set default locale to Arabic
         app()->setLocale('ar');
-        
+
         // Force HTTPS for Cloudflare tunnel
         if (env('APP_ENV') === 'production' || request()->server('HTTP_CF_VISITOR')) {
             URL::forceScheme('https');

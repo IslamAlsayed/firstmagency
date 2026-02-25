@@ -7,7 +7,7 @@
         </div>
 
         <div class="container tickets-form">
-            {{-- <div class="heading">استعلام عن طلبك / تذكرتك</div> --}}
+            {{-- Ticket Inquiry --}}
             <h2>{{ __('main.tickets_title') }}</h2>
 
             <div class="group-tickets">
@@ -18,7 +18,7 @@
                     </label>
 
                     <div class="input flex">
-                        <input type="email" id="email" placeholder="example@domain.com">
+                        <input type="email" id="email" placeholder="{{ __('main.email_placeholder') }}">
                     </div>
                 </div>
 

@@ -34,7 +34,7 @@
     .platform-management-sections {
         text-align: start;
         overflow: hidden;
-        padding: 50px var(--main-inline-padding);
+        padding: 70px var(--platform-management-section-inline-padding);
 
         & .title {
             font-size: 30px;
@@ -72,7 +72,7 @@
         }
 
         &::after {
-            right: 100px;
+            right: 0;
             opacity: 0.05;
             background-image: url('/assets/images/platforms/platforms-right-bg.png');
             background-position: right top;
@@ -80,10 +80,10 @@
 
         .platform-cards {
             .platform {
-                padding: 10px;
+                padding: 15px;
                 border-radius: 12px;
                 backdrop-filter: blur(8px);
-                border: 1px solid var(--light-muted-color);
+                border: 1px solid var(--dark-muted-color);
                 box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .06);
                 transition: all 0.1s ease;
                 position: relative;
@@ -127,25 +127,31 @@
                 }
 
                 .platform-title {
-                    margin-bottom: 5px;
+                    font-weight: 900;
+                    margin-bottom: 10px;
                 }
 
                 .platform-desc {
-                    font-size: 12px;
+                    font-size: 14px;
                 }
             }
         }
     }
 
     .work-lines-sections {
-        padding: 50px var(--main-inline-padding);
+        padding: 50px var(--work-lines-sections-inline-padding);
         background-color: var(--light-color);
         box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
 
         & .title {
             font-size: 36px;
+            font-weight: 900;
             margin-bottom: 10px;
             color: var(--orange-color);
+        }
+
+        & .description {
+            font-weight: bold;
         }
 
         .steps {
@@ -209,11 +215,12 @@
     }
 
     .our-services-marketing {
-        padding-inline: calc(var(--main-inline-padding) / 2);
+        padding-inline: calc(var(--our-services-marketing-inline-padding) / 2);
         background-color: #FFFDF8;
 
         & .title {
             font-size: 30px;
+            font-weight: 900;
             margin-bottom: 10px;
         }
 
@@ -296,8 +303,13 @@
             }
         }
 
+        & .service-card .image+h3 {
+            font-weight: 900;
+        }
+
         & .service-card .feature-card {
             text-align: start;
+            margin-bottom: 10px;
         }
 
         & .service-card .feature-card svg {
@@ -314,7 +326,7 @@
         }
 
         & .service-card .feature-card svg+span {
-            font-size: 12px;
+            font-size: 14px;
         }
     }
 }

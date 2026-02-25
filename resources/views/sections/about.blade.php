@@ -9,6 +9,6 @@
         </button>
     </div>
     <div class="image">
-        <img src="{{ asset('assets/images/about/main-image.png') }}" alt="About Us Image" loading="lazy">
+        <img src="{{ asset('assets/images/about/main-image.png') }}" alt="{{ __('main.about_us_image') }}" loading="lazy">
     </div>
 </section>

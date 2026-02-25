@@ -1,9 +1,9 @@
 <section class="section work-lines-sections text-center">
     <div class="mb-8">
         <div class="title font-semibold">
-            خط العمل
+            {{ __('main.line_works_title') }}
         </div>
-        <p class="text-gray-600">خطوات عملنا في خدمات التسويق عبر وسائل التواصل الاجتماعي.</p>
+        <p class="description text-gray-600">{{ __('main.work_line_description') }}</p>
     </div>
 
     <div class="steps flex items-center justify-between gap-6">
@@ -12,42 +12,42 @@
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/content-marketing.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">تحليلات الأداء</h3>
+            <h3 class="step-title font-semibold">{{ __('main.performance_analysis') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/map.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">وضع إستراتيجية</h3>
+            <h3 class="step-title font-semibold">{{ __('main.strategy_planning') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/planning.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">بدء العمل</h3>
+            <h3 class="step-title font-semibold">{{ __('main.start_work') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/qatar-marketing.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">عمل خطة محتوى</h3>
+            <h3 class="step-title font-semibold">{{ __('main.content_planning') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/strategy-development.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">تطوير المحتوى</h3>
+            <h3 class="step-title font-semibold">{{ __('main.content_development') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
                 <img src="{{ asset('assets/images/services-marketing/work-lines/targeted.png') }}" alt="">
             </p>
-            <h3 class="step-title font-semibold">دراسة المنافسين</h3>
+            <h3 class="step-title font-semibold">{{ __('main.competitor_research') }}</h3>
         </article>
     </div>
 </section>

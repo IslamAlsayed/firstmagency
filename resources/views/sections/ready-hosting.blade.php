@@ -1,19 +1,19 @@
 <section class="section ready-hosting-sections text-center">
     <div class="content mx-auto px-4">
         <p class="font-semibold mb-4 opacity-95">
-            احصل علي تجربة ممتازة مع اشتراك في باقات الاستضافة
+            {{ __('main.ready_hosting_description') }}
         </p>
 
         <h1 class="font-semibold font-black mb-10 tracking-wide">
-            هل انت مستعد الان
+            {{ __('main.ready_heading') }}
         </h1>
 
         <div class="ready-actions flex flex-row-reverse justify-center gap-4">
             <a href="{{ route('hosting') }}" class="btn-outline-white text-lg font-semibold">
-                ابدء الان
+                {{ __('main.start_now_btn') }}
             </a>
             <a href="{{ route('contact') }}" class="btn-outline-white text-lg font-semibold">
-                اتصل بنــــــا
+                {{ __('main.contact_us_btn') }}
             </a>
         </div>
     </div>

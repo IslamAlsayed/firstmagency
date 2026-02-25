@@ -21,3 +21,13 @@
         @include('sections.important-articles')
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            header.setAttribute('data-force-scrolled', 'true');
+            header.classList.add('scrolled');
+        });
+    </script>
+@endpush

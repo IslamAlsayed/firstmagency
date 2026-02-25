@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="image magnetic-effect">
-            <img src="{{ asset('assets/images/services-marketing/hero-1.png') }}" alt="برمجة المتاجر الالكترونية">
+            <img src="{{ asset('assets/images/services-marketing/hero-1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
         </div>
     </div>
     <div class="inner hidden flex items-center gap-4">
@@ -59,36 +59,36 @@
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    نتاخطة محتوى شهرية
+                    {{ __('main.content_strategy_monthly') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    ردود وتعليقات باحتراف
+                    {{ __('main.professional_responses') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    تــــــــــقارير أداء دورية
+                    {{ __('main.performance_reports') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    إدارة كاملة للحسابات
+                    {{ __('main.full_account_management') }}
                 </div>
                 <div class="tag flex items-center gap-2">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    استراتيجية تسويق
+                    {{ __('main.marketing_strategy') }}
                 </div>
             </div>
         </div>
         <div class="image last-image magnetic-effect">
-            <img src="{{ asset('assets/images/services-marketing/hero-2.png') }}" alt="شركة تصميم مواقع">
+            <img src="{{ asset('assets/images/services-marketing/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
         </div>
     </div>
 </section>

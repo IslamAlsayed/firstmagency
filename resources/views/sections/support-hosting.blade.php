@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="image">
-            <img src="{{ asset('assets/images/hosting/support-hosting-bg.png') }}" alt="Support Hosting Image" class="img-fluid">
+            <img src="{{ asset('assets/images/hosting/support-hosting-bg.png') }}" alt="{{ __('main.support_hosting_image') }}" class="img-fluid">
         </div>
     </div>
 
@@ -34,7 +34,7 @@
             <div class="support-stat-icon">
                 <i class="fas fa-hourglass" aria-hidden="true"></i>
             </div>
-            <div class="support-stat-value font-semibold">sec 59</div>
+            <div class="support-stat-value font-semibold">59 {{ __('main.seconds') }}</div>
             <div class="support-stat-label font-semibold">{{ __('main.hosting_support_stat_response_time') }}</div>
         </div>
         <div class="support-stat cursor-pointer">

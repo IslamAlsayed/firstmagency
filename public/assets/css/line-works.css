@@ -1,7 +1,7 @@
 .line-works-section {
     text-align: center;
     text-wrap: balance;
-    background-color: var(--muted-background-color);
+    background-color: var(--line-works-background-color);
     counter-reset: step-counter;
 
     & .info {

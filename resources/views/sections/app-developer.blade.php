@@ -1,4 +1,5 @@
 <section class="developer-section app-developer-section">
+    <div class="background-layer"></div>
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">

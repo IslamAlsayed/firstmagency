@@ -3,7 +3,7 @@
 return [
     // ==================== Common ====================
     'brand_name' => 'فرست ماركتينج',
-    'brand_short' => 'FirstMarketing',
+    'brand_short' => 'فرست ماركتينج',
     'request_now' => 'اطلب الآن',
     'contact_us' => 'اتصل بنا',
     'learn_more' => 'تعرف أكثر',
@@ -135,6 +135,109 @@ return [
     // ==================== About Section ====================
     'about_title' => 'من نحن',
     'about_description' => 'شركة فرست ماركتينج لحلول الويب المتكاملة شركة متخصصة في اعمال التسويق وتصميم المواقع الالكترونية وخدمات الاستضافه والسيرفرات وادارة مواقع الانترنت والمتاجر الالكترونية كما نوفر خدمات اخري توفر خدمات ملائمة للجميع و تمثل البيئة الخصبة لنمو الأفكار و المشاريع على الإنترنت اليوم نعتز و نفتخر بتقديم خدمات الاستضافة المختلفة لأكثر من ألف موقع ، بدءاً من المدونات الصغيرة و الكبيرة و حتى مواقع الأعمال الضخمة، خدماتنا تحمل الكثير من القيم التي تولد شعوراً بالسعادة لدى عملاؤنا . اتصل الان لحجز احد الخدمات من خلال فريق من الدعم الفني جاهز لاستماع وفهم طلبك وتحديد عرض سعر مناسب',
+
+    'our_works_data' => [
+        [
+            'title' => 'الفــــهد للدعاية والاعلان',
+            'description' => 'شركة الفهد للدعاية والاعلان',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'فاطمة لتحفيظ القران',
+            'description' => 'فاطمة لتحفيظ القران للكبار والصغار',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة الدوليــــة',
+            'description' => 'شركة الدوليــــة للخدمات المتنوعة',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'الوصل للذبائح',
+            'description' => 'شركة لبيع منتجات الذبائح بالامارات',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة ميديا للاجهزه',
+            'description' => 'شركة ميديا للاجهزه المنزلية',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'بالعافية للذبائح',
+            'description' => 'شركة بيع منتجات الذبائح بالامارات',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'كونسبت ميديا',
+            'description' => 'شركة كونسبت ميديا للانتاج الفني',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شــركة ATA',
+            'description' => 'بيع منتجات الاجهزه الكهربائية والمنزلية',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'توب وان كلين',
+            'description' => 'شركة مكافحة حشرات بالكويت',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'شركة دهانات',
+            'description' => 'شركة دهانات جي ال سي',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'البصرة لايف 25',
+            'description' => 'منصة بث لايف وبودكاست البصرة 25',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة هوم لايف',
+            'description' => 'شركة هوم لايف لتنسيق الحدائق بالرياض',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'منصة الالفية التعليمية',
+            'description' => 'منصة كورسات تعليمية بالاردن',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'الطيب للذبائح',
+            'description' => 'شركة الطيب للذبائح بدولة الامارات',
+            'tags' => ['Graphic Design'],
+        ],
+        [
+            'title' => 'مباردة بنك السعادة',
+            'description' => 'مؤسسة رسمية بدولة الامارات',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'شركة العز اكسبريس',
+            'description' => 'موقع وسيستم شحن – العز اكسبريس',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'الرحمة لتصدير المنتجات',
+            'description' => 'شركة استيرداد وتصدير منتجات زراعية',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'كيمت التطوير العقاري',
+            'description' => 'شركة متخصصة في التطوير العقاري والمشروعات العقارية',
+            'tags' => ['Web Design'],
+        ],
+        [
+            'title' => 'سمارت بور',
+            'description' => 'موقع خاص بالمعدات الصناعية للمصانع واصحاب المهن',
+            'tags' => ['Web Design', 'Graphic Design'],
+        ],
+        [
+            'title' => 'الحدث اليوم نيوز',
+            'description' => 'موقع اخباري متميز',
+            'tags' => ['Web Design'],
+        ],
+    ],
 
     // ==================== Projects Section ====================
     'projects_main_title' => 'سابقة اعمال',
@@ -348,8 +451,11 @@ return [
     'important_articles_subtitle' => 'تطبيقات الموبيل',
     'important_articles_description' => 'مقالات وشروحات عملية عن تطبيقات الموبايل: أفكار، تطوير، تحسين الأداء',
 
+    // ==================== المدونة والمقالات ====================
+    'date_unavailable' => 'التاريخ غير متوفر',
+
     // ==================== قسم النطاقات ====================
-    'domain_register_title' => 'سجل دومين .com الخاص بك',
+    'domain_register_title' => 'سجل دومين <span class="inline-block main-domain-badge">.com</span> الخاص بك',
     'domain_register_subtitle' => 'توثيق رسمي واعتماد فوري!',
     'domain_register_now' => 'احجز الآن',
     'domain_transfer' => 'انقل نطاقك',
@@ -359,6 +465,12 @@ return [
     'domain_official_domains' => 'النطاقات الرسمية',
     'domain_official_domains_description' => 'الأوراق المطلوبة والتفاصيل لكل نطاق رسمي',
     'domain_best_offers' => 'أفضل عروض النطاقات',
+
+    // ==================== لماذا نحن ====================
+    'why_us_title' => 'مميزات حجز الدومين مع First Marketing',
+    'why_us_description' => 'باقة مميزات عالمية تجمع بين الأمان، السرعة، والدعم الحقيقي — لتبدأ علامتك التجارية بثقة.',
+    'why_us_contact_us' => 'اتصل بنا',
+    'why_us_learn_more' => 'تعرف أكثر',
 
     // ==================== قسم الخدمات المتعددة ====================
     'features_hosting_title' => 'احصل علي جميع المميزات التالية',
@@ -389,6 +501,11 @@ return [
     'details_button' => 'التفاصيل',
     'whatsapp_button' => 'واتساب',
     'more_link' => 'المزيد',
+    'support_hosting_image' => 'صورة الدعم',
+    'dont_worry_image' => 'صورة الطمأنينة',
+    'ecommerce_programming' => 'برمجة المتاجر الالكترونية',
+    'website_design_company' => 'شركة تصميم مواقع',
+    'secondary_title' => 'العنوان الثانوي',
 
     // ==================== الشبكات الاجتماعية ====================
     'social_facebook' => 'فيسبوك',
@@ -414,7 +531,8 @@ return [
     'hosting_vps_title' => 'استضافة vps',
 
     // ==================== إدارة سهلة ====================
-    'easy_management_title' => 'تحكم شامل في حسابات عملائك عبر لوحة WHM الاحترافية',
+    'easy_management_badge' => 'إدارة سهلة',
+    'easy_management_title' => 'تحكم شامل في حسابات عملائك من خلال لوحة WHM الاحترافية',
     'easy_management_description_1' => 'استمتع بإدارة سلسة وآمنة لحسابات الاستضافة من خلال لوحة WHM.',
     'easy_management_description_2' => 'تتيح لك إنشاء حسابات جديدة، ومتابعة أداء العملاء، وتخصيص الموارد، والتحكم الكامل بكل تفاصيل الاستضافة من مكان واحد.',
 
@@ -452,7 +570,7 @@ return [
 
     // ==================== دعم الاستضافة ====================
     'hosting_support_title' => 'فريقنا المتخصص هنا لمساعدتك 24/7!',
-    'hosting_support_description' => 'لدينا فريق الدعم من المحترفين في حل المشكلات. تواصل معنا للحصول على استجابات سريعة وفعالة وصادقة تساعدك حقاً في الوقت الفعلي الذي تحتاج به',
+    'hosting_support_description' => 'لدينا فريق الدعم من المحترفين في حل المشكلات. تواصل معنا للحصول على استجابات سريعة وفعالة وصادقة تساعدك حقاً في الوقت الفعلي الذي تحتاج به إلى مساعدة. قمنا علي مدار السنوات الماضية بمساعدة اكثر من 3000 عميل في خدمات الهوست والدومين وقمنا بعمل المزيد من التحديثات والصيانة',
     'hosting_support_stat_first_contact' => 'معدل إصلاح المشكلات من الاتصال الأول',
     'hosting_support_stat_satisfaction' => 'رضا العملاء',
     'hosting_support_stat_response_time' => 'متوسط الاستجابة لطلبات الدعم',
@@ -464,7 +582,127 @@ return [
     // ==================== الأزرار ====================
     'btn_start_now' => 'ابدأ الآن',
     'btn_transfer_now' => 'ابدأ الآن بنقل موقعك',
-    'btn_start_here' => 'البداية هنا',
+    'btn_start_here' => 'البداية هنا أفضل',
     'btn_request_now' => 'اطلب الآن',
     'btn_order_app' => 'اطلب تطبيقك',
+
+    // ==================== عناصر مفقودة ====================
+    'logo' => 'شعار',
+    'english_language' => 'اللغة الإنجليزية',
+    'arabic_language' => 'اللغة العربية',
+    'payments_methods' => 'طرق الدفع',
+    'about_us_image' => 'صورة عن الشركة',
+    'client_image' => 'صورة العميل',
+    'design_title' => 'التصميم',
+    'hero_image' => 'صورة البطل',
+    'placeholder' => 'صورة توضيحية',
+    'dont_worry_image' => 'صورة الطمأنينة',
+    'support_hosting_image' => 'صورة الدعم',
+    'blog_image' => 'صورة المدونة',
+    'first_marketing_logo' => 'شعار فرست ماركتينج',
+    'email_placeholder' => 'مثال: example@domain.com',
+    'official_category' => 'رسمي',
+    'regular_category' => 'عادي',
+    'seconds' => 'ثانية',
+
+    // ==================== Operating Systems Section ====================
+    'operating_systems_title' => 'انظمة تشغيل',
+    'control_panels_badge' => 'ولوحات تحكم',
+    'operating_systems_description' => 'جميع البرامج ولوحات التحكم وسكربتات ادارة المحتوي وانظمة التشغيل',
+    'operating_systems_filter_label' => 'أنظمة تشغيل',
+    'control_panels_and_apps_label' => 'لوحات تحكم وتطبيقات',
+
+    // ==================== Packages Section ====================
+    'packages_description' => 'اختر من باقات الاستضافة او السيرفرات او خدمات الموزع',
+    'monthly_label' => 'شهري',
+    'yearly_label' => 'سنوي',
+
+    // ==================== Our Services Marketing ====================
+    'services_marketing_description' => 'اختر من ضمن الخدمات الموجودة',
+
+    // ==================== Platform Management ====================
+    'platform_management_title' => 'اداره المنصات',
+    'advertising_platforms_badge' => 'الاعلانية',
+    'platform_management_description' => 'بنجهز لك حضور قوي وإعلانات ذكية على المنصات المناسبة لتحقيق أفضل نتائج بأقل تكلفة.',
+    'facebook_platform' => 'فيس بوك',
+    'facebook_description' => 'حملات استهداف دقيقة + محتوى يزود التفاعل ويحوّل المتابعين لعملاء.',
+    'instagram_platform' => 'إنستجرام',
+    'instagram_description' => 'تصميمات جذابة + ريلز وإعلانات لرفع الوعي والمبيعات بسرعة.',
+    'google_ads_platform' => 'إعلانات جوجل',
+    'google_ads_description' => 'ظهور في الوقت الصح بكلمات مفتاحية قوية وتحسين معدل التحويل.',
+    'snapchat_ads_platform' => 'إعلانات سناب شات',
+    'snapchat_ads_description' => 'حملات موجهة للشباب بإعلانات مبتكرة ونتائج قابلة للقياس.',
+    'tiktok_platform' => 'تيك توك',
+    'tiktok_description' => 'إعلانات فيديو سريعة الانتشار + استراتيجية محتوى لزيادة الطلب.',
+    'seo_platform_service' => 'خدمات SEO',
+    'seo_description' => 'رفع ترتيبك في جوجل بخطة محتوى وتقوية صفحاتك تقنياً وروابط ذكية.',
+
+    // ==================== Work Line Section ====================
+    'work_line_description' => 'خطوات عملنا في خدمات التسويق عبر وسائل التواصل الاجتماعي.',
+    'performance_analysis' => 'تحليلات الأداء',
+    'strategy_planning' => 'وضع إستراتيجية',
+    'start_work' => 'بدء العمل',
+    'content_planning' => 'عمل خطة محتوى',
+    'content_development' => 'تطوير المحتوى',
+    'competitor_research' => 'دراسة المنافسين',
+    'more' => 'المزيد',
+
+    // ==================== Categories & Alt Text ====================
+    'ecommerce_programming' => 'برمجة المتاجر الالكترونية',
+    'website_design_company' => 'شركة تصميم مواقع',
+    'packages_title' => 'باقات استضافة',
+    'seo_services_description' => 'خدمات السيو',
+    'package_heading_text' => 'احصل علي تجربة ممتازة مع اشتراك في باقات الاستضافة',
+    'ready_heading' => 'هل انت مستعد الان',
+    'start_now_btn' => 'ابدء الان',
+    'contact_us_btn' => 'اتصل بنــــــا',
+    'ready_hosting_description' => 'احصل على تجربة ممتازة مع اشتراك في باقات الاستضافة',
+    'our_services_title' => 'باقات خدماتنا في التسويق الالكتروني',
+
+    // ==================== Hosting Features ====================
+    'hosting_cloud_description' => 'الاستضافة السحابية (Cloud Hosting) هي طريقة حديثة لاستضافة موقعك تعتمد على شبكة من السيرفرات المتصلة ببعض بدل ما يكون موقعك على سيرفر واحد فقط. ده بيخلي الموقع أسرع وأكثر استقرارًا لأن الموارد (CPU/RAM) بتتوزع وتزيد تلقائيًا حسب الضغط.',
+    'hosting_vps_description' => 'مميزات استضافة VPS (سيرفر افتراضي خاص) إنها بتديك أداء وتحكم قريبين من السيرفر الكامل بس بتكلفة أقل، لأنك بتاخد جزء "معزول" من سيرفر قوي بموارد مخصصة ليك.',
+    'ssd_storage' => 'مساحة تخزين SSD',
+    'ssl_certificate' => 'شهادة امان SSL',
+    'cpanel_management' => 'لوحة تحكم Cpnel',
+    'domain_com_net' => 'دومين .com-.net',
+    'monthly_backup' => 'نسخ احتياطي شهري',
+    'official_email' => 'بريد الكتروني رسمــي',
+    'dedicated_resources' => 'مـــوراد مخصصة',
+    'stable_fast_performance' => 'اداء ثابت وسريع',
+    'whm_panel' => 'لوحة تحكم WHM',
+    'full_root_access' => 'تحكم كامل - ROOT',
+    'daily_backup' => 'نسخ احتياطي يومي',
+    'professional_responses' => 'ردود وتعليقات باحتراف',
+    'performance_reports' => 'تــــــــــقارير أداء دورية',
+    'full_account_management' => 'إدارة كاملة للحسابات',
+    'marketing_strategy' => 'استراتيجية تسويق',
+    'optimized_loading_speed' => 'سرعة تحميل محسّنة',
+    'search_engine_optimization' => 'تهيئة لمحركات البحث',
+    'payment_gateway_integration' => 'ربط ببوابات الدفع',
+    'easy_control_panel' => 'لوحة تحكم سهلة',
+    'content_strategy_monthly' => 'نتاخطة محتوى شهرية',
+
+    // ==================== Features Hosting ====================
+    'feature_speed_title' => 'سرعة التنفيذ',
+    'feature_speed_description' => 'تنفيذ سريع مع جودة عالية واهتمام بالتفاصيل.',
+    'feature_security_title' => 'حماية متقدمة',
+    'feature_security_description' => 'حماية قوية ضد الاختراق والسبام والملفات الضارة',
+    'feature_backup_daily_title' => 'نسخ احتياطي يومي',
+    'feature_backup_daily_description' => 'باك اب تلقائي واسترجاع سريع وقت الحاجة.',
+    'feature_support_title' => 'دعم فني سريع',
+    'feature_support_description' => 'متابعة وحل المشاكل أول بأول بدون تأخير.',
+    'feature_cpanel_title' => 'لوحة تحكم سهلة',
+    'feature_cpanel_description' => 'إدارة الدومين والبريد والملفات بسهولة.',
+    'feature_ssl_title' => 'شهادة SSL مجانية',
+    'feature_ssl_description' => 'تأمين الموقع وتفعيل https بضغطة واحدة.',
+    'feature_performance_title' => 'أداء ثابت',
+    'feature_performance_description' => 'موارد مستقرة لتشغيل الموقع بدون تقطيع.',
+    'feature_wordpress_title' => 'تركيب ووردبريس',
+    'feature_wordpress_description' => 'تثبيت ووردبريس وتجهيز الموقع بسرعة.',
+    'search_engine_optimization' => 'تهيئة لمحركات البحث',
+    'payment_gateway_integration' => 'ربط ببوابات الدفع',
+    'easy_control_panel' => 'لوحة تحكم سهلة',
+    'our_services_title' => 'باقات خدماتنا في التسويق الالكتروني',
+    'services_marketing_description' => 'اختر من ضمن الخدمات الموجودة',
 ];
