@@ -80,7 +80,7 @@
 
         .platform-cards {
             .platform {
-                padding: 15px;
+                padding: 25px;
                 border-radius: 12px;
                 backdrop-filter: blur(8px);
                 border: 1px solid var(--dark-muted-color);

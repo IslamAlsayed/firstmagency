@@ -57,9 +57,8 @@
             @if (config('packages-hosting') && count(config('packages-hosting')) > 0)
                 @foreach (config('packages-hosting') as $category => $packages)
                     @foreach ($packages as $package)
-                        <div class="package-card" data-category="{{ $category }}">
+                        <div class="package-card{{ $package['is_popular'] ?? false ? ' card-border' : '' }}" data-category="{{ $category }}">
                             <div class="relative p-3">
-
                                 @if ($package['is_popular'] ?? false)
                                     <div class="main-popular">{{ __('main.hosting_packages_popular') }}</div>
                                 @endif

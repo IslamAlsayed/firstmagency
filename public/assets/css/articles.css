@@ -218,6 +218,36 @@
     }
 }
 
+.heading-title {
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 40px;
+
+    .title {
+        margin-inline: 5px
+    }
+
+    .title-badge {
+        padding: 5px 15px;
+        border-radius: 4px;
+        color: var(--light-color);
+        position: relative;
+        z-index: 3
+    }
+
+    .title-badge::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 14px;
+        transform: skewX(-12deg);
+        background: var(--light-main-color);
+        box-shadow: 0 10px 26px rgba(0, 0, 0, .12);
+    }
+}
+
 .main-articles-section {
     border-radius: 15px;
 

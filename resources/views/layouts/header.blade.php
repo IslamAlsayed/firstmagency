@@ -10,7 +10,7 @@
                     <div class="heading font-semibold">{{ __('main.header_brand') }}</div>
                     <div class="childs flex flex-col gap-6">
                         <div class="flex items-center justify-between gap-3">
-                            <div class="text flex items-center gap-4">
+                            <div class="text flex items-center gap-2">
                                 <div class="icon">
                                     <i class="fas fa-phone"></i>
                                 </div>
@@ -19,7 +19,7 @@
                             <div class="contact">{{ config('app.whatsapp') }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
-                            <div class="text flex items-center gap-4">
+                            <div class="text flex items-center gap-2">
                                 <div class="icon">
                                     <i class="fas fa-phone"></i>
                                 </div>
@@ -28,7 +28,7 @@
                             <div class="contact">{{ config('app.phone') }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
-                            <div class="text flex items-center gap-4">
+                            <div class="text flex items-center gap-2">
                                 <div class="icon">
                                     <i class="fas fa-envelope"></i>
                                 </div>

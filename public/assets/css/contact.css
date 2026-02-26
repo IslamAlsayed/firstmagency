@@ -42,11 +42,16 @@
                     }
 
                     & .input {
-                        /* overflow: hidden; */
                         padding: 5px;
                         direction: ltr;
                         border-radius: 10px;
                         border: 1px solid var(--light-muted-color);
+
+                        &:has(input:focus),
+                        &:has(select:focus),
+                        &:has(textarea:focus) {
+                            border: 1px solid var(--main-color);
+                        }
 
                         & input,
                         & select,
@@ -57,7 +62,6 @@
 
                             &:focus {
                                 outline: none;
-                                border: 1px solid var(--main-color);
                             }
                         }
 

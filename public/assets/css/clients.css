@@ -6,12 +6,12 @@
         gap: 15px;
         border-radius: 15px;
         padding: 15px var(--main-inline-padding) 50px;
-        background-color: var(--blog-show-background-color);
 
         & .client {
             max-height: 150px;
-            border-radius: 15px;
+            border-radius: 8px;
             background-color: var(--light-color);
+            box-shadow: 0 0 31px -7px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             position: relative;
             z-index: 0;
@@ -35,7 +35,7 @@
             }
 
             &:hover::after {
-                animation: shineLogo 2s ease-in-out forwards;
+                animation: shineLogo 4s ease-in-out forwards;
             }
 
             &:hover {

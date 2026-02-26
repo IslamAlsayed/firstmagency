@@ -3,7 +3,10 @@
 @section('content')
     <div class="articles-page">
         <section class="articles-section">
-            <div class="heading">{{ __('main.blog_archive') }}</div>
+            <div class="heading-title">
+                <div class="title font-semibold">مدونة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
+                <div class="description"></div>
+            </div>
 
             <div class="main-articles-section">
                 <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="articlesContainer">
