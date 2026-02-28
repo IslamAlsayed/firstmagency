@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="image magnetic-effect">
-            <img src="{{ asset('assets/images/services-marketing/hero-1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+            <img src="{{ asset('assets/images/website/services-marketing/hero-1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
         </div>
     </div>
     <div class="inner hidden flex items-center gap-4">
@@ -88,7 +88,7 @@
             </div>
         </div>
         <div class="image last-image magnetic-effect">
-            <img src="{{ asset('assets/images/services-marketing/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
+            <img src="{{ asset('assets/images/website/services-marketing/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
         </div>
     </div>
 </section>

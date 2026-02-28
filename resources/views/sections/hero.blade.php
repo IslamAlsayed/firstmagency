@@ -12,7 +12,7 @@
         <div class="swapper">
             @for ($i = 1; $i <= 4; $i++)
                 <div class="item {{ $i === 1 ? 'active' : '' }}">
-                    <img src="{{ asset('assets/images/hero/' . $i . '.png') }}" alt="{{ __('main.hero_image') }} {{ $i }}">
+                    <img src="{{ asset('assets/images/website/hero/' . $i . '.png') }}" alt="{{ __('main.hero_image') }} {{ $i }}">
                 </div>
             @endfor
         </div>

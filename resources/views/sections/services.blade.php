@@ -9,11 +9,11 @@
                 @foreach (config('main-services') as $service)
                     <swiper-slide class="service-item">
                         <a href="" class="service-image">
-                            <img src="{{ asset('assets/images/services/' . $service['image']) }}" alt="{{ __('main.' . $service['title_key']) }}">
+                            <img src="{{ asset('assets/images/website/services/' . $service['image']) }}" alt="{{ __('main.' . $service['title_key']) }}">
                         </a>
                         <div class="service-text">
                             <div class="icon">
-                                <img src="{{ asset('assets/images/services/' . $service['icon']) }}" alt="{{ __('main.' . $service['title_key']) }}">
+                                <img src="{{ asset('assets/images/website/services/' . $service['icon']) }}" alt="{{ __('main.' . $service['title_key']) }}">
                             </div>
                             <div class="service-title font-semibold">{{ __('main.' . $service['title_key']) }}</div>
                             <div class="service-description">{{ __('main.' . $service['desc_key']) }}</div>

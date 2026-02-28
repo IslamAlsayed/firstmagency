@@ -14,7 +14,7 @@
                 <div class="project-item" data-tags="{{ isset($company['tags']) && is_array($company['tags']) ? implode(',', $company['tags']) : '' }}">
                     <a href="{{ route('works.show', ['id' => $key]) }}">
                         <div class="project-image">
-                            <img src="{{ asset('assets/images/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
+                            <img src="{{ asset('assets/images/website/projects/' . ($key + 1) . '.png') }}" alt="{{ $company['title'] }}">
                         </div>
                         <div class="project-text">
                             <div class="project-title font-semibold">{{ $company['title'] }}</div>

@@ -19,7 +19,8 @@
                         <div class="mb-6">
                             <div class="image">
                                 @if (isset($service['image']))
-                                    <img src="{{ asset('assets/images/' . $service['image']) }}" class="w-16 mx-auto mb-4" alt="{{ $service['title'] }}">
+                                    <img src="{{ asset('assets/images/website/' . $service['image']) }}" class="w-16 mx-auto mb-4"
+                                        alt="{{ $service['title'] }}">
                                 @elseif (isset($service['icon']))
                                     {!! $service['icon'] !!}
                                 @endif

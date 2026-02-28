@@ -14,7 +14,7 @@
                         <div class="article">
                             <div class="image">
                                 @if (rand(0, 1) == 1)
-                                    <img src="{{ asset('assets/images/projects/' . rand(1, 12) . '.png') }}" alt="">
+                                    <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="">
                                 @endif
                             </div>
                             <div class="visitor">
@@ -60,7 +60,7 @@
             const whatsappButtonText = "{{ __('main.whatsapp_button') }}";
 
             function generateArticleHTML(article, index) {
-                const randomImage = Math.random() > 0.5 ? `<img src="{{ asset('assets/images/projects/') }}${Math.ceil(Math.random() * 12)}.png" alt="">` : '';
+                const randomImage = Math.random() > 0.5 ? `<img src="{{ asset('assets/images/website/projects/') }}${Math.ceil(Math.random() * 12)}.png" alt="">` : '';
                 const randomVisitors = Math.floor(Math.random() * (584 - 254 + 1)) + 254;
 
                 return `

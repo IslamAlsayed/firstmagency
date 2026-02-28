@@ -62,7 +62,7 @@
         </div>
 
         <div class="image">
-            <img src="{{ asset('assets/images/developer/design.png') }}" alt="{{ __('main.design_title') }}">
+            <img src="{{ asset('assets/images/website/developer/design.png') }}" alt="{{ __('main.design_title') }}">
         </div>
     </div>
 </section>

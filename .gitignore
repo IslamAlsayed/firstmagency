@@ -22,8 +22,17 @@ Homestead.yaml
 Thumbs.db
 *.md
 docs
-*copy.*
+copy.*
 .github/workflows/deploy1.yml
 .github/workflows/deploy2.yml
 cloudflared.exe
 translation_extraction.json
+.trash
+
+# Performance Optimization Files (منفصلة - يتم استخدامها لاحقاً)
+PERFORMANCE_*.md
+QUICK_START_GUIDE.md
+INDEX_AR.md
+IMPLEMENTATION_CHECKLIST.md
+*.optimized
+performance-setup.sh

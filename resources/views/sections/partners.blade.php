@@ -6,7 +6,7 @@
         @for ($i = 1; $i <= 6; $i++)
             <div class="partner">
                 <a href="">
-                    <img src="{{ asset('assets/images/partners/' . $i . '.png') }}" alt="{{ __('main.partners_item') }} {{ $i }}">
+                    <img src="{{ asset('assets/images/website/partners/' . $i . '.png') }}" alt="{{ __('main.partners_item') }} {{ $i }}">
                 </a>
             </div>
         @endfor

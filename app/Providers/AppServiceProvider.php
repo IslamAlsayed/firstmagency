@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use App\Providers\SettingsServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(SettingsServiceProvider::class);
     }
 
     /**
@@ -20,9 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Set default locale to Arabic
-        app()->setLocale('ar');
-
         // Force HTTPS for Cloudflare tunnel
         if (env('APP_ENV') === 'production' || request()->server('HTTP_CF_VISITOR')) {
             URL::forceScheme('https');

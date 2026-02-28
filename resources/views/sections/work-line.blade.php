@@ -10,42 +10,42 @@
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/content-marketing.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/content-marketing.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.performance_analysis') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/map.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/map.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.strategy_planning') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/planning.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/planning.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.start_work') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/qatar-marketing.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/qatar-marketing.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.content_planning') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/strategy-development.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/strategy-development.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.content_development') }}</h3>
         </article>
         <article class="step">
             <div class="step-line"></div>
             <p class="image">
-                <img src="{{ asset('assets/images/services-marketing/work-lines/targeted.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/services-marketing/work-lines/targeted.png') }}" alt="">
             </p>
             <h3 class="step-title font-semibold">{{ __('main.competitor_research') }}</h3>
         </article>

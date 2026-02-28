@@ -7,7 +7,7 @@
             @foreach (config('websites') as $website)
                 <a href="" class="website">
                     <div class="image">
-                        <img src="{{ asset('assets/images/' . $website['image']) }}" alt="{{ $website['title'] }}">
+                        <img src="{{ asset('assets/images/website/' . $website['image']) }}" alt="{{ $website['title'] }}">
                     </div>
                     <div class="title font-semibold">{{ $website['title'] }}</div>
                 </a>

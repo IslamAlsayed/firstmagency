@@ -11,7 +11,7 @@
                         <div class="article">
                             <div class="image">
                                 @if (rand(0, 1) == 1)
-                                    <img src="{{ asset('assets/images/projects/' . rand(1, 12) . '.png') }}" alt="">
+                                    <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="">
                                 @endif
                             </div>
                             <div class="visitor">

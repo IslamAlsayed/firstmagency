@@ -8,12 +8,12 @@
             <div class="our-clients-wrapper left">
                 @for ($i = 0; $i < 24; $i++)
                     <a href="" class="client">
-                        <img src="{{ asset('assets/images/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
+                        <img src="{{ asset('assets/images/website/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
                     </a>
                 @endfor
                 @for ($i = 0; $i < 24; $i++)
                     <a href="" class="client">
-                        <img src="{{ asset('assets/images/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
+                        <img src="{{ asset('assets/images/website/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
                     </a>
                 @endfor
             </div>
@@ -24,12 +24,13 @@
             <div class="our-clients-wrapper right">
                 @for ($i = 0; $i < 24; $i++)
                     <a href="" class="client">
-                        <img src="{{ asset('assets/images/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
+                        <img src="{{ asset('assets/images/website/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
                     </a>
                 @endfor
                 @for ($i = 0; $i < 24; $i++)
                     <a href="" class="client">
-                        <img src="{{ asset('assets/images/clients/' . (($i % 6) + 1) . '.png') }}" alt="{{ __('main.clients') }} {{ $i + 1 }}">
+                        <img src="{{ asset('assets/images/website/clients/' . (($i % 6) + 1) . '.png') }}"
+                            alt="{{ __('main.clients') }} {{ $i + 1 }}">
                     </a>
                 @endfor
             </div>

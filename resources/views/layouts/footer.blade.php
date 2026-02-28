@@ -3,7 +3,13 @@
     <div class="inner">
         <div class="footer-header flex items-center justify-between gap-4">
             <div class="description">
-                {{ __('main.footer_description') }}
+                @if (app()->getLocale() === 'ar' && hasDisplayableRichText($settings ?? null, 'site_description_ar'))
+                    {!! $settings->site_description_ar ?? '' !!}
+                @elseif (app()->getLocale() === 'en' && hasDisplayableRichText($settings ?? null, 'site_description'))
+                    {!! $settings->site_description ?? '' !!}
+                @else
+                    {!! __('main.footer_description') ?? '' !!}
+                @endif
             </div>
 
             <div class="social">
@@ -30,7 +36,7 @@
                 <div class="title font-semibold">{{ __('main.footer_offer_new') }}</div>
                 <div class="flex items-center gap-4 mb-4">
                     <div class="image">
-                        <img src="{{ asset('assets/images/google-map.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/google-map.png') }}" alt="">
                     </div>
                     <div class="text">
                         <div class="title font-semibold">{{ __('main.footer_egypt') }}</div>
@@ -39,7 +45,7 @@
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="image">
-                        <img src="{{ asset('assets/images/google-line.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/google-line.png') }}" alt="">
                     </div>
                     <div class="text">
                         <div class="title font-semibold">{{ __('main.footer_uae') }}</div>
@@ -79,7 +85,7 @@
                 {{ __('main.footer_copyright') }}
             </div>
             <div class="payments">
-                <img src="{{ asset('assets/images/payments.png') }}" alt="{{ __('main.payments_methods') }}">
+                <img src="{{ asset('assets/images/website/payments.png') }}" alt="{{ __('main.payments_methods') }}">
             </div>
         </div>
     </div>

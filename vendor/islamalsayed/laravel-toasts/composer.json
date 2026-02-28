@@ -1,0 +1,68 @@
+{
+  "name": "islamalsayed/laravel-toasts",
+  "description": "Modern, elegant toast notifications and confirmation dialogs for Laravel with full Livewire 3.x support, emoji integration, and RTL compatibility",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "toast",
+    "notification",
+    "alert",
+    "confirm",
+    "dialog",
+    "livewire",
+    "emoji",
+    "flash-message",
+    "notification-system",
+    "rtl",
+    "arabic"
+  ],
+  "homepage": "https://github.com/IslamAlsayed/laravel-toasts",
+  "authors": [
+    {
+      "name": "IslamAlsayed",
+      "email": "eslamalsayed8133@gmail.com",
+      "homepage": "https://www.linkedin.com/in/islam-alsayed7"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.0 || ^9.0",
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "IslamAlsayed\\Toasts\\": "src/"
+    },
+    "files": [
+      "src/Helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "IslamAlsayed\\LaravelToasts\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "IslamAlsayed\\Toasts\\ToastServiceProvider"
+      ],
+      "aliases": {
+        "Toast": "IslamAlsayed\\Toasts\\Facades\\ToastFacade"
+      }
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

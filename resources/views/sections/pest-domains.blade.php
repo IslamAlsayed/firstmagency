@@ -9,7 +9,7 @@
             @foreach (config('pest-domains') as $domain)
                 <div class="domain-card p-3 font-semibold flex flex-col items-center justify-center" data-extension="{{ $domain['extension'] }}">
                     <div class="image">
-                        <img src="{{ asset('assets/images/' . $domain['icon']) }}" alt="">
+                        <img src="{{ asset('assets/images/website/' . $domain['icon']) }}" alt="">
                     </div>
                     @if (isset($domain['old_price']) && $domain['old_price'])
                         <small class="text-gray-600 line-through">${{ $domain['old_price'] }}</small>

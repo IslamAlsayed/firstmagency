@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="logo">
             <a href="{{ url('/') }}" class="shineEffect">
-                <img src="{{ asset('assets/images/logo.png.webp') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
+                <img src="{{ asset('assets/images/website/logo.png.webp') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
             </a>
 
             <div class="contact-fast">
@@ -16,7 +16,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_mobile') }}</span>
                             </div>
-                            <div class="contact">{{ config('app.whatsapp') }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_whatsapp ?? '' }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-2">
@@ -25,7 +25,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_company') }}</span>
                             </div>
-                            <div class="contact">{{ config('app.phone') }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_phone ?? '' }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-2">
@@ -34,13 +34,14 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_email_label') }}</span>
                             </div>
-                            <div class="contact">{{ config('app.email') }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_email ?? '' }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="social">
                     <button class="btn-link main-color dark-hover font-semibold">
-                        <a href="https://api.whatsapp.com/send?phone={{ config('app.whatsapp') }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ?? '' }}" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
                     </button>
                     <button class="btn-link main-color dark-hover font-semibold">
                         <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -187,11 +188,11 @@
             <div class="language-side">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}">
-                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
+                        <img src="{{ asset('assets/images/website/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
                     </a>
                 @else
                     <a href="{{ route('locale.change', 'ar') }}">
-                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
+                        <img src="{{ asset('assets/images/website/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
                     </a>
                 @endif
             </div>
@@ -200,17 +201,18 @@
             <div class="languages language-selector">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
+                        <img src="{{ asset('assets/images/website/flags/en.svg') }}" alt="{{ __('main.english_language') }}">
                     </a>
                 @else
                     <a href="{{ route('locale.change', 'ar') }}" class="btn-link font-semibold">
-                        <img src="{{ asset('assets/images/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
+                        <img src="{{ asset('assets/images/website/flags/ar.svg') }}" alt="{{ __('main.arabic_language') }}">
                     </a>
                 @endif
             </div>
 
             <div class="btn-link main-color font-semibold whatsapp">
-                <a href="https://api.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0" class="whatsapp-link">
+                <a href="https://api.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_whatsapp ?? ('' ?? '') }}&text&type=phone_number&app_absent=0"
+                    class="whatsapp-link">
                     <span>{{ __('main.whatsapp_contact') }}</span>
                     <i class="icon fab fa-whatsapp"></i>
                 </a>

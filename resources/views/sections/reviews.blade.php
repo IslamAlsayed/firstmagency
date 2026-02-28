@@ -24,7 +24,7 @@
                             <div class="info flex items-center gap-2">
                                 <div class="review-photo">
                                     {{-- <img src="{{ $review['photo'] }}" alt="{{ $review['name'] }}"> --}}
-                                    <img src="{{ asset('assets/images/services/' . $review['photo']) }}" alt="{{ $review['name'] }}">
+                                    <img src="{{ asset('assets/images/website/services/' . $review['photo']) }}" alt="{{ $review['name'] }}">
                                 </div>
                                 <div class="review-info">
                                     <div class="review-name font-semibold">{{ $review['name'] }}</div>

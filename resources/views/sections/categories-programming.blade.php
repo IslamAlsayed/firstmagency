@@ -9,13 +9,13 @@
 
         <div class="images flex items-center" data-random-images>
             <div class="image" data-image-slot="0">
-                <img src="{{ asset('assets/images/categories/1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                <img src="{{ asset('assets/images/website/categories/1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
             </div>
             <div class="image" data-image-slot="1">
-                <img src="{{ asset('assets/images/categories/2.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                <img src="{{ asset('assets/images/website/categories/2.png') }}" alt="{{ __('main.ecommerce_programming') }}">
             </div>
             <div class="image" data-image-slot="2">
-                <img src="{{ asset('assets/images/categories/3.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                <img src="{{ asset('assets/images/website/categories/3.png') }}" alt="{{ __('main.ecommerce_programming') }}">
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
             @foreach (config('features-hosting') as $feature)
                 <div class="website">
                     <div class="image cursor-pointer">
-                        <img src="{{ asset('assets/images/' . $feature['image']) }}" alt="{{ __('main.' . $feature['title_key']) }}">
+                        <img src="{{ asset('assets/images/website/' . $feature['image']) }}" alt="{{ __('main.' . $feature['title_key']) }}">
                     </div>
                     <div class="title font-semibold">{{ __('main.' . $feature['title_key']) }}</div>
                     <div class="description">{{ __('main.' . $feature['description_key']) }}</div>

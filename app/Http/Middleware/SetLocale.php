@@ -17,7 +17,7 @@ class SetLocale
     {
         // Check if locale exists in session
         if (session()->has('locale') && in_array(session('locale'), ['en', 'ar'])) {
-            app()->setLocale(session('locale'));
+            app()->setLocale(\App\Helpers\SettingsHelper::get()['site_locale'] ?? session('locale') ?? 'en');
         } else {
             // Default locale is Arabic
             app()->setLocale('ar');

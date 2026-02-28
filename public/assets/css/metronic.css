@@ -16990,7 +16990,7 @@
             display: none;
         }
 
-        .demo1.kt-sidebar-fixed .kt-wrapper {
+        /* .demo1.kt-sidebar-fixed .kt-wrapper {
             padding-inline-start: var(--sidebar-width) !important;
         }
 
@@ -17000,7 +17000,7 @@
 
         .demo1.kt-sidebar-fixed.kt-header-fixed .kt-wrapper {
             padding-top: var(--header-height);
-        }
+        } */
 
         .demo1.kt-sidebar-collapse {
             --sidebar-width: var(--sidebar-width-collapse);
@@ -17063,13 +17063,13 @@
         }
     }
 
-    .demo1 .kt-wrapper {
+    /* .demo1 .kt-wrapper {
         transition: padding-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-timing);
     }
 
     .demo1 .kt-header {
         transition: inset-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-timing);
-    }
+    } */
 }
 
 @property --tw-border-spacing-x {

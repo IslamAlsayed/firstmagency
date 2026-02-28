@@ -45,35 +45,36 @@
 
     --inline-padding: 20px;
     --main-inline-padding: 120px;
+
     --home-hero-section-inline-padding: 120px;
     --home-services-section-inline-padding: 60px;
     --home-projects-section-inline-padding: 20px;
     --home-reviews-section-inline-padding: 60px;
     --home-clients-section-inline-padding: 120px;
 
-    --about-us-partners-inline-padding: 60px;
+    --about-us-line-works-steps-section-inline-padding: 60px;
+    --about-us-partners-section-inline-padding: 60px;
 
-    --portfolio-inline-padding: 60px;
-
+    --portfolio-section-inline-padding: 60px;
     --blog-articles-section-inline-padding: 60px;
+    --contact-page-section-inline-padding: 180px;
 
-    --contact-page-inline-padding: 180px;
-
+    --website-developer-section-inline-padding: 60px;
     --website-programming-section-inline-padding: 60px;
-    --website-important-articles-inline-padding: 60px;
+    --website-design-section-inline-padding: 60px;
+    --website-important-articles-section-inline-padding: 60px;
     --faqs-section-inline-padding: 60px;
-    --app-important-articles-inline-padding: 120px;
 
+    --app-important-articles-section-inline-padding: 120px;
     --feature-section-inline-padding: 60px;
     --packages-section-inline-padding: 120px;
-    --operations-systems-sections-inline-padding: 60px;
+    --operations-systems-section-inline-padding: 60px;
     --your-domain-section-inline-padding: 240px;
-    --pest-domains-sections-inline-padding: 60px;
+    --pest-domains-section-inline-padding: 60px;
     --why-us-section-inline-padding: 120px;
-
     --platform-management-section-inline-padding: 60px;
-    --work-lines-sections-inline-padding: 120px;
-    --our-services-marketing-inline-padding: 120px;
+    --work-lines-section-inline-padding: 120px;
+    --our-services-marketing-section-inline-padding: 120px;
 
     --font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
 }
@@ -376,7 +377,7 @@ html[lang=en] {
         background-color: #ffffffc4;
         backdrop-filter: blur(15px);
         box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
-        background-image: url('../images/header-bg.png');
+        background-image: url('../images/website/header-bg.png');
     }
 
     & .inner {
@@ -1426,7 +1427,7 @@ footer {
         left: 50%;
         z-index: -2;
         transform: translateX(-50%);
-        background-image: url('../images/map.png');
+        background-image: url('../images/website/map.png');
         background-position: top center;
         background-size: cover;
         background-repeat: no-repeat;

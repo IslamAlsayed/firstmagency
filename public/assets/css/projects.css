@@ -4,7 +4,7 @@
     padding: 50px var(--home-projects-section-inline-padding) 30px;
     position: relative;
     min-height: 600px;
-    background-image: url('../images/projects/projects-bg.jpg');
+    background-image: url('../images/website/projects/projects-bg.jpg');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -166,7 +166,7 @@
         z-index: -5;
         top: 130px;
         /* background-color: var(--light-color); */
-        background-image: url('../images/transparent-logo.png');
+        background-image: url('../images/website/transparent-logo.png');
         background-position: top center;
         background-size: 20% auto;
         background-repeat: repeat;

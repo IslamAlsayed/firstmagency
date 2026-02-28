@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="image">
-                <img src="{{ asset('assets/images/line-works/1.png') }}" alt="{{ __('main.line_work_step1_title') }}">
+                <img src="{{ asset('assets/images/website/line-works/1.png') }}" alt="{{ __('main.line_work_step1_title') }}">
             </div>
         </div>
         <div class="step">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="image">
-                <img src="{{ asset('assets/images/line-works/2.png') }}" alt="{{ __('main.line_work_step2_title') }}">
+                <img src="{{ asset('assets/images/website/line-works/2.png') }}" alt="{{ __('main.line_work_step2_title') }}">
             </div>
         </div>
         <div class="step">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="image">
-                <img src="{{ asset('assets/images/line-works/3.png') }}" alt="{{ __('main.line_work_step3_title') }}">
+                <img src="{{ asset('assets/images/website/line-works/3.png') }}" alt="{{ __('main.line_work_step3_title') }}">
             </div>
         </div>
         <div class="step">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="image">
-                <img src="{{ asset('assets/images/line-works/4.png') }}" alt="{{ __('main.line_work_step4_title') }}">
+                <img src="{{ asset('assets/images/website/line-works/4.png') }}" alt="{{ __('main.line_work_step4_title') }}">
             </div>
         </div>
     </div>

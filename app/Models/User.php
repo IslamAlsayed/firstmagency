@@ -6,11 +6,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable, HasRichText;
+    protected $richTextAttributes = [
+        'bio',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +25,22 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'address',
+        'bio',
+        'mobile',
+        'phone',
+        'photo',
+        'role',
+        'last_login_ip',
+        'last_login_at',
+        'password_changed_at',
+        'button_display_mode',
+        'status',
+        'is_active',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -43,6 +63,118 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
+            'password_changed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * ✨ Helper Methods للتحقق من الأدوار والصلاحيات
+     */
+
+    /**
+     * هل المستخدم Super Admin؟
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'superadmin';
+    }
+
+    /**
+     * هل المستخدم Admin؟
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * هل المستخدم Content Manager؟
+     */
+    public function isContentManager(): bool
+    {
+        return $this->role === 'content_manager';
+    }
+
+    /**
+     * هل يمكنه الوصول للـ Dashboard؟
+     */
+    public function canAccessDashboard(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin', 'content_manager']);
+    }
+
+    /**
+     * هل يمكنه الوصول للإعدادات (Colors/Fonts)؟
+     */
+    public function canManageSettings(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin']);
+    }
+
+    /**
+     * هل يمكنه تغيير الـ Sections (Padding)؟
+     */
+    public function canManageSections(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin']);
+    }
+
+    /**
+     * هل يمكنه إدارة المحتوى؟
+     */
+    public function canManageContent(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin', 'content_manager']);
+    }
+
+    /**
+     * هل يمكنه عرض جميع المراجعات Revisions؟
+     */
+    public function canViewAllRevisions(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin']);
+    }
+
+    /**
+     * هل يمكنه الـ Rollback؟
+     */
+    public function canRollback(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin']);
+    }
+
+    /**
+     * هل يمكنه إدارة المستخدمين؟
+     */
+    public function canManageUsers(): bool
+    {
+        return in_array($this->role, ['superadmin', 'admin']);
+    }
+
+    /**
+     * الحصول على اسم الدور بالعربية
+     */
+    public function getRoleNameArabic(): string
+    {
+        return match ($this->role) {
+            'superadmin' => 'المسؤول الأعلى',
+            'admin' => 'المسؤول',
+            'content_manager' => 'مدير المحتوى',
+            default => 'غير معروف'
+        };
+    }
+
+    /**
+     * الحصول على اسم الدور بالإنجليزية
+     */
+    public function getRoleNameEnglish(): string
+    {
+        return match ($this->role) {
+            'superadmin' => 'Super Admin',
+            'admin' => 'Admin',
+            'content_manager' => 'Content Manager',
+            default => 'Unknown'
+        };
     }
 }

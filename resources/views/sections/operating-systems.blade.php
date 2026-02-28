@@ -22,7 +22,7 @@
                     @foreach (config('operating-systems') as $system)
                         <div class="system-card p-3">
                             <div class="image mb-4">
-                                <img src="{{ asset('assets/images/' . $system['icon']) }}" alt="">
+                                <img src="{{ asset('assets/images/website/' . $system['icon']) }}" alt="">
                             </div>
                             <h3 class="font-semibold text-lg mb-2">{{ $system['title'] }}</h3>
                         </div>
@@ -36,7 +36,7 @@
                     @foreach (config('dashboards-and-apps') as $item)
                         <div class="system-card p-3">
                             <div class="image mb-4">
-                                <img src="{{ asset('assets/images/' . $item['icon']) }}" alt="">
+                                <img src="{{ asset('assets/images/website/' . $item['icon']) }}" alt="">
                             </div>
                             <h3 class="font-semibold text-lg mb-2">{{ $item['title'] }}</h3>
                         </div>

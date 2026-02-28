@@ -14,7 +14,7 @@
             left: 0;
             z-index: 1;
             opacity: 0.05;
-            background-image: url('../images/services-marketing/hero-bg.png');
+            background-image: url('../images/website/services-marketing/hero-bg.png');
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -67,14 +67,14 @@
         &::before {
             left: 0;
             opacity: 0.15;
-            background-image: url('/assets/images/platforms/platforms-left-bg.png');
+            background-image: url('/assets/images/website/platforms/platforms-left-bg.png');
             background-position: left top;
         }
 
         &::after {
             right: 0;
             opacity: 0.05;
-            background-image: url('/assets/images/platforms/platforms-right-bg.png');
+            background-image: url('/assets/images/website/platforms/platforms-right-bg.png');
             background-position: right top;
         }
 

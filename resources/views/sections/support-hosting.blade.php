@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="image">
-            <img src="{{ asset('assets/images/hosting/support-hosting-bg.png') }}" alt="{{ __('main.support_hosting_image') }}" class="img-fluid">
+            <img src="{{ asset('assets/images/website/hosting/support-hosting-bg.png') }}" alt="{{ __('main.support_hosting_image') }}" class="img-fluid">
         </div>
     </div>
 

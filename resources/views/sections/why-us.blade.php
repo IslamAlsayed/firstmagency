@@ -7,7 +7,7 @@
             @foreach (config('why-us') as $item)
                 <div class="website">
                     <div class="image cursor-pointer">
-                        <img src="{{ asset('assets/images/' . $item['icon']) }}" alt="{{ $item['title'] }}">
+                        <img src="{{ asset('assets/images/website/' . $item['icon']) }}" alt="{{ $item['title'] }}">
                     </div>
                     <div class="website-title font-semibold">{{ $item['title'] }}</div>
                     <div class="website-description">{{ $item['description'] }}</div>

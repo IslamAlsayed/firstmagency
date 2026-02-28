@@ -20,7 +20,7 @@
             bottom: 0;
             left: 0;
             opacity: 0.03;
-            background-image: url('../images/domains/hero-bg.png');
+            background-image: url('../images/website/domains/hero-bg.png');
             background-position: top left;
             background-size: 60% auto;
             background-repeat: repeat;
@@ -362,7 +362,7 @@
             right: -10px;
             z-index: -1;
             opacity: 0.05;
-            background-image: url(../images/domains/why-us-bg.png);
+            background-image: url(../images/website/domains/why-us-bg.png);
             background-position: top right;
             background-size: 20%;
             background-repeat: no-repeat;

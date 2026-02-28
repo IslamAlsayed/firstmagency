@@ -1,0 +1,512 @@
+.app-developer-section {
+    height: auto;
+    min-height: auto;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 180%;
+        height: 150%;
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        opacity: 0;
+        background: linear-gradient(-45deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.3) 25%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0.3) 75%,
+                transparent 100%);
+        transform: rotate(0deg);
+        animation: shineSection 4s ease-in-out infinite;
+        animation-delay: 0s;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: var(--app-developer-hero-background-color);
+        z-index: 2;
+    }
+
+    & .background-layer {
+        position: absolute;
+        inset: 0;
+        background-image: url(../../images/website/hero/background.png);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        z-index: 3;
+    }
+
+    & .inner {
+        position: relative;
+        z-index: 10;
+
+        & .content {
+            & .text {
+                & h1 {
+                    margin-bottom: 10px;
+                    color: var(--dark-color);
+                }
+
+                & .description {
+                    font-size: 16px;
+                    line-height: 2;
+                    color: var(--dark-color);
+                }
+            }
+
+            & .tags {
+                & .tag {
+                    color: var(--dark-color);
+                }
+            }
+        }
+
+        & .image {
+            & img {
+                animation: scaleImage 3s ease-in-out infinite;
+            }
+        }
+    }
+
+    & .last-image {
+        height: 400px !important;
+    }
+}
+
+.app-developer {
+    & .important-articles {
+        margin-top: 0;
+        position: relative;
+        padding-inline: var(--app-important-articles-section-inline-padding);
+        background-color: var(--app-articles-background-color);
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image: url('../images/website/reviews-bg.jpg');
+            background-size: 11% auto;
+        }
+
+        &>.title {
+            font-size: 26px;
+        }
+
+        &>.title+.description {
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+.order-your-app-section {
+    margin-top: 0;
+    overflow: hidden;
+    padding-inline-start: 0;
+    padding-inline-end: 50px;
+    background-color: var(--order-background-color);
+}
+
+.order-your-app-section .content {
+    gap: 50px;
+}
+
+.order-your-app-section .image {
+    width: 650px;
+    min-width: auto;
+    height: auto;
+    padding-top: 50px;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 50%;
+        height: 200%;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: auto;
+        z-index: -1;
+        opacity: 0.8;
+        pointer-events: none;
+        transform: translateY(-50%);
+        background-color: var(--light-main-color);
+    }
+}
+
+html[lang=en] {
+    .order-your-app-section .image {
+        &::before {
+            top: 50%;
+            left: 0;
+            right: auto;
+        }
+    }
+}
+
+.order-your-app-section .image img {
+    width: 100%;
+    height: auto;
+}
+
+.order-your-app-section .text {
+    flex: 1;
+    padding-inline-end: 50px;
+}
+
+.order-your-app-section .title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.order-your-app-section .description {
+    font-size: 20px;
+    line-height: 2.2;
+    margin-bottom: 30px;
+    color: var(--main-text);
+}
+
+.order-your-app-section button {
+    border-radius: 10px;
+    padding-block: 8px;
+    filter: saturate(1.9);
+}
+
+@keyframes shineSection {
+    0% {
+        transform: translateX(-150%) translateY(-150%) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateX(150%) translateY(150%) rotate(0deg);
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(150%) translateY(150%) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+@keyframes scaleImage {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.categories-programming-section {
+    padding-inline: calc(var(--main-inline-padding) / 2);
+    position: relative;
+    background: #FAFAFA;
+    background-image: url('../images/website/reviews-bg.jpg');
+    background-position: top left;
+    background-size: 22%;
+    background-repeat: repeat;
+    z-index: 50;
+}
+
+.categories-programming-section .content {
+    gap: 40px;
+    text-wrap: nowrap;
+    padding-block: 50px;
+    position: relative;
+    z-index: 50;
+}
+
+.categories-programming-section .text {
+    margin-top: 50px;
+}
+
+.categories-programming-section .text .title {
+    font-size: 28px;
+}
+
+.categories-programming-section .description {
+    font-size: 16px;
+}
+
+.categories-programming-section .text .title .title-badge {
+    padding: 1px 10px;
+}
+
+.categories-programming-section .images {
+    gap: 50px;
+}
+
+.categories-programming-section .images .image {
+    min-width: 140px;
+    max-width: 210px;
+    height: auto;
+}
+
+@media (max-width: 1080px) {
+    .categories-programming-section .images {
+        gap: 20px;
+    }
+
+    .categories-programming-section .images .image {
+        min-width: 120px;
+        max-width: 190px;
+    }
+
+    .categories-programming-section .text .title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .order-your-app-section .image {
+        width: 350px;
+    }
+
+    .order-your-app-section .title {
+        font-size: 18px;
+    }
+
+    .order-your-app-section .description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .app-developer-section {
+        & .inner {
+            gap: 30px;
+            flex-direction: column-reverse;
+
+            & .content {
+                max-width: 100%;
+
+                & .text {
+                    margin-inline: 0;
+                }
+            }
+        }
+    }
+
+    .order-your-app-section .content {
+        gap: 40px;
+        flex-direction: column;
+    }
+
+    .order-your-app-section .title {
+        font-size: 12px;
+    }
+
+    .order-your-app-section .image {
+        width: 60%;
+    }
+
+    .order-your-app-section .image {
+        &::before {
+            width: 200%;
+            height: 80%;
+            position: absolute;
+            top: -100px;
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .order-your-app-section .text {
+        padding-inline: var(--inline-padding);
+    }
+
+    .categories-programming-section .content {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .categories-programming-section .images {
+        gap: 20px;
+    }
+
+    .categories-programming-section .images .image {
+        min-width: 50px;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-developer {
+        & .important-articles {
+            &>.title {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .developer-section {
+        & .inner {
+            & .content {
+                & .text {
+                    & h1 {
+                        font-size: 24px;
+                    }
+                }
+
+                & .tags {
+                    width: 100%;
+                    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+                }
+            }
+        }
+    }
+
+    .categories-programming-section {
+        text-align: center;
+        padding-inline: var(--inline-padding);
+
+        & .content {
+            & .title {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .categories-programming-section .content {
+        gap: 20px;
+        padding-inline: 0;
+        text-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .categories-programming-section .images {
+        gap: 10px;
+    }
+
+    .categories-programming-section .images .image {
+        min-width: 55px;
+        max-width: 90px;
+    }
+
+    .order-your-app-section .image {
+        &::before {
+            width: 300% !important;
+            top: -100px !important;
+            left: 50% !important;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .app-developer {
+        & .important-articles {
+            margin-top: 0;
+        }
+    }
+
+    .app-developer-section {
+        & .inner {
+            gap: 80px;
+            padding-bottom: 20px;
+        }
+    }
+
+    .developer-section {
+        padding: 50px var(--inline-padding) 50px;
+
+        & .inner {
+            & .image {
+                width: 90%;
+            }
+
+            & .content {
+                & .tags {
+                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+
+                    & .tag {
+                        font-size: 10px;
+                        border: 1px solid var(--main-color);
+
+                        & svg {
+                            width: 15px;
+                            height: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .categories-programming-section {
+        margin-top: 0;
+    }
+
+    .order-your-app-section {
+        text-align: center;
+        margin-top: 0;
+        padding-bottom: 30px;
+        padding-inline: var(--inline-padding);
+
+        & .inner {
+            & .content {
+                & .text {
+
+                    & .description {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
+    .order-your-app-section .description {
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .order-your-app-section .image {
+        width: 90%;
+        top: 30px;
+    }
+
+    .important-articles {
+        padding-inline: 0;
+    }
+
+    .faqs-section {
+        & .question-item {
+            padding: 12px;
+            border-radius: 10px;
+
+            & .question,
+            & .answer {
+                font-size: 8px;
+            }
+        }
+    }
+}

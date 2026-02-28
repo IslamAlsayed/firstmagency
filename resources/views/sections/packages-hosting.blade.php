@@ -18,7 +18,7 @@
             <button data-target="hosting" class="filter-btn-package active flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/hosting/hosting-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/hosting-packages/icon.png') }}" alt="">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_shared') }}</span>
                 </div>
@@ -27,7 +27,7 @@
             <button data-target="reseller" class="filter-btn-package flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/hosting/reseller-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/reseller-packages/icon.png') }}" alt="">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_reseller') }}</span>
                 </div>
@@ -36,7 +36,7 @@
             <button data-target="vps" class="filter-btn-package flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/hosting/vps-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/vps-packages/icon.png') }}" alt="">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_vps') }}</span>
                 </div>
@@ -66,10 +66,10 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if (isset($package['image']) && checkExistFileInPublic($package['image']))
-                                            <img src="{{ asset('assets/images/' . $package['image']) }}" class="w-16 mx-auto mb-4"
+                                            <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package['name'] }}">
                                         @else
-                                            <img src="{{ asset('assets/images/placeholder.png') }}" class="w-16 mx-auto mb-4"
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>

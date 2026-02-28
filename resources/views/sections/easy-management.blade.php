@@ -2,7 +2,7 @@
     <div class="flex items-center">
         <div class="image-container">
             <div class="image">
-                <img src="{{ asset('assets/images/hosting/easy-management-bg.png') }}" alt="">
+                <img src="{{ asset('assets/images/website/hosting/easy-management-bg.png') }}" alt="">
             </div>
         </div>
 
