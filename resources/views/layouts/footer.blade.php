@@ -10,6 +10,24 @@
                 @else
                     {!! __('main.footer_description') ?? '' !!}
                 @endif
+
+                {{-- @php
+                    $description = __('main.footer_description');
+                    $locale = app()->getLocale();
+                    
+                    if ($locale === 'ar' && isset($settings) && $settings->rich_text_site_description_ar) {
+                        $richAr = $settings->rich_text_site_description_ar;
+                        if ($richAr && !empty($richAr->body)) {
+                            $description = $richAr->body;
+                        }
+                    } elseif ($locale === 'en' && isset($settings) && $settings->rich_text_site_description) {
+                        $richEn = $settings->rich_text_site_description;
+                        if ($richEn && !empty($richEn->body)) {
+                            $description = $richEn->body;
+                        }
+                    }
+                @endphp
+                {!! $description !!} --}}
             </div>
 
             <div class="social">

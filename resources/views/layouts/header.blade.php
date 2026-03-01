@@ -7,7 +7,7 @@
 
             <div class="contact-fast">
                 <div class="contact-area">
-                    <div class="heading font-semibold">{{ __('main.header_brand') }}</div>
+                    <div class="heading font-semibold" title="{{ __('main.header_brand') }}">{{ limitedText(__('main.header_brand'), 33) }}</div>
                     <div class="childs flex flex-col gap-6">
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-2">
@@ -16,7 +16,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_mobile') }}</span>
                             </div>
-                            <div class="contact">{{ isset($settings) && $settings->site_whatsapp ?? '' }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-2">
@@ -25,7 +25,7 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_company') }}</span>
                             </div>
-                            <div class="contact">{{ isset($settings) && $settings->site_phone ?? '' }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_phone ? $settings->site_phone : '' }}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
                             <div class="text flex items-center gap-2">
@@ -34,14 +34,14 @@
                                 </div>
                                 <span class="font-semibold">{{ __('main.header_email_label') }}</span>
                             </div>
-                            <div class="contact">{{ isset($settings) && $settings->site_email ?? '' }}</div>
+                            <div class="contact">{{ isset($settings) && $settings->site_email ? $settings->site_email : '' }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="social">
                     <button class="btn-link main-color dark-hover font-semibold">
-                        <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ?? '' }}" target="_blank"><i
-                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}"
+                            target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </button>
                     <button class="btn-link main-color dark-hover font-semibold">
                         <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -76,14 +76,14 @@
 
             <div class="contact-actions flex items-center gap-4">
                 <button>
-                    <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
+                    <a href="https://apicontact-actions.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}&text&type=phone_number&app_absent=0"
                         class="flex items-center gap-2">
                         <i class="fab fa-whatsapp"></i>
                         {{ __('main.header_whatsapp') }}
                     </a>
                 </button>
                 <button>
-                    <a href="https://apicontact-actions.whatsapp.com/send/?phone=201212601601&text&type=phone_number&app_absent=0"
+                    <a href="https://apicontact-actions.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_phone ? $settings->site_phone : '' }}&text&type=phone_number&app_absent=0"
                         class="flex items-center gap-2">
                         <i class="fa-solid fa-phone fa-flip"></i>
                         {{ __('main.header_call_now') }}
