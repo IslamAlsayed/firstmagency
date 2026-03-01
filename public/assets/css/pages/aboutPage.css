@@ -259,47 +259,49 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-& button {
-    padding: 7px 0;
-    border-radius: 10px;
-    transition: all 0.1s ease;
-
-    &.details {
-        max-height: 40px;
+.articles-page {
+    & .btn-link {
+        padding: 7px 0;
         border-radius: 10px;
-        color: var(--red-color);
-        background-color: var(--light-red-color);
-        box-shadow: 0 0 1px 0 var(--red-color);
-    }
-
-    &.whatsapp {
-        max-height: 40px;
-        border-radius: 10px;
-        color: var(--green-color);
-        background-color: var(--light-green-color);
-        box-shadow: 0 0 1px 0 var(--green-color);
-    }
-
-    &.more {
-        width: 150px;
-        min-height: 45px;
-        display: block;
-        margin: 20px auto;
-        color: var(--red-color);
-        background-color: var(--light-red-color);
-        box-shadow: 0 0 1px 0 var(--red-color);
-    }
-
-    &:hover {
-        transform: translateY(-2px) scale(1.01);
-        box-shadow: 0px 10px 11px -4px var(--light-muted-color);
+        transition: all 0.1s ease;
 
         &.details {
-            border: 1px solid var(--middle-red-color);
+            max-height: 40px;
+            border-radius: 10px;
+            color: var(--red-color);
+            background-color: var(--light-red-color);
+            box-shadow: 0 0 1px 0 var(--red-color);
         }
 
         &.whatsapp {
-            border: 1px solid var(--middle-green-color);
+            max-height: 40px;
+            border-radius: 10px;
+            color: var(--green-color);
+            background-color: var(--light-green-color);
+            box-shadow: 0 0 1px 0 var(--green-color);
+        }
+
+        &.more {
+            width: 150px;
+            min-height: 45px;
+            display: block;
+            margin: 20px auto;
+            color: var(--red-color);
+            background-color: var(--light-red-color);
+            box-shadow: 0 0 1px 0 var(--red-color);
+        }
+
+        &:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0px 10px 11px -4px var(--light-muted-color);
+
+            &.details {
+                border: 1px solid var(--middle-red-color);
+            }
+
+            &.whatsapp {
+                border: 1px solid var(--middle-green-color);
+            }
         }
     }
 }

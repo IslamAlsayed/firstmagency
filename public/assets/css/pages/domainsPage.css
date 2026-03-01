@@ -20,7 +20,7 @@
             bottom: 0;
             left: 0;
             opacity: 0.03;
-            background-image: url('../images/website/domains/hero-bg.png');
+            background-image: url(../../images/website/domains/hero-bg.png);
             background-position: top left;
             background-size: 60% auto;
             background-repeat: repeat;

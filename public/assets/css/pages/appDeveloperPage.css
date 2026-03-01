@@ -96,7 +96,7 @@
             position: absolute;
             inset: 0;
             z-index: -1;
-            background-image: url('../images/website/reviews-bg.jpg');
+            background-image: url(../../images/website/reviews-bg.jpg);
             background-size: 11% auto;
         }
 
@@ -231,7 +231,7 @@ html[lang=en] {
     padding-inline: calc(var(--main-inline-padding) / 2);
     position: relative;
     background: #FAFAFA;
-    background-image: url('../images/website/reviews-bg.jpg');
+    background-image: url(../../images/website/reviews-bg.jpg);
     background-position: top left;
     background-size: 22%;
     background-repeat: repeat;
