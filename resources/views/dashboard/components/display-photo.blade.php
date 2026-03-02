@@ -11,7 +11,7 @@
         <div class="flex flex-col gap-6">
             @if ($record->$columnName && checkExistFile($record->$columnName))
                 <div class="flex flex-col w-fit">
-                    <label class="kt-label mb-2">{{ __('main.photo') }}</label>
+                    <label class="kt-label mb-2">{{ __('main.' . $columnName) }}</label>
                     <div class="image-container">
                         @if ($record->$columnName)
                             <img src="{{ asset('storage/' . $record->$columnName) }}" alt="{{ $alt }}" class="w-auto h-[250px] object-cover shadow"
@@ -32,7 +32,7 @@
                 </div>
             @else
                 <div>
-                    <p class="text-sm text-secondary-foreground">{{ __('messages.no_photo_available') }}</p>
+                    <p class="text-sm text-secondary-foreground">{{ __('messages.no_type_available', ['type' => $columnName]) }}</p>
                 </div>
             @endif
         </div>

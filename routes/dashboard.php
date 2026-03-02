@@ -5,11 +5,14 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\PermissionController;
 use App\Http\Controllers\Dashboard\ArticleController;
+use App\Http\Controllers\Dashboard\ServiceController;
+use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::post('/account/switch', [UserController::class, 'switch'])->name('account.switch')->middleware('auth');
+    Route::post('{modelClass}/{id}/toggle/{field}', [DashboardController::class, 'toggleField'])->name('toggleField');
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
@@ -43,5 +46,13 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::resource('articles', ArticleController::class)->names('articles');
         // Article status change route
         Route::patch('/articles/{id}/status/{status}', [ArticleController::class, 'changeStatus'])->name('articles.changeStatus');
+
+        Route::resource('services', ServiceController::class)->names('services');
+        // Service status change route
+        Route::patch('/services/{id}/status/{status}', [ServiceController::class, 'changeStatus'])->name('services.changeStatus');
+
+        Route::resource('companies', CompanyController::class)->names('companies');
+        // Company status change route
+        Route::patch('/companies/{id}/status/{status}', [CompanyController::class, 'changeStatus'])->name('companies.changeStatus');
     });
 });

@@ -36,7 +36,7 @@ class UpdateRequest extends FormRequest
             'category_id' => 'nullable|integer|exists:categories,id',
             'status' => 'required|string|in:draft,published,archived',
             'is_active' => 'nullable|boolean',
-            'featured' => 'nullable|boolean',
+            'is_featured' => 'nullable|boolean',
             'published_at' => 'nullable|date',
         ];
     }

@@ -1,6 +1,12 @@
 <?php
 
 return [
-    'en' => 'English',
-    'ar' => 'Arabic',
+    'en' => [
+        'name' => 'English',
+        'flag' => '🇺🇸',
+    ],
+    'ar' => [
+        'name' => 'Arabic',
+        'flag' => '🇪🇬',
+    ],
 ];

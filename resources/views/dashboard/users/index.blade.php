@@ -9,41 +9,37 @@
             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-gray-800">{{ count($users) }}</div>
-                    <small class="text-gray-500">{{ __('main.total_users') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.total_users') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-red-600">{{ $users->where('role', 'superadmin')->count() }}</div>
-                    <small class="text-gray-500">{{ __('main.super_admin') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.super_admin') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-yellow-600">{{ $users->where('role', 'admin')->count() }}</div>
-                    <small class="text-gray-500">{{ __('main.admin') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.admin') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-blue-600">{{ $users->where('role', 'content_manager')->count() }}</div>
-                    <small class="text-gray-500">{{ __('main.content_manager') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.content_manager') }}</small>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow">
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.user_list') }}</h5>
 
+            <div class="bg-white rounded-lg shadow">
+                <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.users') }}</h5>
+
+                    <div class="flex justify-between items-center gap-4">
+                        <input type="text" id="searchBox"
+                            class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.users')]) }}">
                         <a href="{{ route('dashboard.users.create') }}" class="kt-btn kt-btn-outline-primary">
-                            {{ __('main.create_type', ['type' => __('main.user')]) }}
+                            {{ __('main.create_user') }}
                         </a>
                     </div>
                 </div>
-                <div class="p-6">
-                    <!-- فلتر البحث -->
-                    <div class="mb-4">
-                        <input type="text" id="searchUsers"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            placeholder="{{ __('main.search_users_placeholder') }}">
-                    </div>
-
-                    <!-- جدول المستخدمين -->
-                    <div class="overflow-x-auto">
+                <div class="p-4">
+                    <div class="">
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">
@@ -52,6 +48,7 @@
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.email') }}</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.role') }}</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.join_date') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                                 </tr>
                             </thead>
@@ -73,9 +70,9 @@
                                                 @endif
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-800">{{ $user->name }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-600">{{ $user->email }}</td>
-                                        <td class="px-6 py-4 text-sm">
+                                        <td class="p-4 text-sm text-gray-800">{{ $user->name }}</td>
+                                        <td class="p-4 text-sm text-gray-600">{{ $user->email }}</td>
+                                        <td class="p-4 text-sm">
                                             <span
                                                 class="px-3 py-1 rounded-full text-xs font-semibold
                                         @if ($user->isSuperAdmin()) bg-red-100 text-red-800
@@ -84,8 +81,16 @@
                                                 {{ $user->role }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-600">{{ $user->created_at->format('d/m/Y') }}</td>
-                                        <td class="px-6 py-4 text-sm space-x-2">
+                                        <td class="p-4 text-sm text-gray-600">{{ $user->created_at->format('d/m/Y') }}</td>
+                                        <td class="p-4 text-sm">
+                                            @include('dashboard.components.toggle-hold', [
+                                                'modelId' => $user->id,
+                                                'field' => 'is_active',
+                                                'value' => (bool) $user->is_active,
+                                                'modelClass' => 'user',
+                                            ])
+                                        </td>
+                                        <td class="p-4 text-sm space-x-2">
                                             @include('dashboard.components.permissions-actions', [
                                                 'record' => $user,
                                                 'models' => 'users',
@@ -162,23 +167,8 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function editUser(button, userId, name, email, role) {
-            document.getElementById('edit-name').value = name;
-            document.getElementById('edit-email').value = email;
-            document.getElementById('edit-role').value = role;
-            document.getElementById('editUserForm').action = `{{ route('dashboard.users.update', ':id') }}`.replace(':id', userId);
-        }
-
-        // البحث والتصفية
-        document.getElementById('searchUsers').addEventListener('keyup', function() {
-            const search = this.value.toLowerCase();
-            const rows = document.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(search) ? '' : 'none';
-            });
-        });
-    </script>
 @endsection
+
+@push('scripts')
+    @include('dashboard.components.toggle-hold-script')
+@endpush

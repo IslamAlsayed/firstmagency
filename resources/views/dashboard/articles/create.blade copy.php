@@ -20,7 +20,7 @@
                 <!-- Tabs Navigation -->
                 <div class="flex border-b border-gray-300">
                     <button type="button" class="language-tab px-4 py-2 border-b-2 border-indigo-600 text-indigo-600 font-semibold" data-lang="ar">
-                        🇸🇦 {{ __('main.arabic') }}
+                        EG {{ __('main.arabic') }}
                     </button>
                     <button type="button" class="language-tab px-4 py-2 border-b-2 border-transparent text-gray-600 hover:text-gray-900" data-lang="en">
                         🇺🇸 {{ __('main.english') }}

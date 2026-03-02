@@ -4,10 +4,14 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Service;
+use App\Models\Company;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\ArticlePolicy;
+use App\Policies\ServicePolicy;
+use App\Policies\CompanyPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -25,6 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         Permission::class => PermissionPolicy::class,
         Article::class => ArticlePolicy::class,
+        Service::class => ServicePolicy::class,
+        Company::class => CompanyPolicy::class,
     ];
 
     /**

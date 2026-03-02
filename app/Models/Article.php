@@ -21,7 +21,7 @@ class Article extends Model
         'comments_count',
         'status',
         'is_active',
-        'featured',
+        'is_featured',
         'related_articles',
         'created_by',
         'updated_by',
@@ -80,7 +80,7 @@ class Article extends Model
 
     public function scopeFeatured($query)
     {
-        return $query->where('featured', true);
+        return $query->where('is_featured', true);
     }
 
     public function scopeActive($query)

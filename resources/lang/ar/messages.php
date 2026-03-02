@@ -20,6 +20,7 @@ return [
     'invalid_type' => 'هذا النوع غير صالح',
     'session_expired' => 'انتهت الجلسة. برجاء تسجيل الدخول مرة أخرى.',
     'no_photo_available' => 'لا توجد صورة متاحة.',
+    'no_type_available' => 'لا يوجد :type متاح.',
     'more' => 'المزيد',
     'less' => 'أقل',
 
@@ -35,7 +36,8 @@ return [
     'operation_failed' => 'فشلت العملية',
     'photo_uploaded_successfully' => 'تم تحميل الصورة بنجاح',
     'no_photo_uploaded' => 'لم يتم تحميل أي صورة',
-    'changes_saved' => 'تم حفظ التغييرات',    'article_created' => 'تم إنشاء المقالة بنجاح.',
+    'changes_saved' => 'تم حفظ التغييرات',
+    'article_created' => 'تم إنشاء المقالة بنجاح.',
     'article_updated' => 'تم تحديث المقالة بنجاح.',
     'article_deleted' => 'تم حذف المقالة بنجاح.',
     // Error Messages
@@ -67,6 +69,7 @@ return [
     'type_updated_by' => 'تم تحديث :record_name من :type_name بواسطة :user_name',
     'type_updated_count' => 'تم تحديث :count من :type',
     'type_update_failed' => 'فشل تحديث :type',
+    'type_update_to_status' => 'تم تحديث حالة :type إلى :status',
     'session_lifetime_min_5_or_0' => 'مدة الجلسة يجب أن تكون 0 أو على الأقل 5 دقائق',
     'type_deleted' => 'تم حذف :type',
     'type_force_deleted' => 'تم حذف :type نهائيا',

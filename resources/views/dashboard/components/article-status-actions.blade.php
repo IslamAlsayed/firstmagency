@@ -1,6 +1,6 @@
 @if (isset($record) && $record && getActiveUser()->can('articles-update'))
     <div class="relative group inline-block">
-        <button class="px-3 py-1 cursor-pointer bg-gray-200 hover:bg-gray-300 rounded-md text-xs font-semibold transition" title="Change Status">
+        <button class="px-3 py-1 cursor-pointer text-nowrap bg-gray-200 hover:bg-gray-300 rounded-md text-xs font-semibold transition" title="Change Status">
             <i class="fas fa-exchange-alt"></i>
             <span class="hidden sm:inline">{{ __('main.change') }}</span>
         </button>

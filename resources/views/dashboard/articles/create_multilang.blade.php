@@ -21,7 +21,7 @@
                     <div class="flex border-b border-gray-300">
                         <button type="button" data-lang="ar"
                             class="language-tab cursor-pointer px-4 py-2 border-b-2 border-indigo-600 text-indigo-600 font-semibold">
-                            🇸🇦 {{ __('main.arabic') }}
+                            EG {{ __('main.arabic') }}
                         </button>
                         <button type="button" data-lang="en"
                             class="language-tab cursor-pointer px-4 py-2 border-b-2 border-transparent text-gray-600 hover:text-gray-900">

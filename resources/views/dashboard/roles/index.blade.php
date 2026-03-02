@@ -10,38 +10,33 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-gray-800">{{ count($roles) }}</div>
-                    <small class="text-gray-500">{{ __('main.total_roles') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.total_roles') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-pink-600">{{ $roles->sum(fn($r) => $r->permissions->count()) }}</div>
-                    <small class="text-gray-500">{{ __('main.total_permissions') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.total_permissions') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-green-600">{{ $roles->filter(fn($r) => $r->permissions->count() > 0)->count() }}</div>
-                    <small class="text-gray-500">{{ __('main.roles_with_permissions') }}</small>
+                    <small class="text-primary font-semibold">{{ __('main.roles_with_permissions') }}</small>
                 </div>
             </div>
 
             <div class="bg-white rounded-lg shadow">
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-shield-alt mr-2"></i> {{ __('main.role_list') }}</h5>
-                        <a href="{{ route('dashboard.roles.create') }}"
-                            class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
-                            <i class="fas fa-plus mr-2"></i> {{ __('main.create_role') }}
+                <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-shield-alt mr-2"></i> {{ __('main.roles') }}</h5>
+
+                    <div class="flex justify-between items-center gap-4">
+                        <input type="text" id="searchBox"
+                            class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.roles')]) }}">
+                        <a href="{{ route('dashboard.roles.create') }}" class="kt-btn kt-btn-outline-primary">
+                            {{ __('main.create_role') }}
                         </a>
                     </div>
                 </div>
                 <div class="p-4">
-                    <!-- Search Filter -->
-                    <div class="mb-4">
-                        <input type="text" id="searchRoles"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            placeholder="{{ __('main.search') }} {{ __('main.role_name') }}...">
-                    </div>
-
-                    <!-- Roles Table -->
-                    <div class="overflow-x-auto">
+                    <div class="">
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">
@@ -55,19 +50,19 @@
                             <tbody>
                                 @forelse($roles as $role)
                                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 text-sm text-gray-800 font-semibold">{{ $role->name }}</td>
-                                        <td class="px-6 py-4 text-sm">
+                                        <td class="p-4 text-sm text-gray-800 font-semibold">{{ $role->name }}</td>
+                                        <td class="p-4 text-sm">
                                             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
                                                 {{ $role->guard_name }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-600">
+                                        <td class="p-4 text-sm text-gray-600">
                                             <span class="px-2 py-1 bg-pink-100 text-pink-800 rounded text-xs font-medium">
                                                 {{ $role->permissions->count() }} {{ __('main.permissions') }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-600">{{ $role->created_at->format('d/m/Y') }}</td>
-                                        <td class="px-6 py-4 text-sm space-x-2">
+                                        <td class="p-4 text-sm text-gray-600">{{ $role->created_at->format('d/m/Y') }}</td>
+                                        <td class="p-4 text-sm space-x-2">
                                             @include('dashboard.components.permissions-actions', [
                                                 'record' => $role,
                                                 'models' => 'roles',

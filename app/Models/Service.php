@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class Service extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'slug',
+        'icon',
+        'image',
+        'order',
+        'status',
+        'is_active',
+        'is_featured',
+        'created_by',
+        'updated_by',
+        'published_at',
+        'translations',
+    ];
+
+    protected $casts = [
+        'published_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'translations' => 'array',
+    ];
+
+    // Boot method لإنشاء slug تلقائياً
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (!$model->slug) {
+                $title = $model->translations['ar']['title'] ?? $model->translations['en']['title'] ?? 'service';
+                $model->slug = Str::slug($title);
+            }
+        });
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+}

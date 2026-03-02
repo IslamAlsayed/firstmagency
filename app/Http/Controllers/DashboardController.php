@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enum\AvailableToggleFields;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -105,5 +106,56 @@ class DashboardController extends Controller
         }
 
         return view('dashboard.revisions');
+    }
+
+    // Toggle field for any model
+    public function toggleField($modelClass, $id, $field)
+    {
+        $modelClass = '\\App\\Models\\' . ucfirst($modelClass);
+        $model = $modelClass::find($id);
+
+        if (!$model) {
+            return response()->json([
+                'success' => false,
+                'status' => 'info',
+                'message' => __('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($model)))])
+            ], 404);
+        }
+
+        $this->authorize('update', $model);
+
+        if (!in_array($field, array_column(AvailableToggleFields::cases(), 'value'))) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Invalid field'
+            ], 400);
+        }
+
+        $newValue = !$model->{$field};
+        $model->{$field} = $newValue;
+        $model->save();
+
+        // Generate dynamic status label based on field name
+        // Extract field name without 'is_' prefix
+        $fieldName = str_replace('is_', '', $field);
+
+        // Try to get translations for this specific field, fallback to generic on/off
+        $statusLabel = $newValue
+            ? __("main.{$fieldName}_on", [], app()->getLocale(), null)
+            : __("main.{$fieldName}_off", [], app()->getLocale(), null);
+
+        // If translation doesn't exist, use readable format
+        if ($statusLabel === "main.{$fieldName}_on" || $statusLabel === "main.{$fieldName}_off") {
+            $readableName = ucfirst(str_replace('_', ' ', $fieldName));
+            $statusLabel = $newValue ? $readableName : "Not {$readableName}";
+        }
+
+        return response()->json([
+            'success' => true,
+            'status' => 'success',
+            'message' => __('messages.type_update_to_status', ['type' => __('main.' . strtolower(class_basename($model))), 'status' => $statusLabel]),
+            'value' => (bool) $newValue
+        ], 200);
     }
 }

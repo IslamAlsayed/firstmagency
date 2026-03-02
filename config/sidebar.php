@@ -189,6 +189,42 @@ return [
                         ],
                     ],
                 ],
+                // ================= Services - الخدمات =================
+                [
+                    'title' => 'services',
+                    'icon' => 'fas fa-briefcase',
+                    'status' => 'new',
+                    'children' => [
+                        [
+                            'title' => 'all services',
+                            'icon' => 'fas fa-list',
+                            'route' => null,
+                        ],
+                        [
+                            'title' => 'create service',
+                            'icon' => 'fas fa-plus',
+                            'route' => null,
+                        ],
+                    ],
+                ],
+                // ================= Companies - الشركات =================
+                [
+                    'title' => 'companies',
+                    'icon' => 'fas fa-building',
+                    'status' => 'new',
+                    'children' => [
+                        [
+                            'title' => 'all companies',
+                            'icon' => 'fas fa-list',
+                            'route' => 'dashboard.companies.index',
+                        ],
+                        [
+                            'title' => 'create company',
+                            'icon' => 'fas fa-plus',
+                            'route' => 'dashboard.companies.create',
+                        ],
+                    ],
+                ],
                 // ================= Settings - الإعدادات =================
                 [
                     'title' => 'settings',

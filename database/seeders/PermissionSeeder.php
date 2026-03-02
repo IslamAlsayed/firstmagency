@@ -66,6 +66,22 @@ class PermissionSeeder extends Seeder
             ['name' => 'articles-restore', 'guard_name' => 'web', 'description' => 'Restore articles'],
             ['name' => 'articles-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete articles'],
 
+            // Services Permissions
+            ['name' => 'services-create', 'guard_name' => 'web', 'description' => 'Create services'],
+            ['name' => 'services-read', 'guard_name' => 'web', 'description' => 'View services'],
+            ['name' => 'services-update', 'guard_name' => 'web', 'description' => 'Edit services'],
+            ['name' => 'services-delete', 'guard_name' => 'web', 'description' => 'Delete services'],
+            ['name' => 'services-restore', 'guard_name' => 'web', 'description' => 'Restore services'],
+            ['name' => 'services-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete services'],
+
+            // Companies Permissions
+            ['name' => 'companies-create', 'guard_name' => 'web', 'description' => 'Create companies'],
+            ['name' => 'companies-read', 'guard_name' => 'web', 'description' => 'View companies'],
+            ['name' => 'companies-update', 'guard_name' => 'web', 'description' => 'Edit companies'],
+            ['name' => 'companies-delete', 'guard_name' => 'web', 'description' => 'Delete companies'],
+            ['name' => 'companies-restore', 'guard_name' => 'web', 'description' => 'Restore companies'],
+            ['name' => 'companies-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete companies'],
+
             // Dashboard Permissions
             ['name' => 'dashboard-access', 'guard_name' => 'web', 'description' => 'Access dashboard'],
             ['name' => 'dashboard-manage', 'guard_name' => 'web', 'description' => 'Manage dashboard'],
@@ -110,6 +126,18 @@ class PermissionSeeder extends Seeder
             'articles-delete',
             'articles-restore',
             'articles-force-delete',
+            'services-create',
+            'services-read',
+            'services-update',
+            'services-delete',
+            'services-restore',
+            'services-force-delete',
+            'companies-create',
+            'companies-read',
+            'companies-update',
+            'companies-delete',
+            'companies-restore',
+            'companies-force-delete',
             'dashboard-access',
             'dashboard-manage',
         ])->get();
@@ -123,6 +151,12 @@ class PermissionSeeder extends Seeder
             'articles-create',
             'articles-read',
             'articles-update',
+            'services-create',
+            'services-read',
+            'services-update',
+            'companies-create',
+            'companies-read',
+            'companies-update',
             'dashboard-access',
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);

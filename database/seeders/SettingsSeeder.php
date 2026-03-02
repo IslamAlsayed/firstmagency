@@ -20,7 +20,7 @@ class SettingsSeeder extends Seeder
         Setting::firstOrCreate(
             ['id' => 1],
             [
-                'primary_color' => '#6f42c1',
+                'primary_color' => '#260368',
                 'secondary_color' => '#6c757d',
                 'danger_color' => '#dc3545',
                 'warning_color' => '#ffc107',

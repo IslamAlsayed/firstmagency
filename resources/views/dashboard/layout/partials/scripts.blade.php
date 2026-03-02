@@ -14,7 +14,6 @@
 
 {{-- Custom Js --}}
 <script src="{{ asset('assets/dashboard/js/main.js') }}"></script>
-
 @vite(['resources/js/app.js'])
 @yield('scripts')
 @stack('scripts')
