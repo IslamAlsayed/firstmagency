@@ -857,6 +857,10 @@
         margin: 15px;
     }
 
+    .m-0 {
+        margin: calc(var(--spacing) * 0);
+    }
+
     .mx-0\.5 {
         margin-inline: calc(var(--spacing) * 0.5);
     }

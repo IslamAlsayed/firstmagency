@@ -23,7 +23,7 @@
 
 <!-- Account Switcher Dropdown -->
 <div class="relative" id="accountSwitcher">
-    <button class="action-button kt-btn" onclick="document.querySelector('.custom-dropdown').classList.toggle('hidden')">
+    <button class="action-button kt-btn" id="accountSwitcherBtn">
         <i class="ki-filled ki-arrow-right-left text-lg"></i>
     </button>
 
@@ -87,4 +87,15 @@
         document.body.appendChild(form);
         form.submit();
     }
+
+    document.addEventListener('click', function(event) {
+        const dropdown = document.querySelector('#accountSwitcher .custom-dropdown');
+        const button = document.getElementById('accountSwitcherBtn');
+
+        if (button.contains(event.target)) {
+            dropdown.classList.toggle('hidden');
+        } else if (!dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
 </script>

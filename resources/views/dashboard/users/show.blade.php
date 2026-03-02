@@ -1,7 +1,7 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('dashboard.view_user'))
-@section('page-title', '👤 ' . __('dashboard.view_user'))
+@section('title', __('main.view_user'))
+@section('page-title', '👤 ' . __('main.view_user'))
 
 @section('content')
     <div class="kt-container-fixed">

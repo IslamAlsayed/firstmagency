@@ -31,7 +31,7 @@
                     <div class="menu-item">
                         {{-- begin::Menu link --}}
                         <span class="menu-link">
-                            <span class="menu-title">MixJo Tourism Dashboard</span>
+                            <span class="menu-title">{{ __('main.dashboard_title') }}</span>
                         </span>
                         {{-- end::Menu link --}}
                     </div>
@@ -75,7 +75,7 @@
 
                         {{-- begin::Menu item --}}
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
+                            <a href="#" class="menu-link px-5">{{ __('main.my_profile') }}</a>
                         </div>
                         {{-- end::Menu item --}}
 
@@ -85,7 +85,7 @@
 
                         {{-- begin::Menu item --}}
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">Sign Out</a>
+                            <a href="#" class="menu-link px-5">{{ __('main.sign_out') }}</a>
                         </div>
                         {{-- end::Menu item --}}
                     </div>

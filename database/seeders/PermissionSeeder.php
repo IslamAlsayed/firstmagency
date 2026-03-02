@@ -27,18 +27,24 @@ class PermissionSeeder extends Seeder
             ['name' => 'users-read', 'guard_name' => 'web', 'description' => 'View users'],
             ['name' => 'users-update', 'guard_name' => 'web', 'description' => 'Edit users'],
             ['name' => 'users-delete', 'guard_name' => 'web', 'description' => 'Delete users'],
+            ['name' => 'users-restore', 'guard_name' => 'web', 'description' => 'Restore users'],
+            ['name' => 'users-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete users'],
 
             // Roles Permissions
             ['name' => 'roles-create', 'guard_name' => 'web', 'description' => 'Create new roles'],
             ['name' => 'roles-read', 'guard_name' => 'web', 'description' => 'View roles'],
             ['name' => 'roles-update', 'guard_name' => 'web', 'description' => 'Edit roles'],
             ['name' => 'roles-delete', 'guard_name' => 'web', 'description' => 'Delete roles'],
+            ['name' => 'roles-restore', 'guard_name' => 'web', 'description' => 'Restore roles'],
+            ['name' => 'roles-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete roles'],
 
             // Permissions Management
             ['name' => 'permissions-create', 'guard_name' => 'web', 'description' => 'Create permissions'],
             ['name' => 'permissions-read', 'guard_name' => 'web', 'description' => 'View permissions'],
             ['name' => 'permissions-update', 'guard_name' => 'web', 'description' => 'Edit permissions'],
             ['name' => 'permissions-delete', 'guard_name' => 'web', 'description' => 'Delete permissions'],
+            ['name' => 'permissions-restore', 'guard_name' => 'web', 'description' => 'Restore permissions'],
+            ['name' => 'permissions-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete permissions'],
 
             // Settings Permissions
             ['name' => 'settings-read', 'guard_name' => 'web', 'description' => 'View settings'],
@@ -49,6 +55,16 @@ class PermissionSeeder extends Seeder
             ['name' => 'content-read', 'guard_name' => 'web', 'description' => 'View content'],
             ['name' => 'content-update', 'guard_name' => 'web', 'description' => 'Edit content'],
             ['name' => 'content-delete', 'guard_name' => 'web', 'description' => 'Delete content'],
+            ['name' => 'content-restore', 'guard_name' => 'web', 'description' => 'Restore content'],
+            ['name' => 'content-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete content'],
+
+            // Articles Permissions
+            ['name' => 'articles-create', 'guard_name' => 'web', 'description' => 'Create articles'],
+            ['name' => 'articles-read', 'guard_name' => 'web', 'description' => 'View articles'],
+            ['name' => 'articles-update', 'guard_name' => 'web', 'description' => 'Edit articles'],
+            ['name' => 'articles-delete', 'guard_name' => 'web', 'description' => 'Delete articles'],
+            ['name' => 'articles-restore', 'guard_name' => 'web', 'description' => 'Restore articles'],
+            ['name' => 'articles-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete articles'],
 
             // Dashboard Permissions
             ['name' => 'dashboard-access', 'guard_name' => 'web', 'description' => 'Access dashboard'],
@@ -88,6 +104,12 @@ class PermissionSeeder extends Seeder
             'content-read',
             'content-update',
             'content-delete',
+            'articles-create',
+            'articles-read',
+            'articles-update',
+            'articles-delete',
+            'articles-restore',
+            'articles-force-delete',
             'dashboard-access',
             'dashboard-manage',
         ])->get();
@@ -98,6 +120,9 @@ class PermissionSeeder extends Seeder
             'content-create',
             'content-read',
             'content-update',
+            'articles-create',
+            'articles-read',
+            'articles-update',
             'dashboard-access',
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);

@@ -1,18 +1,18 @@
 @extends('dashboard.layout')
 
-@section('title', __('dashboard.sections'))
-@section('page-title', '📋 ' . __('dashboard.sections_management'))
+@section('title', __('main.sections'))
+@section('page-title', '📋 ' . __('main.sections_management'))
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="dashboard-card">
                 <div class="dashboard-card-header">
-                    <h5><i class="fas fa-th"></i> {{ __('dashboard.sections_management') }}</h5>
+                    <h5><i class="fas fa-th"></i> {{ __('main.sections_management') }}</h5>
                 </div>
                 <div class="dashboard-card-body">
                     <div class="alert alert-info" role="alert">
-                        <strong>ℹ️ معلومة:</strong> {{ __('dashboard.sections_info') }}
+                        <strong>ℹ️ {{ __('main.info') }}:</strong> {{ __('main.sections_info') }}
                     </div>
 
                     <!-- Sections List -->
@@ -20,19 +20,19 @@
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
-                                    <th>{{ __('dashboard.section_name') }}</th>
-                                    <th>{{ __('dashboard.section_description') }}</th>
-                                    <th>{{ __('dashboard.padding') }}</th>
-                                    <th>{{ __('dashboard.actions') }}</th>
+                                    <th>{{ __('main.section_name') }}</th>
+                                    <th>{{ __('main.section_description') }}</th>
+                                    <th>{{ __('main.padding') }}</th>
+                                    <th>{{ __('main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>{{ __('dashboard.hero_section') }}</strong></td>
-                                    <td>{{ __('dashboard.hero_description') }}</td>
+                                    <td><strong>{{ __('main.hero_section') }}</strong></td>
+                                    <td>{{ __('main.hero_description') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 60px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 30px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 60px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 30px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -41,11 +41,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>{{ __('dashboard.services_section') }}</strong></td>
-                                    <td>{{ __('dashboard.services_description') }}</td>
+                                    <td><strong>{{ __('main.services_section') }}</strong></td>
+                                    <td>{{ __('main.services_description') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 40px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 20px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 40px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 20px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -54,11 +54,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>{{ __('dashboard.portfolio') }} {{ __('dashboard.sections') }}</strong></td>
-                                    <td>قسم الأعمال</td>
+                                    <td><strong>{{ __('main.portfolio') }} {{ __('main.sections') }}</strong></td>
+                                    <td>{{ __('main.portfolio_section_desc') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 40px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 20px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 40px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 20px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -67,11 +67,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>{{ __('dashboard.clients') }} {{ __('dashboard.sections') }}</strong></td>
-                                    <td>قسم العملاء</td>
+                                    <td><strong>{{ __('main.clients') }} {{ __('main.sections') }}</strong></td>
+                                    <td>{{ __('main.clients_section_desc') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 40px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 20px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 40px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 20px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -80,11 +80,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Blog {{ __('dashboard.sections') }}</strong></td>
-                                    <td>قسم المدونة</td>
+                                    <td><strong>Blog {{ __('main.sections') }}</strong></td>
+                                    <td>{{ __('main.blog_section_desc') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 40px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 20px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 40px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 20px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -93,11 +93,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Footer {{ __('dashboard.sections') }}</strong></td>
-                                    <td>القسم السفلي</td>
+                                    <td><strong>Footer {{ __('main.sections') }}</strong></td>
+                                    <td>{{ __('main.footer_section_desc') }}</td>
                                     <td>
-                                        <span class="badge bg-primary">{{ __('dashboard.top_bottom') }}: 30px</span><br>
-                                        <span class="badge bg-secondary">{{ __('dashboard.left_right') }}: 15px</span>
+                                        <span class="badge bg-primary">{{ __('main.top_bottom') }}: 30px</span><br>
+                                        <span class="badge bg-secondary">{{ __('main.left_right') }}: 15px</span>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editPadding">
@@ -118,7 +118,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ __('dashboard.edit') }} {{ __('dashboard.padding') }}</h5>
+                    <h5 class="modal-title">{{ __('main.edit') }} {{ __('main.padding') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -142,9 +142,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dashboard.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('main.cancel') }}</button>
                     <button type="button" class="btn btn-primary">
-                        <i class="fas fa-save"></i> {{ __('dashboard.save_changes') }}
+                        <i class="fas fa-save"></i> {{ __('main.save_changes') }}
                     </button>
                 </div>
             </div>

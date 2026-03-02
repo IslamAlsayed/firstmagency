@@ -36,6 +36,9 @@ return [
     'photo_uploaded_successfully' => 'Photo Uploaded Successfully',
     'no_photo_uploaded' => 'No Photo Uploaded',
     'changes_saved' => 'Changes Saved',
+    'article_created' => 'Article created successfully.',
+    'article_updated' => 'Article updated successfully.',
+    'article_deleted' => 'Article deleted successfully.',
 
     // Error Messages
     'error_occurred' => 'Error Occurred',

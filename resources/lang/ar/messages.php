@@ -35,8 +35,9 @@ return [
     'operation_failed' => 'فشلت العملية',
     'photo_uploaded_successfully' => 'تم تحميل الصورة بنجاح',
     'no_photo_uploaded' => 'لم يتم تحميل أي صورة',
-    'changes_saved' => 'تم حفظ التغييرات',
-
+    'changes_saved' => 'تم حفظ التغييرات',    'article_created' => 'تم إنشاء المقالة بنجاح.',
+    'article_updated' => 'تم تحديث المقالة بنجاح.',
+    'article_deleted' => 'تم حذف المقالة بنجاح.',
     // Error Messages
     'error_occurred' => 'حدث خطأ',
     'access_denied' => 'تم الرفض',

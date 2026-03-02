@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -20,17 +21,14 @@ class PermissionController extends Controller
         return view('dashboard.permissions.create');
     }
 
-    public function store(\Illuminate\Http\Request $request)
+    public function store(Request $request)
     {
         $this->authorize('create', Permission::class);
         $validated = $request->validate([
             'name' => 'required|string|unique:permissions,name|max:255',
-            'guard_name' => 'required|string|in:web,api',
             'description' => 'nullable|string|max:500',
         ]);
-
         Permission::create($validated);
-
         return redirect()->route('dashboard.permissions.index')->withSuccess('Permission created successfully.');
     }
 
@@ -46,17 +44,14 @@ class PermissionController extends Controller
         return view('dashboard.permissions.edit', compact('permission'));
     }
 
-    public function update(\Illuminate\Http\Request $request, Permission $permission)
+    public function update(Request $request, Permission $permission)
     {
         $this->authorize('update', $permission);
         $validated = $request->validate([
             'name' => 'required|string|unique:permissions,name,' . $permission->id . '|max:255',
-            'guard_name' => 'required|string|in:web,api',
             'description' => 'nullable|string|max:500',
         ]);
-
         $permission->update($validated);
-
         return redirect()->route('dashboard.permissions.index')->withSuccess('Permission updated successfully.');
     }
 

@@ -1,7 +1,7 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('dashboard.view_permission'))
-@section('page-title', '🔑 ' . __('dashboard.view_permission'))
+@section('title', __('main.view_permission'))
+@section('page-title', '🔑 ' . __('main.view_permission'))
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -13,21 +13,21 @@
                         <i class="fas fa-key text-yellow-500 text-xl"></i>
                         <h3 class="text-lg font-semibold text-gray-800">{{ $permission->name }}</h3>
                     </div>
-                    <p class="text-sm text-gray-600 mt-1">{{ __('dashboard.guard') }}: <span
+                    <p class="text-sm text-gray-600 mt-1">{{ __('main.guard') }}: <span
                             class="px-2 py-1 bg-gray-100 rounded text-xs">{{ $permission->guard_name }}</span></p>
                 </div>
 
                 <div class="space-y-3">
                     <div>
-                        <label class="text-sm font-semibold text-gray-700">{{ __('dashboard.description') }}</label>
+                        <label class="text-sm font-semibold text-gray-700">{{ __('main.description') }}</label>
                         <p class="text-sm text-gray-600 mt-1">{{ $permission->description ?? '—' }}</p>
                     </div>
                     <div>
-                        <label class="text-sm font-semibold text-gray-700">{{ __('dashboard.created_at') }}</label>
+                        <label class="text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</label>
                         <p class="text-sm text-gray-600">{{ $permission->created_at->format('d/m/Y H:i') }}</p>
                     </div>
                     <div>
-                        <label class="text-sm font-semibold text-gray-700">{{ __('dashboard.updated_at') }}</label>
+                        <label class="text-sm font-semibold text-gray-700">{{ __('main.updated_at') }}</label>
                         <p class="text-sm text-gray-600">{{ $permission->updated_at->format('d/m/Y H:i') }}</p>
                     </div>
                 </div>
@@ -35,11 +35,11 @@
                 <div class="flex gap-2 mt-6">
                     <a href="{{ route('dashboard.permissions.edit', $permission->id) }}"
                         class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition">
-                        <i class="fas fa-edit mr-2"></i> {{ __('dashboard.edit') }}
+                        <i class="fas fa-edit mr-2"></i> {{ __('main.edit') }}
                     </a>
                     <a href="{{ route('dashboard.permissions.index') }}"
                         class="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">
-                        <i class="fas fa-arrow-left mr-2"></i> {{ __('dashboard.back') }}
+                        <i class="fas fa-arrow-left mr-2"></i> {{ __('main.back') }}
                     </a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
         <div class="lg:col-span-2">
             <div class="background rounded-lg shadow p-4">
                 <div class="bg-purple-50 mb-6 rounded">
-                    <h4 class="text-sm font-semibold text-purple-900">{{ __('dashboard.roles_with_this_permission') }}</h4>
+                    <h4 class="text-sm font-semibold text-purple-900">{{ __('main.roles_with_this_permission') }}</h4>
                 </div>
 
                 @php
@@ -77,8 +77,8 @@
                 @else
                     <div class="bg-yellow-50 rounded-lg p-6 text-center">
                         <i class="fas fa-info-circle text-yellow-600 text-2xl mb-2"></i>
-                        <p class="text-yellow-800 font-medium">{{ __('dashboard.no_associated_roles') }}</p>
-                        <p class="text-yellow-700 text-sm mt-1">{{ __('dashboard.link_permission_to_roles') }}</p>
+                        <p class="text-yellow-800 font-medium">{{ __('main.no_associated_roles') }}</p>
+                        <p class="text-yellow-700 text-sm mt-1">{{ __('main.link_permission_to_roles') }}</p>
                     </div>
                 @endif
             </div>

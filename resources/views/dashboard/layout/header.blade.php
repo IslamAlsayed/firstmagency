@@ -26,20 +26,20 @@
                 <div
                     class="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible">
                     <div class="p-4 border-b border-gray-200 dark:border-slate-700">
-                        <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('dashboard.messages') }}</h3>
+                        <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('main.messages') }}</h3>
                     </div>
                     <div class="max-h-80 overflow-y-auto">
                         <a href="#" class="block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
-                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('dashboard.new_message') }}</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('dashboard.welcome_message') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('main.new_message') }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('main.welcome_message') }}</p>
                         </a>
                         <a href="#" class="block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
-                            <p class="font-medium text-gray-800 dark:text-white text-sm">تحديث النظام</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('dashboard.system_update_message') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('main.system_update') }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('main.system_update_message') }}</p>
                         </a>
                     </div>
                     <div class="p-3 border-t border-gray-200 dark:border-slate-700 text-center">
-                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('dashboard.view_all_messages') }}</a>
+                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.view_all_messages') }}</a>
                     </div>
                 </div>
             </div>
@@ -55,20 +55,20 @@
                 <div
                     class="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible">
                     <div class="p-4 border-b border-gray-200 dark:border-slate-700">
-                        <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('dashboard.notifications') }}</h3>
+                        <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('main.notifications') }}</h3>
                     </div>
                     <div class="max-h-80 overflow-y-auto">
                         <a href="#" class="block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
-                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('dashboard.new_operation') }}</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('dashboard.operation_added') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('main.new_operation') }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('main.operation_added') }}</p>
                         </a>
                         <a href="#" class="block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
-                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('dashboard.security_alert') }}</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('dashboard.new_login_attempt') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-white text-sm">{{ __('main.security_alert') }}</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ __('main.new_login_attempt') }}</p>
                         </a>
                     </div>
                     <div class="p-3 border-t border-gray-200 dark:border-slate-700 text-center">
-                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('dashboard.view_all_notifications') }}</a>
+                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.view_all_notifications') }}</a>
                     </div>
                 </div>
             </div>
@@ -105,24 +105,24 @@
                     <a href="#"
                         class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
                         <i class="fas fa-user-circle w-4"></i>
-                        <span>{{ __('dashboard.profile') }}</span>
+                        <span>{{ __('main.profile') }}</span>
                     </a>
                     <a href="#"
                         class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
                         <i class="fas fa-cog w-4"></i>
-                        <span>{{ __('dashboard.settings') }}</span>
+                        <span>{{ __('main.settings') }}</span>
                     </a>
                     <a href="#"
                         class="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
                         <i class="fas fa-lock w-4"></i>
-                        <span>{{ __('dashboard.change_password') }}</span>
+                        <span>{{ __('main.change_password') }}</span>
                     </a>
                     <form method="POST" action="{{ route('logout') }}" class="border-t border-gray-200 dark:border-slate-700">
                         @csrf
                         <button type="submit"
                             class="w-full flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-700">
                             <i class="fas fa-sign-out-alt w-4"></i>
-                            <span>{{ __('dashboard.logout') }}</span>
+                            <span>{{ __('main.logout') }}</span>
                         </button>
                     </form>
                 </div>

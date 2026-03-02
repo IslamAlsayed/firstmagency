@@ -4,24 +4,50 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\App;
 
 class SetLocale
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        // Check if locale exists in session
-        if (session()->has('locale') && in_array(session('locale'), ['en', 'ar'])) {
-            app()->setLocale(\App\Helpers\SettingsHelper::get()['site_locale'] ?? session('locale') ?? 'en');
-        } else {
-            // Default locale is Arabic
-            app()->setLocale('ar');
+        // قائمة اللغات المدعومة
+        $supportedLocales = array_keys(config('languages'));
+
+        // الحصول على اللغة من المصادر المختلفة
+        $locale = null;
+
+        // 1. من URL path (/locale/en أو /ar/page)
+        $urlSegment = $request->segment(1);
+        if (in_array($urlSegment, $supportedLocales)) {
+            $locale = $urlSegment;
         }
+
+        // 2. من URL path (locale/{locale})
+        if (!$locale && $urlSegment === 'locale') {
+            $locale = $request->segment(2);
+        }
+
+        // 3. من session
+        if (!$locale) {
+            $locale = session('locale');
+        }
+
+        // 4. الافتراضية
+        if (!$locale) {
+            $locale = config('app.locale', 'ar');
+        }
+
+        // التحقق من صحة اللغة
+        if (!in_array($locale, $supportedLocales)) {
+            $locale = config('app.locale', 'ar');
+        }
+
+        // تعيين اللغة
+        App::setLocale($locale);
+        session(['locale' => $locale]);
 
         return $next($request);
     }

@@ -9,17 +9,25 @@ class LocaleController extends Controller
 {
     public function change($locale)
     {
-        if (!in_array($locale, ['en', 'ar'])) {
-            $locale = 'ar';
+        $supportedLocales = array_keys(config('languages'));
+        
+        // التحقق من أن اللغة مدعومة
+        if (!in_array($locale, $supportedLocales)) {
+            $locale = config('app.locale', 'ar');
         }
+        
+        // حفظ اللغة في الـ session
         session(['locale' => $locale]);
+        
+        // تعيين اللغة الحالية للـ app
         app()->setLocale($locale);
-        if (Setting::query()->update(['site_locale' => $locale])) {
-            if (Auth::check()) {
-                return redirect()->back()->withSuccess('Locale updated successfully.');
-            }
-            // Locale updated successfully
+        
+        // حفظ اللغة في قاعدة البيانات للمستخدم المسجل
+        if (Auth::check()) {
+            Setting::query()->update(['site_locale' => $locale]);
+            showToastSuccessMessage('Locale updated successfully.');
         }
+        
         return redirect()->back();
     }
 }

@@ -1,13 +1,13 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('dashboard.edit_role'))
-@section('page-title', '🔐 ' . __('dashboard.edit_role'))
+@section('title', __('main.edit_role'))
+@section('page-title', '🔐 ' . __('main.edit_role'))
 
 @section('content')
     <div class="kt-card mb-4">
         <div class="kt-card-header">
             <div class="flex items-center gap-4">
-                <h3 class="kt-card-title">{{ __('dashboard.edit_role') }}: {{ $role->name }}</h3>
+                <h3 class="kt-card-title">{{ __('main.edit_role') }}: {{ $role->name }}</h3>
             </div>
         </div>
         <div class="kt-card-body p-4">
@@ -17,9 +17,9 @@
                 <div class="grid gap-4 lg:gap-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.role_name') }} <span
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 id="name" name="name" required value="{{ old('name', $role->name) }}" placeholder="مثال: محرر، مدير">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -27,10 +27,10 @@
                         </div>
                     </div>
 
-                    <!-- {{ __('dashboard.assign_permissions') }} -->
+                    <!-- {{ __('main.assign_permissions') }} -->
                     <div class="">
-                        <h4 class="text-sm font-semibold text-gray-600 mb-1">{{ __('dashboard.assign_permissions') }}</h4>
-                        <p class="text-xs text-gray-500">{{ __('dashboard.select_permissions_for_role') ?? 'اختر الأذونات المراد تعيينها لهذا الدور' }}</p>
+                        <h4 class="text-sm font-semibold text-gray-600 mb-1">{{ __('main.assign_permissions') }}</h4>
+                        <p class="text-xs text-gray-500">{{ __('main.select_permissions_for_role') ?? 'اختر الأذونات المراد تعيينها لهذا الدور' }}</p>
                     </div>
 
                     @if ($permissions->count() > 0)
@@ -57,7 +57,7 @@
                         </div>
                     @else
                         <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                            <p class="text-yellow-800 text-sm">{{ __('dashboard.no_data') }}</p>
+                            <p class="text-yellow-800 text-sm">{{ __('main.no_data') }}</p>
                         </div>
                     @endif
 

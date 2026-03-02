@@ -28,7 +28,7 @@ return new class extends Migration
                 $table->timestamp('last_login_at')->nullable();
                 $table->timestamp('password_changed_at')->nullable();
                 $table->enum('button_display_mode', ['icon', 'text', 'both'])->default('icon');
-                $table->boolean('status')->nullable();
+                $table->string('status')->nullable();
                 $table->boolean('is_active')->nullable();
                 $table->foreignId('created_by')->nullable();
                 $table->foreignId('updated_by')->nullable()->default(2);

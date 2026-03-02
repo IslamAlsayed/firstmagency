@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
         $middleware->web([
             \App\Http\Middleware\SetLocale::class,
-            \App\Http\Middleware\CachePageResponse::class,
+            // \App\Http\Middleware\CachePageResponse::class,
         ]);
 
         // ✨ تسجيل الـ Middleware المخصصة للـ Dashboard

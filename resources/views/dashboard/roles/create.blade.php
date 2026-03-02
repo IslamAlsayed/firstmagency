@@ -1,12 +1,12 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('dashboard.create_role'))
-@section('page-title', '🔐 ' . __('dashboard.create_role'))
+@section('title', __('main.create_role'))
+@section('page-title', '🔐 ' . __('main.create_role'))
 
 @section('content')
     <div class="kt-card mb-4">
         <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('dashboard.create_role') }}</h3>
+            <h3 class="kt-card-title">{{ __('main.create_role') }}</h3>
 
             <a href="{{ route('dashboard.roles.index') }}" class="kt-btn kt-btn-outline-primary">
                 {{ __('main.back_to_types', ['types' => __('main.roles')]) }}
@@ -18,9 +18,9 @@
                 <div class="grid gap-4 lg:gap-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('dashboard.role_name') }} <span
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 id="name" name="name" required value="{{ old('name') }}" placeholder="مثال: محرر، مدير">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -30,7 +30,7 @@
 
                     <!-- تعيين الأذونات -->
                     <div class="">
-                        <h4 class="text-sm font-semibold text-gray-600 mb-1">{{ __('dashboard.assign_permissions') }}</h4>
+                        <h4 class="text-sm font-semibold text-gray-600 mb-1">{{ __('main.assign_permissions') }}</h4>
                         <p class="text-xs text-gray-500">حدد الأذونات المراد تعيينها إلى هذا الدور</p>
                     </div>
 

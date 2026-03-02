@@ -1,4 +1,4 @@
-<a href="{{ route("{$models}.show", $id) }}" class="kt-btn kt-btn-sm kt-btn-outline bg-yellow-500 text-white" style="{{ $styles ?? '' }}" wire:ignore>
+<a href="{{ route("{$models}.show", $id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-yellow-500 text-white" style="{{ $styles ?? '' }}" wire:ignore>
     @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
         {!! $text ?? __('main.show') !!}
     @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')

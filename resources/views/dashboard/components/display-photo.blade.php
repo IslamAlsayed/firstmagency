@@ -1,3 +1,7 @@
+@php
+    $columnName = $column ?? 'photo';
+@endphp
+
 <!-- Media Files -->
 <div class="kt-card">
     <div class="kt-card-header">
@@ -5,12 +9,12 @@
     </div>
     <div class="kt-card-body p-4">
         <div class="flex flex-col gap-6">
-            @if ($record->photo && checkExistFile($record->photo))
+            @if ($record->$columnName && checkExistFile($record->$columnName))
                 <div class="flex flex-col w-fit">
                     <label class="kt-label mb-2">{{ __('main.photo') }}</label>
                     <div class="image-container">
-                        @if ($record->photo)
-                            <img src="{{ asset('storage/' . $record->photo) }}" alt="{{ $alt }}" class="w-auto h-[250px] object-cover shadow"
+                        @if ($record->$columnName)
+                            <img src="{{ asset('storage/' . $record->$columnName) }}" alt="{{ $alt }}" class="w-auto h-[250px] object-cover shadow"
                                 loading="lazy">
                         @else
                             <div class="h-40 bg-gray-200 flex items-center justify-center">
@@ -18,7 +22,7 @@
                             </div>
                         @endif
                         <div class="image-overlay">
-                            <a href="{{ $record->photo ? asset('storage/' . $record->photo) : '#' }}" download="{{ $record->photo }}"
+                            <a href="{{ $record->$columnName ? asset('storage/' . $record->$columnName) : '#' }}" download="{{ $record->$columnName }}"
                                 class="kt-btn kt-btn-sm kt-btn-primary">
                                 <i class="fas fa-download text-sm me-1"></i>
                                 <span>{{ __('main.download') }}</span>

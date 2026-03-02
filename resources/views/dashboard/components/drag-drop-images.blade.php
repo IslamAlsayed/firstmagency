@@ -67,15 +67,13 @@
             // File change event (when user selects via dialog)
             input.addEventListener('change', () => {
 
-                // إذا كان هذا الـ photo input وفيه ملفات جديدة، حذف الصورة القديمة
-                if (inputId === 'photo' && input.files.length > 0) {
-                    const existingPhoto = document.getElementById('existing-photo');
-                    if (existingPhoto) {
-                        existingPhoto.remove();
-                        const removePhotoInput = document.getElementById('remove_photo');
-                        if (removePhotoInput) {
-                            removePhotoInput.value = 1;
-                        }
+                // إذا كان هناك صورة قديمة موجودة، حذفها
+                const existingDiv = document.getElementById('existing-' + inputId);
+                if (existingDiv && input.files.length > 0) {
+                    existingDiv.remove();
+                    const removeInput = document.getElementById('remove_' + inputId);
+                    if (removeInput) {
+                        removeInput.value = 1;
                     }
                 }
 
@@ -124,24 +122,40 @@
         /* ================= REMOVE LOGIC ================= */
         document.addEventListener('click', function(e) {
 
-            /* ---- remove existing photo ---- */
-            if (e.target.classList.contains('remove-existing-photo')) {
-                document.getElementById('existing-photo')?.remove();
-                document.getElementById('remove_photo').value = 1;
-                return;
-            }
+            /* ---- remove existing file ---- */
+            if (e.target.classList.contains('remove-existing-photo') ||
+                e.target.classList.contains('remove-existing-gallery') ||
+                e.target.getAttribute('class')?.includes('remove-existing-')) {
 
-            /* ---- remove existing gallery ---- */
-            if (e.target.classList.contains('remove-existing-gallery')) {
-                const index = e.target.dataset.index;
-                const path = e.target.dataset.path;
+                // الحصول على اسم العمود من class
+                const classList = Array.from(e.target.classList);
+                const removeExistingClass = classList.find(c => c.startsWith('remove-existing-'));
 
-                document.getElementById('existing_gallery_' + index)?.remove();
+                if (removeExistingClass) {
+                    const columnName = removeExistingClass.replace('remove-existing-', '');
 
-                const input = document.getElementById('removed_gallery');
-                const data = JSON.parse(input.value);
-                data.push(path);
-                input.value = JSON.stringify(data);
+                    // لـ photo
+                    if (columnName === 'photo' || !columnName.includes('_')) {
+                        const existingDiv = document.getElementById('existing-' + columnName);
+                        if (existingDiv) existingDiv.remove();
+
+                        const removeInput = document.getElementById('remove_' + columnName);
+                        if (removeInput) removeInput.value = 1;
+                    }
+                    // لـ gallery
+                    else {
+                        const index = e.target.dataset.index;
+                        const path = e.target.dataset.path;
+                        document.getElementById('existing_' + columnName + '_' + index)?.remove();
+
+                        const input = document.getElementById('removed_' + columnName);
+                        if (input) {
+                            const data = JSON.parse(input.value);
+                            data.push(path);
+                            input.value = JSON.stringify(data);
+                        }
+                    }
+                }
                 return;
             }
 

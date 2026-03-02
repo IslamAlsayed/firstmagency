@@ -83,6 +83,6 @@ class UserController extends Controller
         // Log in as the new user
         Auth::login($user, remember: true);
 
-        return redirect()->route('dashboard')->with('success', __('messages.switched_to_user', ['name' => $user->name]));
+        return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
     }
 }

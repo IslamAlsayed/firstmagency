@@ -1,4 +1,4 @@
-<a href="{{ route("{$models}.edit", $id) }}" class="kt-btn kt-btn-sm kt-btn-outline bg-primary text-white" style="{{ $styles ?? '' }}">
+<a href="{{ route("{$models}.edit", $id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-primary text-white" style="{{ $styles ?? '' }}">
     @if (getActiveUser()->button_display_mode === 'text')
         {!! $text ?? __('main.edit') !!}
     @elseif (getActiveUser()->button_display_mode === 'icon')

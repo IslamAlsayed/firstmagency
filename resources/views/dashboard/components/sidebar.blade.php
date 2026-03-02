@@ -8,7 +8,7 @@
         <li>
             <a href="{{ route('dashboard.index') }}" class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                 <i class="fas fa-home"></i>
-                <span>{{ __('dashboard.home') ?? 'الرئيسية' }}</span>
+                <span>{{ __('main.home') ?? 'الرئيسية' }}</span>
             </a>
         </li>
 
@@ -16,7 +16,7 @@
         <li>
             <a href="{{ route('dashboard.content') }}" class="{{ request()->routeIs('dashboard.content*') ? 'active' : '' }}">
                 <i class="fas fa-file-alt"></i>
-                <span>{{ __('dashboard.content') ?? 'المحتوى' }}</span>
+                <span>{{ __('main.content') ?? 'المحتوى' }}</span>
             </a>
         </li>
 
@@ -25,7 +25,7 @@
             <li>
                 <a href="{{ route('dashboard.settings') }}" class="{{ request()->routeIs('dashboard.settings*') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
-                    <span>{{ __('dashboard.settings') ?? 'الإعدادات' }}</span>
+                    <span>{{ __('main.settings') ?? 'الإعدادات' }}</span>
                 </a>
             </li>
         @endif
@@ -35,7 +35,7 @@
             <li>
                 <a href="{{ route('dashboard.sections') }}" class="{{ request()->routeIs('dashboard.sections*') ? 'active' : '' }}">
                     <i class="fas fa-th"></i>
-                    <span>{{ __('dashboard.sections') ?? 'الأقسام' }}</span>
+                    <span>{{ __('main.sections') ?? 'الأقسام' }}</span>
                 </a>
             </li>
         @endif
@@ -45,7 +45,7 @@
             <li>
                 <a href="{{ route('dashboard.revisions') }}" class="{{ request()->routeIs('dashboard.revisions*') ? 'active' : '' }}">
                     <i class="fas fa-history"></i>
-                    <span>{{ __('dashboard.revisions') ?? 'المراجعات' }}</span>
+                    <span>{{ __('main.revisions') ?? 'المراجعات' }}</span>
                 </a>
             </li>
         @endif
@@ -55,7 +55,7 @@
             <li>
                 <a href="{{ route('dashboard.users.index') }}" class="{{ request()->routeIs('dashboard.users*') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
-                    <span>{{ __('dashboard.users') ?? 'المستخدمون' }}</span>
+                    <span>{{ __('main.users') ?? 'المستخدمون' }}</span>
                 </a>
             </li>
         @endif

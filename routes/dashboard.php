@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\PermissionController;
+use App\Http\Controllers\Dashboard\ArticleController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::resource('users', UserController::class)->names('users');
         Route::resource('roles', RoleController::class)->names('roles');
         Route::resource('permissions', PermissionController::class)->names('permissions');
+        Route::resource('articles', ArticleController::class)->names('articles');
+        // Article status change route
+        Route::patch('/articles/{id}/status/{status}', [ArticleController::class, 'changeStatus'])->name('articles.changeStatus');
     });
 });

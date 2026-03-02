@@ -1,34 +1,33 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('dashboard.user_management'))
-@section('page-title', '👤 ' . __('dashboard.user_management'))
+@section('title', __('main.user_management'))
+@section('page-title', '👤 ' . __('main.user_management'))
 
 @section('content')
     <div class="w-full">
         <div class="w-full">
-            <!-- الإحصائيات -->
             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-gray-800">{{ count($users) }}</div>
-                    <small class="text-gray-500">إجمالي المستخدمين</small>
+                    <small class="text-gray-500">{{ __('main.total_users') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-red-600">{{ $users->where('role', 'superadmin')->count() }}</div>
-                    <small class="text-gray-500">مسؤول فائق</small>
+                    <small class="text-gray-500">{{ __('main.super_admin') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-yellow-600">{{ $users->where('role', 'admin')->count() }}</div>
-                    <small class="text-gray-500">مسؤول</small>
+                    <small class="text-gray-500">{{ __('main.admin') }}</small>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="text-2xl font-bold text-blue-600">{{ $users->where('role', 'content_manager')->count() }}</div>
-                    <small class="text-gray-500">مدير المحتوى</small>
+                    <small class="text-gray-500">{{ __('main.content_manager') }}</small>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
                     <div class="flex justify-between items-center">
-                        <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> قائمة المستخدمين</h5>
+                        <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.user_list') }}</h5>
 
                         <a href="{{ route('dashboard.users.create') }}" class="kt-btn kt-btn-outline-primary">
                             {{ __('main.create_type', ['type' => __('main.user')]) }}
@@ -39,8 +38,8 @@
                     <!-- فلتر البحث -->
                     <div class="mb-4">
                         <input type="text" id="searchUsers"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            placeholder="البحث عن مستخدم (الاسم أو البريد الإلكتروني)...">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            placeholder="{{ __('main.search_users_placeholder') }}">
                     </div>
 
                     <!-- جدول المستخدمين -->
@@ -48,12 +47,12 @@
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">الصورة</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">الاسم</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">البريد الإلكتروني</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">الدور</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">تاريخ الانضمام</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">الإجراءات</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.photo') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.name') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.email') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.role') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.join_date') }}</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,23 +86,16 @@
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-600">{{ $user->created_at->format('d/m/Y') }}</td>
                                         <td class="px-6 py-4 text-sm space-x-2">
-                                            @include('dashboard.components.show-button', [
-                                                'models' => 'dashboard.users',
-                                                'id' => $user->id,
+                                            @include('dashboard.components.permissions-actions', [
+                                                'record' => $user,
+                                                'models' => 'users',
                                             ])
-                                            @include('dashboard.components.edit-button', [
-                                                'models' => 'dashboard.users',
-                                                'id' => $user->id,
-                                            ])
-                                            @include('dashboard.components.delete-button', ['id' => $user->id])
-
-                                            @include('dashboard.components.forceDelete-button', ['id' => $user->id])
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="5" class="px-6 py-8 text-center text-gray-400">
-                                            لا توجد مستخدمين متاحون حالياً
+                                            {{ __('main.no_users_found') }}
                                         </td>
                                     </tr>
                                 @endforelse
@@ -121,37 +113,37 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header flex items-center justify-between gap-4 p-4 border-b border-gray-200">
-                        <h5 class="modal-title font-semibold text-gray-800">إضافة مستخدم جديد</h5>
+                        <h5 class="modal-title font-semibold text-gray-800">{{ __('main.add_new_user') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <form method="POST" action="{{ route('dashboard.users.store') ?? '#' }}">
                         @csrf
                         <div class="modal-body p-4 space-y-4">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.name') }}</label>
                                 <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name"
                                     name="name" required>
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.email') }}</label>
                                 <input type="email"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email"
                                     name="email" required>
                             </div>
                             <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.password') }}</label>
                                 <input type="password"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password"
                                     name="password" required>
                             </div>
                             <div>
-                                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">الدور</label>
-                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role') }}</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                     id="role" name="role" required>
-                                    <option value="content_manager">مدير المحتوى</option>
-                                    <option value="admin">مسؤول</option>
-                                    <option value="superadmin">مسؤول فائق</option>
+                                    <option value="content_manager">{{ __('main.content_manager') }}</option>
+                                    <option value="admin">{{ __('main.admin') }}</option>
+                                    <option value="superadmin">{{ __('main.super_admin') }}</option>
                                 </select>
                             </div>
                         </div>
