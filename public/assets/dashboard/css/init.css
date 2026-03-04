@@ -76,7 +76,7 @@
 @media (max-width: 992px) {
     :root {
         --sidebar-width: 260px;
-        --sidebar-small-width: 80px;
+        --sidebar-small-width: 65px;
     }
 
     .sidebar {
@@ -320,8 +320,8 @@ body.sidebar-closed .sidebar-logo h4 {
     font-size: 20px;
 }
 
-body.sidebar-closed #sidebarMenu li i,
-body.sidebar-closed #sidebarMenu li svg {
+body.sidebar-closed #sidebarMenu li i:not(.nav-icon),
+body.sidebar-closed #sidebarMenu li svg:not(.nav-icon) {
     display: inline-flex !important;
 }
 
@@ -387,6 +387,10 @@ body.sidebar-closed #sidebarMenu li:hover span:not(.main-icon) {
 
     .sidebar {
         width: var(--sidebar-width);
+
+        .nav-menu .nav-link:not(.submenu-btn):hover {
+            transform: translateX(2px);
+        }
     }
 
     body.sidebar-closed .sidebar {
@@ -405,6 +409,7 @@ body.sidebar-closed #sidebarMenu li:hover span:not(.main-icon) {
         display: inline !important;
     }
 
+    body.sidebar-closed .nav-menu .nav-icon,
     body.sidebar-closed .nav-menu .nav-link span:not(.main-icon) {
         display: none !important;
     }
@@ -436,8 +441,8 @@ body.sidebar-closed #sidebarMenu li:hover span:not(.main-icon) {
         padding: 10px 8px;
     }
 
-    body #sidebarMenu li i,
-    body #sidebarMenu li svg {
+    body #sidebarMenu li i:not(.nav-icon),
+    body #sidebarMenu li svg:not(.nav-icon) {
         display: inline-flex !important;
     }
 

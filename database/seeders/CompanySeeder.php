@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class CompanySeeder extends Seeder
 {
@@ -13,7 +14,13 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::first();
+        Schema::disableForeignKeyConstraints();
+        Company::truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $user = User::where('email', 'content@example.com')->first() ?? User::first();
+        if (!$user) return; // لا توجد مستخدمين
+
 
         $companies = [
             [
@@ -27,6 +34,7 @@ class CompanySeeder extends Seeder
                         'description' => 'Specialized in developing digital solutions and software',
                     ],
                 ],
+                'slug' => 'leading-tech-company',
                 'website' => 'https://techcompany.com',
                 'order' => 1,
                 'is_active' => true,
@@ -43,6 +51,7 @@ class CompanySeeder extends Seeder
                         'description' => 'Provides consulting services to major companies',
                     ],
                 ],
+                'slug' => 'global-consulting-firm',
                 'website' => 'https://consulting.com',
                 'order' => 2,
                 'is_active' => true,
@@ -59,6 +68,7 @@ class CompanySeeder extends Seeder
                         'description' => 'Specialized in residential and commercial projects',
                     ],
                 ],
+                'slug' => 'construction-company',
                 'website' => 'https://construction.com',
                 'order' => 3,
                 'is_active' => true,
@@ -75,6 +85,7 @@ class CompanySeeder extends Seeder
                         'description' => 'Vast experience in digital marketing and advertising',
                     ],
                 ],
+                'slug' => 'digital-marketing-agency',
                 'website' => 'https://marketing.com',
                 'order' => 4,
                 'is_active' => true,
@@ -91,6 +102,7 @@ class CompanySeeder extends Seeder
                         'description' => 'Visual identity and website design',
                     ],
                 ],
+                'slug' => 'creative-design-studio',
                 'website' => 'https://design.com',
                 'order' => 5,
                 'is_active' => true,

@@ -22,7 +22,7 @@
                         <span class="main-icon">👥</span>
                         <span>{{ __('main.users') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -55,7 +55,7 @@
                         <span class="main-icon">🔐</span>
                         <span>{{ __('main.roles') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -88,7 +88,7 @@
                         <span class="main-icon">🔑</span>
                         <span>{{ __('main.permissions') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -120,7 +120,7 @@
                         <span class="main-icon">📝</span>
                         <span>{{ __('main.articles') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -152,7 +152,7 @@
                         <span class="main-icon">💼</span>
                         <span>{{ __('main.services') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -184,7 +184,7 @@
                         <span class="main-icon">🏢</span>
                         <span>{{ __('main.companies') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -216,7 +216,7 @@
                         <span class="main-icon">👥</span>
                         <span>{{ __('main.clients') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -248,7 +248,7 @@
                         <span class="main-icon">🤝</span>
                         <span>{{ __('main.partners') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -280,7 +280,7 @@
                         <span class="main-icon">⚙️</span>
                         <span>{{ __('main.line_works') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -312,7 +312,7 @@
                         <span class="main-icon">⭐</span>
                         <span>{{ __('main.reviews') }}</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs"></i>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
@@ -345,7 +345,7 @@
                         <span>{{ __('main.settings') }}</span>
                     </div>
 
-                    <i class="fas fa-arrow-up-right-from-square"></i>
+                    <i class="fas fa-arrow-up-right-from-square text-sm nav-icon"></i>
                 </a>
             </li>
         @endif
