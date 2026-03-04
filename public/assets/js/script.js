@@ -1,5 +1,20 @@
 // Hero Gallery Slider
 document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
+        let multiples = [
+            document.querySelectorAll(".basic-multiple"),
+            document.querySelectorAll(".basic-single"),
+        ];
+        if (multiples.length > 0) {
+            multiples.forEach((multiple) => {
+                multiple.forEach((select) => {
+                    $(select).select2();
+                });
+            });
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.querySelector('.hero-section .gallery');
     if (gallery) {
         const items = gallery.querySelectorAll('.item');

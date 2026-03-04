@@ -1636,3 +1636,37 @@ footer {
 }
 
 /* End Footer Section */
+
+.debug-flag-badge {
+    width: fit-content !important;
+    height: fit-content !important;
+    position: absolute !important;
+    top: 150px !important;
+    left: 30px !important;
+    z-index: 995 !important;
+    display: inline-block !important;
+    background: #830000;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.text-lowercase,
+.text-lowercase * {
+    text-transform: lowercase !important;
+}
+
+.text-uppercase,
+.text-uppercase * {
+    text-transform: uppercase !important;
+}
+
+.text-capitalize,
+.text-capitalize * {
+    text-transform: capitalize !important;
+}

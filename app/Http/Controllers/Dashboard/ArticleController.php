@@ -8,10 +8,13 @@ use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Traits\PhotoUploadTrait;
+use App\Traits\GlobalDestroyTrait;
 
 class ArticleController extends Controller
 {
-    use PhotoUploadTrait;
+    use PhotoUploadTrait, GlobalDestroyTrait;
+
+    protected $modelClass = Article::class;
 
     public function index()
     {
@@ -132,7 +135,7 @@ class ArticleController extends Controller
         // Validate status
         $validStatuses = ['draft', 'published', 'archived'];
         if (!in_array($status, $validStatuses)) {
-            return redirect()->route('dashboard.articles.index')->withError('Invalid status');
+            return redirect()->route('dashboard.articles.index')->withError(__('messages.invalid_status'));
         }
 
         $article->update([
@@ -141,9 +144,7 @@ class ArticleController extends Controller
         ]);
 
         $statusLabel = __('main.status_' . $status);
-        return redirect()->route('dashboard.articles.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.article')]) . ' - ' . $statusLabel
-        );
+        return redirect()->route('dashboard.articles.index')->withSuccess(__('messages.type_updated', ['type' => __('main.article')]) . ' - ' . $statusLabel);
     }
 
     public function destroy($id)

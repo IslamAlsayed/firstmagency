@@ -41,6 +41,8 @@ class User extends Authenticatable
         'is_active',
         'created_by',
         'updated_by',
+        'website_locale',
+        'dashboard_locale',
     ];
 
     /**
@@ -176,5 +178,21 @@ class User extends Authenticatable
             'content_manager' => 'Content Manager',
             default => 'Unknown'
         };
+    }
+
+    /**
+     * الحصول على لغة الموقع
+     */
+    public function getWebsiteLocale(): string
+    {
+        return $this->website_locale ?? config('app.locale', 'ar');
+    }
+
+    /**
+     * الحصول على لغة الداشبورد
+     */
+    public function getDashboardLocale(): string
+    {
+        return $this->dashboard_locale ?? config('app.locale', 'ar');
     }
 }

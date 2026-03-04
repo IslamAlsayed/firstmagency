@@ -88,7 +88,16 @@
                                                 'modelClass' => 'service',
                                             ])
                                         </td>
-                                        <td class="p-4 text-sm text-gray-600">{{ $service->creator->name ?? 'N/A' }}</td>
+                                        <td class="p-4 text-sm text-gray-600">
+                                            @if ($service->creator)
+                                                <a href="{{ route('dashboard.users.show', $service->creator->id) }}" class="text-primary hover:underline">
+                                                    {{ $service->creator->name }}
+                                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                </a>
+                                            @else
+                                                <span class="text-gray-400 italic">N/A</span>
+                                            @endif
+                                        </td>
                                         <td class="p-4 text-sm text-gray-600">{{ $service->created_at?->format('d/m/Y') }}</td>
                                         <td class="p-4 text-sm text-gray-600">{{ $service->order ?? 0 }}</td>
                                         <td class="p-4 text-sm space-x-2 flex items-center gap-2">

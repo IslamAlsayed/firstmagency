@@ -1,4 +1,4 @@
-<section class="section easy-management">
+<section class="section easy-management relative">
     <div class="flex items-center">
         <div class="image-container">
             <div class="image">
@@ -23,4 +23,7 @@
             </a>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-easy-management</div>
+    @endif
 </section>

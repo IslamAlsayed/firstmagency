@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Review\StoreRequest;
+use App\Http\Requests\Review\UpdateRequest;
+use App\Models\Review;
+use App\Traits\GlobalDestroyTrait;
+use App\Traits\PhotoUploadTrait;
+use Illuminate\Support\Facades\Storage;
+
+class ReviewController extends Controller
+{
+    use PhotoUploadTrait, GlobalDestroyTrait;
+
+    protected $modelClass = Review::class;
+
+    public function index()
+    {
+        $this->authorize('viewAny', Review::class);
+        $reviews = Review::withTrashed()->latest()->paginate(15);
+        $pendingCount = Review::where('status', 'pending')->count();
+        $approvedCount = Review::where('status', 'approved')->count();
+        $rejectedCount = Review::where('status', 'rejected')->count();
+
+        return view('dashboard.reviews.index', compact('reviews', 'pendingCount', 'approvedCount', 'rejectedCount'));
+    }
+
+    public function create()
+    {
+        $this->authorize('create', Review::class);
+        return view('dashboard.reviews.create');
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $this->authorize('create', Review::class);
+        $validated = $request->validated();
+        $validated['status'] = 'pending';
+        $validated['created_by'] = getActiveUserId();
+
+        // Extract audio before creating review
+        $audioBase64 = $validated['audio'] ?? null;
+        unset($validated['audio']);
+
+        // Create review without audio
+        $review = Review::create($validated);
+
+        // Handle audio upload (convert base64 to file)
+        if ($audioBase64) {
+            $audioContent = base64_decode(preg_replace('#^data:audio/\w+;base64,#i', '', $audioBase64));
+            $filename = 'review_' . time() . '.wav';
+            $audioPath = "uploads/reviews/{$review->id}/audio/{$filename}";
+            Storage::disk('public')->put($audioPath, $audioContent);
+            $review->update(['audio' => $audioPath]);
+        }
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            $this->uploadSinglePhoto($request, $review, 'photo', 'reviews', 'photo');
+        }
+
+        return redirect()->route('dashboard.reviews.show', $review)->withSuccess(__('messages.type_created', ['type' => __('main.review')]));
+    }
+
+    public function show(Review $review)
+    {
+        $this->authorize('view', $review);
+        return view('dashboard.reviews.show', compact('review'));
+    }
+
+    public function edit(Review $review)
+    {
+        $this->authorize('update', $review);
+        return view('dashboard.reviews.edit', compact('review'));
+    }
+
+    public function update(UpdateRequest $request, Review $review)
+    {
+        $this->authorize('update', $review);
+
+        $validated = $request->validated();
+        $validated['updated_by'] = getActiveUserId();
+
+        // Handle photo update
+        if ($request->hasFile('photo')) {
+            if ($review->photo) {
+                Storage::disk('public')->delete($review->photo);
+            }
+            $this->uploadSinglePhoto($request, $review, 'photo', 'reviews/photos');
+        }
+
+        $review->update($validated);
+
+        return redirect()->route('dashboard.reviews.show', $review)->withSuccess(__('messages.type_updated', ['type' => __('main.review')]));
+    }
+
+    public function destroy(Review $review)
+    {
+        $this->authorize('delete', $review);
+
+        if ($review->photo) {
+            Storage::disk('public')->delete($review->photo);
+        }
+        if ($review->audio) {
+            Storage::disk('public')->delete($review->audio);
+        }
+
+        $review->delete();
+
+        return back()->withSuccess(__('messages.type_deleted', ['type' => __('main.review')]));
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $review = Review::find($id);
+        if (!$review)
+            return redirect()->route('dashboard.reviews.index')->withError(__('messages.type_not_found', ['type' => __('main.review')]));
+
+        // Check if user can update reviews
+        $this->authorize('update', $review);
+
+        // Validate status
+        $validStatuses = ['pending', 'approved', 'rejected'];
+        if (!in_array($status, $validStatuses)) {
+            return back()->withError(__('messages.invalid_status'));
+        }
+
+        $review->update([
+            'status' => $status,
+            'updated_by' => getActiveUserId(),
+        ]);
+
+        $statusLabel = __('main.status_' . $status);
+        return back()->withSuccess(__('messages.type_updated', ['type' => __('main.review')]) . ' - ' . $statusLabel);
+    }
+}

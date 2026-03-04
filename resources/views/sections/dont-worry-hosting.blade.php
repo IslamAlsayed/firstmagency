@@ -1,4 +1,4 @@
-<section class="section dont-worry-sections main-dont-worry-sections">
+<section class="section dont-worry-sections main-dont-worry-sections relative">
     <div class="content flex items-center justify-between gap-8">
         <div class="text">
             <div class="label font-semibold">{{ __('main.hosting_worry_label') }}</div>
@@ -15,4 +15,7 @@
             <img src="{{ asset('assets/images/website/hosting/dont-worry-bg.png') }}" alt="{{ __('main.dont_worry_image') }}" class="img-fluid">
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-dont-worry-hosting</div>
+    @endif
 </section>

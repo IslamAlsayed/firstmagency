@@ -1,4 +1,4 @@
-<section class="developer-section shineSection">
+<section class="developer-section shineSection relative" id="hosting-hero">
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
@@ -101,4 +101,8 @@
             <img src="{{ asset('assets/images/website/hosting/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
         </div>
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-hosting-hero</div>
+    @endif
 </section>

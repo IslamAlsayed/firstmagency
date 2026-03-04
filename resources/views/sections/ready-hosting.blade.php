@@ -1,4 +1,4 @@
-<section class="section ready-hosting-sections text-center">
+<section class="section ready-hosting-sections text-center relative">
     <div class="content mx-auto px-4">
         <p class="font-semibold mb-4 opacity-95">
             {{ __('main.ready_hosting_description') }}
@@ -17,4 +17,7 @@
             </a>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-ready-hosting</div>
+    @endif
 </section>

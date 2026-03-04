@@ -10,6 +10,15 @@ class ArticlePolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability): ?bool
+    {
+        if ($user->hasRole('superadmin')) {
+            return true;
+        }
+
+        return null;
+    }
+
     public function viewAny(User $user): bool
     {
         return $user->can('articles-read');

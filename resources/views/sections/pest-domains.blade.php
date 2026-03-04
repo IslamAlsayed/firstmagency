@@ -1,4 +1,4 @@
-<section class="section pest-domains-sections text-center">
+<section class="section pest-domains-sections text-center relative">
     <div class="mb-8">
         <div class="title font-semibold mb-4">{{ __('main.domain_best_offers') }}</div>
         <p class="description text-gray-600 font-semibold">{{ __('main.domains_best_description') }}</p>
@@ -19,4 +19,8 @@
             @endforeach
         @endif
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-pest-domains</div>
+    @endif
 </section>

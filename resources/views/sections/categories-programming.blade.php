@@ -1,4 +1,4 @@
-<section class="section categories-programming-section">
+<section class="section categories-programming-section relative">
     <div class="content flex items-center justify-between">
         <div class="text">
             <div class="title font-semibold">{{ __('main.categories_title') }} <span class="title-badge">{{ __('main.brand_short') }}</span></div>
@@ -19,4 +19,7 @@
             </div>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-categories-programming</div>
+    @endif
 </section>

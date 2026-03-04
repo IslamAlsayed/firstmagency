@@ -14,42 +14,49 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
+                'slug' => 'digital-marketing',
                 'name' => 'التسويق الرقمي',
                 'description' => 'مقالات وتجارب في مجال التسويق الرقمي والتطبيقات الحديثة',
                 'icon' => 'fas fa-bullhorn',
                 'is_active' => true,
             ],
             [
+                'slug' => 'web-development',
                 'name' => 'تطوير الويب',
                 'description' => 'نصائح وأفضل الممارسات في تطوير وتصميم المواقع',
                 'icon' => 'fas fa-code',
                 'is_active' => true,
             ],
             [
+                'slug' => 'app-development',
                 'name' => 'تطوير التطبيقات',
                 'description' => 'موارد وشروحات لتطوير التطبيقات على مختلف الأنظمة',
                 'icon' => 'fas fa-mobile-alt',
                 'is_active' => true,
             ],
             [
+                'slug' => 'hosting-servers',
                 'name' => 'استضافة وسيرفرات',
                 'description' => 'معلومات عن استضافة المواقع والخوادم والعناية بها',
                 'icon' => 'fas fa-server',
                 'is_active' => true,
             ],
             [
+                'slug' => 'seo',
                 'name' => 'تحسين محركات البحث',
                 'description' => 'استراتيجيات وتقنيات لتحسين تصنيف موقعك في محركات البحث',
                 'icon' => 'fas fa-search',
                 'is_active' => true,
             ],
             [
+                'slug' => 'cybersecurity',
                 'name' => 'الأمان السيبراني',
                 'description' => 'نصائح متقدمة لحماية مواقعك والبيانات الخاصة بك',
                 'icon' => 'fas fa-shield-alt',
                 'is_active' => true,
             ],
             [
+                'slug' => 'e-commerce',
                 'name' => 'أخرى',
                 'description' => 'مقالات متنوعة لا تندرج تحت التصنيفات الأخرى',
                 'icon' => 'fas fa-folder-open',
@@ -58,7 +65,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::firstOrCreate(['name' => $category['name']],$category);
+            Category::firstOrCreate(['name' => $category['name']], $category);
         }
     }
 }

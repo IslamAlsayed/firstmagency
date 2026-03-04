@@ -28,22 +28,22 @@
             </button>
 
             <!-- Switch Language Toggle -->
-            <a href="{{ route('locale.change', app()->getLocale() == 'ar' ? 'en' : 'ar') }}"
+            <a href="{{ route('dashboard.locale.change', ['locale' => session('dashboard_locale', 'ar') == 'ar' ? 'en' : 'ar']) }}"
                 class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300"
                 title="Switch Language">
                 <i class="fas fa-language text-lg"></i>
             </a>
 
             <!-- Dark/Light Mode Toggle -->
-            <button id="themeToggle" class="hidden action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="Toggle Dark Mode">
+            {{-- <button id="themeToggle" class="hidden action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="Toggle Dark Mode">
                 <i class="fas fa-sun mode-icon text-lg"></i>
-            </button>
+            </button> --}}
 
             <!-- Account Switcher -->
             @include('dashboard.components.account-switcher', ['availableUsers' => \App\Models\User::all()])
         </div>
 
-        <div>
+        <div class="relative">
             <div class="profile">
                 <div class="user">
                     <div class="user-name">{{ getActiveUser()?->name ?? 'Super Admin' }}</div>
@@ -80,14 +80,34 @@
 <script>
     // Initialize Sidebar state from localStorage
     function initSidebarState() {
-        const sidebarState = localStorage.getItem('sidebar-state') || 'open';
+        const sidebarState = localStorage.getItem('sidebar-state');
         const sidebar = document.querySelector('aside');
         const toggleBtn = document.getElementById('toggleSidebar');
+        const isSmallScreen = window.innerWidth < 768;
+        const isMobile = window.innerWidth <= 992;
 
-        if (sidebarState === 'closed') {
-            sidebar?.classList.add('active');
-            document.body.classList.add('sidebar-closed');
-            toggleBtn?.classList.add('active');
+        // For very small screens (< 768px), sidebar should always start hidden
+        if (isSmallScreen) {
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleBtn?.classList.remove('active');
+        } else if (isMobile) {
+            // For medium screens (768px - 992px), start with sidebar closed
+            let shouldBeClosed = sidebarState !== 'open';
+            if (shouldBeClosed) {
+                sidebar?.classList.add('active');
+                document.body.classList.add('sidebar-closed');
+                toggleBtn?.classList.add('active');
+            } else {
+                sidebar?.classList.remove('active');
+                document.body.classList.remove('sidebar-closed');
+                toggleBtn?.classList.remove('active');
+            }
+        } else {
+            // For desktop (> 992px), sidebar should start open
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleBtn?.classList.remove('active');
         }
     }
 
@@ -104,7 +124,19 @@
             toggleBtn.classList.toggle('active');
 
             // Save state to localStorage
-            localStorage.setItem('sidebar-state', isActive ? 'open' : 'closed');
+            // localStorage.setItem('sidebar-state', isActive ? 'open' : 'closed');
+        }
+    });
+
+    // Close Sidebar button for small screens
+    document.getElementById('closeSidebar')?.addEventListener('click', () => {
+        const sidebar = document.querySelector('aside');
+        const toggleBtn = document.getElementById('toggleSidebar');
+
+        if (sidebar) {
+            sidebar.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleBtn.classList.remove('active');
         }
     });
 
@@ -147,6 +179,11 @@
     } else {
         initSidebarState();
     }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        initSidebarState();
+    });
 
     // Profile Menu Toggle
     const profile = document.querySelector('.profile');

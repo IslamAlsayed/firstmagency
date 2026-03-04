@@ -7,10 +7,13 @@ use App\Http\Requests\Service\StoreRequest;
 use App\Http\Requests\Service\UpdateRequest;
 use App\Models\Service;
 use App\Traits\PhotoUploadTrait;
+use App\Traits\GlobalDestroyTrait;
 
 class ServiceController extends Controller
 {
-    use PhotoUploadTrait;
+    use PhotoUploadTrait, GlobalDestroyTrait;
+
+    protected $modelClass = Service::class;
 
     public function index()
     {
@@ -129,7 +132,7 @@ class ServiceController extends Controller
         // Validate status
         $validStatuses = ['active', 'inactive'];
         if (!in_array($status, $validStatuses)) {
-            return redirect()->route('dashboard.services.index')->withError('Invalid status');
+            return back()->withError(__('messages.invalid_status'));
         }
 
         $service->update([

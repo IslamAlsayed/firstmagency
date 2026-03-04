@@ -1,4 +1,4 @@
-<section class="section our-services-marketing text-center">
+<section class="section our-services-marketing text-center relative">
     <div class="content">
         <div class="mb-8">
             <div class="title font-semibold mb-4">
@@ -45,4 +45,7 @@
             @endif
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-our-services-marketing</div>
+    @endif
 </section>

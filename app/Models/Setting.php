@@ -12,6 +12,8 @@ class Setting extends Model
     protected $richTextAttributes = [
         'site_description',
         'site_description_ar',
+        'about_us_description',
+        'about_us_description_ar',
     ];
 
     protected $fillable = [
@@ -34,7 +36,6 @@ class Setting extends Model
         'font_size',
         'line_height',
 
-        'site_locale',
         'site_name',
         'site_email',
         'site_whatsapp',
@@ -42,6 +43,15 @@ class Setting extends Model
         'site_description',
         'site_description_ar',
         'app_display_menu_labels',
+        'debug_mode',
+        'debug_ips',
+
+        // About Us
+        'about_us_title',
+        'about_us_title_ar',
+        'about_us_description',
+        'about_us_description_ar',
+        'about_us_image',
 
         // Inline Padding
         'home_hero_section',
@@ -66,11 +76,30 @@ class Setting extends Model
         'platform_management_section',
         'work_lines_section',
         'our_services_marketing_section',
+        'about_us_section',
+        'marketing_hero_section',
+        'order_app_section',
+        'hosting_hero_section',
+        'hosting_features_section',
+        'categories_programming_section',
+        'dont_worry_hosting_section',
+        'easy_management_section',
+        'important_articles_marketing_section',
+        'project_steps_section',
+        'ready_hosting_section',
+        'support_hosting_section',
+        'work_line_section',
+        'clients_2_section',
+        'step_work2_section',
+        'website_developer_section',
+        'packages_hosting_section',
+        'pest_domains_official_section',
     ];
 
     protected $casts = [
         'font_size' => 'integer',
         'line_height' => 'float',
+        'debug_mode' => 'boolean',
     ];
 
     /**

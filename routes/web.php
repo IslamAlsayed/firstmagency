@@ -21,6 +21,11 @@ Route::get('/domains', fn() => view('website.domains'))->name('domains');
 Route::get('/services-marketing', fn() => view('website.servicesMarketing'))->name('services.marketing');
 Route::get('/seo', fn() => view('website.seo'))->name('seo');
 Route::post('/cart', fn() => dd(request()->all()))->name('cart');
+Route::post('/reviews', fn(\Illuminate\Http\Request $request) => response()->json([
+    'success' => true,
+    'message' => 'تم استقبال المراجعة',
+    'data' => $request->all()
+], 200))->name('reviews.store');
 
 // Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
 //     Route::post('/cache/clear', [HomeController::class, 'clearHomepageCache'])->name('admin.cache.clear');

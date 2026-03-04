@@ -1,4 +1,4 @@
-<section class="section order-your-app-section">
+<section class="section order-your-app-section relative">
     <div class="content flex items-center">
         <div class="image">
             <img src="{{ asset('assets/images/website/app-developer/order-app.png') }}" alt="{{ __('main.btn_order_app') }}">
@@ -9,4 +9,7 @@
             <button class="btn-link light-main-color">{{ __('main.order_app_button') }}</button>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-order-app</div>
+    @endif
 </section>

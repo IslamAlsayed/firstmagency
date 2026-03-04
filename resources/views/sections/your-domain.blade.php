@@ -1,4 +1,4 @@
-<section class="section your-domain-section relative py-20 bg-slate-50 overflow-hidden">
+<section class="section your-domain-section relative py-20 bg-slate-50 overflow-hidden relative">
     {{-- <form action="https://client.firstmagency.com/cart.php" method="post" class="mx-auto px-4 relative z-10" id="domainForm"> --}}
     <form action="{{ route('cart') }}" method="post" class="mx-auto px-4 relative z-10" id="domainForm">
         @csrf
@@ -521,6 +521,10 @@
             </p>
         </div>
     </form>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-your-domain</div>
+    @endif
 </section>
 
 {{-- 

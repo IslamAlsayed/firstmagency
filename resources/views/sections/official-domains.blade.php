@@ -1,4 +1,4 @@
-<section class="section pest-domains-sections official-domains text-center">
+<section class="section pest-domains-sections official-domains text-center relative">
     <div class="mb-8">
         <div class="title font-semibold mb-4">{{ __('main.domain_official_domains') }}</div>
         <p class="description text-gray-600 font-semibold">{{ __('main.domain_official_domains_description') }}</p>
@@ -29,4 +29,8 @@
             @endforeach
         @endif
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-official-domains</div>
+    @endif
 </section>

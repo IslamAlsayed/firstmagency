@@ -1,4 +1,4 @@
-<section class="section clients-section text-center">
+<section class="section clients-section text-center relative">
     <div class="title font-semibold">{{ __('main.clients_title') }} <span class="title-badge">{{ __('main.clients_subtitle') }}</span></div>
     <div class="description">{{ __('main.clients_description') }}</div>
 
@@ -36,4 +36,7 @@
             </div>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-clients2</div>
+    @endif
 </section>

@@ -1,4 +1,4 @@
-<section class="section services-section text-center">
+<section class="section services-section text-center relative">
     <div class="title font-semibold">{{ __('main.services_title') }} <span class="title-badge">{{ __('main.services_subtitle') }}</span></div>
     <div class="description">{{ __('main.services_description') }}</div>
 
@@ -31,4 +31,8 @@
             @endif
         </swiper-container>
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-services</div>
+    @endif
 </section>

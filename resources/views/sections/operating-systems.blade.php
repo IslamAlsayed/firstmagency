@@ -1,4 +1,4 @@
-<section class="section operations-systems-sections text-center">
+<section class="section operations-systems-sections text-center relative">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
             {{ __('main.operating_systems_title') }} <span class="title-badge">{{ __('main.control_panels_badge') }}</span>
@@ -45,4 +45,7 @@
             </div>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-operating-systems</div>
+    @endif
 </section>

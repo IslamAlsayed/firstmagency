@@ -1,4 +1,4 @@
-<section class="website-design">
+<section class="website-design relative">
     <div class="layout"></div>
     <div class="content">
         <div class="text">
@@ -65,4 +65,7 @@
             <img src="{{ asset('assets/images/website/developer/design.png') }}" alt="{{ __('main.design_title') }}">
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-website-designer</div>
+    @endif
 </section>

@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ArticleSeeder::class,
             ServiceSeeder::class,
+            CompanySeeder::class,
+            ClientSeeder::class,
+            PartnerSeeder::class,
         ]);
     }
 }

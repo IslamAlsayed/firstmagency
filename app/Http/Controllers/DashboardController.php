@@ -158,4 +158,37 @@ class DashboardController extends Controller
             'value' => (bool) $newValue
         ], 200);
     }
+
+    // Force destroy (permanent delete) for any model
+    public function forceDestroy($modelClass, $id)
+    {
+        $modelClass = '\\App\\Models\\' . ucfirst($modelClass);
+        $model = $modelClass::withTrashed()->find($id);
+
+        if (!$model) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'status' => 'error',
+                    'message' => __('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($modelClass)))])
+                ], 404);
+            }
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($modelClass)))]));
+        }
+
+        $this->authorize('forceDelete', $model);
+
+        $modelName = strtolower(class_basename($modelClass));
+        $model->forceDelete();
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => __('messages.type_deleted', ['type' => __('main.' . $modelName)])
+            ], 200);
+        }
+
+        return redirect()->back()->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]));
+    }
 }

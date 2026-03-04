@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Traits\GlobalDestroyTrait;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    use GlobalDestroyTrait;
+
+    protected $modelClass = Role::class;
+
     public function index()
     {
         $this->authorize('viewAny', Role::class);
@@ -49,7 +54,7 @@ class RoleController extends Controller
             $role->syncPermissions($permissions);
         }
 
-        return redirect()->route('dashboard.roles.index')->withSuccess('Role created successfully.');
+        return redirect()->route('dashboard.roles.index')->withSuccess(__('messages.role_created_successfully'));
     }
 
     public function show(Role $role)
@@ -97,13 +102,13 @@ class RoleController extends Controller
             $role->syncPermissions([]);
         }
 
-        return redirect()->route('dashboard.roles.index')->withSuccess('Role updated successfully.');
+        return redirect()->route('dashboard.roles.index')->withSuccess(__('messages.role_updated_successfully'));
     }
 
     public function destroy(Role $role)
     {
         $this->authorize('delete', $role);
         $role->delete();
-        return redirect()->route('dashboard.roles.index')->withSuccess('Role deleted successfully.');
+        return redirect()->route('dashboard.roles.index')->withSuccess(__('messages.role_deleted_successfully'));
     }
 }

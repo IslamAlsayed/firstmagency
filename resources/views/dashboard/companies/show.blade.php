@@ -45,7 +45,16 @@
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.created_by') }}</p>
-                            <p class="font-semibold text-gray-800">{{ $company->creator->name ?? 'N/A' }}</p>
+                            <p class="font-semibold text-gray-800">
+                                @if ($company->creator)
+                                    <a href="{{ route('dashboard.users.show', $company->creator->id) }}" class="text-primary hover:underline">
+                                        {{ $company->creator->name }}
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                    </a>
+                                @else
+                                    <span class="text-gray-400 italic">N/A</span>
+                                @endif
+                            </p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.created_at') }}</p>

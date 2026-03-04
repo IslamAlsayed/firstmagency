@@ -147,7 +147,7 @@
     } */
 </style>
 
-<section class="project-steps">
+<section class="project-steps relative">
     <h2 class="section-title">{{ __('main.project_steps_title') }}</h2>
     <p class="section-subtitle">
         {{ __('main.project_steps_subtitle') }}
@@ -215,4 +215,7 @@
             </div>
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-step-work2</div>
+    @endif
 </section>

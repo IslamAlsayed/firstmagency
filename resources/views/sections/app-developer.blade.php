@@ -1,4 +1,4 @@
-<section class="developer-section app-developer-section">
+<section class="developer-section app-developer-section relative">
     <div class="background-layer"></div>
     <div class="inner flex items-center gap-4">
         <div class="content">
@@ -98,4 +98,7 @@
             <img src="{{ asset('assets/images/website/app-developer/hero-2.png') }}" alt="{{ __('main.service_website_design_title') }}">
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-app-developer</div>
+    @endif
 </section>

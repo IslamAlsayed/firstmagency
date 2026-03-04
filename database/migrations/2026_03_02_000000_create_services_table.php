@@ -25,7 +25,7 @@ return new class extends Migration
             // Ordering
             $table->unsignedInteger('order')->default(0);
 
-            // Status & Flags
+            // Flags
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
 
@@ -37,7 +37,6 @@ return new class extends Migration
             $table->timestamps();
 
             // Indexes
-            $table->index('status');
             $table->index('order');
         });
     }

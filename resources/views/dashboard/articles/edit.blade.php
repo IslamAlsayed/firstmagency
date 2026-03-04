@@ -19,16 +19,8 @@
                 @method('PUT')
                 <div class="grid gap-4 lg:gap-6">
                     <!-- Tabs Navigation -->
-                    <div class="flex border-b border-gray-300">
-                        <button type="button" data-lang="ar"
-                            class="language-tab cursor-pointer px-4 py-2 border-b-2 border-indigo-600 text-indigo-600 font-semibold">
-                            EG {{ __('main.arabic') }}
-                        </button>
-                        <button type="button" data-lang="en"
-                            class="language-tab cursor-pointer px-4 py-2 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            🇺🇸 {{ __('main.english') }}
-                        </button>
-                    </div>
+                    @include('dashboard.components.tabs-navigation')
+
                     <!-- Category (Common) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
                         <div>
@@ -215,28 +207,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // Language tab switching
-        document.querySelectorAll('.language-tab').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.dataset.lang;
-
-                // Update tab active state
-                document.querySelectorAll('.language-tab').forEach(btn => {
-                    btn.classList.remove('border-indigo-600', 'text-indigo-600');
-                    btn.classList.add('border-transparent', 'text-gray-600');
-                });
-                this.classList.add('border-indigo-600', 'text-indigo-600');
-                this.classList.remove('border-transparent', 'text-gray-600');
-
-                // Update content visibility
-                document.querySelectorAll('.language-content').forEach(content => {
-                    content.classList.add('hidden');
-                });
-                document.querySelector(`[data-lang="${lang}"].language-content`).classList.remove('hidden');
-            });
-        });
-    </script>
 @endsection

@@ -1,4 +1,4 @@
-<section class="section programming-section why-us-section text-center">
+<section class="section programming-section why-us-section text-center relative">
     <div class="title font-semibold">{{ __('main.why_us_title') }}</div>
     <div class="description">{{ __('main.why_us_description') }}</div>
 
@@ -15,4 +15,8 @@
             @endforeach
         @endif
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-why-us</div>
+    @endif
 </section>

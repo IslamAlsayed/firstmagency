@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Traits\GlobalDestroyTrait;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    use GlobalDestroyTrait;
+
+    protected $modelClass = Permission::class;
+
     public function index()
     {
         $this->authorize('viewAny', Permission::class);
@@ -29,7 +34,7 @@ class PermissionController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
         Permission::create($validated);
-        return redirect()->route('dashboard.permissions.index')->withSuccess('Permission created successfully.');
+        return redirect()->route('dashboard.permissions.index')->withSuccess(__('messages.permission_created_successfully'));
     }
 
     public function show(Permission $permission)
@@ -52,13 +57,13 @@ class PermissionController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
         $permission->update($validated);
-        return redirect()->route('dashboard.permissions.index')->withSuccess('Permission updated successfully.');
+        return redirect()->route('dashboard.permissions.index')->withSuccess(__('messages.permission_updated_successfully'));
     }
 
     public function destroy(Permission $permission)
     {
         $this->authorize('delete', $permission);
         $permission->delete();
-        return redirect()->route('dashboard.permissions.index')->withSuccess('Permission deleted successfully.');
+        return redirect()->route('dashboard.permissions.index')->withSuccess(__('messages.permission_deleted_successfully'));
     }
 }

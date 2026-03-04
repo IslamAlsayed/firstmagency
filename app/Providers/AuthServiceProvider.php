@@ -6,12 +6,20 @@ use App\Models\User;
 use App\Models\Article;
 use App\Models\Service;
 use App\Models\Company;
+use App\Models\Client;
+use App\Models\Partner;
+use App\Models\LineWork;
+use App\Models\Review;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\ArticlePolicy;
 use App\Policies\ServicePolicy;
 use App\Policies\CompanyPolicy;
+use App\Policies\ClientPolicy;
+use App\Policies\PartnerPolicy;
+use App\Policies\LineWorkPolicy;
+use App\Policies\ReviewPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -31,6 +39,10 @@ class AuthServiceProvider extends ServiceProvider
         Article::class => ArticlePolicy::class,
         Service::class => ServicePolicy::class,
         Company::class => CompanyPolicy::class,
+        Client::class => ClientPolicy::class,
+        Partner::class => PartnerPolicy::class,
+        LineWork::class => LineWorkPolicy::class,
+        Review::class => ReviewPolicy::class,
     ];
 
     /**

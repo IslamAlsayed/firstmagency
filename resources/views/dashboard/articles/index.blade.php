@@ -102,7 +102,16 @@
                                                 'modelClass' => 'article',
                                             ])
                                         </td>
-                                        <td class="p-4 text-sm text-gray-600">{{ $article->creator->name ?? 'N/A' }}</td>
+                                        <td class="p-4 text-sm text-gray-600">
+                                            @if ($article->creator)
+                                                <a href="{{ route('dashboard.users.show', $article->creator->id) }}" class="text-primary hover:underline">
+                                                    {{ $article->creator->name }}
+                                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                </a>
+                                            @else
+                                                <span class="text-gray-400 italic">N/A</span>
+                                            @endif
+                                        </td>
                                         <td class="p-4 text-sm text-gray-600">{{ $article->created_at?->format('d/m/Y') }}</td>
                                         <td class="p-4 text-sm text-gray-600">
                                             <i class="fas fa-eye text-blue-500"></i> {{ $article->view_count ?? 0 }}

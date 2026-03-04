@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="contact-sections">
+    <section class="contact-sections relative">
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.contact_form_header') }}</div>
             <button class="btn-link light-main-color dark-hover font-semibold mb-8">
@@ -139,6 +139,10 @@
                 </div>
             </div>
         </div>
+
+        @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-contact</div>
+    @endif
     </section>
 @endsection
 

@@ -1,4 +1,4 @@
-<section class="section platform-management-sections text-center">
+<section class="section platform-management-sections text-center relative">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
             {{ __('main.platform_management_title') }} <span class="title-badge">{{ __('main.advertising_platforms_badge') }}</span>
@@ -38,4 +38,7 @@
             <p class="platform-desc">{{ __('main.seo_description') }}</p>
         </article>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-platform-management</div>
+    @endif
 </section>

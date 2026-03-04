@@ -1,4 +1,4 @@
- <section class="developer-section effect-section">
+ <section class="developer-section effect-section relative">
      <div class="inner flex items-center gap-4">
          <div class="content">
              <div class="text">
@@ -101,4 +101,7 @@
              <img src="{{ asset('assets/images/website/developer/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
          </div>
      </div>
+     @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-website-developer</div>
+    @endif
  </section>

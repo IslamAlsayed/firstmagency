@@ -1,4 +1,4 @@
-<section class="section programming-section feature-section text-center">
+<section class="section programming-section feature-section text-center relative" id="hosting-features">
     <div class="title font-semibold">{{ __('main.hosting_features_title') }} <span class="title-badge">{{ __('main.brand_name') }}</span></div>
     <div class="description">{{ __('main.hosting_features_description') }}</div>
 
@@ -15,4 +15,8 @@
             @endforeach
         @endif
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-hosting-features</div>
+    @endif
 </section>

@@ -40,6 +40,15 @@ return [
     'article_created' => 'تم إنشاء المقالة بنجاح.',
     'article_updated' => 'تم تحديث المقالة بنجاح.',
     'article_deleted' => 'تم حذف المقالة بنجاح.',
+    'company_created' => 'تم إنشاء الشركة بنجاح.',
+    'company_updated' => 'تم تحديث الشركة بنجاح.',
+    'company_deleted' => 'تم حذف الشركة بنجاح.',
+    'client_created' => 'تم إنشاء العميل بنجاح.',
+    'client_updated' => 'تم تحديث العميل بنجاح.',
+    'client_deleted' => 'تم حذف العميل بنجاح.',
+    'line_work_created' => 'تم إنشاء خطوة العمل بنجاح.',
+    'line_work_updated' => 'تم تحديث خطوة العمل بنجاح.',
+    'line_work_deleted' => 'تم حذف خطوة العمل بنجاح.',
     // Error Messages
     'error_occurred' => 'حدث خطأ',
     'access_denied' => 'تم الرفض',
@@ -198,4 +207,18 @@ return [
     // Account Switching
     'switched_to_user' => 'تم التبديل إلى الحساب: :name',
     'dev_account_switcher' => 'ميزة تطويرية - اختبر أدوار مختلفة',
+
+    // Settings
+    'settings_updated' => 'تم تحديث الإعدادات بنجاح',
+    'settings_colors_fonts_applied' => 'تم تطبيق الألوان والخطوط على الموقع.',
+    'settings_colors_applied' => 'تم تطبيق ألوان الموقع على الموقع.',
+    'settings_fonts_applied' => 'تم تطبيق الخطوط على الموقع.',
+    'settings_general_applied' => 'تم تطبيق الإعدادات العامة على الموقع.',
+    'about_us_settings_updated' => 'تم تحديث إعدادات من نحن بنجاح!',
+    'debug_mode_toggled' => 'تم تفعيل وضع التصحيح :status بنجاح!',
+    'debug_ips_saved' => 'تم حفظ :count عنوان IP بنجاح!',
+    'your_ip_added' => 'تم إضافة عنوان IP الخاص بك (:ip) إلى قائمة عناوين IP للتصحيح!',
+    'your_ip_already_exists' => 'عنوان IP الخاص بك (:ip) موجود بالفعل في قائمة عناوين IP للتصحيح!',
+    // Validation & Status
+    'invalid_status' => 'حالة غير صحيحة',
 ];

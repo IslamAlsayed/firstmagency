@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Section;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -189,5 +191,68 @@ if (!function_exists('hasDisplayableRichText')) {
         $text = preg_replace('/\xc2\xa0|\s+/u', '', $text);
 
         return $text !== '';
+    }
+}
+
+/**
+ * Check if debug mode is enabled for the current IP
+ */
+if (!function_exists('isDebugModeEnabled')) {
+    function isDebugModeEnabled(): bool
+    {
+        static $debugMode = null;
+
+        if ($debugMode === null) {
+            $settings = Setting::first();
+
+            // Check if debug mode is globally enabled
+            if (!$settings || !$settings->debug_mode) {
+                $debugMode = false;
+                return $debugMode;
+            }
+
+            // If debug mode is enabled, check if current IP is allowed
+            $clientIp = request()->ip();
+            $allowedIps = $settings->debug_ips ? json_decode($settings->debug_ips, true) : [];
+
+            // If no IPs specified, allow for everyone (backward compatibility)
+            if (empty($allowedIps)) {
+                $debugMode = true;
+            } else {
+                $debugMode = in_array($clientIp, $allowedIps);
+            }
+        }
+
+        return $debugMode;
+    }
+}
+
+/**
+ * Get current client IP address
+ */
+if (!function_exists('getCurrentClientIp')) {
+    function getCurrentClientIp(): string
+    {
+        return request()->ip();
+    }
+}
+
+/**
+ * Get a section by flag
+ */
+if (!function_exists('getSectionByFlag')) {
+    function getSectionByFlag($flag)
+    {
+        return Section::findByFlag($flag);
+    }
+}
+
+/**
+ * Get all sections
+ */
+if (!function_exists('getAllSections')) {
+    function getAllSections()
+    {
+        return Section::active()->get();
     }
 }

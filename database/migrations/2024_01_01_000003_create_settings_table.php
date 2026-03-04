@@ -38,7 +38,6 @@ return new class extends Migration
             $table->float('line_height')->default(1.5);
 
             // General Settings
-            $table->string('site_locale')->default('ar');
             $table->string('site_name')->default('First Ma\'Agency');
             $table->string('site_email')->default('info@firstmagency.com');
             $table->string('site_whatsapp')->default('201212601601');
@@ -46,9 +45,17 @@ return new class extends Migration
             $table->longText('site_description')->nullable();
             $table->longText('site_description_ar')->nullable();
 
+            $table->string('about_us_title')->nullable();
+            $table->string('about_us_title_ar')->nullable();
+            $table->longText('about_us_description')->nullable();
+            $table->longText('about_us_description_ar')->nullable();
+            $table->string('about_us_image')->nullable();
+
             $table->string('main_color')->default('#d05423');
             $table->string('light_main_color')->default('#F97316');
             $table->string('dark_main_color')->default('#96310E');
+
+            $table->boolean('debug_mode')->default(false);
 
             $table->string('home_hero_section')->default(120);
             $table->string('home_services_section')->default(60);

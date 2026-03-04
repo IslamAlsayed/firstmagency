@@ -7,6 +7,10 @@
 </head>
 
 <body>
+    @if (view()->exists('vendor/toasts/toasts'))
+        @include('vendor.toasts.toasts')
+    @endif
+
     <!-- Wrapper -->
     <div class="kt-wrapper flex grow flex-col">
         @include('layouts.header')

@@ -40,6 +40,15 @@ return [
     'article_created' => 'Article created successfully.',
     'article_updated' => 'Article updated successfully.',
     'article_deleted' => 'Article deleted successfully.',
+    'company_created' => 'Company created successfully.',
+    'company_updated' => 'Company updated successfully.',
+    'company_deleted' => 'Company deleted successfully.',
+    'client_created' => 'Client created successfully.',
+    'client_updated' => 'Client updated successfully.',
+    'client_deleted' => 'Client deleted successfully.',
+    'line_work_created' => 'Line work created successfully.',
+    'line_work_updated' => 'Line work updated successfully.',
+    'line_work_deleted' => 'Line work deleted successfully.',
 
     // Error Messages
     'error_occurred' => 'Error Occurred',
@@ -199,4 +208,19 @@ return [
     // Account Switching
     'switched_to_user' => 'Switched to account: :name',
     'dev_account_switcher' => 'Development feature - Test different roles',
+
+    // Settings
+    'settings_updated' => 'Settings Updated Successfully',
+    'settings_colors_fonts_applied' => 'Colors and fonts have been applied to the site.',
+    'settings_colors_applied' => 'Website colors have been applied to the site.',
+    'settings_fonts_applied' => 'Fonts have been applied to the site.',
+    'settings_general_applied' => 'General settings have been applied to the site.',
+    'about_us_settings_updated' => 'About Us settings updated successfully!',
+    'debug_mode_toggled' => 'Debug mode :status successfully!',
+    'debug_ips_saved' => ':count IP(s) saved successfully!',
+    'your_ip_added' => 'Your IP (:ip) has been added to debug IPs!',
+    'your_ip_already_exists' => 'Your IP (:ip) is already in the debug IPs list!',
+
+    // Validation & Status
+    'invalid_status' => 'Invalid Status',
 ];

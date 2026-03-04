@@ -1,4 +1,4 @@
-<section class="developer-section app-developer-section marketing-hero">
+<section class="developer-section app-developer-section marketing-hero relative">
     <div class="inner flex items-center gap-4">
         <div class="content">
             <div class="text">
@@ -91,4 +91,7 @@
             <img src="{{ asset('assets/images/website/services-marketing/hero-2.png') }}" alt="{{ __('main.website_design_company') }}">
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-marketing-hero</div>
+    @endif
 </section>

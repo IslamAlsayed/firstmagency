@@ -1,4 +1,4 @@
-<section class="section important-articles text-center">
+<section class="section important-articles text-center relative">
     <div class="title font-semibold">{{ __('main.important_marketing_articles_title') }} <span
             class="title-badge">{{ __('main.important_marketing_articles_subtitle') }}</span></div>
     <div class="description">{{ __('main.important_marketing_articles_description') }}</div>
@@ -43,4 +43,7 @@
             @endif
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-important-articles-marketing</div>
+    @endif
 </section>

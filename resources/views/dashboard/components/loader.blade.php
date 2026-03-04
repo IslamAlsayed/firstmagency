@@ -1,21 +1,19 @@
 {{-- Include this component where loading indicator is needed --}}
 {{-- Example Usage: --}}
-{{-- <div class="search-load">
-    <div wire:loading wire:target="search">
-        @include('components.load-data')
-    </div>
-</div> --}}
+{{-- @include('dashboard.components.loader', ['width' => '15px', 'height' => '15px', 'color' => '#fff']) --}}
 
-{{-- <div class="la-ball-clip-rotate la-md" style="width: auto; height: auto;"> --}}
-<div class="la-ball-clip-rotate la-md" style="color: {{ isset($color) ? $color : 'var(--color-primary)' }};">
-    <div style="width: {{ isset($width) ? $width : '' }}; height: {{ isset($height) ? $height : '' }}"></div>
+<div class="container-loader hidden">
+    <div class="loader">
+        <div class="la-ball-clip-rotate la-md" style="color: {{ isset($color) ? $color : 'var(--color-primary)' }};">
+            <div style="width: {{ isset($width) ? $width : '' }}; height: {{ isset($height) ? $height : '' }}"></div>
+        </div>
+    </div>
 </div>
 
 @push('styles')
     <style>
-        .search-container {
+        .container-loader {
             --width: 40px;
-            border: 1px solid var(--input);
             border-radius: 5px;
 
             & input {
@@ -26,19 +24,10 @@
                 border: none;
                 box-shadow: none;
             }
-
-            & .search-load {
-                width: var(--width);
-                min-width: var(--width);
-                height: 100%;
-                padding-top: 5px;
-                text-align: center;
-                align-content: center;
-            }
         }
 
         @media (max-width: 992px) {
-            .search-container {
+            .container-loader {
                 --width: 30px;
 
                 & input {
@@ -48,7 +37,7 @@
         }
 
         @media (max-width: 768px) {
-            .search-container {
+            .container-loader {
                 --width: 30px;
 
                 & label {
@@ -62,11 +51,11 @@
             }
         }
 
-        /* !
-                                                                                                                                                                * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
-                                                                                                                                                                * Copyright 2015 Daniel Cardoso <@DanielCardoso>
-                                                                                                                                                                * Licensed under MIT
-                                                                                                                                                                */
+        /** !
+                                                                                        * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+                                                                                        * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+                                                                                        * Licensed under MIT
+                                                                                        */
         .la-ball-clip-rotate,
         .la-ball-clip-rotate>div {
             position: relative;
@@ -157,8 +146,8 @@
         }
 
         /*
-                                                                                                                                                                                                                         * Animation
-                                                                                                                                                                                                                         */
+                                                                                                                                                                                                                                                                                                                     * Animation
+                                                                                                                                                                                                                                                                                                                     */
         @-webkit-keyframes ball-clip-rotate {
             0% {
                 -webkit-transform: rotate(0deg);

@@ -109,7 +109,10 @@ class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
     protected function writeMigration($name, $table, $create)
     {
         $file = $this->creator->create(
-            $name, $this->getMigrationPath(), $table, $create
+            $name,
+            $this->getMigrationPath(),
+            $table,
+            $create
         );
 
         if (windows_os()) {
@@ -128,7 +131,7 @@ class MigrateMakeCommand extends BaseCommand implements PromptsForMissingInput
     {
         if (! is_null($targetPath = $this->input->getOption('path'))) {
             return ! $this->usingRealPath()
-                ? $this->laravel->basePath().'/'.$targetPath
+                ? $this->laravel->basePath() . '/' . $targetPath
                 : $targetPath;
         }
 

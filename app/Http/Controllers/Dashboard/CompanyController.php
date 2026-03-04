@@ -7,10 +7,13 @@ use App\Http\Requests\Company\StoreRequest;
 use App\Http\Requests\Company\UpdateRequest;
 use App\Models\Company;
 use App\Traits\PhotoUploadTrait;
+use App\Traits\GlobalDestroyTrait;
 
 class CompanyController extends Controller
 {
-    use PhotoUploadTrait;
+    use PhotoUploadTrait, GlobalDestroyTrait;
+
+    protected $modelClass = Company::class;
 
     public function index()
     {
@@ -117,7 +120,7 @@ class CompanyController extends Controller
         // Validate status
         $validStatuses = ['published', 'draft'];
         if (!in_array($status, $validStatuses)) {
-            return redirect()->route('dashboard.companies.index')->withError('Invalid status');
+            return back()->withError(__('messages.invalid_status'));
         }
 
         $company->update([

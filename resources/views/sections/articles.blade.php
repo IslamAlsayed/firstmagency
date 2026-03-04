@@ -1,4 +1,4 @@
-<section class="articles-section">
+<section class="articles-section relative">
     @if (isset($title) && $title)
         <div class="heading">{{ $title }}</div>
     @endif
@@ -125,5 +125,8 @@
                 document.getElementById('loadMoreBtn').style.display = 'none';
             }
         </script>
+    @endif
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-articles</div>
     @endif
 </section>

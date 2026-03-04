@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="section portfolio text-center section-with-filter">
+    <section class="section portfolio text-center section-with-filter relative">
         <div class="title font-semibold">{{ __('main.projects_main_title') }} <span class="title-badge">{{ __('main.projects_main_badge') }}</span></div>
         <div class="description">{{ __('main.projects_main_description') }}</div>
 
@@ -42,6 +42,10 @@
                 @endforeach
             @endif
         </div>
+
+        @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-portfolio</div>
+    @endif
     </section>
 @endsection
 

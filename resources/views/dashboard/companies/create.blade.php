@@ -18,16 +18,7 @@
                 @csrf
                 <div class="grid gap-4 lg:gap-6">
                     <!-- Tabs Navigation -->
-                    <div class="flex border-b border-gray-300">
-                        <button type="button" data-lang="ar"
-                            class="language-tab cursor-pointer px-4 py-2 border-b-2 border-indigo-600 text-indigo-600 font-semibold">
-                            EG {{ __('main.arabic') }}
-                        </button>
-                        <button type="button" data-lang="en"
-                            class="language-tab cursor-pointer px-4 py-2 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            🇺🇸 {{ __('main.english') }}
-                        </button>
-                    </div>
+                    @include('dashboard.components.tabs-navigation')
 
                     <!-- Arabic Tab Content -->
                     <div class="language-content" data-lang="ar">
@@ -65,7 +56,7 @@
                                 </label>
                                 <input type="text"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en"
-                                    name="name_en" required value="{{ old('name_en') }}" placeholder="Enter name in English">
+                                    name="name_en" value="{{ old('name_en') }}" placeholder="Enter name in English">
                                 @error('name_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -131,33 +122,10 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Save Button -->
                     @include('dashboard.components.save-submit', ['models' => 'dashboard.companies', 'model' => 'company'])
                 </div>
             </form>
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        document.querySelectorAll('.language-tab').forEach(button => {
-            button.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-
-                // Update tabs
-                document.querySelectorAll('.language-tab').forEach(tab => {
-                    tab.classList.remove('border-indigo-600', 'text-indigo-600', 'font-semibold');
-                    tab.classList.add('border-transparent', 'text-gray-600');
-                });
-                this.classList.add('border-indigo-600', 'text-indigo-600', 'font-semibold');
-
-                // Update content
-                document.querySelectorAll('.language-content').forEach(content => {
-                    content.classList.add('hidden');
-                });
-                document.querySelector(`.language-content[data-lang="${lang}"]`).classList.remove('hidden');
-            });
-        });
-    </script>
-@endpush

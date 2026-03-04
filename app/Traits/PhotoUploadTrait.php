@@ -85,22 +85,16 @@ trait PhotoUploadTrait
         });
     }
 
-    public function uploadSinglePhoto(Request $request, Model $model, string $column = 'photo', string $folder = 'other')
+    public function uploadSinglePhoto(Request $request, Model $model, string $column = 'photo', string $folder = 'other', string $option = null)
     {
         if (!$request->hasFile($column)) {
             return;
         }
         // Store old photo path BEFORE any updates
         $oldPhoto = $model->{$column};
-        // dd($model->toArray(), $oldPhoto, $request->file($column));
-
-        // if (Storage::disk('public')->exists($oldPhoto)) {
-        // dd("Old photo exists at path: {$oldPhoto}. Deletion is deferred until after new photo is uploaded and model is updated.");
-        // }
-        // dd($request->input('remove_photo'), $request->all(), $request->file($column));
 
         // Upload new photo
-        $path = $request->file($column)->store("uploads/{$folder}/{$model->id}", 'public');
+        $path = $request->file($column)->store("uploads/{$folder}/{$model->id}/" . ($option ? $option . '/' : ''), 'public');
 
         // Update model with new path
         $model->update([$column => $path]);
@@ -112,7 +106,7 @@ trait PhotoUploadTrait
             }
 
             // Delete the folder if empty
-            $folderPath = "uploads/{$folder}/{$model->id}";
+            $folderPath = "uploads/{$folder}/{$model->id}/" . ($option ? $option . '/' : '');
             if (Storage::disk('public')->exists($folderPath)) {
                 $files = Storage::disk('public')->files($folderPath);
                 if (empty($files)) {

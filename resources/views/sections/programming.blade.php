@@ -1,4 +1,4 @@
-<section class="section programming-section text-center">
+<section class="section programming-section text-center relative">
     <div class="title font-semibold">{{ __('main.programming_title') }} <span class="title-badge">{{ __('main.programming_subtitle') }}</span></div>
     <div class="description">{{ __('main.programming_description') }}</div>
 
@@ -14,4 +14,7 @@
             @endforeach
         @endif
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-programming</div>
+    @endif
 </section>

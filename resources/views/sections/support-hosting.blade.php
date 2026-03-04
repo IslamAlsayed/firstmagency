@@ -1,4 +1,4 @@
-<section class="section dont-worry-sections support-sections">
+<section class="section dont-worry-sections support-sections relative">
     <div class="content flex items-center justify-between gap-8">
         <div class="text">
             <div class="label font-semibold">{{ __('main.hosting_support_title') }}</div>
@@ -46,4 +46,7 @@
         </div>
     </div>
 
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-support-hosting</div>
+    @endif
 </section>

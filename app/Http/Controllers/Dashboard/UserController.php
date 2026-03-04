@@ -7,12 +7,15 @@ use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Traits\PhotoUploadTrait;
+use App\Traits\GlobalDestroyTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    use PhotoUploadTrait;
+    use PhotoUploadTrait, GlobalDestroyTrait;
+
+    protected $modelClass = User::class;
 
     public function index()
     {
@@ -34,7 +37,7 @@ class UserController extends Controller
         if ($request->hasFile('photo')) {
             $this->uploadSinglePhoto($request, $user, 'photo', 'users');
         }
-        return redirect()->route('dashboard.users.index')->withSuccess('User created successfully.');
+        return redirect()->route('dashboard.users.index')->withSuccess(__('messages.user_created'));
     }
 
     public function edit(User $user)
@@ -50,7 +53,7 @@ class UserController extends Controller
         if ($request->input('remove_photo') && $request->hasFile('photo')) {
             $this->uploadSinglePhoto($request, $user, 'photo', 'users');
         }
-        return redirect()->route('dashboard.users.index')->withSuccess('User updated successfully.');
+        return redirect()->route('dashboard.users.index')->withSuccess(__('messages.user_updated'));
     }
 
     public function show(User $user)
@@ -63,7 +66,7 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
         $user->delete();
-        return redirect()->route('dashboard.users.index')->withSuccess('User deleted successfully.');
+        return redirect()->route('dashboard.users.index')->withSuccess(__('messages.user_deleted'));
     }
 
     /**
@@ -83,6 +86,10 @@ class UserController extends Controller
         // Log in as the new user
         Auth::login($user, remember: true);
 
-        return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
+        if (in_array($user->role, ['superadmin', 'admin'])) {
+            return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
+        }
+
+        return redirect()->route('dashboard.index')->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
     }
 }

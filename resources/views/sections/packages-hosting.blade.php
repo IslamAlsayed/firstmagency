@@ -1,4 +1,4 @@
-<section class="section packages-sections text-center">
+<section class="section packages-sections text-center relative" id="packages-hosting">
     <div class="mb-8">
         <div class="title text-3xl font-semibold mb-4">
             {{ __('main.packages_title') }} <span class="title-badge">{{ __('main.brand_name') }}</span>
@@ -114,4 +114,8 @@
             @endif
         </div>
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-packages</div>
+    @endif
 </section>

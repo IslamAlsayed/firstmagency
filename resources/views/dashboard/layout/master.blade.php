@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
+<html class="h-full" dir="{{ session('dashboard_locale', 'ar') == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ session('dashboard_locale', 'ar') }}">
 
 <head>
     @include('dashboard.layout.partials.head')
@@ -44,6 +44,7 @@
 
     <!-- Scripts -->
     @include('dashboard.layout.partials.scripts')
+    @include('dashboard.components.delete-ajax-script')
 </body>
 
 </html>

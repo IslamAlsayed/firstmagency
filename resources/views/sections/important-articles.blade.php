@@ -1,4 +1,4 @@
-<section class="section important-articles text-center">
+<section class="section important-articles text-center relative">
     {{-- <div class="title font-semibold">{{ __('main.important_articles_title') }} <span class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div> --}}
     <div class="title font-semibold">{{ $title ?? __('main.important_articles_title') }} <span
             class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div>
@@ -44,4 +44,7 @@
             @endif
         </div>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-important-articles</div>
+    @endif
 </section>

@@ -1,4 +1,4 @@
-<section class="section work-lines-sections text-center">
+<section class="section work-lines-sections text-center relative">
     <div class="mb-8">
         <div class="title font-semibold">
             {{ __('main.line_works_title') }}
@@ -50,4 +50,7 @@
             <h3 class="step-title font-semibold">{{ __('main.competitor_research') }}</h3>
         </article>
     </div>
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-work-line</div>
+    @endif
 </section>

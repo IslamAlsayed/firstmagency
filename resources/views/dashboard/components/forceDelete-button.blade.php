@@ -1,6 +1,4 @@
-<button wire:key="{{ $id ? $id : '' }}-forceDelete" wire:click="{{ $id ? "forceDelete($id)" : '' }}" style="{{ isset($styles) ? $styles : '' }}"
-    class="kt-btn kt-btn-sm kt-btn-outline m-0 text-white bg-red-800" wire:loading.attr="disabled" wire:target="forceDelete" wire:ignore>
-
+<button style="{{ isset($styles) ? $styles : '' }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 text-white bg-red-800">
     @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
         {!! $text ?? __('main.force_delete') !!}
     @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')

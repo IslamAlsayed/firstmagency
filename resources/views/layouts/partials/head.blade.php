@@ -28,11 +28,22 @@
 <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
     rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+{{-- ? Start plugins --}}
+{{-- Select multiple plugin --}}
+<link href="{{ asset('assets/plugins/select2@4.1.0-rc.0/css/select2.min.css') }}" rel="stylesheet" />
 {{-- Fontawesome icons pro --}}
 <link href="{{ asset('assets/plugins/fontawesome-icons/css/all.min.css') }}" rel="stylesheet" />
-{{-- metronic css --}}
-<link href="{{ asset('assets/css/metronic.css') }}" rel="stylesheet" />
+{{-- Swiper slider --}}
+<link href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" rel="stylesheet" />
+<!-- Tailwind CSS -->
+<link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
+{{-- ? End plugins --}}
+
+{{-- Toasts Styles --}}
+<link rel="stylesheet" href="{{ asset('vendor/toasts/css/toasts.css') }}">
+{{-- Toasts Scripts --}}
+<script type="module" src="{{ asset('vendor/toasts/js/toasts.js') }}"></script>
+
 {{-- custom css --}}
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 
