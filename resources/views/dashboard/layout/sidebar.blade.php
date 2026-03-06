@@ -445,42 +445,6 @@
                 </a>
             </li>
         @endif
-
-        <li class="relative group submenu-item">
-            <button type="button" data-toggle="submenu"
-                class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.content.*') ? 'active' : '' }}">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-folder-open main-icon"></i>
-                    <span>{{ __('main.content') }}</span>
-                </div>
-                <i class="fas fa-chevron-down text-xs"></i>
-            </button>
-
-            <ul
-                class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.content.*') ? 'show' : '' }}">
-                <li class="relative">
-                    <a href="{{ route('dashboard.articles.index') }}"
-                        class="nav-link {{ request()->routeIs('dashboard.articles.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                        <i class="fas fa-file-alt text-sm main-icon"></i>
-                        <span class="text-sm">{{ __('main.articles') }}</span>
-                    </a>
-                </li>
-                <li class="relative">
-                    <a href="#"
-                        class="nav-link flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                        <i class="fas fa-images text-sm main-icon"></i>
-                        <span class="text-sm">{{ __('main.images') }}</span>
-                    </a>
-                </li>
-                <li class="relative">
-                    <a href="#"
-                        class="nav-link flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                        <i class="fas fa-video text-sm main-icon"></i>
-                        <span class="text-sm">{{ __('main.videos') }}</span></span>
-                    </a>
-                </li>
-            </ul>
-        </li>
     </ul>
 </aside>
 
