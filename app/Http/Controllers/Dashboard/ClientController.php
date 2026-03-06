@@ -128,7 +128,7 @@ class ClientController extends Controller
             'updated_by' => getActiveUserId(),
         ]);
 
-        $statusLabel = __('main.status_' . $status);
+        $statusLabel = __('main.' . $status);
         return redirect()->route('dashboard.clients.index')->withSuccess(
             __('messages.type_updated', ['type' => __('main.client')]) . ' - ' . $statusLabel
         );

@@ -128,7 +128,7 @@ class LineWorkController extends Controller
             'updated_by' => getActiveUserId(),
         ]);
 
-        $statusLabel = __('main.status_' . $status);
+        $statusLabel = __('main.' . $status);
         return redirect()->route('dashboard.line-works.index')->withSuccess(
             __('messages.type_updated', ['type' => __('main.line_work')]) . ' - ' . $statusLabel
         );

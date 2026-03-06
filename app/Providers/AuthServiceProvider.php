@@ -10,6 +10,8 @@ use App\Models\Client;
 use App\Models\Partner;
 use App\Models\LineWork;
 use App\Models\Review;
+use App\Models\Ticket;
+use App\Models\Programming;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
@@ -20,6 +22,8 @@ use App\Policies\ClientPolicy;
 use App\Policies\PartnerPolicy;
 use App\Policies\LineWorkPolicy;
 use App\Policies\ReviewPolicy;
+use App\Policies\TicketPolicy;
+use App\Policies\ProgrammingPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -43,6 +47,8 @@ class AuthServiceProvider extends ServiceProvider
         Partner::class => PartnerPolicy::class,
         LineWork::class => LineWorkPolicy::class,
         Review::class => ReviewPolicy::class,
+        Ticket::class => TicketPolicy::class,
+        Programming::class => ProgrammingPolicy::class,
     ];
 
     /**

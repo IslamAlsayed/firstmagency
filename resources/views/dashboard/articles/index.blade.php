@@ -8,19 +8,19 @@
         <div class="w-full">
             <!-- {{ __('main.statistics') }} -->
             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-gray-800">{{ count($articles) }}</div>
                     <small class="text-primary font-semibold">{{ __('main.total_articles') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-green-600">{{ $articles->where('status', 'published')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.published') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-yellow-600">{{ $articles->where('status', 'draft')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.draft') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-red-600">{{ $articles->where('status', 'archived')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.archived') }}</small>
                 </div>
@@ -41,9 +41,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-4">
-                    {{-- <div class="overflow-x-auto"> --}}
-                    <div class="">
+                <div class="scroll-container">
+                    <div class="p-4">
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">
@@ -83,7 +82,7 @@
                                                 @if ($article->status === 'published') bg-green-100 text-green-800
                                                 @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
                                                 @else bg-red-100 text-red-800 @endif">
-                                                {{ __('main.status_' . $article->status) }}
+                                                {{ __('main.' . $article->status) }}
                                             </span>
                                         </td>
                                         <td>

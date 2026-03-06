@@ -8,6 +8,11 @@
                 ev.stopPropagation();
             });
         });
+        // ['dragenter', 'dragover'].forEach(e => {
+        //     document.addEventListener(e, ev => {
+        //         ev.preventDefault();
+        //     });
+        // });
 
         /* ================= DROPZONE ================= */
         const dropzones = document.querySelectorAll('.dropzone');
@@ -18,7 +23,6 @@
             const previewId = 'preview-' + inputId;
             const preview = document.getElementById(previewId);
 
-
             if (!input) {
                 console.error('Input not found for:', inputId);
                 return;
@@ -28,7 +32,6 @@
                 console.error('Preview not found for:', previewId);
                 return;
             }
-
 
             // Click handler to open file dialog
             zone.addEventListener('click', (e) => {
@@ -47,19 +50,25 @@
                 })
             );
 
-            // Handle drop للـ single و multiple files
+            // Handle drop for single and multiple files
             zone.addEventListener('drop', e => {
                 const files = e.dataTransfer.files;
                 if (!files.length) return;
 
-                // للـ single photo: خذ أول ملف فقط
+                // For single photo: take only the first file
                 if (!input.multiple) {
                     const dt = new DataTransfer();
                     dt.items.add(files[0]);
                     input.files = dt.files;
                 } else {
-                    // للـ gallery: خذ كل الملفات
-                    input.files = files;
+                    // For multiple files: take all files
+                    const dt = new DataTransfer();
+
+                    for (let i = 0; i < files.length; i++) {
+                        dt.items.add(files[i]);
+                    }
+
+                    input.files = dt.files;
                 }
                 renderFiles(input, preview);
             });
@@ -67,10 +76,11 @@
             // File change event (when user selects via dialog)
             input.addEventListener('change', () => {
 
-                // إذا كان هناك صورة قديمة موجودة، حذفها
-                const existingDiv = document.getElementById('existing-' + inputId);
-                if (existingDiv && input.files.length > 0) {
-                    existingDiv.remove();
+                // If there is an existing photo, remove it
+                // const existingDiv = document.getElementById('existing-' + inputId);
+                const existingDivs = document.querySelectorAll('[id^="existing-' + inputId + '"]');
+                if (existingDivs.length > 0 && input.files.length > 0) {
+                    existingDivs.forEach(div => div.remove());
                     const removeInput = document.getElementById('remove_' + inputId);
                     if (removeInput) {
                         removeInput.value = 1;
@@ -88,6 +98,7 @@
             preview.classList.remove('hidden');
 
             const files = [...input.files];
+            console.log(input.files);
 
             if (files.length === 0) {
                 preview.classList.add('hidden');
@@ -142,7 +153,7 @@
                         const removeInput = document.getElementById('remove_' + columnName);
                         if (removeInput) removeInput.value = 1;
                     }
-                    // لـ gallery
+                    // for Multiple
                     else {
                         const index = e.target.dataset.index;
                         const path = e.target.dataset.path;

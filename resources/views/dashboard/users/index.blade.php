@@ -7,19 +7,19 @@
     <div class="w-full">
         <div class="w-full">
             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-gray-800">{{ count($users) }}</div>
                     <small class="text-primary font-semibold">{{ __('main.total_users') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-red-600">{{ $users->where('role', 'superadmin')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.super_admin') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-yellow-600">{{ $users->where('role', 'admin')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.admin') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-blue-600">{{ $users->where('role', 'content_manager')->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.content_manager') }}</small>
                 </div>
@@ -38,8 +38,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="p-4">
-                    <div class="">
+                <div class="scroll-container">
+                    <div class="p-4">
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">

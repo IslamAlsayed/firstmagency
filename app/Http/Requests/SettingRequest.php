@@ -51,6 +51,15 @@ class SettingRequest extends FormRequest
             'about_us_description_ar' => 'nullable|string',
             'about_us_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
 
+            'website_design_title' => 'nullable|string|max:255',
+            'website_design_title_ar' => 'nullable|string|max:255',
+            'website_design_heading' => 'nullable|string|max:255',
+            'website_design_heading_ar' => 'nullable|string|max:255',
+            'website_design_description' => 'nullable|string',
+            'website_design_description_ar' => 'nullable|string',
+            'website_design_years_experience' => 'nullable|numeric|max:999',
+            'website_design_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+
             'home_hero_section' => 'nullable|numeric|max:255',
             'home_services_section' => 'nullable|numeric|max:255',
             'home_projects_section' => 'nullable|numeric|max:255',

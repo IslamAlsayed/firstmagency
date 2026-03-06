@@ -163,6 +163,7 @@ class User extends Authenticatable
             'superadmin' => 'المسؤول الأعلى',
             'admin' => 'المسؤول',
             'content_manager' => 'مدير المحتوى',
+            'support' => 'الدعم الفني',
             default => 'غير معروف'
         };
     }
@@ -176,6 +177,7 @@ class User extends Authenticatable
             'superadmin' => 'Super Admin',
             'admin' => 'Admin',
             'content_manager' => 'Content Manager',
+            'support' => 'Support',
             default => 'Unknown'
         };
     }

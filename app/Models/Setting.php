@@ -14,6 +14,8 @@ class Setting extends Model
         'site_description_ar',
         'about_us_description',
         'about_us_description_ar',
+        'website_design_description',
+        'website_design_description_ar',
     ];
 
     protected $fillable = [
@@ -52,6 +54,15 @@ class Setting extends Model
         'about_us_description',
         'about_us_description_ar',
         'about_us_image',
+
+        'website_design_title',
+        'website_design_title_ar',
+        'website_design_heading',
+        'website_design_heading_ar',
+        'website_design_description',
+        'website_design_description_ar',
+        'website_design_years_experience',
+        'website_design_image',
 
         // Inline Padding
         'home_hero_section',

@@ -8,15 +8,15 @@
         <div class="w-full">
             <!-- Stats -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-gray-800">{{ count($roles) }}</div>
                     <small class="text-primary font-semibold">{{ __('main.total_roles') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-pink-600">{{ $roles->sum(fn($r) => $r->permissions->count()) }}</div>
                     <small class="text-primary font-semibold">{{ __('main.total_permissions') }}</small>
                 </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                     <div class="text-2xl font-bold text-green-600">{{ $roles->filter(fn($r) => $r->permissions->count() > 0)->count() }}</div>
                     <small class="text-primary font-semibold">{{ __('main.roles_with_permissions') }}</small>
                 </div>
@@ -35,8 +35,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="p-4">
-                    <div class="">
+                <div class="scroll-container">
+                    <div class="p-4">
                         <table class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 border-b-2 border-gray-300">

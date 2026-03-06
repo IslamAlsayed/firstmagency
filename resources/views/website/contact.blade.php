@@ -132,7 +132,8 @@
                                     <input type="text" id="verification" placeholder="{{ __('main.contact_form_answer') }}">
                                 </div>
                             </div>
-                            <div class="question font-semibold">{{ __('main.contact_form_verification_text') }}{{ rand(1, 9) }} + {{ rand(1, 9) }} = ?
+                            <div class="question font-semibold">
+                                {{ __('main.contact_form_verification_text') }}{{ rand(1, 9) }} + {{ rand(1, 9) }} = ?
                             </div>
                         </div>
                     </div>
@@ -141,8 +142,8 @@
         </div>
 
         @if (isDebugModeEnabled())
-        <div class="debug-flag-badge">🚩 flag-contact</div>
-    @endif
+            <div class="debug-flag-badge">🚩 flag-contact</div>
+        @endif
     </section>
 @endsection
 

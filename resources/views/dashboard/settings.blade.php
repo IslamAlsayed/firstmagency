@@ -12,8 +12,95 @@
                 {{ __('main.settings_management') }}
             </h5>
         </div>
-        <div class="p-4">
-            <div class="grid grid-cols-1 gap-4">
+
+        <!-- Main Grid: Sidebar + Content -->
+        {{-- <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 p-4"> --}}
+        <div class="grid grid-cols-1 gap-6 p-4">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1 hidden">
+                <div id="settings-sidebar" class="bg-gradient-to-b from-blue-50 to-purple-50 rounded-lg shadow-md p-4 border-2 border-blue-200">
+                    <h6 class="text-lg font-bold text-blue-900 mb-4">
+                        <i class="fas fa-list"></i> {{ __('main.sections') }}
+                    </h6>
+                    <nav class="space-y-2">
+                        <!-- General Settings -->
+                        <a href="#section-general"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="general">
+                            <i class="fas fa-sliders-h text-green-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.general_settings') }}</span>
+                        </a>
+
+                        <!-- Debug Mode -->
+                        <a href="#section-debug-mode"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="debug-mode">
+                            <i class="fas fa-bug text-red-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.debug_mode') }}</span>
+                        </a>
+
+                        <!-- Debug IPs -->
+                        <a href="#section-debug-ips"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="debug-ips">
+                            <i class="fas fa-network-wired text-blue-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">Debug IPs</span>
+                        </a>
+
+                        <!-- About Us -->
+                        <a href="#section-about-us"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="about-us">
+                            <i class="fas fa-info-circle text-amber-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.about_us') }}</span>
+                        </a>
+
+                        <!-- Website Design -->
+                        <a href="#section-website-design"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="website-design">
+                            <i class="fas fa-laptop-code text-blue-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.website_design') }}</span>
+                        </a>
+
+                        <!-- Colors Website -->
+                        <a href="#section-colors-website"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="colors-website">
+                            <i class="fas fa-palette text-blue-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.color_website') }}</span>
+                        </a>
+
+                        <!-- Colors Dashboard -->
+                        <a href="#section-colors-dashboard"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="colors-dashboard">
+                            <i class="fas fa-palette text-purple-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.color_dashboard') }}</span>
+                        </a>
+
+                        <!-- Fonts -->
+                        <a href="#section-fonts"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="fonts">
+                            <i class="fas fa-font text-purple-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.font_settings') }}</span>
+                        </a>
+
+                        <!-- Inline Padding -->
+                        <a href="#section-inline-padding"
+                            class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
+                            data-section="inline-padding">
+                            <i class="fas fa-arrows-alt-h text-purple-500 group-hover:scale-110 transition"></i>
+                            <span class="text-sm font-semibold text-gray-700">Padding</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            {{-- <div class="lg:col-span-3 space-y-6"> --}}
+            <div class="space-y-6">
                 <!-- General Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
                     <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
@@ -197,6 +284,107 @@
 
                         {{-- About Us Image --}}
                         @include('dashboard.components.photo', ['record' => $settings, 'column' => 'about_us_image'])
+
+                        <button type="submit" toggle-button
+                            class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
+                            <i class="fas fa-save"></i>
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Website Design Settings -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-blue-300">
+                        <i class="fas fa-laptop-code text-blue-500"></i>
+                        {{ __('main.website_design_title') }}
+                    </h6>
+                    <form action="{{ route('dashboard.settings.updateWebsiteDesign') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="grid gap-4">
+                            <!-- Tabs Navigation -->
+                            @include('dashboard.components.tabs-navigation')
+
+                            <!-- English Tab Content -->
+                            <div class="language-content" data-lang="en">
+                                <div class="grid gap-4">
+                                    {{-- Website Design Title EN --}}
+                                    <div>
+                                        <label for="website-design-title" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
+                                        <input type="text" id="website-design-title" name="website_design_title"
+                                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                            placeholder="Website Design Title" value="{{ $settings->website_design_title ?? '' }}">
+                                    </div>
+
+                                    {{-- Website Design Heading EN --}}
+                                    <div>
+                                        <label for="website-design-heading"
+                                            class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
+                                        <input type="text" id="website-design-heading" name="website_design_heading"
+                                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                            placeholder="Website Design Heading" value="{{ $settings->website_design_heading ?? '' }}">
+                                    </div>
+
+                                    {{-- Website Design Description EN --}}
+                                    @include('dashboard.components.input-text-editor', [
+                                        'name' => 'website_design_description',
+                                        'value' => $settings->website_design_description ?? '',
+                                        'classes' => 'mb-4',
+                                    ])
+                                </div>
+                            </div>
+
+                            <!-- Arabic Tab Content -->
+                            <div class="language-content hidden" data-lang="ar">
+                                <div class="grid gap-4">
+                                    {{-- Website Design Title AR --}}
+                                    <div>
+                                        <label for="website-design-title-ar"
+                                            class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
+                                        <input type="text" id="website-design-title-ar" name="website_design_title_ar"
+                                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                            placeholder="عنوان تصميم المواقع" value="{{ $settings->website_design_title_ar ?? '' }}">
+                                    </div>
+
+                                    {{-- Website Design Heading AR --}}
+                                    <div>
+                                        <label for="website-design-heading-ar"
+                                            class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
+                                        <input type="text" id="website-design-heading-ar" name="website_design_heading_ar"
+                                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                            placeholder="عنوان تصميم المواقع" value="{{ $settings->website_design_heading_ar ?? '' }}">
+                                    </div>
+
+                                    {{-- Website Design Description AR --}}
+                                    @include('dashboard.components.input-text-editor', [
+                                        'name' => 'website_design_description_ar',
+                                        'value' => $settings->website_design_description_ar ?? '',
+                                        'classes' => 'mb-4',
+                                    ])
+                                </div>
+                            </div>
+
+                            {{-- Website Design Image --}}
+                            @include('dashboard.components.photo', ['record' => $settings, 'column' => 'website_design_image'])
+
+                            {{-- Website Design Years Experience --}}
+                            <div class="grid grid-cols-1 gap-4">
+                                <div>
+                                    <label for="website-design-years"
+                                        class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.website_design_years_experience') }}</label>
+                                    <input type="number" id="website-design-years" name="website_design_years_experience"
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                        placeholder="8" value="{{ $settings->website_design_years_experience ?? 8 }}" min="0">
+                                </div>
+                                <div class="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg">
+                                    <p><strong>{{ __('main.website_design_clients') }}:</strong> {{ App\Models\Client::count() }}</p>
+                                    <p><strong>{{ __('main.website_design_projects') }}:</strong> {{ App\Models\Company::count() }}</p>
+                                    <p><strong>{{ __('main.website_design_support_ticket') }}:</strong> {{ App\Models\Ticket::count() }}</p>
+                                </div>
+                            </div>
+                        </div>
 
                         <button type="submit" toggle-button
                             class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
@@ -796,11 +984,142 @@
         [style*="--info"] {
             color: var(--info);
         }
+
+        /* Custom Sidebar Fixed Position */
+        #settings-sidebar {
+            position: relative;
+        }
+
+        #settings-sidebar.fixed-sidebar {
+            position: fixed;
+            width: calc((100% - 48px) / 4);
+            max-width: 280px;
+            z-index: 40;
+            top: 20px;
+        }
+
+        /* Sidebar Navigation Active State */
+        .settings-nav-item {
+            position: relative;
+        }
+
+        .settings-nav-item.active {
+            background-color: rgb(191, 219, 254);
+            border-left: 4px solid #3b82f6;
+            padding-left: calc(1rem - 4px);
+        }
+
+        .settings-nav-item.active i {
+            color: #1e40af !important;
+        }
+
+        .settings-nav-item.active span {
+            color: #1e40af !important;
+            font-weight: 700;
+        }
     </style>
 @endpush
 
 @push('scripts')
     <script>
+        // Custom Fixed Sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('settings-sidebar');
+            const sidebarContainer = sidebar.parentElement;
+            const contentContainer = document.querySelector('.lg\\:col-span-3');
+
+            function handleSidebarPosition() {
+                const sidebarRect = sidebar.getBoundingClientRect();
+                const containerRect = sidebarContainer.getBoundingClientRect();
+                const contentRect = contentContainer.getBoundingClientRect();
+
+                // Check if we need to make sidebar fixed
+                if (window.scrollY > sidebarContainer.offsetTop && contentRect.bottom > window.innerHeight) {
+                    sidebar.classList.add('fixed-sidebar');
+                } else {
+                    sidebar.classList.remove('fixed-sidebar');
+                }
+            }
+
+            window.addEventListener('scroll', handleSidebarPosition);
+            window.addEventListener('resize', handleSidebarPosition);
+        });
+
+        // Sidebar Navigation & Smooth Scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.settings-nav-item');
+            const contentSections = document.querySelectorAll('.bg-gray-50.rounded-lg.p-4');
+
+            // Smooth scroll to section when clicking nav item
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+
+                    // Add active class to clicked item
+                    this.classList.add('active');
+
+                    // Get the section to scroll to
+                    const section = this.getAttribute('data-section');
+                    let target = null;
+
+                    // Map section to content
+                    if (section === 'general') {
+                        target = contentSections[0]; // General Settings
+                    } else if (section === 'debug-mode') {
+                        target = contentSections[1]; // Debug Mode
+                    } else if (section === 'debug-ips') {
+                        target = contentSections[2]; // Debug IPs
+                    } else if (section === 'about-us') {
+                        target = contentSections[3]; // About Us
+                    } else if (section === 'website-design') {
+                        target = contentSections[4]; // Website Design
+                    } else if (section === 'colors-website') {
+                        target = contentSections[5]; // Colors Website
+                    } else if (section === 'colors-dashboard') {
+                        target = contentSections[6]; // Colors Dashboard
+                    } else if (section === 'fonts') {
+                        target = contentSections[7]; // Fonts
+                    } else if (section === 'inline-padding') {
+                        target = contentSections[8]; // Inline Padding
+                    }
+
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Highlight active section on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+
+                contentSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section;
+                    }
+                });
+
+                navItems.forEach(nav => {
+                    nav.classList.remove('active');
+                });
+
+                // Find matching nav item based on position
+                if (current) {
+                    const position = Array.from(contentSections).indexOf(current);
+                    if (navItems[position]) {
+                        navItems[position].classList.add('active');
+                    }
+                }
+            });
+        });
+
         // Live color preview
         document.addEventListener('DOMContentLoaded', function() {
             // Dashboard colors

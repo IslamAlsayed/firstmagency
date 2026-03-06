@@ -61,18 +61,26 @@
                             <p class="font-semibold text-gray-800">{{ $article->created_at?->format('d/m/Y H:i') }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">{{ __('main.status') }}</p>
-                            <p class="text-sm text-secondary-foreground">
+                            <p class="text-sm text-gray-500 mb-2">
+                                {{ __('main.status') }}
                                 <span
                                     class="px-3 py-1 rounded-full text-xs font-semibold
-                            @if ($article->status === 'published') bg-green-100 text-green-800
-                            @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
-                            @else bg-red-100 text-red-800 @endif">
-                                    {{ __('main.status_' . $article->status) }}
+                                @if ($article->status === 'published') bg-green-100 text-green-800
+                                @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
+                                @else bg-red-100 text-red-800 @endif">
+                                    @if ($article->status === 'draft')
+                                        <i class="fas fa-clock text-yellow-500"></i> {{ __('main.draft') }}
+                                    @elseif ($article->status === 'published')
+                                        <i class="fas fa-check-circle text-green-600"></i> {{ __('main.published') }}
+                                    @elseif ($article->status === 'archived')
+                                        <i class="fas fa-times-circle text-red-600"></i> {{ __('main.archived') }}
+                                    @endif
                                 </span>
                             </p>
+                            @include('dashboard.components.article-status-actions', [
+                                'record' => $article,
+                            ])
                         </div>
-
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
                             @include('dashboard.components.toggle-hold', [

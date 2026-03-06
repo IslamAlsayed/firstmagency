@@ -14,7 +14,7 @@
 
     <ul id="sidebarMenu" class="nav-menu">
         @if (auth()->user()->can('users-read') || auth()->user()->can('users-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.users.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -47,7 +47,7 @@
 
         <!-- Roles -->
         @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -80,7 +80,7 @@
 
         <!-- Permissions -->
         @if (auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.permissions.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -113,7 +113,7 @@
 
         <!-- Articles -->
         @if (auth()->user()->can('articles-read') || auth()->user()->can('articles-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -145,7 +145,7 @@
 
         <!-- Services -->
         @if (auth()->user()->can('services-read') || auth()->user()->can('services-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -177,7 +177,7 @@
 
         <!-- Companies -->
         @if (auth()->user()->can('companies-read') || auth()->user()->can('companies-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.companies.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -209,7 +209,7 @@
 
         <!-- Clients -->
         @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
@@ -335,6 +335,102 @@
             </li>
         @endif
 
+        <!-- Programming -->
+        @if (auth()->user()->can('programmings-read') || auth()->user()->can('programmings-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.programmings.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">💻</span>
+                        <span>{{ __('main.programmings') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.programmings.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.programmings.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.programmings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.programmings') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.programmings.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.programmings.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.programming')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- FAQs -->
+        @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">❓</span>
+                        <span>{{ __('main.faqs') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.faqs.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.faqs.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.faqs.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.faqs') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.faqs.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.faqs.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.faq')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Tickets -->
+        @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🎫</span>
+                        <span>{{ __('main.tickets') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.tickets.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.tickets.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.tickets.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.tickets') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.tickets.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.tickets.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.ticket')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
         {{-- Settings --}}
         @if (auth()->user()->can('settings-read'))
             <li class="relative">
@@ -395,6 +491,9 @@
         button.addEventListener('click', function(e) {
             e.preventDefault();
             submenuButtons.forEach(button => button.classList.remove('active'));
+            // if (button.classList.contains('active')) {
+            //     button.classList.remove('active');
+            // }
             button.classList.toggle('active');
 
             const submenuItem = this.closest('.submenu-item');
@@ -424,10 +523,6 @@
             // Get the sidebar container
             const sidebar = document.getElementById('sidebar');
             if (sidebar) {
-                // Calculate the position of active link relative to sidebar
-                const linkPosition = activeLink.getBoundingClientRect();
-                const sidebarPosition = main.getBoundingClientRect();
-
                 // Scroll to center the active link
                 activeLink.scrollIntoView({
                     behavior: 'smooth',

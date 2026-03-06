@@ -132,7 +132,7 @@ class ReviewController extends Controller
             'updated_by' => getActiveUserId(),
         ]);
 
-        $statusLabel = __('main.status_' . $status);
+        $statusLabel = __('main.' . $status);
         return back()->withSuccess(__('messages.type_updated', ['type' => __('main.review')]) . ' - ' . $statusLabel);
     }
 }

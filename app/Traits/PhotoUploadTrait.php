@@ -116,30 +116,24 @@ trait PhotoUploadTrait
         }
     }
 
-    public function uploadGallery(Request $request, Model $model, string $column = 'gallery', string $folder = 'other')
+    public function uploadFiles(Request $request, Model $model, string $column = 'files', string $folder = 'other')
     {
-        if (!$request->hasFile($column)) {
-            return;
-        }
-
-        $gallery = $model->{$column} ?? [];
-
+        if (!$request->hasFile($column)) return;
+        $files = $model->{$column} ?? [];
         foreach ($request->file($column) as $file) {
-            $gallery[] = $file->store("uploads/{$folder}/{$model->id}/gallery", 'public');
+            $files[] = $file->store("uploads/{$folder}/{$model->id}/{$column}", 'public');
         }
-
-        $model->update([$column => array_values($gallery),]);
+        $model->update([$column => array_values($files)]);
     }
 
-    public function deleteGalleryImages(Model $model, array $removedImages, string $column = 'gallery')
+    public function deleteFiles(Model $model, array $indexes, string $column = 'files')
     {
-        $gallery = $model->{$column} ?? [];
-
-        foreach ($removedImages as $image) {
-            Storage::disk('public')->delete($image);
-            $gallery = array_diff($gallery, [$image]);
+        $files = $model->{$column} ?? [];
+        foreach ($indexes as $index) {
+            if (!isset($files[$index])) continue;
+            Storage::disk('public')->delete($files[$index]);
+            unset($files[$index]);
         }
-
-        $model->update([$column => array_values($gallery),]);
+        $model->update([$column => array_values($files)]);
     }
 }

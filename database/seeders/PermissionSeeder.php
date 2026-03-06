@@ -114,6 +114,30 @@ class PermissionSeeder extends Seeder
             ['name' => 'reviews-restore', 'guard_name' => 'web', 'description' => 'Restore reviews'],
             ['name' => 'reviews-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete reviews'],
 
+            // Programming Permissions
+            ['name' => 'programmings-create', 'guard_name' => 'web', 'description' => 'Create programmings'],
+            ['name' => 'programmings-read', 'guard_name' => 'web', 'description' => 'View programmings'],
+            ['name' => 'programmings-update', 'guard_name' => 'web', 'description' => 'Edit programmings'],
+            ['name' => 'programmings-delete', 'guard_name' => 'web', 'description' => 'Delete programmings'],
+            ['name' => 'programmings-restore', 'guard_name' => 'web', 'description' => 'Restore programmings'],
+            ['name' => 'programmings-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete programmings'],
+
+            // FAQs Permissions
+            ['name' => 'faqs-create', 'guard_name' => 'web', 'description' => 'Create FAQs'],
+            ['name' => 'faqs-read', 'guard_name' => 'web', 'description' => 'View FAQs'],
+            ['name' => 'faqs-update', 'guard_name' => 'web', 'description' => 'Edit FAQs'],
+            ['name' => 'faqs-delete', 'guard_name' => 'web', 'description' => 'Delete FAQs'],
+            ['name' => 'faqs-restore', 'guard_name' => 'web', 'description' => 'Restore FAQs'],
+            ['name' => 'faqs-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete FAQs'],
+
+            // Tickets Permissions
+            ['name' => 'tickets-create', 'guard_name' => 'web', 'description' => 'Create tickets'],
+            ['name' => 'tickets-read', 'guard_name' => 'web', 'description' => 'View tickets'],
+            ['name' => 'tickets-update', 'guard_name' => 'web', 'description' => 'Edit tickets'],
+            ['name' => 'tickets-delete', 'guard_name' => 'web', 'description' => 'Delete tickets'],
+            ['name' => 'tickets-restore', 'guard_name' => 'web', 'description' => 'Restore tickets'],
+            ['name' => 'tickets-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete tickets'],
+
             // Dashboard Permissions
             ['name' => 'dashboard-access', 'guard_name' => 'web', 'description' => 'Access dashboard'],
             ['name' => 'dashboard-manage', 'guard_name' => 'web', 'description' => 'Manage dashboard'],
@@ -184,6 +208,18 @@ class PermissionSeeder extends Seeder
             'reviews-read',
             'reviews-update',
             'reviews-delete',
+            'programmings-create',
+            'programmings-read',
+            'programmings-update',
+            'programmings-delete',
+            'faqs-create',
+            'faqs-read',
+            'faqs-update',
+            'faqs-delete',
+            'tickets-create',
+            'tickets-read',
+            'tickets-update',
+            'tickets-delete',
             'dashboard-access',
             'dashboard-manage',
         ])->get();
@@ -215,6 +251,12 @@ class PermissionSeeder extends Seeder
             'reviews-create',
             'reviews-read',
             'reviews-update',
+            'programmings-create',
+            'programmings-read',
+            'programmings-update',
+            'faqs-create',
+            'faqs-read',
+            'faqs-update',
             'dashboard-access',
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);
@@ -222,6 +264,14 @@ class PermissionSeeder extends Seeder
         $supportPermissions = Permission::whereIn('name', [
             'content-read',
             'dashboard-access',
+        ])->get();
+        $supportRole->syncPermissions($supportPermissions);
+
+        // Assign Support permissions
+        $supportPermissions = Permission::whereIn('name', [
+            'tickets-create',
+            'tickets-read',
+            'tickets-update',
         ])->get();
         $supportRole->syncPermissions($supportPermissions);
 

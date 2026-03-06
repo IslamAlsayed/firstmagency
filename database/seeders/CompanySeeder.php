@@ -21,7 +21,6 @@ class CompanySeeder extends Seeder
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
         if (!$user) return; // لا توجد مستخدمين
 
-
         $companies = [
             [
                 'translations' => [

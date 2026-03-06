@@ -31,7 +31,7 @@
         <div class="flex flex-col divide-y divide-border max-h-64 overflow-y-auto" id="accountSwitcherList">
             @foreach ($availableUsers as $user)
                 <button type="button" onclick="switchAccount({{ $user->id }})"
-                    class="flex items-center gap-3 p-4 hover:bg-gray-100 cursor-pointer transition-colors text-start {{ getActiveUserId() === $user->id ? 'bg-primary/10 border-l-2 border-primary' : '' }}">
+                    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors text-start {{ getActiveUserId() === $user->id ? 'bg-primary/10 border-l-2 border-primary' : '' }}">
                     <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                         @if ($user->photo && checkExistFile($user->photo))
                             <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-8 h-8 rounded-full object-cover">
@@ -40,9 +40,10 @@
                         @endif
                     </div>
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-600">{{ $user->name }}</p>
-                        <p class="text-xs text-gray-600 truncate">{{ $user->email }}</p>
-                        <div class="flex items-center gap-1 mt-1">
+                        {{-- <p class="text-sm font-medium text-gray-600">{{ $user->name }}</p> --}}
+                        {{-- <p class="text-xs text-gray-600 truncate">{{ $user->email }}</p> --}}
+                        {{-- <div class="flex items-center gap-1 mt-1"> --}}
+                        <div class="flex items-center gap-1">
                             @foreach ($user->getRoleNames() as $role)
                                 <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700">
                                     {{ __('main.' . $role) }}
@@ -51,7 +52,7 @@
                         </div>
                     </div>
                     @if (getActiveUserId() === $user->id)
-                        <i class="ki-filled ki-check text-primary text-lg ms-auto"></i>
+                        <i class="ki-filled ki-check text-lg ms-auto" style="color: var(--color-green-600) !important"></i>
                     @endif
                 </button>
             @endforeach

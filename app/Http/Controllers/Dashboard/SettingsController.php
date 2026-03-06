@@ -84,6 +84,23 @@ class SettingsController extends Controller
         return redirect()->back()->withSuccess(__('messages.about_us_settings_updated'));
     }
 
+    public function updateWebsiteDesign(SettingRequest $request)
+    {
+        $settings = Setting::first();
+        $settings->update($request->validated());
+
+        // Handle image upload
+        if ($request->hasFile('website_design_image')) {
+            // Delete old image if exists
+            if ($settings->website_design_image) {
+                @unlink(storage_path('app/public/' . $settings->website_design_image));
+            }
+            $this->uploadSinglePhoto($request, $settings, 'website_design_image', 'settings/website-design');
+        }
+
+        return redirect()->back()->withSuccess(__('messages.about_us_settings_updated'));
+    }
+
     /**
      * Toggle debug mode
      */

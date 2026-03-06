@@ -103,7 +103,7 @@
                     <a href="{{ route('about-us') }}"
                         class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
-                        <span>{{ __('main.about_us') }}</span>
+                        <span>{{ __('main.about_us_') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center our_services">

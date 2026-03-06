@@ -17,7 +17,7 @@
             --info: {{ $settings->info_color ?? '#0dcaf0' }};
             --accent-color: {{ $settings->accent_color ?? '#dc3545' }};
 
-            --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
+            --font-family: "{{ $settings->font_name ?? 'Tajawal' }}";
         }
     </style>
 </head>

@@ -128,7 +128,7 @@ class PartnerController extends Controller
             'updated_by' => getActiveUserId(),
         ]);
 
-        $statusLabel = __('main.status_' . $status);
+        $statusLabel = __('main.' . $status);
         return redirect()->route('dashboard.partners.index')->withSuccess(__('messages.type_updated', ['type' => __('main.partner')]) . ' - ' . $statusLabel);
     }
 }

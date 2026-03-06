@@ -68,7 +68,7 @@
                             @if ($company->status === 'published') bg-green-100 text-green-800
                             @elseif($company->status === 'draft') bg-yellow-100 text-yellow-800
                             @else bg-red-100 text-red-800 @endif">
-                                    {{ __('main.status_' . $company->status) }}
+                                    {{ __('main.' . $company->status) }}
                                 </span>
                             </p>
                         </div>
