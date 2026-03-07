@@ -14,6 +14,7 @@ use App\Models\Ticket;
 use App\Models\Programming;
 use App\Models\OurProgramming;
 use App\Models\ProjectStep;
+use App\Models\FeaturesHosting;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
@@ -28,6 +29,7 @@ use App\Policies\TicketPolicy;
 use App\Policies\ProgrammingPolicy;
 use App\Policies\OurProgrammingPolicy;
 use App\Policies\ProjectStepPolicy;
+use App\Policies\FeaturesHostingPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -55,6 +57,7 @@ class AuthServiceProvider extends ServiceProvider
         Programming::class => ProgrammingPolicy::class,
         OurProgramming::class => OurProgrammingPolicy::class,
         ProjectStep::class => ProjectStepPolicy::class,
+        FeaturesHosting::class => FeaturesHostingPolicy::class,
     ];
 
     /**

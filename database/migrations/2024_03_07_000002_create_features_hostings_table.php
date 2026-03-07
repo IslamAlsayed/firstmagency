@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_steps', function (Blueprint $table) {
+        Schema::create('features_hostings', function (Blueprint $table) {
             $table->id();
-            $table->json('translations'); // ar/en: title, content
-            $table->string('icon')->nullable();
+            $table->string('slug')->unique();
+            $table->json('translations'); // ar/en: title, description
+            $table->string('image')->nullable();
             $table->integer('order')->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_steps');
+        Schema::dropIfExists('features_hostings');
     }
 };

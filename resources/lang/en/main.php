@@ -1314,6 +1314,24 @@ return [
     'edit_project_step' => 'Edit Project Step',
     'project_step_details' => 'Project Step Details',
 
+    // ==================== Features Hosting ====================
+    'features_hosting' => 'Features Hosting',
+    'features-hosting' => 'Features Hosting',
+    'featuresHosting' => 'Features Hosting',
+    'featureshostings' => 'Features Hosting',
+    'features_hostings' => 'Features Hosting',
+    'features-hostings' => 'Features Hosting',
+    'total_features_hostings' => 'Total Features Hosting',
+    'create_features_hosting' => 'Add Hosting Feature',
+    'edit_features_hosting' => 'Edit Hosting Feature',
+    'view_features_hosting' => 'View Hosting Feature',
+    'features_hosting_details' => 'Hosting Feature Details',
+    'features_hosting_information' => 'Hosting Feature Information',
+    'features_hosting_created_successfully' => 'Hosting feature added successfully',
+    'features_hosting_updated_successfully' => 'Hosting feature updated successfully',
+    'features_hosting_deleted_successfully' => 'Hosting feature deleted successfully',
+    'no_features_hostings_found' => 'No hosting features found',
+
     // ==================== Categories Programming ====================
     'categories_programming' => 'Categories Programming',
     'total_categories_programming' => 'Total Categories Programming',

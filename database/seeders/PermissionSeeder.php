@@ -146,6 +146,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'project-steps-restore', 'guard_name' => 'web', 'description' => 'Restore project steps'],
             ['name' => 'project-steps-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete project steps'],
 
+            // Features Hosting Permissions
+            ['name' => 'features-hosting-create', 'guard_name' => 'web', 'description' => 'Create features hosting'],
+            ['name' => 'features-hosting-read', 'guard_name' => 'web', 'description' => 'View features hosting'],
+            ['name' => 'features-hosting-update', 'guard_name' => 'web', 'description' => 'Edit features hosting'],
+            ['name' => 'features-hosting-delete', 'guard_name' => 'web', 'description' => 'Delete features hosting'],
+            ['name' => 'features-hosting-restore', 'guard_name' => 'web', 'description' => 'Restore features hosting'],
+            ['name' => 'features-hosting-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete features hosting'],
+
             // FAQs Permissions
             ['name' => 'faqs-create', 'guard_name' => 'web', 'description' => 'Create FAQs'],
             ['name' => 'faqs-read', 'guard_name' => 'web', 'description' => 'View FAQs'],

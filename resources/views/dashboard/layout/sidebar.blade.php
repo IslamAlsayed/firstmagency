@@ -495,6 +495,38 @@
             </li>
         @endif
 
+        <!-- Features Hosting -->
+        @if (auth()->user()->can('features-hosting-read') || auth()->user()->can('features-hosting-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.features-hostings.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🎁</span>
+                        <span>{{ __('main.features_hostings') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.features-hostings.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.features-hostings.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.features-hostings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.features_hostings') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.features-hostings.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.features-hostings.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.features_hosting')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
         {{-- Settings --}}
         @if (auth()->user()->can('settings-read'))
             <li class="relative">

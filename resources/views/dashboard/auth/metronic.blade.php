@@ -35,7 +35,7 @@
         @include('vendor.toasts.toasts')
     @endif
 
-    <div id="kt_theme_mode_menu">
+    {{-- <div id="kt_theme_mode_menu">
         <div class="flex items-center justify-between gap-2">
             <span class="flex items-center gap-2">
                 <i class="text-base ki-filled ki-moon text-gray-600" id="icon-theme-mode"></i>
@@ -45,7 +45,7 @@
             </span>
             <input class="kt-switch" id="switch-theme-mode" type="checkbox" value="1" />
         </div>
-    </div>
+    </div> --}}
 
     @yield('content')
 

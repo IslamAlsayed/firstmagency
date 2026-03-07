@@ -1325,6 +1325,24 @@ return [
     'edit_project_step' => 'تعديل خطوة المشروع',
     'project_step_details' => 'تفاصيل خطوة المشروع',
 
+    // ==================== Features Hosting ====================
+    'features_hosting' => 'ميزات الاستضافة',
+    'features-hosting' => 'ميزات الاستضافة',
+    'featuresHosting' => 'ميزات الاستضافة',
+    'featureshostings' => 'ميزات الاستضافة',
+    'features_hostings' => 'ميزات الاستضافة',
+    'features-hostings' => 'ميزات الاستضافة',
+    'total_features_hostings' => 'إجمالي ميزات الاستضافة',
+    'create_features_hosting' => 'إضافة ميزة استضافة',
+    'edit_features_hosting' => 'تعديل ميزة الاستضافة',
+    'view_features_hosting' => 'عرض ميزة الاستضافة',
+    'features_hosting_details' => 'تفاصيل ميزة الاستضافة',
+    'features_hosting_information' => 'معلومات ميزة الاستضافة',
+    'features_hosting_created_successfully' => 'تمت إضافة ميزة الاستضافة بنجاح',
+    'features_hosting_updated_successfully' => 'تم تحديث ميزة الاستضافة بنجاح',
+    'features_hosting_deleted_successfully' => 'تم حذف ميزة الاستضافة بنجاح',
+    'no_features_hostings_found' => 'لم يتم العثور على ميزات استضافة',
+
     // ==================== Categories Programming ====================
     'categories_programming' => 'صور قسم البرمجة',
     'total_categories_programming' => 'إجمالي صور قسم البرمجة',

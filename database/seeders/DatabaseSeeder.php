@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             FAQSeeder::class,
             OurProgrammingSeeder::class,
             ProjectStepSeeder::class,
+            FeaturesHostingSeeder::class,
         ]);
     }
 }
