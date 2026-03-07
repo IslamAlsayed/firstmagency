@@ -162,7 +162,10 @@ class DashboardController extends Controller
     // Force destroy (permanent delete) for any model
     public function forceDestroy($modelClass, $id)
     {
-        $modelClass = '\\App\\Models\\' . ucfirst($modelClass);
+        $modelClass = str_replace('-', ' ', $modelClass);
+        $modelClass = str_replace(' ', '', ucwords($modelClass));
+        $modelClass = implode(' ', array_map('ucfirst', explode('-', singularLowerCaseName($modelClass, '-'))));
+        $modelClass = '\\App\\Models\\' . $modelClass;
         $model = $modelClass::withTrashed()->find($id);
 
         if (!$model) {

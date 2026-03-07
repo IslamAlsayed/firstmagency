@@ -13,7 +13,6 @@
             ])
         @endif
         @if (getActiveUser()->can($models . '-delete'))
-            {{-- @include('dashboard.components.delete-button', ['id' => $record->id, 'route' => 'dashboard.general.destroy']) --}}
             @include('dashboard.components.delete-form', ['id' => $record->id, 'model' => 'dashboard.' . $models])
         @endif
         @if (getActiveUser()->can($models . '-force-delete'))

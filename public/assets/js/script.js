@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.querySelector('.hero-section .gallery');
     if (gallery) {
@@ -367,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 imageSlots.forEach((slot, index) => {
                     const img = slot.querySelector('img');
                     setTimeout(() => {
-                        img.src = "/assets/images/categories/" + randomImages[index] + ".png";
+                        img.src = "/assets/images/website/categories/" + randomImages[index] + ".png";
                     }, 250);
                 });
             }

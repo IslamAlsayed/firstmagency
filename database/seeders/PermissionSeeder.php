@@ -122,6 +122,30 @@ class PermissionSeeder extends Seeder
             ['name' => 'programmings-restore', 'guard_name' => 'web', 'description' => 'Restore programmings'],
             ['name' => 'programmings-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete programmings'],
 
+            // Our Programming Permissions
+            ['name' => 'our-programmings-create', 'guard_name' => 'web', 'description' => 'Create our programmings'],
+            ['name' => 'our-programmings-read', 'guard_name' => 'web', 'description' => 'View our programmings'],
+            ['name' => 'our-programmings-update', 'guard_name' => 'web', 'description' => 'Edit our programmings'],
+            ['name' => 'our-programmings-delete', 'guard_name' => 'web', 'description' => 'Delete our programmings'],
+            ['name' => 'our-programmings-restore', 'guard_name' => 'web', 'description' => 'Restore our programmings'],
+            ['name' => 'our-programmings-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete our programmings'],
+
+            // Categories Programming Permissions
+            ['name' => 'categories-programming-create', 'guard_name' => 'web', 'description' => 'Create categories programming'],
+            ['name' => 'categories-programming-read', 'guard_name' => 'web', 'description' => 'View categories programming'],
+            ['name' => 'categories-programming-update', 'guard_name' => 'web', 'description' => 'Edit categories programming'],
+            ['name' => 'categories-programming-delete', 'guard_name' => 'web', 'description' => 'Delete categories programming'],
+            ['name' => 'categories-programming-restore', 'guard_name' => 'web', 'description' => 'Restore categories programming'],
+            ['name' => 'categories-programming-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete categories programming'],
+
+            // Project Steps Permissions
+            ['name' => 'project-steps-create', 'guard_name' => 'web', 'description' => 'Create project steps'],
+            ['name' => 'project-steps-read', 'guard_name' => 'web', 'description' => 'View project steps'],
+            ['name' => 'project-steps-update', 'guard_name' => 'web', 'description' => 'Edit project steps'],
+            ['name' => 'project-steps-delete', 'guard_name' => 'web', 'description' => 'Delete project steps'],
+            ['name' => 'project-steps-restore', 'guard_name' => 'web', 'description' => 'Restore project steps'],
+            ['name' => 'project-steps-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete project steps'],
+
             // FAQs Permissions
             ['name' => 'faqs-create', 'guard_name' => 'web', 'description' => 'Create FAQs'],
             ['name' => 'faqs-read', 'guard_name' => 'web', 'description' => 'View FAQs'],
@@ -212,6 +236,18 @@ class PermissionSeeder extends Seeder
             'programmings-read',
             'programmings-update',
             'programmings-delete',
+            'our-programmings-create',
+            'our-programmings-read',
+            'our-programmings-update',
+            'our-programmings-delete',
+            'categories-programming-create',
+            'categories-programming-read',
+            'categories-programming-update',
+            'categories-programming-delete',
+            'project-steps-create',
+            'project-steps-read',
+            'project-steps-update',
+            'project-steps-delete',
             'faqs-create',
             'faqs-read',
             'faqs-update',
@@ -254,21 +290,26 @@ class PermissionSeeder extends Seeder
             'programmings-create',
             'programmings-read',
             'programmings-update',
-            'faqs-create',
+            'our-programmings-create',
+            'our-programmings-read',
+            'our-programmings-update',
+            'categories-programming-create',
+            'categories-programming-read',
+            'categories-programming-update',
+            'project-steps-create',
+            'project-steps-read',
+            'project-steps-update',
             'faqs-read',
             'faqs-update',
             'dashboard-access',
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);
 
+        // Assign Support permissions
         $supportPermissions = Permission::whereIn('name', [
             'content-read',
             'dashboard-access',
-        ])->get();
-        $supportRole->syncPermissions($supportPermissions);
 
-        // Assign Support permissions
-        $supportPermissions = Permission::whereIn('name', [
             'tickets-create',
             'tickets-read',
             'tickets-update',

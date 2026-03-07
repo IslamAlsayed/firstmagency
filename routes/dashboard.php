@@ -14,6 +14,8 @@ use App\Http\Controllers\Dashboard\LineWorkController;
 use App\Http\Controllers\Dashboard\ReviewController;
 use App\Http\Controllers\Dashboard\TicketController;
 use App\Http\Controllers\Dashboard\ProgrammingController;
+use App\Http\Controllers\Dashboard\OurProgrammingController;
+use App\Http\Controllers\Dashboard\ProjectStepController;
 use App\Http\Controllers\Dashboard\FAQController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -85,6 +87,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::resource('programmings', ProgrammingController::class)->names('programmings');
 
+    // Route::delete('our-programmings/{ourProgramming}/force', [OurProgrammingController::class, 'forceDestroy'])->name('our-programmings.forceDestroy');
+    Route::resource('our-programmings', OurProgrammingController::class)->names('our-programmings');
+
+    Route::resource('project-steps', ProjectStepController::class)->names('project-steps');
+
     Route::resource('faqs', FAQController::class)->names('faqs');
     Route::patch('/faqs/{faq}/change-status', [FAQController::class, 'changeStatus'])->name('faqs.changeStatus');
 
@@ -92,5 +99,5 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::patch('/tickets/{ticket}/change-status/{status}', [TicketController::class, 'changeStatus'])->name('tickets.changeStatus');
 
     // Unified force-destroy route for all models
-    Route::post('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');
+    Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');
 });

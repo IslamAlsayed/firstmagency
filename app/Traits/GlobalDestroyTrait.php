@@ -30,7 +30,7 @@ trait GlobalDestroyTrait
         $this->authorize('delete', $model);
 
         // Delete the model
-        $model->delete();
+        // $model->delete();
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -69,7 +69,7 @@ trait GlobalDestroyTrait
         $this->authorize('forceDelete', $model);
 
         // Permanently delete the model
-        $model->forceDelete();
+        // $model->forceDelete();
 
         if (request()->wantsJson()) {
             return response()->json([

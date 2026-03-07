@@ -94,6 +94,7 @@ return [
     'ably_key_not_configured' => 'مفتاح Ably غير مضبوط، تم تجاوز إرسال البث',
     'no_items_selected' => 'لم يتم اختيار أي عناصر.',
     'selected_items_deleted' => 'تم حذف العناصر المحددة بنجاح. تم إزالة :count عنصر.',
+    'language_changed' => 'تم تغيير اللغة بنجاح.',
 
     // User Creation
     'user_created' => 'تم إنشاء المستخدم',

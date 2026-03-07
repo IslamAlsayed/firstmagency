@@ -65,7 +65,7 @@
 
                                 <div class="mb-6">
                                     <div class="image">
-                                        @if (isset($package['image']) && checkExistFileInPublic($package['image']))
+                                        @if (isset($package['image']))
                                             <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package['name'] }}">
                                         @else

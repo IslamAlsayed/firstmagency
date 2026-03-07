@@ -12,6 +12,8 @@ use App\Models\LineWork;
 use App\Models\Review;
 use App\Models\Ticket;
 use App\Models\Programming;
+use App\Models\OurProgramming;
+use App\Models\ProjectStep;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
@@ -24,6 +26,8 @@ use App\Policies\LineWorkPolicy;
 use App\Policies\ReviewPolicy;
 use App\Policies\TicketPolicy;
 use App\Policies\ProgrammingPolicy;
+use App\Policies\OurProgrammingPolicy;
+use App\Policies\ProjectStepPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -49,6 +53,8 @@ class AuthServiceProvider extends ServiceProvider
         Review::class => ReviewPolicy::class,
         Ticket::class => TicketPolicy::class,
         Programming::class => ProgrammingPolicy::class,
+        OurProgramming::class => OurProgrammingPolicy::class,
+        ProjectStep::class => ProjectStepPolicy::class,
     ];
 
     /**

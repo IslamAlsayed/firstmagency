@@ -96,6 +96,7 @@ return [
     'ably_key_not_configured' => 'Ably key not configured, skipping Ably broadcast.',
     'no_items_selected' => 'No items selected.',
     'selected_items_deleted' => 'Selected items deleted successfully. :count items removed.',
+    'language_changed' => 'Language changed successfully.',
 
     // User Creation
     'user_created' => 'User Created',

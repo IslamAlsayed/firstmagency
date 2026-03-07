@@ -40,7 +40,7 @@ class LocaleController extends Controller
             session(['website_locale' => $locale]);
         }
 
-        showToastSuccessMessage('Locale updated successfully.');
+        showToastSuccessMessage(__('messages.language_changed'));
 
         return redirect()->back();
     }

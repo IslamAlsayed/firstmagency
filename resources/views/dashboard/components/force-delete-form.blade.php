@@ -4,7 +4,7 @@
         $modelName = str_replace('dashboard.', '', $model);
     @endphp
 
-    <button type="button" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white bg-red-800"
+    <button type="button" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white bg-red-800 force-delete-btn"
         data-route="{{ route('dashboard.forceDestroy', [$modelName, $id]) }}" data-row-id="row-{{ $id }}" data-force="true">
 
         <span class="btn-text">
