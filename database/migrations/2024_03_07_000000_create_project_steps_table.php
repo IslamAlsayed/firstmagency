@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('project_steps', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
             $table->json('translations'); // ar/en: title, icon, content
             $table->string('icon')->nullable();
             $table->integer('order')->default(0);
