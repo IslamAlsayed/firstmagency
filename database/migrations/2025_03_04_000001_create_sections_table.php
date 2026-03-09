@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('padding_setting_key')->nullable(); // مفتاح الـ padding في جدول settings
             $table->string('view_file')->nullable(); // الملف المرتبط بالقسم في resources/views/sections
             $table->boolean('is_active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

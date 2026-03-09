@@ -83,6 +83,7 @@ return new class extends Migration
             $table->string('work_lines_section')->default(120);
             $table->string('our_services_marketing_section')->default(120);
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

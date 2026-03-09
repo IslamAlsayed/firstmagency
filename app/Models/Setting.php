@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Setting extends Model
 {
-    use HasFactory, HasRichText;
+    use HasFactory, SoftDeletes, HasRichText;
     protected $richTextAttributes = [
         'site_description',
         'site_description_ar',

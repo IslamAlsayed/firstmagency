@@ -34,6 +34,7 @@ return new class extends Migration
 
             // Timestamps
             $table->datetime('published_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             // Indexes
