@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class ServiceSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        Service::truncate();
+        Schema::enableForeignKeyConstraints();
+
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
 
         if (!$user) return; // لا توجد مستخدمين

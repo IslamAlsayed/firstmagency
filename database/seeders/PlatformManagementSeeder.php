@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\PlatformManagement;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class PlatformManagementSeeder extends Seeder
 {
@@ -12,6 +14,10 @@ class PlatformManagementSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        PlatformManagement::truncate();
+        Schema::enableForeignKeyConstraints();
+
         $items = [
             [
                 'translations' => [
@@ -113,6 +119,7 @@ class PlatformManagementSeeder extends Seeder
 
         foreach ($items as $item) {
             $item['created_by'] = 1;
+            $item['slug'] = Str::slug($item['translations']['en']['title'] ?? 'platform-management');
             PlatformManagement::create($item);
         }
     }

@@ -86,10 +86,6 @@ class OurProgrammingSeeder extends Seeder
                 if (!File::exists($destFile)) {
                     File::copy($sourceFile, $destFile);
                 }
-
-                // Save relative path for database storage
-                $imagePath = 'uploads/our-programmings/' . $programming['image_number'] . '/' . $destFileName;
-                echo "✓ Image copied for Programming #" . $programming['image_number'] . ": $imagePath\n";
             } else {
                 echo "⚠️  Source file not found: $sourceFile\n";
             }
@@ -103,11 +99,6 @@ class OurProgrammingSeeder extends Seeder
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
-
-            echo "✓ OurProgramming #" . $programming['image_number'] . " created successfully\n";
         }
-
-        echo "\n✅ 4 OurProgrammings seeded successfully with images!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

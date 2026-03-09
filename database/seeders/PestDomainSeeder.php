@@ -88,11 +88,6 @@ class PestDomainSeeder extends Seeder
                     'updated_by' => $user->id,
                 ]
             );
-
-            echo "✓ Pest Domain #$i created with image: $imagePath\n";
         }
-
-        echo "\n✅ 16 Pest Domains seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

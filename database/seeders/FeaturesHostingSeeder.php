@@ -38,6 +38,7 @@ class FeaturesHostingSeeder extends Seeder
 
         $featuresHosting = [
             [
+                'slug' => 'lightning-speed',
                 'translations_ar' => [
                     'title' => 'السرعة الفائقة',
                     'description' => 'خوادمنا توفر سرعة تحميل فائقة مع أوقات استجابة سريعة جداً لضمان أفضل أداء لموقعك.',
@@ -50,6 +51,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 1,
             ],
             [
+                'slug' => '',
                 'translations_ar' => [
                     'title' => 'الأمان المتقدم',
                     'description' => 'حماية شاملة ضد الهجمات السيبرانية مع جدران حماية قوية وشهادات SSL معتمدة.',
@@ -62,6 +64,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 2,
             ],
             [
+                'slug' => 'daily-backups',
                 'translations_ar' => [
                     'title' => 'النسخ الاحتياطي اليومي',
                     'description' => 'نسخ احتياطية تلقائية يومية لجميع بيانات موقعك لضمان عدم فقدان أي معلومات مهمة.',
@@ -74,6 +77,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 3,
             ],
             [
+                'slug' => '24-7-support',
                 'translations_ar' => [
                     'title' => 'الدعم على مدار الساعة',
                     'description' => 'فريق دعم عملاء متخصص متاح 24/7 للإجابة على جميع أسئلتك والمساعدة في أي مشاكل.',
@@ -86,6 +90,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 4,
             ],
             [
+                'slug' => 'cpanel-control-panel',
                 'translations_ar' => [
                     'title' => 'لوحة تحكم cPanel',
                     'description' => 'لوحة تحكم سهلة الاستخدام توفر إدارة كاملة لموقعك والبريد الإلكتروني والقواعد البيانات.',
@@ -98,6 +103,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 5,
             ],
             [
+                'slug' => 'free-ssl-certificates',
                 'translations_ar' => [
                     'title' => 'شهادات SSL مجانية',
                     'description' => 'شهادات SSL مجانية لتشفير الاتصالات وحماية بيانات زوار موقعك بأمان تام.',
@@ -110,6 +116,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 6,
             ],
             [
+                'slug' => 'high-performance',
                 'translations_ar' => [
                     'title' => 'الأداء العالي',
                     'description' => 'استخدام أحدث تقنيات الخادم والمعالجات لضمان أداء عالي جداً وثبات دائم.',
@@ -122,6 +129,7 @@ class FeaturesHostingSeeder extends Seeder
                 'order' => 7,
             ],
             [
+                'slug' => 'easy-wordpress-installation',
                 'translations_ar' => [
                     'title' => 'تثبيت WordPress سهل',
                     'description' => 'تثبيت WordPress بنقرة واحدة مع جميع الإضافات الأساسية والمكونات اللازمة.',
@@ -162,6 +170,7 @@ class FeaturesHostingSeeder extends Seeder
             $imagePath = 'uploads/features-hosting/' . $feature['file_index'] . '/' . $destFileName;
 
             FeaturesHosting::create([
+                'slug' => $feature['slug'],
                 'translations' => [
                     'ar' => $feature['translations_ar'],
                     'en' => $feature['translations_en'],
@@ -171,11 +180,6 @@ class FeaturesHostingSeeder extends Seeder
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
-
-            echo "✓ FeaturesHosting '{$feature['translations_en']['title']}' created with image: $imagePath\n";
         }
-
-        echo "\n✅ 8 FeaturesHosting seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

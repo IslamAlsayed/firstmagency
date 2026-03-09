@@ -88,11 +88,6 @@ class ClientSeeder extends Seeder
                     'updated_by' => $user->id,
                 ]
             );
-
-            echo "✓ Client #$i created with image: $imagePath\n";
         }
-
-        echo "\n✅ 12 Clients seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

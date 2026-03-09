@@ -88,11 +88,6 @@ class PartnerSeeder extends Seeder
                     'updated_by' => $user->id,
                 ]
             );
-
-            echo "✓ Partner #$i created with image: $imagePath\n";
         }
-
-        echo "\n✅ 6 Partners seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

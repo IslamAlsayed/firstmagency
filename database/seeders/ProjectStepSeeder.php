@@ -88,10 +88,6 @@ class ProjectStepSeeder extends Seeder
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
-
-            echo "✓ ProjectStep '{$step['translations_en']['title']}' created successfully\n";
         }
-
-        echo "\n✅ 4 ProjectSteps seeded successfully!\n";
     }
 }

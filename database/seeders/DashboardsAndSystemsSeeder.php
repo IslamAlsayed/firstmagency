@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class DashboardsAndSystemsSeeder extends Seeder
 {
@@ -28,7 +29,6 @@ class DashboardsAndSystemsSeeder extends Seeder
         }
 
         // ==================== Operating Systems ====================
-        echo "\n📁 Seeding Operating Systems...\n";
         $osSourcePath = base_path('public/assets/images/website/hosting/operating-systems');
         $osDestBasePath = storage_path('app/public/uploads/operating-systems');
 
@@ -66,6 +66,7 @@ class DashboardsAndSystemsSeeder extends Seeder
             $imagePath = 'uploads/operating-systems/' . $index . '/' . $destFileName;
 
             DashboardsAndSystem::create([
+                'slug' => Str::slug($title),
                 'type' => 'operating-system',
                 'translations' => [
                     'ar' => ['title' => $title],
@@ -76,12 +77,9 @@ class DashboardsAndSystemsSeeder extends Seeder
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
-
-            echo "✓ OS '${title}' created with image: $imagePath\n";
         }
 
         // ==================== Dashboards And Apps ====================
-        echo "\n📁 Seeding Dashboards And Apps...\n";
         $dashSourcePath = base_path('public/assets/images/website/hosting/dashboards-and-apps');
         $dashDestBasePath = storage_path('app/public/uploads/dashboards-and-apps');
 
@@ -129,6 +127,7 @@ class DashboardsAndSystemsSeeder extends Seeder
             $imagePath = 'uploads/dashboards-and-apps/' . $app['file_index'] . '/' . $destFileName;
 
             DashboardsAndSystem::create([
+                'slug' => Str::slug($app['title']),
                 'type' => 'dashboard-app',
                 'translations' => [
                     'ar' => ['title' => $app['title']],
@@ -139,10 +138,6 @@ class DashboardsAndSystemsSeeder extends Seeder
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
-
-            echo "✓ Dashboard/App '{$app['title']}' created with image: $imagePath\n";
         }
-
-        echo "\n✅ All 24 items (12 Operating Systems + 12 Dashboards/Apps) seeded successfully!\n";
     }
 }

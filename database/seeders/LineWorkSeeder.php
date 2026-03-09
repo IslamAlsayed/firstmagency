@@ -82,16 +82,10 @@ class LineWorkSeeder extends Seeder
                     'order' => $i,
                     'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $i <= 2,
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]
             );
-
-            echo "✓ LineWork Step #$i created with image: $imagePath\n";
         }
-
-        echo "\n✅ 4 LineWorks seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

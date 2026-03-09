@@ -40,8 +40,6 @@ class HostingPackageSeeder extends Seeder
         $order = 1;
 
         foreach ($config as $category => $packages) {
-            echo "\n📁 Seeding $category Packages...\n";
-
             foreach ($packages as $index => $packageData) {
                 // Copy image
                 $sourceFile = $sourcePath . '/plan-' . ($index + 1) . '.png';
@@ -96,12 +94,8 @@ class HostingPackageSeeder extends Seeder
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]);
-
-                echo "✓ {$category} - '{$packageData['name']}' created (Order: {$order})\n";
                 $order++;
             }
         }
-
-        echo "\n✅ All hosting packages seeded successfully!\n";
     }
 }

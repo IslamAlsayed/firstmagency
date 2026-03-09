@@ -134,11 +134,6 @@ class WhyUsSeeder extends Seeder
                     'updated_by' => $user->id,
                 ]
             );
-
-            echo "✓ Why Us Item #" . ($index + 1) . " created with image: $imagePath\n";
         }
-
-        echo "\n✅ 6 Why Us items seeded successfully!\n";
-        echo "📁 Images stored in: $destBasePath\n";
     }
 }

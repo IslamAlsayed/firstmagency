@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class ArticleSeeder extends Seeder
@@ -15,6 +16,10 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        Article::truncate();
+        Schema::enableForeignKeyConstraints();
+
         $categories = Category::all();
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
 
