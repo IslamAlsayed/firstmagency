@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\FeaturesHosting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
 class FeaturesHostingSeeder extends Seeder
@@ -26,7 +27,16 @@ class FeaturesHostingSeeder extends Seeder
             return;
         }
 
-        $featuresHostings = [
+        // Paths configuration
+        $sourcePath = base_path('public/assets/images/website/hosting/gifs');
+        $destBasePath = storage_path('app/public/uploads/features-hosting');
+
+        // Ensure the destination directory exists
+        if (!File::isDirectory($destBasePath)) {
+            File::makeDirectory($destBasePath, 0755, true);
+        }
+
+        $featuresHosting = [
             [
                 'translations_ar' => [
                     'title' => 'السرعة الفائقة',
@@ -36,7 +46,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'Lightning Speed',
                     'description' => 'Our servers deliver blazing-fast loading speeds with ultra-low response times for optimal website performance.',
                 ],
-                'image' => 'features-hostings/1.gif',
+                'file_index' => 1,
                 'order' => 1,
             ],
             [
@@ -48,7 +58,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'Advanced Security',
                     'description' => 'Comprehensive protection against cyber attacks with powerful firewalls and certified SSL certificates.',
                 ],
-                'image' => 'features-hostings/2.gif',
+                'file_index' => 2,
                 'order' => 2,
             ],
             [
@@ -60,7 +70,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'Daily Backups',
                     'description' => 'Automatic daily backups of all your website data to ensure no important information is lost.',
                 ],
-                'image' => 'features-hostings/3.gif',
+                'file_index' => 3,
                 'order' => 3,
             ],
             [
@@ -72,7 +82,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => '24/7 Support',
                     'description' => 'Specialized customer support team available 24/7 to answer your questions and help with any issues.',
                 ],
-                'image' => 'features-hostings/4.gif',
+                'file_index' => 4,
                 'order' => 4,
             ],
             [
@@ -84,7 +94,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'cPanel Control Panel',
                     'description' => 'Easy-to-use control panel providing complete management of your website, email, and databases.',
                 ],
-                'image' => 'features-hostings/5.gif',
+                'file_index' => 5,
                 'order' => 5,
             ],
             [
@@ -96,7 +106,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'Free SSL Certificates',
                     'description' => 'Free SSL certificates to encrypt communications and protect your visitors\' data with complete security.',
                 ],
-                'image' => 'features-hostings/6.gif',
+                'file_index' => 6,
                 'order' => 6,
             ],
             [
@@ -108,7 +118,7 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'High Performance',
                     'description' => 'Using the latest server technology and processors to ensure extremely high performance and constant stability.',
                 ],
-                'image' => 'features-hostings/7.gif',
+                'file_index' => 7,
                 'order' => 7,
             ],
             [
@@ -120,26 +130,52 @@ class FeaturesHostingSeeder extends Seeder
                     'title' => 'Easy WordPress Installation',
                     'description' => 'One-click WordPress installation with all essential plugins and required components.',
                 ],
-                'image' => 'features-hostings/8.gif',
+                'file_index' => 8,
                 'order' => 8,
             ],
         ];
 
-        foreach ($featuresHostings as $feature) {
+        foreach ($featuresHosting as $feature) {
+            $sourceFile = $sourcePath . '/' . $feature['file_index'] . '.gif';
+
+            if (!File::exists($sourceFile)) {
+                echo "⚠️  Source file not found: $sourceFile\n";
+                continue;
+            }
+
+            // Create directory for this feature
+            $featureDir = $destBasePath . '/' . $feature['file_index'];
+            if (!File::isDirectory($featureDir)) {
+                File::makeDirectory($featureDir, 0755, true);
+            }
+
+            // Copy the image with a new name
+            $destFileName = 'feature_' . $feature['file_index'] . '.gif';
+            $destFile = $featureDir . '/' . $destFileName;
+
+            // Only copy if destination doesn't exist
+            if (!File::exists($destFile)) {
+                File::copy($sourceFile, $destFile);
+            }
+
+            // Save relative path for database storage (like: uploads/features-hosting/1/feature_1.gif)
+            $imagePath = 'uploads/features-hosting/' . $feature['file_index'] . '/' . $destFileName;
+
             FeaturesHosting::create([
                 'translations' => [
                     'ar' => $feature['translations_ar'],
                     'en' => $feature['translations_en'],
                 ],
-                'image' => $feature['image'],
+                'image' => $imagePath,
                 'order' => $feature['order'],
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
 
-            echo "✓ FeaturesHosting '{$feature['translations_en']['title']}' created successfully\n";
+            echo "✓ FeaturesHosting '{$feature['translations_en']['title']}' created with image: $imagePath\n";
         }
 
-        echo "\n✅ 8 FeaturesHostings seeded successfully!\n";
+        echo "\n✅ 8 FeaturesHosting seeded successfully!\n";
+        echo "📁 Images stored in: $destBasePath\n";
     }
 }

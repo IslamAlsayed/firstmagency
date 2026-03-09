@@ -214,8 +214,8 @@
         }
     }
 
-    .our-services-marketing {
-        padding-inline: calc(var(--our-services-marketing-section-inline-padding) / 2);
+    .packages-marketing {
+        padding-inline: calc(var(--packages-marketing-section-inline-padding) / 2);
         background-color: #FFFDF8;
 
         & .title {

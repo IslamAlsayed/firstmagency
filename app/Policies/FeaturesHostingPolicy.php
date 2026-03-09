@@ -4,63 +4,44 @@ namespace App\Policies;
 
 use App\Models\FeaturesHosting;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FeaturesHostingPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
+    use HandlesAuthorization;
+
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('features-hosting-read');
+        return $user->can('features-hosting-read');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, FeaturesHosting $featuresHosting): bool
     {
-        return $user->hasPermissionTo('features-hosting-read');
+        return $user->can('features-hosting-read');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('features-hosting-create');
+        return $user->can('features-hosting-create');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, FeaturesHosting $featuresHosting): bool
     {
-        return $user->hasPermissionTo('features-hosting-update');
+        return $user->can('features-hosting-update');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
     public function delete(User $user, FeaturesHosting $featuresHosting): bool
     {
-        return $user->hasPermissionTo('features-hosting-delete');
+        return $user->can('features-hosting-delete');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
     public function restore(User $user, FeaturesHosting $featuresHosting): bool
     {
-        return $user->hasPermissionTo('features-hosting-restore');
+        return $user->can('features-hosting-restore');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, FeaturesHosting $featuresHosting): bool
     {
-        return $user->hasPermissionTo('features-hosting-force-delete');
+        return $user->can('features-hosting-force-delete');
     }
 }

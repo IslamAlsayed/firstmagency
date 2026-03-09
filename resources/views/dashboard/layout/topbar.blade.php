@@ -78,65 +78,39 @@
 </div>
 
 <script>
-    // Initialize Sidebar state from localStorage
-    function initSidebarState() {
-        const sidebarState = localStorage.getItem('sidebar-state');
-        const sidebar = document.querySelector('aside');
-        const toggleBtn = document.getElementById('toggleSidebar');
-        const isSmallScreen = window.innerWidth < 768;
-        const isMobile = window.innerWidth <= 992;
-
-        // For very small screens (< 768px), sidebar should always start hidden
-        if (isSmallScreen) {
-            sidebar?.classList.remove('active');
-            document.body.classList.remove('sidebar-closed');
-            toggleBtn?.classList.remove('active');
-        } else if (isMobile) {
-            // For medium screens (768px - 992px), start with sidebar closed
-            let shouldBeClosed = sidebarState !== 'open';
-            if (shouldBeClosed) {
-                sidebar?.classList.add('active');
-                document.body.classList.add('sidebar-closed');
-                toggleBtn?.classList.add('active');
-            } else {
-                sidebar?.classList.remove('active');
-                document.body.classList.remove('sidebar-closed');
-                toggleBtn?.classList.remove('active');
-            }
-        } else {
-            // For desktop (> 992px), sidebar should start open
-            sidebar?.classList.remove('active');
-            document.body.classList.remove('sidebar-closed');
-            toggleBtn?.classList.remove('active');
-        }
-    }
+    const sidebar = document.getElementById('sidebar');
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
 
     // Toggle Sidebar
-    document.getElementById('toggleSidebar')?.addEventListener('click', () => {
-        const sidebar = document.querySelector('aside');
-        const toggleBtn = document.getElementById('toggleSidebar');
-
+    toggleSidebar?.addEventListener('click', () => {
         if (sidebar) {
             const isActive = sidebar.classList.contains('active');
 
+            document.body.style.overflow = isActive ? '' : 'hidden';
             sidebar.classList.toggle('active');
             document.body.classList.toggle('sidebar-closed');
-            toggleBtn.classList.toggle('active');
+            toggleSidebar.classList.toggle('active');
+        }
+    });
 
-            // Save state to localStorage
-            // localStorage.setItem('sidebar-state', isActive ? 'open' : 'closed');
+    document.addEventListener('click', (e) => {
+        if (sidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
+            document.body.style.overflow = '';
+            sidebar.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleSidebar.classList.remove('active');
         }
     });
 
     // Close Sidebar button for small screens
-    document.getElementById('closeSidebar')?.addEventListener('click', () => {
-        const sidebar = document.querySelector('aside');
-        const toggleBtn = document.getElementById('toggleSidebar');
-
+    closeSidebar?.addEventListener('click', () => {
+        console.log('close');
         if (sidebar) {
+            document.body.style.overflow = '';
             sidebar.classList.remove('active');
             document.body.classList.remove('sidebar-closed');
-            toggleBtn.classList.remove('active');
+            toggleSidebar.classList.remove('active');
         }
     });
 
@@ -170,19 +144,37 @@
         }
 
         // Initialize sidebar state
-        initSidebarState();
+        if (sidebar) {
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleSidebar?.classList.remove('active');
+        }
     });
 
     // Initialize on page load
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSidebarState);
+        document.addEventListener('DOMContentLoaded', () => {
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleSidebar?.classList.remove('active');
+        });
     } else {
-        initSidebarState();
+        // Initialize sidebar state
+        if (sidebar) {
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleSidebar?.classList.remove('active');
+        }
     }
 
     // Handle window resize
     window.addEventListener('resize', () => {
-        initSidebarState();
+        // Initialize sidebar state
+        if (sidebar) {
+            sidebar?.classList.remove('active');
+            document.body.classList.remove('sidebar-closed');
+            toggleSidebar?.classList.remove('active');
+        }
     });
 
     // Profile Menu Toggle

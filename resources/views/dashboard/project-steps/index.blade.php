@@ -82,7 +82,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="p-4 text-center text-gray-500">
-                                        {{ __('main.no_project_steps_found') }}
+                                        {{ __('messages.no_records_found') }}
                                     </td>
                                 </tr>
                             @endforelse

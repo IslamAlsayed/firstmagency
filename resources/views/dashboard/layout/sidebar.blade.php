@@ -8,7 +8,7 @@
         </h4>
         <!-- Close button for small screens -->
         <button id="closeSidebar" class="p-2 rounded-lg hover:bg-slate-700">
-            <i class="fas fa-xmark text-xl"></i>
+            <i class="fas fa-xmark text-xl text-red-600"></i>
         </button>
     </div>
 
@@ -271,7 +271,7 @@
             </li>
         @endif
 
-        <!-- LineWorks -->
+        <!-- Line Works -->
         @if (auth()->user()->can('line-works-read') || auth()->user()->can('line-works-create'))
             <li class="relative group submenu-item">
                 <button type="button" data-toggle="submenu"
@@ -499,7 +499,7 @@
         @if (auth()->user()->can('features-hosting-read') || auth()->user()->can('features-hosting-create'))
             <li class="relative group submenu-item">
                 <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.features-hostings.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.features-hosting.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎁</span>
                         <span>{{ __('main.features_hostings') }}</span>
@@ -508,19 +508,275 @@
                 </button>
 
                 <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.features-hostings.*') ? 'show' : '' }}">
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.features-hosting.*') ? 'show' : '' }}">
                     <li class="relative">
-                        <a href="{{ route('dashboard.features-hostings.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.features-hostings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                        <a href="{{ route('dashboard.features-hosting.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.features-hosting.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
                             <i class="fas fa-list text-sm main-icon"></i>
                             <span class="text-sm">{{ __('main.features_hostings') }}</span>
                         </a>
                     </li>
                     <li class="relative">
-                        <a href="{{ route('dashboard.features-hostings.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.features-hostings.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                        <a href="{{ route('dashboard.features-hosting.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.features-hosting.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
                             <i class="fas fa-plus text-sm main-icon"></i>
                             <span class="text-sm">{{ __('main.create_type', ['type' => __('main.features_hosting')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Dashboards And Apps -->
+        @if (auth()->user()->can('dashboards-and-systems-read') || auth()->user()->can('dashboards-and-systems-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🔧</span>
+                        <span>{{ __('main.dashboards_and_apps') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.dashboards-and-systems.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.dashboards-and-systems.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.dashboards_and_apps') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.dashboards-and-systems.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.dashboards-and-systems.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.dashboards_and_app')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Hosting Packages -->
+        @if (auth()->user()->can('hosting-packages-read') || auth()->user()->can('hosting-packages-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">📦</span>
+                        <span>{{ __('main.hosting_packages') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.hosting-packages.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.hosting-packages.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.hosting_packages') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.hosting-packages.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.hosting-packages.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.hosting_package')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Pest Domains -->
+        @if (auth()->user()->can('pest-domains-read') || auth()->user()->can('pest-domains-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.pest-domains.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🌐</span>
+                        <span>{{ __('main.pest_domains') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.pest-domains.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.pest-domains.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.pest-domains.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.pest_domains_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.pest-domains.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.pest-domains.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.pest_domain')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Official Domains -->
+        @if (auth()->user()->can('official-domains-read') || auth()->user()->can('official-domains-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.official-domains.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🌐</span>
+                        <span>{{ __('main.official_domains') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.official-domains.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.official-domains.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.official-domains.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.official_domains_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.official-domains.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.official-domains.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.official_domain')]) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Why Us -->
+        @if (auth()->user()->can('why-us-read') || auth()->user()->can('why-us-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.why-us.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">🌟</span>
+                        <span>{{ __('main.why_us') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.why-us.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.why-us.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.why-us.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.why_us_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.why-us.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.why-us.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_why_us') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Platform Management -->
+        @if (auth()->user()->can('platform-management-read') || auth()->user()->can('platform-management-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.platform-management.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">📱</span>
+                        <span>{{ __('main.platform_management') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.platform-management.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.platform-management.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.platform-management.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.platform_management_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.platform-management.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.platform-management.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_platform_management') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Line Work Step -->
+        @if (auth()->user()->can('work-us-step-read') || auth()->user()->can('work-us-step-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.work-us-step.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">👔</span>
+                        <span>{{ __('main.work_us_step') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.work-us-step.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.work-us-step.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.work-us-step.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.work_us_step_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.work-us-step.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.work-us-step.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_work_us_step') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        <!-- Marketing Packages -->
+        @if (auth()->user()->can('marketing-packages-read') || auth()->user()->can('marketing-packages-create'))
+            <li class="relative group submenu-item">
+                <button type="button" data-toggle="submenu"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.marketing-packages.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">📦</span>
+                        <span>{{ __('main.marketing_package') }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.marketing-packages.*') ? 'show' : '' }}">
+                    <li class="relative">
+                        <a href="{{ route('dashboard.marketing-packages.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.marketing-packages.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-list text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.marketing_package_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.marketing-packages.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.marketing-packages.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-plus text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_marketing_package') }}</span>
                         </a>
                     </li>
                 </ul>

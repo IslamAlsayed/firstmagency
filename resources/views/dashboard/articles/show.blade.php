@@ -77,8 +77,11 @@
                                     @endif
                                 </span>
                             </p>
-                            @include('dashboard.components.article-status-actions', [
+                            @include('dashboard.components.status-actions', [
                                 'record' => $article,
+                                'models' => 'articles',
+                                'modelClass' => 'article',
+                                'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
                             ])
                         </div>
                         <div>
@@ -211,8 +214,9 @@
                     ])
                 @endcan
                 @can('delete', $article)
-                    @include('dashboard.components.delete-form', [
+                    @include('dashboard.components.delete-button', [
                         'model' => 'dashboard.articles',
+                        'modelClass' => 'article',
                         'id' => $article->id,
                     ])
                 @endcan

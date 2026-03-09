@@ -104,31 +104,7 @@ class PartnerController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.partner')]))
-            : redirect()->route('dashboard.partners.index')->withError(__('messages.type_update_failed', ['type' => __('main.partner')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $partner = Partner::find($id);
-        if (!$partner)
-            return redirect()->route('dashboard.partners.index')->withError(__('messages.type_not_found', ['type' => __('main.partner')]));
-
-        // Check if user can update partners
-        $this->authorize('update', $partner);
-
-        // Validate status
-        $validStatuses = ['published', 'draft'];
-        if (!in_array($status, $validStatuses)) {
-            return redirect()->route('dashboard.partners.index')->withError('Invalid status');
-        }
-
-        $partner->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.partners.index')->withSuccess(__('messages.type_updated', ['type' => __('main.partner')]) . ' - ' . $statusLabel);
+            ? redirect()->route('dashboard.partners.index')->withSuccess(__('messages.type_updated', ['type' => __('main.partner')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.partner')]));
     }
 }

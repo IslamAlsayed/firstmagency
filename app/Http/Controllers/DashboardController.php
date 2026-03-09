@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Enum\ArticleEnums;
 use App\Enum\AvailableToggleFields;
+use App\Enum\PestDomainEnums;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
+    public array $availableOption = [];
+
+    public function __construct()
+    {
+        $enums = [
+            AvailableToggleFields::cases(),
+            ArticleEnums::cases(),
+            PestDomainEnums::cases(),
+        ];
+
+        foreach ($enums as $enum) {
+            foreach ($enum as $case) {
+                $this->availableOption = array_unique(array_merge($this->availableOption, [$case->value]));
+            }
+        }
+    }
+
     public function index()
     {
         /** @var User $user */
@@ -111,7 +131,10 @@ class DashboardController extends Controller
     // Toggle field for any model
     public function toggleField($modelClass, $id, $field)
     {
-        $modelClass = '\\App\\Models\\' . ucfirst($modelClass);
+        $modelClass = str_replace('_', '-', $modelClass);
+        $modelClass = str_replace('-', ' ', $modelClass);
+        $modelClass = str_replace(' ', '', ucwords($modelClass));
+        $modelClass = '\\App\\Models\\' . $modelClass;
         $model = $modelClass::find($id);
 
         if (!$model) {
@@ -159,12 +182,44 @@ class DashboardController extends Controller
         ], 200);
     }
 
+    // Delete record for any model (soft delete)
+    public function deleteRecord($models, $modelClass, $id)
+    {
+        $modelClass = str_replace('_', '-', $modelClass);
+        $modelClass = str_replace('-', ' ', $modelClass);
+        $modelClass = str_replace(' ', '', ucwords($modelClass));
+        if (!Str::contains($modelClass, 'us') && !Str::contains($modelClass, 'Us')) {
+            $modelClass = implode(' ', array_map('ucfirst', explode('-', singularLowerCaseName($modelClass, '-'))));
+        }
+        $modelClass = '\\App\\Models\\' . $modelClass;
+        $model = $modelClass::withTrashed()->find($id);
+
+        if (!$model) {
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($modelClass)))]));
+        }
+
+        $this->authorize('delete', $model);
+
+        $modelName = strtolower(class_basename($modelClass));
+
+        // $delete = $model->delete();
+        $delete = true;
+
+        if ($delete) {
+            return redirect()->route("$models.index")->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]));
+        }
+        return redirect()->back()->withError(__('messages.type_deletion_failed', ['type' => __('main.' . $modelName)]));
+    }
+
     // Force destroy (permanent delete) for any model
     public function forceDestroy($modelClass, $id)
     {
+        $modelClass = str_replace('_', '-', $modelClass);
         $modelClass = str_replace('-', ' ', $modelClass);
         $modelClass = str_replace(' ', '', ucwords($modelClass));
-        $modelClass = implode(' ', array_map('ucfirst', explode('-', singularLowerCaseName($modelClass, '-'))));
+        if (!Str::contains($modelClass, 'us') && !Str::contains($modelClass, 'Us')) {
+            $modelClass = implode(' ', array_map('ucfirst', explode('-', singularLowerCaseName($modelClass, '-'))));
+        }
         $modelClass = '\\App\\Models\\' . $modelClass;
         $model = $modelClass::withTrashed()->find($id);
 
@@ -182,16 +237,47 @@ class DashboardController extends Controller
         $this->authorize('forceDelete', $model);
 
         $modelName = strtolower(class_basename($modelClass));
-        $model->forceDelete();
+        // $model->forceDelete();
 
         if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'status' => 'success',
-                'message' => __('messages.type_deleted', ['type' => __('main.' . $modelName)])
+                'message' => __('messages.type_force_deleted', ['type' => __('main.' . $modelName)])
             ], 200);
         }
 
-        return redirect()->back()->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]));
+        return redirect()->back()->withSuccess(__('messages.type_force_deleted', ['type' => __('main.' . $modelName)]));
+    }
+
+    public function changeStatus($models, $modelClass, $id, $status)
+    {
+        $modelClass = str_replace('_', '-', $modelClass);
+        $modelClass = str_replace('-', ' ', $modelClass);
+        $modelClass = str_replace(' ', '', ucwords($modelClass));
+        if (!Str::contains($modelClass, 'us') && !Str::contains($modelClass, 'Us')) {
+            $modelClass = implode(' ', array_map('ucfirst', explode('-', singularLowerCaseName($modelClass, '-'))));
+        }
+        $modelClass = '\\App\\Models\\' . $modelClass;
+        $model = $modelClass::find($id);
+
+        if (!$model)
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($modelClass)))]));
+
+        // Check if user can update articles
+        $this->authorize('update', $model);
+
+        // Validate status
+        if (!in_array($status, $this->availableOption)) {
+            return redirect()->back()->withError(__('messages.invalid_status'));
+        }
+
+        $model->update([
+            'status' => $status,
+            'updated_by' => getActiveUserId(),
+        ]);
+
+        $statusLabel = __('main.' . $status);
+        return redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.' . strtolower(class_basename($modelClass)))]) . ' - ' . $statusLabel);
     }
 }

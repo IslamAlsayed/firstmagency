@@ -27,7 +27,7 @@
                             <!-- Title English -->
                             <div>
                                 <label for="title_en" class="mb-2 block text-sm font-semibold text-gray-700">
-                                    {{ __('main.title') }} <span class="text-red-500">*</span>
+                                    {{ __('main.title') }}
                                 </label>
                                 <input type="text" id="title_en" name="title_en" value="{{ old('title_en', $projectStep->translations['en']['title'] ?? '') }}"
                                     class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('title_en') border-red-500 @enderror"
@@ -40,7 +40,7 @@
                             <!-- Content English -->
                             <div>
                                 <label for="content_en" class="mb-2 block text-sm font-semibold text-gray-700">
-                                    {{ __('main.content') }} <span class="text-red-500">*</span>
+                                    {{ __('main.content') }}
                                 </label>
                                 <textarea id="content_en" name="content_en" rows="5"
                                     class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_en') border-red-500 @enderror"
@@ -58,7 +58,7 @@
                             <!-- Title Arabic -->
                             <div>
                                 <label for="title_ar" class="mb-2 block text-sm font-semibold text-gray-700">
-                                    {{ __('main.title') }} <span class="text-red-500">*</span>
+                                    {{ __('main.title') }}
                                 </label>
                                 <input type="text" id="title_ar" name="title_ar" value="{{ old('title_ar', $projectStep->translations['ar']['title'] ?? '') }}"
                                     class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('title_ar') border-red-500 @enderror"
@@ -71,7 +71,7 @@
                             <!-- Content Arabic -->
                             <div>
                                 <label for="content_ar" class="mb-2 block text-sm font-semibold text-gray-700">
-                                    {{ __('main.content') }} <span class="text-red-500">*</span>
+                                    {{ __('main.content') }}
                                 </label>
                                 <textarea id="content_ar" name="content_ar" rows="5"
                                     class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_ar') border-red-500 @enderror"
@@ -88,7 +88,7 @@
                         <div>
                             <label for="icon" class="flex gap-6 text-sm font-semibold text-gray-700">
                                 <div>
-                                    {{ __('main.icon') }} <span class="text-red-500">*</span>
+                                    {{ __('main.icon') }}
                                 </div>
 
                                 <div id="iconPreview" class="text-2xl text-gray-600">

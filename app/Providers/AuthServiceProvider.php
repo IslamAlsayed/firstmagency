@@ -8,13 +8,21 @@ use App\Models\Service;
 use App\Models\Company;
 use App\Models\Client;
 use App\Models\Partner;
+use App\Models\PestDomain;
+use App\Models\OfficialDomain;
+use App\Models\WhyUs;
+use App\Models\PlatformManagement;
 use App\Models\LineWork;
+use App\Models\WorkUsStep;
+use App\Models\MarketingPackage;
 use App\Models\Review;
 use App\Models\Ticket;
 use App\Models\Programming;
 use App\Models\OurProgramming;
 use App\Models\ProjectStep;
 use App\Models\FeaturesHosting;
+use App\Models\DashboardsAndSystem;
+use App\Models\HostingPackage;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
@@ -23,13 +31,21 @@ use App\Policies\ServicePolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\PartnerPolicy;
+use App\Policies\PestDomainPolicy;
+use App\Policies\OfficialDomainPolicy;
+use App\Policies\WhyUsPolicy;
+use App\Policies\PlatformManagementPolicy;
 use App\Policies\LineWorkPolicy;
+use App\Policies\WorkUsStepPolicy;
+use App\Policies\MarketingPackagePolicy;
 use App\Policies\ReviewPolicy;
 use App\Policies\TicketPolicy;
 use App\Policies\ProgrammingPolicy;
 use App\Policies\OurProgrammingPolicy;
 use App\Policies\ProjectStepPolicy;
 use App\Policies\FeaturesHostingPolicy;
+use App\Policies\DashboardsAndSystemPolicy;
+use App\Policies\HostingPackagePolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Spatie\Permission\Models\Role;
@@ -51,13 +67,21 @@ class AuthServiceProvider extends ServiceProvider
         Company::class => CompanyPolicy::class,
         Client::class => ClientPolicy::class,
         Partner::class => PartnerPolicy::class,
+        PestDomain::class => PestDomainPolicy::class,
+        OfficialDomain::class => OfficialDomainPolicy::class,
+        WhyUs::class => WhyUsPolicy::class,
+        MarketingPackage::class => MarketingPackagePolicy::class,
+        WorkUsStep::class => WorkUsStepPolicy::class,
         LineWork::class => LineWorkPolicy::class,
+        PlatformManagement::class => PlatformManagementPolicy::class,
         Review::class => ReviewPolicy::class,
         Ticket::class => TicketPolicy::class,
         Programming::class => ProgrammingPolicy::class,
         OurProgramming::class => OurProgrammingPolicy::class,
         ProjectStep::class => ProjectStepPolicy::class,
         FeaturesHosting::class => FeaturesHostingPolicy::class,
+        DashboardsAndSystem::class => DashboardsAndSystemPolicy::class,
+        HostingPackage::class => HostingPackagePolicy::class,
     ];
 
     /**

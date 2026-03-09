@@ -781,15 +781,15 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->platform_management_section ?? '60' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-our-services-marketing">
-                                <label for="our-services-marketing-section"
-                                    class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-our-services-marketing</span>
+                            <div class="inline-padding-section" data-section="flag-packages-marketing">
+                                <label for="packages-marketing-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1"
+                                    style="font-size: 12px">
+                                    <span>flag-packages-marketing</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="our-services-marketing-section" name="our_services_marketing_section"
+                                <input type="number" minLength="1" id="packages-marketing-section" name="packages_marketing_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->our_services_marketing_section ?? '120' }}">
+                                    placeholder="60" value="{{ $settings->packages_marketing_section ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-marketing-hero">
                                 <label for="marketing-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1"

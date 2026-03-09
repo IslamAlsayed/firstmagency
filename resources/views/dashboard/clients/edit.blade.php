@@ -26,7 +26,7 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="name_en" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.name') }} <span class="text-red-500">*</span>
+                                    {{ __('main.name') }}
                                 </label>
                                 <input type="text"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en"
@@ -54,7 +54,7 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="name_ar" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.name') }} <span class="text-red-500">*</span>
+                                    {{ __('main.name') }}
                                 </label>
                                 <input type="text"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_ar"

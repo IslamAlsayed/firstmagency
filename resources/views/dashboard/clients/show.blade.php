@@ -183,8 +183,9 @@
                     ])
                 @endcan
                 @can('delete', $client)
-                    @include('dashboard.components.delete-form', [
+                    @include('dashboard.components.delete-button', [
                         'model' => 'dashboard.clients',
+                        'modelClass' => 'client',
                         'id' => $client->id,
                     ])
                 @endcan

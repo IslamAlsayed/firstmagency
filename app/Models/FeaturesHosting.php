@@ -11,13 +11,15 @@ class FeaturesHosting extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'features_hostings';
+    protected $table = 'features_hosting';
 
     protected $fillable = [
         'slug',
         'translations',
         'image',
         'order',
+        'is_active',
+        'is_feature',
         'created_by',
         'updated_by',
     ];

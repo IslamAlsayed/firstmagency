@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LineWork extends Model
 {
+    use SoftDeletes;
+
+    protected $table = 'line_works';
+
     protected $fillable = [
         'slug',
         'translations',
@@ -16,6 +21,7 @@ class LineWork extends Model
         'order',
         'status',
         'is_active',
+        'is_featured',
         'created_by',
         'updated_by',
         'published_at',
@@ -24,6 +30,7 @@ class LineWork extends Model
     protected $casts = [
         'translations' => AsCollection::class,
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
         'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -38,6 +45,11 @@ class LineWork extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true);
     }
 
     public function scopeOrdered($query)

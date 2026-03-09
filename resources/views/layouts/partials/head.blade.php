@@ -95,6 +95,6 @@
         --why-us-section-inline-padding: {{ $settings->why_us_section ?? 120 }}px;
         --platform-management-section-inline-padding: {{ $settings->platform_management_section ?? 60 }}px;
         --work-lines-section-inline-padding: {{ $settings->work_lines_section ?? 120 }}px;
-        --our-services-marketing-section-inline-padding: {{ $settings->our_services_marketing_section ?? 120 }}px;
+        --packages-marketing-section-inline-padding: {{ $settings->packages_marketing_section ?? 120 }}px;
     }
 </style>

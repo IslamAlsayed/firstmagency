@@ -119,41 +119,7 @@ class ArticleController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.article')]))
-            : redirect()->route('dashboard.articles.index')->withError(__('messages.type_update_failed', ['type' => __('main.article')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $article = Article::find($id);
-        if (!$article)
-            return redirect()->route('dashboard.articles.index')->withError(__('messages.type_not_found', ['type' => __('main.article')]));
-
-        // Check if user can update articles
-        $this->authorize('update', $article);
-
-        // Validate status
-        $validStatuses = ['draft', 'published', 'archived'];
-        if (!in_array($status, $validStatuses)) {
-            return redirect()->route('dashboard.articles.index')->withError(__('messages.invalid_status'));
-        }
-
-        $article->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.articles.index')->withSuccess(__('messages.type_updated', ['type' => __('main.article')]) . ' - ' . $statusLabel);
-    }
-
-    public function destroy($id)
-    {
-        $article = Article::find($id);
-        if (!$article)
-            return redirect()->route('dashboard.articles.index')->withError(__('messages.type_not_found', ['type' => __('main.article')]));
-        $this->authorize('delete', $article);
-        $article->delete();
-        return redirect()->route('dashboard.articles.index')->withSuccess(__('messages.type_deleted', ['type' => __('main.article')]));
+            ? redirect()->route('dashboard.articles.index')->withSuccess(__('messages.type_updated', ['type' => __('main.article')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.article')]));
     }
 }

@@ -104,34 +104,8 @@ class CompanyController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.company')]))
-            : redirect()->route('dashboard.companies.index')->withError(__('messages.type_update_failed', ['type' => __('main.company')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $company = Company::find($id);
-        if (!$company)
-            return redirect()->route('dashboard.companies.index')->withError(__('messages.type_not_found', ['type' => __('main.company')]));
-
-        // Check if user can update companies
-        $this->authorize('update', $company);
-
-        // Validate status
-        $validStatuses = ['published', 'draft'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $company->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.companies.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.company')]) . ' - ' . $statusLabel
-        );
+            ? redirect()->route('dashboard.companies.index')->withSuccess(__('messages.type_updated', ['type' => __('main.company')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.company')]));
     }
 
     public function destroy($id)

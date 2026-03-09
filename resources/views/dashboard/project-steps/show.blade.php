@@ -107,8 +107,9 @@
                     ])
                 @endcan
                 @can('delete', $projectStep)
-                    @include('dashboard.components.delete-form', [
+                    @include('dashboard.components.delete-button', [
                         'model' => 'dashboard.project-steps',
+                        'modelClass' => 'projectStep',
                         'id' => $projectStep->id,
                     ])
                 @endcan

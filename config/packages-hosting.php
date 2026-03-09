@@ -9,6 +9,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/hosting-packages/plan-1.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'مساحة تخزين SSD 10',
@@ -63,6 +64,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/hosting-packages/plan-2.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'مساحة تخزين SSD 20',
@@ -117,6 +119,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/hosting-packages/plan-3.png',
             'is_popular' => true,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'مساحة تخزين SSD 30',
@@ -171,6 +174,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/hosting-packages/plan-4.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'مساحة تخزين SSD 80',
@@ -227,6 +231,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/reseller-packages/plan-1.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'لوحة التحكم : cPanel / WHM',
@@ -265,6 +270,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/reseller-packages/plan-2.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'لوحة التحكم : cPanel / WHM',
@@ -303,6 +309,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/reseller-packages/plan-3.png',
             'is_popular' => true,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'لوحة التحكم : cPanel / WHM',
@@ -345,6 +352,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/reseller-packages/plan-4.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'لوحة التحكم : cPanel / WHM',
@@ -389,6 +397,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/vps-packages/plan-1.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => '150GB SSD او HDD 200GB',
@@ -435,6 +444,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/vps-packages/plan-2.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => '256GB SSD او HDD 350GB',
@@ -481,6 +491,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/vps-packages/plan-3.png',
             'is_popular' => true,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => '300 GB SSD او HDD 450GB',
@@ -527,6 +538,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/vps-packages/plan-4.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => '400 GB SSD او HDD 500GB',
@@ -575,6 +587,7 @@ return [
             'old_price' => null,
             'image' => 'hosting/vps-packages/plan-4.png',
             'is_popular' => false,
+            'is_active' => true,
             'features' => [
                 [
                     'title' => 'Intel Xeon',

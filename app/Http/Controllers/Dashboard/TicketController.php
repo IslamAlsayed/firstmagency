@@ -88,35 +88,4 @@ class TicketController extends Controller
 
         return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_updated_successfully', ['type' => __('main.ticket')]));
     }
-
-    public function changeStatus($id, $status)
-    {
-        $ticket = Ticket::find($id);
-        if (!$ticket)
-            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
-
-        // Check if user can update tickets
-        $this->authorize('update', $ticket);
-
-        // Validate status
-        $validStatuses = ['open', 'in_progress', 'resolved', 'closed'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $ticket->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return back()->withSuccess(__('messages.type_updated', ['type' => __('main.ticket')]) . ' - ' . $statusLabel);
-    }
-
-    public function destroy(Ticket $ticket)
-    {
-        $this->authorize('delete', $ticket);
-        $ticket->delete();
-        return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_deleted_successfully', ['type' => __('main.ticket')]));
-    }
 }

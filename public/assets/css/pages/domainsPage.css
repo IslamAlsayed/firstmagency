@@ -245,8 +245,9 @@
             border-radius: 15px;
             transition: 0.2s ease;
             background-color: #FFF3D4;
-            border: 1px solid var(--light-muted-color);
-            box-shadow: 0 4px 6px -5px var(--light-muted-color);
+            /* border: 1px solid var(--light-muted-color); */
+            /* box-shadow: 0 4px 6px -5px var(--light-muted-color); */
+            box-shadow: 0 4px 6px -5px #c1c4c7, 0 0 4px var(--dark-muted-color);
 
             & .question {
                 font-size: 24px;

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features_hostings', function (Blueprint $table) {
+        Schema::create('features_hosting', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
             $table->json('translations'); // ar/en: title, description
             $table->string('image')->nullable();
             $table->integer('order')->default(0);
+            $table->boolean('is_active')->default(1);
+            $table->boolean('is_feature')->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features_hostings');
+        Schema::dropIfExists('features_hosting');
     }
 };

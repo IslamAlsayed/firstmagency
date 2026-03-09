@@ -154,6 +154,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'features-hosting-restore', 'guard_name' => 'web', 'description' => 'Restore features hosting'],
             ['name' => 'features-hosting-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete features hosting'],
 
+            // Dashboards And Apps Permissions
+            ['name' => 'dashboards-and-systems-create', 'guard_name' => 'web', 'description' => 'Create dashboards and apps'],
+            ['name' => 'dashboards-and-systems-read', 'guard_name' => 'web', 'description' => 'View dashboards and apps'],
+            ['name' => 'dashboards-and-systems-update', 'guard_name' => 'web', 'description' => 'Edit dashboards and apps'],
+            ['name' => 'dashboards-and-systems-delete', 'guard_name' => 'web', 'description' => 'Delete dashboards and apps'],
+            ['name' => 'dashboards-and-systems-restore', 'guard_name' => 'web', 'description' => 'Restore dashboards and apps'],
+            ['name' => 'dashboards-and-systems-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete dashboards and apps'],
+
             // FAQs Permissions
             ['name' => 'faqs-create', 'guard_name' => 'web', 'description' => 'Create FAQs'],
             ['name' => 'faqs-read', 'guard_name' => 'web', 'description' => 'View FAQs'],
@@ -169,6 +177,62 @@ class PermissionSeeder extends Seeder
             ['name' => 'tickets-delete', 'guard_name' => 'web', 'description' => 'Delete tickets'],
             ['name' => 'tickets-restore', 'guard_name' => 'web', 'description' => 'Restore tickets'],
             ['name' => 'tickets-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete tickets'],
+
+            // Hosting Packages Permissions
+            ['name' => 'hosting-packages-create', 'guard_name' => 'web', 'description' => 'Create hosting packages'],
+            ['name' => 'hosting-packages-read', 'guard_name' => 'web', 'description' => 'View hosting packages'],
+            ['name' => 'hosting-packages-update', 'guard_name' => 'web', 'description' => 'Edit hosting packages'],
+            ['name' => 'hosting-packages-delete', 'guard_name' => 'web', 'description' => 'Delete hosting packages'],
+            ['name' => 'hosting-packages-restore', 'guard_name' => 'web', 'description' => 'Restore hosting packages'],
+            ['name' => 'hosting-packages-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete hosting packages'],
+
+            // Pest Domains Permissions
+            ['name' => 'pest-domains-create', 'guard_name' => 'web', 'description' => 'Create pest domains'],
+            ['name' => 'pest-domains-read', 'guard_name' => 'web', 'description' => 'View pest domains'],
+            ['name' => 'pest-domains-update', 'guard_name' => 'web', 'description' => 'Edit pest domains'],
+            ['name' => 'pest-domains-delete', 'guard_name' => 'web', 'description' => 'Delete pest domains'],
+            ['name' => 'pest-domains-restore', 'guard_name' => 'web', 'description' => 'Restore pest domains'],
+            ['name' => 'pest-domains-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete pest domains'],
+
+            // Official Domains Permissions
+            ['name' => 'official-domains-create', 'guard_name' => 'web', 'description' => 'Create official domains'],
+            ['name' => 'official-domains-read', 'guard_name' => 'web', 'description' => 'View official domains'],
+            ['name' => 'official-domains-update', 'guard_name' => 'web', 'description' => 'Edit official domains'],
+            ['name' => 'official-domains-delete', 'guard_name' => 'web', 'description' => 'Delete official domains'],
+            ['name' => 'official-domains-restore', 'guard_name' => 'web', 'description' => 'Restore official domains'],
+            ['name' => 'official-domains-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete official domains'],
+
+            // Why Us Permissions
+            ['name' => 'why-us-create', 'guard_name' => 'web', 'description' => 'Create Why Us items'],
+            ['name' => 'why-us-read', 'guard_name' => 'web', 'description' => 'View Why Us items'],
+            ['name' => 'why-us-update', 'guard_name' => 'web', 'description' => 'Edit Why Us items'],
+            ['name' => 'why-us-delete', 'guard_name' => 'web', 'description' => 'Delete Why Us items'],
+            ['name' => 'why-us-restore', 'guard_name' => 'web', 'description' => 'Restore Why Us items'],
+            ['name' => 'why-us-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete Why Us items'],
+
+            // Platform Management Permissions
+            ['name' => 'platform-management-create', 'guard_name' => 'web', 'description' => 'Create Platform Management items'],
+            ['name' => 'platform-management-read', 'guard_name' => 'web', 'description' => 'View Platform Management items'],
+            ['name' => 'platform-management-update', 'guard_name' => 'web', 'description' => 'Edit Platform Management items'],
+            ['name' => 'platform-management-delete', 'guard_name' => 'web', 'description' => 'Delete Platform Management items'],
+            ['name' => 'platform-management-restore', 'guard_name' => 'web', 'description' => 'Restore Platform Management items'],
+            ['name' => 'platform-management-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete Platform Management items'],
+
+            // Work Us Step Permissions
+            ['name' => 'work-us-step-create', 'guard_name' => 'web', 'description' => 'Create Work Us Step items'],
+            ['name' => 'work-us-step-read', 'guard_name' => 'web', 'description' => 'View Work Us Step items'],
+            ['name' => 'work-us-step-update', 'guard_name' => 'web', 'description' => 'Edit Work Us Step items'],
+            ['name' => 'work-us-step-delete', 'guard_name' => 'web', 'description' => 'Delete Work Us Step items'],
+            ['name' => 'work-us-step-restore', 'guard_name' => 'web', 'description' => 'Restore Work Us Step items'],
+            ['name' => 'work-us-step-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete Work Us Step items'],
+
+            // Marketing Packages Permissions
+            ['name' => 'marketing-packages-create', 'guard_name' => 'web', 'description' => 'Create Marketing Package items'],
+            ['name' => 'marketing-packages-read', 'guard_name' => 'web', 'description' => 'View Marketing Package items'],
+            ['name' => 'marketing-packages-update', 'guard_name' => 'web', 'description' => 'Edit Marketing Package items'],
+            ['name' => 'marketing-packages-delete', 'guard_name' => 'web', 'description' => 'Delete Marketing Package items'],
+            ['name' => 'marketing-packages-restore', 'guard_name' => 'web', 'description' => 'Restore Marketing Package items'],
+            ['name' => 'marketing-packages-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete Marketing Package items'],
 
             // Dashboard Permissions
             ['name' => 'dashboard-access', 'guard_name' => 'web', 'description' => 'Access dashboard'],
@@ -264,6 +328,38 @@ class PermissionSeeder extends Seeder
             'tickets-read',
             'tickets-update',
             'tickets-delete',
+            'dashboards-and-systems-create',
+            'dashboards-and-systems-read',
+            'dashboards-and-systems-update',
+            'dashboards-and-systems-delete',
+            'hosting-packages-create',
+            'hosting-packages-read',
+            'hosting-packages-update',
+            'hosting-packages-delete',
+            'pest-domains-create',
+            'pest-domains-read',
+            'pest-domains-update',
+            'pest-domains-delete',
+            'official-domains-create',
+            'official-domains-read',
+            'official-domains-update',
+            'official-domains-delete',
+            'why-us-create',
+            'why-us-read',
+            'why-us-update',
+            'why-us-delete',
+            'platform-management-create',
+            'platform-management-read',
+            'platform-management-update',
+            'platform-management-delete',
+            'work-us-step-create',
+            'work-us-step-read',
+            'work-us-step-update',
+            'work-us-step-delete',
+            'marketing-packages-create',
+            'marketing-packages-read',
+            'marketing-packages-update',
+            'marketing-packages-delete',
             'dashboard-access',
             'dashboard-manage',
         ])->get();

@@ -95,44 +95,4 @@ class ReviewController extends Controller
 
         return redirect()->route('dashboard.reviews.show', $review)->withSuccess(__('messages.type_updated', ['type' => __('main.review')]));
     }
-
-    public function destroy(Review $review)
-    {
-        $this->authorize('delete', $review);
-
-        if ($review->photo) {
-            Storage::disk('public')->delete($review->photo);
-        }
-        if ($review->audio) {
-            Storage::disk('public')->delete($review->audio);
-        }
-
-        $review->delete();
-
-        return back()->withSuccess(__('messages.type_deleted', ['type' => __('main.review')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $review = Review::find($id);
-        if (!$review)
-            return redirect()->route('dashboard.reviews.index')->withError(__('messages.type_not_found', ['type' => __('main.review')]));
-
-        // Check if user can update reviews
-        $this->authorize('update', $review);
-
-        // Validate status
-        $validStatuses = ['pending', 'approved', 'rejected'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $review->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return back()->withSuccess(__('messages.type_updated', ['type' => __('main.review')]) . ' - ' . $statusLabel);
-    }
 }

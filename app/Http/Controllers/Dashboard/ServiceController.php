@@ -116,46 +116,7 @@ class ServiceController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.service')]))
-            : redirect()->route('dashboard.services.index')->withError(__('messages.type_update_failed', ['type' => __('main.service')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $service = Service::find($id);
-        if (!$service)
-            return redirect()->route('dashboard.services.index')->withError(__('messages.type_not_found', ['type' => __('main.service')]));
-
-        // Check if user can update services
-        $this->authorize('update', $service);
-
-        // Validate status
-        $validStatuses = ['active', 'inactive'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $service->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.services.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.service')]) . ' - ' . $statusLabel
-        );
-    }
-
-    public function destroy($id)
-    {
-        $service = Service::find($id);
-        if (!$service)
-            return redirect()->route('dashboard.services.index')->withError(__('messages.type_not_found', ['type' => __('main.service')]));
-
-        $this->authorize('delete', $service);
-
-        $service->delete();
-
-        return redirect()->route('dashboard.services.index')->withSuccess(__('messages.type_deleted', ['type' => __('main.service')]));
+            ? redirect()->route('dashboard.services.index')->withSuccess(__('messages.type_updated', ['type' => __('main.service')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.service')]));
     }
 }

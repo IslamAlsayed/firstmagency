@@ -104,33 +104,7 @@ class LineWorkController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.line_work')]))
-            : redirect()->route('dashboard.line-works.index')->withError(__('messages.type_update_failed', ['type' => __('main.line_work')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $lineWork = LineWork::find($id);
-        if (!$lineWork)
-            return redirect()->route('dashboard.line-works.index')->withError(__('messages.type_not_found', ['type' => __('main.line_work')]));
-
-        // Check if user can update line-works
-        $this->authorize('update', $lineWork);
-
-        // Validate status
-        $validStatuses = ['published', 'draft'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $lineWork->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.line-works.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.line_work')]) . ' - ' . $statusLabel
-        );
+            ? redirect()->route('dashboard.line-works.index')->withSuccess(__('messages.type_updated', ['type' => __('main.line_work')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.line_work')]));
     }
 }

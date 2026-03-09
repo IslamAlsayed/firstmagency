@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchBox = document.getElementById('searchBox');
     if (searchBox) {
         searchBox.addEventListener('keyup', function () {
-            const search = this.value.toLowerCase();
+            const search = this.value.trim();
             const rows = document.querySelectorAll('tbody tr');
             rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(search) ? '' : 'none';
+                const text = row.textContent;
+                const match = text.includes(search) || text.toLowerCase().includes(search.toLowerCase());
+                row.style.display = match ? '' : 'none';
             });
         });
     }

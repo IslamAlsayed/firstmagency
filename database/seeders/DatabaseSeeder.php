@@ -23,11 +23,20 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             CompanySeeder::class,
             ClientSeeder::class,
+            LineWorkSeeder::class,
             PartnerSeeder::class,
             FAQSeeder::class,
             OurProgrammingSeeder::class,
             ProjectStepSeeder::class,
             FeaturesHostingSeeder::class,
+            DashboardsAndSystemsSeeder::class,
+            HostingPackageSeeder::class,
+            PestDomainSeeder::class,
+            OfficialDomainSeeder::class,
+            WhyUsSeeder::class,
+            PlatformManagementSeeder::class,
+            WorkUsStepSeeder::class,
+            MarketingPackageSeeder::class,
         ]);
     }
-}
+};

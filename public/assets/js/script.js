@@ -410,10 +410,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         const target = this.getAttribute('data-target');
 
                         buttons.forEach(b => {
-                            b.classList.remove('bg-blue-50', 'text-blue-600', 'shadow-inner');
+                            b.classList.remove('active', 'bg-blue-50', 'text-blue-600', 'shadow-inner');
                             b.classList.add('text-gray-600');
                         });
-                        this.classList.add('bg-blue-50', 'text-blue-600', 'shadow-inner');
+                        this.classList.add('active', 'bg-blue-50', 'text-blue-600', 'shadow-inner');
                         this.classList.remove('text-gray-600');
 
                         cards.forEach(card => {

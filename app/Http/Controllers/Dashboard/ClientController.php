@@ -104,33 +104,7 @@ class ClientController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.client')]))
-            : redirect()->route('dashboard.clients.index')->withError(__('messages.type_update_failed', ['type' => __('main.client')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $client = Client::find($id);
-        if (!$client)
-            return redirect()->route('dashboard.clients.index')->withError(__('messages.type_not_found', ['type' => __('main.client')]));
-
-        // Check if user can update clients
-        $this->authorize('update', $client);
-
-        // Validate status
-        $validStatuses = ['published', 'draft'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $client->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.clients.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.client')]) . ' - ' . $statusLabel
-        );
+            ? redirect()->route('dashboard.clients.index')->withSuccess(__('messages.type_updated', ['type' => __('main.client')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.client')]));
     }
 }

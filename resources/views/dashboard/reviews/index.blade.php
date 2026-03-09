@@ -79,12 +79,23 @@
                                         {{ limitedText($review->comment, 40) }}
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">{{ $review->created_at?->format('d/m/Y') }}</td>
-                                    <td class="px-6 py-4">
-                                        @include('dashboard.components.reviews-status-actions', [
-                                            'record' => $review,
-                                        ])
+                                    <td class="p-4 text-sm">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold
+                                                @if ($review->status === 'pending') bg-blue-100 text-blue-800
+                                                @elseif($review->status === 'approved') bg-green-100 text-green-800
+                                                @elseif($review->status === 'rejected') bg-red-100 text-red-800
+                                                @else bg-gray-100 text-gray-800 @endif">
+                                            {{ __('main.' . $review->status) }}
+                                        </span>
                                     </td>
                                     <td class="px-6 py-4 text-gray-600 text-sm">
+                                        @include('dashboard.components.status-actions', [
+                                            'record' => $review,
+                                            'models' => 'reviews',
+                                            'modelClass' => 'review',
+                                            'availableOptions' => array_column(\App\Enum\ReviewEnums::cases(), 'value'),
+                                        ])
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $review,
                                             'models' => 'reviews',
@@ -94,8 +105,7 @@
                             @empty
                                 <tr>
                                     <td colspan="7" class="px-6 py-8 text-center text-gray-500">
-                                        <i class="fas fa-inbox text-3xl mb-3"></i>
-                                        <p>{{ __('main.no_reviews') }}</p>
+                                        <p>{{ __('messages.no_records_found') }}</p>
                                     </td>
                                 </tr>
                             @endforelse

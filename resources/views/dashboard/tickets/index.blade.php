@@ -51,6 +51,7 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.assigned_to') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                             </tr>
                         </thead>
@@ -104,9 +105,23 @@
                                     <td class="p-4 text-sm text-gray-600">{{ $ticket->category ?? '-' }}</td>
                                     <td class="p-4 text-sm text-gray-600">{{ $ticket->assignedTo->name ?? '-' }}</td>
                                     <td class="p-4 text-sm text-gray-600">{{ $ticket->created_at?->format('d/m/Y') }}</td>
+                                    <td class="p-4 text-sm">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold
+                                                @if ($ticket->status === 'open') bg-green-100 text-green-800
+                                                @elseif($ticket->status === 'in_progress') bg-yellow-100 text-yellow-800
+                                                @elseif($ticket->status === 'resolved') bg-blue-100 text-blue-800
+                                                @elseif($ticket->status === 'closed') bg-red-100 text-red-800
+                                                @else bg-gray-100 text-gray-800 @endif">
+                                            {{ __('main.' . $ticket->status) }}
+                                        </span>
+                                    </td>
                                     <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                        @include('dashboard.components.tickets-status-actions', [
+                                        @include('dashboard.components.status-actions', [
                                             'record' => $ticket,
+                                            'models' => 'tickets',
+                                            'modelClass' => 'ticket',
+                                            'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
                                         ])
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $ticket,
@@ -117,7 +132,7 @@
                             @empty
                                 <tr>
                                     <td colspan="8" class="px-6 py-8 text-center text-gray-400">
-                                        {{ __('main.no_tickets_found') }}
+                                        {{ __('messages.no_records_found') }}
                                     </td>
                                 </tr>
                             @endforelse

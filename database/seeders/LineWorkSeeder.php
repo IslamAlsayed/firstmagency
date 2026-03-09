@@ -82,6 +82,7 @@ class LineWorkSeeder extends Seeder
                     'order' => $i,
                     'status' => 'published',
                     'is_active' => true,
+                    'is_featured' => $i <= 2,
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

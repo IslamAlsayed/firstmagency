@@ -7,36 +7,49 @@
     </div>
 
     <div class="platform-cards grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.facebook_platform') }}</h3>
-            <p class="platform-desc">{{ __('main.facebook_description') }}</p>
-        </article>
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.instagram_platform') }}</h3>
-            <p class="platform-desc">{{ __('main.instagram_description') }}</p>
-        </article>
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.google_ads_platform') }}</h3>
-            <p class="platform-desc">{{ __('main.google_ads_description') }}</p>
-        </article>
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.snapchat_ads_platform') }}</h3>
-            <p class="platform-desc">{{ __('main.snapchat_ads_description') }}</p>
-        </article>
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.tiktok_platform') }}</h3>
-            <p class="platform-desc">{{ __('main.tiktok_description') }}</p>
-        </article>
-        <article class="platform">
-            <div class="platform-bg"></div>
-            <h3 class="platform-title font-semibold">{{ __('main.seo_platform_service') }}</h3>
-            <p class="platform-desc">{{ __('main.seo_description') }}</p>
-        </article>
+        @php
+            $platforms = \App\Models\PlatformManagement::active()->published()->ordered()->get();
+        @endphp
+
+        @forelse ($platforms as $platform)
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ $platform->translations[app()->getLocale()]['title'] ?? '-' }}</h3>
+                <p class="platform-desc">{{ Str::limit($platform->translations[app()->getLocale()]['description'] ?? '', 100) }}</p>
+            </article>
+        @empty
+            {{-- Fallback to static content if no items in database --}}
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.facebook_platform') }}</h3>
+                <p class="platform-desc">{{ __('main.facebook_description') }}</p>
+            </article>
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.instagram_platform') }}</h3>
+                <p class="platform-desc">{{ __('main.instagram_description') }}</p>
+            </article>
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.google_ads_platform') }}</h3>
+                <p class="platform-desc">{{ __('main.google_ads_description') }}</p>
+            </article>
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.snapchat_ads_platform') }}</h3>
+                <p class="platform-desc">{{ __('main.snapchat_ads_description') }}</p>
+            </article>
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.tiktok_platform') }}</h3>
+                <p class="platform-desc">{{ __('main.tiktok_description') }}</p>
+            </article>
+            <article class="platform">
+                <div class="platform-bg"></div>
+                <h3 class="platform-title font-semibold">{{ __('main.seo_platform_service') }}</h3>
+                <p class="platform-desc">{{ __('main.seo_description') }}</p>
+            </article>
+        @endforelse
     </div>
     @if (isDebugModeEnabled())
         <div class="debug-flag-badge">🚩 flag-platform-management</div>

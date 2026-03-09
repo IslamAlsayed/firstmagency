@@ -102,33 +102,7 @@ class ProgrammingController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.programming')]))
-            : redirect()->route('dashboard.programmings.index')->withError(__('messages.type_update_failed', ['type' => __('main.programming')]));
-    }
-
-    public function changeStatus($id, $status)
-    {
-        $programming = Programming::find($id);
-        if (!$programming)
-            return redirect()->route('dashboard.programmings.index')->withError(__('messages.type_not_found', ['type' => __('main.programming')]));
-
-        // Check if user can update programmings
-        $this->authorize('update', $programming);
-
-        // Validate status
-        $validStatuses = ['published', 'draft'];
-        if (!in_array($status, $validStatuses)) {
-            return back()->withError(__('messages.invalid_status'));
-        }
-
-        $programming->update([
-            'status' => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
-
-        $statusLabel = __('main.' . $status);
-        return redirect()->route('dashboard.programmings.index')->withSuccess(
-            __('messages.type_updated', ['type' => __('main.programming')]) . ' - ' . $statusLabel
-        );
+            ? redirect()->route('dashboard.programmings.index')->withSuccess(__('messages.type_updated', ['type' => __('main.programming')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.programming')]));
     }
 }

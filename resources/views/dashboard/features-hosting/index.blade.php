@@ -8,11 +8,11 @@
         <!-- Statistics -->
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-6">
             <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-gray-800">{{ count($featuresHostings) }}</div>
+                <div class="text-2xl font-bold text-gray-800">{{ count($featuresHosting) }}</div>
                 <small class="text-primary font-semibold">{{ __('main.total_features_hostings') }}</small>
             </div>
             <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-blue-600">{{ count($featuresHostings) }}</div>
+                <div class="text-2xl font-bold text-blue-600">{{ count($featuresHosting) }}</div>
                 <small class="text-primary font-semibold">{{ __('main.features_hostings') }}</small>
             </div>
         </div>
@@ -25,18 +25,20 @@
                     <input type="text" id="searchBox"
                         class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.features_hostings')]) }}">
-                    <a href="{{ route('dashboard.features-hostings.create') }}" class="kt-btn kt-btn-outline-primary">
+                    <a href="{{ route('dashboard.features-hosting.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_features_hosting') }}
                     </a>
                 </div>
             </div>
+
             <div class="scroll-container">
                 <div class="p-4">
                     <table class="w-full border-collapse">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }} ({{ app()->getLocale() === 'ar' ? 'AR' : 'EN' }})</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}
+                                    ({{ app()->getLocale() === 'ar' ? 'AR' : 'EN' }})</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
@@ -44,48 +46,56 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($featuresHostings as $featuresHosting)
-                                <tr id="row-{{ $featuresHosting->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
+                            @forelse($featuresHosting as $feature)
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
                                     <td class="p-4 text-sm">
-                                        @if ($featuresHosting->image)
-                                            <img src="{{ asset('storage/' . $featuresHosting->image) }}" class="w-12 h-12 rounded object-cover">
+                                        @if ($feature->image)
+                                            <img src="{{ asset('storage/' . $feature->image) }}" class="w-12 h-12 rounded object-cover shadow-sm">
                                         @else
                                             <span class="text-gray-400">--</span>
                                         @endif
                                     </td>
-                                    <td title="{{ $featuresHosting->translations[app()->getLocale()]['title'] ?? '--' }}">
+                                    <td title="{{ $feature->translations[app()->getLocale()]['title'] ?? '--' }}">
                                         <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
-                                            {{ limitedText($featuresHosting->translations[app()->getLocale()]['title'] ?? '--', 30) }}
+                                            {{ limitedText($feature->translations[app()->getLocale()]['title'] ?? '--', 30) }}
                                         </span>
                                     </td>
-                                    <td class="p-4 text-sm font-semibold text-gray-600">{{ $featuresHosting->order ?? 0 }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $featuresHosting->creator?->name ?? '--' }}</td>
-                                    <td class="p-4 text-sm text-gray-500">{{ $featuresHosting->created_at?->format('d/m/Y') ?? '--' }}</td>
+                                    <td class="p-4 text-sm font-semibold text-gray-600">{{ $feature->order ?? 0 }}</td>
+                                    <td class="p-4 text-sm text-gray-600">
+                                        @if ($feature->creator)
+                                            <a href="{{ route('dashboard.users.show', $feature->creator->id) }}" class="text-primary hover:underline">
+                                                {{ $feature->creator->name }}
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                            </a>
+                                        @else
+                                            <span class="text-gray-400 italic">N/A</span>
+                                        @endif
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-500">{{ $feature->created_at?->format('d/m/Y') ?? '--' }}</td>
                                     <td class="p-4 text-sm">
                                         @include('dashboard.components.permissions-actions', [
-                                            'resource' => $featuresHosting,
-                                            'resourceName' => 'features-hosting',
-                                            'routePrefix' => 'dashboard.features-hostings',
+                                            'record' => $feature,
+                                            'models' => 'features-hosting',
                                         ])
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="6" class="p-4 text-center text-gray-500">
-                                        {{ __('main.no_features_hostings_found') }}
+                                        {{ __('messages.no_records_found') }}
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-            </div>
 
-            @if ($featuresHostings->hasPages())
-                <div class="flex justify-center p-4 border-t border-gray-200">
-                    {{ $featuresHostings->links('pagination::tailwind') }}
-                </div>
-            @endif
+                @if ($featuresHosting->hasPages())
+                    <div class="mt-6 border-t pt-4">
+                        {{ $featuresHosting->links() }}
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

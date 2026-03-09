@@ -164,9 +164,9 @@ class SectionSeeder extends Seeder
             ],
             [
                 'name' => 'Our Services Marketing Section',
-                'flag' => 'flag-our-services-marketing',
-                'padding_setting_key' => 'our_services_marketing_section',
-                'view_file' => 'our-services-marketing',
+                'flag' => 'flag-packages-marketing',
+                'padding_setting_key' => 'packages_marketing_section',
+                'view_file' => 'packages-marketing',
             ],
             [
                 'name' => 'Hosting Features Section',

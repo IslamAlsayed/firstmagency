@@ -86,6 +86,7 @@ return [
     'session_lifetime_min_5' => 'Session lifetime must be at least 5 minutes',
     'session_lifetime_min_5_or_0' => 'Session lifetime must be 0 or at least 5 minutes',
     'type_deleted' => ':type Deleted',
+    'type_deleted' => ':type Deleted',
     'type_force_deleted' => ':type Force Deleted',
     'type_deleted_by' => ':record_name from :type_name has been deleted by :user_name',
     'type_deleted_count' => ':count :type Deleted',

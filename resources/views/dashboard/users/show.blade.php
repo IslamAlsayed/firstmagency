@@ -81,16 +81,21 @@
             <!-- Metadata -->
             @include('dashboard.components.metadata', ['record' => $user])
 
-            <!-- Actions -->
+            {{-- Action Buttons --}}
             <div class="flex items-center gap-4">
-                @include('dashboard.components.edit-button', [
-                    'models' => 'dashboard.users',
-                    'id' => $user->id,
-                ])
-                @include('dashboard.components.delete-form', [
-                    'model' => 'dashboard.users',
-                    'id' => $user->id,
-                ])
+                @can('update', $user)
+                    @include('dashboard.components.edit-button', [
+                        'models' => 'dashboard.users',
+                        'id' => $user->id,
+                    ])
+                @endcan
+                @can('delete', $user)
+                    @include('dashboard.components.delete-button', [
+                        'model' => 'dashboard.users',
+                        'modelClass' => 'user',
+                        'id' => $user->id,
+                    ])
+                @endcan
                 <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline">
                     {{ __('main.back_to_types', ['types' => __('main.users')]) }}
                 </a>

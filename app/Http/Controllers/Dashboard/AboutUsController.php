@@ -82,7 +82,7 @@ class AboutUsController extends Controller
         }
 
         return $updated
-            ? redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.about_us')]))
-            : redirect()->route('dashboard.about-us.index')->withError(__('messages.type_update_failed', ['type' => __('main.about_us')]));
+            ? redirect()->route('dashboard.about-us.index')->withSuccess(__('messages.type_updated', ['type' => __('main.about_us')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.about_us')]));
     }
 }

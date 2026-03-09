@@ -91,44 +91,46 @@
                 <h5 class="text-lg font-semibold text-gray-800">{{ __('main.permissions') }}</h5>
             </div>
             <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-{{ auth()->user()->canAccessDashboard() ? 'check text-green-500' : 'times text-red-500' }} w-5"></i>
-                    <span class="text-gray-700">{{ __('main.access_dashboard') }}</span>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-{{ auth()->user()->canAccessDashboard() ? 'check text-green-500' : 'times text-red-500' }} w-5"></i>
+                        <span class="text-gray-700">{{ __('main.access_dashboard') }}</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-{{ auth()->user()->canManageContent() ? 'check text-green-500' : 'times text-red-500' }} w-5"></i>
+                        <span class="text-gray-700">{{ __('main.manage_content') }}</span>
+                    </div>
+                    @if (auth()->user()->canManageSettings())
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500 w-5"></i>
+                            <span class="text-gray-700">{{ __('main.manage_settings') }}</span>
+                        </div>
+                    @endif
+                    @if (auth()->user()->canManageSections())
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500 w-5"></i>
+                            <span class="text-gray-700">{{ __('main.manage_sections') }}</span>
+                        </div>
+                    @endif
+                    @if (auth()->user()->canViewAllRevisions())
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500 w-5"></i>
+                            <span class="text-gray-700">{{ __('main.view_revisions') }}</span>
+                        </div>
+                    @endif
+                    @if (auth()->user()->canRollback())
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500 w-5"></i>
+                            <span class="text-gray-700">{{ __('main.rollback_permission') }}</span>
+                        </div>
+                    @endif
+                    @if (auth()->user()->canManageUsers())
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500 w-5"></i>
+                            <span class="text-gray-700">{{ __('main.manage_users') }}</span>
+                        </div>
+                    @endif
                 </div>
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-{{ auth()->user()->canManageContent() ? 'check text-green-500' : 'times text-red-500' }} w-5"></i>
-                    <span class="text-gray-700">{{ __('main.manage_content') }}</span>
-                </div>
-                @if (auth()->user()->canManageSettings())
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500 w-5"></i>
-                        <span class="text-gray-700">{{ __('main.manage_settings') }}</span>
-                    </div>
-                @endif
-                @if (auth()->user()->canManageSections())
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500 w-5"></i>
-                        <span class="text-gray-700">{{ __('main.manage_sections') }}</span>
-                    </div>
-                @endif
-                @if (auth()->user()->canViewAllRevisions())
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500 w-5"></i>
-                        <span class="text-gray-700">{{ __('main.view_revisions') }}</span>
-                    </div>
-                @endif
-                @if (auth()->user()->canRollback())
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500 w-5"></i>
-                        <span class="text-gray-700">{{ __('main.rollback_permission') }}</span>
-                    </div>
-                @endif
-                @if (auth()->user()->canManageUsers())
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500 w-5"></i>
-                        <span class="text-gray-700">{{ __('main.manage_users') }}</span>
-                    </div>
-                @endif
             </div>
         </div>
     </div>

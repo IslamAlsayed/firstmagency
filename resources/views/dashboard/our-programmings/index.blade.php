@@ -111,8 +111,7 @@
                             @empty
                                 <tr>
                                     <td colspan="9" class="text-center py-6 text-gray-500">
-                                        <i class="fas fa-inbox text-3xl mb-2"></i>
-                                        <p>{{ __('main.no_data_found') }}</p>
+                                        <p>{{ __('messages.no_records_found') }}</p>
                                     </td>
                                 </tr>
                             @endforelse

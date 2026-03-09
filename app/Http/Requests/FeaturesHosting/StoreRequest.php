@@ -28,18 +28,8 @@ class StoreRequest extends FormRequest
             'description_en' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:5120',
             'order' => 'nullable|integer|min:0',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'title_ar.required' => __('validation.required'),
-            'title_en.required' => __('validation.required'),
-            'description_ar.required' => __('validation.required'),
-            'description_en.required' => __('validation.required'),
-            'image.image' => __('validation.image'),
-            'image.max' => __('validation.max.file'),
+            'is_active' => 'nullable|boolean',
+            'is_feature' => 'nullable|boolean',
         ];
     }
 }
