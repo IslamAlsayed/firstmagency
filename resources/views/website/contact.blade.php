@@ -5,7 +5,7 @@
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.contact_form_header') }}</div>
             <button class="btn-link light-main-color dark-hover font-semibold mb-8">
-                <a href="{{ route('tickets') }}">{{ __('main.contact_ticket_inquiry') }}</a>
+                <a href="{{ route('tickets.inquiry') }}">{{ __('main.contact_ticket_inquiry') }}</a>
             </button>
         </div>
 

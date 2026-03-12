@@ -6,19 +6,19 @@
         @include('sections.marketing-hero')
 
         {{-- Operating Systems Section --}}
-        @include('sections.platform-management')
+        @include('sections.platform-management', ['platforms' => $data['platforms']])
 
         {{-- Work Line Section --}}
-        @include('sections.work-line')
+        @include('sections.work-line', ['work_steps' => $data['work_steps']])
 
         {{-- Our Services Marketing Section --}}
-        @include('sections.packages-marketing')
+        @include('sections.packages-marketing', ['packages' => $data['packages']])
 
         {{-- Important Articles Section --}}
-        @include('sections.important-articles-marketing')
+        @include('sections.important-articles-marketing', ['articles' => $data['articles']])
 
         {{-- Are You Ready Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-services-marketing')])
+        @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? config('faqs-services-marketing')])
     </div>
 @endsection
 

@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Ticket\StoreMessageRequest;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Http\Requests\Ticket\UpdateRequest;
+use App\Mail\TicketCopyMail;
+use App\Mail\TicketCreatedMail;
+use App\Mail\TicketRepliedMail;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Traits\AblyService;
 use App\Traits\GlobalDestroyTrait;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
-    use PhotoUploadTrait, GlobalDestroyTrait;
+    use PhotoUploadTrait, GlobalDestroyTrait, AblyService;
 
     public function index()
     {
@@ -37,23 +43,38 @@ class TicketController extends Controller
     {
         $this->authorize('create', Ticket::class);
         $validated = $request->validated();
-        unset($validated['verification'], $validated['attachments']);
-        $validated['user_id'] = Auth::id();
+        $message = $validated['message'] ?? null;
+        unset($validated['verification'], $validated['attachments'], $validated['message']);
+        $validated['user_id'] = getActiveUserId();
         $ticket = Ticket::create($validated);
+
+        // Create initial message
+        if ($message) {
+            $ticket->messages()->create([
+                'user_id' => getActiveUserId(),
+                'message' => $message,
+                'sender_type' => 'support',
+            ]);
+        }
 
         // upload new attachments
         if ($request->hasFile('attachments')) {
-            $this->uploadFiles($request, $ticket, 'attachments', 'tickets');
+            $this->uploadFiles($request, $ticket, 'attachments', 'tickets-dashboard');
         }
+
+        // Send email to customer
+        Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
 
         session()->forget('ticket_verification');
         return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_created_successfully', ['type' => __('main.ticket')]));
     }
 
-    public function show(Ticket $ticket)
+    public function show($id)
     {
+        $ticket = Ticket::with(['user', 'assignedTo', 'messages'])->find($id);
         $this->authorize('view', $ticket);
-        $ticket->load(['user', 'assignedTo']);
+        if (!$ticket)
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         return view('dashboard.tickets.show', compact('ticket'));
     }
 
@@ -87,5 +108,72 @@ class TicketController extends Controller
         }
 
         return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_updated_successfully', ['type' => __('main.ticket')]));
+    }
+
+    public function supportReply($ticketId)
+    {
+        $ticket = Ticket::with(['user', 'assignedTo', 'messages'])->find($ticketId);
+        $this->authorize('view', $ticket);
+        if (!$ticket)
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+        return view('dashboard.tickets.supportReply', compact('ticket'));
+    }
+
+    public function postSupportReply(StoreMessageRequest $request, $ticketId)
+    {
+        // Get ticket by ID
+        $ticket = Ticket::find($ticketId);
+        if (!$ticket)
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+
+        // Check authorization
+        if (!Auth::check() || !in_array(getActiveUser()->role, ['superadmin', 'admin', 'support'])) {
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.unauthorized_action'));
+        }
+
+        $validated = $request->validated();
+        $messageText = $validated['your_reply'] ?? null;
+
+        // Create new support reply
+        if ($messageText) {
+            $messageRow = $ticket->messages()->create([
+                'user_id' => getActiveUserId(),
+                'message' => $messageText,
+                'sender_type' => 'support',
+            ]);
+
+            // Upload attachments if any
+            if ($request->hasFile('attachments')) {
+                $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-support');
+            }
+
+            // Prepare comprehensive data for Ably with user info and formatted dates
+            $messageData = array_merge($messageRow->toArray(), [
+                'user_name' => getActiveUser()->name,
+                'ticket_name' => $ticket->name,
+                'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
+                'human_readable_date' => $messageRow->created_at->diffForHumans(),
+                'ticket_uuid' => $ticket->uuid,
+            ]);
+
+            // Publish update to Ably channel (you can customize the channel name and event as needed)
+            $this->publishToAbly('ticket-updates', 'new-support-reply', $messageData);
+
+            // Send email to customer
+            Mail::to($ticket->email)->send(new TicketRepliedMail($messageRow));
+        }
+
+        return redirect()->back()->withSuccess(__('messages.type_sended_successfully', ['type' => __('main.message')]));
+    }
+
+    // send copy from ticket to customer email
+    public function sendCopyToCustomer($ticketId)
+    {
+        $ticket = Ticket::find($ticketId);
+        if (!$ticket)
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+        $this->authorize('view', $ticket);
+        Mail::to($ticket->email)->send(new TicketCopyMail($ticket));
+        return redirect()->back()->withSuccess(__('messages.email_sent_successfully'));
     }
 }

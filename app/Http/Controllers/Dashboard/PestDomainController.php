@@ -33,18 +33,6 @@ class PestDomainController extends Controller
         $this->authorize('create', PestDomain::class);
         $validated = $request->validated();
         $validated['created_by'] = getActiveUserId();
-
-        // Build translations array from form inputs
-        $translations = [];
-
-        foreach (array_keys(config('languages')) as $lang) {
-            $translations[$lang] = [
-                'name' => $request->input("name_{$lang}") ?? '',
-                'description' => $request->input("description_{$lang}") ?? '',
-            ];
-        }
-
-        $validated['translations'] = $translations;
         $pestDomain = PestDomain::create($validated);
 
         if ($request->hasFile('image')) {
@@ -85,21 +73,9 @@ class PestDomainController extends Controller
 
         $validated = $request->validated();
         $validated['updated_by'] = getActiveUserId();
-
-        // Build translations array from form inputs
-        $translations = [];
-
-        foreach (array_keys(config('languages')) as $lang) {
-            $translations[$lang] = [
-                'name' => $request->input("name_{$lang}") ?? '',
-                'description' => $request->input("description_{$lang}") ?? '',
-            ];
-        }
-
-        $validated['translations'] = $translations;
         $updated = $pestDomain->update($validated);
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('remove_image')  && $request->hasFile('image')) {
             $this->uploadSinglePhoto($request, $pestDomain, 'image', 'pest-domains');
         }
 

@@ -5,10 +5,10 @@
     @include('sections.about-us')
 
     {{-- Line Works Section --}}
-    @include('sections.line-works')
+    @include('sections.line-works', ['lineWorks' => $data['lineWorks']])
 
     {{-- Partners Section --}}
-    @include('sections.partners')
+    @include('sections.partners', ['partners' => $data['partners']])
 @endsection
 
 @push('scripts')

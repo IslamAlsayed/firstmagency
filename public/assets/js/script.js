@@ -228,12 +228,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterButtons = document.querySelectorAll('.section-with-filter .filter-btn');
     const projectItems = document.querySelectorAll('.project-item');
 
-    // Mapping من filter IDs إلى أسماء الـ tags الفعلية
-    const tagFilterMap = {
-        'website_design': 'Web Design',
-        'graphic_design': 'Graphic Design'
-    };
-
     // تهيئة جميع العناصر بـ fade-up و opacity 1
     projectItems.forEach(item => {
         item.classList.add('fade-up');
@@ -251,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 projectItems.forEach(item => {
                     const tagsString = item.getAttribute('data-tags');
                     const tags = tagsString ? tagsString.split(',').map(tag => tag.trim()) : [];
-                    const searchTag = filter === 'all' ? null : tagFilterMap[filter];
+                    const searchTag = filter === 'all' ? null : filter;
 
                     const shouldShow = filter === 'all' || (searchTag && tags.includes(searchTag));
 
@@ -516,4 +510,22 @@ document.addEventListener('DOMContentLoaded', function () {
         const color = icon.getAttribute('data-color');
         if (color) icon.style.setProperty('--icon-color', color);
     });
+
+    const viewer = document.getElementById('imageViewer');
+    const viewerImg = document.getElementById('viewerImg');
+
+    if (viewer && viewerImg) {
+        document.querySelectorAll('.clickable-img').forEach(img => {
+            img.addEventListener('click', () => {
+                viewerImg.src = img.dataset.src;
+                viewer.classList.add('active');
+            });
+        });
+
+        viewer.addEventListener('click', (e) => {
+            if (e.target === viewer) {
+                viewer.classList.remove('active');
+            }
+        });
+    }
 });

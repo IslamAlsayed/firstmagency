@@ -14,6 +14,7 @@ return [
     'null' => 'Null',
     'heading' => 'Heading',
     'popular' => 'Popular',
+    'na' => 'N/A',
 
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
@@ -60,6 +61,7 @@ return [
     'cancel' => 'Cancel',
     'back' => 'Back',
     'submit' => 'Submit',
+    'send_reply' => 'Send Reply',
     'search' => 'Search',
     'filter' => 'Filter',
     'reset' => 'Reset',
@@ -76,6 +78,7 @@ return [
     'type' => 'Type',
 
     'search_types_placeholder' => 'Search :types...',
+    'types_count' => 'Total :types',
     'save_type' => 'Save :type',
     'save_and_add_another' => 'Save and Add Another',
     'type_information' => ':type Information',
@@ -107,6 +110,8 @@ return [
     'metadata' => 'Metadata',
     'change' => 'Change',
     'button_display_mode' => 'Change Button Display Mode',
+    'chat' => 'Chat',
+    'go_to_chat' => 'Go to chat',
 
     'all' => 'All',
     'website_design' => 'Website Design',
@@ -115,6 +120,8 @@ return [
     'site_description_ar' => 'Site Description (Arabic)',
     'app_display_menu_labels' => 'Display Menu Labels in App',
     'tagify_desc' => 'Type and press Enter to add it as a new stop.',
+    'tag' => 'tag',
+    'tags' => 'tags',
 
     // ==================== Navigation ====================
     'home' => 'Home',
@@ -400,6 +407,8 @@ return [
     'updated_successfully' => 'Review updated successfully',
     'deleted_successfully' => 'Review deleted successfully',
     'toggled_successfully' => 'Review visibility toggled successfully',
+    'id' => 'Id',
+    'number' => 'Number',
     'name' => 'Name',
     'country' => 'Country',
     'rating' => 'Rating',
@@ -421,6 +430,7 @@ return [
     'no_audio_recorded' => 'No audio recorded',
     'note' => 'Note',
     'recording_time' => 'Recording Time',
+    'your_reply' => 'Your Reply',
 
     // ==================== Footer Section ====================
     'footer_description' => 'Official registered company, specialized in website design, mobile applications, electronic marketing with hosting services, servers and technical support. First Marketing is the ideal partner in providing digital services.',
@@ -465,7 +475,7 @@ return [
     'contact_form_add_attachment' => 'Add Another Attachment',
     'contact_form_verification' => 'Verification',
     'contact_form_answer' => 'Answer',
-    'contact_form_verification_text' => 'Verify: ? = ',
+    'contact_form_verification_text' => 'Verify:',
 
     // ==================== Line Works Section ====================
     'line_works_title' => 'How We Work',
@@ -588,8 +598,8 @@ return [
     // ==================== Website Design ====================
     'website_design_title' => 'Your Website With Us - Professional Design and Programming',
     'website_design_heading' => 'Request Your Website Design From',
-    'website_design_description' => 'Website Design Description',
-    'website_design_description_part1' => 'First Marketing is a company specialized in',
+    'website_design_description' => 'First Marketing is a company specialized in website design and development with high professionalism, transforming your ideas into a strong digital identity, fast and attractive website that represents your business and makes your customer trust you from the first visit. We are not making "nice looks and that\'s it" — we are building a website with a clear goal: increasing customers, boosting sales, and improving your visibility in Google search results.',
+    'website_design_description_part1' => 'First Marketing is a company specialized in website design and development with high professionalism, transforming your ideas into a strong digital identity, fast and attractive website that represents your business and makes your customer trust you from the first visit. We are not making "nice looks and that\'s it" — we are building a website with a clear goal: increasing customers, boosting sales, and improving your visibility in Google search results.',
     'website_design_description_part2' => ' website design and development with high professionalism, transforming your ideas into a strong digital identity, fast and attractive website that represents your business and makes your customer trust you from the first visit.',
     'website_design_description_part3' => ' We are not making "nice looks and that\'s it" — we are building a website with a clear goal: increasing customers, boosting sales, and improving your visibility in Google search results.',
     'website_design_clients' => 'Our Clients',
@@ -855,6 +865,7 @@ return [
     'arabic_language' => 'Arabic Language',
     'payments_methods' => 'Payment Methods',
     'about_us_image' => 'About Us Image',
+    'about_us_image2' => 'About Us Image2',
     'website_design_image' => 'Website Design Image',
     'client_image' => 'Client Image',
     'design_title' => 'Design',
@@ -863,6 +874,7 @@ return [
     'blog_image' => 'Blog Image',
     'first_marketing_logo' => 'First Marketing Logo',
     'email_placeholder' => 'Example: example@domain.com',
+    'inquiry_placeholder' => 'Example: example@domain.com, or Ticket number',
     'official_category' => 'Official',
     'regular_category' => 'Regular',
     'seconds' => 'Seconds',
@@ -900,6 +912,8 @@ return [
     'admin' => 'Admin',
     'content_manager' => 'Content Manager',
     'support' => 'Support',
+    'sales' => 'Sales',
+    'general' => 'General',
 
     // Article Management
     'article_management' => 'Article Management',
@@ -909,10 +923,13 @@ return [
     'article_list' => 'Articles List',
     'total_articles' => 'Total Articles',
     'category' => 'Category',
+    'department' => 'Department',
     'select_category' => 'Select Category',
     'keywords' => 'Keywords',
     'keywords_placeholder' => 'keyword1, keyword2, keyword3',
     'meta_description' => 'Meta Description',
+    'date' => 'Date',
+    'customer' => 'Customer',
 
     // Service Management
     'service_management' => 'Service Management',
@@ -927,6 +944,14 @@ return [
     'service_content' => 'Service Content',
     'icon' => 'Icon',
     'order' => 'Order',
+    'price' => 'Price',
+    'old_price' => 'Old Price',
+    'discount_percentage' => 'Discount Percentage',
+    'discount' => 'Discount',
+    'auto_calculated' => 'Auto Calculated',
+    'old_price_auto_calculated' => 'Old price will be calculated automatically',
+    'calculated_from_price_and_discount' => 'Calculated from price and discount percentage',
+    'current_price' => 'Current Price',
 
     // Companies
     'companies' => 'Companies',
@@ -940,6 +965,18 @@ return [
     'search_companies_placeholder' => 'Search companies...',
     'company_info' => 'Company Information',
     'company_content' => 'Company Content',
+
+    // Projects Management
+    'project' => 'Project',
+    'projects' => 'Projects',
+    'create_project' => 'Create Project',
+    'edit_project' => 'Edit Project',
+    'view_project' => 'View Project',
+    'projects_list' => 'Projects List',
+    'total_projects' => 'Total Projects',
+    'no_projects_found' => 'No projects found',
+    'search_projects_placeholder' => 'Search projects (name or website)...',
+    'project_info' => 'Project Information',
 
     // Clients
     'clients' => 'Clients',
@@ -1105,6 +1142,7 @@ return [
     'marketing_package_updated' => 'Package updated successfully',
     'marketing_package_deleted' => 'Package deleted successfully',
 
+    'about_us_' => 'About Us',
     'about_us' => 'About Us',
     'create_about_us' => 'Create About Us',
     'edit_about_us' => 'Edit About Us',
@@ -1131,6 +1169,7 @@ return [
     'info' => 'Information',
     'translations' => 'Translations',
     'badge' => 'Badge',
+    'badges' => 'Badges',
     'activate' => 'Activate',
     'feature' => 'Feature',
     'features' => 'Features',
@@ -1229,6 +1268,7 @@ return [
     // Form Fields
     'name' => 'Name',
     'email' => 'Email',
+    'email_' => 'Email',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',
     'actions' => 'Actions',
@@ -1562,7 +1602,10 @@ return [
 
     // Ticket Status
     'open' => 'Open',
+    'open_' => 'Open',
     'in_progress' => 'In Progress',
+    'processed' => 'Processed',
+    'replied' => 'Replied',
     'resolved' => 'Resolved',
     'closed' => 'Closed',
 
@@ -1574,4 +1617,27 @@ return [
 
     'assigned_to' => 'Assigned To',
     'select_user' => 'Select User',
+
+    'ticket_message' => 'Ticket Message',
+    'ticket_replied' => 'Ticket Replied',
+    'ticket_received' => 'Ticket Received',
+    'ticket_rating' => 'Ticket Rating',
+    'hello' => 'Hello',
+    'ticket_created_successfully' => 'Your ticket has been created successfully',
+    'ticket_replied_successfully' => 'Your ticket has been replied successfully',
+    'ticket_number' => 'Ticket Number',
+    'view_ticket' => 'View Ticket',
+    'support_team_response' => 'Our support team will respond to you as soon as possible',
+    'ticket_copy' => 'Ticket Copy',
+    'ticket_copy_message' => 'This message contains a copy of the ticket details and conversation as recorded in the support system.',
+    'full_conversation' => 'Full Conversation',
+    'send_copy_to_customer' => 'Send Copy to Customer',
+    'support_reply' => 'Support Reply',
+    'support_pro' => 'Support PRO',
+    'support_rating' => 'Support Rating',
+    'ticket_closed' => 'Your ticket has been closed in the support system.',
+    'ticket_feedback_request' => 'We would like to know your opinion about the quality of the service you received.',
+    'rate_ticket_now' => 'Rate the ticket now',
+    'if_button_not_working' => 'If the button does not work, you can copy the following link and open it in your browser:',
+    'automated_email_notice' => 'This email is sent automatically from the support system – Support PRO.',
 ];

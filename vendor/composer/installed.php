@@ -3,13 +3,22 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2819204a3cfa0112c675f94664e6e05c2b68b933',
+        'reference' => 'f85f3f206c10ee1d3cf0a03ec3f4c046241bd474',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'ably/ably-php' => array(
+            'pretty_version' => '1.1.11',
+            'version' => '1.1.11.0',
+            'reference' => 'ddd9355ab25f76e0db1672fb5dd943fa5d9713bc',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ably/ably-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'brick/math' => array(
             'pretty_version' => '0.14.8',
             'version' => '0.14.8.0',
@@ -409,7 +418,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2819204a3cfa0112c675f94664e6e05c2b68b933',
+            'reference' => 'f85f3f206c10ee1d3cf0a03ec3f4c046241bd474',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -862,6 +871,15 @@
             'replaced' => array(
                 0 => '4.9.2',
             ),
+        ),
+        'rybakit/msgpack' => array(
+            'pretty_version' => 'v0.9.2',
+            'version' => '0.9.2.0',
+            'reference' => 'f483081fe9eb611f6787b63b62dc4593fe2358e8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rybakit/msgpack',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'sebastian/cli-parser' => array(
             'pretty_version' => '3.0.2',

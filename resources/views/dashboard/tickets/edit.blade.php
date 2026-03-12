@@ -112,6 +112,19 @@
 
                     @include('dashboard.components.upload-file', ['column' => 'attachments', 'record' => $ticket])
 
+                    <div class="flex flex-wrap" style="gap: 10px 40px;">
+                        <div class="flex items-center gap-3">
+                            <input type="hidden" name="is_active" value="0">
+                            @include('dashboard.components.checkbox-button', [
+                                'name' => 'is_active',
+                                'id' => 'is_active',
+                                'value' => '1',
+                                'checked' => old('is_active', $ticket->is_active),
+                                'label' => __('main.is_active'),
+                            ])
+                        </div>
+                    </div>
+
                     <!-- Update Button -->
                     @include('dashboard.components.update-submit', ['models' => 'dashboard.tickets', 'model' => 'ticket'])
                 </div>

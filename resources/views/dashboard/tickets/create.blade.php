@@ -122,6 +122,19 @@
                             class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
                     </div>
 
+                    <div class="flex flex-wrap" style="gap: 10px 40px;">
+                        <div class="flex items-center gap-3">
+                            <input type="hidden" name="is_active" value="0">
+                            @include('dashboard.components.checkbox-button', [
+                                'name' => 'is_active',
+                                'id' => 'is_active',
+                                'value' => '1',
+                                'checked' => 1,
+                                'label' => __('main.is_active'),
+                            ])
+                        </div>
+                    </div>
+
                     <!-- Save Button -->
                     @include('dashboard.components.save-submit', ['models' => 'dashboard.tickets', 'model' => 'ticket'])
                 </div>

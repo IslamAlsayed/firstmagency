@@ -16,7 +16,7 @@
 }
 
 .timeline {
-    width: 70%;
+    width: 80%;
     margin: auto;
     position: relative;
     padding-block: 30px;
@@ -42,15 +42,15 @@
 
     &>div:first-child,
     &>div:last-child {
-        width: 40%;
+        width: 50%;
         margin: auto;
     }
 }
 
 .timeline .timeline-item .step-label .label {
-    width: 300px;
+    width: 100%;
     padding: 10px;
-    font-size: 26px;
+    font-size: 22px;
     border-radius: 10px;
     position: relative;
     z-index: 10;
@@ -75,36 +75,20 @@
         height: 30px;
         position: absolute;
         top: 50%;
-        left: calc((25px / 2) * -1);
+        right: calc((25px / 2) * -1);
+        left: auto;
         z-index: -1;
         transform: translateY(-50%) rotate(45deg);
         background: var(--orange-color);
     }
 
-    & i,
-    & svg {
-        transform: translateX(-40px) scaleX(-1);
+    & .arrow-icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        right: auto;
+        transform: translateY(-50%) scaleX(-1);
         color: var(--light-color);
-    }
-}
-
-html[lang=en] {
-    .timeline .timeline-item {
-        &:nth-child(odd) .step-label .label {
-
-            & i,
-            & svg {
-                transform: translateX(40px) scaleX(1) !important;
-            }
-        }
-
-        &:nth-child(even) .step-label .label {
-
-            & i,
-            & svg {
-                transform: translateX(-40px) scaleX(1) !important;
-            }
-        }
     }
 }
 
@@ -115,24 +99,72 @@ html[lang=en] {
 
     &:nth-child(even) {
         & .step-label .label {
-            right: 50px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-direction: row-reverse;
 
-
             &:after {
-                right: calc((30px / 2) * -1);
-                left: auto;
+                right: auto;
+                left: calc((25px / 2) * -1);
                 transform: translateY(-50%) rotate(45deg);
             }
 
-            & i,
-            & svg {
-                transform: translateX(40px) scaleX(-1);
+            & .arrow-icon {
+                right: 20px;
+                left: auto;
             }
         }
+    }
+}
+
+html[lang=en] {
+    .timeline .timeline-item .step-label .label {
+        &:after {
+            right: auto;
+            left: calc((25px / 2) * -1);
+        }
+
+        & .arrow-icon {
+            transform: translateY(-50%) scaleX(1);
+        }
+    }
+
+    .timeline .timeline-item {
+        &:nth-child(even) {
+            & .step-label .label {
+                &:after {
+                    right: calc((25px / 2) * -1);
+                    left: auto;
+                    transform: translateY(-50%) rotate(45deg);
+                }
+            }
+        }
+
+        &:nth-child(even) {
+            & .step-label .label {
+                & .arrow-icon {
+                    left: 20px;
+                    right: auto;
+                }
+            }
+        }
+
+        &:nth-child(odd) {
+            & .step-label .label {
+                & .arrow-icon {
+                    left: auto;
+                    right: 20px;
+                }
+            }
+        }
+
+        /* &:nth-child(odd) .step-label .label {
+            & .arrow-icon {
+                left: 20px;
+                right: auto;
+            }
+        } */
     }
 }
 

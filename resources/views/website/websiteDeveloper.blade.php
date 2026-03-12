@@ -6,19 +6,20 @@
         @include('sections.developer')
 
         {{-- Programming Section --}}
-        @include('sections.programming')
+        @include('sections.programming', ['websites' => $data['programmings'] ?? []])
 
         {{-- Website Design Section --}}
-        @include('sections.website-design')
+        @include('sections.website-design', ['stats' => $data['website_design'] ?? []])
 
         {{-- Important Articles Section --}}
         @include('sections.important-articles', [
+            'articles' => $data['articles'] ?? [],
             'title' => __('main.important_articles_title'),
             'desc' => __('main.important_articles_description'),
         ])
 
         {{-- Frequently Asked Questions Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-websites')])
+        @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? []])
     </div>
 @endsection
 

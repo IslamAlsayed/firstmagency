@@ -44,7 +44,6 @@
                         <tr class="bg-gray-100 border-b-2 border-gray-300">
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.alt_text') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.website') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
@@ -57,11 +56,10 @@
                     <tbody>
                         @forelse($pestDomains as $pestDomain)
                             <tr id="row-{{ $pestDomain->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                <td title="{{ $pestDomain->alt_text ?? ($pestDomain->translations[app()->getLocale()]['name'] ?? '') }}" class="p-4">
+                                <td title="{{ $pestDomain->alt_text ?? '' }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($pestDomain->image && checkExistFile($pestDomain->image))
-                                            <img src="{{ asset('storage/' . $pestDomain->image) }}"
-                                                alt="{{ $pestDomain->alt_text ?? ($pestDomain->translations[app()->getLocale()]['name'] ?? '') }}"
+                                            <img src="{{ asset('storage/' . $pestDomain->image) }}" alt="{{ $pestDomain->alt_text ?? '' }}"
                                                 class="w-[90px] h-[35px] rounded-[9px] shrink-0">
                                         @else
                                             <i class="fas fa-globe text-2xl text-gray-400"></i>
@@ -72,19 +70,6 @@
                                     <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
                                         {{ limitedText($pestDomain->alt_text ?? '--', 25) }}
                                     </span>
-                                </td>
-                                <td title="{{ $pestDomain->website ?? '--' }}">
-                                    @if ($pestDomain->website)
-                                        <a href="{{ $pestDomain->website }}" target="_blank"
-                                            class="inline-block bg-primary/10 text-primary hover:underline text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2">
-                                            {!! limitedText($pestDomain->website ?? '--', 15) !!}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
-                                        </a>
-                                    @else
-                                        <div class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
-                                            <i class="opacity-25">{{ __('main.null') }}</i>
-                                        </div>
-                                    @endif
                                 </td>
                                 <td class="p-4 text-sm">
                                     @include('dashboard.components.toggle-hold', [

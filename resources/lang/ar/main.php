@@ -14,6 +14,7 @@ return [
     'null' => 'لا شيء',
     'heading' => 'العنوان',
     'popular' => 'شائع',
+    'na' => 'غير متوفر',
 
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التحديث',
@@ -60,6 +61,7 @@ return [
     'cancel' => 'إلغاء',
     'back' => 'عودة',
     'submit' => 'إرسال',
+    'send_reply' => 'ارسال الرد',
     'search' => 'بحث',
     'filter' => 'تصفية',
     'reset' => 'إعادة تعيين',
@@ -76,6 +78,7 @@ return [
     'type' => 'الفئة',
 
     'search_types_placeholder' => 'ابحث عن :types...',
+    'types_count' => 'عدد :types',
     'save_type' => 'حفظ :type',
     'save_and_add_another' => 'حفظ وإضافة آخر',
     'type_information' => 'معلومات :type',
@@ -107,6 +110,8 @@ return [
     'metadata' => 'بيانات وصفية',
     'change' => 'تغيير',
     'button_display_mode' => 'تغيير وضع العرض',
+    'chat' => 'الدردشة',
+    'go_to_chat' => 'الذهاب إلى الدردشة',
 
     'all' => 'الكل',
     'website_design' => 'تصميم مواقع',
@@ -115,6 +120,8 @@ return [
     'site_description_ar' => 'وصف الموقع',
     'app_display_menu_labels' => 'عرض تسميات القائمة في التطبيق',
     'tagify_desc' => 'اكتب واضغط Enter لإضافته كعنصر جديد.',
+    'tag' => 'عنصر',
+    'tags' => 'عناصر',
 
     // ==================== Navigation ====================
     'home' => 'الرئيسية',
@@ -398,6 +405,8 @@ return [
     'updated_successfully' => 'تم تحديث المراجعة بنجاح',
     'deleted_successfully' => 'تم حذف المراجعة بنجاح',
     'toggled_successfully' => 'تم تبديل حالة المراجعة بنجاح',
+    'id' => 'المعرف',
+    'number' => 'الرقم',
     'name' => 'الاسم',
     'country' => 'الدولة',
     'rating' => 'التقييم',
@@ -419,6 +428,7 @@ return [
     'no_audio_recorded' => 'لم يتم تسجيل صوت',
     'note' => 'ملاحظة',
     'recording_time' => 'وقت التسجيل',
+    'your_reply' => 'ردك',
 
     // ==================== Footer Section ====================
     'footer_description' => 'شركة رسمية مسجلة، متخصصة في مجال تصميم المواقع وتطبيقات الجوال والتسويق الإلكتروني مع خدمات الاستضافة والسيرفرات والدعم الفني فرست ماركتينج شريك الامثل تقديم الخدمات الرقمية',
@@ -463,7 +473,7 @@ return [
     'contact_form_add_attachment' => 'إضافة مرفق آخر',
     'contact_form_verification' => 'تحقق',
     'contact_form_answer' => 'الاجابة',
-    'contact_form_verification_text' => 'تحقق: ? = ',
+    'contact_form_verification_text' => 'تحقق:',
 
     // ==================== Line Works Section ====================
     'line_works_title' => 'مسار عملنا',
@@ -769,6 +779,7 @@ return [
     'arabic_language' => 'اللغة العربية',
     'payments_methods' => 'طرق الدفع',
     'about_us_image' => 'صورة عن الشركة',
+    'about_us_image2' => 'صورة عن الشركة2',
     'website_design_image' => 'صورة تصميم المواقع',
     'client_image' => 'صورة العميل',
     'design_title' => 'التصميم',
@@ -779,6 +790,7 @@ return [
     'blog_image' => 'صورة المدونة',
     'first_marketing_logo' => 'شعار فرست ماركتينج',
     'email_placeholder' => 'مثال: example@domain.com',
+    'inquiry_placeholder' => 'مثال: example@domain.com، أو رقم التذكرة',
     'official_category' => 'رسمي',
     'regular_category' => 'عادي',
     'seconds' => 'ثانية',
@@ -916,6 +928,8 @@ return [
     'admin' => 'مسؤول',
     'content_manager' => 'مدير المحتوى',
     'support' => 'الدعم',
+    'sales' => 'المبيعات',
+    'general' => 'عام',
 
     // Article Management
     'article_management' => 'إدارة المقالات',
@@ -925,10 +939,13 @@ return [
     'article_list' => 'قائمة المقالات',
     'total_articles' => 'إجمالي المقالات',
     'category' => 'الفئة',
+    'department' => 'القسم',
     'select_category' => 'اختر الفئة',
     'keywords' => 'الكلمات المفتاحية',
     'keywords_placeholder' => 'كلمة_مفتاحية٠, كلمة_مفتاحية١, كلمة_مفتاحية٢',
     'meta_description' => 'وصف الميتا',
+    'date' => 'التاريخ',
+    'customer' => 'العميل',
 
     // Service Management
     'service_management' => 'إدارة الخدمات',
@@ -943,6 +960,14 @@ return [
     'service_content' => 'محتوى الخدمة',
     'icon' => 'أيقونة',
     'order' => 'الترتيب',
+    'price' => 'السعر',
+    'old_price' => 'السعر القديم',
+    'discount_percentage' => 'نسبة الخصم',
+    'discount' => 'خصم',
+    'auto_calculated' => 'محسوب تلقائياً',
+    'old_price_auto_calculated' => 'سيتم حساب السعر القديم تلقائياً',
+    'calculated_from_price_and_discount' => 'يتم حسابها من السعر ونسبة الخصم',
+    'current_price' => 'السعر الحالي',
 
     // Companies Management
     'companies' => 'الشركات',
@@ -955,6 +980,18 @@ return [
     'no_companies_found' => 'لم يتم العثور على شركات',
     'search_companies_placeholder' => 'البحث عن شركات (الاسم أو الموقع الإلكتروني)...',
     'company_info' => 'معلومات الشركة',
+
+    // Projects Management
+    'project' => 'مشروع',
+    'projects' => 'المشاريع',
+    'create_project' => 'إنشاء مشروع',
+    'edit_project' => 'تعديل المشروع',
+    'view_project' => 'عرض المشروع',
+    'projects_list' => 'قائمة المشاريع',
+    'total_projects' => 'إجمالي المشاريع',
+    'no_projects_found' => 'لم يتم العثور على مشاريع',
+    'search_projects_placeholder' => 'البحث عن مشاريع (الاسم أو الموقع الإلكتروني)...',
+    'project_info' => 'معلومات المشروع',
 
     // Clients Management
     'clients' => 'العملاء',
@@ -1146,7 +1183,8 @@ return [
     'delete' => 'حذف',
     'info' => 'المعلومات',
     'translations' => 'الترجمات',
-    'badge' => 'Badge',
+    'badge' => 'شارة',
+    'badges' => 'شارات',
     'activate' => 'تفعيل',
     'featured' => 'مميز',
     'not_featured' => 'غير مميز',
@@ -1243,6 +1281,7 @@ return [
     // Form Fields
     'name' => 'الاسم',
     'email' => 'البريد الإلكتروني',
+    'email_' => 'الإيميل',
     'password' => 'كلمة المرور',
     'confirm_password' => 'تأكيد كلمة المرور',
     'actions' => 'الإجراءات',
@@ -1575,7 +1614,10 @@ return [
 
     // Ticket Status
     'open' => 'مفتوحة',
-    'in_progress' => 'قيد التنفيذ',
+    'open_' => 'فتح',
+    'in_progress' => 'قيد المعالجة',
+    'processed' => 'تمت المعالجة',
+    'replied' => 'تم الرد',
     'resolved' => 'محلولة',
     'closed' => 'مغلقة',
 
@@ -1587,4 +1629,27 @@ return [
 
     'assigned_to' => 'مسند إلى',
     'select_user' => 'اختر مستخدم',
+
+    'ticket_message' => 'ملخص الرساله',
+    'ticket_replied' => 'تم الرد على تذكرتك',
+    'ticket_received' => 'لقد تلقينا تذكرتك',
+    'ticket_rating' => 'تقييم التذكرة',
+    'hello' => 'مرحبًا',
+    'ticket_created_successfully' => 'تم إنشاء تذكرتك بنجاح',
+    'ticket_replied_successfully' => 'تم الرد على تذكرتك بنجاح',
+    'ticket_number' => 'رقم التذكرة',
+    'view_ticket' => 'عرض التذكرة',
+    'support_team_response' => 'سيقوم فريق الدعم بالرد عليك في أقرب وقت ممكن',
+    'ticket_copy' => 'نسخة من تذكرتك',
+    'ticket_copy_message' => 'هذه رسالة تحتوي على نسخة من تفاصيل التذكرة والمحادثة كما هي مسجلة داخل نظام الدعم.',
+    'full_conversation' => 'المحادثة الكاملة',
+    'send_copy_to_customer' => 'إرسال نسخة إلى العميل',
+    'support_reply' => 'رد الدعم',
+    'support_pro' => 'Support PRO',
+    'support_rating' => 'تقييم خدمة الدعم',
+    'ticket_closed' => 'تم إغلاق تذكرتك في نظام الدعم الفني.',
+    'ticket_feedback_request' => 'نرغب في معرفة رأيك عن جودة الخدمة التي حصلت عليها.',
+    'rate_ticket_now' => 'تقييم التذكرة الآن',
+    'if_button_not_working' => 'إذا لم يعمل الزر، يمكنك نسخ الرابط التالي وفتحه في المتصفح:',
+    'automated_email_notice' => 'هذا البريد مرسل تلقائيًا من نظام الدعم الفني – Support PRO.',
 ];

@@ -42,6 +42,10 @@
         </main>
     </div>
 
+    <div id="imageViewer" class="image-viewer">
+        <img id="viewerImg">
+    </div>
+
     <!-- Scripts -->
     @include('dashboard.layout.partials.scripts')
     @include('dashboard.components.delete-ajax-script')

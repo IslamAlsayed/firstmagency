@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
             'message' => 'required|string',
             'attachments' => 'nullable|array',
             'attachments.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'category' => 'nullable|string|max:255',
+            'department' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
             'priority' => 'nullable|string|max:255',
             'user_id' => 'nullable|exists:users,id',
@@ -36,10 +36,25 @@ class StoreRequest extends FormRequest
                 'required',
                 function ($attribute, $value, $fail) {
                     if ($value != session('ticket_verification')) {
-                        $fail(__('Verification answer is incorrect.'));
+                        $fail(__('messages.verification_incorrect'));
                     }
                 }
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => __('messages.validation_required', ['attribute' => __('main.name')]),
+            'email.required' => __('messages.validation_required', ['attribute' => __('main.email')]),
+            'email.email' => __('messages.validation_email', ['attribute' => __('main.email')]),
+            'subject.required' => __('messages.validation_required', ['attribute' => __('main.subject')]),
+            'message.required' => __('messages.validation_required', ['attribute' => __('main.message')]),
+            'attachments.array' => __('messages.validation_array', ['attribute' => __('main.attachments')]),
+            'attachments.*.image' => __('messages.validation_image', ['attribute' => __('main.attachments')]),
+            'attachments.*.mimes' => __('messages.validation_mimes', ['attribute' => __('main.attachments'), 'values' => 'jpeg, png, jpg, gif, webp']),
+            'attachments.*.max' => __('messages.validation_max_file_size', ['attribute' => __('main.attachments'), 'max' => 2048]),
         ];
     }
 }

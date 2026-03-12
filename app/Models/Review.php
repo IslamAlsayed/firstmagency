@@ -36,4 +36,14 @@ class Review extends Model
     {
         return $this->audio ? asset('storage/' . $this->audio) : null;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
 }

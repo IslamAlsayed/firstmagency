@@ -7,32 +7,50 @@
 
         <div class="filter">
             <button class="btn-link main-color dark-hover font-semibold filter-btn active" data-filter="all">{{ __('main.all') }}</button>
-            <button class="btn-link main-color dark-hover font-semibold filter-btn" data-filter="website_design">{{ __('main.website_design') }}</button>
+            <button class="btn-link main-color dark-hover font-semibold filter-btn" data-filter="web_design">{{ __('main.website_design') }}</button>
             <button class="btn-link main-color dark-hover font-semibold filter-btn" data-filter="graphic_design">{{ __('main.graphic_design') }}</button>
         </div>
 
         <div class="our-projects-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            @if (config('portfolio') && count(config('portfolio')) > 0)
-                @foreach (config('portfolio') as $key => $work)
-                    <div class="project-item" data-tags="{{ isset($work['tags']) && is_array($work['tags']) ? implode(',', $work['tags']) : '' }}">
-                        <a href="{{ route('works.show', ['id' => $key]) }}">
+            @if ($portfolio && count($portfolio) > 0)
+                @foreach ($portfolio as $work)
+                    @php
+                        $slug = is_object($work) ? $work->slug : $work['slug'] ?? '';
+                        $image = is_object($work) ? $work->image : $work['image'] ?? '';
+                        $locale = app()->getLocale();
+                        if (is_object($work)) {
+                            $title = $work->translations[$locale]['name'] ?? $slug;
+                            $tags = $work->tags ?? [];
+                        } else {
+                            $title = $work['translations'][$locale]['name'] ?? $slug;
+                            $tags = $work['tags'] ?? [];
+                        }
+                        // Ensure tags is an array
+                        if (is_string($tags)) {
+                            $tags = json_decode($tags, true) ?? [];
+                        }
+                        // Convert tags to filter format (e.g., "Web Design" -> "web_design")
+                        $filterTags = array_map(function ($tag) {
+                            return strtolower(str_replace(' ', '_', $tag));
+                        }, (array) $tags);
+                        $tagsString = implode(',', $filterTags);
+                    @endphp
+                    <div class="project-item" data-tags="{{ $tagsString }}">
+                        <a href="{{ route('portfolio.show', ['id' => $work->id ?? $work['id'], 'slug' => $slug]) }}">
                             <div class="project-image">
-                                <img src="{{ asset('assets/images/website/portfolio/' . ($key + 1) . '.jpg') }}" alt="{{ $work['title'] }}">
+                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $slug }}" loading="lazy">
                             </div>
                             <div class="project-text">
-                                <div class="project-title font-semibold">{{ isset($work['title']) && $work['title'] ? $work['title'] : '' }}</div>
-                                @if (isset($work['description']) && $work['description'])
-                                    <div class="project-description font-semibold">{{ $work['description'] }}</div>
-                                @endif
+                                <div class="project-title font-semibold">{{ $title }}</div>
                             </div>
                         </a>
                         <div class="project-action">
-                            <button class="btn-link main-color dark-hover font-semibold">
-                                <a href="{{ route('works.show', ['id' => $key]) }}">
+                            <button class="btn-link main-color font-semibold">
+                                <a href="{{ route('portfolio.show', ['id' => $work->id ?? $work['id'], 'slug' => $slug]) }}">
                                     <i class="icon fa-solid fa-eye"></i>
                                 </a>
                             </button>
-                            <button class="btn-link main-color dark-hover font-semibold">
+                            <button class="btn-link main-color font-semibold">
                                 <a href="#contact">
                                     <i class="icon fa-solid fa-search"></i>
                                 </a>
@@ -44,8 +62,8 @@
         </div>
 
         @if (isDebugModeEnabled())
-        <div class="debug-flag-badge">🚩 flag-portfolio</div>
-    @endif
+            <div class="debug-flag-badge">🚩 flag-portfolio</div>
+        @endif
     </section>
 @endsection
 

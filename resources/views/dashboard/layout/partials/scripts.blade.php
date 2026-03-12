@@ -7,6 +7,8 @@
 <script src="{{ asset('assets/plugins/trix@2.0.0/trix@2.0.0.js') }}"></script>
 {{-- Fontawesome icons pro --}}
 <script src="{{ asset('assets/plugins/fontawesome-icons/js/all.min.js') }}"></script>
+{{-- Ably realtime --}}
+<script src="{{ asset('assets/plugins/local-ably-cdn/ably.min.js') }}"></script>
 {{-- ? End plugins --}}
 
 <!-- Bootstrap JS -->

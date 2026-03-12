@@ -34,7 +34,7 @@
                                         </a>
                                     </button>
                                     <button class="btn-link font-semibold whatsapp">
-                                        <a href="{{ route('contact') }}">
+                                        <a href="{{ route('tickets.index') }}">
                                             {{ __('main.whatsapp_button') }}
                                         </a>
                                     </button>
@@ -84,7 +84,7 @@
                                     </a>
                                 </button>
                                 <button class="btn-link font-semibold whatsapp">
-                                    <a href="{{ route('contact') }}">
+                                    <a href="{{ route('tickets.index') }}">
                                         ${whatsappButtonText}
                                     </a>
                                 </button>

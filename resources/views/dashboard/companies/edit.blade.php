@@ -8,13 +8,13 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.edit_type', ['type' => __('main.company')]) }}</h3>
 
-            <a href="{{ route('dashboard.companies.index') }}" class="kt-btn kt-btn-outline-primary">
-                {{ __('main.back_to_types', ['types' => __('main.companies')]) }}
+            <a href="{{ route('dashboard.projects.index') }}" class="kt-btn kt-btn-outline-primary">
+                {{ __('main.back_to_types', ['types' => __('main.projects')]) }}
             </a>
         </div>
 
         <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.companies.update', $company->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.projects.update', $project->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="grid gap-4 lg:gap-6">
@@ -30,7 +30,7 @@
                                 </label>
                                 <input type="text"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_ar"
-                                    name="name_ar" required value="{{ old('name_ar', $company->translations['ar']['name'] ?? '') }}"
+                                    name="name_ar" required value="{{ old('name_ar', $project->translations['ar']['name'] ?? '') }}"
                                     placeholder="أدخل الاسم بالعربية">
                                 @error('name_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -41,7 +41,7 @@
                                 <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
                                 <textarea
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror"
-                                    id="description_ar" name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $company->translations['ar']['description'] ?? '') }}</textarea>
+                                    id="description_ar" name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $project->translations['ar']['description'] ?? '') }}</textarea>
                                 @error('description_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -58,7 +58,7 @@
                                 </label>
                                 <input type="text"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en"
-                                    name="name_en" value="{{ old('name_en', $company->translations['en']['name'] ?? '') }}" placeholder="Enter name in English">
+                                    name="name_en" value="{{ old('name_en', $project->translations['en']['name'] ?? '') }}" placeholder="Enter name in English">
                                 @error('name_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -68,7 +68,7 @@
                                 <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
                                 <textarea
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror"
-                                    id="description_en" name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en', $company->translations['en']['description'] ?? '') }}</textarea>
+                                    id="description_en" name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en', $project->translations['en']['description'] ?? '') }}</textarea>
                                 @error('description_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -76,11 +76,21 @@
                         </div>
                     </div>
 
+                    <!-- Tag (Tagify) -->
+                    <div>
+                        <label for="tags" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.tags') }}</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            id="tags" name="tags" value="{{ old('tags', $project->tags) }}" placeholder="tag1, tag2, tag3">
+                        @error('tags')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <!-- Common Fields -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.website') }}</label>
-                            <input type="url" name="website" value="{{ old('website', $company->website) }}"
+                            <input type="url" name="website" value="{{ old('website', $project->website) }}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('website') border-red-500 @enderror"
                                 placeholder="https://example.com">
                             @error('website')
@@ -90,14 +100,14 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" name="order" value="{{ old('order', $company->order) }}"
+                            <input type="number" name="order" value="{{ old('order', $project->order) }}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
                         </div>
                     </div>
 
                     <!-- Media & Other Fields -->
                     <div class="grid grid-cols-1 gap-6">
-                        @include('dashboard.components.photo', ['record' => $company, 'column' => 'image'])
+                        @include('dashboard.components.photo', ['record' => $project, 'column' => 'image'])
                     </div>
 
                     <!-- Checkboxes -->
@@ -108,7 +118,7 @@
                                 'name' => 'is_active',
                                 'id' => 'is_active',
                                 'value' => '1',
-                                'checked' => old('is_active', $company->is_active),
+                                'checked' => old('is_active', $project->is_active),
                                 'label' => __('main.active'),
                             ])
                         </div>
@@ -118,14 +128,14 @@
                                 'name' => 'is_featured',
                                 'id' => 'is_featured',
                                 'value' => '1',
-                                'checked' => old('is_featured', $company->is_featured),
+                                'checked' => old('is_featured', $project->is_featured),
                                 'label' => __('main.featured'),
                             ])
                         </div>
                     </div>
 
                     <!-- Update Button -->
-                    @include('dashboard.components.update-submit', ['models' => 'dashboard.companies', 'model' => 'company'])
+                    @include('dashboard.components.update-submit', ['models' => 'dashboard.projects', 'model' => 'company'])
                 </div>
             </form>
         </div>

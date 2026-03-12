@@ -1,4 +1,4 @@
-<footer class="">
+<footer class="footer">
     <div class="inner">
         <div class="footer-header flex items-center justify-between gap-4">
             <div class="description">

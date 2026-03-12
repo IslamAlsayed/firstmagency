@@ -1,5 +1,8 @@
 <title>@yield('title', 'First Magency')</title>
 <base href="../../">
+<script>
+    window.USERID = "{{ getActiveUserId() }}";
+</script>
 <meta charset="utf-8" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta content="follow, index" name="robots" />
@@ -35,6 +38,8 @@
 <link href="{{ asset('assets/plugins/fontawesome-icons/css/all.min.css') }}" rel="stylesheet" />
 {{-- Swiper slider --}}
 <link href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" rel="stylesheet" />
+{{-- Text editor --}}
+<link href="{{ asset('assets/plugins/trix@2.0.0/trix@2.0.0.css') }}" rel="stylesheet" />
 <!-- Tailwind CSS -->
 <link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
 {{-- ? End plugins --}}
@@ -51,6 +56,7 @@
 <link href="{{ asset('assets/css/pages/homePage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/aboutPage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/contactPage.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/pages/ticketShow.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/workPage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/websiteDeveloperPage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/appDeveloperPage.css') }}" rel="stylesheet" />

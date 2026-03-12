@@ -43,8 +43,7 @@
                     <thead>
                         <tr class="bg-gray-100 border-b-2 border-gray-300">
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.name') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.alt_text') }}</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
@@ -56,24 +55,21 @@
                     <tbody>
                         @forelse($programmings as $programming)
                             <tr id="row-{{ $programming->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                <td title="{{ $programming->alt_text ?? ($programming->translations[app()->getLocale()]['name'] ?? '') }}" class="p-4">
+                                <td title="{{ $programming->alt_text ?? ($programming->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($programming->image && checkExistFile($programming->image))
                                             <img src="{{ asset('storage/' . $programming->image) }}"
-                                                alt="{{ $programming->alt_text ?? ($programming->translations[app()->getLocale()]['name'] ?? '') }}"
+                                                alt="{{ $programming->alt_text ?? ($programming->translations[app()->getLocale()]['title'] ?? '') }}"
                                                 class="w-[90px] h-[35px] rounded-[9px] shrink-0">
                                         @else
                                             <i class="fas fa-code text-2xl text-gray-400"></i>
                                         @endif
                                     </div>
                                 </td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    <strong>{{ $programming->translations[app()->getLocale()]['name'] ?? '--' }}</strong>
-                                </td>
-                                <td title="{{ $programming->alt_text ?? '--' }}">
-                                    <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
-                                        {{ limitedText($programming->alt_text ?? '--', 25) }}
-                                    </span>
+                                <td title="{{ $programming->translations[app()->getLocale()]['title'] ?? '--' }}">
+                                    <strong class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
+                                        {{ limitedText($programming->translations[app()->getLocale()]['title'] ?? '--', 25) }}
+                                    </strong>
                                 </td>
                                 <td class="p-4 text-sm">
                                     @include('dashboard.components.toggle-hold', [

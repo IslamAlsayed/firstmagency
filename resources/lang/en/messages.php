@@ -13,6 +13,10 @@ return [
     'no_backup' => 'No backup files found.',
     'updated_successfully' => 'Updated Successfully',
     'update_not_successfully' => 'Update Not Successfully',
+    'email_sent_successfully' => 'Email sent successfully.',
+    'type_sended_successfully' => ':type sent successfully.',
+    'type_sended_not_successfully' => ':type not sent successfully.',
+    'email_not_sent' => 'Email could not be sent. Please try again later.',
     'Failed to update language status. Please try again.' => 'Failed to update language status. Please try again.',
     'Change Language Successfully' => 'Change Language Successfully',
     'Change Language Not Successfully' => 'Change Language Not Successfully',
@@ -58,6 +62,9 @@ return [
     'invalid_input' => 'Invalid Input',
     'validation_error' => 'Validation Error',
     'server_error' => 'Server Error',
+    'unknown_error' => 'Unknown Error',
+    'validation_required' => 'The :attribute field is required.',
+    'no_file_chosen' => 'No file chosen.',
 
     // Authorization Messages
     'unauthorized_action' => 'You are not authorized to perform this action.',
@@ -228,4 +235,5 @@ return [
 
     // Validation & Status
     'invalid_status' => 'Invalid Status',
+    'verification_incorrect' => 'Verification answer is incorrect.'
 ];

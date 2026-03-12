@@ -8,14 +8,14 @@
 
     <div class="platform-cards grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @php
-            $platforms = \App\Models\PlatformManagement::active()->published()->ordered()->get();
+            $platforms = isset($platforms) && count($platforms) > 0 ? $platforms : config('platform-management') ?? [];
         @endphp
 
         @forelse ($platforms as $platform)
             <article class="platform">
                 <div class="platform-bg"></div>
                 <h3 class="platform-title font-semibold">{{ $platform->translations[app()->getLocale()]['title'] ?? '-' }}</h3>
-                <p class="platform-desc">{{ Str::limit($platform->translations[app()->getLocale()]['description'] ?? '', 100) }}</p>
+                <p class="platform-desc">{{ limitedText($platform->translations[app()->getLocale()]['description'] ?? '', 100) }}</p>
             </article>
         @empty
             {{-- Fallback to static content if no items in database --}}

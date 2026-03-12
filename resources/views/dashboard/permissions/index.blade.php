@@ -6,7 +6,7 @@
 @section('content')
     <div class="w-full">
         <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-gray-800">{{ count($permissions) }}</div>
                 <small class="text-primary font-semibold">{{ __('main.total_permissions') }}</small>

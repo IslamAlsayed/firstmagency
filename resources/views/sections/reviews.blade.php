@@ -18,28 +18,44 @@
             <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="3" navigation="true"
                 navigation-next-el=".swiper-button-next" navigation-prev-el=".swiper-button-prev"
                 breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 4, "spaceBetween": 15}}'>
-                @if (config('main-reviews') && count(config('main-reviews')) > 0)
-                    @foreach (config('main-reviews') as $review)
+                @if ($reviews && count($reviews) > 0)
+                    @foreach ($reviews as $review)
                         <swiper-slide class="review">
                             <div class="info flex items-center gap-2">
                                 <div class="review-photo">
-                                    {{-- <img src="{{ $review['photo'] }}" alt="{{ $review['name'] }}"> --}}
-                                    <img src="{{ asset('assets/images/website/services/' . $review['photo']) }}" alt="{{ $review['name'] }}">
+                                    @if ($review->photo)
+                                        <img src="{{ asset('storage/' . $review->photo) }}" alt="{{ $review->name }}" loading="lazy">
+                                    @else
+                                        <img src="{{ asset('assets/images/placeholder.png') }}" alt="{{ $review->name }}">
+                                    @endif
                                 </div>
                                 <div class="review-info">
-                                    <div class="review-name font-semibold">{{ $review['name'] }}</div>
-                                    <div class="review-country">{{ $review['country'] }}</div>
+                                    <div class="review-name font-semibold">{{ $review->name }}</div>
+                                    <div class="review-country">{{ $review->country }}</div>
                                     <div class="review-review">
-                                        @for ($i = 1; $i <= $review['rate']; $i++)
+                                        @for ($i = 1; $i <= $review->rate; $i++)
                                             <i class="fas fa-star"></i>
                                         @endfor
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment mt-4">{{ $review['comment'] }}</div>
-                            <div class="voice mt-4">{{ __('main.reviews_no_voice') }}</div>
+                            <div class="comment mt-4">{{ $review->comment }}</div>
+                            <div class="voice mt-4">
+                                @if ($review->audio)
+                                    <audio controls style="width: 100%; height: 30px;">
+                                        <source src="{{ asset('storage/' . $review->audio) }}" type="audio/mpeg">
+                                        {{ __('main.audio_not_supported') }}
+                                    </audio>
+                                @else
+                                    {{ __('main.reviews_no_voice') }}
+                                @endif
+                            </div>
                         </swiper-slide>
                     @endforeach
+                @else
+                    <div class="text-center py-8 w-full">
+                        <p class="text-gray-500">{{ __('main.no_reviews_yet') }}</p>
+                    </div>
                 @endif
             </swiper-container>
         </div>

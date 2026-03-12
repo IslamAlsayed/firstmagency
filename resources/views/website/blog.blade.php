@@ -10,12 +10,22 @@
 
             <div class="main-articles-section">
                 <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="articlesContainer">
-                    @if (config('articles') && !empty(config('articles')))
+                    @if ($articles && count($articles) > 0)
                         @php
                             $paginate = 24;
                         @endphp
-                        @foreach (config('articles') as $key => $article)
+                        @foreach ($articles as $key => $article)
                             @if (isset($paginate) && $key < $paginate)
+                                @php
+                                    $locale = app()->getLocale();
+                                    $title = is_object($article)
+                                        ? $article->translations[$locale]['title'] ?? ''
+                                        : $article['translations'][$locale]['title'] ?? '';
+                                    $description = is_object($article)
+                                        ? $article->translations[$locale]['description'] ?? ''
+                                        : $article['translations'][$locale]['description'] ?? '';
+                                    $slug = is_object($article) ? $article->slug : $article['slug'] ?? '';
+                                @endphp
                                 <div class="article">
                                     <div class="image">
                                         @if (rand(0, 1) == 1)
@@ -24,22 +34,22 @@
                                     </div>
                                     <div class="visitor">
                                         <i class="fas fa-eye"></i>
-                                        {{ rand(254, 584) }}
+                                        {{ is_object($article) ? $article->visitors ?? rand(254, 584) : rand(254, 584) }}
                                     </div>
                                     <div class="content">
                                         <div class="body">
-                                            <a href="{{ route('blog.show', ['id' => $key + 1]) }}"
-                                                class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
-                                            <div class="description">{{ limitedText($article['description'], 60) }}</div>
+                                            <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $slug]) }}"
+                                                class="title font-semibold">{{ limitedText(strip_tags($title), 30) }}</a>
+                                            <div class="description">{{ limitedText(strip_tags($description), 60) }}</div>
                                         </div>
                                         <div class="actions">
                                             <button class="btn-link font-semibold details">
-                                                <a href="{{ route('blog.show', ['id' => $key + 1]) }}">
+                                                <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $slug]) }}">
                                                     {{ __('main.details_button') }}
                                                 </a>
                                             </button>
                                             <button class="btn-link font-semibold whatsapp">
-                                                <a href="{{ route('contact') }}">
+                                                <a href="{{ route('tickets.index') }}">
                                                     {{ __('main.whatsapp_button') }}
                                                 </a>
                                             </button>
@@ -56,17 +66,25 @@
                 <span>{{ __('main.more') }}</span>
             </button>
 
-            @if (config('articles') && !empty(config('articles')))
+            @if ($articles && count($articles) > 0)
                 <script>
-                    const allArticles = @json(config('articles'));
+                    const allArticles = @json($articles);
                     let currentPage = 1;
                     const itemsPerPage = 24;
                     const detailsButtonText = "{{ __('main.details_button') }}";
                     const whatsappButtonText = "{{ __('main.whatsapp_button') }}";
+                    const locale = "{{ app()->getLocale() }}";
 
                     function generateArticleHTML(article, index) {
                         const randomImage = Math.random() > 0.5 ? `<img src="{{ asset('assets/images/website/projects/') }}${Math.ceil(Math.random() * 12)}.png" alt="">` : '';
-                        const randomVisitors = Math.floor(Math.random() * (584 - 254 + 1)) + 254;
+                        const randomVisitors = article.visitors || Math.floor(Math.random() * (584 - 254 + 1)) + 254;
+
+                        // Get translations safely
+                        const title = article.translations && article.translations[locale] ? article.translations[locale].title : article.title || '';
+                        const description = article.translations && article.translations[locale] ? article.translations[locale].description : article.description || '';
+                        const slug = article.slug || '';
+                        const articleId = article.id || '';
+                        const articleUrl = `/blog/${articleId}/${slug}`;
 
                         return `
                     <div class="article">
@@ -79,17 +97,17 @@
                         </div>
                         <div class="content">
                             <div class="body">
-                                <a href="{{ route('blog.show', ['id' => '']) }}${index + 1}" class="title font-semibold">${article.title.substring(0, 30)}</a>
-                                <div class="description">${article.description.substring(0, 60)}</div>
+                                <a href="${articleUrl}" class="title font-semibold">${title.substring(0, 30)}</a>
+                                <div class="description">${description.substring(0, 60)}</div>
                             </div>
                             <div class="actions">
                                 <button class="btn-link font-semibold details">
-                                    <a href="{{ route('blog.show', ['id' => '']) }}${index + 1}">
+                                    <a href="${articleUrl}">
                                         ${detailsButtonText}
                                     </a>
                                 </button>
                                 <button class="btn-link font-semibold whatsapp">
-                                    <a href="{{ route('contact') }}">
+                                    <a href="{{ route('tickets.index') }}">
                                         ${whatsappButtonText}
                                     </a>
                                 </button>

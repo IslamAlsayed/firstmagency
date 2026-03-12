@@ -20,7 +20,7 @@
                     <div class="flex items-center gap-3">
                         {{-- <i class="fas fa-folder-open main-icon"></i> --}}
                         <span class="main-icon">👥</span>
-                        <span>{{ __('main.users') }}</span>
+                        <span class="span-text">{{ __('main.users') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -53,7 +53,7 @@
                     <div class="flex items-center gap-3">
                         {{-- <i class="fas fa-folder-open main-icon"></i> --}}
                         <span class="main-icon">🔐</span>
-                        <span>{{ __('main.roles') }}</span>
+                        <span class="span-text">{{ __('main.roles') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -86,7 +86,7 @@
                     <div class="flex items-center gap-3">
                         {{-- <i class="fas fa-folder-open main-icon"></i> --}}
                         <span class="main-icon">🔑</span>
-                        <span>{{ __('main.permissions') }}</span>
+                        <span class="span-text">{{ __('main.permissions') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -118,7 +118,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📝</span>
-                        <span>{{ __('main.articles') }}</span>
+                        <span class="span-text">{{ __('main.articles') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -150,7 +150,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">💼</span>
-                        <span>{{ __('main.services') }}</span>
+                        <span class="span-text">{{ __('main.services') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -176,29 +176,29 @@
         @endif
 
         <!-- Companies -->
-        @if (auth()->user()->can('companies-read') || auth()->user()->can('companies-create'))
+        @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
             <li class="relative group submenu-item">
                 <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.companies.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.projects.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🏢</span>
-                        <span>{{ __('main.companies') }}</span>
+                        <span class="span-text">{{ __('main.projects') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
                 <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.companies.*') ? 'show' : '' }}">
+                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.projects.*') ? 'show' : '' }}">
                     <li class="relative">
-                        <a href="{{ route('dashboard.companies.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.companies.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                        <a href="{{ route('dashboard.projects.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.projects.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
                             <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.companies_list') }}</span>
+                            <span class="text-sm">{{ __('main.projects_list') }}</span>
                         </a>
                     </li>
                     <li class="relative">
-                        <a href="{{ route('dashboard.companies.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.companies.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                        <a href="{{ route('dashboard.projects.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.projects.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
                             <i class="fas fa-plus text-sm main-icon"></i>
                             <span class="text-sm">{{ __('main.create_type', ['type' => __('main.company')]) }}</span>
                         </a>
@@ -214,7 +214,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">👥</span>
-                        <span>{{ __('main.clients') }}</span>
+                        <span class="span-text">{{ __('main.clients') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -246,7 +246,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.partners.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🤝</span>
-                        <span>{{ __('main.partners') }}</span>
+                        <span class="span-text">{{ __('main.partners') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -278,7 +278,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.line-works.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">⚙️</span>
-                        <span>{{ __('main.line_works') }}</span>
+                        <span class="span-text">{{ __('main.line_works') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -310,7 +310,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.reviews.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">⭐</span>
-                        <span>{{ __('main.reviews') }}</span>
+                        <span class="span-text">{{ __('main.reviews') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -342,7 +342,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.programmings.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">💻</span>
-                        <span>{{ __('main.programmings') }}</span>
+                        <span class="span-text">{{ __('main.programmings') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -374,7 +374,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">❓</span>
-                        <span>{{ __('main.faqs') }}</span>
+                        <span class="span-text">{{ __('main.faqs') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -406,7 +406,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎫</span>
-                        <span>{{ __('main.tickets') }}</span>
+                        <span class="span-text">{{ __('main.tickets') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -438,7 +438,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.our-programming.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎫</span>
-                        <span>{{ __('main.our_programming') }}</span>
+                        <span class="span-text">{{ __('main.our_programming') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -470,7 +470,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📋</span>
-                        <span>{{ __('main.project_steps') }}</span>
+                        <span class="span-text">{{ __('main.project_steps') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -502,7 +502,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.features-hosting.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎁</span>
-                        <span>{{ __('main.features_hostings') }}</span>
+                        <span class="span-text">{{ __('main.features_hostings') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -534,7 +534,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🔧</span>
-                        <span>{{ __('main.dashboards_and_apps') }}</span>
+                        <span class="span-text">{{ __('main.dashboards_and_apps') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -566,7 +566,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📦</span>
-                        <span>{{ __('main.hosting_packages') }}</span>
+                        <span class="span-text">{{ __('main.hosting_packages') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -598,7 +598,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.pest-domains.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🌐</span>
-                        <span>{{ __('main.pest_domains') }}</span>
+                        <span class="span-text">{{ __('main.pest_domains') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -630,7 +630,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.official-domains.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🌐</span>
-                        <span>{{ __('main.official_domains') }}</span>
+                        <span class="span-text">{{ __('main.official_domains') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -662,7 +662,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.why-us.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🌟</span>
-                        <span>{{ __('main.why_us') }}</span>
+                        <span class="span-text">{{ __('main.why_us') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -694,7 +694,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.platform-management.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📱</span>
-                        <span>{{ __('main.platform_management') }}</span>
+                        <span class="span-text">{{ __('main.platform_management') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -726,7 +726,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.work-us-step.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">👔</span>
-                        <span>{{ __('main.work_us_step') }}</span>
+                        <span class="span-text">{{ __('main.work_us_step') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -758,7 +758,7 @@
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.marketing-packages.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📦</span>
-                        <span>{{ __('main.marketing_package') }}</span>
+                        <span class="span-text">{{ __('main.marketing_package') }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -790,7 +790,7 @@
                     class="nav-link justify-between {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-cog main-icon"></i>
-                        <span>{{ __('main.settings') }}</span>
+                        <span class="span-text">{{ __('main.settings') }}</span>
                     </div>
 
                     <i class="fas fa-arrow-up-right-from-square text-sm nav-icon"></i>

@@ -2,20 +2,20 @@
 
 use App\Http\Controllers\Dashboard\ArticleController;
 use App\Http\Controllers\Dashboard\ClientController;
-use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardsAndSystemController;
 use App\Http\Controllers\Dashboard\FAQController;
 use App\Http\Controllers\Dashboard\FeaturesHostingController;
 use App\Http\Controllers\Dashboard\HostingPackageController;
 use App\Http\Controllers\Dashboard\LineWorkController;
+use App\Http\Controllers\Dashboard\MarketingPackageController;
 use App\Http\Controllers\Dashboard\OfficialDomainController;
 use App\Http\Controllers\Dashboard\OurProgrammingController;
-use App\Http\Controllers\Dashboard\MarketingPackageController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\PermissionController;
 use App\Http\Controllers\Dashboard\PestDomainController;
 use App\Http\Controllers\Dashboard\PlatformManagementController;
 use App\Http\Controllers\Dashboard\ProgrammingController;
+use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\ProjectStepController;
 use App\Http\Controllers\Dashboard\ReviewController;
 use App\Http\Controllers\Dashboard\RoleController;
@@ -63,7 +63,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::resource('permissions', PermissionController::class)->names('permissions');
     Route::resource('articles', ArticleController::class)->names('articles');
     Route::resource('services', ServiceController::class)->names('services');
-    Route::resource('companies', CompanyController::class)->names('companies');
+    Route::resource('projects', ProjectController::class)->names('projects');
     Route::resource('clients', ClientController::class)->names('clients');
     Route::resource('line-works', LineWorkController::class)->names('line-works');
     Route::resource('partners', PartnerController::class)->names('partners');
@@ -82,6 +82,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::resource('hosting-packages', HostingPackageController::class)->names('hosting-packages');
     Route::resource('faqs', FAQController::class)->names('faqs');
     Route::resource('tickets', TicketController::class)->names('tickets');
+    Route::get('tickets/{ticketId}/support-reply', [TicketController::class, 'supportReply'])->name('tickets.support-reply');
+    Route::post('tickets/{ticketId}/support-reply', [TicketController::class, 'postSupportReply'])->name('tickets.support-reply.store');
+    Route::get('tickets/{ticketId}/send-copy', [TicketController::class, 'sendCopyToCustomer'])->name('tickets.sendCopyToCustomer');
 
     // Unified force-destroy route for all models
     Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');

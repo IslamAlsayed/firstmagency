@@ -40,6 +40,36 @@ class FAQ extends Model
         'services-marketing' => 'Services Marketing',
     ];
 
+    public function scopeActive()
+    {
+        return $this->where('is_active', true);
+    }
+
+    public function scopeWebsites()
+    {
+        return $this->where('category', 'websites');
+    }
+
+    public function scopeApps()
+    {
+        return $this->where('category', 'apps');
+    }
+
+    public function scopeDomains()
+    {
+        return $this->where('category', 'domains');
+    }
+
+    public function scopeHosting()
+    {
+        return $this->where('category', 'hosting');
+    }
+
+    public function scopeServicesMarketing()
+    {
+        return $this->where('category', 'services-marketing');
+    }
+
     // Relationships
     public function creator()
     {

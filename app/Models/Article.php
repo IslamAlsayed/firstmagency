@@ -99,6 +99,27 @@ class Article extends Model
         return $query->where('category_id', $categoryId);
     }
 
+    public function scopeForWebsites($query)
+    {
+        return $query->whereHas('category', function ($q) {
+            $q->where('name', 'like', '%موقع%')->orWhere('name', 'like', '%ويب%')->orWhere('name', 'like', '%website%')->orWhere('name', 'like', '%web%');
+        });
+    }
+
+    public function scopeForAppMobiles($query)
+    {
+        return $query->whereHas('category', function ($q) {
+            $q->where('name', 'like', '%تطبيق%')->orWhere('name', 'like', '%app%');
+        });
+    }
+
+    public function scopeForMarketing($query)
+    {
+        return $query->whereHas('category', function ($q) {
+            $q->where('name', 'like', '%تسويق%')->orWhere('name', 'like', '%market%')->orWhere('name', 'like', '%service%');
+        });
+    }
+
     // Accessors & Mutators
     public function getExcerptAttribute()
     {

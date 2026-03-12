@@ -38,6 +38,7 @@
 
                     & label {
                         display: block;
+                        font-size: 12px;
                         margin-bottom: 5px;
                     }
 
@@ -45,7 +46,7 @@
                         padding: 5px;
                         direction: ltr;
                         border-radius: 10px;
-                        border: 1px solid var(--light-muted-color);
+                        border: 1px solid var(--dark-muted-color);
 
                         &:has(input:focus),
                         &:has(select:focus),
@@ -113,7 +114,7 @@
                         top: 0;
                         left: 0;
                         z-index: 1;
-                        opacity: 0.3;
+                        opacity: 0.1;
                         border-radius: 10px;
                         background-color: var(--light-main-color);
                     }
@@ -143,13 +144,53 @@
                         height: 100%;
                         top: 0;
                         left: 0;
-                        opacity: 0.3;
                         z-index: 1;
+                        opacity: 0.1;
                         border-radius: 10px;
                         transition: opacity 0.3s;
                         background-color: var(--light-main-color);
                     }
                 }
+            }
+
+            .ticket-submit {
+                padding: 10px 25px;
+            }
+        }
+    }
+}
+
+#attachments-container {
+    .input {
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+            content: attr(data-message);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: auto;
+            cursor: pointer;
+            text-align: end;
+            padding-inline: 10px;
+            border-radius: 10px;
+            pointer-events: none;
+            align-content: center;
+            z-index: 50;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+    }
+}
+
+.ticket-show-sections {
+    #attachments-container {
+        .input {
+            &::before {
+                text-align: start;
             }
         }
     }
@@ -205,6 +246,32 @@
                 &:hover {
                     transform: translateY(-3px);
                     box-shadow: 0 8px 20px -5px var(--light-main-color), 0 12px 40px -10px var(--light-main-color);
+                }
+            }
+        }
+    }
+}
+
+html[lang=en] {
+    .contact-sections {
+        & .contact-form {
+            & .groups {
+                & .group {
+                    &>div {
+                        & .input {
+                            direction: rtl;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ticket-show-sections {
+        #attachments-container {
+            .input {
+                &::before {
+                    text-align: start;
                 }
             }
         }

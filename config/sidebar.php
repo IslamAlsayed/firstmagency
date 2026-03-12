@@ -216,12 +216,12 @@ return [
                         [
                             'title' => 'all companies',
                             'icon' => 'fas fa-list',
-                            'route' => 'dashboard.companies.index',
+                            'route' => 'dashboard.projects.index',
                         ],
                         [
                             'title' => 'create company',
                             'icon' => 'fas fa-plus',
-                            'route' => 'dashboard.companies.create',
+                            'route' => 'dashboard.projects.create',
                         ],
                     ],
                 ],

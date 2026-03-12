@@ -12,7 +12,7 @@
             <a href="{{ route('hosting') }}" class="btn-outline-white text-lg font-semibold">
                 {{ __('main.start_now_btn') }}
             </a>
-            <a href="{{ route('contact') }}" class="btn-outline-white text-lg font-semibold">
+            <a href="{{ route('tickets.index') }}" class="btn-outline-white text-lg font-semibold">
                 {{ __('main.contact_us_btn') }}
             </a>
         </div>

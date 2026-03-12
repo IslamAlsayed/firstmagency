@@ -1,20 +1,24 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('main.create_company'))
-@section('page-title', '🏢 ' . __('main.create_company'))
+@section('title', __('main.create_type', ['type' => __('main.project')]))
+@section('page-title', '🏢 ' . __('main.create_type', ['type' => __('main.project')]))
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/tagify/tagify.css') }}">
+@endpush
 
 @section('content')
     <div class="kt-card mb-4">
         <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('main.create_company') }}</h3>
+            <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.project')]) }}</h3>
 
-            <a href="{{ route('dashboard.companies.index') }}" class="kt-btn kt-btn-outline-primary">
-                {{ __('main.back_to_types', ['types' => __('main.companies')]) }}
+            <a href="{{ route('dashboard.projects.index') }}" class="kt-btn kt-btn-outline-primary">
+                {{ __('main.back_to_types', ['types' => __('main.projects')]) }}
             </a>
         </div>
 
         <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.companies.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.projects.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 lg:gap-6">
                     <!-- Tabs Navigation -->
@@ -74,6 +78,17 @@
                         </div>
                     </div>
 
+                    <!-- Tag (Tagify) -->
+                    <div>
+                        <label for="tags" class="kt-label">{{ __('main.tags') }}</label>
+                        <input type="text" name="tags" id="tags" class="kt-input h-fit tagify-container" value="{{ old('tags') }}"
+                            placeholder="tag1, tag2, tag3">
+                        <span class="text-xs text-gray-500 mt-1">{{ __('main.tagify_desc') }}</span>
+                        @error('tags')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <!-- Common Fields -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         <div>
@@ -123,9 +138,33 @@
                     </div>
 
                     <!-- Save Button -->
-                    @include('dashboard.components.save-submit', ['models' => 'dashboard.companies', 'model' => 'company'])
+                    @include('dashboard.components.save-submit', ['models' => 'dashboard.projects', 'model' => 'company'])
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Tagify on Route Itinerary
+            var inputs = document.querySelectorAll('.tagify-container');
+            if (inputs) {
+                inputs.forEach(input => {
+                    new Tagify(input, {
+                        maxTags: 20,
+                        dropdown: {
+                            maxItems: 20, // <- mixumum allowed rendered suggestions
+                            classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+                            enabled: 0, // <- show suggestions on focus
+                            closeOnSelect: false // <- do not hide the suggestions dropdown once an item has been selected
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+@endpush

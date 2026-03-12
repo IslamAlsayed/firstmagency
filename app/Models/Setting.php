@@ -55,6 +55,7 @@ class Setting extends Model
         'about_us_description',
         'about_us_description_ar',
         'about_us_image',
+        'about_us_image2',
 
         'website_design_title',
         'website_design_title_ar',

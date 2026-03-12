@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Service;
-use App\Models\Company;
+use App\Models\Project;
 use App\Models\Client;
 use App\Models\Partner;
 use App\Models\PestDomain;
@@ -28,7 +28,7 @@ use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\ArticlePolicy;
 use App\Policies\ServicePolicy;
-use App\Policies\CompanyPolicy;
+use App\Policies\ProjectPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\PartnerPolicy;
 use App\Policies\PestDomainPolicy;
@@ -64,7 +64,7 @@ class AuthServiceProvider extends ServiceProvider
         Permission::class => PermissionPolicy::class,
         Article::class => ArticlePolicy::class,
         Service::class => ServicePolicy::class,
-        Company::class => CompanyPolicy::class,
+        Project::class => ProjectPolicy::class,
         Client::class => ClientPolicy::class,
         Partner::class => PartnerPolicy::class,
         PestDomain::class => PestDomainPolicy::class,

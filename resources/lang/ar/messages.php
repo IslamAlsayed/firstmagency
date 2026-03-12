@@ -13,6 +13,9 @@ return [
     'no_backup' => 'لم يتم إنشاء نسخة احتياطية بعد',
     'updated_successfully' => 'تم التحديث بنجاح',
     'update_not_successfully' => 'لم يتم التحديث بنجاح',
+    'email_sent_successfully' => 'تم إرسال البريد الإلكتروني بنجاح.',
+    'type_sended_successfully' => 'تم إرسال :type بنجاح.',
+    'type_sended_not_successfully' => 'لم يتم إرسال :type بنجاح.',
     'Failed to update language status. Please try again.' => 'فشل تحديث حالة اللغة. يرجى المحاولة مرة أخرى.',
     'Change Language Successfully' => 'تم تغيير اللغة بنجاح',
     'Change Language Not Successfully' => 'فشل تغيير اللغة',
@@ -57,6 +60,9 @@ return [
     'invalid_input' => 'إدخال غير صالح',
     'validation_error' => 'خطأ في التحقق',
     'server_error' => 'خطأ في الخادم',
+    'unknown_error' => 'خطأ غير معروف',
+    'validation_required' => 'حقل :attribute مطلوب.',
+    'no_file_chosen' => 'لم يتم اختيار ملف.',
 
     // Authorization Messages
     'unauthorized_action' => 'أنت غير مخول للقيام بهذا الإجراء.',
@@ -223,6 +229,8 @@ return [
     'debug_ips_saved' => 'تم حفظ :count عنوان IP بنجاح!',
     'your_ip_added' => 'تم إضافة عنوان IP الخاص بك (:ip) إلى قائمة عناوين IP للتصحيح!',
     'your_ip_already_exists' => 'عنوان IP الخاص بك (:ip) موجود بالفعل في قائمة عناوين IP للتصحيح!',
+
     // Validation & Status
     'invalid_status' => 'حالة غير صحيحة',
+    'verification_incorrect' => 'إجابة التحقق غير صحيحة.',
 ];

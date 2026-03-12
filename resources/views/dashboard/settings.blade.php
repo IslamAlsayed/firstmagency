@@ -285,6 +285,9 @@
                         {{-- About Us Image --}}
                         @include('dashboard.components.photo', ['record' => $settings, 'column' => 'about_us_image'])
 
+                        {{-- About Us Image 2 --}}
+                        @include('dashboard.components.photo', ['record' => $settings, 'column' => 'about_us_image2'])
+
                         <button type="submit" toggle-button
                             class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
@@ -380,7 +383,7 @@
                                 </div>
                                 <div class="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg">
                                     <p><strong>{{ __('main.website_design_clients') }}:</strong> {{ App\Models\Client::count() }}</p>
-                                    <p><strong>{{ __('main.website_design_projects') }}:</strong> {{ App\Models\Company::count() }}</p>
+                                    <p><strong>{{ __('main.website_design_projects') }}:</strong> {{ App\Models\Project::count() }}</p>
                                     <p><strong>{{ __('main.website_design_support_ticket') }}:</strong> {{ App\Models\Ticket::count() }}</p>
                                 </div>
                             </div>

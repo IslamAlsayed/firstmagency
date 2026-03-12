@@ -116,11 +116,29 @@ trait PhotoUploadTrait
         }
     }
 
-    public function uploadFiles(Request $request, Model $model, string $column = 'files', string $folder = 'other')
+    public function uploadFiles($request, Model $model, string $column = 'files', string $folder = 'other')
     {
-        if (!$request->hasFile($column)) return;
+        $filesToUpload = [];
+
+        // Check if $request is an UploadedFile directly
+        if ($request instanceof UploadedFile) {
+            if (!$request) {
+                throw new \Exception("File object is empty");
+            }
+            $filesToUpload[] = $request;
+        }
+        // Check if $request is a Request object
+        elseif ($request instanceof Request) {
+            if (!$request->hasFile($column)) {
+                throw new \Exception("No files found in the '{$column}' field");
+            }
+            $filesToUpload = $request->file($column);
+        } else {
+            throw new \Exception("Invalid request parameter. Expected Request or UploadedFile");
+        }
+
         $files = $model->{$column} ?? [];
-        foreach ($request->file($column) as $file) {
+        foreach ($filesToUpload as $file) {
             $files[] = $file->store("uploads/{$folder}/{$model->id}/{$column}", 'public');
         }
         $model->update([$column => array_values($files)]);

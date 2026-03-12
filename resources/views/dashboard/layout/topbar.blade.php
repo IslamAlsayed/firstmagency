@@ -10,17 +10,22 @@
 
     <div class="flex items-center gap-6 user-actions">
         <div class="flex items-center gap-3">
+            {{-- button go to website --}}
+            <a href="{{ route('welcome') }}" target="_blank" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+                <i class="fas fa-arrow-up-right-from-square text-sm"></i>
+            </a>
+
             <!-- Messages -->
-            <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+            {{-- <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
                 <i class="fas fa-envelope text-lg"></i>
                 <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
-            </button>
+            </button> --}}
 
             <!-- Notifications -->
-            <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+            {{-- <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
                 <i class="fas fa-bell text-lg"></i>
                 <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full"></span>
-            </button>
+            </button> --}}
 
             <!-- Full Screen Toggle -->
             <button id="fullscreenBtn" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="Full Screen">
@@ -59,6 +64,12 @@
             </div>
             <div class="menu">
                 <ul>
+                    <li>
+                        <a href="{{ route('dashboard.roles.show', getActiveUserId()) }}" class="menu-link">
+                            <i class="ph-bold ph-user"></i>
+                            &nbsp;My Roles AndPermission
+                        </a>
+                    </li>
                     <li><a href="#" class="menu-link"><i class="ph-bold ph-user"></i>&nbsp;Profile</a></li>
                     <li><a href="#" class="menu-link"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Inbox</a></li>
                     <li><a href="#" class="menu-link"><i class="ph-bold ph-gear-six"></i>&nbsp;Settings</a></li>

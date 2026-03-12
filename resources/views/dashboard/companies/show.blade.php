@@ -1,28 +1,28 @@
 @extends('dashboard.layout.master')
 
-@section('title', $company->translations[app()->getLocale()]['name'] ?? 'Company')
-@section('page-title', '🏢 ' . limitedText($company->translations[app()->getLocale()]['name'] ?? '', 30))
+@section('title', $project->translations[app()->getLocale()]['name'] ?? 'Company')
+@section('page-title', '🏢 ' . limitedText($project->translations[app()->getLocale()]['name'] ?? '', 30))
 
 @section('content')
     <div class="kt-container-fixed p-0">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
-                    {{ $company->translations[app()->getLocale()]['name'] ?? '-' }}
+                    {{ $project->translations[app()->getLocale()]['name'] ?? '-' }}
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
-                    {{ $company->creator?->name ?? 'N/A' }} • {{ $company->created_at?->format('d M Y') }}
+                    {{ $project->creator?->name ?? 'N/A' }} • {{ $project->created_at?->format('d M Y') }}
                 </div>
             </div>
             <div class="flex items-center gap-2.5">
-                @can('update', $company)
-                    <a href="{{ route('dashboard.companies.edit', $company->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                @can('update', $project)
+                    <a href="{{ route('dashboard.projects.edit', $project->id) }}" class="kt-btn kt-btn-primary md:hidden">
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.companies.index') }}" class="kt-btn kt-btn-outline">
-                    {{ __('main.back_to_types', ['types' => __('main.companies')]) }}
+                <a href="{{ route('dashboard.projects.index') }}" class="kt-btn kt-btn-outline">
+                    {{ __('main.back_to_types', ['types' => __('main.projects')]) }}
                 </a>
             </div>
         </div>
@@ -41,14 +41,14 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.order') }}</p>
-                            <p class="font-semibold text-gray-800">{{ $company->order ?? 0 }}</p>
+                            <p class="font-semibold text-gray-800">{{ $project->order ?? 0 }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.created_by') }}</p>
                             <p class="font-semibold text-gray-800">
-                                @if ($company->creator)
-                                    <a href="{{ route('dashboard.users.show', $company->creator->id) }}" class="text-primary hover:underline">
-                                        {{ $company->creator->name }}
+                                @if ($project->creator)
+                                    <a href="{{ route('dashboard.users.show', $project->creator->id) }}" class="text-primary hover:underline">
+                                        {{ $project->creator->name }}
                                         <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
                                     </a>
                                 @else
@@ -58,17 +58,17 @@
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.created_at') }}</p>
-                            <p class="font-semibold text-gray-800">{{ $company->created_at?->format('d/m/Y H:i') }}</p>
+                            <p class="font-semibold text-gray-800">{{ $project->created_at?->format('d/m/Y H:i') }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.status') }}</p>
                             <p class="text-sm text-secondary-foreground">
                                 <span
                                     class="px-3 py-1 rounded-full text-xs font-semibold
-                            @if ($company->status === 'published') bg-green-100 text-green-800
-                            @elseif($company->status === 'draft') bg-yellow-100 text-yellow-800
+                            @if ($project->status === 'published') bg-green-100 text-green-800
+                            @elseif($project->status === 'draft') bg-yellow-100 text-yellow-800
                             @else bg-red-100 text-red-800 @endif">
-                                    {{ __('main.' . $company->status) }}
+                                    {{ __('main.' . $project->status) }}
                                 </span>
                             </p>
                         </div>
@@ -76,18 +76,18 @@
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
                             @include('dashboard.components.toggle-hold', [
-                                'modelId' => $company->id,
+                                'modelId' => $project->id,
                                 'field' => 'is_active',
-                                'value' => (bool) $company->is_active,
+                                'value' => (bool) $project->is_active,
                                 'modelClass' => 'company',
                             ])
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.featured') }}</p>
                             @include('dashboard.components.toggle-hold', [
-                                'modelId' => $company->id,
+                                'modelId' => $project->id,
                                 'field' => 'is_featured',
-                                'value' => (bool) $company->is_featured,
+                                'value' => (bool) $project->is_featured,
                                 'modelClass' => 'company',
                             ])
                         </div>
@@ -117,11 +117,11 @@
                     <div class="language-content" data-lang="en">
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.name') }}</p>
-                            <p class="text-gray-700 leading-relaxed">{!! $company->translations['en']['name'] ?? '-' !!}</p>
+                            <p class="text-gray-700 leading-relaxed">{!! $project->translations['en']['name'] ?? '-' !!}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.description') }}</p>
-                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $company->translations['en']['description'] ?? '-' !!}</div>
+                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $project->translations['en']['description'] ?? '-' !!}</div>
                         </div>
                     </div>
 
@@ -129,20 +129,20 @@
                     <div class="language-content hidden" data-lang="ar">
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.name') }}</p>
-                            <p class="text-gray-700 leading-relaxed">{!! $company->translations['ar']['name'] ?? '-' !!}</p>
+                            <p class="text-gray-700 leading-relaxed">{!! $project->translations['ar']['name'] ?? '-' !!}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.description') }}</p>
-                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $company->translations['ar']['description'] ?? '-' !!}</div>
+                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $project->translations['ar']['description'] ?? '-' !!}</div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t">
                         <div>
                             <label class="kt-label mb-1">{{ __('main.website') }}</label>
-                            @if ($company->website)
-                                <a href="{{ $company->website }}" target="_blank" class="text-blue-600 hover:underline text-sm">
-                                    {{ $company->website }}
+                            @if ($project->website)
+                                <a href="{{ $project->website }}" target="_blank" class="text-blue-600 hover:underline text-sm">
+                                    {{ $project->website }}
                                 </a>
                             @else
                                 <p class="text-sm text-gray-400">-</p>
@@ -151,46 +151,46 @@
 
                         <div>
                             <label class="kt-label mb-1">{{ __('main.order') }}</label>
-                            <p class="text-sm text-secondary-foreground">{{ $company->order ?? 0 }}</p>
+                            <p class="text-sm text-secondary-foreground">{{ $project->order ?? 0 }}</p>
                         </div>
 
                         <div class="col-span-1 sm:col-span-2">
                             <label class="kt-label mb-1">{{ __('main.slug') }}</label>
-                            <p class="text-sm text-gray-800 font-mono">{{ $company->slug }}</p>
+                            <p class="text-sm text-gray-800 font-mono">{{ $project->slug }}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Logo -->
-            @if (!empty($company->image))
+            @if (!empty($project->image))
                 @include('dashboard.components.display-photo', [
-                    'record' => $company,
+                    'record' => $project,
                     'column' => 'image',
-                    'alt' => $company->translations[app()->getLocale()]['name'] . ' Logo',
+                    'alt' => $project->translations[app()->getLocale()]['name'] . ' Logo',
                 ])
             @endif
 
             <!-- Metadata Card -->
-            @include('dashboard.components.metadata', ['record' => $company])
+            @include('dashboard.components.metadata', ['record' => $project])
 
             <!-- Actions -->
             <div class="flex items-center gap-4">
-                @can('update', $company)
+                @can('update', $project)
                     @include('dashboard.components.edit-button', [
-                        'models' => 'dashboard.companies',
-                        'id' => $company->id,
+                        'models' => 'dashboard.projects',
+                        'id' => $project->id,
                     ])
                 @endcan
-                @can('delete', $company)
+                @can('delete', $project)
                     @include('dashboard.components.delete-button', [
-                        'model' => 'dashboard.companies',
+                        'model' => 'dashboard.projects',
                         'modelClass' => 'company',
-                        'id' => $company->id,
+                        'id' => $project->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.companies.index') }}" class="kt-btn kt-btn-outline">
-                    {{ __('main.back_to_types', ['types' => __('main.companies')]) }}
+                <a href="{{ route('dashboard.projects.index') }}" class="kt-btn kt-btn-outline">
+                    {{ __('main.back_to_types', ['types' => __('main.projects')]) }}
                 </a>
             </div>
         </div>

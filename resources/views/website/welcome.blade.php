@@ -8,14 +8,14 @@
     @include('sections.about')
 
     {{-- Services Section --}}
-    @include('sections.services')
+    @include('sections.services', ['services' => $data['services']])
 
     {{-- Projects Section --}}
-    @include('sections.projects')
+    @include('sections.projects', ['projects' => $data['projects']])
 
     {{-- Reviews Section --}}
-    @include('sections.reviews')
+    @include('sections.reviews', ['reviews' => $data['reviews']])
 
     {{-- Clients Section --}}
-    @include('sections.clients')
+    @include('sections.clients', ['clients' => $data['clients']])
 @endsection

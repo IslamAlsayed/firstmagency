@@ -168,7 +168,7 @@
 
         .domain-card {
             height: 150px;
-            padding: 30px 15px;
+            padding: 20px;
             cursor: pointer;
             border-radius: 10px;
             border: 1px solid var(--dark-muted-color);

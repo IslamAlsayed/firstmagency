@@ -3,16 +3,34 @@
     <div class="content">
         <div class="text">
             <div class="title">
-                {{ $settings->website_design_title ?? __('main.website_design_title') }}
+                @if (app()->getLocale() === 'ar' && hasDisplayableRichText($settings ?? null, 'website_design_title_ar'))
+                    {!! $settings->website_design_title_ar ?? '' !!}
+                @elseif (app()->getLocale() === 'en' && hasDisplayableRichText($settings ?? null, 'website_design_title'))
+                    {!! $settings->website_design_title ?? '' !!}
+                @else
+                    {!! __('main.website_design_title') ?? '' !!}
+                @endif
             </div>
 
             <div class="heading">
-                {{ $settings->website_design_heading ?? __('main.website_design_heading') }}
+                @if (app()->getLocale() === 'ar' && hasDisplayableRichText($settings ?? null, 'website_design_heading_ar'))
+                    {!! $settings->website_design_heading_ar ?? '' !!}
+                @elseif (app()->getLocale() === 'en' && hasDisplayableRichText($settings ?? null, 'website_design_heading'))
+                    {!! $settings->website_design_heading ?? '' !!}
+                @else
+                    {!! __('main.website_design_heading') ?? '' !!}
+                @endif
                 <span class="title-badge">{{ __('main.brand_short') }}</span>
             </div>
 
             <div class="description">
-                {{ $settings->website_design_description ?? __('main.website_design_description_part1') }}
+                @if (app()->getLocale() === 'ar' && hasDisplayableRichText($settings ?? null, 'website_design_description_ar'))
+                    {!! $settings->website_design_description_ar ?? '' !!}
+                @elseif (app()->getLocale() === 'en' && hasDisplayableRichText($settings ?? null, 'website_design_description'))
+                    {!! $settings->website_design_description ?? '' !!}
+                @else
+                    {!! __('main.website_design_description') ?? '' !!}
+                @endif
             </div>
 
             <div class="tags">
@@ -21,7 +39,7 @@
                         <i class="fas fa-handshake"></i>
                     </div>
                     <div class="font-semibold">
-                        <p>{{ \App\Models\Client::count() }}</p>
+                        <p>{{ $stats['clients_count'] ?? 0 }}</p>
                         <span>{{ __('main.website_design_clients') }}</span>
                     </div>
                 </div>
@@ -31,7 +49,7 @@
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <div class="font-semibold">
-                        <p>{{ \App\Models\Company::count() }}</p>
+                        <p>{{ $stats['projects_count'] ?? 0 }}</p>
                         <span>{{ __('main.website_design_projects') }}</span>
                     </div>
                 </div>
@@ -51,7 +69,7 @@
                         <i class="fa-regular fa-at"></i>
                     </div>
                     <div class="font-semibold">
-                        <p>{{ \App\Models\Ticket::count() }}</p>
+                        <p>{{ $stats['tickets_count'] ?? 0 }}</p>
                         <span>{{ __('main.website_design_support_ticket') }}</span>
                     </div>
                 </div>

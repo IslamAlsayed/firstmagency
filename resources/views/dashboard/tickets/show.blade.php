@@ -22,6 +22,9 @@
                         {{ __('main.edit') }}
                     </a>
                 @endcan
+                <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-outline-primary">
+                    {{ __('main.chat') }}
+                </a>
                 <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
                     {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
                 </a>
@@ -30,9 +33,9 @@
     </div>
 
     <div class="kt-container-fixed p-0">
-        <div class="grid gap-4 lg:gap-6">
+        <div class="grid gap-4">
             {{-- Ticket Information --}}
-            <div class="kt-card">
+            <div class="kt-card ">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title">{{ __('main.ticket_information') }}</h3>
                 </div>
@@ -65,24 +68,15 @@
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.status') }}
                                 <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold
-                                @if ($ticket->status === 'open') bg-green-100 text-green-800
-                                @elseif($ticket->status === 'in_progress') bg-yellow-100 text-yellow-800
-                                @elseif($ticket->status === 'resolved') bg-blue-100 text-blue-800
-                                @else bg-red-100 text-red-800 @endif">
-                                    @if ($ticket->status === 'open')
-                                        <i class="fas fa-clock text-yellow-500"></i> {{ __('main.open') }}
-                                    @elseif ($ticket->status === 'in_progress')
-                                        <i class="fas fa-spinner text-blue-600"></i> {{ __('main.in_progress') }}
-                                    @elseif ($ticket->status === 'resolved')
-                                        <i class="fas fa-check-circle text-green-600"></i> {{ __('main.resolved') }}
-                                    @elseif ($ticket->status === 'closed')
-                                        <i class="fas fa-times-circle text-red-600"></i> {{ __('main.closed') }}
-                                    @endif
+                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
+                                    {{ __('main.' . $ticket->status) }}
                                 </span>
                             </p>
-                            @include('dashboard.components.tickets-status-actions', [
+                            @include('dashboard.components.status-actions', [
                                 'record' => $ticket,
+                                'models' => 'tickets',
+                                'modelClass' => 'ticket',
+                                'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
                             ])
                         </div>
                         <div>
@@ -99,34 +93,20 @@
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">{{ __('main.category') }}</p>
-                            <p class="font-semibold text-gray-800">{{ $ticket->category ?? '-' }}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.assigned_to') }}</p>
-                            <p class="font-semibold text-gray-800">
-                                @if ($ticket->assignedTo)
-                                    <a href="{{ route('dashboard.users.show', $ticket->assignedTo->id) }}" class="text-primary hover:underline">
-                                        {{ $ticket->assignedTo->name }}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
-                                    </a>
-                                @else
-                                    <span class="text-gray-400">-</span>
-                                @endif
+                            <p class="text-sm text-gray-500 mb-2">
+                                {{ __('main.department') }}
+                                <span
+                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketDepartmentEnums::from($ticket->department ?? 'general')->badgeColor() }}">
+                                    {{ __('main.' . ($ticket->department ?? 'general')) }}
+                                </span>
                             </p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.created_by') }}</p>
-                            <p class="font-semibold text-gray-800">
-                                @if ($ticket->user)
-                                    <a href="{{ route('dashboard.users.show', $ticket->user->id) }}" class="text-primary hover:underline">
-                                        {{ $ticket->user->name }}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
-                                    </a>
-                                @else
-                                    <span class="text-gray-400">-</span>
-                                @endif
-                            </p>
+                            @include('dashboard.components.status-actions', [
+                                'record' => $ticket,
+                                'models' => 'tickets',
+                                'modelClass' => 'ticket',
+                                'fieldName' => 'department',
+                                'availableOptions' => array_column(\App\Enum\TicketDepartmentEnums::cases(), 'value'),
+                            ])
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.created_at') }}</p>
@@ -136,25 +116,69 @@
                             <p class="text-sm text-gray-500">{{ __('main.updated_at') }}</p>
                             <p class="text-sm text-gray-800">{{ $ticket->updated_at?->format('d/m/Y H:i') }}</p>
                         </div>
+                        {{-- <div>
+                            <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
+                            @include('dashboard.components.toggle-hold', [
+                                'modelId' => $ticket->id,
+                                'field' => 'is_active',
+                                'value' => (bool) $ticket->is_active,
+                                'modelClass' => 'ticket',
+                            ])
+                        </div> --}}
                     </div>
                 </div>
             </div>
 
-            {{-- Message Content --}}
-            <div class="kt-card">
-                <div class="kt-card-header">
-                    <h3 class="kt-card-title">{{ __('main.message') }}</h3>
-                </div>
+            <!-- Media Files from Messages -->
+            @if ($ticket->messages && count($ticket->messages) > 0)
+                @php
+                    $allAttachments = [];
+                    foreach ($ticket->messages as $message) {
+                        if (is_array($message->attachments) && count($message->attachments) > 0) {
+                            $allAttachments = array_merge($allAttachments, $message->attachments);
+                        }
+                    }
+                @endphp
 
-                <div class="kt-card-body p-4">
-                    <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200 whitespace-pre-line">
-                        {{ $ticket->message ?? '-' }}
+                @if (count($allAttachments) > 0)
+                    <div class="kt-card ">
+                        <div class="kt-card-header">
+                            <h3 class="kt-card-title">{{ __('main.attachments') }} <span
+                                    class="font-semibold text-primary">({{ count($allAttachments) ?? 0 }})</span></h3>
+                        </div>
+                        <div class="kt-card-body p-4">
+                            <div class="flex flex-col gap-6">
+                                @if ($allAttachments && count($allAttachments) > 0)
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                        @foreach ($allAttachments as $index => $file)
+                                            <div class="image-container shadow-sm">
+                                                @if ($file)
+                                                    <img src="{{ asset('storage/' . $file) }}" alt="{{ __('main.attachments') }} {{ $index + 1 }}"
+                                                        class="w-full h-32 object-cover" loading="lazy">
+                                                @else
+                                                    <div class="w-full h-32 bg-gray-200 flex items-center justify-center">
+                                                        <p class="text-xs text-secondary-foreground">{{ __('main.na') }}</p>
+                                                    </div>
+                                                @endif
+                                                <div class="image-overlay">
+                                                    <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}"
+                                                        class="kt-btn kt-btn-sm kt-btn-primary">
+                                                        <i class="fas fa-download text-sm me-1"></i>
+                                                        <span>{{ __('main.download') }}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endif
 
-            <!-- Media Files -->
-            @include('dashboard.components.display-files', ['column' => 'attachments', 'record' => $ticket])
+            <!-- Metadata Card -->
+            @include('dashboard.components.metadata', ['record' => $ticket])
 
             {{-- Action Buttons --}}
             <div class="flex items-center gap-4">
@@ -178,3 +202,7 @@
         </div>
     </div>
 @endsection
+
+{{-- @push('scripts')
+    @include('dashboard.components.toggle-hold-script')
+@endpush --}}

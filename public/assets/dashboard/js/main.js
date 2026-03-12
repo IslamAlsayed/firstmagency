@@ -53,4 +53,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    const viewer = document.getElementById('imageViewer');
+    const viewerImg = document.getElementById('viewerImg');
+
+    if (viewer && viewerImg) {
+        document.querySelectorAll('.clickable-img').forEach(img => {
+            img.addEventListener('click', () => {
+                viewerImg.src = img.dataset.src;
+                viewer.classList.add('active');
+            });
+        });
+
+        viewer.addEventListener('click', (e) => {
+            if (e.target === viewer) {
+                viewer.classList.remove('active');
+            }
+        });
+    }
 });

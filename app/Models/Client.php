@@ -58,11 +58,6 @@ class Client extends Model
         return $query->where('is_featured', true);
     }
 
-    public function scopePublished($query)
-    {
-        return $query->where('status', 'published');
-    }
-
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');

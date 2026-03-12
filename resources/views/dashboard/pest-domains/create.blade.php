@@ -17,61 +17,9 @@
             <form method="POST" action="{{ route('dashboard.pest-domains.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4">
-                    <!-- Tabs Navigation -->
-                    @include('dashboard.components.tabs-navigation')
-
-                    <!-- English Tab Content -->
-                    <div class="language-content" data-lang="en">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="name_en" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.name') }} <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en"
-                                    name="name_en" value="{{ old('name_en') }}" placeholder="Enter name in English">
-                                @error('name_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror"
-                                    id="description_en" name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en') }}</textarea>
-                                @error('description_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Arabic Tab Content -->
-                    <div class="language-content hidden" data-lang="ar">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="name_ar" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.name') }} <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_ar"
-                                    name="name_ar" required value="{{ old('name_ar') }}" placeholder="أدخل الاسم بالعربية">
-                                @error('name_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror"
-                                    id="description_ar" name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar') }}</textarea>
-                                @error('description_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
+                    <!-- Media & Other Fields -->
+                    <div class="grid grid-cols-1 gap-6">
+                        @include('dashboard.components.photo', ['column' => 'image'])
                     </div>
 
                     <!-- Common Fields -->
@@ -87,25 +35,48 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.website') }}</label>
-                            <input type="url" name="website" value="{{ old('website') }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('website') border-red-500 @enderror"
-                                placeholder="https://example.com">
-                            @error('website')
+                            <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
+                            <input type="number" name="order" value="{{ old('order', 0) }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.price') }}
+                                <span class="text-gray-400 text-xs">({{ __('main.current_price') }})</span>
+                            </label>
+                            <input type="number" name="price" value="{{ old('price', 0) }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('price') border-red-500 @enderror"
+                                placeholder="0.00" step="0.01" min="0">
+                            @error('price')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" name="order" value="{{ old('order', 0) }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.discount_percentage') }}
+                                <span class="text-primary">(%)</span>
+                            </label>
+                            <input type="number" name="discount_percentage" value="{{ old('discount_percentage', 0) }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('discount_percentage') border-red-500 @enderror"
+                                placeholder="0" step="0.01" min="0" max="100" id="discount_percentage">
+                            @error('discount_percentage')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                            <small class="text-gray-500">{{ __('main.old_price_auto_calculated') }}</small>
                         </div>
-                    </div>
 
-                    <!-- Media & Other Fields -->
-                    <div class="grid grid-cols-1 gap-6">
-                        @include('dashboard.components.photo', ['column' => 'image'])
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.old_price') }}
+                                <span class="text-gray-400 text-xs">({{ __('main.auto_calculated') }})</span>
+                            </label>
+                            <input type="number" name="old_price" value="{{ old('old_price', 0) }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50" placeholder="0.00" step="0.01" min="0" readonly
+                                id="old_price">
+                            <small class="text-gray-500">{{ __('main.calculated_from_price_and_discount') }}</small>
+                        </div>
                     </div>
 
                     <!-- Checkboxes -->
@@ -138,4 +109,32 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function calculateOldPrice() {
+            const priceInput = document.querySelector('input[name="price"]');
+            const discountInput = document.querySelector('input[name="discount_percentage"]');
+            const oldPriceInput = document.getElementById('old_price');
+
+            const price = parseFloat(priceInput.value) || 0;
+            const discount = parseFloat(discountInput.value) || 0;
+
+            if (price > 0 && discount > 0) {
+                // old_price = price / (1 - discount_percentage/100)
+                const oldPrice = price / (1 - (discount / 100));
+                oldPriceInput.value = oldPrice.toFixed(2);
+            } else {
+                oldPriceInput.value = price.toFixed(2);
+            }
+        }
+
+        // حساب old_price عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateOldPrice();
+
+            // حساب عند تغيير السعر أو الخصم
+            document.querySelector('input[name="price"]').addEventListener('change', calculateOldPrice);
+            document.querySelector('input[name="discount_percentage"]').addEventListener('input', calculateOldPrice);
+        });
+    </script>
 @endsection

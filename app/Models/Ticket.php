@@ -15,12 +15,12 @@ class Ticket extends Model
         'email',
         'phone',
         'subject',
-        'message',
-        'attachments',
-        'category',
+        'messages',
+        'department',
         'status',
         'priority',
         'user_id',
+        'is_active',
         'assigned_to',
     ];
 
@@ -31,6 +31,21 @@ class Ticket extends Model
         'attachments' => 'array',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->uuid = mt_rand(100000000, 999999999);
+        });
+
+        static::updating(function ($model) {
+            if (!$model->uuid) {
+                $model->uuid = mt_rand(100000000, 999999999);
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -39,5 +54,10 @@ class Ticket extends Model
     public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(TicketMessage::class);
     }
 }

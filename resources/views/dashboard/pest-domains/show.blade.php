@@ -1,14 +1,14 @@
 @extends('dashboard.layout.master')
 
-@section('title', $pestDomain->translations[app()->getLocale()]['name'] ?? 'Pest Domain')
-@section('page-title', '🌐 ' . limitedText($pestDomain->translations[app()->getLocale()]['name'] ?? '', 30))
+@section('title', $pestDomain->alt_text ?? 'Pest Domain')
+@section('page-title', '🌐 ' . limitedText($pestDomain->alt_text ?? '', 30))
 
 @section('content')
     <div class="kt-container-fixed p-0">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
-                    {{ $pestDomain->translations[app()->getLocale()]['name'] ?? '-' }}
+                    {{ $pestDomain->alt_text ?? '-' }}
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
                     {{ $pestDomain->creator?->name ?? 'N/A' }} • {{ $pestDomain->created_at?->format('d M Y') }}
@@ -118,42 +118,7 @@
                         @endforeach
                     </div>
 
-                    <!-- English Content -->
-                    <div class="language-content" data-lang="en">
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.name') }}</p>
-                            <p class="text-gray-700 leading-relaxed">{!! $pestDomain->translations['en']['name'] ?? '-' !!}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.description') }}</p>
-                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $pestDomain->translations['en']['description'] ?? '-' !!}</div>
-                        </div>
-                    </div>
-
-                    <!-- Arabic Content -->
-                    <div class="language-content hidden" data-lang="ar">
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.name') }}</p>
-                            <p class="text-gray-700 leading-relaxed">{!! $pestDomain->translations['ar']['name'] ?? '-' !!}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.description') }}</p>
-                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200">{!! $pestDomain->translations['ar']['description'] ?? '-' !!}</div>
-                        </div>
-                    </div>
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t">
-                        <div>
-                            <label class="kt-label mb-1">{{ __('main.website') }}</label>
-                            @if ($pestDomain->website)
-                                <a href="{{ $pestDomain->website }}" target="_blank" class="text-blue-600 hover:underline text-sm">
-                                    {{ $pestDomain->website }}
-                                </a>
-                            @else
-                                <p class="text-sm text-gray-400">-</p>
-                            @endif
-                        </div>
-
                         <div>
                             <label class="kt-label mb-1">{{ __('main.order') }}</label>
                             <p class="text-sm text-secondary-foreground">{{ $pestDomain->order ?? 0 }}</p>
@@ -172,7 +137,7 @@
                 @include('dashboard.components.display-photo', [
                     'record' => $pestDomain,
                     'column' => 'image',
-                    'alt' => $pestDomain->alt_text ?? ($pestDomain->translations[app()->getLocale()]['name'] ?? 'Pest Domain Logo'),
+                    'alt' => $pestDomain->alt_text ?? 'Pest Domain Logo',
                 ])
             @endif
 

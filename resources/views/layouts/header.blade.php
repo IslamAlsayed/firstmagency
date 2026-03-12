@@ -94,7 +94,7 @@
             <ul class="list-navbar flex gap-4">
                 <li class="flex items-center">
                     <a href="/"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'home' || $currentRoute == '' ? 'active' : '' }}">
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'home' || $currentRoute == '' || $currentRoute == 'welcome' || $currentRoute == 'home' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.home') }}</span>
                     </a>
@@ -103,7 +103,7 @@
                     <a href="{{ route('about-us') }}"
                         class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
-                        <span>{{ __('main.about_us_') }}</span>
+                        <span>{{ __('main.about_us') }}</span>
                     </a>
                 </li>
                 <li class="flex items-center our_services">
@@ -165,7 +165,7 @@
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('contact') }}"
+                    <a href="{{ route('tickets.index') }}"
                         class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'contact' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.contact') }}</span>

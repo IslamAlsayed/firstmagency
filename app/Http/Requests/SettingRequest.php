@@ -50,6 +50,7 @@ class SettingRequest extends FormRequest
             'about_us_description' => 'nullable|string',
             'about_us_description_ar' => 'nullable|string',
             'about_us_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'about_us_image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
 
             'website_design_title' => 'nullable|string|max:255',
             'website_design_title_ar' => 'nullable|string|max:255',

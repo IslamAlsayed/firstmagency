@@ -81,6 +81,15 @@ class SettingsController extends Controller
             $this->uploadSinglePhoto($request, $settings, 'about_us_image', 'settings/about-us');
         }
 
+        // Handle image upload
+        if ($request->hasFile('about_us_image2')) {
+            // Delete old image if exists
+            if ($settings->about_us_image2) {
+                @unlink(storage_path('app/public/' . $settings->about_us_image2));
+            }
+            $this->uploadSinglePhoto($request, $settings, 'about_us_image2', 'settings/about-us');
+        }
+
         return redirect()->back()->withSuccess(__('messages.about_us_settings_updated'));
     }
 

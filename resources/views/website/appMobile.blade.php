@@ -9,16 +9,20 @@
         @include('sections.order-your-app')
 
         {{-- Categories Programming Section --}}
-        @include('sections.categories-programming')
+        @include('sections.categories-programming', ['categories' => $data['categories'] ?? []])
 
         {{-- Step Work Section --}}
-        @include('sections.project-steps')
+        @include('sections.project-steps', ['steps' => $data['project_steps'] ?? []])
 
         {{-- Frequently Asked Questions Section --}}
-        @include('sections.frequently-asked-questions', ['faqs' => config('faqs-apps')])
+        @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? config('faqs-apps')])
 
         {{-- Important Articles Section --}}
-        @include('sections.important-articles')
+        @include('sections.important-articles', [
+            'articles' => $data['articles'] ?? [],
+            'title' => __('main.important_articles_title'),
+            'desc' => __('main.important_articles_description'),
+        ])
     </div>
 @endsection
 

@@ -3,10 +3,6 @@
 @section('title', __('main.create_type', ['type' => __('main.features_hosting')]))
 @section('page-title', '🎁 ' . __('main.create_type', ['type' => __('main.features_hosting')]))
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/plugins/tagify/tagify.css') }}">
-@endpush
-
 @section('content')
     <div class="kt-card mb-4">
         <div class="kt-card-header flex items-center justify-between gap-4">
@@ -92,25 +88,4 @@
             </form>
         </div>
     </div>
-
-    @push('scripts')
-        <script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
-        <script>
-            const imageInput = document.getElementById('image');
-            const imagePreview = document.getElementById('imagePreview');
-
-            if (imageInput) {
-                imageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            imagePreview.innerHTML = `<img src="${event.target.result}" class="w-full h-full object-cover">`;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-        </script>
-    @endpush
 @endsection

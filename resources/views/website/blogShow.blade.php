@@ -4,92 +4,29 @@
     <div class="blog-show">
         <section class="blog-content">
             <div class="text">
-                <div class="heading">
-                    {{ __('main.portfolio_description_sample') }}
-                </div>
-                <div class="created_at">
-                    <span>{{ __('main.portfolio_date_sample') }}</span>•<span>{{ __('main.brand_name') }}</span>
-                </div>
-                <div class="image">
-                    <img src="{{ asset('assets/images/website/projects/1.png') }}" alt="{{ __('main.blog_image') }}">
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_intro') }}
-                </div>
-                <div class="heading">
-                    {{ __('articles.blog_strategy_section') }}
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_strategy_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_target_section') }}
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_target_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_content_section') }}
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_content_text') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_analytics_section') }}
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_analytics_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_performance_section') }}
-                </div>
-
-                <div class="description">
-                    {{ __('articles.blog_performance_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_monitoring_section') }}
-                </div>
-
-                <div class="description">
-                    {{ __('articles.blog_monitoring_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_engagement_section') }}
-                </div>
-
-                <div class="description">
-                    {{ __('articles.blog_engagement_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_comments_section') }}
-                </div>
-
-                <div class="description">
-                    {{ __('articles.blog_comments_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_increase_engagement_section') }}
-                </div>
-
-                <div class="description">
-                    {{ __('articles.blog_increase_engagement_content') }}
-                </div>
-
-                <div class="heading">
-                    {{ __('articles.blog_success_strategies_section') }}
-                </div>
-                <div class="description">
-                    {{ __('articles.blog_success_strategies_content') }}
-                </div>
+                @if ($article instanceof \App\Models\Article)
+                    <div class="heading">
+                        {{ $article->translations[app()->getLocale()]['title'] ?? ($article->translations['en']['title'] ?? $article->slug) }}
+                    </div>
+                    <div class="created_at">
+                        <span>{{ $article->created_at?->format('Y-m-d') }}</span>•<span>{{ __('main.brand_name') }}</span>
+                    </div>
+                    @if ($article->image)
+                        <div class="image">
+                            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? $article->slug }}">
+                        </div>
+                    @endif
+                    <div class="description">
+                        {{ $article->translations[app()->getLocale()]['description'] ?? ($article->translations['en']['description'] ?? '') }}
+                    </div>
+                @else
+                    <div class="heading">
+                        {{ __('main.article_not_found') }}
+                    </div>
+                    <div class="description">
+                        {{ __('main.please_try_again') }}
+                    </div>
+                @endif
             </div>
 
             <div class="share-your-articles mb-4">
@@ -141,7 +78,45 @@
             <div class="main-articles-section border-custom" style="padding: var(--inline-padding);">
                 <div class="title">{{ __('main.blog_similar_articles') }}</div>
                 <div class="main-articles grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                    @if (config('articles') && count(config('articles')) > 0)
+                    @if ($similarArticles && count($similarArticles) > 0)
+                        @foreach ($similarArticles as $similar)
+                            @if ($similar instanceof \App\Models\Article)
+                                <div class="article">
+                                    <div class="image">
+                                        @if ($similar->image)
+                                            <img src="{{ asset('storage/' . $similar->image) }}"
+                                                alt="{{ $similar->translations[app()->getLocale()]['title'] ?? $similar->slug }}">
+                                        @else
+                                            <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="visitor">
+                                        <i class="fas fa-eye"></i>
+                                        {{ $similar->visitors ?? ($similar->view_count ?? rand(254, 584)) }}
+                                    </div>
+                                    <div class="content">
+                                        <div class="body">
+                                            <a href="{{ route('blog.show', ['id' => $similar->id, 'slug' => $similar->slug]) }}"
+                                                class="title font-semibold">{{ limitedText($similar->translations[app()->getLocale()]['title'] ?? $similar->slug, 30) }}</a>
+                                            <div class="description">{{ limitedText($similar->translations[app()->getLocale()]['description'] ?? '', 60) }}</div>
+                                        </div>
+                                        <div class="actions">
+                                            <button class="btn-link font-semibold details">
+                                                <a href="{{ route('blog.show', ['id' => $similar->id, 'slug' => $similar->slug]) }}">
+                                                    {{ __('main.details_button') }}
+                                                </a>
+                                            </button>
+                                            <button class="btn-link font-semibold whatsapp">
+                                                <a href="#contact">
+                                                    {{ __('main.whatsapp_button') }}
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    @elseif (config('articles') && count(config('articles')) > 0)
                         @foreach (config('articles') as $key => $article)
                             @if ($key < 3)
                                 <div class="article">
@@ -187,17 +162,22 @@
                     <img src="{{ asset('assets/images/website/dark-reviews-bg.jpg') }}" alt="{{ __('main.first_marketing_logo') }}">
                 </div>
             </div>
+            @if ($categories && count($categories) > 0)
+                <div class="categories">
+                    <div class="title font-semibold">{{ __('main.blog_categories') }}</div>
 
-            <div class="categories">
-                <div class="title font-semibold">{{ __('main.blog_categories') }}</div>
-
-                <ul>
-                    <li><a href="#"><span>{{ __('main.blog_social_media_admin') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>{{ __('main.blog_website_design') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>{{ __('main.blog_digital_marketing') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                    <li><a href="#"><span>{{ __('main.blog_seo') }}</span> <strong>{{ rand(6, 64) }}</strong></a></li>
-                </ul>
-            </div>
+                    <ul>
+                        @foreach ($categories as $category)
+                            <li>
+                                <a href="{{ route('blog.category', ['id' => $category->id]) }}">
+                                    <span>{{ $category->name ?? $category->slug }}</span>
+                                    <strong>{{ $category->articles_count ?? rand(6, 64) }}</strong>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="categories">
                 <div class="title font-semibold">{{ __('main.blog_contact_info') }}</div>
@@ -223,50 +203,46 @@
                     </li>
                 </ul>
 
-                <div class="articles">
-                    <div class="title font-semibold">{{ __('main.blog_latest_articles') }}</div>
-
-                    <div class="latest-articles">
-                        @if (config('articles') && count(config('articles')) > 0)
-                            @foreach (config('articles') as $key => $article)
-                                <a href="{{ route('blog.show', ['id' => $key + 1]) }}" class="article flex items-center gap-2">
+                @if ($mostReadArticles && count($mostReadArticles) > 0)
+                    <div class="articles">
+                        <div class="title font-semibold">{{ __('main.blog_latest_articles') }}</div>
+                        <div class="latest-articles">
+                            @foreach ($mostReadArticles as $article)
+                                <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $article->slug]) }}" class="article flex items-center gap-2">
                                     <div class="image">
-                                        <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="{{ $article['title'] }}">
+                                        <img src="{{ asset('assets/images/website/projects/' . ($article->id ?? 1) . '.png') }}" alt="{{ $article->title }}">
                                     </div>
                                     <div class="info">
-                                        <p class="font-semibold">{{ $article['title'] }}</p>
-                                        <small>{{ $article['created_at'] ?? __('main.date_unavailable') }}</small>
+                                        <p class="font-semibold">{{ $article->title }}</p>
+                                        <small>{{ $article->created_at ?? __('main.date_unavailable') }}</small>
                                     </div>
                                 </a>
                             @endforeach
-                        @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
 
-            <div class="categories">
-                <div class="title font-semibold">{{ __('main.blog_most_read') }}</div>
-
-                <div class="articles">
-                    <div class="latest-articles">
-                        @if (config('articles') && count(config('articles')) > 0)
-                            @foreach (config('articles') as $key => $article)
-                                @if ($key < 10)
-                                    <a href="{{ route('blog.show', ['id' => $key + 1]) }}" class="article flex items-center gap-2">
-                                        <div class="image">
-                                            <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="{{ $article['title'] }}">
-                                        </div>
-                                        <div class="info">
-                                            <p class="font-semibold">{{ $article['title'] }}</p>
-                                            <small>{{ $article['created_at'] ?? __('main.date_unavailable') }}</small>
-                                        </div>
-                                    </a>
-                                @endif
+            @if ($mostReadArticles && count($mostReadArticles) > 0)
+                <div class="categories">
+                    <div class="title font-semibold">{{ __('main.blog_most_read') }}</div>
+                    <div class="articles">
+                        <div class="latest-articles">
+                            @foreach ($mostReadArticles as $article)
+                                <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $article->slug]) }}" class="article flex items-center gap-2">
+                                    <div class="image">
+                                        <img src="{{ asset('assets/images/website/projects/' . ($article->id ?? 1) . '.png') }}" alt="{{ $article->title }}">
+                                    </div>
+                                    <div class="info">
+                                        <p class="font-semibold">{{ $article->title }}</p>
+                                        <small>{{ $article->created_at ?? __('main.date_unavailable') }}</small>
+                                    </div>
+                                </a>
                             @endforeach
-                        @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </aside>
     </div>
 @endsection

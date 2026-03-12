@@ -77,6 +77,15 @@
     font-family: var(--font-family);
 }
 
+*:has([class*='@']),
+*:has([href*='@']) {
+    text-transform: lowercase !important;
+}
+
+a[href^="mailto:"] {
+    text-transform: lowercase !important;
+}
+
 body {
     position: relative;
     /* background-color: var(--light-background-color); */
@@ -143,7 +152,7 @@ td {
 .sidebar {
     width: var(--sidebar-width);
     height: 100svh;
-    padding: 10px;
+    padding: 5px 10px;
     position: fixed;
     right: 0;
     left: auto;
@@ -156,7 +165,7 @@ td {
     overflow-x: hidden;
 
     &::-webkit-scrollbar {
-        width: 2px;
+        width: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -181,7 +190,7 @@ td {
         align-items: center;
         justify-content: space-between;
         margin-bottom: 5px;
-        padding-bottom: 20px;
+        padding-bottom: 5px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         min-height: 50px;
         transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
@@ -216,7 +225,8 @@ td {
 
     .nav-menu .nav-link {
         gap: 10px;
-        padding: 10px;
+        /* padding: 10px; */
+        padding: 5px 10px;
         display: flex;
         overflow: hidden;
         border-radius: 8px;
@@ -248,7 +258,7 @@ td {
 
     .nav-menu .nav-link>li,
     .nav-menu .nav-link>svg {
-        width: 15px;
+        width: 10px;
         height: 15px;
         font-size: 14px;
         flex-shrink: 0;
@@ -266,6 +276,11 @@ td {
         transition: all 0.1s ease;
     }
 
+    .nav-menu .submenu-item .submenu-btn:hover .span-text,
+    .nav-menu .submenu-item .submenu-btn.active .span-text {
+        padding-inline-start: 5px;
+    }
+
     .nav-menu .submenu-item .submenu-btn.active {
         border-radius: 8px 8px 0 0 !important;
     }
@@ -279,7 +294,7 @@ td {
     .nav-menu .submenu-list {
         max-height: 0;
         position: relative;
-        cursor: pointer;
+        /* cursor: pointer; */
         border-radius: 0 0 8px 8px;
         transition: max-height var(--main-transition-duration) var(--main-transition-timing);
         overflow: hidden;
@@ -305,6 +320,16 @@ td {
 
     .nav-menu .submenu-list .nav-link.active {
         background-color: var(--hover-light-4);
+    }
+
+    .nav-menu .submenu-list .nav-link {
+        cursor: pointer;
+    }
+
+    .nav-menu .submenu-item .submenu-btn.active,
+    .nav-menu .submenu-list .nav-link.active {
+        cursor: default !important;
+        pointer-events: none !important;
     }
 
     .nav-menu .submenu-list::before {
@@ -340,6 +365,7 @@ td {
 
 @media (max-width: 992px) {
     .main-content {
+        width: 100%;
         margin-inline-start: 0;
     }
 

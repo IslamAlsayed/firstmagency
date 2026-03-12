@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Enum\ArticleEnums;
 use App\Enum\AvailableToggleFields;
 use App\Enum\PestDomainEnums;
+use App\Enum\ReviewEnums;
+use App\Enum\TicketDepartmentEnums;
+use App\Enum\TicketEnums;
+use App\Enum\WhyUsEnums;
+use App\Mail\TicketRatingMail;
 use App\Models\User;
+use App\Traits\AblyService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
+    use AblyService;
     public array $availableOption = [];
 
     public function __construct()
@@ -19,6 +27,10 @@ class DashboardController extends Controller
             AvailableToggleFields::cases(),
             ArticleEnums::cases(),
             PestDomainEnums::cases(),
+            ReviewEnums::cases(),
+            TicketEnums::cases(),
+            TicketDepartmentEnums::cases(),
+            WhyUsEnums::cases(),
         ];
 
         foreach ($enums as $enum) {
@@ -272,12 +284,41 @@ class DashboardController extends Controller
             return redirect()->back()->withError(__('messages.invalid_status'));
         }
 
+        // Get field name from request, default to 'status'
+        $field = request()->input('field', 'status');
+
         $model->update([
-            'status' => $status,
+            $field => $status,
             'updated_by' => getActiveUserId(),
         ]);
 
+        // Only publish Ably event for Ticket model
+        if (class_basename($modelClass) == 'Ticket') {
+            $this->publishTicketStatusUpdate($model, $field, $status);
+
+            if (strtolower($status) == TicketEnums::CLOSED->value) {
+                // Generate unique token for rating and save to database
+                $model->update(['token' => Str::random(40)]);
+
+                // Send automated email to customer asking for feedback
+                Mail::to($model->email)->send(new TicketRatingMail($model));
+            }
+        }
+
         $statusLabel = __('main.' . $status);
         return redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.' . strtolower(class_basename($modelClass)))]) . ' - ' . $statusLabel);
+    }
+
+    private function publishTicketStatusUpdate($ticket, $field, $newStatus)
+    {
+        $ticketData = [
+            'id' => $ticket->id,
+            'uuid' => $ticket->uuid,
+            'field' => $field,
+            'new_status' => $newStatus,
+            'status_label' => __('main.' . $newStatus),
+        ];
+
+        $this->publishToAbly('ticket-updates', 'ticket-status-updated', $ticketData);
     }
 }

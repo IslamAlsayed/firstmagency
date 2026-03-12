@@ -8,15 +8,29 @@
         </div>
 
         <div class="images flex items-center" data-random-images>
-            <div class="image" data-image-slot="0">
-                <img src="{{ asset('assets/images/website/categories/1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
-            </div>
-            <div class="image" data-image-slot="1">
-                <img src="{{ asset('assets/images/website/categories/2.png') }}" alt="{{ __('main.ecommerce_programming') }}">
-            </div>
-            <div class="image" data-image-slot="2">
-                <img src="{{ asset('assets/images/website/categories/3.png') }}" alt="{{ __('main.ecommerce_programming') }}">
-            </div>
+            @if ($categories && count($categories) > 0)
+                @foreach ($categories as $index => $category)
+                    @if ($index < 3)
+                        <div class="image" data-image-slot="{{ $index }}">
+                            @if ($category->image)
+                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->alt_text }}">
+                            @else
+                                <img src="{{ asset('assets/images/website/categories/' . ($index + 1) . '.png') }}" alt="{{ $category->name }}">
+                            @endif
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <div class="image" data-image-slot="0">
+                    <img src="{{ asset('assets/images/website/categories/1.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                </div>
+                <div class="image" data-image-slot="1">
+                    <img src="{{ asset('assets/images/website/categories/2.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                </div>
+                <div class="image" data-image-slot="2">
+                    <img src="{{ asset('assets/images/website/categories/3.png') }}" alt="{{ __('main.ecommerce_programming') }}">
+                </div>
+            @endif
         </div>
     </div>
     @if (isDebugModeEnabled())

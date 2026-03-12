@@ -43,13 +43,10 @@
                     <table class="w-full border-collapse">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.attachments') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.number') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.name') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.phone') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.subject') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.priority') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.assigned_to') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.department') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
@@ -58,61 +55,29 @@
                         <tbody>
                             @forelse($tickets as $ticket)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                    <td
-                                        title="{{ __('main.attachments') }} - {{ __('main.total_images') }}: {{ $ticket->attachments ? count($ticket->attachments) : 0 }}">
-                                        <div class="relative w-fit">
-                                            <div class="flex items-center -space-x-2">
-                                                @if ($ticket->attachments && count($ticket->attachments) > 0)
-                                                    @foreach ($ticket->attachments as $key => $image)
-                                                        @if ($key >= 5)
-                                                            @break
-                                                        @endif
-                                                        <img src="{{ $image && checkExistFile($image) ? asset('storage/' . $image) : asset('metronic/media/avatars/blank.png') }}"
-                                                            alt="{{ $image }}"
-                                                            class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-background size-10">
-                                                    @endforeach
-                                                    @if (count($ticket->attachments) > 5)
-                                                        <div
-                                                            class="h-fit inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2">
-                                                            +{{ count($ticket->attachments) - 5 }}
-                                                        </div>
-                                                    @endif
-                                                @else
-                                                    <div
-                                                        class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
-                                                        <i class="opacity-25">{{ __('main.null') }}</i>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
                                     <td class="p-4 text-sm text-gray-600">
                                         <p>{{ $ticket->name }}</p>
-                                        <a href="mailto:{{ $ticket->email }}" target="_blank"
-                                            class="inline-block text-primary hover:underline text-xs font-medium">
-                                            {!! limitedText($ticket->email ?? '--', 30) !!}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
-                                        </a>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600">
-                                        <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
-                                            {!! limitedText($ticket->phone ?? '--', 30) !!}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
-                                        </a>
+                                        <p>
+                                            <a href="mailto:{{ $ticket->email }}" target="_blank"
+                                                class="inline-block text-primary hover:underline text-xs font-medium">
+                                                {!! limitedText($ticket->email ?? '--', 30) !!}
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <a href="tel:{{ $ticket->phone }}" target="_blank"
+                                                class="inline-block text-primary hover:underline text-xs font-medium">
+                                                {!! limitedText($ticket->phone ?? '--', 30) !!}
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                            </a>
+                                        </p>
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">{{ limitedText($ticket->subject ?? '', 30) }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->priority ?? '-' }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->category ?? '-' }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->assignedTo->name ?? '-' }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->created_at?->format('d/m/Y') }}</td>
+                                    <td class="p-4 text-sm text-gray-600 font-semibold">{{ $ticket->department ?? '-' }}</td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $ticket->created_at?->diffForHumans() }}</td>
                                     <td class="p-4 text-sm">
-                                        <span
-                                            class="px-3 py-1 rounded-full text-xs font-semibold
-                                                @if ($ticket->status === 'open') bg-green-100 text-green-800
-                                                @elseif($ticket->status === 'in_progress') bg-yellow-100 text-yellow-800
-                                                @elseif($ticket->status === 'resolved') bg-blue-100 text-blue-800
-                                                @elseif($ticket->status === 'closed') bg-red-100 text-red-800
-                                                @else bg-gray-100 text-gray-800 @endif">
+                                        <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
                                             {{ __('main.' . $ticket->status) }}
                                         </span>
                                     </td>
@@ -123,6 +88,22 @@
                                             'modelClass' => 'ticket',
                                             'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
                                         ])
+                                        <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}"
+                                            class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white" title="{{ __('main.send_copy_to_customer') }}">
+                                            <i class="fas fa-envelope text-white"></i>
+                                        </a>
+                                        <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}"
+                                            class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white" title="{{ __('main.support_reply') }}">
+                                            @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
+                                                {!! $text ?? __('main.chat') !!}
+                                            @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')
+                                                <i class="fas fa-comments text-white"></i>
+                                            @else
+                                                <i class="fas fa-comments text-white"></i>
+                                                {!! $text ?? __('main.chat') !!}
+                                            @endif
+                                        </a>
+
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $ticket,
                                             'models' => 'tickets',

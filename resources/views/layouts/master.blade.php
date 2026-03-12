@@ -25,6 +25,10 @@
     </div>
     <!-- End of Wrapper -->
 
+    <div id="imageViewer" class="image-viewer">
+        <img id="viewerImg">
+    </div>
+
     <!-- Scripts -->
     @include('layouts.partials.scripts')
 </body>
