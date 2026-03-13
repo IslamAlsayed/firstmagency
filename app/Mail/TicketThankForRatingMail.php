@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TicketRatingMail extends Mailable
+class TicketThankForRatingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -39,7 +39,7 @@ class TicketRatingMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.ticket-rating',
+            view: 'emails.ticket-thank-for-rating',
             with: [
                 'ticket' => $this->ticket,
                 'rating' => $this->rating,

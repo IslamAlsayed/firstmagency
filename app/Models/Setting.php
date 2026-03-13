@@ -33,6 +33,9 @@ class Setting extends Model
         'main_color',
         'dark_main_color',
         'light_main_color',
+        'header_color',
+        'header_text_color',
+        'footer_color',
 
         'font_url',
         'font_name',

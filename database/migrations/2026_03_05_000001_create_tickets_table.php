@@ -10,17 +10,18 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->string('name');
             $table->string('email');
             $table->string('phone')->nullable();
             $table->string('subject');
-            $table->text('message');
-            $table->json('attachments')->nullable();
-            $table->string('category')->nullable();
+            $table->string('department')->nullable();
             $table->string('status')->default('open'); // 'open', 'in_progress', 'resolved', 'closed'
             $table->string('priority')->default('medium'); // 'low', 'medium', 'high', 'urgent'
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('assigned_to')->nullable()->constrained('users')->onDelete('set null');
+            $table->boolean('is_active')->default(true);
+            $table->string('token')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

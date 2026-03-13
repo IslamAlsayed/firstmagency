@@ -4,6 +4,26 @@
 
 @section('page-title', '⚡ ' . __('main.settings'))
 
+@push('styles')
+    <style>
+        .toggle-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="background rounded-lg shadow-lg overflow-hidden">
         <div class="px-6 py-5 border-custom-b-1">
@@ -103,11 +123,17 @@
             <div class="space-y-6">
                 <!-- General Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                        <i class="fas fa-sliders-h text-green-500"></i>
-                        {{ __('main.general_settings') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-sliders-h text-green-500"></i>
+                            {{ __('main.general_settings') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="general-settings-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateGeneral') }}" method="POST" class="space-y-5">
+                    <form action="{{ route('dashboard.settings.updateGeneral') }}" method="POST" class="space-y-5" id="general-settings-section">
                         @csrf
                         @method('PUT')
                         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-4">
@@ -170,11 +196,18 @@
 
                 <!-- Debug Mode Toggle -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                        <i class="fas fa-bug text-red-500"></i>
-                        Debug Mode
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-bug text-red-500"></i>
+                            {{ __('main.debug_mode') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="debug-mode-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.toggleDebugMode') }}" method="POST" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.toggleDebugMode') }}" method="POST" class="space-y-5" id="debug-mode-section">
                         @csrf
                         <p class="text-sm text-gray-500">
                             When enabled, section flags will be visible on the website for debugging purposes.
@@ -189,11 +222,18 @@
 
                 <!-- Debug IPs Configuration -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                        <i class="fas fa-network-wired text-blue-500"></i>
-                        Debug Mode - Allowed IPs
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-network-wired text-blue-500"></i>
+                            {{ __('main.debug_mode_allowed_ips') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="debug-ips-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateDebugIps') }}" method="POST" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateDebugIps') }}" method="POST" class="space-y-5" id="debug-ips-section">
                         @csrf
                         @method('PUT')
 
@@ -243,11 +283,19 @@
 
                 <!-- About Us Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                        <i class="fas fa-info-circle text-amber-500"></i>
-                        {{ __('main.about_us') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-info-circle text-amber-500"></i>
+                            {{ __('main.about_us') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="about-us-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateAboutUs') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateAboutUs') }}" method="POST" enctype="multipart/form-data" class="space-y-5"
+                        id="about-us-section">
                         @csrf
                         @method('PUT')
 
@@ -298,11 +346,19 @@
 
                 <!-- Website Design Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-blue-300">
-                        <i class="fas fa-laptop-code text-blue-500"></i>
-                        {{ __('main.website_design_title') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-laptop-code text-blue-500"></i>
+                            {{ __('main.website_design_title') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="website-design-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateWebsiteDesign') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateWebsiteDesign') }}" method="POST" enctype="multipart/form-data" class="space-y-5"
+                        id="website-design-section">
                         @csrf
                         @method('PUT')
 
@@ -399,27 +455,34 @@
 
                 <!-- Colors Website -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-custom-b-1">
-                        <i class="fas fa-palette text-blue-500"></i>
-                        {{ __('main.color_website') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-palette text-blue-500"></i>
+                            {{ __('main.color_website') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="colors-website-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateColorsWebsite') }}" method="POST" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateColorsWebsite') }}" method="POST" class="space-y-5" id="colors-website-section">
                         @csrf
                         @method('PUT')
                         <div class="flex items-center flex-wrap gap-4">
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="main-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.main_color') }}</label>
                                 <input type="color" id="main-color" name="main_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->main_color ?? '#d05423' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="dark-main-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.dark_main_color') }}</label>
                                 <input type="color" id="dark-main-color" name="dark_main_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->dark_main_color ?? '#96310E' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="light-main-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.light_main_color') }}</label>
                                 <input type="color" id="light-main-color" name="light_main_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
@@ -436,56 +499,83 @@
 
                 <!-- Colors Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-custom-b-1">
-                        <i class="fas fa-palette text-blue-500"></i>
-                        {{ __('main.color_dashboard') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-palette text-blue-500"></i>
+                            {{ __('main.color_dashboard') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="colors-dashboard-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateColors') }}" method="POST" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateColors') }}" method="POST" class="space-y-5" id="colors-dashboard-section">
                         @csrf
                         @method('PUT')
                         <div class="flex items-center flex-wrap gap-4">
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="primary-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.primary_color') }}</label>
                                 <input type="color" id="primary-color" name="primary_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->primary_color ?? '#6f42c1' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="secondary-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.secondary_color') }}</label>
                                 <input type="color" id="secondary-color" name="secondary_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->secondary_color ?? '#6c757d' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="success-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.success_color') }}</label>
                                 <input type="color" id="success-color" name="success_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->success_color ?? '#198754' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="danger-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.danger_color') }}</label>
                                 <input type="color" id="danger-color" name="danger_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->danger_color ?? '#dc3545' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="warning-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.warning_color') }}</label>
                                 <input type="color" id="warning-color" name="warning_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->warning_color ?? '#ffc107' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="info-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.info_color') }}</label>
                                 <input type="color" id="info-color" name="info_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->info_color ?? '#0dcaf0' }}">
                             </div>
-                            <div class="flex-1 text-nowrap" style="min-width: 100px;">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                                 <label for="accent-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.accent_color') }}</label>
                                 <input type="color" id="accent-color" name="accent_color"
                                     class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                     value="{{ $settings->accent_color ?? '#dc3545' }}">
                             </div>
+                        </div>
+                        <div class="flex items-center flex-wrap gap-4">
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
+                                <label for="header-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.header_color') }}</label>
+                                <input type="color" id="header-color" name="header_color"
+                                    class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                    value="{{ $settings->header_color ?? '#6f42c1' }}">
+                            </div>
+                            <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
+                                <label for="header-text-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.header_text_color') }}</label>
+                                <input type="color" id="header-text-color" name="header_text_color"
+                                    class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                    value="{{ $settings->header_text_color ?? '#f7f7f7' }}">
+                            </div>
+                            {{-- <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
+                                <label for="footer-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.footer_color') }}</label>
+                                <input type="color" id="footer-color" name="footer_color"
+                                    class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                    value="{{ $settings->footer_color ?? '#2d3748' }}">
+                            </div> --}}
                         </div>
                         <button type="submit" toggle-button
                             class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
@@ -497,11 +587,18 @@
 
                 <!-- Fonts Settings -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                    <h6 class="text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                        <i class="fas fa-font text-purple-500"></i>
-                        {{ __('main.font_settings') }}
+                    <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
+                        <div>
+                            <i class="fas fa-font text-purple-500"></i>
+                            {{ __('main.font_settings') }}
+                        </div>
+
+                        <div class="toggle-icon" toggle-button data-section="fonts-section">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
                     </h6>
-                    <form action="{{ route('dashboard.settings.updateFonts') }}" method="POST" class="space-y-5">
+
+                    <form action="{{ route('dashboard.settings.updateFonts') }}" method="POST" class="space-y-5" id="fonts-section">
                         @csrf
                         @method('PUT')
                         <div>
@@ -1026,26 +1123,141 @@
 @push('scripts')
     <script>
         // Custom Fixed Sidebar
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const sidebar = document.getElementById('settings-sidebar');
+        //     const sidebarContainer = sidebar.parentElement;
+        //     const contentContainer = document.querySelector('.lg\\:col-span-3');
+
+        //     function handleSidebarPosition() {
+        //         const sidebarRect = sidebar.getBoundingClientRect();
+        //         const containerRect = sidebarContainer.getBoundingClientRect();
+        //         const contentRect = contentContainer.getBoundingClientRect();
+
+        //         // Check if we need to make sidebar fixed
+        //         if (window.scrollY > sidebarContainer.offsetTop && contentRect.bottom > window.innerHeight) {
+        //             sidebar.classList.add('fixed-sidebar');
+        //         } else {
+        //             sidebar.classList.remove('fixed-sidebar');
+        //         }
+        //     }
+
+        //     window.addEventListener('scroll', handleSidebarPosition);
+        //     window.addEventListener('resize', handleSidebarPosition);
+        // });
+
+        // Toggle Sections - Save State to LocalStorage
         document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('settings-sidebar');
-            const sidebarContainer = sidebar.parentElement;
-            const contentContainer = document.querySelector('.lg\\:col-span-3');
+            const STORAGE_KEY = 'settingsSectionsState';
 
-            function handleSidebarPosition() {
-                const sidebarRect = sidebar.getBoundingClientRect();
-                const containerRect = sidebarContainer.getBoundingClientRect();
-                const contentRect = contentContainer.getBoundingClientRect();
-
-                // Check if we need to make sidebar fixed
-                if (window.scrollY > sidebarContainer.offsetTop && contentRect.bottom > window.innerHeight) {
-                    sidebar.classList.add('fixed-sidebar');
-                } else {
-                    sidebar.classList.remove('fixed-sidebar');
-                }
+            // Load saved state from localStorage
+            function loadSectionsState() {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : {};
             }
 
-            window.addEventListener('scroll', handleSidebarPosition);
-            window.addEventListener('resize', handleSidebarPosition);
+            // Save state to localStorage
+            function saveSectionState(sectionId, isOpen) {
+                const state = loadSectionsState();
+                state[sectionId] = isOpen;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+
+            // Toggle section visibility
+            function toggleSection(icon, targetId, targetElement) {
+                const isCurrentlyClosed = targetElement.style.display == 'none' || getComputedStyle(targetElement).display == 'none';
+
+                // Update display
+                targetElement.style.display = isCurrentlyClosed ? 'block' : 'none';
+
+                // Update icon rotation
+                icon.style.transform = isCurrentlyClosed ? 'rotate(180deg)' : 'rotate(0deg)';
+
+                // Update parent classes
+                icon.parentElement.classList.toggle('mb-6');
+                icon.parentElement.classList.toggle('pb-3');
+                icon.parentElement.classList.toggle('border-b-2');
+
+                // Update icon classes
+                if (isCurrentlyClosed) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+
+                // Save state
+                saveSectionState(targetId, isCurrentlyClosed);
+            }
+
+            // Apply saved states on page load
+            const savedState = loadSectionsState();
+            Object.entries(savedState).forEach(([sectionId, isOpen]) => {
+                const targetElement = document.getElementById(sectionId);
+                const toggleIcon = document.querySelector(`[data-section="${sectionId}"]`);
+
+                if (targetElement && toggleIcon) {
+                    targetElement.style.display = isOpen ? 'block' : 'none';
+                    toggleIcon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+
+                    // Apply parent classes
+                    if (isOpen) {
+                        toggleIcon.parentElement.classList.add('mb-6');
+                        toggleIcon.parentElement.classList.add('pb-3');
+                        toggleIcon.parentElement.classList.add('border-b-2');
+                    } else {
+                        toggleIcon.parentElement.classList.remove('mb-6');
+                        toggleIcon.parentElement.classList.remove('pb-3');
+                        toggleIcon.parentElement.classList.remove('border-b-2');
+                    }
+
+                    if (isOpen) {
+                        toggleIcon.classList.remove('fa-chevron-down');
+                        toggleIcon.classList.add('fa-chevron-up');
+                    } else {
+                        toggleIcon.classList.remove('fa-chevron-up');
+                        toggleIcon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
+
+            // Add click listeners
+            let toggleIcons = document.querySelectorAll('.toggle-icon');
+            toggleIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-section');
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        toggleSection(this, targetId, targetElement);
+                    }
+                });
+            });
+        });
+
+
+
+        // Live Header Color Preview
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerColorInput = document.getElementById('header-color');
+            const headerTextColorInput = document.getElementById('header-text-color');
+            const headerElement = document.getElementById('topbar') || document.querySelector('.topbar');
+
+            if (headerElement && headerColorInput) {
+                headerColorInput.addEventListener('input', function() {
+                    const selectedColor = this.value;
+                    document.documentElement.style.setProperty('--header-color', selectedColor);
+                    headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
+                });
+            }
+
+            if (headerElement && headerTextColorInput) {
+                headerTextColorInput.addEventListener('input', function() {
+                    const selectedColor = this.value;
+                    document.documentElement.style.setProperty('--header-text-color', selectedColor);
+                    headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
+                });
+            }
         });
 
         // Sidebar Navigation & Smooth Scroll
@@ -1069,23 +1281,23 @@
                     let target = null;
 
                     // Map section to content
-                    if (section === 'general') {
+                    if (section == 'general') {
                         target = contentSections[0]; // General Settings
-                    } else if (section === 'debug-mode') {
+                    } else if (section == 'debug-mode') {
                         target = contentSections[1]; // Debug Mode
-                    } else if (section === 'debug-ips') {
+                    } else if (section == 'debug-ips') {
                         target = contentSections[2]; // Debug IPs
-                    } else if (section === 'about-us') {
+                    } else if (section == 'about-us') {
                         target = contentSections[3]; // About Us
-                    } else if (section === 'website-design') {
+                    } else if (section == 'website-design') {
                         target = contentSections[4]; // Website Design
-                    } else if (section === 'colors-website') {
+                    } else if (section == 'colors-website') {
                         target = contentSections[5]; // Colors Website
-                    } else if (section === 'colors-dashboard') {
+                    } else if (section == 'colors-dashboard') {
                         target = contentSections[6]; // Colors Dashboard
-                    } else if (section === 'fonts') {
+                    } else if (section == 'fonts') {
                         target = contentSections[7]; // Fonts
-                    } else if (section === 'inline-padding') {
+                    } else if (section == 'inline-padding') {
                         target = contentSections[8]; // Inline Padding
                     }
 

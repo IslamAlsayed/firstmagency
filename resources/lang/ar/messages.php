@@ -233,4 +233,20 @@ return [
     // Validation & Status
     'invalid_status' => 'حالة غير صحيحة',
     'verification_incorrect' => 'إجابة التحقق غير صحيحة.',
+
+    // Ticket Rating
+    'help_us_improve' => 'ساعدنا في تحسين خدمة الدعم الفني',
+    'rate_this_ticket' => 'عن طريق تقييم هذه التذكرة',
+    'how_many_stars' => 'كم نجمة تمنح هذه التذكرة؟',
+    'write_comment' => 'اكتب تعليقًا',
+    'comment_placeholder' => 'أخبرنا برأيك وملاحظاتك...',
+    'max_chars' => 'يمكنك كتابة حتى 1000 حرف',
+    'rating_form_note' => 'هذا النموذج مخصص لتقييم تجربة الدعم الفني فقط.',
+    'rating_confirmation' => 'شكراً لتقيمك، هذا يساعدنا على تحسين الخدمة',
+    'please_select_rating' => 'من فضلك اختر تقييم',
+    'rating_submitted_successfully' => 'تم إرسال التقييم بنجاح. شكراً لآرائك!',
+    'ticket_already_rated' => 'لقد قمت بتقييم هذه التذكرة بالفعل.',
+    'thank_you' => 'شكراً لك',
+    'already_rated' => 'لقد قمت بتقييم هذه التذكرة بالفعل',
+    'rating_helps_us' => 'تقييمك يساعدنا على تحسين خدماتنا بشكل مستمر',
 ];

@@ -17,7 +17,10 @@ class PermissionController extends Controller
     {
         $this->authorize('viewAny', Permission::class);
         $permissions = Permission::all();
-        return view('dashboard.permissions.index', compact('permissions'));
+        $allItems = $permissions->count();
+        $webPermissions = $permissions->where('guard_name', 'web')->count();
+        $apiPermissions = $permissions->where('guard_name', 'api')->count();
+        return view('dashboard.permissions.index', compact('permissions', 'allItems', 'webPermissions', 'apiPermissions'));
     }
 
     public function create()

@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html class="h-full" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
     <title>{{ __('main.ticket_rating') }}</title>
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
         rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
     <style>
         :root {
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
         }
 
         * {
-            font-family: var(----font-family) !important;
+            font-family: var(--font-family) !important;
         }
-    </style>
 
-    <!-- Tailwind CSS -->
-    <link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
-    <style>
         body {
-            font-family: Arial, sans-serif;
             background: #f5f5f5;
             padding: 20px;
         }
@@ -36,13 +33,13 @@
             <h2 class="font-semibold text-black">{{ __('main.support_rating') }}</h2>
             <p>{{ __('main.ticket_closed') }}</p>
             <p>{{ __('main.ticket_feedback_request') }}</p>
-            <a href="{{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $token]) }}"
+            <a href="{{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $ticket->token]) }}"
                 class="kt-btn kt-btn-outline-primary font-semibold rounded-full flex text-center justify-center w-fit">{{ __('main.rate_ticket_now') }}</a>
             <div>
                 <p class="text-sm" style="font-size: 12px; line-height: 0.7;">{{ __('main.if_button_not_working') }}</p>
-                <a href="{{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $token]) }}"
+                <a href="{{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $ticket->token]) }}"
                     style="font-size: 10px; color: #2563eb; word-break: break-all;">
-                    {{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $token]) }}
+                    {{ route('tickets.support_pro_rating', ['ticketId' => $ticket->uuid, 'token' => $ticket->token]) }}
                 </a>
             </div>
         </div>

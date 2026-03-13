@@ -5,27 +5,8 @@
 
 @section('content')
     <div class="w-full">
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($users) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_users') }}</small>
-            </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $users->where('role', 'superadmin')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.super_admin') }}</small>
-            </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600">{{ $users->where('role', 'admin')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.admin') }}</small>
-            </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $users->where('role', 'content_manager')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.content_manager') }}</small>
-            </div>
-        </div>
-
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.users') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -53,7 +34,7 @@
                         </thead>
                         <tbody>
                             @forelse($users as $user)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                                <tr id="row-{{ $user->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
                                     <td title="{{ $user->name }}">
                                         <div class="relative w-fit">
                                             @if ($user->photo && checkExistFile($user->photo))

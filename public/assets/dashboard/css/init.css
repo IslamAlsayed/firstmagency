@@ -39,6 +39,9 @@
     --warning: #ffc107;
     --info: #0dcaf0;
     --accent-color: #dc3545;
+    --header-color: #dddddd;
+    --header-text-color: #000000;
+    --footer-color: #dddddd;
 
     --font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
 
@@ -684,8 +687,8 @@ td {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--primary);
-    color: var(--light-color);
+    color: var(--header-text-color);
+    background: var(--header-color);
     border-bottom: 1px solid var(--hover-light-1);
     box-shadow: 0 2px 4px var(--hover-light-2), -2px 0 4px var(--hover-light-2), inset 2px 0 4px var(--hover-light-1);
     gap: 15px;
@@ -708,7 +711,7 @@ td {
         i,
         svg {
             color: var(--light-color);
-            color: var(--hover-light-7);
+            color: var(--header-text-color);
             transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
         }
 
@@ -717,17 +720,18 @@ td {
             height: 38px;
             padding: 8px;
             margin: auto;
-            background-color: var(--hover-light-1);
             border: none;
-            border-radius: 8px;
             cursor: pointer;
             display: flex;
+            flex-shrink: 0;
+            border-radius: 8px;
+            position: relative;
             align-items: center;
             justify-content: center;
+            color: var(--header-text-color);
+            background-color: var(--hover-light-1);
+            box-shadow: 0 5px 8px -3px var(--hover-dark-1);
             transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
-            color: var(--light-color);
-            position: relative;
-            flex-shrink: 0;
         }
 
         .action-button:hover {
@@ -931,7 +935,6 @@ td {
         }
 
         ul li:hover .menu-link {
-            font-weight: 600;
             padding-inline-start: 20px;
         }
 

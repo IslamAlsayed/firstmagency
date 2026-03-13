@@ -235,5 +235,21 @@ return [
 
     // Validation & Status
     'invalid_status' => 'Invalid Status',
-    'verification_incorrect' => 'Verification answer is incorrect.'
+    'verification_incorrect' => 'Verification answer is incorrect.',
+
+    // Ticket Rating
+    'help_us_improve' => 'Help us improve our support service',
+    'rate_this_ticket' => 'by rating this ticket',
+    'how_many_stars' => 'How many stars do you give this ticket?',
+    'write_comment' => 'Write a comment',
+    'comment_placeholder' => 'Tell us your thoughts and feedback...',
+    'max_chars' => 'You can write up to 1000 characters',
+    'rating_form_note' => 'This form is for rating technical support experience only.',
+    'rating_confirmation' => 'Thank you for your rating, it helps us improve our service',
+    'please_select_rating' => 'Please select a rating',
+    'rating_submitted_successfully' => 'Rating submitted successfully. Thank you for your feedback!',
+    'ticket_already_rated' => 'You have already rated this ticket.',
+    'thank_you' => 'Thank You',
+    'already_rated' => 'You have already rated this ticket',
+    'rating_helps_us' => 'Your rating helps us improve our services continuously',
 ];

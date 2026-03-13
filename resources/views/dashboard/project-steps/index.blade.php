@@ -5,20 +5,8 @@
 
 @section('content')
     <div class="w-full">
-        <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-gray-800">{{ count($projectSteps) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_project_steps') }}</small>
-            </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-blue-600">{{ count($projectSteps) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.project_steps') }}</small>
-            </div>
-        </div>
-
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-list mr-2"></i> {{ __('main.project_steps') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">

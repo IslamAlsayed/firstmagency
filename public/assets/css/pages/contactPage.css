@@ -47,6 +47,7 @@
                         direction: ltr;
                         border-radius: 10px;
                         border: 1px solid var(--dark-muted-color);
+                        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
 
                         &:has(input:focus),
                         &:has(select:focus),

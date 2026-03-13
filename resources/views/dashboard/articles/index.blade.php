@@ -6,38 +6,36 @@
 @section('content')
     <div class="w-full">
         <!-- {{ __('main.statistics') }} -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($articles) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_articles') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $allItems }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.articles')]) }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $articles->where('status', 'published')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.published') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-published">{{ $published }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.published') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600">{{ $articles->where('status', 'draft')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.draft') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-yellow-600" id="stat-draft">{{ $draft }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.draft') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $articles->where('status', 'archived')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.archived') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-red-600" id="stat-archived">{{ $archived }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.archived') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
-                <div class="flex justify-between items-center p-4 border-b border-gray-200">
-                    <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-newspaper mr-2"></i> {{ __('main.articles') }}</h5>
+            <div class="flex justify-between items-center p-4 border-gray-200">
+                <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-newspaper mr-2"></i> {{ __('main.articles') }}</h5>
 
-                    <div class="flex justify-between items-center gap-4">
-                        <input type="text" id="searchBox"
-                            class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
-                        <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary">
-                            {{ __('main.create_article') }}
-                        </a>
-                    </div>
+                <div class="flex justify-between items-center gap-4">
+                    <input type="text" id="searchBox"
+                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
+                    <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary">
+                        {{ __('main.create_article') }}
+                    </a>
                 </div>
             </div>
             <div class="scroll-container">
@@ -58,7 +56,8 @@
                         </thead>
                         <tbody>
                             @forelse($articles as $article)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                                <tr id="row-{{ $article->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-status="{{ $article->status }}"
+                                    data-active="{{ (int) $article->is_active }}">
                                     <td title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}" class="p-4">
                                         <div class="relative w-fit">
                                             @if ($article->image && checkExistFile($article->image))

@@ -16,6 +16,9 @@
             --warning: {{ $settings->warning_color ?? '#ffc107' }};
             --info: {{ $settings->info_color ?? '#0dcaf0' }};
             --accent-color: {{ $settings->accent_color ?? '#dc3545' }};
+            --header-color: {{ $settings->header_color ?? '#ffffff' }};
+            --header-text-color: {{ $settings->header_text_color ?? '#f7f7f7' }};
+            --footer-color: {{ $settings->footer_color ?? '#2d3748' }};
 
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}";
         }

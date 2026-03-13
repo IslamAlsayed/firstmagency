@@ -6,19 +6,23 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-gray-800">{{ count($featuresHosting) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_features_hostings') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800">{{ $allItems }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.features_hostings')]) }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div class="text-2xl font-bold text-blue-600">{{ count($featuresHosting) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.features_hostings') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-2xl font-bold text-blue-600">{{ $allItemActive }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_active_types', ['types' => __('main.features_hostings')]) }}</small>
+            </div>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="text-2xl font-bold text-blue-600">{{ $allItemFeature }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_feature_types', ['types' => __('main.features_hostings')]) }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-list mr-2"></i> {{ __('main.features_hostings') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -37,9 +41,10 @@
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}
-                                    ({{ app()->getLocale() === 'ar' ? 'AR' : 'EN' }})</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.feature') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
@@ -71,6 +76,22 @@
                                             <span class="text-gray-400 italic">N/A</span>
                                         @endif
                                     </td>
+                                    <td class="p-4 text-sm">
+                                        @include('dashboard.components.toggle-hold', [
+                                            'modelId' => $feature->id,
+                                            'field' => 'is_active',
+                                            'value' => (bool) $feature->is_active,
+                                            'modelClass' => 'featuresHosting',
+                                        ])
+                                    </td>
+                                    <td class="p-4 text-sm">
+                                        @include('dashboard.components.toggle-hold', [
+                                            'modelId' => $feature->id,
+                                            'field' => 'is_featured',
+                                            'value' => (bool) $feature->is_featured,
+                                            'modelClass' => 'featuresHosting',
+                                        ])
+                                    </td>
                                     <td class="p-4 text-sm text-gray-500">{{ $feature->created_at?->format('d/m/Y') ?? '--' }}</td>
                                     <td class="p-4 text-sm">
                                         @include('dashboard.components.permissions-actions', [
@@ -99,3 +120,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @include('dashboard.components.toggle-hold-script')
+@endpush

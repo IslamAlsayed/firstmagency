@@ -29,47 +29,24 @@ trait GlobalDestroyTrait
         // Check authorization
         $this->authorize('delete', $model);
 
+        // Store model data before deletion for notification
+        $modelData = [
+            'id' => $model->id,
+            'uuid' => $model->uuid ?? null,
+            'name' => class_basename($modelClass),
+        ];
+
         // Delete the model
-        // $model->delete();
+        $model->delete();
 
-        if (request()->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'status' => 'success',
-                'message' => __('messages.type_deleted', ['type' => $this->getModelTranslationName()]),
-            ], 200);
+        // Publish Ably event for model deletion (if model has UUID like Ticket)
+        if (isset($model->uuid) && method_exists($this, 'publishToAbly')) {
+            $this->publishToAbly('ticket-updates', 'ticket-deleted', [
+                'id' => $modelData['id'],
+                'uuid' => $modelData['uuid'],
+                'model' => $modelData['name'],
+            ]);
         }
-
-        return redirect()->back()->withSuccess(__('messages.type_deleted', ['type' => $this->getModelTranslationName()]));
-    }
-
-    /**
-     * Permanently delete a resource and return JSON for AJAX or redirect for traditional requests
-     * 
-     * @param $id - The ID of the resource to force delete
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
-     */
-    public function forceDestroy($id)
-    {
-        $modelClass = $this->getModelClass();
-        $model = $modelClass::withTrashed()->find($id);
-
-        if (!$model) {
-            if (request()->wantsJson()) {
-                return response()->json([
-                    'success' => false,
-                    'status' => 'error',
-                    'message' => __('messages.type_not_found', ['type' => $this->getModelTranslationName()]),
-                ], 404);
-            }
-            return redirect()->back()->withError(__('messages.type_not_found', ['type' => $this->getModelTranslationName()]));
-        }
-
-        // Check authorization
-        $this->authorize('forceDelete', $model);
-
-        // Permanently delete the model
-        // $model->forceDelete();
 
         if (request()->wantsJson()) {
             return response()->json([

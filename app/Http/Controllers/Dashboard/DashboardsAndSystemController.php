@@ -19,7 +19,10 @@ class DashboardsAndSystemController extends Controller
     {
         $this->authorize('viewAny', DashboardsAndSystem::class);
         $dashboardsAndSystems = DashboardsAndSystem::with(['creator'])->latest()->paginate(15);
-        return view('dashboard.dashboards-and-systems.index', compact('dashboardsAndSystems'));
+        $allItems = DashboardsAndSystem::count() ?? 0;
+        $operatingSystemsCount = DashboardsAndSystem::operatingSystems()->count() ?? 0;
+        $dashboardsAndAppsCount = DashboardsAndSystem::dashboardsApps()->count() ?? 0;
+        return view('dashboard.dashboards-and-systems.index', compact('dashboardsAndSystems', 'allItems', 'operatingSystemsCount', 'dashboardsAndAppsCount'));
     }
 
     public function create()

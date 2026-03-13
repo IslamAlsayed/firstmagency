@@ -6,27 +6,27 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($officialDomains) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_official_domains') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($officialDomains) }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_official_domains') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $officialDomains->where('is_active', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.active') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $officialDomains->where('is_active', true)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $officialDomains->where('is_active', false)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.inactive') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $officialDomains->where('is_active', false)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-blue-600">{{ $officialDomains->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.featured') }}</small>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-globe mr-2"></i> {{ __('main.official_domains') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -54,7 +54,8 @@
                     </thead>
                     <tbody>
                         @forelse($officialDomains as $officialDomain)
-                            <tr id="row-{{ $officialDomain->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
+                            <tr id="row-{{ $officialDomain->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
+                                data-active="{{ (int) $officialDomain->is_active }}">
                                 <td class="p-4 text-sm text-gray-600">{{ $officialDomain->title ?? '' }}</td>
                                 <td class="p-4 text-sm text-gray-600">{{ $officialDomain->translations[app()->getLocale()]['badge'] ?? '' }}</td>
                                 <td class="p-4 text-sm">

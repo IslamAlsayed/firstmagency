@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(1);
-            $table->boolean('is_feature')->default(0);
+            $table->boolean('is_featured')->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();

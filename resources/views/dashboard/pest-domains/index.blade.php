@@ -6,27 +6,27 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($pestDomains) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_pest_domains') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($pestDomains) }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_pest_domains') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $pestDomains->where('is_active', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.active') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $pestDomains->where('is_active', true)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $pestDomains->where('is_active', false)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.inactive') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $pestDomains->where('is_active', false)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-blue-600">{{ $pestDomains->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.featured') }}</small>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-globe mr-2"></i> {{ __('main.pest_domains') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -55,7 +55,8 @@
                     </thead>
                     <tbody>
                         @forelse($pestDomains as $pestDomain)
-                            <tr id="row-{{ $pestDomain->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
+                            <tr id="row-{{ $pestDomain->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
+                                data-active="{{ (int) $pestDomain->is_active }}">
                                 <td title="{{ $pestDomain->alt_text ?? '' }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($pestDomain->image && checkExistFile($pestDomain->image))

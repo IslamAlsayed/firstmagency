@@ -34,6 +34,7 @@ Route::put('/tickets/messages/{messageId}', [TicketController::class, 'updateMes
 Route::delete('/tickets/messages/{messageId}', [TicketController::class, 'deleteMessage'])->name('tickets.messages.delete');
 Route::post('/tickets/generate-verification', [TicketController::class, 'generateNewVerification'])->name('tickets.generate-verification');
 Route::get('/tickets/support_pro_rating/{ticketId}/{token}', [TicketController::class, 'supportProRating'])->name('tickets.support_pro_rating');
+Route::post('/tickets/rating/{ticketId}/{token}', [TicketController::class, 'storeRating'])->name('tickets.store-rating');
 Route::resource('/tickets', TicketController::class)->names('tickets');
 Route::get('/ably-test', [TicketController::class, 'ablyTest'])->name('ably-test');
 

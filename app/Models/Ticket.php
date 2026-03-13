@@ -11,6 +11,7 @@ class Ticket extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'uuid',
         'name',
         'email',
         'phone',
@@ -22,6 +23,7 @@ class Ticket extends Model
         'user_id',
         'is_active',
         'assigned_to',
+        'token'
     ];
 
     protected $casts = [
@@ -37,6 +39,9 @@ class Ticket extends Model
 
         static::creating(function ($model) {
             $model->uuid = mt_rand(100000000, 999999999);
+            if (!$model->token) {
+                $model->token = bin2hex(random_bytes(32));
+            }
         });
 
         static::updating(function ($model) {
@@ -59,5 +64,15 @@ class Ticket extends Model
     public function messages()
     {
         return $this->hasMany(TicketMessage::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(TicketRating::class);
+    }
+
+    public function rating()
+    {
+        return $this->hasOne(TicketRating::class)->latest();
     }
 }

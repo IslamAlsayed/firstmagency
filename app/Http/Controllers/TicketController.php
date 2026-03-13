@@ -6,8 +6,10 @@ use App\Http\Requests\Ticket\StoreMessageRequest;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Http\Requests\Ticket\UpdateMessageRequest;
 use App\Mail\TicketCreatedMail;
+use App\Mail\TicketThankForRatingMail;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
+use App\Models\TicketRating;
 use App\Traits\AblyService;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
@@ -55,6 +57,21 @@ class TicketController extends Controller
 
         // Send email to customer
         Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
+
+        // Publish new ticket event to Ably
+        $ticketData = [
+            'id' => $ticket->id,
+            'uuid' => $ticket->uuid,
+            'name' => $ticket->name,
+            'email' => $ticket->email,
+            'subject' => $ticket->subject,
+            'department' => $ticket->department,
+            'status' => $ticket->status,
+            'priority' => $ticket->priority,
+            'created_at' => $ticket->created_at->format('Y-m-d H:i:s'),
+            'created_at_human' => $ticket->created_at->diffForHumans(),
+        ];
+        $this->publishToAbly('dashboard-tickets', 'new-ticket-created', $ticketData);
 
         session()->forget('ticket_verification');
         return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.type_created_successfully', ['type' => __('main.ticket')]));
@@ -179,6 +196,44 @@ class TicketController extends Controller
         $ticket = Ticket::where('uuid', $ticketId)->where('token', $token)->first();
         if (!$ticket)
             return view('website.tickets.invalid-rating-link');
-        return view('website.tickets.support_pro_rating', compact('ticket'));
+
+        // Check if already rated
+        $existingRating = $ticket->rating;
+        if ($existingRating)
+            return view('website.tickets.rating-already-submitted', compact('ticket', 'existingRating'));
+
+        return view('website.tickets.rating-form', compact('ticket'));
+    }
+
+    public function storeRating(Request $request, $ticketId, $token)
+    {
+        $ticket = Ticket::where('uuid', $ticketId)->where('token', $token)->first();
+        if (!$ticket)
+            return redirect()->route('tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+
+        // Check if already rated
+        if ($ticket->rating)
+            return redirect()->route('tickets.show', $ticket->uuid)->withError(__('messages.ticket_already_rated'));
+
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000',
+        ]);
+
+        // Create rating
+        $rating = $ticket->ratings()->create([
+            'rating' => $validated['rating'],
+            'comment' => $validated['comment'] ?? null,
+            'email' => $ticket->email,
+            'token' => TicketRating::generateToken(),
+            'rated_at' => now(),
+        ]);
+
+        // Send confirmation email
+        // Mail::to($ticket->email)->send(new TicketRatingMail($ticket, $rating));
+        Mail::to($ticket->email)->send(new TicketThankForRatingMail($ticket, $rating));
+
+        return redirect()->route('tickets.support_pro_rating', [$ticket->uuid, $ticket->token])->withSuccess(__('messages.rating_submitted_successfully'));
+        // return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.rating_submitted_successfully'));
     }
 }

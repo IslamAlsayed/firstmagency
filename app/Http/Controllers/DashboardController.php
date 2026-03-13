@@ -159,7 +159,7 @@ class DashboardController extends Controller
 
         $this->authorize('update', $model);
 
-        if (!in_array($field, array_column(AvailableToggleFields::cases(), 'value'))) {
+        if (!in_array($field, $this->availableOption)) {
             return response()->json([
                 'success' => false,
                 'status' => 'error',
@@ -214,8 +214,7 @@ class DashboardController extends Controller
 
         $modelName = strtolower(class_basename($modelClass));
 
-        // $delete = $model->delete();
-        $delete = true;
+        $delete = $model->delete();
 
         if ($delete) {
             return redirect()->route("$models.index")->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]));
@@ -249,7 +248,7 @@ class DashboardController extends Controller
         $this->authorize('forceDelete', $model);
 
         $modelName = strtolower(class_basename($modelClass));
-        // $model->forceDelete();
+        $model->forceDelete();
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -298,7 +297,11 @@ class DashboardController extends Controller
 
             if (strtolower($status) == TicketEnums::CLOSED->value) {
                 // Generate unique token for rating and save to database
-                $model->update(['token' => Str::random(40)]);
+                $token = Str::random(40);
+                $model->update(['token' => $token]);
+
+                // Reload model to get the updated token
+                $model->refresh();
 
                 // Send automated email to customer asking for feedback
                 Mail::to($model->email)->send(new TicketRatingMail($model));

@@ -54,19 +54,19 @@
     <section class="ticket-show-sections relative">
         <article>
             <div class="flex items-center justify-between gap-4">
-                <h2 class="font-semibold">تذكرة الدعم</h2>
-                <button class="btn-link print-btn" onclick="window.print()">طباعة / PDF</button>
+                <h2 class="font-semibold">{{ __('main.support_ticket') }}</h2>
+                <button class="btn-link print-btn" onclick="window.print()">{{ __('main.print_pdf') }}</button>
             </div>
         </article>
 
         <article>
             <div class="articles grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="article-item">
-                    <div class="text-sm">رقم التذكرة</div>
+                    <div class="text-sm">{{ __('main.ticket_number') }}</div>
                     <div class="font-semibold">{{ $ticket->uuid }}</div>
                 </div>
                 <div class="article-item">
-                    <div class="text-sm">الحالة</div>
+                    <div class="text-sm">{{ __('main.status') }}</div>
                     <div class="font-semibold">
                         <span id="ticket-status-badge" class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
                             {{ __('main.' . $ticket->status) }}
@@ -74,19 +74,19 @@
                     </div>
                 </div>
                 <div class="article-item">
-                    <div class="text-sm">القسم</div>
+                    <div class="text-sm">{{ __('main.department') }}</div>
                     <div class="font-semibold" id="ticket-department">{{ __('main.' . $ticket->department) }}</div>
                 </div>
                 <div class="article-item">
-                    <div class="text-sm">رقم الواتساب</div>
+                    <div class="text-sm">{{ __('main.whatsapp') }}</div>
                     <div class="font-semibold">{{ $ticket->phone }}</div>
                 </div>
                 <div class="article-item">
-                    <div class="text-sm">العنوان</div>
+                    <div class="text-sm">{{ __('main.subject') }}</div>
                     <div class="font-semibold">{{ $ticket->subject }}</div>
                 </div>
                 <div class="article-item">
-                    <div class="text-sm">التاريخ</div>
+                    <div class="text-sm">{{ __('main.date') }}</div>
                     <div class="font-semibold">{{ $ticket->created_at->format('d/m/Y H:i') }} - {{ $ticket->created_at->diffForHumans() }}</div>
                 </div>
             </div>
@@ -100,7 +100,8 @@
                             <div class="flex gap-4">
                                 <div class="avatar">
                                     <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                        <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="أيقونة العميل" class="fal-content-img">
+                                        <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
+                                            class="fal-content-img">
                                     </a>
                                 </div>
                                 <div class="body">
@@ -109,7 +110,7 @@
                                         <span class="time">{{ $message->created_at->format('d/m/Y H:i') }} - {{ $message->created_at->diffForHumans() }}</span>
                                         <span
                                             class="text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800' }}">
-                                            {{ $message->sender_type == 'customer' ? 'عميل' : 'دعم' }}
+                                            {{ $message->sender_type == 'customer' ? __('main.customer') : __('main.support') }}
                                         </span>
                                     </div>
                                     <div class="content">{!! $message->message !!}</div>
@@ -157,7 +158,7 @@
             </article>
         @else
             <article>
-                <p class="text-gray-500 text-center py-4">لا توجد رسائل حتى الآن</p>
+                <p class="text-gray-500 text-center py-4">{{ __('main.no_messages_yet') }}</p>
             </article>
         @endif
 
@@ -263,12 +264,40 @@
     @include('dashboard.components.messages-action')
 
     <script>
+        // Translation variables for JavaScript
+        const translations = {
+            customer: '{{ __('main.customer') }}',
+            support: '{{ __('main.support') }}',
+            clientIcon: '{{ __('main.client_icon') }}'
+        };
+
         // Initialize Ably for real-time ticket updates
         const ticketUpdates = new Ably.Realtime({
             key: '{{ config('app.ably_key') }}',
             logLevel: 1
         });
         const ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
+
+        // Subscribe to ticket deletion events
+        ticketUpdatesChannel.subscribe('ticket-deleted', (ablyMessage) => {
+            const deletedData = ablyMessage.data;
+
+            // If the deleted ticket is the current one, redirect user
+            if (deletedData.uuid === '{{ $ticket->uuid }}') {
+                // Show notification
+                if (window.showToast && typeof window.showToast === 'function') {
+                    window.showToast({
+                        type: 'warning',
+                        message: '{{ __('main.ticket_deleted_by_admin') }}'
+                    });
+                }
+
+                // Redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '{{ route('tickets.inquiry') }}';
+                }, 2000);
+            }
+        });
 
         // Subscribe to new support replies
         ticketUpdatesChannel.subscribe('new-support-reply', (ablyMessage) => {
@@ -376,7 +405,7 @@
                     <div class="flex gap-4">
                         <div class="avatar">
                             <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="أيقونة العميل" class="fal-content-img">
+                                <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="${translations.clientIcon}" class="fal-content-img">
                             </a>
                         </div>
                         <div class="body">
@@ -384,18 +413,18 @@
                                 <span class="who font-semibold">${messageData.ticket_name || messageData.user_name}</span>
                                 <span class="time">${messageData.formatted_date} - ${messageData.human_readable_date}</span>
                                 <span class="text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
-                                    ${messageData.sender_type == 'customer' ? 'عميل' : 'دعم'}
+                                    ${messageData.sender_type == 'customer' ? translations.customer : translations.support}
                                 </span>
                             </div>
                             <div class="content">${messageData.message}</div>
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(attachment => `
-                                                                                                            <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
-                                                                                                                <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                {{ __('main.attachment') }}
-                                                                                                            </div>
-                                                                                                        `).join('')
+                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
+                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                            {{ __('main.attachment') }}
+                                                                                                                        </div>
+                                                                                                                    `).join('')
                                     : ''
                                 }
                             </div>

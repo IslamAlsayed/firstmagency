@@ -12,7 +12,7 @@
         }
 
         * {
-            font-family: var(----font-family) !important;
+            font-family: var(--font-family) !important;
         }
     </style>
 
@@ -29,10 +29,10 @@
 <body>
     <div class="kt-card bg-white text-gray-500" style="max-width: 500px; margin: auto; border-color: var(--color-gray-200);">
         <div class="p-4">
-            <h2 class="font-semibold mb-3">رابط التقييم غير صالح أو منتهي</h2>
-            <p class="text-gray-600 mb-3">يرجى التحقق من البريد الإلكتروني والرابط الذي تم إرساله لك.</p>
+            <h2 class="font-semibold mb-3">{{ __('main.invalid_rating_link') }}</h2>
+            <p class="text-gray-600 mb-3">{{ __('main.invalid_rating_description') }}</p>
             <a href="{{ route('tickets.inquiry') }}" class="kt-btn kt-btn-outline-primary rounded-full font-semibold">
-                <i class="fas fa-arrow-left"></i> العودة للاستفسار عن التذاكر
+                <i class="fas fa-arrow-left"></i> {{ __('main.back_to_inquiry') }}
             </a>
         </div>
     </div>

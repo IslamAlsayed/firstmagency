@@ -6,27 +6,27 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($faqs) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_faqs') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($faqs) }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_faqs') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $faqs->where('is_active', 1)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.active') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $faqs->where('is_active', 1)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $faqs->unique('category')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.categories') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-blue-600" id="stat-categories">{{ $faqs->unique('category')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.categories') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-orange-600">{{ $faqs->where('is_active', 0)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.inactive') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-orange-600" id="stat-inactive">{{ $faqs->where('is_active', 0)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-question-circle mr-2"></i> {{ __('main.faqs') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -54,8 +54,9 @@
                         </thead>
                         <tbody>
                             @forelse($faqs as $faq)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition searchable-row"
-                                    data-search="{{ strtolower($faq->question . ' ' . $faq->question_ar . ' ' . $faq->category) }}">
+                                <tr id="row-{{ $faq->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition searchable-row"
+                                    data-search="{{ strtolower($faq->question . ' ' . $faq->question_ar . ' ' . $faq->category) }}"
+                                    data-active="{{ (int) $faq->is_active }}">
                                     <td class="p-4">
                                         <strong class="text-sm text-gray-800 block">
                                             {{ limitedText($faq->question, 50) }}

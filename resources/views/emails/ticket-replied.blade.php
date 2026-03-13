@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html class="h-full" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
         }
 
         * {
-            font-family: var(----font-family) !important;
+            font-family: var(--font-family) !important;
         }
     </style>
     <!-- Tailwind CSS -->

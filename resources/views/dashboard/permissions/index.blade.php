@@ -6,23 +6,23 @@
 @section('content')
     <div class="w-full">
         <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($permissions) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_permissions') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800">{{ $allItems }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_permissions') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $permissions->where('guard_name', 'web')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.web_guard') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-blue-600">{{ $webPermissions }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.web_guard') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-purple-600">{{ $permissions->where('guard_name', 'api')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.api_guard') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-purple-600">{{ $apiPermissions }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.api_guard') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-key mr-2"></i> {{ __('main.permissions') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">

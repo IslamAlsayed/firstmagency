@@ -25,7 +25,7 @@ class TicketRepliedMail extends Mailable
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), config('mail.from.name')),
-            subject: 'تم استلام تذكرتك - ' . $this->messageRow->ticket->uuid,
+            subject: __('main.ticket_received_mail_subject', ['uuid' => $this->messageRow->ticket->uuid]),
         );
     }
 

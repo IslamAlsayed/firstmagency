@@ -27,6 +27,9 @@ class SettingRequest extends FormRequest
             'warning_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
             'info_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
             'accent_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'header_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'header_text_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'footer_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
 
             'main_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
             'dark_main_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',

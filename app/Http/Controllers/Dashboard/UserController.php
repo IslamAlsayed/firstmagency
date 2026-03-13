@@ -21,7 +21,11 @@ class UserController extends Controller
     {
         $this->authorize('viewAny', User::class);
         $users = User::all();
-        return view('dashboard.users.index', compact('users'));
+        $allItems = User::count();
+        $superAdmins = $users->where('role', 'superadmin')->count();
+        $admins = $users->where('role', 'admin')->count();
+        $contentManagers = $users->where('role', 'content_manager')->count();
+        return view('dashboard.users.index', compact('users', 'allItems', 'superAdmins', 'admins', 'contentManagers'));
     }
 
     public function create()

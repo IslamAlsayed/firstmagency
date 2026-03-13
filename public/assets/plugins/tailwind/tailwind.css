@@ -2797,6 +2797,10 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
+    .grid-cols-5 {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
     .grid-rows-1 {
         grid-template-rows: repeat(1, minmax(0, 1fr));
     }
@@ -3149,6 +3153,18 @@
 
     .rounded-\[9px\] {
         border-radius: 9px;
+    }
+
+    .rounded-\[10px\] {
+        border-radius: 10px;
+    }
+
+    .rounded-\[12px\] {
+        border-radius: 12px;
+    }
+
+    .rounded-\[15px\] {
+        border-radius: 15px;
     }
 
     .rounded-\[30px\] {
@@ -6738,6 +6754,12 @@
         }
     }
 
+    .sm\:grid-cols-5 {
+        @media (width >=40rem) {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+    }
+
     .sm\:flex-row {
         @media (width >=40rem) {
             flex-direction: row;
@@ -7906,6 +7928,12 @@
     .xl\:grid-cols-4 {
         @media (width >=80rem) {
             grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    .xl\:grid-cols-5 {
+        @media (width >=80rem) {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
         }
     }
 

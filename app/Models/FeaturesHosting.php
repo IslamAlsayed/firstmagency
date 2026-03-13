@@ -19,7 +19,7 @@ class FeaturesHosting extends Model
         'image',
         'order',
         'is_active',
-        'is_feature',
+        'is_featured',
         'created_by',
         'updated_by',
     ];
@@ -49,6 +49,16 @@ class FeaturesHosting extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('order', 'asc');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeFeature($query)
+    {
+        return $query->where('is_featured', true);
     }
 
     public function creator()

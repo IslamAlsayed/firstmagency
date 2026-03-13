@@ -5,7 +5,7 @@
 
 @section('content')
     <!-- {{ __('main.statistics') }} -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <div class="bg-primary rounded-lg shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
@@ -56,7 +56,7 @@
     </div>
 
     <!-- {{ __('main.account_info') }} -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <!-- {{ __('main.account_info') }} -->
         <div class="bg-gray-200 rounded-lg shadow p-6">
             <div class="flex items-center gap-3 mb-6 pb-4 border-b">

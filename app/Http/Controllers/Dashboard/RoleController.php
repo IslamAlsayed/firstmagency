@@ -18,7 +18,10 @@ class RoleController extends Controller
     {
         $this->authorize('viewAny', Role::class);
         $roles = Role::all();
-        return view('dashboard.roles.index', compact('roles'));
+        $allItems = Role::count();
+        $totalPermissions = $roles->sum(fn($r) => $r->permissions->count());
+        $rolesWithPermissions = $roles->filter(fn($r) => $r->permissions->count() > 0)->count();
+        return view('dashboard.roles.index', compact('roles', 'allItems', 'totalPermissions', 'rolesWithPermissions'));
     }
 
     public function create()

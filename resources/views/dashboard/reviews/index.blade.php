@@ -6,30 +6,30 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ $reviews->total() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.reviews') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $reviews->total() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.reviews') }}</small>
             </div>
             <div class="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-200">
                 {{-- <div class="text-2xl font-bold text-yellow-600">⏳ {{ $pendingCount }}</div> --}}
-                <div class="text-2xl font-bold text-yellow-600"> <i class="fas fa-clock text-yellow-500"></i> {{ $pendingCount }}</div>
-                <small class="text-primary font-semibold">{{ __('main.pending') }}</small>
+                <div class="text-2xl font-bold text-yellow-600" id="stat-pending"> <i class="fas fa-clock text-yellow-500"></i> {{ $pendingCount }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.pending') }}</small>
             </div>
             <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
                 {{-- <div class="text-2xl font-bold text-green-600">✅ {{ $approvedCount }}</div> --}}
-                <div class="text-2xl font-bold text-green-600"> <i class="fas fa-check-circle text-green-600"></i> {{ $approvedCount }}</div>
-                <small class="text-primary font-semibold">{{ __('main.approved') }}</small>
+                <div class="text-2xl font-bold text-green-600" id="stat-approved"> <i class="fas fa-check-circle text-green-600"></i> {{ $approvedCount }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.approved') }}</small>
             </div>
             <div class="text-center p-4 bg-red-50 rounded-lg border border-red-200">
                 {{-- <div class="text-2xl font-bold text-red-600">❌ {{ $rejectedCount }}</div> --}}
-                <div class="text-2xl font-bold text-red-600"> <i class="fas fa-times-circle text-red-600"></i> {{ $rejectedCount }}</div>
-                <small class="text-primary font-semibold">{{ __('main.rejected') }}</small>
+                <div class="text-2xl font-bold text-red-600" id="stat-rejected"> <i class="fas fa-times-circle text-red-600"></i> {{ $rejectedCount }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.rejected') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800">⭐ {{ __('main.reviews') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -57,7 +57,7 @@
                         </thead>
                         <tbody>
                             @forelse($reviews as $review)
-                                <tr id="row-{{ $review->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
+                                <tr id="row-{{ $review->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-status="{{ $review->status }}">
                                     <td class="px-6 py-4 text-gray-800 font-medium">
                                         {{ limitedText($review->name, 25) }}
                                     </td>

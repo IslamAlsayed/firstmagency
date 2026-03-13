@@ -6,27 +6,27 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ count($tickets) }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_types', ['types' => __('main.tickets')]) }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($tickets) }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.tickets')]) }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $tickets->where('status', 'open')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.open') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-blue-600" id="stat-open">{{ $tickets->where('status', 'open')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.open') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600">{{ $tickets->where('status', 'in_progress')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.in_progress') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-yellow-600" id="stat-in_progress">{{ $tickets->where('status', 'in_progress')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.in_progress') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $tickets->where('priority', 'urgent')->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.urgent') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-red-600" id="stat-urgent">{{ $tickets->where('priority', 'urgent')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.urgent') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-ticket-alt mr-2"></i> {{ __('main.tickets') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -54,7 +54,8 @@
                         </thead>
                         <tbody>
                             @forelse($tickets as $ticket)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition" id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}"
+                                    data-priority="{{ $ticket->priority }}">
                                     <td class="p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
                                     <td class="p-4 text-sm text-gray-600">
                                         <p>{{ $ticket->name }}</p>
@@ -81,33 +82,35 @@
                                             {{ __('main.' . $ticket->status) }}
                                         </span>
                                     </td>
-                                    <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                        @include('dashboard.components.status-actions', [
-                                            'record' => $ticket,
-                                            'models' => 'tickets',
-                                            'modelClass' => 'ticket',
-                                            'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
-                                        ])
-                                        <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}"
-                                            class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white" title="{{ __('main.send_copy_to_customer') }}">
-                                            <i class="fas fa-envelope text-white"></i>
-                                        </a>
-                                        <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}"
-                                            class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white" title="{{ __('main.support_reply') }}">
-                                            @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
-                                                {!! $text ?? __('main.chat') !!}
-                                            @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')
-                                                <i class="fas fa-comments text-white"></i>
-                                            @else
-                                                <i class="fas fa-comments text-white"></i>
-                                                {!! $text ?? __('main.chat') !!}
-                                            @endif
-                                        </a>
+                                    <td class="p-4 text-sm">
+                                        <div class="flex items-center gap-2 flex-wrap">
+                                            @include('dashboard.components.status-actions', [
+                                                'record' => $ticket,
+                                                'models' => 'tickets',
+                                                'modelClass' => 'ticket',
+                                                'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
+                                            ])
+                                            <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}"
+                                                class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white" title="{{ __('main.send_copy_to_customer') }}">
+                                                <i class="fas fa-envelope text-white"></i>
+                                            </a>
+                                            <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}"
+                                                class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white" title="{{ __('main.support_reply') }}">
+                                                @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
+                                                    {!! $text ?? __('main.chat') !!}
+                                                @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')
+                                                    <i class="fas fa-comments text-white"></i>
+                                                @else
+                                                    <i class="fas fa-comments text-white"></i>
+                                                    {!! $text ?? __('main.chat') !!}
+                                                @endif
+                                            </a>
 
-                                        @include('dashboard.components.permissions-actions', [
-                                            'record' => $ticket,
-                                            'models' => 'tickets',
-                                        ])
+                                            @include('dashboard.components.permissions-actions', [
+                                                'record' => $ticket,
+                                                'models' => 'tickets',
+                                            ])
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -130,3 +133,117 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Ably connection for real-time updates
+            const apiKey = '{{ config('app.ably_key') }}';
+
+            const realtime = new Ably.Realtime(apiKey);
+            const channel = realtime.channels.get('dashboard-tickets');
+            channel.subscribe('new-ticket-created', function(message) {
+                const newTicket = message.data;
+                addNewTicketToTable(newTicket);
+            });
+
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', function() {
+                realtime?.close();
+            });
+        });
+
+
+        function addNewTicketToTable(ticket) {
+            const tbody = document.querySelector('table tbody');
+
+            if (!tbody) return;
+
+            // Remove empty message if exists
+            const emptyRow = tbody.querySelector('tr:has(td[colspan="8"])');
+            if (emptyRow) {
+                emptyRow.remove();
+            }
+
+            // Fetch the full row HTML from the server
+            fetch(`/api/tickets/${ticket.id}/row-html`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data.success) {
+                        throw new Error(data.error || 'Failed to fetch row HTML');
+                    }
+
+                    // Create new row from server HTML
+                    const newRow = document.createElement('tr');
+                    newRow.id = 'row-' + ticket.id;
+                    newRow.className = 'new-ticket-row';
+                    newRow.style.animation = 'slideInDown 0.3s ease-out';
+                    newRow.innerHTML = data.html;
+
+                    // Insert at the beginning of tbody
+                    tbody.insertBefore(newRow, tbody.firstChild);
+
+                    // Update statistics
+                    updateStatisticsOnAdd(ticket.status, ticket.priority);
+
+                    // Highlight the new row
+                    highlightNewRow(newRow);
+                })
+                .catch(error => console.error('Error fetching ticket row:', error));
+        }
+
+        function updateStatisticsOnAdd(status, priority) {
+            // Increase total
+            const $total = document.getElementById('stat-total');
+            if ($total) {
+                let total = parseInt($total.textContent) || 0;
+                $total.textContent = total + 1;
+            }
+
+            // Increase status-specific count
+            const $statusStat = document.getElementById('stat-' + status);
+            if ($statusStat) {
+                let count = parseInt($statusStat.textContent) || 0;
+                $statusStat.textContent = count + 1;
+            }
+
+            // Increase urgent priority count
+            if (priority === 'urgent') {
+                const $urgentStat = document.getElementById('stat-urgent');
+                if ($urgentStat) {
+                    let count = parseInt($urgentStat.textContent) || 0;
+                    $urgentStat.textContent = count + 1;
+                }
+            }
+        }
+
+        function highlightNewRow(row) {
+            row.style.backgroundColor = '#d1fae5';
+            setTimeout(() => {
+                row.style.transition = 'background-color 0.5s ease-out';
+                row.style.backgroundColor = '';
+            }, 2000);
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+        document.head.appendChild(style);
+    </script>
+@endpush

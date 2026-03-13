@@ -19,7 +19,10 @@ class FeaturesHostingController extends Controller
     {
         $this->authorize('viewAny', FeaturesHosting::class);
         $featuresHosting = FeaturesHosting::with(['creator'])->latest()->paginate(15);
-        return view('dashboard.features-hosting.index', compact('featuresHosting'));
+        $allItems = FeaturesHosting::count() ?? 0;
+        $allItemActive = FeaturesHosting::active()->count() ?? 0;
+        $allItemFeature = FeaturesHosting::feature()->count() ?? 0;
+        return view('dashboard.features-hosting.index', compact('featuresHosting', 'allItems', 'allItemActive', 'allItemFeature'));
     }
 
     public function create()

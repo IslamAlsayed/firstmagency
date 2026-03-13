@@ -20,7 +20,11 @@ class ArticleController extends Controller
     {
         $this->authorize('viewAny', Article::class);
         $articles = Article::with(['category', 'creator'])->latest()->paginate(15);
-        return view('dashboard.articles.index', compact('articles'));
+        $allItems = Article::count() ?? 0;
+        $published = Article::where('status', 'published')->count() ?? 0;
+        $draft = Article::where('status', 'draft')->count() ?? 0;
+        $archived = Article::where('status', 'archived')->count() ?? 0;
+        return view('dashboard.articles.index', compact('articles', 'allItems', 'published', 'draft', 'archived'));
     }
 
     public function create()

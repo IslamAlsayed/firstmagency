@@ -19,7 +19,12 @@ class HostingPackageController extends Controller
     {
         $this->authorize('viewAny', HostingPackage::class);
         $hostingPackages = HostingPackage::with(['creator'])->latest()->paginate(15);
-        return view('dashboard.hosting-packages.index', compact('hostingPackages'));
+        $allItems = HostingPackage::count() ?? 0;
+        $hostingCount = HostingPackage::where('category', 'hosting')->count() ?? 0;
+        $resellerCount = HostingPackage::where('category', 'reseller')->count() ?? 0;
+        $vpsCount = HostingPackage::where('category', 'vps')->count() ?? 0;
+        $serversCount = HostingPackage::where('category', 'servers')->count() ?? 0;
+        return view('dashboard.hosting-packages.index', compact('hostingPackages', 'allItems', 'hostingCount', 'resellerCount', 'vpsCount', 'serversCount'));
     }
 
     public function create()

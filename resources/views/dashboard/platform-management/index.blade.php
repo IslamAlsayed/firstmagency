@@ -6,27 +6,27 @@
 @section('content')
     <div class="w-full">
         <!-- Statistics -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ $platformManagements->total() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.total_platform_management') }}</small>
+        <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $platformManagements->total() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_platform_management') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $platformManagements->where('is_active', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.active') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $platformManagements->where('is_active', true)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600">{{ $platformManagements->where('is_active', false)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.inactive') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $platformManagements->where('is_active', false)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $platformManagements->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold">{{ __('main.featured') }}</small>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-blue-600" id="stat-featured">{{ $platformManagements->where('is_featured', true)->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
             </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+            <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-mobile-alt mr-2"></i> {{ __('main.platform_management') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
@@ -55,7 +55,8 @@
                     </thead>
                     <tbody>
                         @forelse($platformManagements as $item)
-                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
+                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
+                                data-active="{{ (int) $item->is_active }}" data-featured="{{ (int) $item->is_featured }}">
                                 <td title="{{ $item->translations[app()->getLocale()]['title'] ?? '--' }}">
                                     <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
                                         {{ limitedText($item->translations[app()->getLocale()]['title'] ?? '--', 25) }}
