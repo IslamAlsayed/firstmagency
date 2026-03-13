@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company;
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class CompanySeeder extends Seeder
+class ProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +15,13 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        Company::truncate();
+        Project::truncate();
         Schema::enableForeignKeyConstraints();
 
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
         if (!$user) return; // لا توجد مستخدمين
 
-        $companies = [
+        $projects = [
             [
                 'translations' => [
                     'ar' => [
@@ -109,9 +109,9 @@ class CompanySeeder extends Seeder
             ],
         ];
 
-        foreach ($companies as $company) {
-            Company::create([
-                ...$company,
+        foreach ($projects as $project) {
+            Project::create([
+                ...$project,
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);
