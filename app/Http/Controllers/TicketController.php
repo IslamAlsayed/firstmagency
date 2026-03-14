@@ -39,7 +39,7 @@ class TicketController extends Controller
         $validated = $request->validated();
         $message = $validated['message'] ?? null;
         unset($validated['verification'], $validated['attachments'], $validated['message']);
-        $validated['user_id'] = getActiveUserId();
+        $validated['user_id'] = getActiveUserId() ?? 1;
         $ticket = Ticket::create($validated);
 
         // Create initial message

@@ -38,6 +38,7 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $user = User::create($request->validated());
+
         if ($request->hasFile('photo')) {
             $this->uploadSinglePhoto($request, $user, 'photo', 'users');
         }
@@ -50,11 +51,16 @@ class UserController extends Controller
         return view('dashboard.users.edit', compact('user'));
     }
 
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, $id)
     {
+        $user = User::find($id);
+        if (!$user)
+            return redirect()->route('dashboard.users.index')->withError(__('messages.type_not_found', ['type' => __('main.user')]));
         $this->authorize('update', $user);
+
         $user->update($request->validated());
-        if ($request->input('remove_photo') && $request->hasFile('photo')) {
+
+        if ($request->hasFile('photo')) {
             $this->uploadSinglePhoto($request, $user, 'photo', 'users');
         }
         return redirect()->route('dashboard.users.index')->withSuccess(__('messages.user_updated'));

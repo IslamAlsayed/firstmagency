@@ -67,13 +67,13 @@
                     <li>
                         <a href="{{ route('dashboard.roles.show', getActiveUserId()) }}" class="menu-link">
                             <i class="ph-bold ph-user"></i>
-                            &nbsp;My Roles AndPermission
+                            &nbsp;My Roles And Permissions
                         </a>
                     </li>
-                    <li><a href="#" class="menu-link"><i class="ph-bold ph-user"></i>&nbsp;Profile</a></li>
-                    <li><a href="#" class="menu-link"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Inbox</a></li>
-                    <li><a href="#" class="menu-link"><i class="ph-bold ph-gear-six"></i>&nbsp;Settings</a></li>
-                    <li><a href="#" class="menu-link"><i class="ph-bold ph-question"></i>&nbsp;Help</a></li>
+                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-user"></i>&nbsp;Profile</a></li> --}}
+                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Inbox</a></li> --}}
+                    <li><a href="{{ route('dashboard.settings.index') }}" class="menu-link"><i class="ph-bold ph-gear-six"></i>&nbsp;Settings</a></li>
+                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-question"></i>&nbsp;Help</a></li> --}}
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="">
                             @csrf

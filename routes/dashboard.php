@@ -81,10 +81,10 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::resource('dashboards-and-systems', DashboardsAndSystemController::class)->names('dashboards-and-systems');
     Route::resource('hosting-packages', HostingPackageController::class)->names('hosting-packages');
     Route::resource('faqs', FAQController::class)->names('faqs');
-    Route::resource('tickets', TicketController::class)->names('tickets');
     Route::get('tickets/{ticketId}/support-reply', [TicketController::class, 'supportReply'])->name('tickets.support-reply');
     Route::post('tickets/{ticketId}/support-reply', [TicketController::class, 'postSupportReply'])->name('tickets.support-reply.store');
     Route::get('tickets/{ticketId}/send-copy', [TicketController::class, 'sendCopyToCustomer'])->name('tickets.sendCopyToCustomer');
+    Route::resource('tickets', TicketController::class)->names('tickets');
 
     // Unified force-destroy route for all models
     Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');

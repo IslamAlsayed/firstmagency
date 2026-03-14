@@ -901,6 +901,7 @@ return [
     'user' => 'المستخدم',
     'users' => 'المستخدمون',
     'roles' => 'الأدوار',
+    'permission' => 'الإذن',
     'permissions' => 'الأذونات',
     'settings' => 'الإعدادات',
     'content' => 'المحتوى',
@@ -1568,6 +1569,7 @@ return [
     'select_category' => 'اختر الفئة',
     'monthly_price' => 'السعر الشهري',
     'yearly_price' => 'السعر السنوي',
+    'is_active' => 'نشطة',
     'is_popular' => 'باقة شهيرة',
     'add_feature' => 'إضافة ميزة',
 

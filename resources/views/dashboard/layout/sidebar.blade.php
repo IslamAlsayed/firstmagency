@@ -53,7 +53,8 @@
                     <div class="flex items-center gap-3">
                         {{-- <i class="fas fa-folder-open main-icon"></i> --}}
                         <span class="main-icon">🔐</span>
-                        <span class="span-text">{{ __('main.roles') }}</span>
+                        {{-- <span class="span-text">{{ __('main.roles') }}</span> --}}
+                        <span class="span-text">الصلاحيات</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -74,13 +75,28 @@
                             <span class="text-sm">{{ __('main.create_type', ['type' => __('main.role')]) }}</span>
                         </a>
                     </li>
+
+                    <li class="relative">
+                        <a href="{{ route('dashboard.permissions.index') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.permissions.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-file-alt text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.permission_list') }}</span>
+                        </a>
+                    </li>
+                    <li class="relative">
+                        <a href="{{ route('dashboard.permissions.create') }}"
+                            class="nav-link {{ request()->routeIs('dashboard.permissions.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-file-alt text-sm main-icon"></i>
+                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.permission')]) }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endif
 
         <!-- Permissions -->
         @if (auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
-            <li class="relative group submenu-item">
+            <li class="relative group submenu-item hidden">
                 <button type="button" data-toggle="submenu"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.permissions.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">

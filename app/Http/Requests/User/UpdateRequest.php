@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|max:255',
-            'email' => 'nullable|email|unique:users,email,' . $this->route('user')->id,
+            'email' => 'nullable|email|unique:users,email,' . $this->route('user'),
             'email_verified_at' => 'nullable|date',
             'password' => 'nullable|string|min:8|confirmed',
             'address' => 'nullable|string|max:255',

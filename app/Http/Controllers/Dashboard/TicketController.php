@@ -72,7 +72,7 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::with(['user', 'assignedTo', 'messages'])->find($id);
-        $this->authorize('view', $ticket);
+        // $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         return view('dashboard.tickets.show', compact('ticket'));
@@ -154,6 +154,7 @@ class TicketController extends Controller
                 'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
                 'human_readable_date' => $messageRow->created_at->diffForHumans(),
                 'ticket_uuid' => $ticket->uuid,
+                'sender_photo' => getActiveUser()->photo ? 'storage/' . getActiveUser()->photo : null,
             ]);
 
             // Publish update to Ably channel (you can customize the channel name and event as needed)

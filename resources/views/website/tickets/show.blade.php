@@ -100,18 +100,29 @@
                             <div class="flex gap-4">
                                 <div class="avatar">
                                     <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                        <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
-                                            class="fal-content-img">
+                                        @if ($message->sender_type == 'customer')
+                                            <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
+                                                class="fal-content-img">
+                                        @elseif($message->sender_type == 'support')
+                                            <img decoding="async" src="{{ asset('storage/' . $message->user?->photo) }}" alt="{{ __('main.support_icon') }}"
+                                                class="fal-content-img">
+                                        @else
+                                            <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
+                                                class="fal-content-img">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="body">
-                                    <div class="meta flex items-center gap-2">
-                                        <span class="who font-semibold">{{ $ticket->name ?? __('main.user') }}</span>
-                                        <span class="time">{{ $message->created_at->format('d/m/Y H:i') }} - {{ $message->created_at->diffForHumans() }}</span>
-                                        <span
-                                            class="text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800' }}">
-                                            {{ $message->sender_type == 'customer' ? __('main.customer') : __('main.support') }}
-                                        </span>
+                                    <div class="meta flex items-start gap-2">
+                                        <div class="flex flex-col gap-2">
+                                            <span class="who font-semibold">{{ $message->sender_type == 'customer' ? $ticket->name : $ticket->user->name }}</span>
+                                            <span
+                                                class="w-fit block text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800' }}">
+                                                {{ $message->sender_type == 'customer' ? __('main.customer') : 'الدعم الفني' }}
+                                            </span>
+                                        </div>
+                                        <span class="time mt-1">{{ $message->created_at->format('d/m/Y H:i') }} -
+                                            {{ $message->created_at->diffForHumans() }}</span>
                                     </div>
                                     <div class="content">{!! $message->message !!}</div>
                                     <div class="files flex items-center gap-2">
@@ -397,6 +408,8 @@
          */
         function addNewMessageToPage(messageData) {
             const messagesContainer = document.querySelector('.messages-container');
+            console.log('messageData', messageData);
+            let photo = messageData.sender_type === 'support' ? '{{ asset('storage/') }}/' + messageData.user_photo : '{{ asset('assets/images/avatar.png') }}';
             if (!messagesContainer) return;
 
             // Create message element HTML
@@ -404,27 +417,30 @@
                 <div class="flex justify-between gap-4 client ${messageData.sender_type}" data-message-id="${messageData.id}">
                     <div class="flex gap-4">
                         <div class="avatar">
-                            <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="${translations.clientIcon}" class="fal-content-img">
+                            <a href="${photo}" class="client-avatar block">
+                                <img decoding="async" src="${photo}" alt="${translations.clientIcon}" class="fal-content-img">
                             </a>
                         </div>
                         <div class="body">
                             <div class="meta flex items-center gap-2">
-                                <span class="who font-semibold">${messageData.ticket_name || messageData.user_name}</span>
+                                <div class="flex flex-col gap-2">
+                                    <span class="who font-semibold">${messageData.ticket_name || messageData.user_name}</span>
+                                    <span
+                                        class="w-fit block text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
+                                        ${messageData.sender_type == 'customer' ? translations.customer : 'الدعم الفني'}
+                                    </span>
+                                </div>
                                 <span class="time">${messageData.formatted_date} - ${messageData.human_readable_date}</span>
-                                <span class="text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
-                                    ${messageData.sender_type == 'customer' ? translations.customer : translations.support}
-                                </span>
                             </div>
                             <div class="content">${messageData.message}</div>
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(attachment => `
-                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
-                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                            {{ __('main.attachment') }}
-                                                                                                                        </div>
-                                                                                                                    `).join('')
+                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
+                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                    {{ __('main.attachment') }}
+                                                </div>
+                                            `).join('')
                                     : ''
                                 }
                             </div>
