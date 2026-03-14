@@ -13,7 +13,7 @@ return new class extends Migration
         }
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained("tickets")->onDelete("set null");
+            $table->foreignId('ticket_id')->nullable()->constrained("tickets")->onDelete("set null");
             $table->foreignId('user_id')->nullable()->constrained("users")->onDelete("set null");
             $table->string('message');
             $table->string('sender_type'); // customer, support
