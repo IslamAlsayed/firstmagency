@@ -16,8 +16,8 @@ return new class extends Migration
             $table->json('translations'); // {'ar': {'title': '...'}, 'en': {'title': '...'}}
             $table->string('image')->nullable();
             $table->integer('order')->default(0);
-            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

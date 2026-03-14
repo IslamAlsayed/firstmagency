@@ -12,7 +12,7 @@ return new class extends Migration
         if (Schema::hasTable('tickets') && !Schema::hasColumn('tickets', 'department_id')) {
             Schema::table('tickets', function (Blueprint $table) {
                 $table->after('subject', function ($table) {
-                    $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
+                    $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('set null');
                 });
             });
         }

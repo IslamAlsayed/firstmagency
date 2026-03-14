@@ -13,7 +13,7 @@ return new class extends Migration
         }
         Schema::create('ticket_ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained('tickets')->cascadeOnDelete();
+            $table->foreignId('ticket_id')->constrained('tickets')->OnDelete("set null");
             $table->integer('rating')->nullable(); // 1-5 stars
             $table->text('comment')->nullable();
             $table->string('email')->index();

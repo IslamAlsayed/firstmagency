@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('category')->nullable(); // 'websites', 'apps', 'domains', 'hosting', 'services-marketing'
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->constrained('users');
-            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
 
