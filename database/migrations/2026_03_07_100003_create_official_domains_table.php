@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('official_domains')) {
+            return;
+        }
         Schema::create('official_domains', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();

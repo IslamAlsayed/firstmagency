@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('programming_categories')) {
+            return;
+        }
         Schema::create('programming_categories', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();

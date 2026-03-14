@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('why_us')) {
+            return;
+        }
         Schema::create('why_us', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
