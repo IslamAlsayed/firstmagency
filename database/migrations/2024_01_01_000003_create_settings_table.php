@@ -87,14 +87,14 @@ return new class extends Migration
             $table->string('work_lines_section')->default(120);
             $table->string('our_services_marketing_section')->default(120);
 
-            $table->string('website_design_title')->nullable()->after('about_us_image');
-            $table->string('website_design_title_ar')->nullable()->after('website_design_title');
-            $table->string('website_design_heading')->nullable()->after('website_design_title_ar');
-            $table->string('website_design_heading_ar')->nullable()->after('website_design_heading');
-            $table->longText('website_design_description')->nullable()->after('website_design_heading_ar');
-            $table->longText('website_design_description_ar')->nullable()->after('website_design_description');
-            $table->integer('website_design_years_experience')->default(8)->after('website_design_description_ar');
-            $table->string('website_design_image')->nullable()->after('website_design_years_experience');
+            $table->string('website_design_title')->nullable();
+            $table->string('website_design_title_ar')->nullable();
+            $table->string('website_design_heading')->nullable();
+            $table->string('website_design_heading_ar')->nullable();
+            $table->longText('website_design_description')->nullable();
+            $table->longText('website_design_description_ar')->nullable();
+            $table->integer('website_design_years_experience')->default(8);
+            $table->string('website_design_image')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
