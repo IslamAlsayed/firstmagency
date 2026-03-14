@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\ProgrammingCategory;
 use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
@@ -28,7 +28,7 @@ class ArticleController extends Controller
         if (!$article)
             return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.article')]));
 
-        $categories = Category::withCount('articles')->get();
+        $categories = ProgrammingCategory::withCount('articles')->get();
 
         $articles = Cache::remember('home_articles', 1800, function () {
             return Article::active()->published()->limit(10)->get();

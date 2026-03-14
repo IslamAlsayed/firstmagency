@@ -45,23 +45,19 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="category" class="mb-2 block text-sm font-semibold text-gray-700">
-                                {{ __('main.contact_form_department') }} <span class="text-red-500">*</span>
+                            <label for="department_id" class="mb-2 block text-sm font-semibold text-gray-700">
+                                {{ __('main.department') }} <span class="text-red-500">*</span>
                             </label>
-                            <select id="category" name="category"
+                            <select id="department_id" name="department_id"
                                 class="w-full basic-single rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
-                                <option value="">{{ __('main.contact_form_department_choose') }}</option>
-                                <option value="sales" {{ old('category', $ticket->category ?? '') === 'sales' ? 'selected' : '' }}>
-                                    {{ __('main.contact_form_department_sales') }}
-                                </option>
-                                <option value="support" {{ old('category', $ticket->category ?? '') === 'support' ? 'selected' : '' }}>
-                                    {{ __('main.contact_form_department_support') }}
-                                </option>
-                                <option value="general" {{ old('category', $ticket->category ?? '') === 'general' ? 'selected' : '' }}>
-                                    {{ __('main.contact_form_department_general') }}
-                                </option>
+                                <option value="">{{ __('main.select') . ' ' . __('main.department') }}</option>
+                                @foreach ($departments as $dept)
+                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>
+                                        {{ $dept->name }}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('category')
+                            @error('department_id')
                                 <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                             @enderror
                         </div>

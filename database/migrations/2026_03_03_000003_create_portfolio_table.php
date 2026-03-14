@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features_hosting', function (Blueprint $table) {
+        if (Schema::hasTable('portfolio')) {
+            return;
+        }
+        Schema::create('portfolio', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
-            $table->json('translations'); // ar/en: title, description
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(1);
-            $table->boolean('is_featured')->default(0);
-            $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->boolean('is_active')->default(true);
+            $table->json('tags')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features_hosting');
+        Schema::dropIfExists('portfolio');
     }
 };

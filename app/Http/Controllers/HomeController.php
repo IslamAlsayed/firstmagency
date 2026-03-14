@@ -24,7 +24,7 @@ class HomeController extends Controller
             }),
 
             'projects' => Cache::remember('home_projects', 1800, function () {
-                return Project::published()->active()->orderBy('order')->get();
+                return Project::active()->orderBy('order')->get();
             }),
 
             'reviews' => Cache::remember('home_reviews', 1800, function () {

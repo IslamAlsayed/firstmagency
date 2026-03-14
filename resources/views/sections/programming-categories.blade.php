@@ -8,17 +8,15 @@
         </div>
 
         <div class="images flex items-center" data-random-images>
-            @if ($categories && count($categories) > 0)
-                @foreach ($categories as $index => $category)
-                    @if ($index < 3)
-                        <div class="image" data-image-slot="{{ $index }}">
-                            @if ($category->image)
-                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->alt_text }}">
-                            @else
-                                <img src="{{ asset('assets/images/website/categories/' . ($index + 1) . '.png') }}" alt="{{ $category->name }}">
-                            @endif
-                        </div>
-                    @endif
+            @if ($programming_categories && count($programming_categories) > 0)
+                @foreach ($programming_categories as $index => $category)
+                    <div class="image" data-image-slot="{{ $index }}">
+                        @if ($category->image)
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->alt_text }}">
+                        @else
+                            <img src="{{ asset('assets/images/website/categories/' . $category->id . '.png') }}" alt="{{ $category->alt_text }}">
+                        @endif
+                    </div>
                 @endforeach
             @else
                 <div class="image" data-image-slot="0">

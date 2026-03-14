@@ -10,6 +10,7 @@ return [
     'user_session_expired' => ':name session expired.',
     'goodbye_name' => 'Goodbye, :name!',
     'no_records_found' => 'No records found.',
+    'no_reviews_yet' => 'No reviews yet.',
     'no_backup' => 'No backup files found.',
     'updated_successfully' => 'Updated Successfully',
     'update_not_successfully' => 'Update Not Successfully',

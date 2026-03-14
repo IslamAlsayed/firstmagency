@@ -60,7 +60,7 @@ class Article extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(ProgrammingCategory::class, 'category_id');
     }
 
     public function creator()
@@ -102,21 +102,21 @@ class Article extends Model
     public function scopeForWebsites($query)
     {
         return $query->whereHas('category', function ($q) {
-            $q->where('name', 'like', '%موقع%')->orWhere('name', 'like', '%ويب%')->orWhere('name', 'like', '%website%')->orWhere('name', 'like', '%web%');
+            $q->where('alt_text', 'like', '%موقع%')->orWhere('alt_text', 'like', '%ويب%')->orWhere('alt_text', 'like', '%website%')->orWhere('alt_text', 'like', '%web%');
         });
     }
 
     public function scopeForAppMobiles($query)
     {
         return $query->whereHas('category', function ($q) {
-            $q->where('name', 'like', '%تطبيق%')->orWhere('name', 'like', '%app%');
+            $q->where('alt_text', 'like', '%تطبيق%')->orWhere('alt_text', 'like', '%app%');
         });
     }
 
     public function scopeForMarketing($query)
     {
         return $query->whereHas('category', function ($q) {
-            $q->where('name', 'like', '%تسويق%')->orWhere('name', 'like', '%market%')->orWhere('name', 'like', '%service%');
+            $q->where('alt_text', 'like', '%تسويق%')->orWhere('alt_text', 'like', '%market%')->orWhere('alt_text', 'like', '%service%');
         });
     }
 

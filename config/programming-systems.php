@@ -3,50 +3,62 @@
 return [
     [
         'title' => 'مواقع شركات',
-        'image' => 'developer/icon-1.png',
+        'image' => 'icon-1.png',
+        'order' => 1,
     ],
     [
         'title' => 'مواقع متاجر',
-        'image' => 'developer/icon-2.png',
+        'image' => 'icon-2.png',
+        'order' => 2,
     ],
     [
         'title' => 'مواقع أخبار',
-        'image' => 'developer/icon-3.png',
+        'image' => 'icon-3.png',
+        'order' => 3,
     ],
     [
         'title' => 'مواقع تعليمية',
-        'image' => 'developer/icon-4.png',
+        'image' => 'icon-4.png',
+        'order' => 4,
     ],
     [
         'title' => 'مواقع مطاعم',
-        'image' => 'developer/icon-5.png',
+        'image' => 'icon-5.png',
+        'order' => 5,
     ],
     [
         'title' => 'مواقع الفنادق',
-        'image' => 'developer/icon-6.png',
+        'image' => 'icon-6.png',
+        'order' => 6,
     ],
     [
         'title' => 'مواقع عقارات',
-        'image' => 'developer/icon-7.png',
+        'image' => 'icon-7.png',
+        'order' => 7,
     ],
     [
         'title' => 'مواقع مقاولات',
-        'image' => 'developer/icon-8.png',
+        'image' => 'icon-8.png',
+        'order' => 8,
     ],
     [
         'title' => 'مواقع شخصية',
-        'image' => 'developer/icon-9.png',
+        'image' => 'icon-9.png',
+        'order' => 9,
     ],
     [
         'title' => 'شركات خدمات',
-        'image' => 'developer/icon-10.png',
+        'image' => 'icon-10.png',
+        'order' => 10,
     ],
     [
         'title' => 'شركات سياحة',
-        'image' => 'developer/icon-11.png',
+        'image' => 'icon-11.png',
+        'order' => 11,
     ],
     [
         'title' => 'مواقع المدونات',
-        'image' => 'developer/icon-12.png',
+        'image' => 'icon-12.png',
+        'order' => 12,
     ],
 ];

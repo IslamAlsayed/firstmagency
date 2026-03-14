@@ -10,7 +10,7 @@ class PortfolioController extends Controller
     public function index()
     {
         $portfolio = Cache::remember('home_portfolio', 1800, function () {
-            return Portfolio::active()->published()->orderBy('order')->get();
+            return Portfolio::active()->orderBy('order')->get();
         });
 
         return view('website.portfolio', compact('portfolio'));
@@ -27,7 +27,7 @@ class PortfolioController extends Controller
 
         if (!empty($tags) && count($tags) > 0) {
             $similarProjects = Portfolio::where('id', '!=', $portfolio->id)
-                ->active()->published()->orderBy('order')->limit(3)->get()
+                ->active()->orderBy('order')->limit(3)->get()
                 ->filter(function ($project) use ($tags) {
                     $projectTags = is_array($project->tags) ? $project->tags : [];
                     $commonTags = array_intersect($projectTags, $tags);

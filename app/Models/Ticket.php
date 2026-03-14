@@ -16,14 +16,13 @@ class Ticket extends Model
         'email',
         'phone',
         'subject',
-        'messages',
-        'department',
+        'department_id',
         'status',
         'priority',
         'user_id',
         'is_active',
         'assigned_to',
-        'token'
+        'token',
     ];
 
     protected $casts = [
@@ -54,6 +53,11 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     public function assignedTo()

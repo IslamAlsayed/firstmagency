@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Category;
 use App\Models\FAQ;
+use App\Models\ProgrammingCategory;
 use App\Models\ProjectStep;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,8 +13,8 @@ class AppMobileController extends Controller
     public function index()
     {
         $data = [
-            'categories' => Cache::remember('app_mobile_categories', 1800, function () {
-                return Category::active()->get();
+            'programming_categories' => Cache::remember('app_mobile_programming_categories', 1800, function () {
+                return ProgrammingCategory::active()->limit(3)->get();
             }),
 
             'project_steps' => Cache::remember('app_mobile_project_steps', 1800, function () {

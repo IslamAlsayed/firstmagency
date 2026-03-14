@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Enum\ArticleEnums;
 use App\Enum\AvailableToggleFields;
+use App\Enum\DepartmentEnums;
 use App\Enum\PestDomainEnums;
 use App\Enum\ReviewEnums;
 use App\Enum\TicketDepartmentEnums;
 use App\Enum\TicketEnums;
 use App\Enum\WhyUsEnums;
 use App\Mail\TicketRatingMail;
+use App\Models\Department;
 use App\Models\User;
 use App\Traits\AblyService;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,7 @@ class DashboardController extends Controller
             TicketEnums::cases(),
             TicketDepartmentEnums::cases(),
             WhyUsEnums::cases(),
+            DepartmentEnums::cases(),
         ];
 
         foreach ($enums as $enum) {
@@ -278,18 +281,31 @@ class DashboardController extends Controller
         // Check if user can update articles
         $this->authorize('update', $model);
 
-        // Validate status
-        if (!in_array($status, $this->availableOption)) {
-            return redirect()->back()->withError(__('messages.invalid_status'));
-        }
-
         // Get field name from request, default to 'status'
         $field = request()->input('field', 'status');
 
-        $model->update([
-            $field => $status,
-            'updated_by' => getActiveUserId(),
-        ]);
+        // Validate status based on field type
+        if ($field === 'department_id') {
+            // For department_id, validate that the department exists and is active
+            if (!empty($status)) {
+                $departmentExists = \App\Models\Department::where('id', $status)->where('is_active', true)->exists();
+                if (!$departmentExists) {
+                    return redirect()->back()->withError(__('messages.invalid_status') . ' - ' . __('main.department'));
+                }
+            }
+        } else {
+            // For other fields, validate against enum options
+            if (!in_array($status, $this->availableOption)) {
+                return redirect()->back()->withError(__('messages.invalid_status'));
+            }
+        }
+
+        $model->update([$field => $status]);
+
+        // If updating department_id for Ticket, also update all related messages
+        if (class_basename($modelClass) == 'Ticket' && $field === 'department_id') {
+            $model->messages()->update(['department_id' => $status]);
+        }
 
         // Only publish Ably event for Ticket model
         if (class_basename($modelClass) == 'Ticket') {
@@ -308,7 +324,13 @@ class DashboardController extends Controller
             }
         }
 
-        $statusLabel = __('main.' . $status);
+        // Generate appropriate status label
+        if ($field === 'department_id') {
+            $statusLabel = \App\Models\Department::find($status)?->name ?? $status;
+        } else {
+            $statusLabel = __('main.' . $status);
+        }
+
         return redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.' . strtolower(class_basename($modelClass)))]) . ' - ' . $statusLabel);
     }
 
@@ -319,8 +341,14 @@ class DashboardController extends Controller
             'uuid' => $ticket->uuid,
             'field' => $field,
             'new_status' => $newStatus,
-            'status_label' => __('main.' . $newStatus),
         ];
+
+        // Generate appropriate label based on field type
+        if ($field === 'department_id') {
+            $ticketData['status_label'] = Department::find($newStatus)?->name ?? $newStatus;
+        } else {
+            $ticketData['status_label'] = __('main.' . $newStatus);
+        }
 
         $this->publishToAbly('ticket-updates', 'ticket-status-updated', $ticketData);
     }

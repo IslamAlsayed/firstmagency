@@ -42,13 +42,13 @@
                         </div>
                     </a>
                     <div class="project-action">
-                        <button class="btn-link main-color dark-hover font-semibold">
+                        <button class="btn-link main-color font-semibold">
                             <a href="{{ route('portfolio.show', ['id' => $project->id ?? $project['id'], 'slug' => $slug]) }}">
                                 <i class="icon fa-solid fa-eye"></i>
                             </a>
                         </button>
-                        <button class="btn-link main-color dark-hover font-semibold">
-                            <a href="#contact">
+                        <button class="btn-link main-color font-semibold">
+                            <a href="{{ route('portfolio.show', ['id' => $project->id ?? $project['id'], 'slug' => $slug]) }}">
                                 <i class="icon fa-solid fa-search"></i>
                             </a>
                         </button>
@@ -56,9 +56,49 @@
                 </div>
             @endforeach
         @else
-            <div class="text-center py-8 col-span-full">
-                <p class="text-gray-500">{{ __('main.no_projects_found') }}</p>
-            </div>
+            @if (count(config('projects_companies')) > 0)
+                @foreach (config('projects_companies') as $id => $project)
+                    @php
+                        $tags = [];
+                        // Ensure tags is an array
+                        if (is_string($project['tags'])) {
+                            $tags = json_decode($project['tags'], true) ?? [];
+                        }
+                        // Convert tags to filter format (e.g., "Web Design" -> "web_design")
+                        $filterTags = array_map(function ($tag) {
+                            return strtolower(str_replace(' ', '_', $tag));
+                        }, (array) $tags);
+                        $tagsString = implode(',', $filterTags);
+                    @endphp
+                    <div class="project-item" data-tags="{{ $tagsString }}">
+                        <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => str_replace(' ', '-', strtolower($project['title']))]) }}">
+                            <div class="project-image">
+                                <img src="{{ asset('assets/images/website/projects/' . $project['order'] . '.png') }}" alt="{{ $project['title'] }}"
+                                    loading="lazy">
+                            </div>
+                            <div class="project-text">
+                                <div class="project-title font-semibold">{{ $project['title'] }}</div>
+                            </div>
+                        </a>
+                        <div class="project-action">
+                            <button class="btn-link main-color font-semibold">
+                                <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => str_replace(' ', '-', strtolower($project['title']))]) }}">
+                                    <i class="icon fa-solid fa-eye"></i>
+                                </a>
+                            </button>
+                            <button class="btn-link main-color font-semibold">
+                                <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => str_replace(' ', '-', strtolower($project['title']))]) }}">
+                                    <i class="icon fa-solid fa-search"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="text-center py-8 col-span-full">
+                    <p class="text-gray-500">{{ __('main.no_projects_found') }}</p>
+                </div>
+            @endif
         @endif
     </div>
 

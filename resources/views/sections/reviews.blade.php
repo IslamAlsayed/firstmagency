@@ -54,7 +54,7 @@
                     @endforeach
                 @else
                     <div class="text-center py-8 w-full">
-                        <p class="text-gray-500">{{ __('main.no_reviews_yet') }}</p>
+                        <p class="text-gray-500">{{ __('messages.no_reviews_yet') }}</p>
                     </div>
                 @endif
             </swiper-container>

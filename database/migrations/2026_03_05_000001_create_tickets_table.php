@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->string('subject');
-            $table->string('department')->nullable();
+            $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
             $table->string('status')->default('open'); // 'open', 'in_progress', 'resolved', 'closed'
             $table->string('priority')->default('medium'); // 'low', 'medium', 'high', 'urgent'
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();

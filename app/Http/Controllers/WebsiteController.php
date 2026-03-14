@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Client;
 use App\Models\FAQ;
-use App\Models\Programming;
+use App\Models\ProgrammingSystem;
 use App\Models\Project;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Cache;
@@ -15,8 +15,8 @@ class WebsiteController extends Controller
     public function index()
     {
         $data = [
-            'programmings' => Cache::remember('home_programmings', 1800, function () {
-                return Programming::active()->orderBy('order')->get();
+            'programming_systems' => Cache::remember('home_programming_systems', 1800, function () {
+                return ProgrammingSystem::active()->orderBy('order')->get();
             }),
 
             'articles' => Cache::remember('home_articles', 1800, function () {

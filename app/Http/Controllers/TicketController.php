@@ -7,6 +7,7 @@ use App\Http\Requests\Ticket\StoreRequest;
 use App\Http\Requests\Ticket\UpdateMessageRequest;
 use App\Mail\TicketCreatedMail;
 use App\Mail\TicketThankForRatingMail;
+use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use App\Models\TicketRating;
@@ -24,8 +25,9 @@ class TicketController extends Controller
     {
         $a = rand(1, 9);
         $b = rand(1, 9);
+        $departments = Department::where('is_active', true)->get(['id', 'name']);
         session(['ticket_verification' => $a + $b]);
-        return view('website.tickets.index', compact('a', 'b'));
+        return view('website.tickets.index', compact('a', 'b', 'departments'));
     }
 
     public function inquiry(Request $request)
@@ -46,6 +48,7 @@ class TicketController extends Controller
         if ($message) {
             $messageRow = $ticket->messages()->create([
                 'user_id' => $ticket->user_id,
+                'department_id' => $ticket->department_id,
                 'message' => $message,
                 'sender_type' => 'customer',
             ]);
@@ -65,7 +68,7 @@ class TicketController extends Controller
             'name' => $ticket->name,
             'email' => $ticket->email,
             'subject' => $ticket->subject,
-            'department' => $ticket->department,
+            'department_id' => $ticket->department_id,
             'status' => $ticket->status,
             'priority' => $ticket->priority,
             'created_at' => $ticket->created_at->format('Y-m-d H:i:s'),
@@ -77,47 +80,51 @@ class TicketController extends Controller
         return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.type_created_successfully', ['type' => __('main.ticket')]));
     }
 
-    public function message(StoreMessageRequest $request, $uuid)
-    {
-        $ticket = Ticket::with(['user', 'messages'])->where('uuid', $uuid)->first();
-        if (!$ticket)
-            return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+public function message(StoreMessageRequest $request, $uuid)
+{
+    $ticket = Ticket::with(['user', 'messages'])->where('uuid', $uuid)->first();
+    if (!$ticket)
+        return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
 
-        $validated = $request->validated();
-        $messageText = $validated['your_reply'] ?? null;
+    $validated = $request->validated();
+    $messageText = $validated['your_reply'] ?? null;
 
-        // Create new message
-        if ($messageText) {
-            $messageRow = $ticket->messages()->create([
-                'user_id' => $ticket->user_id,
-                'message' => $messageText,
-                'sender_type' => 'customer',
-            ]);
+    // Create new message
+    if ($messageText) {
+        $messageRow = $ticket->messages()->create([
+            'user_id' => $ticket->user_id,
+            'department_id' => $ticket->department_id ?? 1,
+            'message' => $messageText,
+            'sender_type' => 'customer',
+        ]);
 
-            // Upload attachments if any
-            if ($request->hasFile('attachments')) {
-                $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-users');
-            }
-
-            // Prepare comprehensive data for Ably with user info and formatted dates
-            $messageData = array_merge($messageRow->toArray(), [
-                'user_name' => $ticket->name ?? 'عميل',
-                'ticket_name' => $ticket->name,
-                'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
-                'human_readable_date' => $messageRow->created_at->diffForHumans(),
-                'ticket_uuid' => $ticket->uuid,
-            ]);
-
-            // Publish update to Ably channel (you can customize the channel name and event as needed)
-            $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
+        // Upload attachments if any
+        if ($request->hasFile('attachments')) {
+            $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-users');
         }
 
-        return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
+        // Prepare comprehensive data for Ably with user info and formatted dates
+        $department = Department::find($ticket->department_id);
+        $messageData = array_merge($messageRow->toArray(), [
+            'user_name' => $ticket->name ?? 'عميل',
+            'ticket_name' => $ticket->name,
+            'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
+            'human_readable_date' => $messageRow->created_at->diffForHumans(),
+            'ticket_uuid' => $ticket->uuid,
+            'department_name' => $department?->name ?? __('main.no_department'),
+            'department_id' => $department?->id ?? null,
+        ]);
+
+        // Publish update to Ably channel (you can customize the channel name and event as needed)
+        $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
     }
+
+    return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
+}
 
     public function show(Request $request, $uuid)
     {
-        $ticket = Ticket::with(['user', 'messages'])->where('uuid', $uuid)->first();
+        $ticket = Ticket::with(['user', 'messages.department', 'department'])->where('uuid', $uuid)->first();
         if (!$ticket)
             return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         return view('website.tickets.show', compact('ticket'));
@@ -128,15 +135,6 @@ class TicketController extends Controller
         $message = TicketMessage::find($messageId);
         if (!$message)
             return response()->json(['success' => false, 'status' => 'error', 'message' => 'الرسالة غير موجودة'], 404);
-
-        // Check authorization
-        // $isOwner = $message->user_id === getActiveUserId();
-        // $isSupport = Auth::check() && in_array(getActiveUser()->role, ['superadmin', 'admin', 'support']);
-
-        // if (!$isOwner && !$isSupport) {
-        // if (!$isOwner) {
-        // return response()->json(['success' => false, 'status' => 'error', 'message' => 'غير مصرح لك بتعديل هذه الرسالة'], 403);
-        // }
 
         $validated = $request->validated();
         $message->update($validated);

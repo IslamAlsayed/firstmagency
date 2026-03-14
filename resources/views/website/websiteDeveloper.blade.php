@@ -6,17 +6,19 @@
         @include('sections.developer')
 
         {{-- Programming Section --}}
-        @include('sections.programming', ['websites' => $data['programmings'] ?? []])
+        @include('sections.programming-systems', ['programming_systems' => $data['programming_systems'] ?? []])
 
         {{-- Website Design Section --}}
         @include('sections.website-design', ['stats' => $data['website_design'] ?? []])
 
         {{-- Important Articles Section --}}
-        @include('sections.important-articles', [
-            'articles' => $data['articles'] ?? [],
-            'title' => __('main.important_articles_title'),
-            'desc' => __('main.important_articles_description'),
-        ])
+        @if (isset($data['articles']) && count($data['articles']) > 0)
+            @include('sections.important-articles', [
+                'articles' => $data['articles'] ?? [],
+                'title' => __('main.important_articles_title'),
+                'desc' => __('main.important_articles_description'),
+            ])
+        @endif
 
         {{-- Frequently Asked Questions Section --}}
         @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? []])

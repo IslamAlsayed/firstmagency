@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\ProgrammingCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -15,7 +15,7 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = Category::all();
+        $categories = ProgrammingCategory::all();
 
         $articlesData = [
             [

@@ -419,7 +419,5 @@ class PermissionSeeder extends Seeder
             'tickets-update',
         ])->get();
         $supportRole->syncPermissions($supportPermissions);
-
-        $this->command->info('Permissions and roles seeded successfully!');
     }
 }

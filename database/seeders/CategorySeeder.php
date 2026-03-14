@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\ProgrammingCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        Category::truncate();
+        ProgrammingCategory::truncate();
         Schema::enableForeignKeyConstraints();
 
         $categories = [
@@ -70,7 +70,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::firstOrCreate(['name' => $category['name']], $category);
+            ProgrammingCategory::firstOrCreate(['name' => $category['name']], $category);
         }
     }
 }

@@ -75,7 +75,7 @@
                 </div>
                 <div class="article-item">
                     <div class="text-sm">{{ __('main.department') }}</div>
-                    <div class="font-semibold" id="ticket-department">{{ __('main.' . $ticket->department) }}</div>
+                    <div class="font-semibold" id="ticket-department">{{ $ticket->department?->name ?? __('main.no_department') }}</div>
                 </div>
                 <div class="article-item">
                     <div class="text-sm">{{ __('main.whatsapp') }}</div>
@@ -96,7 +96,8 @@
             <article style="padding-inline-end: 3px;">
                 <div class="flex flex-col gap-4 messages-container">
                     @foreach ($ticket->messages as $message)
-                        <div class="flex justify-between gap-4 client {{ $message->sender_type }}" data-message-id="{{ $message->id }}">
+                        <div class="flex justify-between gap-4 client {{ $message->sender_type == 'customer' ? 'bg-gray-100 border-gray-600 text-gray-800' : \App\Enum\DepartmentEnums::from($message->department?->slug)->badgeStyle() }}"
+                            data-message-id="{{ $message->id }}">
                             <div class="flex gap-4">
                                 <div class="avatar">
                                     <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
@@ -104,8 +105,8 @@
                                             <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
                                                 class="fal-content-img">
                                         @elseif($message->sender_type == 'support')
-                                            <img decoding="async" src="{{ asset('storage/' . $message->user?->photo) }}" alt="{{ __('main.support_icon') }}"
-                                                class="fal-content-img">
+                                            <img decoding="async" src="{{ asset('assets/images/avatars/' . $message->department?->image) }}"
+                                                alt="{{ __('main.support_icon') }}" class="fal-content-img">
                                         @else
                                             <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="{{ __('main.client_icon') }}"
                                                 class="fal-content-img">
@@ -115,11 +116,14 @@
                                 <div class="body">
                                     <div class="meta flex items-start gap-2">
                                         <div class="flex flex-col gap-2">
-                                            <span class="who font-semibold">{{ $message->sender_type == 'customer' ? $ticket->name : $ticket->user->name }}</span>
                                             <span
-                                                class="w-fit block text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800' }}">
-                                                {{ $message->sender_type == 'customer' ? __('main.customer') : 'الدعم الفني' }}
-                                            </span>
+                                                class="who font-semibold">{{ $message->sender_type == 'customer' ? $ticket->name : $message->department?->name ?? __('main.support') }}</span>
+                                            <div class="flex gap-2">
+                                                <span
+                                                    class="w-fit block text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : \App\Enum\DepartmentEnums::from($message->department?->slug)->badgeColor() }}">
+                                                    {{ $message->sender_type == 'customer' ? __('main.customer') : __('main.' . $message->department?->title) ?? __('main.' . $message->department?->slug) }}
+                                                </span>
+                                            </div>
                                         </div>
                                         <span class="time mt-1">{{ $message->created_at->format('d/m/Y H:i') }} -
                                             {{ $message->created_at->diffForHumans() }}</span>
@@ -217,7 +221,7 @@
                         <p class="mb-1"><b>{{ __('main.subject') }}:</b> {{ $ticket->subject }}</p>
                     </div>
                     <div class="space-y-2">
-                        <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticket->department }}</p>
+                        <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticket->department?->name ?? __('main.no_department') }}</p>
                         <p class="mb-1"><b>{{ __('main.email_') }}:</b> {{ $ticket->email }}</p>
                         <p class="mb-1"><b>{{ __('main.date') }}:</b> {{ $ticket->created_at }}</p>
                     </div>
@@ -313,6 +317,7 @@
         // Subscribe to new support replies
         ticketUpdatesChannel.subscribe('new-support-reply', (ablyMessage) => {
             const messageData = ablyMessage.data;
+            console.log('customerMessageData', messageData);
 
             // Only add message if it belongs to current ticket
             if (messageData.ticket_uuid === '{{ $ticket->uuid }}') {
@@ -341,7 +346,6 @@
             if (messageElement) {
                 messageElement.style.opacity = '0.5';
                 messageElement.style.textDecoration = 'line-through';
-
                 setTimeout(() => messageElement.remove(), 1000);
             }
         });
@@ -393,11 +397,16 @@
                     });
                 }
 
-                // Update department if field is 'department'
-                if (updateData.field === 'department') {
+                // Update department if field is 'department_id'
+                if (updateData.field === 'department_id') {
                     const departmentElement = document.getElementById('ticket-department');
                     if (departmentElement) {
                         departmentElement.textContent = updateData.status_label;
+                        window.showToast({
+                            type: 'success',
+                            message: '{{ __('main.ticket_transferred', ['department' => ':department']) }}'.replace(':department', updateData
+                                .status_label)
+                        });
                     }
                 }
             }
@@ -408,39 +417,58 @@
          */
         function addNewMessageToPage(messageData) {
             const messagesContainer = document.querySelector('.messages-container');
-            console.log('messageData', messageData);
-            let photo = messageData.sender_type === 'support' ? '{{ asset('storage/') }}/' + messageData.user_photo : '{{ asset('assets/images/avatar.png') }}';
             if (!messagesContainer) return;
+
+            // Determine photo URL based on sender type
+            let photo = '{{ asset('assets/images/avatar.png') }}';
+            if (messageData.sender_type === 'support' && messageData.user_photo) {
+                // user_photo already contains 'storage/' prefix
+                photo = messageData.user_photo.startsWith('storage/') ?
+                    '{{ asset('') }}' + messageData.user_photo :
+                    '{{ asset('storage/') }}' + messageData.user_photo;
+            }
+
+            // Determine sender name based on message type
+            const senderName = messageData.sender_type === 'customer' ?
+                messageData.ticket_name :
+                messageData.user_name;
 
             // Create message element HTML
             const messageHtml = `
-                <div class="flex justify-between gap-4 client ${messageData.sender_type}" data-message-id="${messageData.id}">
+                <div class="flex justify-between gap-4 client {{ $message->sender_type == 'customer' ? 'bg-gray-100 border-gray-600 text-gray-800' : \App\Enum\DepartmentEnums::from($message->department?->slug)->badgeStyle() }}" data-message-id="${messageData.id}">
                     <div class="flex gap-4">
                         <div class="avatar">
                             <a href="${photo}" class="client-avatar block">
-                                <img decoding="async" src="${photo}" alt="${translations.clientIcon}" class="fal-content-img">
+                                ${messageData.sender_type === 'customer' 
+                                    ? `<img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="${translations.clientIcon}" class="fal-content-img">` 
+                                    : `<img decoding="async" src="{{ asset('assets/images/avatars/') }}${messageData.department_image || 'support.png'}" alt="${translations.support}" class="fal-content-img">`
+                                }
                             </a>
                         </div>
                         <div class="body">
-                            <div class="meta flex items-center gap-2">
+                            <div class="meta flex items-start gap-2">
                                 <div class="flex flex-col gap-2">
-                                    <span class="who font-semibold">${messageData.ticket_name || messageData.user_name}</span>
-                                    <span
-                                        class="w-fit block text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
-                                        ${messageData.sender_type == 'customer' ? translations.customer : 'الدعم الفني'}
-                                    </span>
+                                    <span class="who font-semibold">${senderName}</span>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="w-fit block text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}">
+                                            {{ $message->sender_type == 'customer' ? __('main.customer') : __('main.support') }}
+                                        </span>
+                                        ${messageData.department_name && messageData.sender_type === 'support' ? `<span class="w-fit block text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-800">${messageData.department_name}</span>` : ''}
+                                    </div>
                                 </div>
-                                <span class="time">${messageData.formatted_date} - ${messageData.human_readable_date}</span>
+                                <span class="time mt-1">${messageData.formatted_date} -
+                                    ${messageData.human_readable_date}</span>
                             </div>
                             <div class="content">${messageData.message}</div>
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(attachment => `
-                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
-                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                    {{ __('main.attachment') }}
-                                                </div>
-                                            `).join('')
+                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
+                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                    {{ __('main.attachment') }}
+                                                                                </div>
+                                                                            `).join('')
                                     : ''
                                 }
                             </div>

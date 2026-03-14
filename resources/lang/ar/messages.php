@@ -10,6 +10,7 @@ return [
     'user_session_expired' => 'انتهت جلسة :name.',
     'goodbye_name' => 'وداعاً، :name!',
     'no_records_found' => 'لم يتم العثور على سجلات.',
+    'no_reviews_yet' => 'لا توجد مراجعات بعد.',
     'no_backup' => 'لم يتم إنشاء نسخة احتياطية بعد',
     'updated_successfully' => 'تم التحديث بنجاح',
     'update_not_successfully' => 'لم يتم التحديث بنجاح',

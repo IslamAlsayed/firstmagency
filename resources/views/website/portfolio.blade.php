@@ -15,16 +15,8 @@
             @if ($portfolio && count($portfolio) > 0)
                 @foreach ($portfolio as $work)
                     @php
-                        $slug = is_object($work) ? $work->slug : $work['slug'] ?? '';
-                        $image = is_object($work) ? $work->image : $work['image'] ?? '';
-                        $locale = app()->getLocale();
-                        if (is_object($work)) {
-                            $title = $work->translations[$locale]['name'] ?? $slug;
-                            $tags = $work->tags ?? [];
-                        } else {
-                            $title = $work['translations'][$locale]['name'] ?? $slug;
-                            $tags = $work['tags'] ?? [];
-                        }
+                        $tags = is_object($work) ? $work->tags ?? [] : $work['tags'] ?? [];
+
                         // Ensure tags is an array
                         if (is_string($tags)) {
                             $tags = json_decode($tags, true) ?? [];
@@ -36,22 +28,62 @@
                         $tagsString = implode(',', $filterTags);
                     @endphp
                     <div class="project-item" data-tags="{{ $tagsString }}">
-                        <a href="{{ route('portfolio.show', ['id' => $work->id ?? $work['id'], 'slug' => $slug]) }}">
+                        <a href="{{ route('portfolio.show', ['id' => $work->id, 'slug' => $work->slug]) }}">
                             <div class="project-image">
-                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $slug }}" loading="lazy">
+                                <img src="{{ asset('storage/' . $work->image) }}" alt="{{ $work->slug }}" loading="lazy">
                             </div>
                             <div class="project-text">
-                                <div class="project-title font-semibold">{{ $title }}</div>
+                                <div class="project-title font-semibold">{{ $work->translations[app()->getLocale()]['title'] ?? $work->slug }}</div>
+                                <div class="project-description font-semibold">{{ $work->translations[app()->getLocale()]['description'] ?? $work->slug }}</div>
                             </div>
                         </a>
                         <div class="project-action">
                             <button class="btn-link main-color font-semibold">
-                                <a href="{{ route('portfolio.show', ['id' => $work->id ?? $work['id'], 'slug' => $slug]) }}">
+                                <a href="{{ route('portfolio.show', ['id' => $work->id, 'slug' => $work->slug]) }}">
                                     <i class="icon fa-solid fa-eye"></i>
                                 </a>
                             </button>
                             <button class="btn-link main-color font-semibold">
                                 <a href="#contact">
+                                    <i class="icon fa-solid fa-search"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                @foreach (config('portfolio') as $id => $work)
+                    @php
+                        $tags = is_object($work) ? $work->tags ?? [] : $work['tags'] ?? [];
+
+                        // Ensure tags is an array
+                        if (is_string($tags)) {
+                            $tags = json_decode($tags, true) ?? [];
+                        }
+                        // Convert tags to filter format (e.g., "Web Design" -> "web_design")
+                        $filterTags = array_map(function ($tag) {
+                            return strtolower(str_replace(' ', '_', $tag));
+                        }, (array) $tags);
+                        $tagsString = implode(',', $filterTags);
+                    @endphp
+                    <div class="project-item" data-tags="{{ $tagsString }}">
+                        <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => $work['title']]) }}">
+                            <div class="project-image">
+                                <img src="{{ asset('assets/images/website/portfolio/' . $id . '.jpg') }}" alt="{{ $work['title'] }}" loading="lazy">
+                            </div>
+                            <div class="project-text">
+                                <div class="project-title font-semibold">{{ $work['title'] }}</div>
+                                <div class="project-description font-semibold">{{ $work['description'] }}</div>
+                            </div>
+                        </a>
+                        <div class="project-action">
+                            <button class="btn-link main-color font-semibold">
+                                <div class="cursor-pointer clickable-img" data-src="{{ asset('assets/images/website/portfolio/' . $id . '.jpg') }}">
+                                    <i class="icon fa-solid fa-eye"></i>
+                                </div>
+                            </button>
+                            <button class="btn-link main-color font-semibold">
+                                <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => $work['title']]) }}">
                                     <i class="icon fa-solid fa-search"></i>
                                 </a>
                             </button>

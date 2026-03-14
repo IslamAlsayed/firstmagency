@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'messages' => 'nullable|string',
             'attachments' => 'nullable|array',
             'attachments.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'department' => 'nullable|string|max:255',
+            'department_id' => 'nullable|exists:departments,id',
             'status' => 'nullable|string|max:255',
             'priority' => 'nullable|string|max:255',
             'user_id' => 'nullable|exists:users,id',

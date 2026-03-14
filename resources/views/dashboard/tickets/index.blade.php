@@ -181,7 +181,7 @@
                     // Create new row from server HTML
                     const newRow = document.createElement('tr');
                     newRow.id = 'row-' + ticket.id;
-                    newRow.className = 'new-ticket-row';
+                    newRow.className = 'border-b border-gray-200 hover:bg-gray-50 transition new-ticket-row';
                     newRow.style.animation = 'slideInDown 0.3s ease-out';
                     newRow.innerHTML = data.html;
 

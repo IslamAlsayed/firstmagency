@@ -53,6 +53,7 @@ return new class extends Migration
             $table->longText('about_us_description')->nullable();
             $table->longText('about_us_description_ar')->nullable();
             $table->string('about_us_image')->nullable();
+            $table->string('about_us_image2')->nullable();
 
             $table->string('main_color')->default('#d05423');
             $table->string('light_main_color')->default('#F97316');
@@ -85,6 +86,15 @@ return new class extends Migration
             $table->string('platform_management_section')->default(60);
             $table->string('work_lines_section')->default(120);
             $table->string('our_services_marketing_section')->default(120);
+
+            $table->string('website_design_title')->nullable()->after('about_us_image');
+            $table->string('website_design_title_ar')->nullable()->after('website_design_title');
+            $table->string('website_design_heading')->nullable()->after('website_design_title_ar');
+            $table->string('website_design_heading_ar')->nullable()->after('website_design_heading');
+            $table->longText('website_design_description')->nullable()->after('website_design_heading_ar');
+            $table->longText('website_design_description_ar')->nullable()->after('website_design_description');
+            $table->integer('website_design_years_experience')->default(8)->after('website_design_description_ar');
+            $table->string('website_design_image')->nullable()->after('website_design_years_experience');
 
             $table->softDeletes();
             $table->timestamps();

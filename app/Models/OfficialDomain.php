@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OfficialDomain extends Model
@@ -25,39 +23,11 @@ class OfficialDomain extends Model
     ];
 
     protected $casts = [
-        'translations' => AsCollection::class,
+        'translations' => 'json',
         'is_active' => 'boolean',
-        'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    // Scopes
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopePublished($query)
-    {
-        return $query->where('status', 'published');
-    }
-
-    public function scopeOrdered($query)
-    {
-        return $query->orderBy('order', 'asc');
-    }
-
-    // Relationships
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 
     // Boot lifecycle
     protected static function boot()
@@ -78,5 +48,27 @@ class OfficialDomain extends Model
                 $model->slug = \Illuminate\Support\Str::slug($name);
             }
         });
+    }
+
+    // Scopes
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order', 'asc');
+    }
+
+    // Relationships
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

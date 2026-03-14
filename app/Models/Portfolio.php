@@ -15,27 +15,21 @@ class Portfolio extends Model
 
     protected $fillable = [
         'slug',
+        'title',
+        'description',
         'image',
-        'website',
         'order',
-        'status',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
-        'published_at',
-        'translations',
         'tags',
     ];
 
     protected $casts = [
-        'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'translations' => 'array',
         'tags' => 'array',
         'is_active' => 'boolean',
-        'is_featured' => 'boolean',
     ];
 
     // Boot method لإنشاء slug تلقائياً
@@ -45,8 +39,7 @@ class Portfolio extends Model
 
         static::creating(function ($model) {
             if (!$model->slug) {
-                $title = $model->translations['ar']['name'] ?? $model->translations['en']['name'] ?? 'project';
-                $model->slug = Str::slug($title);
+                $model->slug = Str::slug($model->title);
             }
         });
     }
@@ -54,16 +47,6 @@ class Portfolio extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
-    }
-
-    public function scopePublished($query)
-    {
-        return $query->where('status', 'published');
     }
 
     public function creator()

@@ -9,6 +9,7 @@ use App\Http\Requests\Ticket\UpdateRequest;
 use App\Mail\TicketCopyMail;
 use App\Mail\TicketCreatedMail;
 use App\Mail\TicketRepliedMail;
+use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Traits\AblyService;
@@ -32,11 +33,12 @@ class TicketController extends Controller
     {
         $this->authorize('create', Ticket::class);
         $users = User::whereIn('role', ['superadmin', 'admin', 'support'])->get();
+        $departments = Department::where('is_active', true)->get(['id', 'name']);
 
         $a = rand(1, 9);
         $b = rand(1, 9);
         session(['ticket_verification' => $a + $b]);
-        return view('dashboard.tickets.create', compact('users', 'a', 'b'));
+        return view('dashboard.tickets.create', compact('users', 'departments', 'a', 'b'));
     }
 
     public function store(StoreRequest $request)
@@ -52,6 +54,7 @@ class TicketController extends Controller
         if ($message) {
             $ticket->messages()->create([
                 'user_id' => getActiveUserId(),
+                'department_id' => $ticket->department_id,
                 'message' => $message,
                 'sender_type' => 'support',
             ]);
@@ -71,18 +74,23 @@ class TicketController extends Controller
 
     public function show($id)
     {
-        $ticket = Ticket::with(['user', 'assignedTo', 'messages'])->find($id);
-        // $this->authorize('view', $ticket);
+        $ticket = Ticket::with(['user', 'assignedTo', 'messages.department', 'department'])->find($id);
+        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
-        return view('dashboard.tickets.show', compact('ticket'));
+        return view('dashboard.tickets.show', compact('ticket', 'departments'));
     }
 
-    public function edit(Ticket $ticket)
+    public function edit($id)
     {
+        $ticket = Ticket::find($id);
+        if (!$ticket)
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         $this->authorize('update', $ticket);
         $users = User::get(['id', 'name', 'role']);
-        return view('dashboard.tickets.edit', compact('ticket', 'users'));
+        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        return view('dashboard.tickets.edit', compact('ticket', 'users', 'departments'));
     }
 
     public function update(UpdateRequest $request, $id)
@@ -112,7 +120,7 @@ class TicketController extends Controller
 
     public function supportReply($ticketId)
     {
-        $ticket = Ticket::with(['user', 'assignedTo', 'messages'])->find($ticketId);
+        $ticket = Ticket::with(['user', 'assignedTo', 'messages.department', 'department'])->find($ticketId);
         $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
@@ -138,6 +146,7 @@ class TicketController extends Controller
         if ($messageText) {
             $messageRow = $ticket->messages()->create([
                 'user_id' => getActiveUserId(),
+                'department_id' => $ticket->department_id,
                 'message' => $messageText,
                 'sender_type' => 'support',
             ]);
@@ -148,13 +157,17 @@ class TicketController extends Controller
             }
 
             // Prepare comprehensive data for Ably with user info and formatted dates
+            $department = Department::find($ticket->department_id);
             $messageData = array_merge($messageRow->toArray(), [
                 'user_name' => getActiveUser()->name,
                 'ticket_name' => $ticket->name,
                 'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
                 'human_readable_date' => $messageRow->created_at->diffForHumans(),
                 'ticket_uuid' => $ticket->uuid,
-                'sender_photo' => getActiveUser()->photo ? 'storage/' . getActiveUser()->photo : null,
+                'user_photo' => getActiveUser()->photo ? 'storage/' . getActiveUser()->photo : null,
+                'department_name' => $department?->name ?? __('main.no_department'),
+                'department_image' => $department?->image ?? 'support.png',
+                'department_id' => $department?->id ?? null,
             ]);
 
             // Publish update to Ably channel (you can customize the channel name and event as needed)

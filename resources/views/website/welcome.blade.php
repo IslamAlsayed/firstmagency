@@ -1,5 +1,17 @@
 @extends('layouts.master')
 
+@push('styles')
+    <style>
+        .about-section {
+            & .text {
+                &::before {
+                    background-image: url('{{ asset('assets/' . $settings->about_us_image2) }}');
+                }
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     {{-- Hero Section --}}
     @include('sections.hero')

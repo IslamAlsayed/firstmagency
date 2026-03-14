@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\ProgrammingCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +20,7 @@ class ArticleSeeder extends Seeder
         Article::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $categories = Category::all();
+        $categories = ProgrammingCategory::all();
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
 
         if (!$user) return; // لا توجد مستخدمين

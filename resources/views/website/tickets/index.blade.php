@@ -61,19 +61,17 @@
                     </div>
                     {{-- Select Department --}}
                     <div>
-                        <label for="department" class="font-semibold">
+                        <label for="department_id" class="font-semibold">
                             {{ __('main.contact_form_department') }}
                             <span class="text-red-600">*</span>
                         </label>
-                        <div class="input flex" style="@error('department') border: 1px solid red @enderror">
-                            <select id="department" name="department">
-                                <option value="" {{ old('department') == '' ? 'selected' : '' }}>{{ __('main.contact_form_department_choose') }}</option>
-                                <option value="sales" {{ old('department') == 'sales' ? 'selected' : '' }}>{{ __('main.contact_form_department_sales') }}
+                        <div class="input flex" style="@error('department_id') border: 1px solid red @enderror">
+                            <select id="department_id" name="department_id" required>
+                                <option value="" {{ old('department_id') == '' ? 'selected' : '' }}>{{ __('main.select') . ' ' . __('main.department') }}
                                 </option>
-                                <option value="support" {{ old('department') == 'support' ? 'selected' : '' }}>{{ __('main.contact_form_department_support') }}
-                                </option>
-                                <option value="general" {{ old('department') == 'general' ? 'selected' : '' }}>{{ __('main.contact_form_department_general') }}
-                                </option>
+                                @foreach ($departments as $dept)
+                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>
+                                @endforeach
                             </select>
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/pin.svg') }}" alt="{{ __('main.contact_form_department') }}">
@@ -118,7 +116,7 @@
                     {{-- Optional Attachment --}}
                     <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
                     <div class="attachments flex flex-col gap-4" id="attachments-container">
-                        <div class="input flex" style="@error('attachments') border: 1px solid red @enderror">
+                        <div class="input flex" style="@error('attachments') border: 1px solid red @enderror" data-message="{{ __('messages.no_file_chosen') }}">
                             <input type="file" id="attachments" name="attachments[]">
                         </div>
                     </div>

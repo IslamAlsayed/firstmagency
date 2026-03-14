@@ -17,14 +17,16 @@
                         $title = $client['translations'][$locale]['name'] ?? $slug;
                     }
                 @endphp
-                <a href="{{ $website }}" target="_blank" class="client" title="{{ $title }}">
+                <div class="client cursor-pointer" title="{{ $title }}">
                     <img src="{{ asset('storage/' . $image) }}" alt="{{ $altText ?? $slug }}" loading="lazy">
-                </a>
+                </div>
             @endforeach
         @else
-            <div class="col-span-full text-center py-8">
-                <p class="text-gray-500">{{ __('main.no_clients_found') }}</p>
-            </div>
+            @for ($i = 1; $i <= 12; $i++)
+                <div class="client cursor-pointer" title="{{ 'Client ' . $i . ' Logo' }}">
+                    <img src="{{ asset('assets/images/website/clients/' . $i . '.png') }}" alt="Client {{ $i }} Logo" loading="lazy">
+                </div>
+            @endfor
         @endif
     </div>
 

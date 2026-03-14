@@ -8,10 +8,12 @@
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
-                    {{ $ticket->subject ?? __('main.ticket_details') }}
+                    {{ $ticket->subject ?? __('main.ticket_details') }} - <span
+                        class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
+                        {{ __('main.' . $ticket->status) }} </span>
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
-                    {{ $ticket->user?->name ?? '-' }} • {{ $ticket->created_at?->format('d M Y') }}
+                    {{ $ticket->user?->name ?? '-' }} • {{ $ticket->created_at?->format('d M Y') }} - <span class="font-semibold">{{ $ticket->uuid }}</span>
                 </div>
             </div>
 
@@ -47,13 +49,23 @@
                                     </div>
                                     <div class="body">
                                         <div class="meta flex items-center gap-2">
-                                            <span class="who font-semibold">{{ $ticket->name ?? __('main.user') }}</span>
+                                            <div class="flex flex-col gap-2">
+                                                <span
+                                                    class="who font-semibold">{{ $message->sender_type == 'customer' ? $ticket->name : $message->user?->name ?? __('main.user') }}</span>
+                                                <div class="flex gap-2 flex-wrap">
+                                                    <span
+                                                        class="text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800' }}">
+                                                        {{ $message->sender_type == 'customer' ? 'عميل' : 'دعم' }}
+                                                    </span>
+                                                    @if ($message->department)
+                                                        <span class="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-800">
+                                                            {{ $message->department->name }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                             <span class="time">{{ $message->created_at->format('d/m/Y H:i') }} -
                                                 {{ $message->created_at->diffForHumans() }}</span>
-                                            <span
-                                                class="text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800' }}">
-                                                {{ $message->sender_type == 'customer' ? 'عميل' : 'دعم' }}
-                                            </span>
                                         </div>
                                         <div class="content">{!! $message->message !!}</div>
                                         <div class="files flex items-center gap-2">
@@ -118,7 +130,7 @@
                         {{-- Optional Attachment --}}
                         <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
                         <div class="attachments flex flex-col gap-4" id="attachments-container">
-                            <div class="input flex w-half p-2 rounded-[9px]"
+                            <div class="input flex w-half p-2 rounded-[9px]" data-message="{{ __('messages.no_file_chosen') }}"
                                 style="border: 1px solid var(--primary); @error('attachments') border: 1px solid red !important @enderror">
                                 <input type="file" id="attachments" name="attachments[]">
                             </div>
@@ -171,6 +183,7 @@
         // Subscribe to new customer replies
         ticketUpdatesChannel.subscribe('new-customer-reply', (ablyMessage) => {
             const messageData = ablyMessage.data;
+            console.log('SupportMessageData: ', messageData);
 
             // Only add message if it belongs to current ticket
             if (messageData.ticket_uuid === '{{ $ticket->uuid }}') {
@@ -232,11 +245,11 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(attachment => `
-                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
-                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                    {{ __('main.attachment') }}
-                                                                </div>
-                                                            `).join('')
+                                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
+                                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                    {{ __('main.attachment') }}
+                                                                                                </div>
+                                                                                            `).join('')
                                     : ''
                                 }
                             </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DashboardsAndSystem;
 use App\Models\FAQ;
-use App\Models\FeaturesHosting;
+use App\Models\HostingFeature;
 use App\Models\HostingPackage;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,8 +13,8 @@ class HostingController extends Controller
     public function index()
     {
         $data = [
-            'features_hosting' => Cache::remember('hosting_features', 1800, function () {
-                return FeaturesHosting::ordered()->get();
+            'hosting_features' => Cache::remember('hosting_features', 1800, function () {
+                return HostingFeature::ordered()->get();
             }),
 
             'packages' => [

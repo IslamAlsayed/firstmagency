@@ -15,24 +15,18 @@ class Client extends Model
         'slug',
         'image',
         'alt_text',
-        'website',
         'order',
-        'status',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
-        'published_at',
         'translations',
     ];
 
     protected $casts = [
-        'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'translations' => 'array',
         'is_active' => 'boolean',
-        'is_featured' => 'boolean',
     ];
 
     // Boot method لإنشاء slug تلقائياً
@@ -51,11 +45,6 @@ class Client extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
     }
 
     public function creator()

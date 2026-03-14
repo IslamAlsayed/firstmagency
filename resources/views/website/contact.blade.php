@@ -111,7 +111,7 @@
                     {{-- Optional Attachment --}}
                     <label for="attachment" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
                     <div class="attachments flex flex-col gap-4" id="attachments-container">
-                        <div class="input flex">
+                        <div class="input flex" data-message="{{ __('messages.no_file_chosen') }}">
                             <input type="file" id="attachment">
                         </div>
                     </div>

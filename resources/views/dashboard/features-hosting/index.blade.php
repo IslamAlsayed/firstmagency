@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($featuresHosting as $feature)
+                            @forelse($hostingFeatures as $feature)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
                                     <td class="p-4 text-sm">
                                         @if ($feature->image)
@@ -81,7 +81,7 @@
                                             'modelId' => $feature->id,
                                             'field' => 'is_active',
                                             'value' => (bool) $feature->is_active,
-                                            'modelClass' => 'featuresHosting',
+                                            'modelClass' => 'hostingFeature',
                                         ])
                                     </td>
                                     <td class="p-4 text-sm">
@@ -89,7 +89,7 @@
                                             'modelId' => $feature->id,
                                             'field' => 'is_featured',
                                             'value' => (bool) $feature->is_featured,
-                                            'modelClass' => 'featuresHosting',
+                                            'modelClass' => 'hostingFeature',
                                         ])
                                     </td>
                                     <td class="p-4 text-sm text-gray-500">{{ $feature->created_at?->format('d/m/Y') ?? '--' }}</td>
@@ -111,9 +111,9 @@
                     </table>
                 </div>
 
-                @if ($featuresHosting->hasPages())
+                @if ($hostingFeatures->hasPages())
                     <div class="mt-6 border-t pt-4">
-                        {{ $featuresHosting->links() }}
+                        {{ $hostingFeatures->links() }}
                     </div>
                 @endif
             </div>

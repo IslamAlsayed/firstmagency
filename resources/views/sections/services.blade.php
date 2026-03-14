@@ -16,18 +16,9 @@
                                 <img src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}"
                                     alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
                             </div>
-                            @php
-                                $locale = app()->getLocale();
-                                if (is_object($service)) {
-                                    $title = $service->translations[$locale]['title'] ?? ($service->slug ?? '');
-                                    $description = $service->translations[$locale]['description'] ?? '';
-                                } else {
-                                    $title = $service['translations'][$locale]['title'] ?? ($service['slug'] ?? '');
-                                    $description = $service['translations'][$locale]['description'] ?? '';
-                                }
-                            @endphp
-                            <div class="service-title font-semibold">{{ $title }}</div>
-                            <div class="service-description">{{ $description }}</div>
+                            <div class="service-title font-semibold">{{ $service['translations'][app()->getLocale()]['title'] ?? ($service['slug'] ?? '') }}
+                            </div>
+                            <div class="service-description">{{ $service['translations'][app()->getLocale()]['description'] ?? '' }}</div>
                         </div>
                         <div class="service-action">
                             <button class="btn-link main-color font-semibold">

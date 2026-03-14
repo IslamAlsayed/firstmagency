@@ -79,11 +79,8 @@ class ClientSeeder extends Seeder
                     ],
                     'image' => $imagePath,
                     'alt_text' => 'Client ' . $i . ' Logo',
-                    'website' => 'https://example-client-' . $i . '.com',
                     'order' => $i,
-                    'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $i <= 4, // Featured first 4 clients
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

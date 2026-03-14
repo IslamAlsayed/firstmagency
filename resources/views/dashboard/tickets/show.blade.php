@@ -96,16 +96,16 @@
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.department') }}
                                 <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketDepartmentEnums::from($ticket->department ?? 'general')->badgeColor() }}">
-                                    {{ __('main.' . ($ticket->department ?? 'general')) }}
+                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\DepartmentEnums::from($ticket->department?->slug)->badgeColor() }}">
+                                    {{ $ticket->department?->name ?? __('main.no_department') }}
                                 </span>
                             </p>
                             @include('dashboard.components.status-actions', [
                                 'record' => $ticket,
                                 'models' => 'tickets',
                                 'modelClass' => 'ticket',
-                                'fieldName' => 'department',
-                                'availableOptions' => array_column(\App\Enum\TicketDepartmentEnums::cases(), 'value'),
+                                'fieldName' => 'department_id',
+                                'availableOptions' => $departments->pluck('name', 'id')->toArray(),
                             ])
                         </div>
                         <div>
@@ -116,15 +116,6 @@
                             <p class="text-sm text-gray-500">{{ __('main.updated_at') }}</p>
                             <p class="text-sm text-gray-800">{{ $ticket->updated_at?->format('d/m/Y H:i') }}</p>
                         </div>
-                        {{-- <div>
-                            <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
-                            @include('dashboard.components.toggle-hold', [
-                                'modelId' => $ticket->id,
-                                'field' => 'is_active',
-                                'value' => (bool) $ticket->is_active,
-                                'modelClass' => 'ticket',
-                            ])
-                        </div> --}}
                     </div>
                 </div>
             </div>

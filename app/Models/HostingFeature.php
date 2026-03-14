@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class FeaturesHosting extends Model
+class HostingFeature extends Model
 {
     use HasFactory, SoftDeletes;
-
-    protected $table = 'features_hosting';
 
     protected $fillable = [
         'slug',
@@ -19,7 +17,6 @@ class FeaturesHosting extends Model
         'image',
         'order',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
     ];
@@ -54,11 +51,6 @@ class FeaturesHosting extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeFeature($query)
-    {
-        return $query->where('is_featured', true);
     }
 
     public function creator()

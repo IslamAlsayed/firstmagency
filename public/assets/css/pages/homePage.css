@@ -236,8 +236,8 @@
             }
         }
 
-        & .description {
-            line-height: 2.2;
+        & .description * {
+            line-height: 2.2 !important;
         }
 
         & button {

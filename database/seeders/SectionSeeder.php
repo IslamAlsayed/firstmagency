@@ -260,7 +260,5 @@ class SectionSeeder extends Seeder
                 $section
             );
         }
-
-        $this->command->info('Sections seeded successfully!');
     }
 }

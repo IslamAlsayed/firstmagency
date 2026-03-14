@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
 class ProjectSeeder extends Seeder
@@ -21,97 +22,43 @@ class ProjectSeeder extends Seeder
         $user = User::where('email', 'content@example.com')->first() ?? User::first();
         if (!$user) return; // لا توجد مستخدمين
 
-        $projects = [
-            [
-                'translations' => [
-                    'ar' => [
-                        'name' => 'شركة تقنية رائدة',
-                        'description' => 'متخصصة في تطوير الحلول الرقمية والبرمجيات',
-                    ],
-                    'en' => [
-                        'name' => 'Leading Tech Company',
-                        'description' => 'Specialized in developing digital solutions and software',
-                    ],
-                ],
-                'slug' => 'leading-tech-company',
-                'website' => 'https://techcompany.com',
-                'order' => 1,
-                'is_active' => true,
-                'is_featured' => true,
-            ],
-            [
-                'translations' => [
-                    'ar' => [
-                        'name' => 'شركة استشارات عالمية',
-                        'description' => 'تقدم خدمات الاستشارة لأكبر الشركات',
-                    ],
-                    'en' => [
-                        'name' => 'Global Consulting Firm',
-                        'description' => 'Provides consulting services to major companies',
-                    ],
-                ],
-                'slug' => 'global-consulting-firm',
-                'website' => 'https://consulting.com',
-                'order' => 2,
-                'is_active' => true,
-                'is_featured' => true,
-            ],
-            [
-                'translations' => [
-                    'ar' => [
-                        'name' => 'شركة البناء والتشييد',
-                        'description' => 'متخصصة في المشاريع السكنية والتجارية',
-                    ],
-                    'en' => [
-                        'name' => 'Construction Company',
-                        'description' => 'Specialized in residential and commercial projects',
-                    ],
-                ],
-                'slug' => 'construction-company',
-                'website' => 'https://construction.com',
-                'order' => 3,
-                'is_active' => true,
-                'is_featured' => false,
-            ],
-            [
-                'translations' => [
-                    'ar' => [
-                        'name' => 'شركة التسويق الرقمي',
-                        'description' => 'خبرة عارمة في التسويق الإلكتروني والإعلانات',
-                    ],
-                    'en' => [
-                        'name' => 'Digital Marketing Agency',
-                        'description' => 'Vast experience in digital marketing and advertising',
-                    ],
-                ],
-                'slug' => 'digital-marketing-agency',
-                'website' => 'https://marketing.com',
-                'order' => 4,
-                'is_active' => true,
-                'is_featured' => false,
-            ],
-            [
-                'translations' => [
-                    'ar' => [
-                        'name' => 'شركة التصميم الإبداعي',
-                        'description' => 'تصميم الهويات البصرية والمواقع الإلكترونية',
-                    ],
-                    'en' => [
-                        'name' => 'Creative Design Studio',
-                        'description' => 'Visual identity and website design',
-                    ],
-                ],
-                'slug' => 'creative-design-studio',
-                'website' => 'https://design.com',
-                'order' => 5,
-                'is_active' => true,
-                'is_featured' => true,
-            ],
-        ];
+        $projects = config('projects_companies');
 
-        foreach ($projects as $project) {
+        // Paths configuration
+        $sourcePath = base_path('public/assets/images/website/projects');
+        $destBasePath = storage_path('app/public/uploads/projects');
+
+        // Ensure the destination directory exists
+        if (!File::isDirectory($destBasePath)) {
+            File::makeDirectory($destBasePath, 0755, true);
+        }
+
+        foreach ($projects as $i => $data) {
+            $sourceImageFile = $sourcePath . '/' . ($i + 1) . '.png';
+
+            if (!File::exists($sourceImageFile)) {
+                echo "⚠️  Source file not found for project index " . ($i + 1) . ": $sourceImageFile\n";
+                continue;
+            }
+
+            // Create directory for this project
+            $mainDir = $destBasePath . '/' . ($i + 1);
+            if (!File::isDirectory($mainDir)) {
+                File::makeDirectory($mainDir, 0755, true);
+            }
+
+            // Copy the main image
+            $destImageFile = $mainDir . '/' . ($i + 1) . '.png';
+            if (!File::exists($destImageFile)) {
+                File::copy($sourceImageFile, $destImageFile);
+            }
+
+            // Save relative paths for database storage
+            $data['slug'] = strtolower(str_replace(' ', '-', $data['title']));
+            $data['image'] = 'uploads/projects/' . ($i + 1) . '/' . ($i + 1) . '.png';
+
             Project::create([
-                ...$project,
+                ...$data,
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
             ]);

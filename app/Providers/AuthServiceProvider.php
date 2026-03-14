@@ -20,7 +20,7 @@ use App\Models\Ticket;
 use App\Models\Programming;
 use App\Models\OurProgramming;
 use App\Models\ProjectStep;
-use App\Models\FeaturesHosting;
+use App\Models\HostingFeature;
 use App\Models\DashboardsAndSystem;
 use App\Models\HostingPackage;
 use App\Policies\UserPolicy;
@@ -43,7 +43,7 @@ use App\Policies\TicketPolicy;
 use App\Policies\ProgrammingPolicy;
 use App\Policies\OurProgrammingPolicy;
 use App\Policies\ProjectStepPolicy;
-use App\Policies\FeaturesHostingPolicy;
+use App\Policies\HostingFeaturePolicy;
 use App\Policies\DashboardsAndSystemPolicy;
 use App\Policies\HostingPackagePolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -79,7 +79,7 @@ class AuthServiceProvider extends ServiceProvider
         Programming::class => ProgrammingPolicy::class,
         OurProgramming::class => OurProgrammingPolicy::class,
         ProjectStep::class => ProjectStepPolicy::class,
-        FeaturesHosting::class => FeaturesHostingPolicy::class,
+        HostingFeature::class => HostingFeaturePolicy::class,
         DashboardsAndSystem::class => DashboardsAndSystemPolicy::class,
         HostingPackage::class => HostingPackagePolicy::class,
     ];

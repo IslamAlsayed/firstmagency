@@ -384,9 +384,9 @@
             height: auto !important;
             max-height: fit-content;
             text-align: start;
-            border: 1px solid var(--light-muted-color);
+            border: 1px solid var(--dark-muted-color);
             box-shadow: 0 12px 26px rgba(0, 0, 0, .07);
-            background: radial-gradient(circle at 15% 15%, rgba(99, 102, 241, .14), transparent 55%),
+            background: radial-gradient(circle at 15% 15%, rgba(146, 149, 255, 0.18), transparent 55%),
                 radial-gradient(circle at 85% 25%, rgba(6, 182, 212, .10), transparent 55%),
                 radial-gradient(circle at 30% 90%, rgba(245, 158, 11, .10), transparent 55%);
 

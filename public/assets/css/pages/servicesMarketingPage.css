@@ -82,9 +82,10 @@
             .platform {
                 padding: 25px;
                 border-radius: 12px;
+                margin-bottom: 0;
                 backdrop-filter: blur(8px);
                 border: 1px solid var(--dark-muted-color);
-                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .06);
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
                 transition: all 0.1s ease;
                 position: relative;
                 overflow: hidden;

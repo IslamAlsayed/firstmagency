@@ -4,7 +4,7 @@ use App\Http\Controllers\Dashboard\ArticleController;
 use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\DashboardsAndSystemController;
 use App\Http\Controllers\Dashboard\FAQController;
-use App\Http\Controllers\Dashboard\FeaturesHostingController;
+use App\Http\Controllers\Dashboard\HostingFeatureController;
 use App\Http\Controllers\Dashboard\HostingPackageController;
 use App\Http\Controllers\Dashboard\LineWorkController;
 use App\Http\Controllers\Dashboard\MarketingPackageController;
@@ -77,7 +77,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::resource('programmings', ProgrammingController::class)->names('programmings');
     Route::resource('our-programmings', OurProgrammingController::class)->names('our-programmings');
     Route::resource('project-steps', ProjectStepController::class)->names('project-steps');
-    Route::resource('features-hosting', FeaturesHostingController::class)->names('features-hosting');
+    Route::resource('features-hosting', HostingFeatureController::class)->names('features-hosting');
     Route::resource('dashboards-and-systems', DashboardsAndSystemController::class)->names('dashboards-and-systems');
     Route::resource('hosting-packages', HostingPackageController::class)->names('hosting-packages');
     Route::resource('faqs', FAQController::class)->names('faqs');

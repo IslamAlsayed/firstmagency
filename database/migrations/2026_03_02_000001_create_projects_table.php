@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
-            $table->json('translations')->nullable(); // {ar: {name, description}, en: {name, description}}
+            $table->string('title')->index();
             $table->string('image')->nullable();
-            $table->string('website')->nullable();
             $table->integer('order')->default(0)->index();
-            $table->string('status')->default('published'); // 'draft', 'published'
+            $table->json('tags')->nullable();
             $table->boolean('is_active')->default(true)->index();
-            $table->boolean('is_featured')->default(false);
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

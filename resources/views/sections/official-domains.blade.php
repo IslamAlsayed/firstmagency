@@ -6,7 +6,7 @@
 
     <div class="grid grid-cols-2 gap-4">
         @php
-            $officialDomainsList = isset($domains) && count($domains) > 0 ? $domains : config('official-domains') ?? [];
+            $officialDomainsList = isset($domains) && count($domains) > 0 ? $domains : [];
         @endphp
         @if ($officialDomainsList && count($officialDomainsList) > 0)
             @foreach ($officialDomainsList as $domain)
@@ -20,18 +20,14 @@
                         {{ $domain->title ?? $domain->slug }}
                     </div>
                     <div class="details text-right" data-official-answer>
-                        @if ($domain->translations[app()->getLocale()] && count($domain->translations[app()->getLocale()]) > 0)
-                            @foreach ($domain->translations[app()->getLocale()] as $child)
-                                <div class="detail">
-                                    @if (isset($child['badge']))
-                                        <div class="kt-badge mt-4 mb-4">{{ $child['badge'] }}</div>
-                                    @endif
-                                    <div class="answer text-sm text-gray-600" data-official-answer>
-                                        {{ $child['details'] ?? ($child['description'] ?? '') }}
-                                    </div>
+                        @foreach ($domain->translations as $child)
+                            <div class="detail">
+                                <div class="kt-badge mt-4 mb-4">{{ $domain->translations[app()->getLocale()]['badge'] }}</div>
+                                <div class="answer text-sm text-gray-600" data-official-answer>
+                                    {{ $domain->translations[app()->getLocale()]['details'] ?? ($domain->translations[app()->getLocale()]['description'] ?? '') }}
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             @endforeach

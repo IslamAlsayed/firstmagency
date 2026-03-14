@@ -15,7 +15,9 @@
         @include('sections.packages-marketing', ['packages' => $data['packages']])
 
         {{-- Important Articles Section --}}
-        @include('sections.important-articles-marketing', ['articles' => $data['articles']])
+        @if (isset($data['articles']) && count($data['articles']) > 0)
+            @include('sections.important-articles-marketing', ['articles' => $data['articles']])
+        @endif
 
         {{-- Are You Ready Section --}}
         @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? config('faqs-services-marketing')])

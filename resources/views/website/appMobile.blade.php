@@ -9,7 +9,7 @@
         @include('sections.order-your-app')
 
         {{-- Categories Programming Section --}}
-        @include('sections.categories-programming', ['categories' => $data['categories'] ?? []])
+        @include('sections.programming-categories', ['programming_categories' => $data['programming_categories'] ?? []])
 
         {{-- Step Work Section --}}
         @include('sections.project-steps', ['steps' => $data['project_steps'] ?? []])
@@ -18,11 +18,13 @@
         @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? config('faqs-apps')])
 
         {{-- Important Articles Section --}}
-        @include('sections.important-articles', [
-            'articles' => $data['articles'] ?? [],
-            'title' => __('main.important_articles_title'),
-            'desc' => __('main.important_articles_description'),
-        ])
+        @if (isset($data['articles']) && count($data['articles']) > 0)
+            @include('sections.important-articles', [
+                'articles' => $data['articles'] ?? [],
+                'title' => __('main.important_articles_title'),
+                'desc' => __('main.important_articles_description'),
+            ])
+        @endif
     </div>
 @endsection
 

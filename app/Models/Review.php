@@ -18,6 +18,8 @@ class Review extends Model
         'photo',
         'audio',
         'status',
+        'created_by',
+        'updated_by',
     ];
 
     protected $casts = [
@@ -45,5 +47,15 @@ class Review extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

@@ -14,7 +14,7 @@
         @include('sections.hero-hosting')
 
         {{-- Hosting Features Section --}}
-        @include('sections.features-hosting', ['features' => $data['features_hosting'] ?? []])
+        @include('sections.hosting-features', ['features' => $data['hosting_features'] ?? []])
 
         {{-- Hosting Packages Section --}}
         @include('sections.packages-hosting', ['packages' => $data['packages']])

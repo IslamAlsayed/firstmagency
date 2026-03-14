@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\StoreRequest;
 use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\ProgrammingCategory;
 use App\Traits\PhotoUploadTrait;
 use App\Traits\GlobalDestroyTrait;
 
@@ -30,7 +30,7 @@ class ArticleController extends Controller
     public function create()
     {
         $this->authorize('create', Article::class);
-        $categories = Category::active()->get();
+        $categories = ProgrammingCategory::active()->get();
         return view('dashboard.articles.create', compact('categories'));
     }
 
@@ -85,7 +85,7 @@ class ArticleController extends Controller
         if (!$article)
             return redirect()->route('dashboard.articles.index')->withError(__('messages.type_not_found', ['type' => __('main.article')]));
         $this->authorize('update', $article);
-        $categories = Category::active()->get();
+        $categories = ProgrammingCategory::active()->get();
         return view('dashboard.articles.edit', compact('article', 'categories'));
     }
 
