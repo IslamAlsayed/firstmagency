@@ -70,7 +70,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            ProgrammingCategory::firstOrCreate(['name' => $category['name']], $category);
+            ProgrammingCategory::create(['slug' => $category['slug']], $category);
         }
     }
 }
