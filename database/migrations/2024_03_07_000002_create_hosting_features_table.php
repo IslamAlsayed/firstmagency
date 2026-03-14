@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('hosting_features')) {
+            return;
+        }
         Schema::create('hosting_features', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
@@ -18,8 +21,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(1);
-            $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete("set null");
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete("set null");
             $table->timestamps();
             $table->softDeletes();
         });
