@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             LineWorkSeeder::class,
             PartnerSeeder::class,
             FAQSeeder::class,
-            // ProgrammingCategorySeeder::class,
+            ProgrammingCategorySeeder::class,
             ProgrammingSystemSeeder::class,
             ProjectStepSeeder::class,
             HostingFeatureSeeder::class,
