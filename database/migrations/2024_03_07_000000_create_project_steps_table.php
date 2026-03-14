@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('project_steps')) {
+            return;
+        }
         Schema::create('project_steps', function (Blueprint $table) {
             $table->id();
             $table->json('translations'); // ar/en: title, content
