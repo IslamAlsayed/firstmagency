@@ -13,7 +13,7 @@
                         {{ __('main.' . $ticket->status) }} </span>
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
-                    {{ $ticket->user?->name ?? '-' }} • {{ $ticket->created_at?->format('d M Y') }} - <span class="font-semibold">{{ $ticket->uuid }}</span>
+                    {{ $ticket->created_at?->format('d M Y') }} • <span class="font-semibold">#{{ $ticket->uuid }}</span>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                     </a>
                 @endcan
                 <a href="{{ route('dashboard.tickets.show', $ticket->id) }}" class="kt-btn kt-btn-outline-primary">
-                    {{ __('main.show') }}
+                    {{ __('main.details') }}
                 </a>
                 <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
                     {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
@@ -36,115 +36,89 @@
 
     <div class="kt-container-fixed p-0">
         <div class="grid gap-4">
-            @if ($ticket->messages && count($ticket->messages) > 0)
-                <article>
-                    <div class="flex flex-col gap-4 messages-container">
-                        @foreach ($ticket->messages as $message)
-                            <div class="flex justify-between gap-4 client {{ $message->sender_type }}" data-message-id="{{ $message->id }}">
-                                <div class="flex gap-4">
-                                    <div class="avatar">
-                                        <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                            <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="أيقونة العميل" class="fal-content-img">
-                                        </a>
-                                    </div>
-                                    <div class="body">
-                                        <div class="meta flex items-center gap-2">
-                                            <div class="flex flex-col gap-2">
-                                                <span
-                                                    class="who font-semibold">{{ $message->sender_type == 'customer' ? $ticket->name : $message->user?->name ?? __('main.user') }}</span>
-                                                <div class="flex gap-2 flex-wrap">
-                                                    <span
-                                                        class="text-xs px-2 py-1 rounded-full {{ $message->sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800' }}">
-                                                        {{ $message->sender_type == 'customer' ? 'عميل' : 'دعم' }}
-                                                    </span>
-                                                    @if ($message->department)
-                                                        <span class="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-800">
-                                                            {{ $message->department->name }}
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <span class="time">{{ $message->created_at->format('d/m/Y H:i') }} -
-                                                {{ $message->created_at->diffForHumans() }}</span>
-                                        </div>
-                                        <div class="content">{!! $message->message !!}</div>
-                                        <div class="files flex items-center gap-2">
-                                            @if ($message->attachments && is_array($message->attachments) && count($message->attachments) > 0)
-                                                @foreach ($message->attachments as $attachment)
-                                                    <div class="client-attachment flex items-center gap-2 clickable-img"
-                                                        data-src="{{ asset('storage/' . $attachment) }}">
-                                                        <img draggable="false" role="img" alt="📎"
-                                                            src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                        {{ __('main.attachment') }}
-                                                    </div>
-                                                @endforeach
-                                            @endif
+            {{-- Messages Section --}}
+            <article id="messages-section" class="messages-section {{ $ticketData['messages'] && count($ticketData['messages']) > 0 ? '' : 'hidden' }}" style="padding-inline-end: 3px;">
+                <div class="flex flex-col gap-4 messages-container">
+                    @foreach ($ticketData['messages'] as $message)
+                        <div class="flex justify-between gap-4 client {{ $message['sender_type'] == 'customer' ? 'customer' : '' }}" data-message-id="{{ $message['id'] }}"
+                            style="background-color: {{ $message['department']['bg_color'] ?? '' }}; border: 1px solid {{ $message['department']['border_color'] ?? 'var(--primary)' }}; border-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 4px solid {{ $message['department']['border_main_color'] ?? 'var(--primary)' }};">
+                            <div class="flex gap-4">
+                                <div class="avatar">
+                                    @php
+                                        if ($message['sender_type'] == 'customer') {
+                                            $imagePath = asset('assets/images/avatars/avatar.png');
+                                            $alt = __('main.client_icon');
+                                        } else {
+                                            $imagePath = $message['user']['photo'] ? $message['user']['photo'] : asset('assets/images/avatars/avatar.png');
+                                            $alt = __('main.support_icon');
+                                        }
+                                    @endphp
+                                    <a href="{{ $imagePath }}" class="client-avatar block">
+                                        <img decoding="async" src="{{ $imagePath }}" alt="{{ $alt }}" class="fal-content-img">
+                                    </a>
+                                </div>
+                                <div class="body">
+                                    <div class="meta">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="who font-semibold">
+                                                {{ $message['sender_type'] == 'customer' ? $ticket->name : $message['user']['name'] ?? __('main.support') }}
+                                            </span>
+                                            <span class="time mt-1">
+                                                {{ $message['created_at'] }} - {{ $message['human_readable_date'] }}
+                                            </span>
                                         </div>
 
-                                        <div class="edit-form" style="display:none;">
-                                            <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                <textarea class="edit-textarea w-full p-2 border rounded" rows="4">{{ strip_tags($message->message) }}</textarea>
-                                                <div class="edit-buttons flex gap-2 mt-3">
-                                                    <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-                                                        data-message-id="{{ $message->id }}">
-                                                        {{ __('main.save') }}
-                                                    </button>
-                                                    <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">
-                                                        {{ __('main.cancel') }}
-                                                    </button>
+                                        <div class="flex gap-2">
+                                            <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message"
+                                                style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--primary)' }};">
+                                                {{ $message['sender_type'] == 'customer' ? __('main.customer') : $message['department']['name'] ?? __('main.support') }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="content">{!! $message['message'] !!}</div>
+                                    <div class="files flex items-center gap-2">
+                                        @if ($message['attachments'] && is_array($message['attachments']) && count($message['attachments']) > 0)
+                                            @foreach ($message['attachments'] as $attachment)
+                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/' . $attachment) }}">
+                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                    {{ __('main.attachment') }}
                                                 </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+                                    <div class="edit-form" style="display:none;">
+                                        <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                            <textarea class="edit-textarea w-full p-2 border rounded" rows="4">{{ strip_tags($message['message']) }}</textarea>
+                                            <div class="edit-buttons flex gap-2 mt-3">
+                                                <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="{{ $message['id'] }}">
+                                                    {{ __('main.save') }}
+                                                </button>
+                                                <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">
+                                                    {{ __('main.cancel') }}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="actions flex gap-2">
-                                    <div class="message-edit-btn px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
-                                        data-message-id="{{ $message->id }}">
-                                        {{ __('main.edit') }}
-                                    </div>
-                                    <div class="message-delete-btn px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" data-message-id="{{ $message->id }}">
-                                        {{ __('main.delete') }}
-                                    </div>
-                                </div>
                             </div>
-                        @endforeach
-                    </div>
-                </article>
-            @else
-                <article>
-                    <p class="text-gray-500 text-center py-4">لا توجد رسائل حتى الآن</p>
-                </article>
-            @endif
 
-            <article>
-                <form action="{{ route('dashboard.tickets.support-reply.store', ['ticketId' => $ticket->id]) }}" method="POST" enctype="multipart/form-data"
-                    class="tickets-message-form">
-                    @csrf
-                    @include('dashboard.components.input-text-editor', [
-                        'name' => 'your_reply',
-                        'value' => old('your_reply'),
-                    ])
-
-                    <div class="group my-4">
-                        {{-- Optional Attachment --}}
-                        <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
-                        <div class="attachments flex flex-col gap-4" id="attachments-container">
-                            <div class="input flex w-half p-2 rounded-[9px]" data-message="{{ __('messages.no_file_chosen') }}"
-                                style="border: 1px solid var(--primary); @error('attachments') border: 1px solid red !important @enderror">
-                                <input type="file" id="attachments" name="attachments[]">
+                            <div class="actions {{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'flex' }}">
+                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
+                                    {{ __('main.edit') }}
+                                </button>
+                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
+                                    {{ __('main.delete') }}
+                                </button>
                             </div>
                         </div>
+                    @endforeach
+                </div>
+            </article>
 
-                        <div class="add-attachment-input mt-4" id="add-attachment-btn">
-                            {{ __('main.contact_form_add_attachment') }}
-                        </div>
-                    </div>
-
-                    <button class="kt-btn kt-btn-outline-primary font-semibold">
-                        {{ __('main.send_reply') }}
-                    </button>
-                </form>
+            {{-- Reply Form --}}
+            <article class="{{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : '' }}">
+                @include('dashboard.tickets.reply-form', ['ticket' => $ticket])
             </article>
         </div>
     </div>
@@ -158,7 +132,7 @@
             if (container) {
                 const div = document.createElement('div');
                 div.className = 'input flex w-half p-2 rounded-[9px]';
-                div.style = 'border: 1px solid var(--primary);';
+                div.style = 'border: 1px solid var(--dark-muted-color);';
                 div.innerHTML = '<input type="file" name="attachments[]">';
                 container.appendChild(div);
             }
@@ -172,7 +146,16 @@
         }
     </script>
 
+    @include('dashboard.components.messages-action')
+
     <script>
+        // Translation variables for JavaScript
+        const translations = {
+            customer: '{{ __('main.customer') }}',
+            support: '{{ __('main.support') }}',
+            clientIcon: '{{ __('main.client_icon') }}'
+        };
+
         // Initialize Ably for real-time ticket updates
         const ticketUpdates = new Ably.Realtime({
             key: '{{ config('app.ably_key') }}',
@@ -180,10 +163,32 @@
         });
         const ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
 
+        // Subscribe to ticket deletion events
+        ticketUpdatesChannel.subscribe('ticket-deleted', (ablyMessage) => {
+            const deletedData = ablyMessage.data;
+
+            // If the deleted ticket is the current one, redirect user
+            if (deletedData.uuid === '{{ $ticket->uuid }}') {
+                // Show notification
+                if (window.showToast && typeof window.showToast === 'function') {
+                    window.showToast({
+                        type: 'warning',
+                        message: '{{ __('main.ticket_deleted_by_admin') }}'
+                    });
+                }
+
+                // Redirect after 3 seconds
+                setTimeout(() => {
+                    window.location.href = '{{ route('tickets.inquiry') }}';
+                }, 3000);
+            }
+        });
+
         // Subscribe to new customer replies
         ticketUpdatesChannel.subscribe('new-customer-reply', (ablyMessage) => {
             const messageData = ablyMessage.data;
-            console.log('SupportMessageData: ', messageData);
+            let messagesSection = document.getElementById('messages-section');
+            messagesSection.classList.remove('hidden');
 
             // Only add message if it belongs to current ticket
             if (messageData.ticket_uuid === '{{ $ticket->uuid }}') {
@@ -209,11 +214,76 @@
             const messageData = ablyMessage.data;
             const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
 
-            if (messageElement) {
-                messageElement.style.opacity = '0.5';
-                messageElement.style.textDecoration = 'line-through';
+            let messagesSection = document.getElementById('messages-section');
+            if (messagesSection) {
+                const remainingMessages = messagesSection.querySelectorAll('.client');
+                if (remainingMessages.length === 1 && remainingMessages[0].dataset.messageId === messageData.id) {
+                    messagesSection.classList.add('hidden');
+                }
+            }
 
-                setTimeout(() => messageElement.remove(), 1000);
+            if (messageElement) {
+                messageElement.style.opacity = '0.3';
+                messageElement.style.textDecoration = 'line-through';
+                setTimeout(() => messageElement.remove(), 300);
+            }
+        });
+
+        // Subscribe to ticket status updates
+        ticketUpdatesChannel.subscribe('ticket-status-updated', (ablyMessage) => {
+            const updateData = ablyMessage.data;
+
+            // Only update if it belongs to current ticket
+            if (updateData.uuid === '{{ $ticket->uuid }}') {
+                // Update status if field is 'status'
+                if (updateData.field === 'status') {
+                    const statusBadge = document.getElementById('ticket-status-badge');
+                    if (statusBadge) {
+                        // Get the color class based on the new status
+                        const statusColorMap = {
+                            'open': 'bg-yellow-600',
+                            'in_progress': 'bg-blue-600',
+                            'processed': 'bg-violet-600',
+                            'replied': 'bg-green-600',
+                            'closed': 'bg-red-600'
+                        };
+
+                        // Update badge text and color
+                        statusBadge.textContent = updateData.status_label;
+
+                        // Remove all status color classes
+                        statusBadge.className = 'kt-badge text-white rounded-full';
+
+                        // Add the new color class
+                        const newColorClass = statusColorMap[updateData.new_status] || 'bg-gray-600';
+                        statusBadge.classList.add(newColorClass);
+                    }
+
+                    // Get all reply forms
+                    const replyForms = document.querySelectorAll('.tickets-message-form');
+                    replyForms.forEach(form => {
+                        form.closest('article').classList.toggle('hidden');
+                    });
+
+                    // Get all action buttons (edit/delete) for messages
+                    const messageActions = document.querySelectorAll('.client .actions');
+                    messageActions.forEach(actions => {
+                        actions.classList.toggle('hidden');
+                    });
+                }
+
+                // Update department if field is 'department.id'
+                if (updateData.field === 'department.id') {
+                    const departmentElement = document.getElementById('ticket-department');
+                    if (departmentElement) {
+                        departmentElement.textContent = updateData.status_label;
+                        window.showToast({
+                            type: 'success',
+                            message: '{{ __('main.ticket_transferred', ['department' => ':department']) }}'.replace(':department', updateData
+                                .status_label)
+                        });
+                    }
+                }
             }
         });
 
@@ -224,69 +294,91 @@
             const messagesContainer = document.querySelector('.messages-container');
             if (!messagesContainer) return;
 
-            // Create message element HTML
+            // Current locale for border direction
+            const locale = '{{ app()->getLocale() }}';
+            const borderDirection = locale === 'ar' ? 'left' : 'right';
+
+            const isCustomer = messageData.sender_type === 'customer';
+
+            // User & Department
+            const user = messageData.user ?? {};
+            const department = messageData.department ?? {};
+
+            // Photo
+            const photoUrl = isCustomer ? '{{ asset('assets/images/avatars/avatar.png') }}' : user.photo || '{{ asset('assets/images/avatars/avatar.png') }}';
+
+            // Display Name
+            const displayName = isCustomer ? messageData.customer_name || '{{ __('main.customer') }}' : user.name || '{{ __('main.support') }}';
+
+            // Sender Label
+            const senderLabel = isCustomer ? '{{ __('main.customer') }}' : department.name || '{{ __('main.support') }}';
+
+            // Styling
+            const backgroundColor = `background-color: ${department.bg_color || "#f3f4f6"};`;
+            const borderColor = `border: 1px solid ${department.border_color || "#d1d5db"};`;
+            const borderMainColor = `border-${borderDirection}: 4px solid ${department.border_main_color || "#9ca3af"};`;
+            const badgeColor = `background-color: ${department.badge_color || "#1e40af"}; color: var(--light-color);`;
+            const ticketStatus = '{{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'flex' }}';
+
+            // Create message HTML
             const messageHtml = `
-                <div class="flex justify-between gap-4 client ${messageData.sender_type}" data-message-id="${messageData.id}">
+                <div class="flex justify-between gap-4 client ${isCustomer ? 'customer' : ''}" data-message-id="${messageData.id}" style="${backgroundColor} ${borderColor} ${borderMainColor}">
                     <div class="flex gap-4">
                         <div class="avatar">
-                            <a href="{{ asset('assets/images/avatar.png') }}" class="client-avatar block">
-                                <img decoding="async" src="{{ asset('assets/images/avatar.png') }}" alt="أيقونة العميل" class="fal-content-img">
+                            <a href="${photoUrl}" class="client-avatar block">
+                                <img decoding="async" src="${photoUrl}" alt="${isCustomer ? '{{ __('main.client_icon') }}' : '{{ __('main.support_icon') }}'}" class="fal-content-img">
                             </a>
                         </div>
                         <div class="body">
-                            <div class="meta flex items-center gap-2">
-                                <span class="who font-semibold">${messageData.ticket_name || messageData.user_name}</span>
-                                <span class="time">${messageData.formatted_date} - ${messageData.human_readable_date}</span>
-                                <span class="text-xs px-2 py-1 rounded-full ${messageData.sender_type == 'customer' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'}">
-                                    ${messageData.sender_type == 'customer' ? 'عميل' : 'دعم'}
-                                </span>
+                            <div class="meta">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="who font-semibold">${displayName}</span>
+                                    <span class="time mt-1">${messageData.created_at} - ${messageData.human_readable_date}</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message" style="${badgeColor}">
+                                        ${senderLabel}
+                                    </span>
+                                </div>
                             </div>
                             <div class="content">${messageData.message}</div>
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
-                                    ? messageData.attachments.map(attachment => `
-                                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${attachment}">
-                                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                    {{ __('main.attachment') }}
-                                                                                                </div>
-                                                                                            `).join('')
+                                    ? messageData.attachments.map(att => `
+                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                            {{ __('main.attachment') }}
+                                                                                                        </div>`).join('')
                                     : ''
                                 }
                             </div>
+
                             <div class="edit-form" style="display:none;">
                                 <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
                                     <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
                                     <div class="edit-buttons flex gap-2 mt-3">
-                                        <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">
-                                            {{ __('main.save') }}
-                                        </button>
-                                        <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">
-                                            {{ __('main.cancel') }}
-                                        </button>
+                                        <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                        <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="actions flex gap-2">
-                        <div class="message-edit-btn px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700" data-message-id="${messageData.id}">
-                            {{ __('main.edit') }}
-                        </div>
-                        <div class="message-delete-btn px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" data-message-id="${messageData.id}">
-                            {{ __('main.delete') }}
-                        </div>
+                    <div class="actions ${ticketStatus}">
+                        <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                        <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
                     </div>
                 </div>
-            `;
+                `;
 
-            // Insert the new message at the end of messages container
+            // Append message
             messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
 
-            // Rebind message handlers for the new message
-            rebindMessageHandlers();
+            // Rebind handlers if needed
+            if (typeof rebindMessageHandlers === 'function') rebindMessageHandlers();
 
-            // Scroll to the new message smoothly
+            // Scroll smoothly
             setTimeout(() => {
                 messagesContainer.lastElementChild?.scrollIntoView({
                     behavior: 'smooth',
@@ -295,6 +387,4 @@
             }, 100);
         }
     </script>
-
-    @include('dashboard.components.messages-action')
 @endpush

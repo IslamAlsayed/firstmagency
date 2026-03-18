@@ -18,7 +18,6 @@ class Service extends Model
         'order',
         'status',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
         'published_at',
@@ -48,11 +47,6 @@ class Service extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
     }
 
     public function scopePublished($query)

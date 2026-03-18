@@ -3,6 +3,7 @@
 use App\Models\Section;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\UserSidebarPreference;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -49,6 +50,29 @@ if (!function_exists('getActiveUserId')) {
         }
 
         return Auth::id();
+    }
+}
+
+if (!function_exists('userSidebarPreference')) {
+    /**
+     * Get the currently authenticated user's sidebar preference.
+     * Checks authentication first.
+     *
+     * @param int|null $id
+     * @return mixed|null
+     */
+    function userSidebarPreference($id = null)
+    {
+        if (!Auth::check()) {
+            return null;
+        }
+
+        if ($id != null) {
+            $user = User::find($id);
+            return $user ? $user->sidebar_preference : null;
+        }
+
+        return UserSidebarPreference::where('user_id', getActiveUserId())->first();
     }
 }
 

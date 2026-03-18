@@ -30,6 +30,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'users-restore', 'guard_name' => 'web', 'description' => 'Restore users'],
             ['name' => 'users-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete users'],
 
+            // Departments Permissions
+            ['name' => 'departments-create', 'guard_name' => 'web', 'description' => 'Create new departments'],
+            ['name' => 'departments-read', 'guard_name' => 'web', 'description' => 'View departments'],
+            ['name' => 'departments-update', 'guard_name' => 'web', 'description' => 'Edit departments'],
+            ['name' => 'departments-delete', 'guard_name' => 'web', 'description' => 'Delete departments'],
+            ['name' => 'departments-restore', 'guard_name' => 'web', 'description' => 'Restore departments'],
+            ['name' => 'departments-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete departments'],
+
             // Roles Permissions
             ['name' => 'roles-create', 'guard_name' => 'web', 'description' => 'Create new roles'],
             ['name' => 'roles-read', 'guard_name' => 'web', 'description' => 'View roles'],
@@ -45,10 +53,6 @@ class PermissionSeeder extends Seeder
             ['name' => 'permissions-delete', 'guard_name' => 'web', 'description' => 'Delete permissions'],
             ['name' => 'permissions-restore', 'guard_name' => 'web', 'description' => 'Restore permissions'],
             ['name' => 'permissions-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete permissions'],
-
-            // Settings Permissions
-            ['name' => 'settings-read', 'guard_name' => 'web', 'description' => 'View settings'],
-            ['name' => 'settings-update', 'guard_name' => 'web', 'description' => 'Edit settings'],
 
             // Content Permissions
             ['name' => 'content-create', 'guard_name' => 'web', 'description' => 'Create content'],
@@ -73,6 +77,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'services-delete', 'guard_name' => 'web', 'description' => 'Delete services'],
             ['name' => 'services-restore', 'guard_name' => 'web', 'description' => 'Restore services'],
             ['name' => 'services-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete services'],
+
+            // Project Permissions
+            ['name' => 'project-create', 'guard_name' => 'web', 'description' => 'Create project'],
+            ['name' => 'project-read', 'guard_name' => 'web', 'description' => 'View project'],
+            ['name' => 'project-update', 'guard_name' => 'web', 'description' => 'Edit project'],
+            ['name' => 'project-delete', 'guard_name' => 'web', 'description' => 'Delete project'],
+            ['name' => 'project-restore', 'guard_name' => 'web', 'description' => 'Restore project'],
+            ['name' => 'project-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete project'],
 
             // Companies Permissions
             ['name' => 'companies-create', 'guard_name' => 'web', 'description' => 'Create companies'],
@@ -115,28 +127,20 @@ class PermissionSeeder extends Seeder
             ['name' => 'reviews-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete reviews'],
 
             // Programming Permissions
-            ['name' => 'programmings-create', 'guard_name' => 'web', 'description' => 'Create programmings'],
-            ['name' => 'programmings-read', 'guard_name' => 'web', 'description' => 'View programmings'],
-            ['name' => 'programmings-update', 'guard_name' => 'web', 'description' => 'Edit programmings'],
-            ['name' => 'programmings-delete', 'guard_name' => 'web', 'description' => 'Delete programmings'],
-            ['name' => 'programmings-restore', 'guard_name' => 'web', 'description' => 'Restore programmings'],
-            ['name' => 'programmings-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete programmings'],
+            ['name' => 'programming-systems-create', 'guard_name' => 'web', 'description' => 'Create programming systems'],
+            ['name' => 'programming-systems-read', 'guard_name' => 'web', 'description' => 'View programming systems'],
+            ['name' => 'programming-systems-update', 'guard_name' => 'web', 'description' => 'Edit programming systems'],
+            ['name' => 'programming-systems-delete', 'guard_name' => 'web', 'description' => 'Delete programming systems'],
+            ['name' => 'programming-systems-restore', 'guard_name' => 'web', 'description' => 'Restore programming systems'],
+            ['name' => 'programming-systems-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete programming systems'],
 
             // Our Programming Permissions
-            ['name' => 'our-programmings-create', 'guard_name' => 'web', 'description' => 'Create our programmings'],
-            ['name' => 'our-programmings-read', 'guard_name' => 'web', 'description' => 'View our programmings'],
-            ['name' => 'our-programmings-update', 'guard_name' => 'web', 'description' => 'Edit our programmings'],
-            ['name' => 'our-programmings-delete', 'guard_name' => 'web', 'description' => 'Delete our programmings'],
-            ['name' => 'our-programmings-restore', 'guard_name' => 'web', 'description' => 'Restore our programmings'],
-            ['name' => 'our-programmings-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete our programmings'],
-
-            // Categories Programming Permissions
-            ['name' => 'categories-programming-create', 'guard_name' => 'web', 'description' => 'Create categories programming'],
-            ['name' => 'categories-programming-read', 'guard_name' => 'web', 'description' => 'View categories programming'],
-            ['name' => 'categories-programming-update', 'guard_name' => 'web', 'description' => 'Edit categories programming'],
-            ['name' => 'categories-programming-delete', 'guard_name' => 'web', 'description' => 'Delete categories programming'],
-            ['name' => 'categories-programming-restore', 'guard_name' => 'web', 'description' => 'Restore categories programming'],
-            ['name' => 'categories-programming-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete categories programming'],
+            ['name' => 'programming-categories-create', 'guard_name' => 'web', 'description' => 'Create programming categories'],
+            ['name' => 'programming-categories-read', 'guard_name' => 'web', 'description' => 'View programming categories'],
+            ['name' => 'programming-categories-update', 'guard_name' => 'web', 'description' => 'Edit programming categories'],
+            ['name' => 'programming-categories-delete', 'guard_name' => 'web', 'description' => 'Delete programming categories'],
+            ['name' => 'programming-categories-restore', 'guard_name' => 'web', 'description' => 'Restore programming categories'],
+            ['name' => 'programming-categories-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete programming categories'],
 
             // Project Steps Permissions
             ['name' => 'project-steps-create', 'guard_name' => 'web', 'description' => 'Create project steps'],
@@ -146,13 +150,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'project-steps-restore', 'guard_name' => 'web', 'description' => 'Restore project steps'],
             ['name' => 'project-steps-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete project steps'],
 
-            // Features Hosting Permissions
-            ['name' => 'features-hosting-create', 'guard_name' => 'web', 'description' => 'Create features hosting'],
-            ['name' => 'features-hosting-read', 'guard_name' => 'web', 'description' => 'View features hosting'],
-            ['name' => 'features-hosting-update', 'guard_name' => 'web', 'description' => 'Edit features hosting'],
-            ['name' => 'features-hosting-delete', 'guard_name' => 'web', 'description' => 'Delete features hosting'],
-            ['name' => 'features-hosting-restore', 'guard_name' => 'web', 'description' => 'Restore features hosting'],
-            ['name' => 'features-hosting-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete features hosting'],
+            // Hosting Features Permissions
+            ['name' => 'hosting-features-create', 'guard_name' => 'web', 'description' => 'Create hosting features'],
+            ['name' => 'hosting-features-read', 'guard_name' => 'web', 'description' => 'View hosting features'],
+            ['name' => 'hosting-features-update', 'guard_name' => 'web', 'description' => 'Edit hosting features'],
+            ['name' => 'hosting-features-delete', 'guard_name' => 'web', 'description' => 'Delete hosting features'],
+            ['name' => 'hosting-features-restore', 'guard_name' => 'web', 'description' => 'Restore hosting features'],
+            ['name' => 'hosting-features-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete hosting features'],
 
             // Dashboards And Apps Permissions
             ['name' => 'dashboards-and-systems-create', 'guard_name' => 'web', 'description' => 'Create dashboards and apps'],
@@ -237,6 +241,10 @@ class PermissionSeeder extends Seeder
             // Dashboard Permissions
             ['name' => 'dashboard-access', 'guard_name' => 'web', 'description' => 'Access dashboard'],
             ['name' => 'dashboard-manage', 'guard_name' => 'web', 'description' => 'Manage dashboard'],
+
+            // Settings Permissions
+            ['name' => 'settings-read', 'guard_name' => 'web', 'description' => 'View settings'],
+            ['name' => 'settings-update', 'guard_name' => 'web', 'description' => 'Edit settings'],
         ];
 
         // Create permissions
@@ -262,6 +270,10 @@ class PermissionSeeder extends Seeder
             'users-read',
             'users-update',
             'users-delete',
+            'departments-create',
+            'departments-read',
+            'departments-update',
+            'departments-delete',
             'roles-create',
             'roles-read',
             'roles-update',
@@ -270,8 +282,6 @@ class PermissionSeeder extends Seeder
             'permissions-read',
             'permissions-update',
             'permissions-delete',
-            'settings-read',
-            'settings-update',
             'content-create',
             'content-read',
             'content-update',
@@ -284,6 +294,10 @@ class PermissionSeeder extends Seeder
             'services-read',
             'services-update',
             'services-delete',
+            'projects-create',
+            'projects-read',
+            'projects-update',
+            'projects-delete',
             'companies-create',
             'companies-read',
             'companies-update',
@@ -304,14 +318,14 @@ class PermissionSeeder extends Seeder
             'reviews-read',
             'reviews-update',
             'reviews-delete',
-            'programmings-create',
-            'programmings-read',
-            'programmings-update',
-            'programmings-delete',
-            'our-programmings-create',
-            'our-programmings-read',
-            'our-programmings-update',
-            'our-programmings-delete',
+            'programming-systems-create',
+            'programming-systems-read',
+            'programming-systems-update',
+            'programming-systems-delete',
+            'programming-categories-create',
+            'programming-categories-read',
+            'programming-categories-update',
+            'programming-categories-delete',
             'categories-programming-create',
             'categories-programming-read',
             'categories-programming-update',
@@ -320,6 +334,10 @@ class PermissionSeeder extends Seeder
             'project-steps-read',
             'project-steps-update',
             'project-steps-delete',
+            'hosting-features-create',
+            'hosting-features-read',
+            'hosting-features-update',
+            'hosting-features-delete',
             'faqs-create',
             'faqs-read',
             'faqs-update',
@@ -391,12 +409,12 @@ class PermissionSeeder extends Seeder
             'reviews-create',
             'reviews-read',
             'reviews-update',
-            'programmings-create',
-            'programmings-read',
-            'programmings-update',
-            'our-programmings-create',
-            'our-programmings-read',
-            'our-programmings-update',
+            'programming-systems-create',
+            'programming-systems-read',
+            'programming-systems-update',
+            'programming-categories-create',
+            'programming-categories-read',
+            'programming-categories-update',
             'categories-programming-create',
             'categories-programming-read',
             'categories-programming-update',
@@ -406,6 +424,8 @@ class PermissionSeeder extends Seeder
             'faqs-read',
             'faqs-update',
             'dashboard-access',
+            'settings-read',
+            'settings-update',
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);
 

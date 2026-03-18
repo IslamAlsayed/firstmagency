@@ -83,7 +83,6 @@ class PartnerSeeder extends Seeder
                     'order' => $i,
                     'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $i <= 3, // Featured first 3 partners
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

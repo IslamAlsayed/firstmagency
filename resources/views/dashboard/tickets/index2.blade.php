@@ -81,7 +81,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">{{ __('main.no_tickets_found') }}</td>
+                                    <td colspan="7" class="text-center">{{ __('main.no_tickets_found') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>

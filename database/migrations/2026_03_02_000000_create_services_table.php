@@ -27,7 +27,6 @@ return new class extends Migration
 
             // Flags
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

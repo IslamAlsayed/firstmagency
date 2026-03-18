@@ -44,9 +44,19 @@ class Review extends Model
         return $query->where('is_active', true);
     }
 
-    public function scopePublished($query)
+    public function scopePending($query)
     {
-        return $query->where('status', 'published');
+        return $query->where('status', 'pending');
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('status', 'approved');
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('status', 'rejected');
     }
 
     public function creator()

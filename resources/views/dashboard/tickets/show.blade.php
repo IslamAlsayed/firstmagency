@@ -11,7 +11,7 @@
                     {{ $ticket->subject ?? __('main.ticket_details') }}
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
-                    {{ $ticket->user?->name ?? '-' }} • {{ $ticket->created_at?->format('d M Y') }}
+                    {{ $ticket->department?->name ?? '-' }} • {{ $ticket->created_at?->format('d M Y') }}
                 </div>
             </div>
 
@@ -67,8 +67,7 @@
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.status') }}
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
                                     {{ __('main.' . $ticket->status) }}
                                 </span>
                             </p>
@@ -95,16 +94,15 @@
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.department') }}
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\DepartmentEnums::from($ticket->department?->slug)->badgeColor() }}">
-                                    {{ $ticket->department?->name ?? __('main.no_department') }}
+
+                                <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
+                                    {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
                                 </span>
                             </p>
-                            @include('dashboard.components.status-actions', [
+                            @include('dashboard.components.department-actions', [
                                 'record' => $ticket,
                                 'models' => 'tickets',
                                 'modelClass' => 'ticket',
-                                'fieldName' => 'department_id',
                                 'availableOptions' => $departments->pluck('name', 'id')->toArray(),
                             ])
                         </div>
@@ -134,8 +132,7 @@
                 @if (count($allAttachments) > 0)
                     <div class="kt-card ">
                         <div class="kt-card-header">
-                            <h3 class="kt-card-title">{{ __('main.attachments') }} <span
-                                    class="font-semibold text-primary">({{ count($allAttachments) ?? 0 }})</span></h3>
+                            <h3 class="kt-card-title">{{ __('main.attachments') }} <span class="font-semibold text-primary">({{ count($allAttachments) ?? 0 }})</span></h3>
                         </div>
                         <div class="kt-card-body p-4">
                             <div class="flex flex-col gap-6">
@@ -144,16 +141,14 @@
                                         @foreach ($allAttachments as $index => $file)
                                             <div class="image-container shadow-sm">
                                                 @if ($file)
-                                                    <img src="{{ asset('storage/' . $file) }}" alt="{{ __('main.attachments') }} {{ $index + 1 }}"
-                                                        class="w-full h-32 object-cover" loading="lazy">
+                                                    <img src="{{ asset('storage/' . $file) }}" alt="{{ __('main.attachments') }} {{ $index + 1 }}" class="w-full h-32 object-cover" loading="lazy">
                                                 @else
                                                     <div class="w-full h-32 bg-gray-200 flex items-center justify-center">
                                                         <p class="text-xs text-secondary-foreground">{{ __('main.na') }}</p>
                                                     </div>
                                                 @endif
                                                 <div class="image-overlay">
-                                                    <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}"
-                                                        class="kt-btn kt-btn-sm kt-btn-primary">
+                                                    <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}" class="kt-btn kt-btn-sm kt-btn-primary">
                                                         <i class="fas fa-download text-sm me-1"></i>
                                                         <span>{{ __('main.download') }}</span>
                                                     </a>

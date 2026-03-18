@@ -252,6 +252,20 @@
         }
     }
 
+    @media (max-width: 1180px) {
+        & .packages-sections {
+            padding: 50px var(--small-inline-padding);
+        }
+
+        & .packages-sections .package-card .package-title {
+            font-size: 16px;
+        }
+
+        & .packages-sections .package-card .main-price {
+            font-size: 26px;
+        }
+    }
+
     .ready-hosting-sections {
         height: 350px;
         background-image: url(../../images/website/hosting/ready-hosting-bg.png);
@@ -532,8 +546,9 @@
 
     .main-dont-worry-sections {
         padding-block: 70px;
+        padding-inline: var(--dont-worry-hosting-section-inline-padding);
         position: relative;
-        background-color: var(--app-dont-worry-background-color);
+        background-color: var(--dont-worry-background-color);
 
         &::after {
             content: '';
@@ -553,8 +568,70 @@
         }
     }
 
+    @media (max-width: 1440px) {
+        .feature-section {
+            padding-inline: calc(var(--feature-section-inline-padding) / 2);
+        }
+    }
+
+    @media (max-width: 1180px) {
+        .feature-section {
+            padding-inline: calc(var(--feature-section-inline-padding) / 4);
+        }
+
+        .dont-worry-sections {
+            padding-inline: calc(var(--dont-worry-hosting-section-inline-padding) / 2);
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .dont-worry-sections {
+            padding-inline: calc(var(--dont-worry-hosting-section-inline-padding) / 3);
+        }
+    }
+
+    @media (max-width: 992px) {
+        .feature-section {
+            padding-inline: var(--small-inline-padding);
+        }
+
+        .operations-systems-sections {
+            .content {
+                gap: 15px;
+                justify-content: center;
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+
+                .system-card {
+                    min-width: 110px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dont-worry-sections {
+            padding-inline: calc(var(--dont-worry-hosting-section-inline-padding) / 4);
+        }
+
+        .operations-systems-sections {
+            padding: 50px calc(var(--operations-systems-section-inline-padding) / 2);
+        }
+    }
+
+    @media (max-width: 435px) {
+        .dont-worry-sections {
+            padding-inline: var(--small-inline-padding);
+        }
+
+        .operations-systems-sections {
+            padding: 50px var(--small-inline-padding);
+        }
+    }
+
     .dont-worry-sections:not(.support-sections) {
         .text {
+            padding-inline-start: 30px;
+
             .heading {
                 text-wrap: balance;
             }

@@ -10,8 +10,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.users') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.users')]) }}">
                     <a href="{{ route('dashboard.users.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_user') }}
@@ -37,15 +36,13 @@
                                 <tr id="row-{{ $user->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
                                     <td title="{{ $user->name }}">
                                         <div class="relative w-fit">
-                                            @if ($user->photo && checkExistFile($user->photo))
-                                                <img src="{{ $user->photo && checkExistFile($user->photo) ? asset('storage/' . $user->photo) : asset('metronic/media/avatars/blank.png') }}"
-                                                    alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                            @if ($user->photo)
+                                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
                                             @else
                                                 <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
                                             @endif
                                             @if (isset($models) && $models && $models == 'users')
-                                                <span
-                                                    class="real-active {{ $user->user_status == 'online' ? 'active heartbeat' : '' }} user-heartbeat-{{ $user->id }}"></span>
+                                                <span class="real-active {{ $user->user_status == 'online' ? 'active heartbeat' : '' }} user-heartbeat-{{ $user->id }}"></span>
                                             @endif
                                         </div>
                                     </td>
@@ -78,7 +75,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-8 text-center text-gray-400">
+                                    <td colspan="7" class="px-6 py-8 text-center text-gray-400">
                                         {{ __('main.no_users_found') }}
                                     </td>
                                 </tr>
@@ -104,26 +101,22 @@
                         <div class="modal-body p-4 space-y-4">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.name') }}</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name"
-                                    name="name" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name"
+                                    required>
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.email') }}</label>
-                                <input type="email"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email"
-                                    name="email" required>
+                                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email" name="email"
+                                    required>
                             </div>
                             <div>
                                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.password') }}</label>
-                                <input type="password"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password"
-                                    name="password" required>
+                                <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password" name="password"
+                                    required>
                             </div>
                             <div>
                                 <label for="role" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role') }}</label>
-                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                    id="role" name="role" required>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="role" name="role" required>
                                     <option value="content_manager">{{ __('main.content_manager') }}</option>
                                     <option value="admin">{{ __('main.admin') }}</option>
                                     <option value="superadmin">{{ __('main.super_admin') }}</option>

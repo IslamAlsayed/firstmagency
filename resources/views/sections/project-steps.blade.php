@@ -7,7 +7,7 @@
     <div class="timeline">
         @if ($steps && count($steps) > 0)
             @foreach ($steps as $step)
-                <div class="timeline-item flex items-center">
+                <div class="timeline-item flex items-center justify-center">
                     <div class="step-label font-semibold">
                         <div class="label">
                             <span>{{ $step->translations[app()->getLocale()]['title'] ?? $step->slug }}</span>
@@ -15,21 +15,25 @@
                         </div>
                     </div>
 
-                    <div class="timeline-icon">
-                        @if ($step->icon)
-                            <i class="{{ $step->icon }}"></i>
-                        @else
-                            <i class="fas fa-circle"></i>
-                        @endif
+                    <div>
+                        <div class="timeline-icon">
+                            @if ($step->icon)
+                                <i class="{{ $step->icon }}"></i>
+                            @else
+                                <i class="fas fa-circle"></i>
+                            @endif
+                        </div>
                     </div>
 
-                    <div class="timeline-content">
-                        {{ $step->translations[app()->getLocale()]['content'] ?? '' }}
+                    <div>
+                        <div class="timeline-content">
+                            {{ $step->translations[app()->getLocale()]['content'] ?? '' }}
+                        </div>
                     </div>
                 </div>
             @endforeach
         @else
-            <div class="timeline-item flex items-center">
+            <div class="timeline-item flex items-center justify-center">
                 <div class="step-label font-semibold">
                     <div class="label">
                         <span>{{ __('main.project_step_analysis') }}</span>
@@ -37,16 +41,20 @@
                     </div>
                 </div>
 
-                <div class="timeline-icon">
-                    <i class="fas fa-chart-pie"></i>
+                <div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
                 </div>
 
-                <div class="timeline-content">
-                    {{ __('main.project_step_analysis_content') }}
+                <div>
+                    <div class="timeline-content">
+                        {{ __('main.project_step_analysis_content') }}
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item flex items-center">
+            <div class="timeline-item flex items-center justify-center">
                 <div class="step-label font-semibold">
                     <div class="label">
                         <span>{{ __('main.project_step_design') }}</span>
@@ -54,16 +62,20 @@
                     </div>
                 </div>
 
-                <div class="timeline-icon">
-                    <i class="fas fa-pencil-ruler"></i>
+                <div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
                 </div>
 
-                <div class="timeline-content">
-                    {{ __('main.project_step_design_content') }}
+                <div>
+                    <div class="timeline-content">
+                        {{ __('main.project_step_design_content') }}
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item flex items-center">
+            <div class="timeline-item flex items-center justify-center">
                 <div class="step-label font-semibold">
                     <div class="label">
                         <span>{{ __('main.project_step_programming') }}</span>
@@ -71,16 +83,20 @@
                     </div>
                 </div>
 
-                <div class="timeline-icon">
-                    <i class="fas fa-code"></i>
+                <div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
                 </div>
 
-                <div class="timeline-content">
-                    {{ __('main.project_step_programming_content') }}
+                <div>
+                    <div class="timeline-content">
+                        {{ __('main.project_step_programming_content') }}
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item flex items-center">
+            <div class="timeline-item flex items-center justify-center">
                 <div class="step-label font-semibold">
                     <div class="label">
                         <span>{{ __('main.project_step_results') }}</span>
@@ -88,12 +104,16 @@
                     </div>
                 </div>
 
-                <div class="timeline-icon">
-                    <i class="fas fa-desktop"></i>
+                <div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
                 </div>
 
-                <div class="timeline-content">
-                    {{ __('main.project_step_results_content') }}
+                <div>
+                    <div class="timeline-content">
+                        {{ __('main.project_step_results_content') }}
+                    </div>
                 </div>
             </div>
         @endif

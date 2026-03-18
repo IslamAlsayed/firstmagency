@@ -178,7 +178,6 @@ class ServiceSeeder extends Seeder
             Service::create([
                 ...$data,
                 'is_active' => true,
-                'is_featured' => false,
                 'created_by' => $user->id,
             ]);
         }

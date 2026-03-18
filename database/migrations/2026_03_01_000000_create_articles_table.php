@@ -35,7 +35,6 @@ return new class extends Migration
             // $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
             $table->string('status')->default('draft');
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
 
             // Related Articles (JSON or text)
             $table->json('related_articles')->nullable();

@@ -28,8 +28,7 @@
 {{-- <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800&family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap"
     rel="stylesheet"> --}}
 
-<link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
-    rel="stylesheet">
+<link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
 
 {{-- ? Start plugins --}}
 {{-- Select multiple plugin --}}
@@ -73,7 +72,7 @@
 
         --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
 
-        --home-hero-section-inline-padding: {{ $settings->home_hero_section ?? 120 }}px;
+        --home-hero-section-inline-padding: {{ $settings->home_hero_section ?? 200 }}px;
         --home-services-section-inline-padding: {{ $settings->home_services_section ?? 60 }}px;
         --home-projects-section-inline-padding: {{ $settings->home_projects_section ?? 20 }}px;
         --home-reviews-section-inline-padding: {{ $settings->home_reviews_section ?? 60 }}px;
@@ -82,18 +81,18 @@
         --about-us-line-works-steps-section-inline-padding: {{ $settings->about_us_line_works_steps_section ?? 60 }}px;
         --about-us-partners-section-inline-padding: {{ $settings->about_us_partners_section ?? 60 }}px;
 
-        --portfolio-section-inline-padding: {{ $settings->portfolio_section ?? 60 }}px;
-        --blog-articles-section-inline-padding: {{ $settings->blog_articles_section ?? 60 }}px;
+        --portfolio-section-inline-padding: {{ $settings->portfolio_section ?? 200 }}px;
+        --blog-articles-section-inline-padding: {{ $settings->blog_articles_section ?? 200 }}px;
         --contact-page-section-inline-padding: {{ $settings->contact_page_section ?? 180 }}px;
 
-        --website-developer-section-inline-padding: {{ $settings->website_developer_section ?? 60 }}px;
-        --website-programming-section-inline-padding: {{ $settings->website_programming_section ?? 60 }}px;
+        --website-developer-section-inline-padding: {{ $settings->website_developer_section ?? 120 }}px;
+        --website-programming-section-inline-padding: {{ $settings->website_programming_section ?? 200 }}px;
         --website-design-section-inline-padding: {{ $settings->website_design_section ?? 60 }}px;
         --website-important-articles-section-inline-padding: {{ $settings->website_important_articles_section ?? 60 }}px;
         --faqs-section-inline-padding: {{ $settings->faqs_section ?? 60 }}px;
 
         --app-important-articles-section-inline-padding: {{ $settings->app_important_articles_section ?? 120 }}px;
-        --feature-section-inline-padding: {{ $settings->feature_section ?? 60 }}px;
+        --feature-section-inline-padding: {{ $settings->feature_section ?? 200 }}px;
         --packages-section-inline-padding: {{ $settings->packages_section ?? 120 }}px;
         --operations-systems-section-inline-padding: {{ $settings->operations_systems_section ?? 60 }}px;
         --your-domain-section-inline-padding: {{ $settings->your_domain_section ?? 240 }}px;
@@ -102,5 +101,7 @@
         --platform-management-section-inline-padding: {{ $settings->platform_management_section ?? 60 }}px;
         --work-lines-section-inline-padding: {{ $settings->work_lines_section ?? 120 }}px;
         --packages-marketing-section-inline-padding: {{ $settings->packages_marketing_section ?? 120 }}px;
+        --dont-worry-hosting-section-inline-padding: {{ $settings->dont_worry_hosting_section ?? 60 }}px;
+        --categories-programming-section-inline-padding: {{ $settings->categories_programming_section ?? 200 }}px;
     }
 </style>

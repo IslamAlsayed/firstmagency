@@ -28,7 +28,6 @@ class UpdateRequest extends FormRequest
             'website' => 'nullable|url|max:255',
             'order' => 'nullable|integer|min:0',
             'is_active' => 'nullable|boolean',
-            'is_featured' => 'nullable|boolean',
             'published_at' => 'nullable|date',
         ];
     }

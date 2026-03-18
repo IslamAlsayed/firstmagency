@@ -25,7 +25,6 @@ return new class extends Migration
             // $table->enum('status', ['draft', 'published'])->default('published');
             $table->string('status')->default('published'); // 'draft', 'published'
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamp('published_at')->nullable();

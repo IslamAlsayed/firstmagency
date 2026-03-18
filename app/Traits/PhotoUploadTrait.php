@@ -85,7 +85,7 @@ trait PhotoUploadTrait
         });
     }
 
-    public function uploadSinglePhoto(Request $request, Model $model, string $column = 'photo', string $folder = 'other', string $option = null)
+    public function uploadSinglePhoto(Request $request, $model, string $column = 'photo', string $folder = 'other', string $option = null)
     {
         if (!$request->hasFile($column)) {
             return;

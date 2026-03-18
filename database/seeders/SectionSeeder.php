@@ -172,7 +172,7 @@ class SectionSeeder extends Seeder
                 'name' => 'Hosting Features Section',
                 'flag' => 'flag-hosting-features',
                 'padding_setting_key' => 'hosting_features_section',
-                'view_file' => 'features-hosting',
+                'view_file' => 'hosting-features',
             ],
             [
                 'name' => 'Hosting Packages Section',
@@ -197,6 +197,12 @@ class SectionSeeder extends Seeder
                 'flag' => 'flag-dont-worry-hosting',
                 'padding_setting_key' => 'dont_worry_hosting_section',
                 'view_file' => 'dont-worry-hosting',
+            ],
+            [
+                'name' => 'Categories Programming Section',
+                'flag' => 'flag-categories-programming',
+                'padding_setting_key' => 'categories_programming_section',
+                'view_file' => 'categories-programming',
             ],
             [
                 'name' => 'Easy Management Section',

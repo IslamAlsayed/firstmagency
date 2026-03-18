@@ -8,10 +8,8 @@
 
     <div class="">
         <div class="filter price-packages">
-            <button class="btn-link main-color dark-hover font-semibold filter-btn-style filter-btn-price"
-                data-filter="monthly_price">{{ __('main.monthly_label') }}</button>
-            <button class="btn-link main-color dark-hover font-semibold filter-btn-style active filter-btn-price"
-                data-filter="yearly_price">{{ __('main.yearly_label') }}</button>
+            <button class="btn-link main-color dark-hover font-semibold filter-btn-style filter-btn-price" data-filter="monthly_price">{{ __('main.monthly_label') }}</button>
+            <button class="btn-link main-color dark-hover font-semibold filter-btn-style active filter-btn-price" data-filter="yearly_price">{{ __('main.yearly_label') }}</button>
         </div>
 
         <div class="filter-btn-packages flex items-center justify-between gap-4 bg-white p-2 shadow-sm border mx-auto mb-4 rounded-[9px]">
@@ -56,8 +54,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             @php
                 $hosting = isset($packages['hosting']) && count($packages['hosting']) > 0 ? $packages['hosting'] : config('packages-hosting.hosting') ?? [];
-                $reseller =
-                    isset($packages['reseller']) && count($packages['reseller']) > 0 ? $packages['reseller'] : config('packages-hosting.reseller') ?? [];
+                $reseller = isset($packages['reseller']) && count($packages['reseller']) > 0 ? $packages['reseller'] : config('packages-hosting.reseller') ?? [];
                 $vps = isset($packages['vps']) && count($packages['vps']) > 0 ? $packages['vps'] : config('packages-hosting.vps') ?? [];
                 $server = isset($packages['server']) && count($packages['server']) > 0 ? $packages['server'] : config('packages-hosting.server') ?? [];
             @endphp
@@ -79,11 +76,10 @@
                                             <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
-                                    <h3 class="text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
+                                    <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
                                 </div>
 
                                 <div class="mb-8">
@@ -101,12 +97,10 @@
                                             <li class="feature-card flex items-center justify-between text-right group/item mb-2">
                                                 <div class="flex items-center justify-between gap-2">
                                                     <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd"
-                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                                             clip-rule="evenodd"></path>
                                                     </svg>
-                                                    <span
-                                                        class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
+                                                    <span class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
                                                 </div>
                                                 @if (isset($feature['label_' . app()->getLocale()]))
                                                     <span
@@ -142,11 +136,10 @@
                                             <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
-                                    <h3 class="text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
+                                    <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
                                 </div>
 
                                 <div class="mb-8">
@@ -165,11 +158,10 @@
                                                 <div class="flex items-center justify-between gap-2">
                                                     <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd"
-                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                            clip-rule="evenodd"></path>
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
+                                                        </path>
                                                     </svg>
-                                                    <span
-                                                        class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
+                                                    <span class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
                                                 </div>
                                                 @if (isset($feature['label_' . app()->getLocale()]))
                                                     <span
@@ -205,11 +197,10 @@
                                             <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
-                                    <h3 class="text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
+                                    <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
                                 </div>
 
                                 <div class="mb-8">
@@ -228,11 +219,10 @@
                                                 <div class="flex items-center justify-between gap-2">
                                                     <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd"
-                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                            clip-rule="evenodd"></path>
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
+                                                        </path>
                                                     </svg>
-                                                    <span
-                                                        class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
+                                                    <span class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
                                                 </div>
                                                 @if (isset($feature['label_' . app()->getLocale()]))
                                                     <span
@@ -268,11 +258,10 @@
                                             <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
                                                 alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
-                                    <h3 class="text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
+                                    <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
                                 </div>
 
                                 <div class="mb-8">
@@ -291,11 +280,10 @@
                                                 <div class="flex items-center justify-between gap-2">
                                                     <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd"
-                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                            clip-rule="evenodd"></path>
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
+                                                        </path>
                                                     </svg>
-                                                    <span
-                                                        class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
+                                                    <span class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? '' }}</span>
                                                 </div>
                                                 @if (isset($feature['label_' . app()->getLocale()]))
                                                     <span
@@ -327,14 +315,12 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if (isset($package['image']))
-                                            <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ $package['name'] }}">
+                                            <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4" alt="{{ $package['name'] }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
                                         @endif
                                     </div>
-                                    <h3 class="text-xl font-semibold">{{ $package['name'] }}</h3>
+                                    <h3 class="package-title text-xl font-semibold">{{ $package['name'] }}</h3>
                                 </div>
 
                                 <div class="mb-8">
@@ -351,15 +337,12 @@
                                         <li class="feature-card flex items-center justify-between text-right group/item mb-2">
                                             <div class="flex items-center justify-between gap-2">
                                                 <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                                         clip-rule="evenodd"></path>
                                                 </svg>
-                                                <span
-                                                    class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? $feature['title'] }}</span>
+                                                <span class="text-gray-700 text-sm font-medium mr-auto">{{ $feature['title_' . app()->getLocale()] ?? $feature['title'] }}</span>
                                             </div>
-                                            <span
-                                                class="main-label text-gray-600 cursor-pointer font-semibold text-xs border border-gray-300 rounded-full w-5 h-5 flex items-center justify-center"
+                                            <span class="main-label text-gray-600 cursor-pointer font-semibold text-xs border border-gray-300 rounded-full w-5 h-5 flex items-center justify-center"
                                                 data-label="{{ $feature['label_' . app()->getLocale()] ?? ($feature['label'] ?? '') }}">?</span>
                                         </li>
                                     @endforeach

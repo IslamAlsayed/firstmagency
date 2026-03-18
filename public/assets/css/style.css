@@ -2,6 +2,7 @@
     --main-color: #d05423;
     --dark-main-color: #96310E;
     --light-main-color: #F97316;
+    --light-main-color-opacity: #F9731650;
 
     --light-color: #ffffff;
     --dark-color: #000000;
@@ -31,7 +32,7 @@
     --website-articles-background-color: #F9F9F9;
     --app-developer-hero-background-color: #F4F4F4;
     --app-articles-background-color: #FAFAFA;
-    --app-dont-worry-background-color: #F8F6F6;
+    --dont-worry-background-color: #F8F6F6;
     --pest-domains-background-color: #FBFBFB;
 
     --green-color: #00ae40;
@@ -44,9 +45,10 @@
     --hover-color: #fdeae2;
 
     --inline-padding: 20px;
+    --small-inline-padding: 20px;
     --main-inline-padding: 120px;
 
-    --home-hero-section-inline-padding: 120px;
+    --home-hero-section-inline-padding: 200px;
     --home-services-section-inline-padding: 60px;
     --home-projects-section-inline-padding: 20px;
     --home-reviews-section-inline-padding: 60px;
@@ -55,18 +57,21 @@
     --about-us-line-works-steps-section-inline-padding: 60px;
     --about-us-partners-section-inline-padding: 60px;
 
-    --portfolio-section-inline-padding: 60px;
+    --portfolio-section-inline-padding: 200px;
     --blog-articles-section-inline-padding: 60px;
+    --articles-page-section-inline-padding: 200px;
     --contact-page-section-inline-padding: 180px;
 
-    --website-developer-section-inline-padding: 60px;
-    --website-programming-section-inline-padding: 60px;
+    --website-developer-section-inline-padding: 120px;
+    --website-programming-section-inline-padding: 200px;
     --website-design-section-inline-padding: 60px;
     --website-important-articles-section-inline-padding: 60px;
     --faqs-section-inline-padding: 60px;
 
-    --app-important-articles-section-inline-padding: 120px;
-    --feature-section-inline-padding: 60px;
+    --app-developer-hero-section-inline-padding: 240px;
+    --app-important-articles-section-inline-padding: 100px;
+    --projects-steps-inline-padding: 60px;
+    --feature-section-inline-padding: 200px;
     --packages-section-inline-padding: 120px;
     --operations-systems-section-inline-padding: 60px;
     --your-domain-section-inline-padding: 240px;
@@ -75,6 +80,9 @@
     --platform-management-section-inline-padding: 60px;
     --work-lines-section-inline-padding: 120px;
     --packages-marketing-section-inline-padding: 120px;
+    --dont-worry-hosting-section-inline-padding: 60px;
+    --order-your-app-section-inline-padding: 170px;
+    --categories-programming-section-inline-padding: 200px;
 
     --font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
 }
@@ -220,7 +228,7 @@ img {
     height: auto;
     overflow: visible;
     position: relative;
-    margin-inline-end: 120px;
+    margin-inline-end: 80px;
 
     & .contact-fast {
         width: 280px;
@@ -382,6 +390,7 @@ html[lang=en] {
 
     & .inner {
         width: 80%;
+        max-width: 1220px;
         height: 100%;
         margin: 0 auto;
         user-select: none;
@@ -393,8 +402,11 @@ html[lang=en] {
         justify-content: center;
 
         & .navbar {
+            flex: 1;
+
             & ul {
                 gap: 0px;
+                justify-content: center;
             }
 
             & li>a {
@@ -698,10 +710,10 @@ html[lang=en] {
 }
 
 @media (max-width: 1080px) {
-    .logo {
+    /* .logo {
         width: 50px;
         min-width: 50px;
-    }
+    } */
 
     .header {
         & .inner {
@@ -1352,8 +1364,8 @@ swiper-slide img {
 }
 
 .section {
-    position: relative;
-    z-index: 500;
+    /* position: relative; */
+    /* z-index: 500; */
 }
 
 .section .title {
@@ -1435,6 +1447,140 @@ swiper-slide img {
     max-width: fit-content;
     max-height: 50%;
     object-fit: contain;
+}
+
+.fixed-support {
+    position: fixed;
+    z-index: 99999;
+    bottom: 22px;
+    right: 22px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--dark-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    border: none;
+
+    .headphones {
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 50px;
+        background-color: var(--light-color);
+
+        .icon {
+            color: var(--main-color);
+        }
+    }
+
+    .fixed-support-content {
+        overflow: hidden;
+        border-radius: 15px;
+        background-color: var(--light-color);
+    }
+
+    .fixed-support-header {
+        padding: 15px;
+        color: var(--light-color);
+        background: linear-gradient(150deg, var(--light-main-color) 45%, #f19d62);
+    }
+
+    .fixed-support-body {
+        padding: 15px;
+        font-size: 16px;
+        border-block: 1px solid var(--color-gray-100);
+
+        .fixed-support-title {
+            margin-block: 10px;
+        }
+
+        .fixed-support-welcome {
+            padding: 12px;
+            border-radius: 10px;
+            position: relative;
+            filter: saturate(1.5);
+            color: var(--dark-main-color);
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.1;
+                border-radius: inherit;
+                background-color: var(--light-main-color);
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.1;
+                border-radius: inherit;
+                border: 1px solid var(--main-color);
+            }
+        }
+
+        .fixed-support-list {
+            .fixed-support-item {
+                padding: 12px;
+                border-radius: 25px;
+                transition: .2s ease;
+                border: 1px solid var(--dark-muted-color);
+
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+
+                .fixed-support-image {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &:hover {
+                    border: 1px solid var(--light-main-color);
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+                }
+            }
+        }
+    }
+
+    .fixed-support-footer {
+        padding: 15px;
+        font-size: 14px;
+        color: var(--green-color);
+
+        .status {
+            width: 15px;
+            height: 15px;
+            margin: 3px;
+            border-radius: 50%;
+            background-color: var(--green-color);
+            border: 2px solid var(--dark-green-color);
+            animation: pulse 0.9s infinite;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+        opacity: 0.2;
+    }
+
+    90% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* Start Footer Section */

@@ -5,8 +5,7 @@
     @include('dashboard.layout.partials.head')
     @stack('styles')
 
-    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
-        rel="stylesheet">
+    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         :root {
             --primary: {{ $settings->primary_color ?? '#6f42c1' }};

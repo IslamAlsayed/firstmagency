@@ -131,7 +131,6 @@ class WorkUsStepSeeder extends Seeder
                     'order' => $step['order'],
                     'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $i <= 2,
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

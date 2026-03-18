@@ -11,18 +11,15 @@
                 <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $reviews->total() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.reviews') }}</small>
             </div>
-            <div class="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                {{-- <div class="text-2xl font-bold text-yellow-600">⏳ {{ $pendingCount }}</div> --}}
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-yellow-200">
                 <div class="text-2xl font-bold text-yellow-600" id="stat-pending"> <i class="fas fa-clock text-yellow-500"></i> {{ $pendingCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.pending') }}</small>
             </div>
-            <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
-                {{-- <div class="text-2xl font-bold text-green-600">✅ {{ $approvedCount }}</div> --}}
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-green-200">
                 <div class="text-2xl font-bold text-green-600" id="stat-approved"> <i class="fas fa-check-circle text-green-600"></i> {{ $approvedCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.approved') }}</small>
             </div>
-            <div class="text-center p-4 bg-red-50 rounded-lg border border-red-200">
-                {{-- <div class="text-2xl font-bold text-red-600">❌ {{ $rejectedCount }}</div> --}}
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-red-200">
                 <div class="text-2xl font-bold text-red-600" id="stat-rejected"> <i class="fas fa-times-circle text-red-600"></i> {{ $rejectedCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.rejected') }}</small>
             </div>
@@ -33,8 +30,7 @@
                 <h5 class="text-lg font-semibold text-gray-800">⭐ {{ __('main.reviews') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.reviews')]) }}">
                     <a href="{{ route('dashboard.reviews.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_type', ['type' => __('main.review')]) }}
@@ -50,8 +46,8 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.country') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.rating') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.message') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                             </tr>
                         </thead>
@@ -75,27 +71,27 @@
                                         @endphp
                                         {!! $stars !!}
                                     </td>
-                                    <td class="px-6 py-4 text-gray-600 text-sm">
+                                    <td class="px-6 py-4 text-gray-600 text-sm" title="{{ $review->comment }}">
                                         {{ limitedText($review->comment, 40) }}
                                     </td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $review->created_at?->format('d/m/Y') }}</td>
                                     <td class="p-4 text-sm">
-                                        <span
-                                            class="px-3 py-1 rounded-full text-xs font-semibold
-                                                @if ($review->status === 'pending') bg-blue-100 text-blue-800
-                                                @elseif($review->status === 'approved') bg-green-100 text-green-800
-                                                @elseif($review->status === 'rejected') bg-red-100 text-red-800
-                                                @else bg-gray-100 text-gray-800 @endif">
-                                            {{ __('main.' . $review->status) }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-gray-600 text-sm">
                                         @include('dashboard.components.status-actions', [
                                             'record' => $review,
                                             'models' => 'reviews',
                                             'modelClass' => 'review',
                                             'availableOptions' => array_column(\App\Enum\ReviewEnums::cases(), 'value'),
                                         ])
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold
+                                        @if ($review->status === 'pending') bg-blue-100 text-blue-800
+                                        @elseif($review->status === 'approved') bg-green-100 text-green-800
+                                                @elseif($review->status === 'rejected') bg-red-100 text-red-800
+                                                @else bg-gray-100 text-gray-800 @endif">
+                                            {{ __('main.' . $review->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $review->created_at?->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 text-gray-600 text-sm">
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $review,
                                             'models' => 'reviews',

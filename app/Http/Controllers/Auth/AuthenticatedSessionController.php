@@ -38,7 +38,15 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         $user = getActiveUser();
-        // if ($user) { }
+        
+        // Update last login information
+        if ($user) {
+            $user->update([
+                'last_login_at' => now(),
+                'last_login_ip' => $request->ip(),
+            ]);
+        }
+        
         showToastSuccessMessage(__('messages.welcome_back_name', ['name' => Auth::user()->name ?? 'User']));
         return redirect()->intended(route('dashboard.index', false));
     }

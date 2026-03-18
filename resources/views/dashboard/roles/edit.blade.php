@@ -17,10 +17,9 @@
                 <div class="grid gap-4 lg:gap-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="name" name="name" required value="{{ old('name', $role->name) }}" placeholder="مثال: محرر، مدير">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name" required
+                                value="{{ old('name', $role->name) }}" placeholder="مثال: محرر، مدير">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -35,9 +34,21 @@
 
                     @if ($permissions->count() > 0)
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            @foreach ($permissions->groupBy(fn($p) => explode('-', $p->name)[0]) as $module => $modulePermissions)
+                            @php
+                                $permissions = $permissions->groupBy(function ($p) {
+                                    $parts = explode('-', $p->name);
+                                    if (count($parts) > 1 && $parts[count($parts) - 1] === 'delete' && $parts[count($parts) - 2] === 'force') {
+                                        array_pop($parts);
+                                        array_pop($parts);
+                                    } else {
+                                        array_pop($parts);
+                                    }
+                                    return implode('-', $parts);
+                                });
+                            @endphp
+                            @foreach ($permissions as $module => $modulePermissions)
                                 <div class="border border-gray-200 rounded-lg p-4">
-                                    <h5 class="text-sm font-semibold text-gray-700 mb-3 capitalize">{{ $module }}</h5>
+                                    <h5 class="text-sm font-semibold text-gray-700 mb-3 capitalize">{{ str_replace('-', ' ', $module) }}</h5>
                                     <div class="space-y-2">
                                         @foreach ($modulePermissions as $permission)
                                             <div class="flex items-center gap-3">

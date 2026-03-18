@@ -19,10 +19,6 @@
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $platformManagements->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-featured">{{ $platformManagements->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
-            </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
@@ -30,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-mobile-alt mr-2"></i> {{ __('main.platform_management') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_platform_management') }}">
                     <a href="{{ route('dashboard.platform-management.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_platform_management') }}
@@ -45,18 +40,16 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.description') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($platformManagements as $item)
-                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                data-active="{{ (int) $item->is_active }}" data-featured="{{ (int) $item->is_featured }}">
+                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $item->is_active }}">
                                 <td title="{{ $item->translations[app()->getLocale()]['title'] ?? '--' }}">
                                     <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
                                         {{ limitedText($item->translations[app()->getLocale()]['title'] ?? '--', 25) }}
@@ -75,13 +68,21 @@
                                         'modelClass' => 'platformManagement',
                                     ])
                                 </td>
+                                <td class="p-4 text-sm text-gray-600">{{ $item->order ?? 0 }}</td>
                                 <td class="p-4 text-sm">
-                                    @include('dashboard.components.toggle-hold', [
-                                        'modelId' => $item->id,
-                                        'field' => 'is_featured',
-                                        'value' => (bool) $item->is_featured,
-                                        'modelClass' => 'platformManagement',
+                                    @include('dashboard.components.status-actions', [
+                                        'record' => $item,
+                                        'models' => 'platform-management',
+                                        'modelClass' => 'platform-management',
+                                        'availableOptions' => array_column(\App\Enum\PestDomainEnums::cases(), 'value'),
                                     ])
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs font-semibold
+                                    @if ($item->status === 'published') bg-green-100 text-green-800
+                                    @elseif($item->status === 'draft') bg-yellow-100 text-yellow-800
+                                    @else bg-red-100 text-red-800 @endif">
+                                        {{ __('main.' . $item->status) }}
+                                    </span>
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">
                                     @if ($item->creator)
@@ -94,23 +95,7 @@
                                     @endif
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">{{ $item->created_at?->format('d/m/Y') }}</td>
-                                <td class="p-4 text-sm text-gray-600">{{ $item->order ?? 0 }}</td>
-                                <td class="p-4 text-sm">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs font-semibold
-                                                @if ($item->status === 'published') bg-green-100 text-green-800
-                                                @elseif($item->status === 'draft') bg-yellow-100 text-yellow-800
-                                                @else bg-red-100 text-red-800 @endif">
-                                        {{ __('main.' . $item->status) }}
-                                    </span>
-                                </td>
                                 <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                    @include('dashboard.components.status-actions', [
-                                        'record' => $item,
-                                        'models' => 'platform-management',
-                                        'modelClass' => 'platform-management',
-                                        'availableOptions' => array_column(\App\Enum\PestDomainEnums::cases(), 'value'),
-                                    ])
                                     @include('dashboard.components.permissions-actions', [
                                         'record' => $item,
                                         'models' => 'platform-management',

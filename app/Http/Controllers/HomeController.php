@@ -27,9 +27,7 @@ class HomeController extends Controller
                 return Project::active()->orderBy('order')->get();
             }),
 
-            'reviews' => Cache::remember('home_reviews', 1800, function () {
-                return Review::orderBy('created_at', 'desc')->get();
-            }),
+            'reviews' => Review::approved()->orderBy('created_at', 'desc')->get(),
 
             'clients' => Cache::remember('home_clients', 3600, function () {
                 return Client::active()->orderBy('order')->get();

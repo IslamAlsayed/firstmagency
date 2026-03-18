@@ -19,11 +19,28 @@ class ArticleController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Article::class);
-        $articles = Article::with(['category', 'creator'])->latest()->paginate(15);
-        $allItems = Article::count() ?? 0;
-        $published = Article::where('status', 'published')->count() ?? 0;
-        $draft = Article::where('status', 'draft')->count() ?? 0;
-        $archived = Article::where('status', 'archived')->count() ?? 0;
+        $isAdmin = in_array(getActiveUser()->role, ['admin', 'superadmin']);
+
+        $articles = Article::with(['category', 'creator']);
+        if (!$isAdmin) {
+            $articles = $articles->published();
+        }
+
+        $articles = $articles->latest()->paginate(15);
+
+        // Calculate statistics
+        if ($isAdmin) {
+            $allItems = Article::count() ?? 0;
+            $published = Article::where('status', 'published')->count() ?? 0;
+            $draft = Article::where('status', 'draft')->count() ?? 0;
+            $archived = Article::where('status', 'archived')->count() ?? 0;
+        } else {
+            $allItems = Article::published()->count() ?? 0;
+            $published = Article::published()->count() ?? 0;
+            $draft = 0;
+            $archived = 0;
+        }
+
         return view('dashboard.articles.index', compact('articles', 'allItems', 'published', 'draft', 'archived'));
     }
 

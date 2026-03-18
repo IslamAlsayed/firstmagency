@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->string('status')->default('published');
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamp('published_at')->nullable();

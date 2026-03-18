@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             LineWorkSeeder::class,
             PartnerSeeder::class,
             FAQSeeder::class,
+            PortfolioSeeder::class,
             ProgrammingCategorySeeder::class,
             ProgrammingSystemSeeder::class,
             ProjectStepSeeder::class,

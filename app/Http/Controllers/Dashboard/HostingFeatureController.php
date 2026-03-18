@@ -21,14 +21,13 @@ class HostingFeatureController extends Controller
         $hostingFeatures = HostingFeature::with(['creator'])->latest()->paginate(15);
         $allItems = HostingFeature::count() ?? 0;
         $allItemActive = HostingFeature::active()->count() ?? 0;
-        $allItemFeature = HostingFeature::feature()->count() ?? 0;
-        return view('dashboard.features-hosting.index', compact('hostingFeatures', 'allItems', 'allItemActive', 'allItemFeature'));
+        return view('dashboard.hosting-features.index', compact('hostingFeatures', 'allItems', 'allItemActive'));
     }
 
     public function create()
     {
         $this->authorize('create', HostingFeature::class);
-        return view('dashboard.features-hosting.create');
+        return view('dashboard.hosting-features.create');
     }
 
     public function store(StoreRequest $request)
@@ -52,39 +51,39 @@ class HostingFeatureController extends Controller
         $hostingFeatures = HostingFeature::create($validated);
 
         if ($request->hasFile('image')) {
-            $this->uploadSinglePhoto($request, $hostingFeatures, 'image', 'features-hosting');
+            $this->uploadSinglePhoto($request, $hostingFeatures, 'image', 'hosting-features');
         }
 
         return $hostingFeatures
             ? ($request->has('save_and_add')
-                ? redirect()->back()->withSuccess(__('messages.type_created', ['type' => __('main.features_hosting')]))
-                : redirect()->route('dashboard.features-hosting.index')->withSuccess(__('messages.type_created', ['type' => __('main.features_hosting')])))
-            : redirect()->route('dashboard.features-hosting.index')->withError(__('messages.type_creation_failed', ['type' => __('main.features_hosting')]));
+                ? redirect()->back()->withSuccess(__('messages.type_created', ['type' => __('main.hosting_feature')]))
+                : redirect()->route('dashboard.hosting-features.index')->withSuccess(__('messages.type_created', ['type' => __('main.hosting_feature')])))
+            : redirect()->route('dashboard.hosting-features.index')->withError(__('messages.type_creation_failed', ['type' => __('main.hosting_feature')]));
     }
 
     public function show($id)
     {
         $hostingFeatures = HostingFeature::find($id);
         if (!$hostingFeatures)
-            return redirect()->route('dashboard.features-hosting.index')->withError(__('messages.type_not_found', ['type' => __('main.features_hosting')]));
+            return redirect()->route('dashboard.hosting-features.index')->withError(__('messages.type_not_found', ['type' => __('main.hosting_feature')]));
         $this->authorize('view', $hostingFeatures);
-        return view('dashboard.features-hosting.show', compact('hostingFeatures'));
+        return view('dashboard.hosting-features.show', compact('hostingFeatures'));
     }
 
     public function edit($id)
     {
         $hostingFeatures = HostingFeature::find($id);
         if (!$hostingFeatures)
-            return redirect()->route('dashboard.features-hosting.index')->withError(__('messages.type_not_found', ['type' => __('main.features_hosting')]));
+            return redirect()->route('dashboard.hosting-features.index')->withError(__('messages.type_not_found', ['type' => __('main.hosting_feature')]));
         $this->authorize('update', $hostingFeatures);
-        return view('dashboard.features-hosting.edit', compact('hostingFeatures'));
+        return view('dashboard.hosting-features.edit', compact('hostingFeatures'));
     }
 
     public function update(UpdateRequest $request, $id)
     {
         $hostingFeatures = HostingFeature::find($id);
         if (!$hostingFeatures)
-            return redirect()->route('dashboard.features-hosting.index')->withError(__('messages.type_not_found', ['type' => __('main.features_hosting')]));
+            return redirect()->route('dashboard.hosting-features.index')->withError(__('messages.type_not_found', ['type' => __('main.hosting_feature')]));
         $this->authorize('update', $hostingFeatures);
 
         $validated = $request->validated();
@@ -107,13 +106,13 @@ class HostingFeatureController extends Controller
             if ($hostingFeatures->image && file_exists(public_path('storage/' . $hostingFeatures->image))) {
                 unlink(public_path('storage/' . $hostingFeatures->image));
             }
-            $this->uploadSinglePhoto($request, $hostingFeatures, 'image', 'features-hosting');
+            $this->uploadSinglePhoto($request, $hostingFeatures, 'image', 'hosting-features');
         }
 
         $updated = $hostingFeatures->update($validated);
 
         return $updated
-            ? redirect()->route('dashboard.features-hosting.show', $hostingFeatures->id)->withSuccess(__('messages.type_updated', ['type' => __('main.features_hosting')]))
-            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.features_hosting')]));
+            ? redirect()->route('dashboard.hosting-features.show', $hostingFeatures->id)->withSuccess(__('messages.type_updated', ['type' => __('main.hosting_feature')]))
+            : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.hosting_feature')]));
     }
 }

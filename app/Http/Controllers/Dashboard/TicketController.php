@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ticket\StoreMessageRequest;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Http\Requests\Ticket\UpdateRequest;
+use App\Mail\TicketAssignedDepartmentMail;
 use App\Mail\TicketCopyMail;
 use App\Mail\TicketCreatedMail;
 use App\Mail\TicketRepliedMail;
@@ -25,7 +26,11 @@ class TicketController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Ticket::class);
-        $tickets = Ticket::with(['user', 'assignedTo'])->latest()->paginate(15);
+        $tickets = Ticket::with(['assignedTo']);
+        if (getActiveUser()->role == 'support' && getActiveUser()->department) {
+            $tickets = $tickets->where('department_id', getActiveUser()->department->id);
+        }
+        $tickets = $tickets->latest()->paginate(15);
         return view('dashboard.tickets.index', compact('tickets'));
     }
 
@@ -68,14 +73,21 @@ class TicketController extends Controller
         // Send email to customer
         Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
 
+        // Send email to department user
+        $department = Department::find($ticket->department_id);
+        if ($department && $department->user) {
+            Mail::to($department->user->email)->send(new TicketAssignedDepartmentMail($ticket, $department));
+        }
+
         session()->forget('ticket_verification');
         return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_created_successfully', ['type' => __('main.ticket')]));
     }
 
     public function show($id)
     {
-        $ticket = Ticket::with(['user', 'assignedTo', 'messages.department', 'department'])->find($id);
-        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        // $ticket = Ticket::with(['assignedTo', 'messages.department', 'messages.user', 'department.supportUser'])->find($id);
+        $ticket = Ticket::with(['assignedTo', 'department.user'])->find($id);
+        $departments = Department::get(['id', 'name', 'user_id']);
         $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
@@ -102,6 +114,11 @@ class TicketController extends Controller
 
         $validated = $request->validated();
         unset($validated['attachments'], $validated['removed_attachments']);
+
+        // Store old values for comparison
+        $oldDepartmentId = $ticket->department_id;
+        $oldStatus = $ticket->status;
+
         $ticket->update($validated);
 
         // upload new attachments
@@ -115,16 +132,56 @@ class TicketController extends Controller
             $this->deleteFiles($ticket, $removedIndexes, 'attachments');
         }
 
+        // Send email to new department user if department changed
+        if ($oldDepartmentId != $ticket->department_id) {
+            $newDepartment = Department::find($ticket->department_id);
+            if ($newDepartment && $newDepartment->user) {
+                Mail::to($newDepartment->user->email)->send(new TicketAssignedDepartmentMail($ticket, $newDepartment));
+            }
+        }
+
         return redirect()->route('dashboard.tickets.index')->withSuccess(__('messages.type_updated_successfully', ['type' => __('main.ticket')]));
     }
 
     public function supportReply($ticketId)
     {
-        $ticket = Ticket::with(['user', 'assignedTo', 'messages.department', 'department'])->find($ticketId);
+        $ticket = Ticket::with(['messages', 'messages.user.department'])->find($ticketId);
+
+        $messagesData = $ticket->messages->map(function ($message) {
+            $user = $message->user;
+            $department = $user?->department;
+
+            return [
+                'id' => $message->id,
+                'message' => $message->message,
+                'sender_type' => $message->sender_type,
+                'created_at' => $message->created_at->format('d/m/Y H:i'),
+                'human_readable_date' => $message->created_at->diffForHumans(),
+
+                'user' => [
+                    'name' => $user?->name ?? __('main.customer'),
+                    'photo' => $user?->photo ? asset('assets/images/avatars/' . $user->photo) : asset('assets/images/avatars/avatar.png'),
+                ],
+
+                'department' => [
+                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
+                    'bg_color' => $department?->bg_color,
+                    'border_color' => $department?->border_color,
+                    'border_main_color' => $department?->border_main_color,
+                    'badge_color' => $department?->badge_color,
+                ],
+
+                'attachments' => $message->attachments ?? [],
+            ];
+        });
+
+        $ticketData = $ticket->toArray();
+        $ticketData['messages'] = $messagesData;
+
         $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
-        return view('dashboard.tickets.supportReply', compact('ticket'));
+        return view('dashboard.tickets.supportReply', compact('ticket', 'ticketData'));
     }
 
     public function postSupportReply(StoreMessageRequest $request, $ticketId)
@@ -146,7 +203,6 @@ class TicketController extends Controller
         if ($messageText) {
             $messageRow = $ticket->messages()->create([
                 'user_id' => getActiveUserId(),
-                'department_id' => $ticket->department_id,
                 'message' => $messageText,
                 'sender_type' => 'support',
             ]);
@@ -157,17 +213,24 @@ class TicketController extends Controller
             }
 
             // Prepare comprehensive data for Ably with user info and formatted dates
-            $department = Department::find($ticket->department_id);
+            $department = getActiveUser()->department;
+            $supportUser = getActiveUser(); // The user who is replying
             $messageData = array_merge($messageRow->toArray(), [
-                'user_name' => getActiveUser()->name,
-                'ticket_name' => $ticket->name,
-                'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
-                'human_readable_date' => $messageRow->created_at->diffForHumans(),
                 'ticket_uuid' => $ticket->uuid,
-                'user_photo' => getActiveUser()->photo ? 'storage/' . getActiveUser()->photo : null,
-                'department_name' => $department?->name ?? __('main.no_department'),
-                'department_image' => $department?->image ?? 'support.png',
-                'department_id' => $department?->id ?? null,
+                'created_at' => $messageRow->created_at->format('d/m/Y H:i'),
+                'human_readable_date' => $messageRow->created_at->diffForHumans(),
+                'user' => [
+                    'name' => $supportUser->name,
+                    'photo' => $supportUser->photo ? asset('assets/images/avatars/' . $supportUser->photo) : asset('assets/images/avatars/avatar.png'),
+                ],
+                'department' => $department ? [
+                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support')),
+                    'bg_color' => $department->bg_color,
+                    'border_color' => $department->border_color,
+                    'border_main_color' => $department->border_main_color,
+                    'badge_color' => $department->badge_color,
+                ] : null,
+                'attachments' => $messageRow->attachments ?? [],
             ]);
 
             // Publish update to Ably channel (you can customize the channel name and event as needed)

@@ -12,7 +12,6 @@ class TicketMessage extends Model
     protected $fillable = [
         'ticket_id',
         'user_id',
-        'department_id',
         'message',
         'sender_type',
         'attachments',
@@ -32,11 +31,6 @@ class TicketMessage extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function department()
-    {
-        return $this->belongsTo(Department::class);
     }
 
     public function attachments()

@@ -25,6 +25,7 @@
         // Delete message
         const deleteBtns = document.querySelectorAll('.message-delete-btn');
         deleteBtns.forEach(btn => {
+            btn.style.userSelect = 'none';
             btn.removeEventListener('click', handleDeleteClick);
             btn.addEventListener('click', handleDeleteClick);
         });
@@ -170,10 +171,10 @@
             const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
 
             if (messageElement) {
-                messageElement.style.opacity = '0.5';
+                messageElement.style.opacity = '0.3';
                 messageElement.style.textDecoration = 'line-through';
 
-                setTimeout(() => messageElement.remove(), 1000);
+                setTimeout(() => messageElement.remove(), 300);
             }
         });
     }

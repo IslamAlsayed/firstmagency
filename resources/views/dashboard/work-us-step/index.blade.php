@@ -19,10 +19,6 @@
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $workUsSteps->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-featured">{{ $workUsSteps->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
-            </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
@@ -46,7 +42,6 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.description') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
@@ -57,7 +52,7 @@
                     <tbody>
                         @forelse($workUsSteps as $item)
                             <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                data-active="{{ (int) $item->is_active }}" data-featured="{{ (int) $item->is_featured }}">
+                                data-active="{{ (int) $item->is_active }}">
                                 <td title="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($item->image && checkExistFile($item->image))
@@ -82,14 +77,6 @@
                                         'modelId' => $item->id,
                                         'field' => 'is_active',
                                         'value' => (bool) $item->is_active,
-                                        'modelClass' => 'workUsStep',
-                                    ])
-                                </td>
-                                <td class="p-4 text-sm">
-                                    @include('dashboard.components.toggle-hold', [
-                                        'modelId' => $item->id,
-                                        'field' => 'is_featured',
-                                        'value' => (bool) $item->is_featured,
                                         'modelClass' => 'workUsStep',
                                     ])
                                 </td>

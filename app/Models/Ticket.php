@@ -19,7 +19,6 @@ class Ticket extends Model
         'department_id',
         'status',
         'priority',
-        'user_id',
         'is_active',
         'assigned_to',
         'token',
@@ -48,11 +47,6 @@ class Ticket extends Model
                 $model->uuid = mt_rand(100000000, 999999999);
             }
         });
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function department()

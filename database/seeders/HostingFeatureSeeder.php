@@ -150,8 +150,6 @@ class HostingFeatureSeeder extends Seeder
             ],
         ];
 
-        $portfolio = config('portfolio');
-
         // Paths configuration
         $sourcePath = base_path('public/assets/images/website/hosting/gifs');
         $destBasePath = storage_path('app/public/uploads/hosting-features');
@@ -183,7 +181,7 @@ class HostingFeatureSeeder extends Seeder
 
             // Save relative paths for database storage
             $data['slug'] = strtolower(str_replace(' ', '-', $data['slug'] ?? $data['translations']['en']['title'] ?? 'feature-' . ($i + 1)));
-            $data['image'] = 'uploads/portfolio/' . ($i + 1) . '/' . $data['image'];
+            $data['image'] = 'uploads/hosting-features/' . ($i + 1) . '/' . $data['image'];
 
             HostingFeature::create([
                 ...$data,

@@ -19,7 +19,6 @@ class PlatformManagement extends Model
         'order',
         'status',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
         'published_at',
@@ -28,7 +27,6 @@ class PlatformManagement extends Model
     protected $casts = [
         'translations' => AsCollection::class,
         'is_active' => 'boolean',
-        'is_featured' => 'boolean',
         'published_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -43,11 +41,6 @@ class PlatformManagement extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
     }
 
     public function scopeOrdered($query)

@@ -881,6 +881,10 @@
         margin-inline: calc(var(--spacing) * 2);
     }
 
+    .mx-3 {
+        margin-inline: calc(var(--spacing) * 3);
+    }
+
     .mx-3\.5 {
         margin-inline: calc(var(--spacing) * 3.5);
     }
@@ -1341,8 +1345,16 @@
         display: grid;
     }
 
+    .grid\! {
+        display: grid !important;
+    }
+
     .hidden {
         display: none;
+    }
+
+    .hidden\! {
+        display: none !important;
     }
 
     .inline {

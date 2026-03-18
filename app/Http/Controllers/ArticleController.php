@@ -28,6 +28,10 @@ class ArticleController extends Controller
         if (!$article)
             return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.article')]));
 
+        // Count each article visit.
+        $article->increment('visitors');
+        $article->refresh();
+
         $categories = ProgrammingCategory::withCount('articles')->get();
 
         $articles = Cache::remember('home_articles', 1800, function () {

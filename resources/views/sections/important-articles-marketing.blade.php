@@ -1,6 +1,5 @@
 <section class="section important-articles text-center relative">
-    <div class="title font-semibold">{{ __('main.important_marketing_articles_title') }} <span
-            class="title-badge">{{ __('main.important_marketing_articles_subtitle') }}</span></div>
+    <div class="title font-semibold">{{ __('main.important_marketing_articles_title') }} <span class="title-badge">{{ __('main.important_marketing_articles_subtitle') }}</span></div>
     <div class="description">{{ __('main.important_marketing_articles_description') }}</div>
 
     <div class="main-articles-section">
@@ -13,8 +12,7 @@
                     <div class="article">
                         <div class="image">
                             @if (rand(0, 1) == 1)
-                                <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}"
-                                    alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}">
+                                <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}">
                             @endif
                         </div>
                         <div class="visitor">

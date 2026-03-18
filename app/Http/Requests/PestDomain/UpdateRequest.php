@@ -26,7 +26,6 @@ class UpdateRequest extends FormRequest
             'discount_percentage' => 'nullable|numeric|min:0|max:100',
             'order' => 'nullable|integer|min:0',
             'is_active' => 'nullable|boolean',
-            'is_featured' => 'nullable|boolean',
         ];
     }
 }

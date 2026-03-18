@@ -11,37 +11,21 @@ class LocaleController extends Controller
     {
         $supportedLocales = array_keys(config('languages'));
 
-        // التحقق من أن اللغة مدعومة
         if (!in_array($locale, $supportedLocales)) {
             $locale = config('app.locale', 'ar');
         }
 
-        // تحديد ما إذا كان الطلب للداشبورد أم الموقع
         $isDashboard = $request->segment(1) === 'dashboard';
 
-        // حفظ اللغة في قاعدة البيانات والـ session بناءً على النوع
         if (Auth::check()) {
             $user = Auth::user();
-            if ($isDashboard) {
-                // تحديث لغة الداشبورد فقط
-                $user->dashboard_locale = $locale;
-            } else {
-                // تحديث لغة الموقع فقط
-                $user->website_locale = $locale;
-            }
+            $isDashboard ? $user->dashboard_locale = $locale : $user->website_locale = $locale;
             /** @var \App\Models\User $user */
             $user->save();
         }
 
-        // حفظ في session
-        if ($isDashboard) {
-            session(['dashboard_locale' => $locale]);
-        } else {
-            session(['website_locale' => $locale]);
-        }
+        $isDashboard ? session(['dashboard_locale' => $locale]) : session(['website_locale' => $locale]);
 
-        showToastSuccessMessage(__('messages.language_changed'));
-
-        return redirect()->back();
+        return redirect()->back()->withSuccess(__('messages.language_changed'));
     }
 }

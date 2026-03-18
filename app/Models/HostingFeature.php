@@ -37,7 +37,7 @@ class HostingFeature extends Model
             if (!$model->slug) {
                 $translations = $model->translations ?? [];
                 $title = $translations['en']['title'] ?? $translations['ar']['title'] ?? null;
-                $slug = Str::slug($title ?? 'features-hosting-' . time());
+                $slug = Str::slug($title ?? 'hosting-features' . time());
                 $model->slug = $slug;
             }
         });

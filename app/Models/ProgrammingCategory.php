@@ -54,4 +54,9 @@ class ProgrammingCategory extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

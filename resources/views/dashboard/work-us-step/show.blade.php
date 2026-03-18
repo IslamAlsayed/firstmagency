@@ -65,8 +65,7 @@
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-600 mb-3">{{ __('main.image') }}</label>
                     <div class="border border-gray-300 rounded-lg overflow-hidden max-w-md">
-                        <img src="{{ asset('storage/' . $workUsStep->image) }}"
-                            alt="{{ $workUsStep->alt_text ?? ($workUsStep->translations[app()->getLocale()]['title'] ?? '') }}" class="w-full h-auto">
+                        <img src="{{ asset('storage/' . $workUsStep->image) }}" alt="{{ $workUsStep->alt_text ?? ($workUsStep->translations[app()->getLocale()]['title'] ?? '') }}" class="w-full h-auto">
                     </div>
                 </div>
             @endif
@@ -111,23 +110,6 @@
                         </span>
                     </p>
                 </div>
-
-                <div>
-                    <label class="text-xs font-semibold text-gray-500 uppercase">{{ __('main.featured') }}</label>
-                    <p class="mt-1">
-                        <span
-                            class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium
-                            @if ($workUsStep->is_featured) bg-blue-100 text-blue-800
-                            @else bg-gray-100 text-gray-800 @endif">
-                            @if ($workUsStep->is_featured)
-                                <i class="fas fa-star"></i> {{ __('main.yes') }}
-                            @else
-                                <i class="fas fa-circle-notch"></i> {{ __('main.no') }}
-                            @endif
-                        </span>
-                    </p>
-                </div>
-
                 <div>
                     <label class="text-xs font-semibold text-gray-500 uppercase">{{ __('main.created_by') }}</label>
                     <p class="mt-1">

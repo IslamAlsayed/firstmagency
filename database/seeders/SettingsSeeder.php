@@ -47,20 +47,20 @@ class SettingsSeeder extends Seeder
                 'about_us_image' => 'images/website/about/main-image.png',
                 'about_us_image2' => 'images/website/about/text-bg.png',
 
-                'home_hero_section' => 120,
+                'home_hero_section' => 200,
                 'home_services_section' => 60,
                 'home_projects_section' => 20,
                 'home_reviews_section' => 60,
                 'home_clients_section' => 120,
                 'about_us_partners_section' => 60,
-                'portfolio_section' => 60,
-                'blog_articles_section' => 60,
+                'portfolio_section' => 200,
+                'blog_articles_section' => 200,
                 'contact_page_section' => 180,
-                'website_programming_section' => 60,
+                'website_programming_section' => 200,
                 'website_important_articles_section' => 60,
                 'faqs_section' => 60,
                 'app_important_articles_section' => 120,
-                'feature_section' => 60,
+                'feature_section' => 200,
                 'packages_section' => 120,
                 'operations_systems_section' => 60,
                 'your_domain_section' => 240,
@@ -69,6 +69,7 @@ class SettingsSeeder extends Seeder
                 'platform_management_section' => 60,
                 'work_lines_section' => 120,
                 'our_services_marketing_section' => 120,
+                'categories_programming_section' => 200,
             ]
         );
     }

@@ -83,7 +83,6 @@ class PestDomainSeeder extends Seeder
                     'order' => $i,
                     'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $i <= 5, // Featured first 5 pest domains
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

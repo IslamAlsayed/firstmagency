@@ -25,8 +25,7 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('name') border: 1px solid red @enderror">
-                            <input type="text" id="name" name="name" required placeholder="{{ __('main.contact_form_name') }}"
-                                value="{{ old('name') }}">
+                            <input type="text" id="name" name="name" required placeholder="{{ __('main.contact_form_name') }}" value="{{ old('name') }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/user.svg') }}" alt="{{ __('main.contact_form_name') }}">
                             </div>
@@ -39,8 +38,7 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('email') border: 1px solid red @enderror">
-                            <input type="email" id="email" name="email" required placeholder="{{ __('main.contact_form_email') }}"
-                                value="{{ old('email') }}">
+                            <input type="email" id="email" name="email" required placeholder="{{ __('main.contact_form_email') }}" value="{{ old('email') }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/email.svg') }}" alt="{{ __('main.contact_form_email') }}">
                             </div>
@@ -67,10 +65,11 @@
                         </label>
                         <div class="input flex" style="@error('department_id') border: 1px solid red @enderror">
                             <select id="department_id" name="department_id" required>
-                                <option value="" {{ old('department_id') == '' ? 'selected' : '' }}>{{ __('main.select') . ' ' . __('main.department') }}
+                                <option value="" {{ old('department_id') == '' ? 'selected' : '' }}>
+                                    {{ __('main.department') }}
                                 </option>
                                 @foreach ($departments as $dept)
-                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ $dept->name }}</option>
+                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ __('main.' . str_replace('-', '_', $dept->name)) }}</option>
                                 @endforeach
                             </select>
                             <div class="icon">
@@ -88,8 +87,7 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('subject') border: 1px solid red @enderror">
-                            <input type="text" id="subject" name="subject" required placeholder="{{ __('main.contact_form_subject_placeholder') }}"
-                                value="{{ old('subject') }}">
+                            <input type="text" id="subject" name="subject" required placeholder="{{ __('main.contact_form_subject_placeholder') }}" value="{{ old('subject') }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/sheet.svg') }}" alt="{{ __('main.contact_form_subject') }}">
                             </div>
@@ -133,11 +131,10 @@
                         <div class="flex items-center justify-between gap-4">
                             <div class="flex inter gap-4">
                                 <div class="rotate cursor-pointer regenerateVerify"><i class="fas fa-arrow-rotate-right"></i></div>
-                                <div class="input flex items-center" style="@error('verification') border: 1px solid red @enderror"
-                                    data-message="{{ __('messages.no_file_chosen') }}">
+                                <div class="input flex items-center" style="@error('verification') border: 1px solid red @enderror" data-message="{{ __('messages.no_file_chosen') }}">
                                     <input type="number" id="verification" name="verification" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
-                                        style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important"
-                                        placeholder="{{ __('main.contact_form_answer') }}" value="{{ old('verification') }}">
+                                        style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important" placeholder="{{ __('main.contact_form_answer') }}"
+                                        value="{{ old('verification') }}">
                                 </div>
                             </div>
                             <div class="question font-semibold">

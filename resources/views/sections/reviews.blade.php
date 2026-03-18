@@ -1,3 +1,47 @@
+<style>
+    .layout {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &,
+        & * {
+            z-index: 150450;
+        }
+
+        &.hidden {
+            display: none;
+        }
+
+        #reviewForm {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90svh;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background-color: var(--color-gray-400);
+            }
+        }
+    }
+</style>
+
 <section class="section reviews-section relative">
     <div class="text-center title font-semibold">{{ __('main.reviews_title') }} <span class="title-badge">{{ __('main.reviews_subtitle') }}</span></div>
     <div class="text-center description">{{ __('main.reviews_description') }}</div>
@@ -15,8 +59,8 @@
             </div>
         </div>
         <div class="our-reviews-wrapper">
-            <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="3" navigation="true"
-                navigation-next-el=".swiper-button-next" navigation-prev-el=".swiper-button-prev"
+            <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="3" navigation="true" navigation-next-el=".swiper-button-next"
+                navigation-prev-el=".swiper-button-prev"
                 breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 4, "spaceBetween": 15}}'>
                 @if ($reviews && count($reviews) > 0)
                     @foreach ($reviews as $review)
@@ -65,199 +109,197 @@
                 <i class="fas fa-plus icon-plus"></i>
                 {{ __('main.write_review') }}
             </button>
+        </div>
+    </div>
 
-            <form id="reviewForm" class="hidden mt-8 mx-auto bg-white rounded-[9px] shadow-lg p-6 border border-gray-200" enctype="multipart/form-data">
-                <!-- Close Button -->
-                <button type="button" id="closeReviewBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
+    <div class="layout hidden" id="reviewFormLayout">
+        <form id="reviewForm" class="mt-8 mx-auto bg-white rounded-[9px] shadow-lg p-6 border border-gray-200" enctype="multipart/form-data">
+            <!-- Close Button -->
+            <button type="button" id="closeReviewBtn" class="absolute cursor-pointer text-red-600 hover:text-red-800 transition"
+                style="top: 10px; {{ app()->getLocale() == 'ar' ? 'left: 10px' : 'right: 10px' }}">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 items-end gap-4">
-                    <!-- Name Field -->
-                    <div class="mb-5">
-                        <label class="block text-sm font-semibold text-gray-600 text-start mb-2">
-                            <i class="fas fa-user text-primary me-2"></i>{{ __('main.your_name') ?? 'اسمك' }}
-                        </label>
-                        <input type="text" name="name" placeholder="{{ __('main.enter_your_name') ?? 'أدخل اسمك الكامل' }}" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition placeholder-gray-400">
-                    </div>
-
-                    <!-- Rating Field -->
-                    <div class="mb-5">
-                        <label for="stars" class="kt-label mb-2 w-full">{{ __('main.rating') ?? 'تقييمك' }}</label>
-                        <select name="stars" id="stars" class="kt-select h-[45px] bg-white" required>
-                            @for ($i = 5; $i >= 1; $i--)
-                                <option value="{{ $i }}" {{ old('stars') == $i ? 'selected' : '' }} style="font-size: 12px;">
-                                    @for ($j = 1; $j <= $i; $j++)
-                                        ⭐
-                                    @endfor
-                                    @for ($j = $i + 1; $j <= 5; $j++)
-                                        ☆
-                                    @endfor
-                                </option>
-                            @endfor
-                        </select>
-                        @error('stars')
-                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Country Field -->
-                    <div class="mb-5">
-                        <label for="country" class="kt-label mb-2 w-full">{{ __('main.country') ?? 'دولتك' }}</label>
-                        <select name="country" id="country" class="kt-select h-[45px] bg-white" required>
-                            <option value="" disabled selected>{{ __('main.enter_your_country') ?? 'أدخل دولتك' }}</option>
-                            <option value="EG" {{ old('country') == 'EG' ? 'selected' : '' }}>🇪🇬 مصر</option>
-                            <option value="SA" {{ old('country') == 'SA' ? 'selected' : '' }}>🇸🇦 السعودية</option>
-                            <option value="AE" {{ old('country') == 'AE' ? 'selected' : '' }}>🇦🇪 الإمارات</option>
-                            <option value="KW" {{ old('country') == 'KW' ? 'selected' : '' }}>🇰🇼 الكويت</option>
-                            <option value="IQ" {{ old('country') == 'IQ' ? 'selected' : '' }}>🇮🇶 العراق</option>
-                            <option value="QA" {{ old('country') == 'QA' ? 'selected' : '' }}>🇶🇦 قطر</option>
-                            <option value="SD" {{ old('country') == 'SD' ? 'selected' : '' }}>🇸🇩 السودان</option>
-                            <option value="JO" {{ old('country') == 'JO' ? 'selected' : '' }}>🇯🇴 الأردن</option>
-                            <option value="DZ" {{ old('country') == 'DZ' ? 'selected' : '' }}>🇩🇿 الجزائر</option>
-                            <option value="MA" {{ old('country') == 'MA' ? 'selected' : '' }}>🇲🇦 المغرب</option>
-                        </select>
-                        @error('country')
-                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <!-- Review Message Field -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 items-end gap-4">
+                <!-- Name Field -->
                 <div class="mb-5">
                     <label class="block text-sm font-semibold text-gray-600 text-start mb-2">
-                        <i class="fas fa-comment text-primary me-2"></i>{{ __('main.review_message') ?? 'رسالتك' }}
+                        <i class="fas fa-user text-primary me-2"></i>{{ __('main.your_name') ?? 'اسمك' }}
                     </label>
-                    <textarea name="comment" placeholder="{{ __('main.write_your_review') ?? 'شارك آرائك وتجربتك...' }}" required rows="4"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition placeholder-gray-400 resize-none"></textarea>
+                    <input type="text" name="name" placeholder="{{ __('main.enter_your_name') ?? 'أدخل اسمك الكامل' }}" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition placeholder-gray-400">
                 </div>
 
-                <!-- Photo Upload Field -->
+                <!-- Rating Field -->
                 <div class="mb-5">
-                    <label class="block text-sm font-semibold text-gray-600 text-start mb-2">
-                        <i class="fas fa-image text-primary me-2"></i>{{ __('main.photo') ?? 'صورة' }}
-                        <span class="text-gray-500 font-normal">({{ __('main.optional') ?? 'اختياري' }})</span>
-                    </label>
-                    <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition cursor-pointer"
-                        id="photoUploadArea">
+                    <label for="stars" class="kt-label mb-2 w-full">{{ __('main.rating') ?? 'تقييمك' }}</label>
+                    <select name="stars" id="stars" class="kt-select h-[45px] bg-white" required>
+                        @for ($i = 5; $i >= 1; $i--)
+                            <option value="{{ $i }}" {{ old('stars') == $i ? 'selected' : '' }} style="font-size: 12px;">
+                                @for ($j = 1; $j <= $i; $j++)
+                                    ⭐
+                                @endfor
+                                @for ($j = $i + 1; $j <= 5; $j++)
+                                    ☆
+                                @endfor
+                            </option>
+                        @endfor
+                    </select>
+                    @error('stars')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Country Field -->
+                <div class="mb-5">
+                    <label for="country" class="kt-label mb-2 w-full">{{ __('main.country') ?? 'دولتك' }}</label>
+                    <select name="country" id="country" class="kt-select h-[45px] bg-white" required>
+                        <option value="" disabled selected>{{ __('main.enter_your_country') ?? 'أدخل دولتك' }}</option>
+                        <option value="EG" {{ old('country') == 'EG' ? 'selected' : '' }}>🇪🇬 مصر</option>
+                        <option value="SA" {{ old('country') == 'SA' ? 'selected' : '' }}>🇸🇦 السعودية</option>
+                        <option value="AE" {{ old('country') == 'AE' ? 'selected' : '' }}>🇦🇪 الإمارات</option>
+                        <option value="KW" {{ old('country') == 'KW' ? 'selected' : '' }}>🇰🇼 الكويت</option>
+                        <option value="IQ" {{ old('country') == 'IQ' ? 'selected' : '' }}>🇮🇶 العراق</option>
+                        <option value="QA" {{ old('country') == 'QA' ? 'selected' : '' }}>🇶🇦 قطر</option>
+                        <option value="SD" {{ old('country') == 'SD' ? 'selected' : '' }}>🇸🇩 السودان</option>
+                        <option value="JO" {{ old('country') == 'JO' ? 'selected' : '' }}>🇯🇴 الأردن</option>
+                        <option value="DZ" {{ old('country') == 'DZ' ? 'selected' : '' }}>🇩🇿 الجزائر</option>
+                        <option value="MA" {{ old('country') == 'MA' ? 'selected' : '' }}>🇲🇦 المغرب</option>
+                    </select>
+                    @error('country')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Review Message Field -->
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-gray-600 text-start mb-2">
+                    <i class="fas fa-comment text-primary me-2"></i>{{ __('main.review_message') ?? 'رسالتك' }}
+                </label>
+                <textarea name="comment" placeholder="{{ __('main.write_your_review') ?? 'شارك آرائك وتجربتك...' }}" required rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition placeholder-gray-400 resize-none"></textarea>
+            </div>
+
+            <!-- Photo Upload Field -->
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-gray-600 text-start mb-2">
+                    <i class="fas fa-image text-primary me-2"></i>{{ __('main.photo') ?? 'صورة' }}
+                    <span class="text-gray-500 font-normal">({{ __('main.optional') ?? 'اختياري' }})</span>
+                </label>
+                <div class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition cursor-pointer" id="photoUploadArea">
+                    <i class="fas fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
+                    <p class="text-sm text-gray-600">{{ __('main.click_or_drag') ?? 'اضغط أو اسحب الصورة هنا' }}</p>
+                    <input type="file" name="photo" accept="image/*" class="hidden" id="photoInput">
+                    <div id="photoPreview" class="w-[80px] h-auto mt-3 hidden">
+                        <img id="photoPreviewImg" src="" alt="Preview" class="max-h-40 mx-auto rounded-lg">
+                        <button type="button" id="removephoto" class="kt-btn bg-danger cursor-pointer mt-2 text-sm">
+                            <i class="fas fa-trash mr-1"></i>{{ __('main.remove') ?? 'إزالة' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Section with Tabs -->
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-600 text-start">
+                    <i class="fas fa-microphone text-primary me-2"></i>{{ __('main.audio_record') ?? 'تسجيل صوتي' }}
+                    <span class="text-gray-500 font-normal">({{ __('main.optional') ?? 'اختياري' }})</span>
+                </label>
+
+                <!-- Tab Buttons -->
+                <div class="flex gap-2 mb-4 border-b-2 border-gray-200">
+                    <button type="button" id="audioUploadTab" class="audio-tab-btn px-4 py-2 font-semibold text-primary border-b-2 border-b-primary transition hover:opacity-80 active"
+                        data-tab="upload">
+                        <i class="fas fa-cloud-arrow-up me-2"></i>{{ __('main.upload_audio') ?? 'رفع ملف صوتي' }}
+                    </button>
+                    <button type="button" id="audioRecordTab" class="audio-tab-btn px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent transition hover:text-primary"
+                        data-tab="record">
+                        <i class="fas fa-microphone me-2"></i>{{ __('main.record_now') ?? 'سجل الآن' }}
+                    </button>
+                </div>
+
+                <!-- Upload Audio Tab -->
+                <div id="audioUploadContent" class="audio-tab-content">
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition cursor-pointer" id="audioUploadArea">
                         <i class="fas fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-sm text-gray-600">{{ __('main.click_or_drag') ?? 'اضغط أو اسحب الصورة هنا' }}</p>
-                        <input type="file" name="photo" accept="image/*" class="hidden" id="photoInput">
-                        <div id="photoPreview" class="w-[80px] h-auto mt-3 hidden">
-                            <img id="photoPreviewImg" src="" alt="Preview" class="max-h-40 mx-auto rounded-lg">
-                            <button type="button" id="removephoto" class="kt-btn bg-danger cursor-pointer mt-2 text-sm">
-                                <i class="fas fa-trash mr-1"></i>{{ __('main.remove') ?? 'إزالة' }}
+                        <p class="text-sm text-gray-600">{{ __('main.click_or_drag_audio') ?? 'اضغط أو اسحب الملف الصوتي هنا' }}</p>
+                        <p class="text-xs text-gray-500 mt-1">{{ __('main.supported_formats') ?? 'الصيغ المدعومة: MP3, WAV, M4A' }}</p>
+                        <input type="file" name="audio_upload" accept="audio/*" class="hidden" id="audioUploadInput">
+                        <div id="audioUploadPreview" class="mt-4 hidden">
+                            <div class="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-check-circle text-green-600"></i>
+                                    <span id="audioUploadFileName" class="text-sm text-gray-700 font-medium"></span>
+                                </div>
+                                <button type="button" id="removeAudioUpload" class="kt-btn bg-danger cursor-pointer transition">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <audio id="audioUploadPlayer" controls class="w-full mt-3 rounded-lg">
+                                {{ __('main.audio_not_supported') ?? 'متصفحك لا يدعم تشغيل الصوت' }}
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Record Audio Tab -->
+                <div id="audioRecordContent" class="audio-tab-content hidden">
+                    <div class="space-y-3">
+                        <div class="flex gap-3">
+                            <button type="button" id="startRecordBtn"
+                                class="w-[200px] px-4 py-3 bg-primary hover:bg-dark-primary cursor-pointer text-white rounded-lg transition font-semibold flex items-center justify-center gap-2">
+                                <i class="fas fa-circle text-red-500 animate-pulse"></i> {{ __('main.start_recording') ?? 'ابدأ التسجيل' }}
+                            </button>
+                            <button type="button" id="stopRecordBtn"
+                                class="w-[200px] px-4 py-3 bg-gray-400 cursor-pointer text-white rounded-lg hover:bg-gray-500 transition font-semibold flex items-center justify-center gap-2 hidden"
+                                disabled>
+                                <i class="fas fa-square text-white"></i> {{ __('main.stop_recording') ?? 'إيقاف التسجيل' }}
                             </button>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Audio Section with Tabs -->
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-gray-600 text-start">
-                        <i class="fas fa-microphone text-primary me-2"></i>{{ __('main.audio_record') ?? 'تسجيل صوتي' }}
-                        <span class="text-gray-500 font-normal">({{ __('main.optional') ?? 'اختياري' }})</span>
-                    </label>
-
-                    <!-- Tab Buttons -->
-                    <div class="flex gap-2 mb-4 border-b-2 border-gray-200">
-                        <button type="button" id="audioUploadTab"
-                            class="audio-tab-btn px-4 py-2 font-semibold text-primary border-b-2 border-b-primary transition hover:opacity-80 active"
-                            data-tab="upload">
-                            <i class="fas fa-cloud-arrow-up me-2"></i>{{ __('main.upload_audio') ?? 'رفع ملف صوتي' }}
-                        </button>
-                        <button type="button" id="audioRecordTab"
-                            class="audio-tab-btn px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent transition hover:text-primary"
-                            data-tab="record">
-                            <i class="fas fa-microphone me-2"></i>{{ __('main.record_now') ?? 'سجل الآن' }}
-                        </button>
-                    </div>
-
-                    <!-- Upload Audio Tab -->
-                    <div id="audioUploadContent" class="audio-tab-content">
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition cursor-pointer"
-                            id="audioUploadArea">
-                            <i class="fas fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600">{{ __('main.click_or_drag_audio') ?? 'اضغط أو اسحب الملف الصوتي هنا' }}</p>
-                            <p class="text-xs text-gray-500 mt-1">{{ __('main.supported_formats') ?? 'الصيغ المدعومة: MP3, WAV, M4A' }}</p>
-                            <input type="file" name="audio_upload" accept="audio/*" class="hidden" id="audioUploadInput">
-                            <div id="audioUploadPreview" class="mt-4 hidden">
-                                <div class="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-check-circle text-green-600"></i>
-                                        <span id="audioUploadFileName" class="text-sm text-gray-700 font-medium"></span>
-                                    </div>
-                                    <button type="button" id="removeAudioUpload" class="kt-btn bg-danger cursor-pointer transition">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <audio id="audioUploadPlayer" controls class="w-full mt-3 rounded-lg">
-                                    {{ __('main.audio_not_supported') ?? 'متصفحك لا يدعم تشغيل الصوت' }}
-                                </audio>
-                            </div>
+                        <div id="recordingStatus" class="text-sm text-gray-600 hidden flex items-center gap-2">
+                            <i class="fas fa-microphone text-red-600 animate-pulse"></i>
+                            {{ __('main.recording') ?? 'جاري التسجيل...' }}
+                            <span id="recordingTime" class="font-mono font-bold">00:00</span>
                         </div>
-                    </div>
 
-                    <!-- Record Audio Tab -->
-                    <div id="audioRecordContent" class="audio-tab-content hidden">
-                        <div class="space-y-3">
-                            <div class="flex gap-3">
-                                <button type="button" id="startRecordBtn"
-                                    class="w-[200px] px-4 py-3 bg-primary hover:bg-dark-primary cursor-pointer text-white rounded-lg transition font-semibold flex items-center justify-center gap-2">
-                                    <i class="fas fa-circle text-red-500 animate-pulse"></i> {{ __('main.start_recording') ?? 'ابدأ التسجيل' }}
-                                </button>
-                                <button type="button" id="stopRecordBtn"
-                                    class="w-[200px] px-4 py-3 bg-gray-400 cursor-pointer text-white rounded-lg hover:bg-gray-500 transition font-semibold flex items-center justify-center gap-2 hidden"
-                                    disabled>
-                                    <i class="fas fa-square text-white"></i> {{ __('main.stop_recording') ?? 'إيقاف التسجيل' }}
+                        <div id="recordingPreview" class="hidden flex flex-row-reverse justify-end gap-4">
+                            <div class="w-[300px] flex items-center justify-between gap-4 bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-check-circle text-blue-600"></i>
+                                    <span class="text-sm text-gray-700 font-medium">{{ __('main.recording_completed') ?? 'تم التسجيل بنجاح' }}</span>
+                                </div>
+                                <button type="button" id="removeRecording" class="kt-btn bg-danger cursor-pointer transition">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-
-                            <div id="recordingStatus" class="text-sm text-gray-600 hidden flex items-center gap-2">
-                                <i class="fas fa-microphone text-red-600 animate-pulse"></i>
-                                {{ __('main.recording') ?? 'جاري التسجيل...' }}
-                                <span id="recordingTime" class="font-mono font-bold">00:00</span>
-                            </div>
-
-                            <div id="recordingPreview" class="hidden flex flex-row-reverse justify-end gap-4">
-                                <div class="w-[300px] flex items-center justify-between gap-4 bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-check-circle text-blue-600"></i>
-                                        <span class="text-sm text-gray-700 font-medium">{{ __('main.recording_completed') ?? 'تم التسجيل بنجاح' }}</span>
-                                    </div>
-                                    <button type="button" id="removeRecording" class="kt-btn bg-danger cursor-pointer transition">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <audio id="audioRecordPlayer" controls class="w-[200px] rounded-lg">
-                                    {{ __('main.audio_not_supported') ?? 'متصفحك لا يدعم تشغيل الصوت' }}
-                                </audio>
-                            </div>
+                            <audio id="audioRecordPlayer" controls class="w-[200px] rounded-lg">
+                                {{ __('main.audio_not_supported') ?? 'متصفحك لا يدعم تشغيل الصوت' }}
+                            </audio>
                         </div>
                     </div>
-
-                    <!-- Hidden inputs for form submission -->
-                    <input type="hidden" name="audio" id="audioInput">
                 </div>
 
-                <!-- Submit Button -->
-                <div class="flex flex-row-reverse items-center justify-between gap-3">
-                    <p>سيتم مراجعة الرأي قبل نشره.</p>
+                <!-- Hidden inputs for form submission -->
+                <input type="hidden" name="audio" id="audioInput">
+            </div>
 
-                    <div class="flex gap-3">
-                        <button type="submit"
-                            class="flex-1 p-3 bg-primary hover:bg-dark-primary text-white text-nowrap cursor-pointer rounded-lg transition font-semibold flex items-center justify-center gap-2 shadow-md">
-                            <i class="fas fa-paper-plane"></i> {{ __('main.send_review') ?? 'إرسال المراجعة' }}
-                        </button>
-                        <button type="button" id="cancelReviewBtn"
-                            class="flex-1 p-3 bg-gray-300 text-gray-700  text-nowrap cursor-pointer rounded-lg hover:bg-gray-400 transition font-semibold">
-                            {{ __('main.cancel') ?? 'إلغاء' }}
-                        </button>
-                    </div>
+            <!-- Submit Button -->
+            <div class="flex flex-row-reverse items-center justify-between gap-3">
+                <p>سيتم مراجعة الرأي قبل نشره.</p>
+
+                <div class="flex gap-3">
+                    <button type="submit"
+                        class="flex-1 p-3 bg-primary hover:bg-dark-primary text-white text-nowrap cursor-pointer rounded-lg transition font-semibold flex items-center justify-center gap-2 shadow-md">
+                        <i class="fas fa-paper-plane"></i> {{ __('main.send_review') ?? 'إرسال المراجعة' }}
+                    </button>
+                    <button type="button" id="cancelReviewBtn" class="flex-1 p-3 bg-gray-300 text-gray-700  text-nowrap cursor-pointer rounded-lg hover:bg-gray-400 transition font-semibold">
+                        {{ __('main.cancel') ?? 'إلغاء' }}
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     @if (isDebugModeEnabled())
@@ -269,23 +311,33 @@
     <script>
         // Form visibility toggle
         const writeReviewBtn = document.getElementById('writeReviewBtn');
+        const reviewFormLayout = document.getElementById('reviewFormLayout');
         const reviewForm = document.getElementById('reviewForm');
         const closeReviewBtn = document.getElementById('closeReviewBtn');
         const cancelReviewBtn = document.getElementById('cancelReviewBtn');
 
         writeReviewBtn.addEventListener('click', () => {
-            reviewForm.classList.remove('hidden');
-            reviewForm.scrollIntoView({
+            reviewFormLayout.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            reviewFormLayout.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
+        });
+
+        // hide form when clicking outside of it
+        document.addEventListener('click', (e) => {
+            if (!reviewFormLayout.classList.contains('hidden') && !reviewForm.contains(e.target) && e.target !== writeReviewBtn) {
+                hideForm();
+            }
         });
 
         closeReviewBtn?.addEventListener('click', hideForm);
         cancelReviewBtn?.addEventListener('click', hideForm);
 
         function hideForm() {
-            reviewForm.classList.add('hidden');
+            reviewFormLayout.classList.add('hidden');
+            document.body.style.overflow = 'auto';
             reviewForm.reset();
             resetForm();
         }

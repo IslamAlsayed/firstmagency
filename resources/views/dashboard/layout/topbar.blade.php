@@ -34,8 +34,7 @@
 
             <!-- Switch Language Toggle -->
             <a href="{{ route('dashboard.locale.change', ['locale' => session('dashboard_locale', 'ar') == 'ar' ? 'en' : 'ar']) }}"
-                class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300"
-                title="Switch Language">
+                class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="Switch Language">
                 <i class="fas fa-language text-lg"></i>
             </a>
 
@@ -55,8 +54,8 @@
                     <p class="user-role {{ getActiveUser()?->role ?? 'superadmin' }}">{{ getActiveUser()?->role ?? 'superadmin' }}</p>
                 </div>
                 <div class="img-box">
-                    @if (getActiveUser() && checkExistFile(getActiveUser()->photo))
-                        <img src="{{ asset('storage/' . getActiveUser()->photo) }}" class="h-32 w-32 rounded">
+                    @if (getActiveUser())
+                        <img src="{{ asset('assets/images/avatars/' . getActiveUser()->photo) }}" class="h-32 w-32 rounded">
                     @else
                         <img src="{{ asset('assets/images/avatar.png') }}" alt="some user image">
                     @endif
@@ -67,18 +66,38 @@
                     <li>
                         <a href="{{ route('dashboard.roles.show', getActiveUserId()) }}" class="menu-link">
                             <i class="ph-bold ph-user"></i>
-                            &nbsp;My Roles And Permissions
+                            {{ __('main.my_roles_and_permissions') }}
                         </a>
                     </li>
-                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-user"></i>&nbsp;Profile</a></li> --}}
-                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Inbox</a></li> --}}
-                    <li><a href="{{ route('dashboard.settings.index') }}" class="menu-link"><i class="ph-bold ph-gear-six"></i>&nbsp;Settings</a></li>
-                    {{-- <li><a href="#" class="menu-link"><i class="ph-bold ph-question"></i>&nbsp;Help</a></li> --}}
+                    <li>
+                        <a href="{{ route('dashboard.profile.show') }}" class="menu-link">
+                            <i class="ph-bold ph-user"></i>
+                            &nbsp;{{ __('main.my_profile') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard.profile.edit') }}" class="menu-link">
+                            <i class="ph-bold ph-pencil"></i>
+                            &nbsp;{{ __('main.edit_profile') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard.profile.activity') }}" class="menu-link">
+                            <i class="ph-bold ph-clock"></i>
+                            &nbsp;{{ __('main.activity') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard.settings.index') }}" class="menu-link">
+                            <i class="ph-bold ph-gear-six"></i>&nbsp;{{ __('main.settings') }}
+                        </a>
+                    </li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="">
                             @csrf
                             <button type="submit" class="menu-link w-full h-full cursor-pointer">
-                                <i class="ph-bold ph-sign-out"></i>&nbsp;Sign Out
+                                <i class="ph-bold ph-sign-out"></i>
+                                &nbsp;{{ __('main.sign_out') }}
                             </button>
                         </form>
                     </li>

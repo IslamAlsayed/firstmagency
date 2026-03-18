@@ -178,7 +178,6 @@ class ArticleSeeder extends Seeder
                 ],
                 'status' => 'published',
                 'is_active' => true,
-                'is_featured' => rand(0, 1) === 1,
                 'visitors' => rand(10, 500),
                 'view_count' => rand(10, 500),
                 'likes_count' => rand(0, 100),

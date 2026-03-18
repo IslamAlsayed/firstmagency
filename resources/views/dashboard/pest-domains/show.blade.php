@@ -87,15 +87,6 @@
                                 'modelClass' => 'pest_domain',
                             ])
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.featured') }}</p>
-                            @include('dashboard.components.toggle-hold', [
-                                'modelId' => $pestDomain->id,
-                                'field' => 'is_featured',
-                                'value' => (bool) $pestDomain->is_featured,
-                                'modelClass' => 'pest_domain',
-                            ])
-                        </div>
                     </div>
                 </div>
             </div>
@@ -110,8 +101,7 @@
                     <!-- Language Tabs -->
                     <div class="flex gap-4 mb-6">
                         @foreach (array_keys(config('languages')) as $lang)
-                            <button type="button"
-                                class="language-tab cursor-pointer {{ $loop->first ? 'border-b-2 text-gray-900 font-semibold' : 'border-transparent text-gray-600' }} pb-2 px-2"
+                            <button type="button" class="language-tab cursor-pointer {{ $loop->first ? 'border-b-2 text-gray-900 font-semibold' : 'border-transparent text-gray-600' }} pb-2 px-2"
                                 data-lang="{{ $lang }}">
                                 {{ config("languages.$lang.flag") }} {{ __('main.' . $lang . '_content') }}
                             </button>

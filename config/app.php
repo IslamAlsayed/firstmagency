@@ -31,6 +31,8 @@ return [
     'phone' => env('APP_PHONE', '1234567890'),
     'email' => env('APP_EMAIL', 'info@example.com'),
     'ably_key' => env('ABLY_KEY', ''),
+    'start_work_time' => env('START_WORK_TIME', ''),
+    'end_work_time' => env('END_WORK_TIME', ''),
 
     /*
     |--------------------------------------------------------------------------

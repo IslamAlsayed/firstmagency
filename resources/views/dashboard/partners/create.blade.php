@@ -27,9 +27,8 @@
                                 <label for="name_en" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.name') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en"
-                                    name="name_en" value="{{ old('name_en') }}" placeholder="Enter name in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_en" name="name_en"
+                                    value="{{ old('name_en') }}" placeholder="Enter name in English">
                                 @error('name_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -37,9 +36,8 @@
 
                             <div>
                                 <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror"
-                                    id="description_en" name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en') }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror" id="description_en"
+                                    name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en') }}</textarea>
                                 @error('description_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -54,9 +52,8 @@
                                 <label for="name_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.name') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_ar"
-                                    name="name_ar" required value="{{ old('name_ar') }}" placeholder="أدخل الاسم بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name_ar" name="name_ar"
+                                    required value="{{ old('name_ar') }}" placeholder="أدخل الاسم بالعربية">
                                 @error('name_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -64,9 +61,8 @@
 
                             <div>
                                 <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror"
-                                    id="description_ar" name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar') }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror" id="description_ar"
+                                    name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar') }}</textarea>
                                 @error('description_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -118,16 +114,6 @@
                                 'value' => '1',
                                 'checked' => 0,
                                 'label' => __('main.active'),
-                            ])
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="is_featured" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'is_featured',
-                                'id' => 'is_featured',
-                                'value' => '1',
-                                'checked' => 0,
-                                'label' => __('main.featured'),
                             ])
                         </div>
                     </div>

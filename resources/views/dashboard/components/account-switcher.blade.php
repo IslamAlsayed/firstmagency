@@ -15,6 +15,17 @@
         z-index: 50;
     }
 
+    #accountSwitcherList {
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: var(--color-gray-400);
+        }
+    }
+
     html[lang=ar] .custom-dropdown {
         right: auto;
         left: 160px;
@@ -46,7 +57,7 @@
                         <div class="flex items-center gap-1">
                             @foreach ($user->getRoleNames() as $role)
                                 <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700">
-                                    {{ __('main.' . $role) }}
+                                    {{ __('main.' . $role) }} <br /> {{ $user->name }}
                                 </span>
                             @endforeach
                         </div>

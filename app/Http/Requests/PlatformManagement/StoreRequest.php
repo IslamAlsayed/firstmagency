@@ -20,7 +20,6 @@ class StoreRequest extends FormRequest
             'description_en' => 'nullable|string',
             'order' => 'nullable|integer|min:0',
             'is_active' => 'nullable|boolean',
-            'is_featured' => 'nullable|boolean',
         ];
     }
 

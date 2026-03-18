@@ -21,7 +21,6 @@ class PestDomain extends Model
         'order',
         'status',
         'is_active',
-        'is_featured',
         'created_by',
         'updated_by',
         'published_at',
@@ -30,7 +29,6 @@ class PestDomain extends Model
     protected $casts = [
         'translations' => AsCollection::class,
         'is_active' => 'boolean',
-        'is_featured' => 'boolean',
         'price' => 'decimal:2',
         'old_price' => 'decimal:2',
         'discount_percentage' => 'decimal:2',
@@ -105,11 +103,6 @@ class PestDomain extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
     }
 
     public function scopeOrdered($query)

@@ -33,7 +33,6 @@ class StoreRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'order' => 'nullable|integer|min:0',
             'is_active' => 'nullable|boolean',
-            'is_featured' => 'nullable|boolean',
             'published_at' => 'nullable|date',
         ];
     }

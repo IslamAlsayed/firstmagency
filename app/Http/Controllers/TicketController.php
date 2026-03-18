@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Ticket\StoreMessageRequest;
 use App\Http\Requests\Ticket\StoreRequest;
 use App\Http\Requests\Ticket\UpdateMessageRequest;
+use App\Mail\CustomerReplyOnTicketMail;
+use App\Mail\TicketAssignedDepartmentMail;
 use App\Mail\TicketCreatedMail;
 use App\Mail\TicketThankForRatingMail;
 use App\Models\Department;
@@ -14,7 +16,6 @@ use App\Models\TicketRating;
 use App\Traits\AblyService;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
@@ -25,7 +26,7 @@ class TicketController extends Controller
     {
         $a = rand(1, 9);
         $b = rand(1, 9);
-        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        $departments = Department::get(['id', 'name']);
         session(['ticket_verification' => $a + $b]);
         return view('website.tickets.index', compact('a', 'b', 'departments'));
     }
@@ -41,25 +42,28 @@ class TicketController extends Controller
         $validated = $request->validated();
         $message = $validated['message'] ?? null;
         unset($validated['verification'], $validated['attachments'], $validated['message']);
-        $validated['user_id'] = getActiveUserId() ?? 1;
         $ticket = Ticket::create($validated);
 
         // Create initial message
         if ($message) {
             $messageRow = $ticket->messages()->create([
-                'user_id' => $ticket->user_id,
-                'department_id' => $ticket->department_id,
                 'message' => $message,
                 'sender_type' => 'customer',
             ]);
 
             if ($request->hasFile('attachments')) {
-                $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-users');
+                $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-customers');
             }
         }
 
         // Send email to customer
         Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
+
+        // Send email to department user
+        $department = Department::find($ticket->department_id);
+        if ($department && $department->user) {
+            Mail::to($department->user->email)->send(new TicketAssignedDepartmentMail($ticket, $department));
+        }
 
         // Publish new ticket event to Ably
         $ticketData = [
@@ -76,72 +80,121 @@ class TicketController extends Controller
         ];
         $this->publishToAbly('dashboard-tickets', 'new-ticket-created', $ticketData);
 
+        // Send tickets counts to Ably channel for real-time updates
+        $ticketsCount = Ticket::count();
+        $this->publishToAbly('ticket-updates', 'tickets-count', ['tickets_count' => $ticketsCount]);
+
         session()->forget('ticket_verification');
         return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.type_created_successfully', ['type' => __('main.ticket')]));
     }
 
-public function message(StoreMessageRequest $request, $uuid)
-{
-    $ticket = Ticket::with(['user', 'messages'])->where('uuid', $uuid)->first();
-    if (!$ticket)
-        return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+    public function message(StoreMessageRequest $request, $uuid)
+    {
+        $ticket = Ticket::with(['messages', 'department'])->where('uuid', $uuid)->first();
+        if (!$ticket)
+            return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
 
-    $validated = $request->validated();
-    $messageText = $validated['your_reply'] ?? null;
+        $validated = $request->validated();
+        $messageText = $validated['your_reply'] ?? null;
 
-    // Create new message
-    if ($messageText) {
-        $messageRow = $ticket->messages()->create([
-            'user_id' => $ticket->user_id,
-            'department_id' => $ticket->department_id ?? 1,
-            'message' => $messageText,
-            'sender_type' => 'customer',
-        ]);
+        // Create new message
+        if ($messageText) {
+            $messageRow = $ticket->messages()->create([
+                'message' => $messageText,
+                'sender_type' => 'customer',
+            ]);
 
-        // Upload attachments if any
-        if ($request->hasFile('attachments')) {
-            $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-users');
+            // Upload attachments if any
+            if ($request->hasFile('attachments')) {
+                $this->uploadFiles($request, $messageRow, 'attachments', 'tickets-customers');
+            }
+
+            // Send email to department user
+            $department = $ticket->department;
+            if ($department && $department->user) {
+                Mail::to($department->user->email)->send(new CustomerReplyOnTicketMail($ticket, $messageRow));
+            }
+
+            $messageData = array_merge($messageRow->toArray(), [
+                'customer_name' => $ticket->name,
+                'ticket_uuid' => $ticket->uuid,
+                'created_at' => $messageRow->created_at->format('d/m/Y H:i'),
+                'human_readable_date' => $messageRow->created_at->diffForHumans(),
+                'user' => [
+                    'name' => $ticket->name,
+                    'photo' => asset('assets/images/avatars/avatar.png'),
+                ],
+                'department' => $department ? [
+                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support')),
+                    'bg_color' => $department->bg_color,
+                    'border_color' => $department->border_color,
+                    'border_main_color' => $department->border_main_color,
+                    'badge_color' => $department->badge_color,
+                ] : null,
+                'attachments' => $messageRow->attachments ?? [],
+            ]);
+
+            // Publish update to Ably channel (you can customize the channel name and event as needed)
+            $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
         }
 
-        // Prepare comprehensive data for Ably with user info and formatted dates
-        $department = Department::find($ticket->department_id);
-        $messageData = array_merge($messageRow->toArray(), [
-            'user_name' => $ticket->name ?? 'عميل',
-            'ticket_name' => $ticket->name,
-            'formatted_date' => $messageRow->created_at->format('d/m/Y H:i'),
-            'human_readable_date' => $messageRow->created_at->diffForHumans(),
-            'ticket_uuid' => $ticket->uuid,
-            'department_name' => $department?->name ?? __('main.no_department'),
-            'department_id' => $department?->id ?? null,
-        ]);
-
-        // Publish update to Ably channel (you can customize the channel name and event as needed)
-        $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
+        return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
     }
-
-    return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
-}
 
     public function show(Request $request, $uuid)
     {
-        $ticket = Ticket::with(['user', 'messages.department', 'department'])->where('uuid', $uuid)->first();
+        $ticket = Ticket::with(['messages', 'messages.user.department'])->where('uuid', $uuid)->first();
         if (!$ticket)
             return redirect()->route('tickets.inquiry')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
-        return view('website.tickets.show', compact('ticket'));
+
+        $ticket['department'] = $ticket->department;
+
+        $messagesData = $ticket->messages->map(function ($message) {
+            $user = $message->user;
+            $department = $user?->department;
+
+            return [
+                'id' => $message->id,
+                'message' => $message->message,
+                'sender_type' => $message->sender_type,
+                'created_at' => $message->created_at->format('d/m/Y H:i'),
+                'human_readable_date' => $message->created_at->diffForHumans(),
+
+                'user' => [
+                    'name' => $user?->name ?? __('main.customer'),
+                    'photo' => $user?->photo ? asset('assets/images/avatars/' . $user->photo) : asset('assets/images/avatars/avatar.png'),
+                ],
+
+                'department' => [
+                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
+                    'bg_color' => $department?->bg_color,
+                    'border_color' => $department?->border_color,
+                    'border_main_color' => $department?->border_main_color,
+                    'badge_color' => $department?->badge_color,
+                ],
+
+                'attachments' => $message->attachments ?? [],
+            ];
+        });
+
+        $ticketData = $ticket->toArray();
+        $ticketData['messages'] = $messagesData;
+
+        return view('website.tickets.show', compact('ticket', 'ticketData'));
     }
 
     public function updateMessage(UpdateMessageRequest $request, $messageId)
     {
         $message = TicketMessage::find($messageId);
         if (!$message)
-            return response()->json(['success' => false, 'status' => 'error', 'message' => 'الرسالة غير موجودة'], 404);
+            return response()->json(['success' => false, 'status' => 'error', 'message' => __('main.msg_not_found')], 404);
 
         $validated = $request->validated();
         $message->update($validated);
 
         // Prepare data for Ably with formatted dates
         $messageData = array_merge($message->toArray(), [
-            'formatted_date' => $message->created_at->format('d/m/Y H:i'),
+            'created_at' => $message->created_at->format('d/m/Y H:i'),
             'human_readable_date' => $message->created_at->diffForHumans(),
             'ticket_uuid' => $message->ticket->uuid,
         ]);
@@ -149,22 +202,14 @@ public function message(StoreMessageRequest $request, $uuid)
         // Publish update notification to Ably
         $this->publishToAbly('ticket-updates', 'message-updated', $messageData);
 
-        return response()->json(['success' => true, 'status' => 'success', 'message' => 'تم تحديث الرسالة بنجاح']);
+        return response()->json(['success' => true, 'status' => 'success', 'message' => __('main.success_updated')]);
     }
 
     public function deleteMessage($messageId)
     {
         $message = TicketMessage::find($messageId);
         if (!$message)
-            return response()->json(['success' => false, 'status' => 'error', 'message' => 'الرسالة غير موجودة'], 404);
-
-        // Check authorization
-        $isOwner = $message->user_id === getActiveUserId();
-        $isSupport = Auth::check() && in_array(getActiveUser()->role, ['superadmin', 'admin', 'support']);
-
-        if (!$isOwner && !$isSupport) {
-            return response()->json(['success' => false, 'status' => 'error', 'message' => 'غير مصرح لك بحذف هذه الرسالة'], 403);
-        }
+            return response()->json(['success' => false, 'status' => 'error', 'message' => __('main.msg_not_found')], 404);
 
         $ticket = $message->ticket;
         $message->delete();
@@ -178,7 +223,7 @@ public function message(StoreMessageRequest $request, $uuid)
         // Publish deletion notification to Ably
         $this->publishToAbly('ticket-updates', 'message-deleted', $messageData);
 
-        return response()->json(['success' => true, 'status' => 'success', 'message' => 'تم حذف الرسالة بنجاح']);
+        return response()->json(['success' => true, 'status' => 'success', 'message' => __('main.success_deleted')]);
     }
 
     public function generateNewVerification()

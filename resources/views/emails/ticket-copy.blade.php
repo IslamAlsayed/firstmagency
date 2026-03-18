@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ __('main.ticket_received') }}</title>
-    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
-        rel="stylesheet">
+    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         :root {
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
@@ -16,11 +15,11 @@
         }
     </style>
 
-
     <!-- Tailwind CSS -->
     <link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
     {{-- custom css --}}
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+
     <style>
         .client-attachment {
             min-height: 30px;

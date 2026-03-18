@@ -84,8 +84,7 @@
                                 <div class="article">
                                     <div class="image">
                                         @if ($similar->image)
-                                            <img src="{{ asset('storage/' . $similar->image) }}"
-                                                alt="{{ $similar->translations[app()->getLocale()]['title'] ?? $similar->slug }}">
+                                            <img src="{{ asset('storage/' . $similar->image) }}" alt="{{ $similar->translations[app()->getLocale()]['title'] ?? $similar->slug }}">
                                         @else
                                             <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="">
                                         @endif
@@ -131,8 +130,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="body">
-                                            <a href="{{ route('blog.show', ['id' => $key + 1]) }}"
-                                                class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
+                                            <a href="{{ route('blog.show', ['id' => $key + 1]) }}" class="title font-semibold">{{ limitedText($article['title'], 30) }}</a>
                                             <div class="description">{{ limitedText($article['description'], 60) }}</div>
                                         </div>
                                         <div class="actions">

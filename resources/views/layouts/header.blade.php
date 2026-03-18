@@ -197,7 +197,7 @@
                 @endif
             </div>
         </nav>
-        <div class="flex items-center justify-between gap-4 relative" style="left: -50px">
+        <div class="faster flex items-center justify-between gap-4 relative">
             <div class="languages language-selector">
                 @if (app()->getLocale() == 'ar')
                     <a href="{{ route('locale.change', 'en') }}" class="btn-link font-semibold">

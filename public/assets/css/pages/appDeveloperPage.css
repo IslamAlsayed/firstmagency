@@ -3,6 +3,7 @@
     min-height: auto;
     overflow: hidden;
     position: relative;
+    padding-inline: var(--app-developer-hero-section-inline-padding);
 
     &::after {
         content: "";
@@ -84,11 +85,29 @@
     }
 }
 
+@media (max-width: 1440px) {
+    .app-developer-section {
+        padding-inline: calc(var(--app-developer-hero-section-inline-padding) / 2);
+    }
+}
+
+@media (max-width: 1080px) {
+    .app-developer-section {
+        padding-inline: calc(var(--app-developer-hero-section-inline-padding) / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    .app-developer-section {
+        padding-inline: var(--small-inline-padding);
+    }
+}
+
 .app-developer {
     & .important-articles {
-        margin-top: 0;
+        margin: 0 auto;
         position: relative;
-        padding-inline: var(--app-important-articles-section-inline-padding);
+        padding-inline: calc(var(--app-important-articles-section-inline-padding) * 2);
         background-color: var(--app-articles-background-color);
 
         &::before {
@@ -114,25 +133,14 @@
 .order-your-app-section {
     margin-top: 0;
     overflow: hidden;
-    padding-inline-start: 0;
-    padding-inline-end: 50px;
+    padding-block: 50px;
+    padding-inline: var(--order-your-app-section-inline-padding);
     background-color: var(--order-background-color);
-}
-
-.order-your-app-section .content {
-    gap: 50px;
-}
-
-.order-your-app-section .image {
-    width: 650px;
-    min-width: auto;
-    height: auto;
-    padding-top: 50px;
     position: relative;
 
     &::before {
         content: '';
-        width: 50%;
+        width: 27%;
         height: 200%;
         position: absolute;
         top: 50%;
@@ -144,6 +152,17 @@
         transform: translateY(-50%);
         background-color: var(--light-main-color);
     }
+}
+
+.order-your-app-section .content {
+    gap: 70px;
+}
+
+.order-your-app-section .image {
+    width: 700px;
+    min-width: auto;
+    height: auto;
+    padding-top: 50px;
 }
 
 html[lang=en] {
@@ -227,8 +246,109 @@ html[lang=en] {
     }
 }
 
+@media (max-width: 1440px) {
+    .order-your-app-section {
+        padding-inline: calc(var(--order-your-app-section-inline-padding) / 2);
+    }
+
+    .order-your-app-section .title {
+        font-size: 20px;
+    }
+
+    .order-your-app-section .description {
+        font-size: 14px;
+    }
+
+    .order-your-app-section .image {
+        width: 500px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .order-your-app-section {
+        padding-inline: calc(var(--order-your-app-section-inline-padding) / 3);
+
+        &::before {
+            width: 200%;
+            height: 350px;
+            position: absolute;
+            top: -100px;
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .order-your-app-section .image {
+        width: 350px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .order-your-app-section {
+        padding-inline: calc(var(--order-your-app-section-inline-padding) / 3);
+    }
+
+    .order-your-app-section .title {
+        font-size: 18px;
+    }
+
+    .order-your-app-section .description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .order-your-app-section .content {
+        gap: 40px;
+        flex-direction: column;
+    }
+
+    .order-your-app-section .title {
+        font-size: 12px;
+    }
+
+    .order-your-app-section .image {
+        width: 60%;
+    }
+
+    .order-your-app-section .text {
+        padding-inline: var(--inline-padding);
+    }
+}
+
+@media (max-width: 768px) {
+    .order-your-app-section {
+        padding-inline: var(--small-inline-padding);
+    }
+}
+
+@media (max-width: 425px) {
+    .order-your-app-section {
+        text-align: center;
+        margin-top: 0;
+        padding-bottom: 30px;
+        padding-inline: var(--inline-padding);
+
+        & .inner {
+            & .content {
+                & .text {
+
+                    & .description {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
+    .order-your-app-section .description {
+        font-size: 12px;
+    }
+}
+
 .categories-programming-section {
-    padding-inline: calc(var(--main-inline-padding) / 2);
+    padding-inline: var(--categories-programming-section-inline-padding);
     position: relative;
     background: #FAFAFA;
     background-image: url(../../images/website/reviews-bg.jpg);
@@ -247,7 +367,8 @@ html[lang=en] {
 }
 
 .categories-programming-section .text {
-    margin-top: 50px;
+    margin-top: 70px;
+    margin-inline-start: 70px;
 }
 
 .categories-programming-section .text .title {
@@ -256,6 +377,7 @@ html[lang=en] {
 
 .categories-programming-section .description {
     font-size: 16px;
+    text-wrap: wrap;
 }
 
 .categories-programming-section .text .title .title-badge {
@@ -263,13 +385,39 @@ html[lang=en] {
 }
 
 .categories-programming-section .images {
-    gap: 50px;
+    gap: 70px;
 }
 
 .categories-programming-section .images .image {
-    min-width: 140px;
-    max-width: 210px;
+    min-width: 190px;
+    max-width: 250px;
     height: auto;
+}
+
+@media (max-width: 1600px) {
+    .categories-programming-section {
+        padding-inline: calc(var(--categories-programming-section-inline-padding) / 2);
+    }
+
+    .categories-programming-section .images {
+        gap: 40px;
+    }
+
+    .categories-programming-section .images .image {
+        min-width: 130px;
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .categories-programming-section .text {
+        margin-top: 70px;
+        margin-inline-start: 0px;
+    }
+
+    .categories-programming-section .text .title {
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 1080px) {
@@ -285,18 +433,6 @@ html[lang=en] {
     .categories-programming-section .text .title {
         font-size: 22px;
         margin-bottom: 10px;
-    }
-
-    .order-your-app-section .image {
-        width: 350px;
-    }
-
-    .order-your-app-section .title {
-        font-size: 18px;
-    }
-
-    .order-your-app-section .description {
-        font-size: 16px;
     }
 }
 
@@ -316,38 +452,14 @@ html[lang=en] {
         }
     }
 
-    .order-your-app-section .content {
-        gap: 40px;
-        flex-direction: column;
-    }
-
-    .order-your-app-section .title {
-        font-size: 12px;
-    }
-
-    .order-your-app-section .image {
-        width: 60%;
-    }
-
-    .order-your-app-section .image {
-        &::before {
-            width: 200%;
-            height: 80%;
-            position: absolute;
-            top: -100px;
-            right: auto;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-    }
-
-    .order-your-app-section .text {
-        padding-inline: var(--inline-padding);
-    }
 
     .categories-programming-section .content {
         gap: 10px;
         flex-direction: column;
+    }
+
+    .categories-programming-section .text {
+        text-align: center;
     }
 
     .categories-programming-section .images {
@@ -412,14 +524,6 @@ html[lang=en] {
         min-width: 55px;
         max-width: 90px;
     }
-
-    .order-your-app-section .image {
-        &::before {
-            width: 300% !important;
-            top: -100px !important;
-            left: 50% !important;
-        }
-    }
 }
 
 @media (max-width: 425px) {
@@ -450,7 +554,7 @@ html[lang=en] {
 
                     & .tag {
                         font-size: 10px;
-                        border: 1px solid var(--main-color);
+                        border: 1px solid var(--light-main-color-opacity);
 
                         & svg {
                             width: 15px;
@@ -464,34 +568,6 @@ html[lang=en] {
 
     .categories-programming-section {
         margin-top: 0;
-    }
-
-    .order-your-app-section {
-        text-align: center;
-        margin-top: 0;
-        padding-bottom: 30px;
-        padding-inline: var(--inline-padding);
-
-        & .inner {
-            & .content {
-                & .text {
-
-                    & .description {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
-    }
-
-    .order-your-app-section .description {
-        padding: 0;
-        font-size: 12px;
-    }
-
-    .order-your-app-section .image {
-        width: 90%;
-        top: 30px;
     }
 
     .important-articles {

@@ -61,9 +61,8 @@
                                 <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title_ar') }}
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar"
-                                    name="title_ar" value="{{ old('title_ar', $article->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                    value="{{ old('title_ar', $article->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية">
                                 @error('title_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -88,22 +87,17 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label for="keywords_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_ar') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="keywords_ar" name="keywords_ar" value="{{ old('keywords_ar', $article->translations['ar']['keywords'] ?? '') }}"
-                                        placeholder="كلمة1، كلمة2، كلمة3">
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="keywords_ar"
+                                        name="keywords_ar" value="{{ old('keywords_ar', $article->translations['ar']['keywords'] ?? '') }}" placeholder="كلمة1، كلمة2، كلمة3">
                                     @error('keywords_ar')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label for="meta_description_ar"
-                                        class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_ar') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="meta_description_ar" name="meta_description_ar"
-                                        value="{{ old('meta_description_ar', $article->translations['ar']['meta_description'] ?? '') }}" maxlength="300"
+                                    <label for="meta_description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_ar') }}</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_ar"
+                                        name="meta_description_ar" value="{{ old('meta_description_ar', $article->translations['ar']['meta_description'] ?? '') }}" maxlength="300"
                                         placeholder="وصف الميتا بالعربية">
                                     @error('meta_description_ar')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -118,10 +112,8 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en"
-                                    name="title_en" value="{{ old('title_en', $article->translations['en']['title'] ?? '') }}"
-                                    placeholder="Enter title in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                    value="{{ old('title_en', $article->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
                                 @error('title_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -146,22 +138,17 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label for="keywords_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_en') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="keywords_en" name="keywords_en" value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}"
-                                        placeholder="keyword1, keyword2, keyword3">
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="keywords_en"
+                                        name="keywords_en" value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}" placeholder="keyword1, keyword2, keyword3">
                                     @error('keywords_en')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label for="meta_description_en"
-                                        class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="meta_description_en" name="meta_description_en"
-                                        value="{{ old('meta_description_en', $article->translations['en']['meta_description'] ?? '') }}" maxlength="300"
+                                    <label for="meta_description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_en"
+                                        name="meta_description_en" value="{{ old('meta_description_en', $article->translations['en']['meta_description'] ?? '') }}" maxlength="300"
                                         placeholder="Meta description in English">
                                     @error('meta_description_en')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -187,16 +174,6 @@
                                 'value' => '1',
                                 'checked' => old('is_active', $article->is_active),
                                 'label' => __('main.active'),
-                            ])
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="featured" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'featured',
-                                'id' => 'featured',
-                                'value' => '1',
-                                'checked' => old('featured', $article->featured),
-                                'label' => __('main.featured'),
                             ])
                         </div>
                     </div>

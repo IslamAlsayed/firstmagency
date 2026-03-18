@@ -167,6 +167,24 @@ td {
     overflow-y: scroll;
     overflow-x: hidden;
 
+    .layout {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--primary);
+        z-index: 1;
+        opacity: 1;
+        visibility: visible;
+        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+
+        &.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
     &::-webkit-scrollbar {
         width: 5px;
     }
@@ -189,19 +207,19 @@ td {
     }
 
     .sidebar-logo {
+        min-height: 73px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 5px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        min-height: 50px;
         transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
     }
 
     .sidebar-logo h4 {
         margin: 0;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: bold;
         white-space: nowrap;
         transition: opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing);
@@ -302,6 +320,13 @@ td {
         border-radius: 0 0 8px 8px;
         transition: max-height var(--main-transition-duration) var(--main-transition-timing);
         overflow: hidden;
+        filter: saturate(2.5);
+        background-color: var(--primary);
+    }
+
+    .nav-menu .submenu-list.show {
+        max-height: 500px;
+        transition: max-height calc(var(--main-transition-duration) * 1.5) var(--main-transition-timing);
     }
 
     .nav-menu .submenu-list li:not(:last-child),
@@ -346,11 +371,6 @@ td {
         z-index: -1;
         border-radius: 0 0 8px 8px;
         background-color: var(--hover-light-1);
-    }
-
-    .nav-menu .submenu-list.show {
-        max-height: 500px;
-        transition: max-height calc(var(--main-transition-duration) * 1.5) var(--main-transition-timing);
     }
 }
 

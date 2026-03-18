@@ -129,7 +129,6 @@ class WhyUsSeeder extends Seeder
                     'order' => $index + 1,
                     'status' => 'published',
                     'is_active' => true,
-                    'is_featured' => $index < 3, // Featured first 3 items
                     'created_by' => $user->id,
                     'updated_by' => $user->id,
                 ]

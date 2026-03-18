@@ -52,7 +52,7 @@
                     </div>
                 @endforeach
             @else
-                @foreach (config('portfolio') as $id => $work)
+                @foreach (config('portfolio') as $i => $work)
                     @php
                         $tags = is_object($work) ? $work->tags ?? [] : $work['tags'] ?? [];
 
@@ -67,9 +67,9 @@
                         $tagsString = implode(',', $filterTags);
                     @endphp
                     <div class="project-item" data-tags="{{ $tagsString }}">
-                        <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => $work['title']]) }}">
+                        <a href="{{ route('portfolio.show', ['id' => $i + 1, 'slug' => $work['title']]) }}">
                             <div class="project-image">
-                                <img src="{{ asset('assets/images/website/portfolio/' . $id . '.jpg') }}" alt="{{ $work['title'] }}" loading="lazy">
+                                <img src="{{ asset('assets/images/website/portfolio/' . ($i + 1) . '.jpg') }}" alt="{{ $work['title'] }}" loading="lazy">
                             </div>
                             <div class="project-text">
                                 <div class="project-title font-semibold">{{ $work['title'] }}</div>
@@ -78,12 +78,12 @@
                         </a>
                         <div class="project-action">
                             <button class="btn-link main-color font-semibold">
-                                <div class="cursor-pointer clickable-img" data-src="{{ asset('assets/images/website/portfolio/' . $id . '.jpg') }}">
+                                <div class="cursor-pointer clickable-img" data-src="{{ asset('assets/images/website/portfolio/' . ($i + 1) . '.jpg') }}">
                                     <i class="icon fa-solid fa-eye"></i>
                                 </div>
                             </button>
                             <button class="btn-link main-color font-semibold">
-                                <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => $work['title']]) }}">
+                                <a href="{{ route('portfolio.show', ['id' => $i + 1, 'slug' => $work['title']]) }}">
                                     <i class="icon fa-solid fa-search"></i>
                                 </a>
                             </button>

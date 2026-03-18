@@ -1,6 +1,6 @@
 .project-steps {
     text-align: center;
-    padding: 50px var(--main-inline-padding) 50px;
+    padding: 50px var(--projects-steps-inline-padding) 50px;
     background: var(--projects-steps-background-color);
 }
 
@@ -16,7 +16,7 @@
 }
 
 .timeline {
-    width: 80%;
+    width: 70%;
     margin: auto;
     position: relative;
     padding-block: 30px;
@@ -37,21 +37,37 @@
 }
 
 .timeline .timeline-item {
-    gap: 30px;
+    gap: 10px;
     margin-bottom: 50px;
+
+    &>div:nth-child(2) {
+        width: auto;
+        min-width: 150px;
+        justify-items: center;
+    }
+
+    &>div>div {
+        width: fit-content;
+        text-align: center;
+    }
 
     &>div:first-child,
     &>div:last-child {
-        width: 50%;
-        margin: auto;
+        width: 40%;
+    }
+
+    &>div:first-child {
+        text-align: end;
     }
 }
 
 .timeline .timeline-item .step-label .label {
-    width: 100%;
-    padding: 10px;
-    font-size: 22px;
-    border-radius: 10px;
+    width: 80%;
+    padding: 15px;
+    font-size: 24px;
+    border-radius: 12px;
+    text-wrap: nowrap;
+    box-shadow: 0 10px 26px rgba(244, 180, 42, .28);
     position: relative;
     z-index: 10;
 
@@ -75,7 +91,7 @@
         height: 30px;
         position: absolute;
         top: 50%;
-        right: calc((25px / 2) * -1);
+        right: calc((30px / 2) * -1);
         left: auto;
         z-index: -1;
         transform: translateY(-50%) rotate(45deg);
@@ -83,6 +99,7 @@
     }
 
     & .arrow-icon {
+        font-size: 30px;
         position: absolute;
         top: 50%;
         left: 20px;
@@ -106,7 +123,7 @@
 
             &:after {
                 right: auto;
-                left: calc((25px / 2) * -1);
+                left: calc((30px / 2) * -1);
                 transform: translateY(-50%) rotate(45deg);
             }
 
@@ -122,7 +139,7 @@ html[lang=en] {
     .timeline .timeline-item .step-label .label {
         &:after {
             right: auto;
-            left: calc((25px / 2) * -1);
+            left: calc((30px / 2) * -1);
         }
 
         & .arrow-icon {
@@ -134,7 +151,7 @@ html[lang=en] {
         &:nth-child(even) {
             & .step-label .label {
                 &:after {
-                    right: calc((25px / 2) * -1);
+                    right: calc((30px / 2) * -1);
                     left: auto;
                     transform: translateY(-50%) rotate(45deg);
                 }
@@ -170,9 +187,9 @@ html[lang=en] {
 
 .timeline .timeline-item .timeline-content {
     padding: 15px;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 1.8;
-    border-radius: 15px;
+    border-radius: 20px;
     text-align: start;
     background: var(--light-color);
     box-shadow: 0 10px 26px rgba(0, 0, 0, .08);
@@ -265,6 +282,26 @@ html[lang=en] {
     }
 }
 
+@media(max-width: 1440px) {
+    .timeline {
+        width: 90%;
+    }
+
+    .timeline .timeline-item .timeline-content {
+        font-size: 18px;
+    }
+
+    .timeline .timeline-item .step-label .label {
+        font-size: 20px;
+    }
+
+    .timeline .timeline-item .step-label .label {
+        & .arrow-icon {
+            font-size: 24px;
+        }
+    }
+}
+
 @media(max-width: 1180px) {
     .timeline {
         width: 100%;
@@ -283,11 +320,16 @@ html[lang=en] {
     }
 
     .timeline .timeline-item {
+        margin-bottom: 100px;
         flex-direction: column !important;
     }
 
     .timeline .timeline-item .timeline-content {
         font-size: 12px;
+    }
+
+    .timeline .timeline-item .timeline-icon {
+        margin-block: 20px;
     }
 
     .timeline .timeline-item .step-label .label {

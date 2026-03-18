@@ -19,10 +19,6 @@
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $clients->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-featured">{{ $clients->where('is_featured', true)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
-            </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
@@ -30,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-users mr-2"></i> {{ __('main.clients') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.clients')]) }}">
                     <a href="{{ route('dashboard.clients.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_client') }}
@@ -47,7 +42,6 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.alt_text') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.website') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
@@ -56,13 +50,11 @@
                         </thead>
                         <tbody>
                             @forelse($clients as $client)
-                                <tr id="row-{{ $client->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                    data-active="{{ (int) $client->is_active }}" data-featured="{{ (int) $client->is_featured }}">
+                                <tr id="row-{{ $client->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $client->is_active }}">
                                     <td title="{{ $client->alt_text ?? ($client->translations[app()->getLocale()]['name'] ?? '') }}" class="p-4">
                                         <div class="relative w-fit">
                                             @if ($client->image && checkExistFile($client->image))
-                                                <img src="{{ asset('storage/' . $client->image) }}"
-                                                    alt="{{ $client->alt_text ?? ($client->translations[app()->getLocale()]['name'] ?? '') }}"
+                                                <img src="{{ asset('storage/' . $client->image) }}" alt="{{ $client->alt_text ?? ($client->translations[app()->getLocale()]['name'] ?? '') }}"
                                                     class="w-[90px] h-[35px] rounded-[9px] shrink-0">
                                             @else
                                                 <i class="fas fa-users text-2xl text-gray-400"></i>
@@ -82,8 +74,7 @@
                                                 <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
                                             </a>
                                         @else
-                                            <div
-                                                class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
+                                            <div class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
                                                 <i class="opacity-25">{{ __('main.null') }}</i>
                                             </div>
                                         @endif
@@ -93,14 +84,6 @@
                                             'modelId' => $client->id,
                                             'field' => 'is_active',
                                             'value' => (bool) $client->is_active,
-                                            'modelClass' => 'client',
-                                        ])
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        @include('dashboard.components.toggle-hold', [
-                                            'modelId' => $client->id,
-                                            'field' => 'is_featured',
-                                            'value' => (bool) $client->is_featured,
                                             'modelClass' => 'client',
                                         ])
                                     </td>
@@ -125,7 +108,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="10" class="px-6 py-8 text-center text-gray-400">
+                                    <td colspan="9" class="px-6 py-8 text-center text-gray-400">
                                         {{ __('messages.no_records_found') }}
                                     </td>
                                 </tr>

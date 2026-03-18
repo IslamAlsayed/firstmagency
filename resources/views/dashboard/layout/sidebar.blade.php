@@ -1,9 +1,10 @@
-<aside id="sidebar" class="sidebar fixed top-0 left-0 bg-gray-900 text-white shadow-lg flex flex-col">
+<aside id="sidebar" class="sidebar fixed top-0 left-0 bg-gray-900 text-white shadow-lg flex flex-col" data-sortable-group="sidebar-menu">
+    <div class="layout"></div>
     <div class="sidebar-logo flex items-center justify-between">
         <h4>
             <a href="{{ route('dashboard.index') }}">
                 🎛️
-                <span>{{ __('main.dashboard') }}</span>
+                <span>{{ __('main.brand_name') }}</span>
             </a>
         </h4>
         <!-- Close button for small screens -->
@@ -12,801 +13,433 @@
         </button>
     </div>
 
-    <ul id="sidebarMenu" class="nav-menu">
-        @if (auth()->user()->can('users-read') || auth()->user()->can('users-create'))
-            <li class="relative group submenu-item">
+    <ul id="sidebarMenu" class="nav-menu sortable-menu" data-group="sidebar-items">
+        <!-- System Management -->
+        @if (auth()->user()->can('users-read') || auth()->user()->can('users-create') || auth()->user()->can('departments-read') || auth()->user()->can('departments-create'))
+            <li class="relative group submenu-item" data-item-id="system-management" title="{{ __('main.system') }}">
                 <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.users.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        {{-- <i class="fas fa-folder-open main-icon"></i> --}}
-                        <span class="main-icon">👥</span>
-                        <span class="span-text">{{ __('main.users') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.users.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.users.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.users.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.user_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.users.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.users.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.user')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Roles -->
-        @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        {{-- <i class="fas fa-folder-open main-icon"></i> --}}
-                        <span class="main-icon">🔐</span>
-                        {{-- <span class="span-text">{{ __('main.roles') }}</span> --}}
-                        <span class="span-text">الصلاحيات</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.roles.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.roles.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.roles.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.role_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.roles.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.roles.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.role')]) }}</span>
-                        </a>
-                    </li>
-
-                    <li class="relative">
-                        <a href="{{ route('dashboard.permissions.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.permissions.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.permission_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.permissions.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.permissions.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.permission')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Permissions -->
-        @if (auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
-            <li class="relative group submenu-item hidden">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.permissions.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        {{-- <i class="fas fa-folder-open main-icon"></i> --}}
-                        <span class="main-icon">🔑</span>
-                        <span class="span-text">{{ __('main.permissions') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.permissions.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.permissions.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.permissions.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.permission_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.permissions.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.permissions.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-file-alt text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.permission')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Articles -->
-        @if (auth()->user()->can('articles-read') || auth()->user()->can('articles-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">📝</span>
-                        <span class="span-text">{{ __('main.articles') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.articles.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.articles.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.articles.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.article_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.articles.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.articles.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.article')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Services -->
-        @if (auth()->user()->can('services-read') || auth()->user()->can('services-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">💼</span>
-                        <span class="span-text">{{ __('main.services') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.services.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.services.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.services.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.service_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.services.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.services.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.service')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Companies -->
-        @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.projects.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">🏢</span>
-                        <span class="span-text">{{ __('main.projects') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.projects.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.projects.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.projects.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.projects_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.projects.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.projects.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.company')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Clients -->
-        @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">👥</span>
-                        <span class="span-text">{{ __('main.clients') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.clients.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.clients.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.clients.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.clients_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.clients.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.clients.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.client')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Partners -->
-        @if (auth()->user()->can('partners-read') || auth()->user()->can('partners-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.partners.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">🤝</span>
-                        <span class="span-text">{{ __('main.partners') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.partners.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.partners.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.partners.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.partners_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.partners.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.partners.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.partner')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Line Works -->
-        @if (auth()->user()->can('line-works-read') || auth()->user()->can('line-works-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.line-works.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.users.*', 'dashboard.departments.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">⚙️</span>
-                        <span class="span-text">{{ __('main.line_works') }}</span>
+                        <span class="span-text">{{ limitedText(__('main.system'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.line-works.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.line-works.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.line-works.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.line_works_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.line-works.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.line-works.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.line_work')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.users.*', 'dashboard.departments.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('users-read') || auth()->user()->can('users-create'))
+                        <li class="relative" data-sub-id="users" title="{{ __('main.user') }}">
+                            <a href="{{ route('dashboard.users.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.users.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="text-sm">{{ __('main.user') }}</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    <!-- Departments -->
+                    @if (auth()->user()->can('departments-read') || auth()->user()->can('departments-create'))
+                        <li class="relative" data-sub-id="departments" title="{{ __('main.department') }}">
+                            <a href="{{ route('dashboard.departments.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.departments.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="text-sm">{{ __('main.department') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Reviews -->
-        @if (auth()->user()->can('reviews-read') || auth()->user()->can('reviews-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.reviews.*') ? 'active' : '' }}">
+        <!-- Roles & Permissions -->
+        @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create') || auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
+            <li class="relative group submenu-item" data-item-id="roles-permissions">
+                <button type="button" data-toggle="submenu" title="{{ __('main.permissions') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">⭐</span>
-                        <span class="span-text">{{ __('main.reviews') }}</span>
+                        <span class="main-icon">🔐</span>
+                        <span class="span-text">{{ limitedText(__('main.permissions'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.reviews.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.reviews.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.reviews.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.reviews') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.reviews.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.reviews.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.review')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Programming -->
-        @if (auth()->user()->can('programmings-read') || auth()->user()->can('programmings-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.programmings.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">💻</span>
-                        <span class="span-text">{{ __('main.programmings') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.programmings.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.programmings.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.programmings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.programmings') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.programmings.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.programmings.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.programming')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- FAQs -->
-        @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">❓</span>
-                        <span class="span-text">{{ __('main.faqs') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.faqs.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.faqs.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.faqs.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.faqs') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.faqs.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.faqs.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.faq')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.roles.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create'))
+                        <li class="relative" data-sub-id="roles" title="{{ __('main.role') }}">
+                            <a href="{{ route('dashboard.roles.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🔐</span>
+                                <span class="text-sm">{{ __('main.role') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
+                        <li class="relative" data-sub-id="permissions" title="{{ __('main.permission') }}">
+                            <a href="{{ route('dashboard.permissions.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.permissions.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🔐</span>
+                                <span class="text-sm">{{ __('main.permission') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
         <!-- Tickets -->
         @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
+            <li class="relative group submenu-item" data-item-id="tickets" title="{{ __('main.tickets') }}">
+                <button type="button" data-toggle="submenu" title="{{ __('main.tickets') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎫</span>
-                        <span class="span-text">{{ __('main.tickets') }}</span>
+                        <span class="span-text">{{ limitedText(__('main.tickets'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.tickets.*') ? 'show' : '' }}">
-                    <li class="relative">
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.tickets.*') ? 'show' : '' }}">
+                    <li class="relative" data-sub-id="tickets" title="{{ __('main.tickets') }}">
                         <a href="{{ route('dashboard.tickets.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.tickets.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
+                            class="nav-link {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                            <span class="main-icon">🎫</span>
                             <span class="text-sm">{{ __('main.tickets') }}</span>
                         </a>
                     </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.tickets.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.tickets.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.ticket')]) }}</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
         @endif
 
-        <!-- Our Programming -->
-        @if (auth()->user()->can('our-programmings-read') || auth()->user()->can('our-programmings-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.our-programming.*') ? 'active' : '' }}">
+        <!-- Content Management -->
+        @if (auth()->user()->can('articles-read') || auth()->user()->can('articles-create'))
+            <li class="relative group submenu-item" data-item-id="content-management" title="{{ __('main.content_management') }}">
+                <button type="button" data-toggle="submenu" title="{{ __('main.content_management') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">🎫</span>
-                        <span class="span-text">{{ __('main.our_programming') }}</span>
+                        <span class="main-icon">📝</span>
+                        <span class="span-text">{{ limitedText(__('main.content_management'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.our-programming.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.our-programmings.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.our-programmings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.our_programming') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.our-programmings.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.our-programmings.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.our_programming')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.articles.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('articles-read') || auth()->user()->can('articles-create'))
+                        <li class="relative" data-sub-id="articles" title="{{ __('main.article') }}">
+                            <a href="{{ route('dashboard.articles.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📝</span>
+                                <span class="text-sm">{{ __('main.article') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Project Steps -->
-        @if (auth()->user()->can('project-steps-read') || auth()->user()->can('project-steps-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }}">
+        <!-- Clients & Partners -->
+        @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create') || auth()->user()->can('partners-read') || auth()->user()->can('partners-create'))
+            <li class="relative group submenu-item" data-item-id="clients-partners">
+                <button type="button" data-toggle="submenu" title="{{ __('main.entities_and_partners') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">📋</span>
-                        <span class="span-text">{{ __('main.project_steps') }}</span>
+                        <span class="main-icon">👥</span>
+                        <span class="span-text">{{ limitedText(__('main.entities_and_partners'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.project-steps.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.project-steps.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.project-steps.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.project_steps') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.project-steps.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.project-steps.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.project_step')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.clients.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create'))
+                        <li class="relative" data-sub-id="clients" title="{{ __('main.clients') }}">
+                            <a href="{{ route('dashboard.clients.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">👥</span>
+                                <span class="text-sm">{{ __('main.clients') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('partners-read') || auth()->user()->can('partners-create'))
+                        <li class="relative" data-sub-id="partners" title="{{ __('main.partners') }}">
+                            <a href="{{ route('dashboard.partners.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.partners.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🤝</span>
+                                <span class="text-sm">{{ __('main.partners') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Features Hosting -->
-        @if (auth()->user()->can('features-hosting-read') || auth()->user()->can('features-hosting-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.features-hosting.*') ? 'active' : '' }}">
+        <!-- Services & Projects -->
+        @if (auth()->user()->can('services-read') || auth()->user()->can('services-create') || auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
+            <li class="relative group submenu-item" data-item-id="services-projects">
+                <button type="button" data-toggle="submenu" title="{{ __('main.services_and_projects') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">🎁</span>
-                        <span class="span-text">{{ __('main.features_hostings') }}</span>
+                        <span class="main-icon">💼</span>
+                        <span class="span-text">{{ limitedText(__('main.services_and_projects'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.features-hosting.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.features-hosting.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.features-hosting.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.features_hostings') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.features-hosting.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.features-hosting.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.features_hosting')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.services.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('services-read') || auth()->user()->can('services-create'))
+                        <li class="relative" data-sub-id="services" title="{{ __('main.service') }}">
+                            <a href="{{ route('dashboard.services.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📝</span>
+                                <span class="text-sm">{{ __('main.service') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
+                        <li class="relative" data-sub-id="projects" title="{{ __('main.projects') }}">
+                            <a href="{{ route('dashboard.projects.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.projects.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🏢</span>
+                                <span class="text-sm">{{ __('main.projects') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Dashboards And Apps -->
-        @if (auth()->user()->can('dashboards-and-systems-read') || auth()->user()->can('dashboards-and-systems-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'active' : '' }}">
+        <!-- Programming & Development -->
+        @if (auth()->user()->can('programming-systems-read') ||
+                auth()->user()->can('programming-systems-create') ||
+                auth()->user()->can('programming-categories-read') ||
+                auth()->user()->can('programming-categories-create'))
+            <li class="relative group submenu-item" data-item-id="programming-development">
+                <button type="button" data-toggle="submenu" title="{{ __('main.programmings') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.programming-systems.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">🔧</span>
-                        <span class="span-text">{{ __('main.dashboards_and_apps') }}</span>
+                        <span class="main-icon">💻</span>
+                        <span class="span-text">{{ limitedText(__('main.programmings'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.dashboards-and-systems.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.dashboards-and-systems.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.dashboards_and_apps') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.dashboards-and-systems.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.dashboards-and-systems.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.dashboards_and_app')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.programming-systems.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('programming-systems-read') || auth()->user()->can('programming-systems-create'))
+                        <li class="relative" data-sub-id="programming-systems" title="{{ __('main.programming-systems') }}">
+                            <a href="{{ route('dashboard.programming-systems.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.programming-systems.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">💻</span>
+                                <span class="text-sm">{{ __('main.programming-systems') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('programming-categories-read') || auth()->user()->can('programming-categories-create'))
+                        <li class="relative" data-sub-id="programming-categories" title="{{ __('main.programming-categories') }}">
+                            <a href="{{ route('dashboard.programming-categories.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.programming-categories.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🎫</span>
+                                <span class="text-sm">{{ __('main.programming-categories') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
+
+        <!-- FAQs & Reviews -->
+        @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create') || auth()->user()->can('reviews-read') || auth()->user()->can('reviews-create'))
+            <li class="relative group submenu-item" data-item-id="faqs-reviews">
+                <button type="button" data-toggle="submenu" title="{{ __('main.faqs_and_reviews') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <span class="main-icon">❓</span>
+                        <span class="span-text">{{ limitedText(__('main.faqs_and_reviews'), 20) }}</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.faqs.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create'))
+                        <li class="relative" data-sub-id="faqs" title="{{ __('main.faqs') }}">
+                            <a href="{{ route('dashboard.faqs.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">❓</span>
+                                <span class="text-sm">{{ __('main.faqs') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('reviews-read') || auth()->user()->can('reviews-create'))
+                        <li class="relative" data-sub-id="reviews" title="{{ __('main.reviews') }}">
+                            <a href="{{ route('dashboard.reviews.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.reviews.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">⭐</span>
+                                <span class="text-sm">{{ __('main.reviews') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
         <!-- Hosting Packages -->
-        @if (auth()->user()->can('hosting-packages-read') || auth()->user()->can('hosting-packages-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
+        @if (auth()->user()->can('hosting-packages-read') ||
+                auth()->user()->can('hosting-packages-create') ||
+                auth()->user()->can('marketing-packages-read') ||
+                auth()->user()->can('marketing-packages-create'))
+            <li class="relative group submenu-item" data-item-id="packages-domains">
+                <button type="button" data-toggle="submenu" title="{{ __('main.packages_and_domains') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📦</span>
-                        <span class="span-text">{{ __('main.hosting_packages') }}</span>
+                        <span class="span-text">{{ limitedText(__('main.packages_and_domains'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.hosting-packages.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.hosting-packages.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.hosting_packages') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.hosting-packages.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.hosting-packages.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.hosting_package')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('hosting-packages-read') || auth()->user()->can('hosting-packages-create'))
+                        <li class="relative" data-sub-id="hosting-packages" title="{{ __('main.hosting_packages') }}">
+                            <a href="{{ route('dashboard.hosting-packages.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📦</span>
+                                <span class="text-sm">{{ __('main.hosting_packages') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('marketing-packages-read') || auth()->user()->can('marketing-packages-create'))
+                        <li class="relative" data-sub-id="marketing-packages" title="{{ __('main.marketing_package') }}">
+                            <a href="{{ route('dashboard.marketing-packages.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.marketing-packages.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📦</span>
+                                <span class="text-sm">{{ __('main.marketing_package') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('pest-domains-read') || auth()->user()->can('pest-domains-create'))
+                        <li class="relative" data-sub-id="pest-domains" title="{{ __('main.pest_domains') }}">
+                            <a href="{{ route('dashboard.pest-domains.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.pest-domains.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🌐</span>
+                                <span class="text-sm">{{ __('main.pest_domains') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('official-domains-read') || auth()->user()->can('official-domains-create'))
+                        <li class="relative" data-sub-id="official-domains" title="{{ __('main.official_domains') }}">
+                            <a href="{{ route('dashboard.official-domains.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.official-domains.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🌐</span>
+                                <span class="text-sm">{{ __('main.official_domains') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Pest Domains -->
-        @if (auth()->user()->can('pest-domains-read') || auth()->user()->can('pest-domains-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.pest-domains.*') ? 'active' : '' }}">
+        <!-- Projects & Steps -->
+        @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create') || auth()->user()->can('steps-read') || auth()->user()->can('steps-create'))
+            <li class="relative group submenu-item" data-item-id="projects-steps">
+                <button type="button" data-toggle="submenu" title="{{ __('main.projects_and_steps') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">🌐</span>
-                        <span class="span-text">{{ __('main.pest_domains') }}</span>
+                        <span class="main-icon">📋</span>
+                        <span class="span-text">{{ limitedText(__('main.projects_and_steps'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.pest-domains.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.pest-domains.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.pest-domains.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.pest_domains_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.pest-domains.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.pest-domains.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.pest_domain')]) }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.project-steps.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('line-works-read') || auth()->user()->can('line-works-create'))
+                        <li class="relative" data-sub-id="line-works" title="{{ __('main.line_works') }}">
+                            <a href="{{ route('dashboard.line-works.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.line-works.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">⚙️</span>
+                                <span class="text-sm">{{ __('main.line_works') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('project-steps-read') || auth()->user()->can('project-steps-create'))
+                        <li class="relative" data-sub-id="project-steps" title="{{ __('main.project_steps') }}">
+                            <a href="{{ route('dashboard.project-steps.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📋</span>
+                                <span class="text-sm">{{ __('main.project_steps') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('work-us-step-read') || auth()->user()->can('work-us-step-create'))
+                        <li class="relative" data-sub-id="work-us-step" title="{{ __('main.work_us_step') }}">
+                            <a href="{{ route('dashboard.work-us-step.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.work-us-step.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">👔</span>
+                                <span class="text-sm">{{ __('main.work_us_step') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('why-us-read') || auth()->user()->can('why-us-create'))
+                        <li class="relative" data-sub-id="why-us" title="{{ __('main.why_us') }}">
+                            <a href="{{ route('dashboard.why-us.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.why-us.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🌟</span>
+                                <span class="text-sm">{{ __('main.why_us') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
-        <!-- Official Domains -->
-        @if (auth()->user()->can('official-domains-read') || auth()->user()->can('official-domains-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.official-domains.*') ? 'active' : '' }}">
+        <!-- Features Hosting -->
+        @if (auth()->user()->can('hosting-features-read') ||
+                auth()->user()->can('hosting-features-create') ||
+                auth()->user()->can('dashboards-and-systems-read') ||
+                auth()->user()->can('dashboards-and-systems-create'))
+            <li class="relative group submenu-item" data-item-id="hosting-features">
+                <button type="button" data-toggle="submenu" title="{{ __('main.features_and_system') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">🌐</span>
-                        <span class="span-text">{{ __('main.official_domains') }}</span>
+                        <span class="main-icon">🎁</span>
+                        <span class="span-text">{{ limitedText(__('main.features_and_system'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.official-domains.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.official-domains.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.official-domains.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.official_domains_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.official-domains.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.official-domains.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_type', ['type' => __('main.official_domain')]) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Why Us -->
-        @if (auth()->user()->can('why-us-read') || auth()->user()->can('why-us-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.why-us.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">🌟</span>
-                        <span class="span-text">{{ __('main.why_us') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.why-us.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.why-us.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.why-us.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.why_us_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.why-us.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.why-us.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_why_us') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Platform Management -->
-        @if (auth()->user()->can('platform-management-read') || auth()->user()->can('platform-management-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.platform-management.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">📱</span>
-                        <span class="span-text">{{ __('main.platform_management') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.platform-management.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.platform-management.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.platform-management.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.platform_management_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.platform-management.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.platform-management.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_platform_management') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Line Work Step -->
-        @if (auth()->user()->can('work-us-step-read') || auth()->user()->can('work-us-step-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.work-us-step.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">👔</span>
-                        <span class="span-text">{{ __('main.work_us_step') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.work-us-step.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.work-us-step.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.work-us-step.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.work_us_step_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.work-us-step.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.work-us-step.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_work_us_step') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-
-        <!-- Marketing Packages -->
-        @if (auth()->user()->can('marketing-packages-read') || auth()->user()->can('marketing-packages-create'))
-            <li class="relative group submenu-item">
-                <button type="button" data-toggle="submenu"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover:bg-slate-800 {{ request()->routeIs('dashboard.marketing-packages.*') ? 'active' : '' }}">
-                    <div class="flex items-center gap-3">
-                        <span class="main-icon">📦</span>
-                        <span class="span-text">{{ __('main.marketing_package') }}</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
-                </button>
-
-                <ul
-                    class="submenu-list group-hover:block bg-slate-800 rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.marketing-packages.*') ? 'show' : '' }}">
-                    <li class="relative">
-                        <a href="{{ route('dashboard.marketing-packages.index') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.marketing-packages.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-list text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.marketing_package_list') }}</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('dashboard.marketing-packages.create') }}"
-                            class="nav-link {{ request()->routeIs('dashboard.marketing-packages.create') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
-                            <i class="fas fa-plus text-sm main-icon"></i>
-                            <span class="text-sm">{{ __('main.create_marketing_package') }}</span>
-                        </a>
-                    </li>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-features.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('hosting-features-read') || auth()->user()->can('hosting-features-create'))
+                        <li class="relative" data-sub-id="hosting-features" title="{{ __('main.features_hostings') }}">
+                            <a href="{{ route('dashboard.hosting-features.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🎁</span>
+                                <span class="text-sm">{{ __('main.features_hostings') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('dashboards-and-systems-read') || auth()->user()->can('dashboards-and-systems-create'))
+                        <li class="relative" data-sub-id="dashboards-and-systems" title="{{ __('main.dashboards_and_apps') }}">
+                            <a href="{{ route('dashboard.dashboards-and-systems.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.dashboards-and-systems.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">🔧</span>
+                                <span class="text-sm">{{ __('main.dashboards_and_apps') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('platform-management-read') || auth()->user()->can('platform-management-create'))
+                        <li class="relative" data-sub-id="platform-management" title="{{ __('main.platform_management') }}">
+                            <a href="{{ route('dashboard.platform-management.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.platform-management.*') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">📱</span>
+                                <span class="text-sm">{{ __('main.platform_management') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
 
         {{-- Settings --}}
         @if (auth()->user()->can('settings-read'))
-            <li class="relative">
-                <a href="{{ route('dashboard.settings.index') }}"
-                    class="nav-link justify-between {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
+            <li class="relative" data-item-id="settings" title="{{ __('main.settings') }}">
+                <a href="{{ route('dashboard.settings.index') }}" class="nav-link justify-between {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <i class="fas fa-cog main-icon"></i>
-                        <span class="span-text">{{ __('main.settings') }}</span>
+                        <span class="main-icon">⚙️</span>
+                        <span class="span-text">{{ limitedText(__('main.settings'), 20) }}</span>
                     </div>
 
                     <i class="fas fa-arrow-up-right-from-square text-sm nav-icon"></i>
@@ -816,51 +449,236 @@
     </ul>
 </aside>
 
-<script>
-    // Submenu Toggle Functionality
-    const submenuButtons = document.querySelectorAll('[data-toggle="submenu"]');
-    submenuButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            submenuButtons.forEach(button => button.classList.remove('active'));
-            // if (button.classList.contains('active')) {
-            //     button.classList.remove('active');
-            // }
-            button.classList.toggle('active');
-
-            const submenuItem = this.closest('.submenu-item');
-            const submenuList = submenuItem.querySelector('.submenu-list');
-            const isOpen = submenuList.classList.contains('show');
-
-            // Close all open submenus
-            document.querySelectorAll('.submenu-list.show').forEach(menu => {
-                if (menu !== submenuList) {
-                    menu.classList.remove('show');
-                }
-            });
-
-            // Toggle current submenu
-            if (isOpen) {
-                submenuList.classList.remove('show');
-            } else {
-                submenuList.classList.add('show');
-            }
-        });
-    });
-
-    // Scroll to active link
-    document.addEventListener('DOMContentLoaded', function() {
-        const activeLink = document.querySelector('.nav-link.active');
-        if (activeLink) {
-            // Get the sidebar container
+@push('scripts')
+    <script>
+        document.addEventListener('click', function(e) {
+            const sidebarLogo = document.querySelector('.sidebar-logo');
             const sidebar = document.getElementById('sidebar');
-            if (sidebar) {
-                // Scroll to center the active link
-                activeLink.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
+            const button = e.target.closest('[data-toggle="submenu"]');
+
+            if (button) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenuItem = button.closest('.submenu-item');
+                const submenuList = submenuItem.querySelector('.submenu-list');
+
+                submenuList.classList.toggle('show');
+                button.classList.toggle('active');
+                return;
+            }
+
+            const isLink = e.target.closest('a');
+            if (sidebar && sidebar.contains(e.target) && !sidebarLogo.contains(e.target)) {
+                document.querySelectorAll('.submenu-list.show').forEach(menu => {
+                    menu.classList.remove('show');
+                    menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
                 });
             }
-        }
-    });
-</script>
+        });
+    </script>
+
+    {{-- Drag and Drop Functionality --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            /* =========================
+                MAIN MENU (Parents)
+            ========================= */
+            let draggedItem = null;
+
+            document.querySelectorAll('#sidebarMenu > li').forEach(item => {
+                item.draggable = true;
+
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    this.classList.add('opacity-50');
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('opacity-50');
+                    draggedItem = null;
+                    saveFullOrder();
+                });
+
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (!draggedItem || draggedItem === this) return;
+                    const rect = this.getBoundingClientRect();
+                    const offset = e.clientY - rect.top;
+                    const shouldMoveAfter = offset > rect.height / 2;
+                    if (shouldMoveAfter && this.nextSibling !== draggedItem) {
+                        this.after(draggedItem);
+                    } else if (!shouldMoveAfter && this.previousSibling !== draggedItem) {
+                        this.before(draggedItem);
+                    }
+                });
+            });
+
+            /* =========================
+                SUBMENU (Children)
+            ========================= */
+            let draggedSub = null;
+
+            const placeholder = document.createElement('li');
+            placeholder.className = 'bg-gray-300 my-1 rounded';
+
+            document.querySelectorAll('.submenu-list').forEach(menu => {
+                menu.querySelectorAll(':scope > li[data-sub-id]').forEach(item => {
+                    item.draggable = true;
+                    const link = item.querySelector('a');
+                    if (link) link.draggable = false;
+                    item.addEventListener('dragstart', function() {
+                        draggedSub = this;
+                        placeholder.style.height = this.offsetHeight + 'px';
+                        this.parentNode.insertBefore(placeholder, this.nextSibling);
+                        setTimeout(() => {
+                            this.style.display = 'none';
+                        }, 0);
+                    });
+
+                    item.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        if (!draggedSub || this === draggedSub) return;
+                        const rect = this.getBoundingClientRect();
+                        const offset = e.clientY - rect.top;
+                        const shouldMoveAfter = offset > rect.height / 2;
+                        if (shouldMoveAfter) {
+                            if (this.nextSibling !== placeholder) {
+                                this.after(placeholder);
+                            }
+                        } else {
+                            if (this.previousSibling !== placeholder) {
+                                this.before(placeholder);
+                            }
+                        }
+                    });
+
+                    item.addEventListener('dragend', function() {
+                        this.style.display = '';
+                        if (placeholder.parentNode) {
+                            placeholder.replaceWith(this);
+                        }
+                        draggedSub = null;
+                        saveFullOrder();
+                    });
+                });
+            });
+
+            /* =========================
+                SAVE ORDER (FULL)
+            ========================= */
+            function saveFullOrder() {
+                let menuOrder = [];
+                let submenuOrder = {};
+
+                document.querySelectorAll('#sidebarMenu > li[data-item-id]').forEach((item, index) => {
+                    let parentId = item.dataset.itemId;
+                    menuOrder.push({
+                        id: parentId,
+                        order: index
+                    });
+
+                    let submenu = item.querySelector('.submenu-list');
+
+                    if (submenu) {
+                        submenuOrder[parentId] = [];
+
+                        submenu.querySelectorAll(':scope > li[data-sub-id]').forEach((sub, i) => {
+                            submenuOrder[parentId].push({
+                                id: sub.dataset.subId,
+                                order: i
+                            });
+                        });
+                    }
+                });
+
+                fetch("{{ route('dashboard.sidebar.save') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        menu_order: menuOrder,
+                        submenu_order: submenuOrder
+                    })
+                });
+            }
+        });
+    </script>
+
+    {{-- Fetch and apply saved order on page load --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let sidebarLayout = document.querySelector('#sidebar .layout');
+            let sidebar = document.getElementById('sidebarMenu');
+            fetch("{{ route('dashboard.sidebar.order') }}")
+                .then(res => res.json())
+                .then(res => {
+
+                    if (res.status !== 'success') return;
+
+                    sidebarLayout.classList.add('hide');
+
+                    const menuOrder = res.data.menu_order || [];
+                    const submenuOrder = res.data.submenu_order || {};
+
+                    const sidebar = document.getElementById('sidebarMenu');
+
+                    /* =========================
+                        SORT MAIN MENU
+                    ========================= */
+                    if (menuOrder.length) {
+
+                        const orderMap = {};
+                        menuOrder.forEach(item => {
+                            orderMap[item.id] = item.order;
+                        });
+
+                        const items = Array.from(
+                            sidebar.querySelectorAll(':scope > li[data-item-id]')
+                        );
+
+                        items.sort((a, b) => {
+                            return (orderMap[a.dataset.itemId] ?? 999) -
+                                (orderMap[b.dataset.itemId] ?? 999);
+                        });
+
+                        items.forEach(el => sidebar.appendChild(el));
+                    }
+
+                    /* =========================
+                        SORT SUBMENUS
+                    ========================= */
+                    Object.keys(submenuOrder).forEach(parentId => {
+
+                        const parent = sidebar.querySelector(`[data-item-id="${parentId}"]`);
+                        if (!parent) return;
+
+                        const submenu = parent.querySelector('.submenu-list');
+                        if (!submenu) return;
+
+                        const orderMap = {};
+                        submenuOrder[parentId].forEach(item => {
+                            orderMap[item.id] = item.order;
+                        });
+
+                        const items = Array.from(
+                            submenu.querySelectorAll(':scope > li[data-sub-id]')
+                        );
+
+                        items.sort((a, b) => {
+                            return (orderMap[a.dataset.subId] ?? 999) -
+                                (orderMap[b.dataset.subId] ?? 999);
+                        });
+
+                        items.forEach(el => submenu.appendChild(el));
+                    });
+                })
+                .catch(err => {
+                    console.error('Sidebar order fetch error:', err);
+                });
+
+        });
+    </script>
+@endpush

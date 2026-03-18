@@ -18,64 +18,56 @@ class DepartmentSeeder extends Seeder
         Department::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $user = User::where('email', 'admin@example.com')->first() ?? User::first();
+        // Get users (they must exist from UsersSeeder)
+        $supportTechnical = User::where('email', 'support@example.com')->first();
+        $supportSales = User::where('email', 'sales@example.com')->first();
+        $supportBilling = User::where('email', 'billing@example.com')->first();
+        $supportComplaints = User::where('email', 'complaints@example.com')->first();
 
-        if (!$user) return;
+        $adminUser = User::where('email', 'admin@example.com')->first() ?? User::first();
+        if (!$adminUser) return;
 
         $departments = [
             [
-                'name' => 'محمد احمد',
-                'title' => 'Technical Support',
-                'slug' => 'technical-support',
-                'description' => 'دائرة الدعم الفني للعملاء',
-                'email' => 'support@example.com',
-                'phone' => '+966123456789',
-                'whatsapp' => '+966123456789',
-                'order' => 1,
-                'image' => '1.jpg',
+                'name' => 'technical-support',
+                'name_ar' => 'الدعم الفني',
+                'user_id' => $supportTechnical->id,
+                'bg_color' => '#eff6ff',
+                'border_color' => '#bedbff',
+                'border_main_color' => '#155dfb',
+                'badge_color' => '#155dfb',
             ],
             [
-                'name' => 'احمد محمد',
-                'title' => 'Sales',
-                'slug' => 'sales',
-                'description' => 'دائرة المبيعات والاستشارات',
-                'email' => 'sales@example.com',
-                'phone' => '+966987654321',
-                'whatsapp' => '+966987654321',
-                'order' => 2,
-                'image' => '2.jpg',
+                'name' => 'sales',
+                'name_ar' => 'المبيعات',
+                'user_id' => $supportSales->id,
+                'bg_color' => '#f0fdf4',
+                'border_color' => '#b9f8cf',
+                'border_main_color' => '#00a63e',
+                'badge_color' => '#00a63e',
             ],
             [
-                'name' => 'علي حسن',
-                'title' => 'Billing',
-                'slug' => 'billing',
-                'description' => 'دائرة الفواتير والمدفوعات',
-                'email' => 'billing@example.com',
-                'phone' => '+966111111111',
-                'whatsapp' => '+966111111111',
-                'order' => 3,
-                'image' => '3.jpg',
+                'name' => 'billing',
+                'name_ar' => 'الفوترة',
+                'user_id' => $supportBilling->id,
+                'bg_color' => '#fefce8',
+                'border_color' => '#fef08a',
+                'border_main_color' => '#ca8a04',
+                'badge_color' => '#ca8a04',
             ],
             [
-                'name' => 'سارة علي',
-                'title' => 'Complaints and Suggestions',
-                'slug' => 'complaints',
-                'description' => 'دائرة الشكاوى والاقتراحات',
-                'email' => 'complaints@example.com',
-                'phone' => '+966222222222',
-                'whatsapp' => '+966222222222',
-                'order' => 4,
-                'image' => '4.jpg',
+                'name' => 'complaints_and_suggestions',
+                'name_ar' => 'الشكاوى والاقتراحات',
+                'user_id' => $supportComplaints->id,
+                'bg_color' => '#fff7f5',
+                'border_color' => '#ffd5cd',
+                'border_main_color' => '#f92434',
+                'badge_color' => '#f92434',
             ],
         ];
 
         foreach ($departments as $department) {
-            Department::create([
-                ...$department,
-                'title' => strtolower(str_replace(' ', '_', $department['title'])),
-                'is_active' => true,
-                'created_by' => $user->id,
-            ]);
+            Department::create([...$department]);
         }
     }
 }

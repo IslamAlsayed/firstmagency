@@ -20,28 +20,28 @@ class SettingsController extends Controller
     public function update(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_fonts_applied'));
     }
 
     public function updateColorsWebsite(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_applied'));
     }
 
     public function updateColors(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_fonts_applied'));
     }
 
     public function updateFonts(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
 
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_fonts_applied'));
     }
@@ -49,7 +49,7 @@ class SettingsController extends Controller
     public function updateInlinePadding(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_general_applied'));
     }
 
@@ -63,14 +63,14 @@ class SettingsController extends Controller
         }
 
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_general_applied'));
     }
 
     public function updateAboutUs(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
 
         // Handle image upload
         if ($request->hasFile('about_us_image')) {
@@ -96,7 +96,7 @@ class SettingsController extends Controller
     public function updateWebsiteDesign(SettingRequest $request)
     {
         $settings = Setting::first();
-        $settings->update($request->validated());
+        $settings->update($request->all());
 
         // Handle image upload
         if ($request->hasFile('website_design_image')) {

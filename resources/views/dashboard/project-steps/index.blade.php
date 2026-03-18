@@ -10,8 +10,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-list mr-2"></i> {{ __('main.project_steps') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.project_steps')]) }}">
                     <a href="{{ route('dashboard.project-steps.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_project_step') }}
@@ -23,8 +22,7 @@
                     <table class="w-full border-collapse">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}
-                                    ({{ app()->getLocale() === 'ar' ? 'AR' : 'EN' }})</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.icon') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>

@@ -20,7 +20,10 @@ class PasswordController extends Controller
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
         $user = $request->user();
-        $user->update(['password' => Hash::make($validated['password'])]);
+        $user->update([
+            'password' => Hash::make($validated['password']),
+            'password_changed_at' => now(),
+        ]);
         activity()->causedBy($user)->performedOn($user)->useLog('models')->event('password_update')->withProperties([
             'ip_address' => $request->ip(),
             'update_time' => now()->toDateTimeString(),

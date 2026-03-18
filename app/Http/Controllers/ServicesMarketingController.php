@@ -27,7 +27,7 @@ class ServicesMarketingController extends Controller
             }),
 
             'articles' => Cache::remember('marketing_articles', 1800, function () {
-                return Article::active()->forMarketing()->limit(4)->get()->toArray();
+                return Article::active()->forMarketing()->limit(4)->get();
             }),
 
             'faqs' => Cache::remember('marketing_faqs', 1800, function () {

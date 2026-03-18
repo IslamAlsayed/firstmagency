@@ -15,14 +15,16 @@
                 <div class="text-2xl font-bold text-green-600" id="stat-published">{{ $published }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.published') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600" id="stat-draft">{{ $draft }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.draft') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600" id="stat-archived">{{ $archived }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.archived') }}</small>
-            </div>
+            @if (in_array(getActiveUser()->role, ['admin', 'superadmin']))
+                <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                    <div class="text-2xl font-bold text-yellow-600" id="stat-draft">{{ $draft }}</div>
+                    <small class="text-primary font-semibold text-nowrap">{{ __('main.draft') }}</small>
+                </div>
+                <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                    <div class="text-2xl font-bold text-red-600" id="stat-archived">{{ $archived }}</div>
+                    <small class="text-primary font-semibold text-nowrap">{{ __('main.archived') }}</small>
+                </div>
+            @endif
         </div>
 
         <div class="bg-white rounded-lg shadow">
@@ -30,8 +32,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-newspaper mr-2"></i> {{ __('main.articles') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
                     <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_article') }}
@@ -46,11 +47,10 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.views') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                             </tr>
                         </thead>
@@ -61,8 +61,8 @@
                                     <td title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}" class="p-4">
                                         <div class="relative w-fit">
                                             @if ($article->image && checkExistFile($article->image))
-                                                <img src="{{ asset('storage/' . $article->image) }}"
-                                                    alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}" class="rounded-full size-9 shrink-0">
+                                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}"
+                                                    class="rounded-full size-9 shrink-0">
                                             @else
                                                 <i class="fas fa-pencil" title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}"></i>
                                             @endif
@@ -81,13 +81,23 @@
                                             'modelClass' => 'article',
                                         ])
                                     </td>
-                                    <td>
-                                        @include('dashboard.components.toggle-hold', [
-                                            'modelId' => $article->id,
-                                            'field' => 'is_featured',
-                                            'value' => (bool) $article->is_featured,
+                                    <td class="p-4 text-sm">
+                                        @include('dashboard.components.status-actions', [
+                                            'record' => $article,
+                                            'models' => 'articles',
                                             'modelClass' => 'article',
+                                            'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
                                         ])
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold
+                                        @if ($article->status === 'published') bg-green-100 text-green-800
+                                        @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
+                                        @else bg-red-100 text-red-800 @endif">
+                                            {{ __('main.' . $article->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">
+                                        <i class="fas fa-eye text-blue-500"></i> {{ $article->view_count ?? 0 }}
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">
                                         @if ($article->creator)
@@ -100,25 +110,7 @@
                                         @endif
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">{{ $article->created_at?->format('d/m/Y') }}</td>
-                                    <td class="p-4 text-sm text-gray-600">
-                                        <i class="fas fa-eye text-blue-500"></i> {{ $article->view_count ?? 0 }}
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <span
-                                            class="px-3 py-1 rounded-full text-xs font-semibold
-                                                @if ($article->status === 'published') bg-green-100 text-green-800
-                                                @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
-                                                @else bg-red-100 text-red-800 @endif">
-                                            {{ __('main.' . $article->status) }}
-                                        </span>
-                                    </td>
                                     <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                        @include('dashboard.components.status-actions', [
-                                            'record' => $article,
-                                            'models' => 'articles',
-                                            'modelClass' => 'article',
-                                            'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
-                                        ])
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $article,
                                             'models' => 'articles',
@@ -127,7 +119,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-8 text-center text-gray-400">
+                                    <td colspan="8" class="px-6 py-8 text-center text-gray-400">
                                         {{ __('messages.no_records_found') }}
                                     </td>
                                 </tr>

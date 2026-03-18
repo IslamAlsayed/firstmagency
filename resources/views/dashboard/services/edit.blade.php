@@ -32,10 +32,8 @@
                                 <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title_ar') }}
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar"
-                                    name="title_ar" required value="{{ old('title_ar', $service->translations['ar']['title'] ?? '') }}"
-                                    placeholder="أدخل العنوان بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                    required value="{{ old('title_ar', $service->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية">
                                 @error('title_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -70,12 +68,9 @@
                                 </div>
 
                                 <div>
-                                    <label for="meta_description_ar"
-                                        class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_ar') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="meta_description_ar" name="meta_description_ar"
-                                        value="{{ old('meta_description_ar', $service->translations['ar']['meta_description'] ?? '') }}" maxlength="300"
+                                    <label for="meta_description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_ar') }}</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_ar"
+                                        name="meta_description_ar" value="{{ old('meta_description_ar', $service->translations['ar']['meta_description'] ?? '') }}" maxlength="300"
                                         placeholder="وصف الميتا بالعربية">
                                     @error('meta_description_ar')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -90,10 +85,8 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en"
-                                    name="title_en" value="{{ old('title_en', $service->translations['en']['title'] ?? '') }}"
-                                    placeholder="Enter title in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                    value="{{ old('title_en', $service->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
                                 @error('title_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -128,12 +121,9 @@
                                 </div>
 
                                 <div>
-                                    <label for="meta_description_en"
-                                        class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
-                                    <input type="text"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                        id="meta_description_en" name="meta_description_en"
-                                        value="{{ old('meta_description_en', $service->translations['en']['meta_description'] ?? '') }}" maxlength="300"
+                                    <label for="meta_description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_en"
+                                        name="meta_description_en" value="{{ old('meta_description_en', $service->translations['en']['meta_description'] ?? '') }}" maxlength="300"
                                         placeholder="Meta description in English">
                                     @error('meta_description_en')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -152,8 +142,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                             <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="order" name="order" value="{{ old('order', $service->order) }}" min="0" placeholder="0">
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="order" name="order"
+                                value="{{ old('order', $service->order) }}" min="0" placeholder="0">
                             @error('order')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -170,16 +160,6 @@
                                 'value' => '1',
                                 'checked' => $service->is_active,
                                 'label' => __('main.active'),
-                            ])
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="featured" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'featured',
-                                'id' => 'featured',
-                                'value' => '1',
-                                'checked' => $service->featured,
-                                'label' => __('main.featured'),
                             ])
                         </div>
                     </div>

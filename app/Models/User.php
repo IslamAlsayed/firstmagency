@@ -197,4 +197,20 @@ class User extends Authenticatable
     {
         return $this->dashboard_locale ?? config('app.locale', 'ar');
     }
+
+    /**
+     * Get the department for this support user
+     */
+    public function department()
+    {
+        return $this->hasOne(Department::class, 'user_id');
+    }
+
+    /**
+     * Get the sidebar preferences for this user
+     */
+    public function sidebarPreference()
+    {
+        return $this->hasOne(UserSidebarPreference::class);
+    }
 }

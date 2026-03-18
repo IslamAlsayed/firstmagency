@@ -63,8 +63,7 @@
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.status') }}
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\ArticleEnums::from($article->status)->badgeColor() }}">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\ArticleEnums::from($article->status)->badgeColor() }}">
                                     {{ __('main.' . $article->status) }}
                                 </span>
                             </p>
@@ -84,15 +83,6 @@
                                 'modelClass' => 'article',
                             ])
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.featured') }}</p>
-                            @include('dashboard.components.toggle-hold', [
-                                'modelId' => $article->id,
-                                'field' => 'is_featured',
-                                'value' => (bool) $article->is_featured,
-                                'modelClass' => 'article',
-                            ])
-                        </div>
                     </div>
                 </div>
             </div>
@@ -107,8 +97,7 @@
                     <!-- Language Tabs -->
                     <div class="flex gap-4 mb-6">
                         @foreach (array_keys(config('languages')) as $lang)
-                            <button type="button"
-                                class="language-tab cursor-pointer {{ $loop->first ? 'border-b-2 text-gray-900 font-semibold' : 'border-transparent text-gray-600' }} pb-2 px-2"
+                            <button type="button" class="language-tab cursor-pointer {{ $loop->first ? 'border-b-2 text-gray-900 font-semibold' : 'border-transparent text-gray-600' }} pb-2 px-2"
                                 data-lang="{{ $lang }}">
                                 {{ config("languages.$lang.flag") }} {{ __('main.' . $lang . '_content') }}
                             </button>

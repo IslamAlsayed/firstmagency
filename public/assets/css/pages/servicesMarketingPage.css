@@ -84,8 +84,7 @@
                 border-radius: 12px;
                 margin-bottom: 0;
                 backdrop-filter: blur(8px);
-                border: 1px solid var(--dark-muted-color);
-                box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+                border: 1px solid rgba(0, 0, 0, .08);
                 transition: all 0.1s ease;
                 position: relative;
                 overflow: hidden;
@@ -226,7 +225,7 @@
         }
 
         & .content {
-            padding: 50px calc(var(--main-inline-padding) / 2);
+            padding: 50px var(--small-inline-padding);
             overflow: hidden;
             position: relative;
         }

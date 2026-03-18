@@ -23,6 +23,8 @@ Thumbs.db
 *.md
 docs
 copy.*
+*copy *
+*copy*
 .github/workflows/deploy1.yml
 .github/workflows/deploy2.yml
 cloudflared.exe
@@ -36,3 +38,8 @@ INDEX_AR.md
 IMPLEMENTATION_CHECKLIST.md
 *.optimized
 performance-setup.sh
+resources/views/dashboard/layout/partials/sidebar-preview-menu.blade.php
+resources/views/dashboard/layout/partials/sidebar-sortable-menu.blade.php
+resources/views/dashboard/layout/partials/sidebar-preview-menu.blade.php
+resources/views/dashboard/layout/partials/sidebar-sortable-menu.blade.php
+resources/views/dashboard/layout/sidebar2.blade.php

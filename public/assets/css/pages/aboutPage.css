@@ -510,7 +510,7 @@
     border-radius: 15px;
 
     & .title {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         display: block;
         margin-bottom: 6px;
@@ -522,12 +522,14 @@
             overflow: hidden;
             border-radius: var(--border-radius, 15px);
             border: 1px solid var(--light-muted-color);
+            border: 1px solid rgba(17, 24, 39, .10);
             background-color: var(--light-color);
+            box-shadow: 0 10px calc(var(--fal-shadow) * 1px) rgba(0, 0, 0, .08);
             position: relative;
 
             & .image {
                 width: 100%;
-                height: 200px;
+                height: 225px;
                 position: relative;
 
                 & img {
@@ -576,6 +578,7 @@
             & .body {
                 padding: 10px;
                 text-align: start;
+                min-height: 95px;
 
                 & .title:hover {
                     text-decoration: underline var(--main-color);
@@ -583,6 +586,7 @@
 
                 & .description {
                     font-size: 14px;
+                    margin: 0;
                 }
             }
         }
@@ -662,9 +666,21 @@
     }
 }
 
+@media (max-width: 1440px) {
+    .articles-section {
+        padding-inline: calc(var(--blog-articles-section-inline-padding) / 2);
+    }
+}
+
+@media (max-width: 1180px) {
+    .articles-section {
+        padding-inline: calc(var(--blog-articles-section-inline-padding) / 4);
+    }
+}
+
 @media (max-width: 992px) {
     .articles-section {
-        padding: 140px var(--blog-articles-section-inline-padding) 30px;
+        padding-inline: calc(var(--blog-articles-section-inline-padding) / 6);
     }
 
     .blog-show {
@@ -679,12 +695,8 @@
 
 @media (max-width: 425px) {
     .articles-section {
-        padding: 120px var(--blog-articles-section-inline-padding) 30px;
+        padding: 120px var(--small-inline-padding) 30px;
     }
 }
 
 /* End Articles Section */
-
-/* Start Line Work Section */
-
-/* End Line Work Section */

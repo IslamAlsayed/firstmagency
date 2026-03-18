@@ -89,6 +89,8 @@ class SettingRequest extends FormRequest
             'platform_management_section' => 'nullable|numeric|max:255',
             'work_lines_section' => 'nullable|numeric|max:255',
             'our_services_marketing_section' => 'nullable|numeric|max:255',
+            'dont_worry_hosting_section' => 'nullable|numeric|max:255',
+            'categories_programming_section' => 'nullable|numeric|max:255',
         ];
     }
 

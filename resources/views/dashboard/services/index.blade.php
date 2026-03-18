@@ -19,10 +19,6 @@
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $services->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-featured">{{ $services->where('featured', true)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.featured') }}</small>
-            </div>
         </div>
 
         <div class="bg-white rounded-lg shadow">
@@ -30,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-building mr-2"></i> {{ __('main.services') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.services')]) }}">
                     <a href="{{ route('dashboard.services.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_service') }}
@@ -46,7 +41,6 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.icon') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.featured') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
@@ -55,13 +49,12 @@
                         </thead>
                         <tbody>
                             @forelse($services as $service)
-                                <tr id="row-{{ $service->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                    data-active="{{ (int) $service->is_active }}" data-featured="{{ (int) $service->featured }}">
+                                <tr id="row-{{ $service->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $service->is_active }}">
                                     <td title="{{ $service->translations[app()->getLocale()]['title'] ?? '' }}" class="p-4">
                                         <div class="relative w-fit">
                                             @if ($service->icon && checkExistFile($service->icon))
-                                                <img src="{{ asset('storage/' . $service->icon) }}"
-                                                    alt="{{ $service->translations[app()->getLocale()]['title'] ?? '' }}" class="rounded-full size-9 shrink-0">
+                                                <img src="{{ asset('storage/' . $service->icon) }}" alt="{{ $service->translations[app()->getLocale()]['title'] ?? '' }}"
+                                                    class="rounded-full size-9 shrink-0">
                                             @else
                                                 <i class="fas fa-briefcase text-2xl text-gray-400"></i>
                                             @endif
@@ -77,14 +70,6 @@
                                             'modelId' => $service->id,
                                             'field' => 'is_active',
                                             'value' => (bool) $service->is_active,
-                                            'modelClass' => 'service',
-                                        ])
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        @include('dashboard.components.toggle-hold', [
-                                            'modelId' => $service->id,
-                                            'field' => 'is_featured',
-                                            'value' => (bool) $service->is_featured,
                                             'modelClass' => 'service',
                                         ])
                                     </td>
