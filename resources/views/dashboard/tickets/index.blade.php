@@ -146,6 +146,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Ably connection for real-time updates
             const apiKey = '{{ config('app.ably_key') }}';
+            if (typeof Ably === 'undefined' || !apiKey) {
+                console.warn('Ably is not available or ABLY_KEY is missing.');
+                return;
+            }
 
             const realtime = new Ably.Realtime(apiKey);
             const channel = realtime.channels.get('dashboard-tickets');
@@ -158,12 +162,6 @@
             window.addEventListener('beforeunload', function() {
                 realtime?.close();
             });
-        });
-
-        // Initialize Ably for real-time ticket updates
-        const ticketUpdates = new Ably.Realtime({
-            key: '{{ config('app.ably_key') }}',
-            logLevel: 1
         });
 
         function addNewTicketToTable(ticket) {

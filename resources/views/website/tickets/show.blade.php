@@ -233,8 +233,14 @@
         };
 
         // Initialize Ably for real-time ticket updates
+        const ablyKey = '{{ config('app.ably_key') }}';
+        if (typeof Ably === 'undefined' || !ablyKey) {
+            console.warn('Ably is not available or ABLY_KEY is missing.');
+            return;
+        }
+
         const ticketUpdates = new Ably.Realtime({
-            key: '{{ config('app.ably_key') }}',
+            key: ablyKey,
             logLevel: 1
         });
         window.ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
