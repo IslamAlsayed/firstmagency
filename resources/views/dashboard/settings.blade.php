@@ -700,7 +700,16 @@
                                 </label>
                                 <input type="number" minLength="1" id="blog-articles-section" name="blog_articles_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->blog_articles_section ?? '200' }}">
+                                    placeholder="60" value="{{ $settings->blog_articles_section ?? '60' }}">
+                            </div>
+                            <div class="inline-padding-section" data-section="flag-articles-page">
+                                <label for="articles-page-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-articles-page</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="articles-page-section" name="articles_page_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="200" value="{{ $settings->articles_page_section ?? '200' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-contact">
                                 <label for="contact-page" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -756,6 +765,33 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="180" value="{{ $settings->faqs_section ?? '60' }}">
                             </div>
+                            <div class="inline-padding-section" data-section="flag-app-developer-hero">
+                                <label for="app-developer-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-app-developer-hero</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="app-developer-hero-section" name="app_developer_hero_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="240" value="{{ $settings->app_developer_hero_section ?? '240' }}">
+                            </div>
+                            <div class="inline-padding-section" data-section="flag-app-important-articles">
+                                <label for="app-important-articles-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-app-important-articles</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="app-important-articles-section" name="app_important_articles_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="100" value="{{ $settings->app_important_articles_section ?? '100' }}">
+                            </div>
+                            <div class="inline-padding-section" data-section="flag-projects-steps">
+                                <label for="projects-steps-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-projects-steps</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="projects-steps-section" name="projects_steps_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="60" value="{{ $settings->projects_steps_section ?? '60' }}">
+                            </div>
                             <div class="inline-padding-section" data-section="flag-app-developer">
                                 <label for="app-developer-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-app-developer</span>
@@ -763,7 +799,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="app-developer-section" name="feature_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->feature_section ?? '200' }}">
+                                    placeholder="200" value="{{ $settings->feature_section ?? '200' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-packages">
                                 <label for="packages-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -851,9 +887,9 @@
                                     <span>flag-order-app</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="order-app-section" name="order_app_section"
+                                <input type="number" minLength="1" id="order-app-section" name="order_your_app_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->order_app_section ?? '60' }}">
+                                    placeholder="170" value="{{ $settings->order_your_app_section ?? '170' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-hosting-hero">
                                 <label for="hosting-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">

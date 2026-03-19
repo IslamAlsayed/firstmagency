@@ -38,7 +38,7 @@ class TicketController extends Controller
     {
         $this->authorize('create', Ticket::class);
         $users = User::whereIn('role', ['superadmin', 'admin', 'support'])->get();
-        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        $departments = Department::get(['id', 'name']);
 
         $a = rand(1, 9);
         $b = rand(1, 9);
@@ -101,7 +101,7 @@ class TicketController extends Controller
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         $this->authorize('update', $ticket);
         $users = User::get(['id', 'name', 'role']);
-        $departments = Department::where('is_active', true)->get(['id', 'name']);
+        $departments = Department::get(['id', 'name']);
         return view('dashboard.tickets.edit', compact('ticket', 'users', 'departments'));
     }
 

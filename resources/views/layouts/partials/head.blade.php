@@ -82,7 +82,8 @@
         --about-us-partners-section-inline-padding: {{ $settings->about_us_partners_section ?? 60 }}px;
 
         --portfolio-section-inline-padding: {{ $settings->portfolio_section ?? 200 }}px;
-        --blog-articles-section-inline-padding: {{ $settings->blog_articles_section ?? 200 }}px;
+        --blog-articles-section-inline-padding: {{ $settings->blog_articles_section ?? 60 }}px;
+        --articles-page-section-inline-padding: {{ $settings->articles_page_section ?? 200 }}px;
         --contact-page-section-inline-padding: {{ $settings->contact_page_section ?? 180 }}px;
 
         --website-developer-section-inline-padding: {{ $settings->website_developer_section ?? 120 }}px;
@@ -91,7 +92,9 @@
         --website-important-articles-section-inline-padding: {{ $settings->website_important_articles_section ?? 60 }}px;
         --faqs-section-inline-padding: {{ $settings->faqs_section ?? 60 }}px;
 
-        --app-important-articles-section-inline-padding: {{ $settings->app_important_articles_section ?? 120 }}px;
+        --app-developer-hero-section-inline-padding: {{ $settings->app_developer_hero_section ?? 240 }}px;
+        --app-important-articles-section-inline-padding: {{ $settings->app_important_articles_section ?? 100 }}px;
+        --projects-steps-inline-padding: {{ $settings->projects_steps_section ?? 60 }}px;
         --feature-section-inline-padding: {{ $settings->feature_section ?? 200 }}px;
         --packages-section-inline-padding: {{ $settings->packages_section ?? 120 }}px;
         --operations-systems-section-inline-padding: {{ $settings->operations_systems_section ?? 60 }}px;
@@ -102,6 +105,7 @@
         --work-lines-section-inline-padding: {{ $settings->work_lines_section ?? 120 }}px;
         --packages-marketing-section-inline-padding: {{ $settings->packages_marketing_section ?? 120 }}px;
         --dont-worry-hosting-section-inline-padding: {{ $settings->dont_worry_hosting_section ?? 60 }}px;
+        --order-your-app-section-inline-padding: {{ $settings->order_your_app_section ?? 170 }}px;
         --categories-programming-section-inline-padding: {{ $settings->categories_programming_section ?? 200 }}px;
     }
 </style>
