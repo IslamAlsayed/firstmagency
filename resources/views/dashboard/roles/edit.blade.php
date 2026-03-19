@@ -26,7 +26,6 @@
                         </div>
                     </div>
 
-                    <!-- {{ __('main.assign_permissions') }} -->
                     <div class="">
                         <h4 class="text-sm font-semibold text-gray-600 mb-1">{{ __('main.assign_permissions') }}</h4>
                         <p class="text-xs text-gray-500">{{ __('main.select_permissions_for_role') ?? 'اختر الأذونات المراد تعيينها لهذا الدور' }}</p>
@@ -48,7 +47,7 @@
                             @endphp
                             @foreach ($permissions as $module => $modulePermissions)
                                 <div class="border border-gray-200 rounded-lg p-4">
-                                    <h5 class="text-sm font-semibold text-gray-700 mb-3 capitalize">{{ str_replace('-', ' ', $module) }}</h5>
+                                    <h5 class="text-sm font-semibold text-gray-700 mb-3 capitalize">{{ __('main.' . str_replace('-', '_', $module)) }}</h5>
                                     <div class="space-y-2">
                                         @foreach ($modulePermissions as $permission)
                                             <div class="flex items-center gap-3">
@@ -58,7 +57,7 @@
                                                     'id' => 'permission_' . $permission->id,
                                                     'value' => $permission->id,
                                                     'checked' => in_array($permission->id, old('permissions', $rolePermissions)) ? 'checked' : '',
-                                                    'label' => $permission->name,
+                                                    'label' => __('main.' . strtolower($permission->name)),
                                                 ])
                                             </div>
                                         @endforeach
