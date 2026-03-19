@@ -1364,8 +1364,8 @@ swiper-slide img {
 }
 
 .section {
-    /* position: relative; */
-    /* z-index: 500; */
+    position: relative;
+    z-index: 500;
 }
 
 .section .title {
