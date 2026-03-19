@@ -20,7 +20,7 @@ class PestDomainSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         // Get current user or find content user
-        $user = getActiveUser() ?? User::where('email', 'content@example.com')->first() ?? User::first();
+        $user = getActiveUser() ?? User::where('email', 'content@firstmagency.com')->first() ?? User::first();
 
         if (!$user) {
             echo "⚠️  No users found. Please create users first.\n";

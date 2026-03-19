@@ -19,12 +19,12 @@ class DepartmentSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         // Get users (they must exist from UsersSeeder)
-        $supportTechnical = User::where('email', 'support@example.com')->first();
-        $supportSales = User::where('email', 'sales@example.com')->first();
-        $supportBilling = User::where('email', 'billing@example.com')->first();
-        $supportComplaints = User::where('email', 'complaints@example.com')->first();
+        $supportTechnical = User::where('email', 'support@firstmagency.com')->first();
+        $supportSales = User::where('email', 'sales@firstmagency.com')->first();
+        $supportBilling = User::where('email', 'billing@firstmagency.com')->first();
+        $supportComplaints = User::where('email', 'complaints@firstmagency.com')->first();
 
-        $adminUser = User::where('email', 'admin@example.com')->first() ?? User::first();
+        $adminUser = User::where('email', 'admin@firstmagency.com')->first() ?? User::first();
         if (!$adminUser) return;
 
         $departments = [

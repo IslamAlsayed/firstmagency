@@ -21,7 +21,7 @@ class ArticleSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $categories = ProgrammingCategory::all();
-        $user = User::where('email', 'content@example.com')->first() ?? User::first();
+        $user = User::where('email', 'content@firstmagency.com')->first() ?? User::first();
 
         if (!$user) return; // لا توجد مستخدمين
 

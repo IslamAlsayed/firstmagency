@@ -19,7 +19,7 @@ class ProjectSeeder extends Seeder
         Project::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $user = User::where('email', 'content@example.com')->first() ?? User::first();
+        $user = User::where('email', 'content@firstmagency.com')->first() ?? User::first();
         if (!$user) return; // لا توجد مستخدمين
 
         $projects = config('projects_companies');

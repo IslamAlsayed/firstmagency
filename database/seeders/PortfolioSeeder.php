@@ -19,7 +19,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $user = User::where('email', 'content@example.com')->first() ?? User::first();
+        $user = User::where('email', 'content@firstmagency.com')->first() ?? User::first();
         if (!$user) return; // لا توجد مستخدمين
 
         $portfolio = config('portfolio');

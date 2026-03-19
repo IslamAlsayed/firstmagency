@@ -19,7 +19,8 @@ class UsersSeeder extends Seeder
 
         // Super Admin
         $superadmin = User::firstOrCreate(
-            ['email' => 'superadmin@example.com'],
+            ['email' => 'superadmin@firstmagency.com'],
+
             [
                 'name' => 'Super Admin',
                 'password' => '12345678',
@@ -44,7 +45,8 @@ class UsersSeeder extends Seeder
 
         // Admin
         $admin = User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'admin@firstmagency.com'],
+
             [
                 'name' => 'Admin',
                 'password' => '12345678',
@@ -69,7 +71,8 @@ class UsersSeeder extends Seeder
 
         // Content Manager
         $content_manager = User::firstOrCreate(
-            ['email' => 'content@example.com'],
+            ['email' => 'content@firstmagency.com'],
+
             [
                 'name' => 'Content Manager',
                 'password' => '12345678',
@@ -94,7 +97,8 @@ class UsersSeeder extends Seeder
 
         // Support - Technical Support
         $support_technical = User::firstOrCreate(
-            ['email' => 'support@example.com'],
+            ['email' => 'support@firstmagency.com'],
+
             [
                 'name' => 'محمد احمد',
                 'password' => '12345678',
@@ -120,7 +124,8 @@ class UsersSeeder extends Seeder
 
         // Support - Sales
         $support_sales = User::firstOrCreate(
-            ['email' => 'sales@example.com'],
+            ['email' => 'sales@firstmagency.com'],
+
             [
                 'name' => 'احمد محمد',
                 'password' => '12345678',
@@ -146,7 +151,8 @@ class UsersSeeder extends Seeder
 
         // Support - Billing
         $support_billing = User::firstOrCreate(
-            ['email' => 'billing@example.com'],
+            ['email' => 'billing@firstmagency.com'],
+
             [
                 'name' => 'علي حسن',
                 'password' => '12345678',
@@ -172,7 +178,8 @@ class UsersSeeder extends Seeder
 
         // Support - Complaints
         $support_complaints = User::firstOrCreate(
-            ['email' => 'complaints@example.com'],
+            ['email' => 'complaints@firstmagency.com'],
+
             [
                 'name' => 'سارة علي',
                 'password' => '12345678',
