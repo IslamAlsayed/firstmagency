@@ -4,7 +4,7 @@
         <h4>
             <a href="{{ route('dashboard.index') }}">
                 🎛️
-                <span>{{ __('main.brand_name') }}</span>
+                <span class="span-brand">{{ __('main.brand_name') }}</span>
             </a>
         </h4>
         <!-- Close button for small screens -->
@@ -20,7 +20,7 @@
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.system') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.users.*', 'dashboard.departments.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
-                        <span class="main-icon">⚙️</span>
+                        <span class="main-icon">👥</span>
                         <span class="span-text">{{ limitedText(__('main.system'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>

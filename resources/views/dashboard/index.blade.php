@@ -3,10 +3,34 @@
 @section('title', __('main.dashboard'))
 @section('page-title', '🏠 ' . __('main.dashboard'))
 
+@push('styles')
+    <style>
+        @media (max-width: 768px) {
+            .welcome-header {
+                padding: 20px;
+
+                h1 {
+                    font-size: 20px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+
+                i,
+                svg {
+                    width: 40px;
+                }
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <!-- Header Section -->
     <div class="mb-8">
-        <div class="rounded-[15px] shadow-xl p-8 text-white" style="background: linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, var(--primary) 0%, #5e5d5d 100%)">
+        <div class="welcome-header rounded-[15px] shadow-xl p-8 text-white"
+            style="background: linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, var(--primary) 0%, #5e5d5d 100%)">
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-4xl font-bold mb-2">{{ __('main.welcome') }}, {{ auth()->user()->name }}! 👋</h1>

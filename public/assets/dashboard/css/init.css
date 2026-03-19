@@ -283,9 +283,9 @@ td {
 
     .nav-menu .nav-link>li,
     .nav-menu .nav-link>svg {
-        width: 10px;
+        width: 15px;
         height: 15px;
-        font-size: 14px;
+        font-size: 18px;
         flex-shrink: 0;
     }
 
@@ -420,14 +420,25 @@ td {
             }
         }
 
-        .nav-menu .submenu-item .nav-link {
+        .sidebar-logo,
+        .nav-menu .nav-link {
             justify-content: center;
         }
 
-        .nav-menu .submenu-item .nav-link .nav-icon,
-        .nav-menu .submenu-item .nav-link .text-sm,
-        .nav-menu .submenu-item .nav-link .span-text {
+        .span-brand,
+        .nav-menu>li .span-text,
+        .nav-menu .nav-link .nav-icon,
+        .nav-menu .nav-link .text-sm,
+        .nav-menu .nav-link .span-text {
             display: none;
+        }
+    }
+}
+
+html[lang=ar] {
+    .sidebar {
+        .nav-menu .nav-link:not(.submenu-btn):hover span:not(.main-icon) {
+            transform: translateX(-5px);
         }
     }
 }
