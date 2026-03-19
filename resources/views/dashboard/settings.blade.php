@@ -662,9 +662,9 @@
                                     <span>flag-about-us</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="about-us-steps" name="about_us_section"
+                                <input type="number" minLength="1" id="about-us-steps" name="about_us_line_works_steps_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->about_us_section ?? '60' }}">
+                                    placeholder="60" value="{{ $settings->about_us_line_works_steps_section ?? '60' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-partners">
                                 <label for="about-us-partners" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -752,9 +752,9 @@
                                     <span>flag-important-articles</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="website-important-articles-section" name="app_important_articles_section"
+                                <input type="number" minLength="1" id="website-important-articles-section" name="website_important_articles_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="180" value="{{ $settings->app_important_articles_section ?? '60' }}">
+                                    placeholder="60" value="{{ $settings->website_important_articles_section ?? '60' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-faq">
                                 <label for="faqs-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -806,9 +806,9 @@
                                     <span>flag-packages</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="packages-section" name="packages_hosting_section"
+                                <input type="number" minLength="1" id="packages-section" name="packages_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->packages_hosting_section ?? '120' }}">
+                                    placeholder="120" value="{{ $settings->packages_section ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-operating-systems">
                                 <label for="operations-systems-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -828,15 +828,7 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->your_domain_section ?? '240' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-official-domains">
-                                <label for="official-domains-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-official-domains</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="official-domains-section" name="pest_domains_official_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->pest_domains_official_section ?? '60' }}">
-                            </div>
+
                             <div class="inline-padding-section" data-section="flag-pest-domains">
                                 <label for="pest-domains-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-pest-domains</span>
@@ -873,15 +865,7 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->packages_marketing_section ?? '120' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-marketing-hero">
-                                <label for="marketing-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-marketing-hero</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="marketing-hero-section" name="marketing_hero_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->marketing_hero_section ?? '120' }}">
-                            </div>
+
                             <div class="inline-padding-section" data-section="flag-order-app">
                                 <label for="order-app-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-order-app</span>
@@ -891,24 +875,8 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="170" value="{{ $settings->order_your_app_section ?? '170' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-hosting-hero">
-                                <label for="hosting-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-hosting-hero</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="hosting-hero-section" name="hosting_hero_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->hosting_hero_section ?? '120' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-hosting-features">
-                                <label for="hosting-features-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-hosting-features</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="hosting-features-section" name="hosting_features_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->hosting_features_section ?? '60' }}">
-                            </div>
+
+
                             <div class="inline-padding-section" data-section="flag-categories-programming">
                                 <label for="categories-programming-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-categories-programming</span>
@@ -927,87 +895,14 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->dont_worry_hosting_section ?? '60' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-categories-programming">
-                                <label for="categories-programming-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-categories-programming</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="categories-programming-section" name="categories_programming_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->categories_programming_section ?? '200' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-easy-management">
-                                <label for="easy-management-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-easy-management</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="easy-management-section" name="easy_management_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->easy_management_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-important-articles-marketing">
-                                <label for="important-articles-marketing-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-important-articles-marketing</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="important-articles-marketing-section" name="important_articles_marketing_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->important_articles_marketing_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-project-steps">
-                                <label for="project-steps-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-project-steps</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="project-steps-section" name="project_steps_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->project_steps_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-ready-hosting">
-                                <label for="ready-hosting-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-ready-hosting</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="ready-hosting-section" name="ready_hosting_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->ready_hosting_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-support-hosting">
-                                <label for="support-hosting-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-support-hosting</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="support-hosting-section" name="support_hosting_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->support_hosting_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-work-line">
-                                <label for="work-line-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-work-line</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="work-line-section" name="work_line_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->work_line_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-clients2">
-                                <label for="clients2-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-clients2</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="clients2-section" name="clients_2_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->clients_2_section ?? '60' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-step-work2">
-                                <label for="step-work2-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-step-work2</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="step-work2-section" name="step_work2_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->step_work2_section ?? '60' }}">
-                            </div>
+
+
+
+
+
+
+
+
                         </div>
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
