@@ -22,19 +22,74 @@
             </button> --}}
 
             <!-- Notifications -->
-            {{-- <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
-                <i class="fas fa-bell text-lg"></i>
-                <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full"></span>
-            </button> --}}
+            @php
+                $unreadNotifications = auth()->user()?->unreadNotifications ?? collect();
+                $unreadCount = $unreadNotifications->count();
+            @endphp
+            <div class="relative group" id="topbar-notifications">
+                <button id="topbar-notifications-button" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+                    <i class="fas fa-bell text-lg"></i>
+                    @if ($unreadCount > 0)
+                        <span id="topbar-notifications-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full"></span>
+                    @endif
+                </button>
+
+                <!-- Notifications Dropdown -->
+                <div id="topbar-notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-lg shadow-lg group-hover:opacity-100 z-50">
+                    <div class="p-4 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
+                        <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('main.notifications') }}</h3>
+                        @if ($unreadCount > 0)
+                            <form method="POST" action="{{ route('dashboard.notifications.readAll') }}">
+                                @csrf
+                                <button type="submit" class="text-xs text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.mark_all_read') }}</button>
+                            </form>
+                        @endif
+                    </div>
+                    <div class="max-h-80 overflow-y-auto" id="topbar-notifications-list">
+                        @forelse($unreadNotifications as $notification)
+                            <form method="POST" action="{{ route('dashboard.notifications.read', $notification->id) }}">
+                                @csrf
+                                <button type="submit" class="w-full text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
+                                    <div class="flex items-start gap-3">
+                                        <div class="mt-0.5 w-5 text-center">
+                                            @if ($notification->data['type'] === 'new_ticket')
+                                                <i class="fas fa-ticket-alt text-blue-500"></i>
+                                            @elseif($notification->data['type'] === 'customer_reply')
+                                                <i class="fas fa-reply text-green-500"></i>
+                                            @else
+                                                <i class="fas fa-star text-yellow-500"></i>
+                                            @endif
+                                        </div>
+                                        <div class="flex-1 min-w-0 text-start">
+                                            <p class="font-medium text-gray-800 dark:text-white text-sm truncate">{{ $notification->data['subject'] }}</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ $notification->data['body'] }}</p>
+                                            <p class="text-xs text-gray-400 mt-1">{{ $notification->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        <span class="mt-2 w-2 h-2 bg-blue-500 rounded-full shrink-0"></span>
+                                    </div>
+                                </button>
+                            </form>
+                        @empty
+                            <div id="topbar-notifications-empty" class="p-6 text-center text-gray-400 dark:text-gray-500 text-sm">
+                                <i class="fas fa-bell-slash text-2xl mx-2 block"></i>
+                                {{ __('main.no_new_notifications') }}
+                            </div>
+                        @endforelse
+                    </div>
+                    <div class="p-3 border-t border-gray-200 dark:border-slate-700 text-center">
+                        <a href="{{ route('dashboard.notifications.index') }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.view_all_notifications') }}</a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Full Screen Toggle -->
-            <button id="fullscreenBtn" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="Full Screen">
+            <button id="fullscreenBtn" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="{{ __('main.full_screen') }}">
                 <i class="fas fa-expand text-lg"></i>
             </button>
 
             <!-- Switch Language Toggle -->
             <a href="{{ route('dashboard.locale.change', ['locale' => session('dashboard_locale', 'ar') == 'ar' ? 'en' : 'ar']) }}"
-                class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="Switch Language">
+                class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="{{ __('main.switch_language') }}">
                 <i class="fas fa-language text-lg"></i>
             </a>
 
@@ -50,7 +105,7 @@
         <div class="relative">
             <div class="profile">
                 <div class="user">
-                    <div class="user-name">{{ getActiveUser()?->name ?? 'Super Admin' }}</div>
+                    <div class="user-name">{{ getActiveUser()?->name ?? __('main.super_admin') }}</div>
                     <p class="user-role {{ getActiveUser()?->role ?? 'superadmin' }}">{{ getActiveUser()?->role ?? 'superadmin' }}</p>
                 </div>
                 <div class="img-box">
@@ -111,25 +166,52 @@
     const sidebar = document.getElementById('sidebar');
     const toggleSidebar = document.getElementById('toggleSidebar');
     const closeSidebar = document.getElementById('closeSidebar');
+    const topbarNotificationsButton = document.getElementById('topbar-notifications-button');
+    const topbarNotificationsDropdown = document.getElementById('topbar-notifications-dropdown');
 
     // Toggle Sidebar
-    toggleSidebar?.addEventListener('click', () => {
-        if (sidebar) {
-            const isActive = sidebar.classList.contains('active');
+    toggleSidebar?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-            document.body.style.overflow = isActive ? '' : 'hidden';
-            sidebar.classList.toggle('active');
-            document.body.classList.toggle('sidebar-closed');
-            toggleSidebar.classList.toggle('active');
+        if (sidebar) {
+            const isOpening = !sidebar.classList.contains('active');
+
+            document.body.style.overflow = isOpening ? 'hidden' : '';
+            sidebar.classList.toggle('active', isOpening);
+            document.body.classList.toggle('sidebar-closed', isOpening);
+            toggleSidebar.classList.toggle('active', isOpening);
+        }
+    });
+
+    // Toggle Sidebar
+    topbarNotificationsButton?.addEventListener('click', () => {
+        if (topbarNotificationsDropdown) {
+            const isActive = topbarNotificationsDropdown.classList.contains('hidden');
+            if (isActive)
+                topbarNotificationsDropdown.classList.toggle('hidden');
         }
     });
 
     document.addEventListener('click', (e) => {
-        if (sidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
+        if (sidebar && toggleSidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
             document.body.style.overflow = '';
             sidebar.classList.remove('active');
             document.body.classList.remove('sidebar-closed');
             toggleSidebar.classList.remove('active');
+        }
+
+        if (topbarNotificationsDropdown && !topbarNotificationsDropdown.contains(e.target) && !topbarNotificationsButton.contains(e.target)) {
+            topbarNotificationsDropdown.classList.add('hidden');
+        }
+    });
+
+    // hide notifications dropdown on scroll from my were plus 100
+    window.addEventListener('scroll', (e) => {
+        if (window.scrollY > 100) {
+            const isActive = topbarNotificationsDropdown.classList.contains('hidden');
+            if (!isActive)
+                topbarNotificationsDropdown.classList.add('hidden');
         }
     });
 
@@ -223,4 +305,122 @@
             }
         });
     }
+
+    // Topbar notifications realtime updates via Ably
+    document.addEventListener('DOMContentLoaded', function() {
+        (() => {
+            if (typeof Ably === 'undefined') {
+                return;
+            }
+
+            const ablyKey = @json(config('app.ably_key'));
+            if (!ablyKey) {
+                return;
+            }
+
+            const csrfToken = @json(csrf_token());
+            const notificationsList = document.getElementById('topbar-notifications-list');
+            if (!notificationsList) {
+                return;
+            }
+
+            const customerLabel = @json(__('main.customer'));
+            const markReadBaseUrl = @json(route('dashboard.notifications.read', ['id' => '__ID__']));
+
+            const ensureBadge = (hasUnread) => {
+                const button = document.getElementById('topbar-notifications-button');
+                if (!button) {
+                    return;
+                }
+
+                let badge = document.getElementById('topbar-notifications-badge');
+
+                if (!hasUnread) {
+                    if (badge) {
+                        badge.remove();
+                    }
+                    return;
+                }
+
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.id = 'topbar-notifications-badge';
+                    badge.className = 'absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full';
+                    button.appendChild(badge);
+                }
+            };
+
+            const notificationIconHtml = (type) => {
+                if (type === 'new_ticket') {
+                    return '<i class="fas fa-ticket-alt text-blue-500"></i>';
+                }
+
+                if (type === 'customer_reply') {
+                    return '<i class="fas fa-reply text-green-500"></i>';
+                }
+
+                return '<i class="fas fa-star text-yellow-500"></i>';
+            };
+
+            const prependNotification = (payload) => {
+                const emptyNode = document.getElementById('topbar-notifications-empty');
+                if (emptyNode) {
+                    emptyNode.remove();
+                }
+
+                const notificationId = payload.id ?? payload.notification_id;
+                const wrapper = document.createElement('form');
+
+                if (notificationId) {
+                    wrapper.method = 'POST';
+                    wrapper.action = markReadBaseUrl.replace('__ID__', notificationId);
+                } else {
+                    wrapper.method = 'GET';
+                    wrapper.action = payload.url || '#';
+                }
+
+                wrapper.innerHTML =
+                    (notificationId ? '<input type="hidden" name="_token" value="' + csrfToken + '">' : '') +
+                    '<button type="submit" class="w-full text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">' +
+                    '<div class="flex items-start gap-3">' +
+                    '<div class="mt-0.5 w-5 text-center">' + notificationIconHtml(payload.type) + '</div>' +
+                    '<div class="flex-1 min-w-0 text-start">' +
+                    '<p class="font-medium text-gray-800 dark:text-white text-sm truncate"></p>' +
+                    '<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5"></p>' +
+                    '<p class="text-xs text-gray-400 mt-1"></p>' +
+                    '</div>' +
+                    '<span class="mt-2 w-2 h-2 bg-blue-500 rounded-full shrink-0"></span>' +
+                    '</div>' +
+                    '</button>';
+
+                const subjectNode = wrapper.querySelector('p:nth-of-type(1)');
+                const bodyNode = wrapper.querySelector('p:nth-of-type(2)');
+                const dateNode = wrapper.querySelector('p:nth-of-type(3)');
+
+                subjectNode.textContent = payload.subject || customerLabel;
+                bodyNode.textContent = payload.body || '';
+                dateNode.textContent = payload.created_at_human || @json(__('main.just_now'));
+
+                notificationsList.prepend(wrapper);
+
+                const notificationForms = notificationsList.querySelectorAll('form');
+                if (notificationForms.length > 5) {
+                    notificationForms[notificationForms.length - 1].remove();
+                }
+            };
+
+            const realtime = new Ably.Realtime({
+                key: ablyKey,
+                logLevel: 1,
+            });
+
+            const ticketUpdatesChannel = realtime.channels.get('dashboard-notifications');
+            ticketUpdatesChannel.subscribe('ticket-notification', (message) => {
+                const payload = message?.data || {};
+
+                prependNotification(payload);
+                ensureBadge(true);
+            });
+        })();
+    });
 </script>

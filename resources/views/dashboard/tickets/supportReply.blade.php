@@ -126,16 +126,19 @@
 
 @push('scripts')
     <script>
-        document.getElementById('add-attachment-btn').addEventListener('click', function() {
-            const container = document.getElementById('attachments-container');
+        document.addEventListener('DOMContentLoaded', function() {
+            let addAttachmentBtn = document.getElementById('add-attachment-btn');
+            addAttachmentBtn?.addEventListener('click', function() {
+                const container = document.getElementById('attachments-container');
 
-            if (container) {
-                const div = document.createElement('div');
-                div.className = 'input flex w-half p-2 rounded-[9px]';
-                div.style = 'border: 1px solid var(--dark-muted-color);';
-                div.innerHTML = '<input type="file" name="attachments[]">';
-                container.appendChild(div);
-            }
+                for (let i = 0; i < 1; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'input flex w-half p-2 rounded-[9px]';
+                    div.style = 'border: 1px solid var(--color-gray-300);';
+                    div.innerHTML = '<input type="file" name="attachments[]">';
+                    container.appendChild(div);
+                }
+            });
         });
 
         // Helper function to strip HTML tags
@@ -345,10 +348,10 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                            {{ __('main.attachment') }}
-                                                                                                        </div>`).join('')
+                                                            <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                {{ __('main.attachment') }}
+                                                            </div>`).join('')
                                     : ''
                                 }
                             </div>

@@ -20,7 +20,7 @@ class SettingsSeeder extends Seeder
         Setting::updateOrCreate(
             ['site_email' => config('app.email')],
             [
-                'primary_color' => '#260368',
+                'primary_color' => '#5A8622',
                 'secondary_color' => '#6c757d',
                 'danger_color' => '#dc3545',
                 'warning_color' => '#ffc107',

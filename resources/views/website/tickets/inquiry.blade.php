@@ -20,8 +20,7 @@
                     </label>
 
                     <div class="input flex">
-                        <input type="text" name="email" id="email" placeholder="{{ __('main.inquiry_placeholder') }}"
-                            value="{{ old('email', request()->input('email')) }}">
+                        <input type="text" name="email" id="email" placeholder="{{ __('main.inquiry_placeholder') }}" value="{{ old('email', request()->input('email')) }}">
                     </div>
                 </div>
 
@@ -48,7 +47,11 @@
                                 @forelse($tickets as $ticket)
                                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
                                         <td class="text-start p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
-                                        <td class="text-start p-4 text-sm text-gray-600">{{ __('main.' . $ticket->department) ?? '-' }}</td>
+                                        <td class="text-start p-4 text-sm text-gray-600">
+                                            <span class="kt-badge text-white rounded-full" style="background-color: {{ $ticket->department['border_main_color'] ?? 'var(--main-color)' }};">
+                                                {{ __('main.' . $ticket->department?->name) }}
+                                            </span>
+                                        </td>
                                         <td class="text-start p-4 text-sm">
                                             <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
                                                 {{ __('main.' . $ticket->status) }}
@@ -56,8 +59,7 @@
                                         </td>
                                         <td class="text-start p-4 text-sm text-gray-600">{{ $ticket->created_at?->format('d/m/Y') }}</td>
                                         <td class="text-start p-4 text-sm space-x-2 flex items-center gap-2">
-                                            <a href="{{ route('tickets.show', $ticket->uuid) }}"
-                                                class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-orange-500 text-white font-semibold">
+                                            <a href="{{ route('tickets.show', $ticket->uuid) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-orange-500 text-white font-semibold">
                                                 {{ __('main.open_') }}
                                             </a>
                                         </td>

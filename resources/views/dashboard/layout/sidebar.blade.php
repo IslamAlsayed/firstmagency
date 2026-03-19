@@ -17,7 +17,7 @@
         <!-- System Management -->
         @if (auth()->user()->can('users-read') || auth()->user()->can('users-create') || auth()->user()->can('departments-read') || auth()->user()->can('departments-create'))
             <li class="relative group submenu-item" data-item-id="system-management" title="{{ __('main.system') }}">
-                <button type="button" data-toggle="submenu"
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.system') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.users.*', 'dashboard.departments.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">⚙️</span>
@@ -51,8 +51,8 @@
 
         <!-- Roles & Permissions -->
         @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create') || auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
-            <li class="relative group submenu-item" data-item-id="roles-permissions">
-                <button type="button" data-toggle="submenu" title="{{ __('main.permissions') }}"
+            <li class="relative group submenu-item" data-item-id="roles-permissions" title="{{ __('main.permissions') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.permissions') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🔐</span>
@@ -87,7 +87,7 @@
         <!-- Tickets -->
         @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create'))
             <li class="relative group submenu-item" data-item-id="tickets" title="{{ __('main.tickets') }}">
-                <button type="button" data-toggle="submenu" title="{{ __('main.tickets') }}"
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.tickets') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎫</span>
@@ -111,7 +111,7 @@
         <!-- Content Management -->
         @if (auth()->user()->can('articles-read') || auth()->user()->can('articles-create'))
             <li class="relative group submenu-item" data-item-id="content-management" title="{{ __('main.content_management') }}">
-                <button type="button" data-toggle="submenu" title="{{ __('main.content_management') }}"
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.content_management') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.articles.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📝</span>
@@ -136,12 +136,12 @@
 
         <!-- Clients & Partners -->
         @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create') || auth()->user()->can('partners-read') || auth()->user()->can('partners-create'))
-            <li class="relative group submenu-item" data-item-id="clients-partners">
-                <button type="button" data-toggle="submenu" title="{{ __('main.entities_and_partners') }}"
+            <li class="relative group submenu-item" data-item-id="clients-partners" title="{{ __('main.clients_and_partners') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.clients_and_partners') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">👥</span>
-                        <span class="span-text">{{ limitedText(__('main.entities_and_partners'), 20) }}</span>
+                        <span class="span-text">{{ limitedText(__('main.clients_and_partners'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
@@ -171,8 +171,8 @@
 
         <!-- Services & Projects -->
         @if (auth()->user()->can('services-read') || auth()->user()->can('services-create') || auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
-            <li class="relative group submenu-item" data-item-id="services-projects">
-                <button type="button" data-toggle="submenu" title="{{ __('main.services_and_projects') }}"
+            <li class="relative group submenu-item" data-item-id="services-projects" title="{{ __('main.services_and_projects') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.services_and_projects') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">💼</span>
@@ -209,8 +209,8 @@
                 auth()->user()->can('programming-systems-create') ||
                 auth()->user()->can('programming-categories-read') ||
                 auth()->user()->can('programming-categories-create'))
-            <li class="relative group submenu-item" data-item-id="programming-development">
-                <button type="button" data-toggle="submenu" title="{{ __('main.programmings') }}"
+            <li class="relative group submenu-item" data-item-id="programming-development" title="{{ __('main.programmings') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.programmings') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.programming-systems.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">💻</span>
@@ -244,8 +244,8 @@
 
         <!-- FAQs & Reviews -->
         @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create') || auth()->user()->can('reviews-read') || auth()->user()->can('reviews-create'))
-            <li class="relative group submenu-item" data-item-id="faqs-reviews">
-                <button type="button" data-toggle="submenu" title="{{ __('main.faqs_and_reviews') }}"
+            <li class="relative group submenu-item" data-item-id="faqs-reviews" title="{{ __('main.faqs_and_reviews') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.faqs_and_reviews') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">❓</span>
@@ -282,8 +282,8 @@
                 auth()->user()->can('hosting-packages-create') ||
                 auth()->user()->can('marketing-packages-read') ||
                 auth()->user()->can('marketing-packages-create'))
-            <li class="relative group submenu-item" data-item-id="packages-domains">
-                <button type="button" data-toggle="submenu" title="{{ __('main.packages_and_domains') }}"
+            <li class="relative group submenu-item" data-item-id="packages-domains" title="{{ __('main.packages_and_domains') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.packages_and_domains') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📦</span>
@@ -335,8 +335,8 @@
 
         <!-- Projects & Steps -->
         @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create') || auth()->user()->can('steps-read') || auth()->user()->can('steps-create'))
-            <li class="relative group submenu-item" data-item-id="projects-steps">
-                <button type="button" data-toggle="submenu" title="{{ __('main.projects_and_steps') }}"
+            <li class="relative group submenu-item" data-item-id="projects-steps" title="{{ __('main.projects_and_steps') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.projects_and_steps') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">📋</span>
@@ -391,8 +391,8 @@
                 auth()->user()->can('hosting-features-create') ||
                 auth()->user()->can('dashboards-and-systems-read') ||
                 auth()->user()->can('dashboards-and-systems-create'))
-            <li class="relative group submenu-item" data-item-id="hosting-features">
-                <button type="button" data-toggle="submenu" title="{{ __('main.features_and_system') }}"
+            <li class="relative group submenu-item" data-item-id="hosting-features" title="{{ __('main.features_and_system') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.features_and_system') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">🎁</span>
@@ -452,9 +452,18 @@
 @push('scripts')
     <script>
         document.addEventListener('click', function(e) {
-            const sidebarLogo = document.querySelector('.sidebar-logo');
             const sidebar = document.getElementById('sidebar');
+            const sidebarLogo = document.querySelector('.sidebar-logo');
+            const toggleSidebar = document.getElementById('toggleSidebar');
             const button = e.target.closest('[data-toggle="submenu"]');
+            const isCompactRange = window.innerWidth >= 991 && window.innerWidth <= 1180;
+
+            const closeAllSubmenus = () => {
+                document.querySelectorAll('.submenu-list.show').forEach(menu => {
+                    menu.classList.remove('show');
+                    menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
+                });
+            };
 
             if (button) {
                 e.preventDefault();
@@ -468,12 +477,28 @@
                 return;
             }
 
-            const isLink = e.target.closest('a');
-            if (sidebar && sidebar.contains(e.target) && !sidebarLogo.contains(e.target)) {
-                document.querySelectorAll('.submenu-list.show').forEach(menu => {
-                    menu.classList.remove('show');
-                    menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
-                });
+            // Close all open submenus when clicking empty area inside sidebar,
+            // except in compact range (991 - 1180).
+            if (!isCompactRange && sidebar && sidebar.contains(e.target) && !(sidebarLogo && sidebarLogo.contains(e.target))) {
+                closeAllSubmenus();
+                return;
+            }
+
+            // Compact-sidebar outside-click behavior only in compact range.
+            if (!isCompactRange) {
+                return;
+            }
+
+            // Don't treat topbar toggle button click as an outside click.
+            if (toggleSidebar && toggleSidebar.contains(e.target)) {
+                return;
+            }
+
+            if (sidebar && !sidebar.contains(e.target)) {
+                closeAllSubmenus();
+
+                // In mobile/off-canvas states, close sidebar if these classes are used.
+                sidebar.classList.remove('show', 'active');
             }
         });
     </script>
@@ -679,6 +704,62 @@
                     console.error('Sidebar order fetch error:', err);
                 });
 
+        });
+    </script>
+
+    <script>
+        // Auto-scroll to active menu item on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebar = document.getElementById('sidebar');
+            const submenuBtns = document.querySelectorAll('.submenu-btn');
+
+            const isCompactSidebarViewport = () => window.innerWidth >= 991 && window.innerWidth <= 1180;
+
+            const closeOpenSubmenus = () => {
+                document.querySelectorAll('.submenu-list.show').forEach(menu => {
+                    menu.classList.remove('show');
+                    menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
+                });
+            };
+
+            const syncSidebarSizeClass = () => {
+                if (!sidebar) return;
+
+                if (isCompactSidebarViewport()) {
+                    sidebar.classList.add('small-sidebar');
+                } else {
+                    sidebar.classList.remove('small-sidebar');
+                    closeOpenSubmenus();
+                }
+            };
+
+            // Apply once on initial load.
+            syncSidebarSizeClass();
+
+            submenuBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!isCompactSidebarViewport()) {
+                        return;
+                    }
+
+                    sidebar.classList.remove('small-sidebar');
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!isCompactSidebarViewport()) {
+                    return;
+                }
+
+                if (!sidebar.contains(e.target) && !Array.from(submenuBtns).some(btn => btn.contains(e.target))) {
+                    sidebar.classList.add('small-sidebar');
+                    sidebar.classList.remove('show', 'active');
+                    closeOpenSubmenus();
+                }
+            });
+
+            // Keep class in sync with viewport changes.
+            window.addEventListener("resize", syncSidebarSizeClass);
         });
     </script>
 @endpush

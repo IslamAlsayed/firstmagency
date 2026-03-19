@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\ArticleController;
 use App\Http\Controllers\Dashboard\BackupController;
+use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\DashboardsAndSystemController;
 use App\Http\Controllers\Dashboard\DepartmentController;
@@ -69,6 +70,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/backups/download/{filename}', [BackupController::class, 'download'])->name('backups.download');
     Route::post('/backups/restore', [BackupController::class, 'restore'])->name('backups.restore');
     Route::delete('/backups/delete', [BackupController::class, 'delete'])->name('backups.delete');
+
+    // Notifications Routes
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

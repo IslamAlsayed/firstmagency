@@ -227,7 +227,7 @@
                         @php
                             $activePercent = $businessStats['clients']['total'] > 0 ? ($businessStats['clients']['active'] / $businessStats['clients']['total']) * 100 : 0;
                         @endphp
-                        <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full transition-all duration-500" style="width: {{ $activePercent }}%"></div>
+                        <div class="bg-green-600 h-2 rounded-full transition-all duration-500" style="width: {{ $activePercent }}%"></div>
                     </div>
                     <p class="text-xs text-gray-500 mt-2">{{ round($activePercent) }}% {{ __('main.active') }}</p>
                 </div>

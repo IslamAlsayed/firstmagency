@@ -18,16 +18,16 @@ return new class extends Migration
             $table->id();
 
             // Color Settings
-            $table->string('primary_color')->default('#6f42c1');
+            $table->string('primary_color')->default('#5A8622');
             $table->string('secondary_color')->default('#6c757d');
             $table->string('success_color')->default('#198754');
             $table->string('danger_color')->default('#dc3545');
             $table->string('warning_color')->default('#ffc107');
             $table->string('info_color')->default('#0dcaf0');
             $table->string('accent_color')->default('#dc3545');
-            $table->string('header_color')->default('#6f42c1');
+            $table->string('header_color')->default('#5A8622');
             $table->string('header_text_color')->default('#f7f7f7');
-            $table->string('footer_color')->default('#6f42c1');
+            $table->string('footer_color')->default('#5A8622');
 
             // Website colors
             // $table->string('main_color')->default('#d05423');

@@ -237,7 +237,7 @@ class TicketController extends Controller
             $this->publishToAbly('ticket-updates', 'new-support-reply', $messageData);
 
             // Send email to customer
-            Mail::to($ticket->email)->send(new TicketRepliedMail($messageRow));
+            Mail::to($ticket->email)->send(new TicketRepliedMail($ticket, $messageRow));
         }
 
         return redirect()->back()->withSuccess(__('messages.type_sended_successfully', ['type' => __('main.message')]));

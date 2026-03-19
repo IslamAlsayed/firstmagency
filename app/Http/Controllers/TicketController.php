@@ -13,6 +13,8 @@ use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use App\Models\TicketRating;
+use App\Models\User;
+use App\Notifications\TicketActivityNotification;
 use App\Traits\AblyService;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
@@ -64,6 +66,26 @@ class TicketController extends Controller
         if ($department && $department->user) {
             Mail::to($department->user->email)->send(new TicketAssignedDepartmentMail($ticket, $department));
         }
+
+        // Notify all admins/superadmins about new ticket
+        $notification = new TicketActivityNotification(
+            ticket: $ticket,
+            type: 'new_ticket',
+            body: __('main.customer') . ': ' . $ticket->name,
+        );
+        $users = User::whereIn('role', ['superadmin', 'admin'])->get();
+        foreach ($users as $user) {
+            $user->notify($notification);
+        }
+
+        $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+            'type' => 'new_ticket',
+            'subject' => $ticket->subject,
+            'body' => __('main.customer') . ': ' . $ticket->name,
+            'url' => route('dashboard.tickets.show', $ticket->id),
+            'created_at' => now()->toIso8601String(),
+            'created_at_human' => now()->diffForHumans(),
+        ]);
 
         // Publish new ticket event to Ably
         $ticketData = [
@@ -125,7 +147,7 @@ class TicketController extends Controller
                     'photo' => asset('assets/images/avatars/avatar.png'),
                 ],
                 'department' => $department ? [
-                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support')),
+                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
                     'bg_color' => $department->bg_color,
                     'border_color' => $department->border_color,
                     'border_main_color' => $department->border_main_color,
@@ -136,6 +158,26 @@ class TicketController extends Controller
 
             // Publish update to Ably channel (you can customize the channel name and event as needed)
             $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
+
+            // Notify all admins/superadmins about customer reply
+            $replyNotification = new TicketActivityNotification(
+                ticket: $ticket,
+                type: 'customer_reply',
+                body: __('main.customer') . ': ' . $ticket->name,
+            );
+            $users = User::whereIn('role', ['superadmin', 'admin'])->get();
+            foreach ($users as $user) {
+                $user->notify($replyNotification);
+            }
+
+            $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+                'type' => 'customer_reply',
+                'subject' => $ticket->subject,
+                'body' => __('main.customer') . ': ' . $ticket->name,
+                'url' => route('dashboard.tickets.show', $ticket->id),
+                'created_at' => now()->toIso8601String(),
+                'created_at_human' => now()->diffForHumans(),
+            ]);
         }
 
         return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
@@ -275,6 +317,26 @@ class TicketController extends Controller
         // Send confirmation email
         // Mail::to($ticket->email)->send(new TicketRatingMail($ticket, $rating));
         Mail::to($ticket->email)->send(new TicketThankForRatingMail($ticket, $rating));
+
+        // Notify all admins/superadmins about new rating
+        $ratingNotification = new TicketActivityNotification(
+            ticket: $ticket,
+            type: 'ticket_rated',
+            body: str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
+        );
+        $users = User::whereIn('role', ['superadmin', 'admin'])->get();
+        foreach ($users as $user) {
+            $user->notify($ratingNotification);
+        }
+
+        $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+            'type' => 'ticket_rated',
+            'subject' => $ticket->subject,
+            'body' => str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
+            'url' => route('dashboard.tickets.show', $ticket->id),
+            'created_at' => now()->toIso8601String(),
+            'created_at_human' => now()->diffForHumans(),
+        ]);
 
         return redirect()->route('tickets.support_pro_rating', [$ticket->uuid, $ticket->token])->withSuccess(__('messages.rating_submitted_successfully'));
         // return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.rating_submitted_successfully'));
