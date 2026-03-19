@@ -237,7 +237,9 @@
             key: '{{ config('app.ably_key') }}',
             logLevel: 1
         });
-        const ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
+        window.ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
+        window.dispatchEvent(new CustomEvent('ticket-channel-ready'));
+        const ticketUpdatesChannel = window.ticketUpdatesChannel;
 
         // Subscribe to ticket deletion events
         ticketUpdatesChannel.subscribe('ticket-deleted', (ablyMessage) => {

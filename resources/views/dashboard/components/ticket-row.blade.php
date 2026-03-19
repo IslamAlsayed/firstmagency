@@ -1,5 +1,4 @@
-<tr class="border-b border-gray-200 hover:bg-gray-50 transition" id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}"
-    data-priority="{{ $ticket->priority }}">
+<tr class="border-b border-gray-200 hover:bg-gray-50 transition" id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
     <td class="p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
     <td class="p-4 text-sm text-gray-600">
         <p>{{ $ticket->name }}</p>
@@ -17,7 +16,7 @@
         </p>
     </td>
     <td class="p-4 text-sm text-gray-600">{{ limitedText($ticket->subject ?? '', 30) }}</td>
-    <td class="p-4 text-sm text-gray-600 font-semibold">{{ $ticket->department ?? '-' }}</td>
+    <td class="p-4 text-sm text-gray-600 font-semibold">{{ $ticket->department?->name ?? '-' }}</td>
     <td class="p-4 text-sm text-gray-600">{{ $ticket->created_at?->diffForHumans() }}</td>
     <td class="p-4 text-sm">
         <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
@@ -32,12 +31,12 @@
                 'modelClass' => 'ticket',
                 'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
             ])
-            <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}"
-                class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white" title="{{ __('main.send_copy_to_customer') }}">
+            <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white"
+                title="{{ __('main.send_copy_to_customer') }}">
                 <i class="fas fa-envelope text-white"></i>
             </a>
-            <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}"
-                class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white" title="{{ __('main.support_reply') }}">
+            <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white"
+                title="{{ __('main.support_reply') }}">
                 @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
                     {!! $text ?? __('main.chat') !!}
                 @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')

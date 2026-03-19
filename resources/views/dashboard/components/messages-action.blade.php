@@ -149,11 +149,12 @@
 
     // Listen for real-time message updates via Ably
     function setupAblyMessageListeners() {
-        // Only setup if Ably is available and ticket info exists
-        if (typeof ticketUpdatesChannel === 'undefined') return;
+        // Use global channel to avoid TDZ / undefined errors.
+        const channel = window.ticketUpdatesChannel;
+        if (!channel || typeof channel.subscribe !== 'function') return;
 
         // Listen for message updates
-        ticketUpdatesChannel.subscribe('message-updated', (ablyMessage) => {
+        channel.subscribe('message-updated', (ablyMessage) => {
             const messageData = ablyMessage.data;
             const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
 
@@ -166,7 +167,7 @@
         });
 
         // Listen for message deletions
-        ticketUpdatesChannel.subscribe('message-deleted', (ablyMessage) => {
+        channel.subscribe('message-deleted', (ablyMessage) => {
             const messageData = ablyMessage.data;
             const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
 
@@ -185,4 +186,7 @@
     } else {
         setupAblyMessageListeners();
     }
+
+    // If the channel is created after this script, bind listeners once it's ready.
+    window.addEventListener('ticket-channel-ready', setupAblyMessageListeners);
 </script>
