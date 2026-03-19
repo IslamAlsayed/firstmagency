@@ -13,11 +13,11 @@ use App\Mail\TicketRepliedMail;
 use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Support\SafeMail;
 use App\Traits\AblyService;
 use App\Traits\GlobalDestroyTrait;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -71,12 +71,19 @@ class TicketController extends Controller
         }
 
         // Send email to customer
-        Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
+        SafeMail::send($ticket->email, new TicketCreatedMail($ticket), [
+            'source' => __CLASS__ . '@store',
+            'ticket_id' => $ticket->id,
+        ]);
 
         // Send email to department user
         $department = Department::find($ticket->department_id);
         if ($department && $department->user) {
-            Mail::to($department->user->email)->send(new TicketAssignedDepartmentMail($ticket, $department));
+            SafeMail::send($department->user->email, new TicketAssignedDepartmentMail($ticket, $department), [
+                'source' => __CLASS__ . '@store',
+                'ticket_id' => $ticket->id,
+                'department_id' => $department->id,
+            ]);
         }
 
         session()->forget('ticket_verification');
@@ -136,7 +143,11 @@ class TicketController extends Controller
         if ($oldDepartmentId != $ticket->department_id) {
             $newDepartment = Department::find($ticket->department_id);
             if ($newDepartment && $newDepartment->user) {
-                Mail::to($newDepartment->user->email)->send(new TicketAssignedDepartmentMail($ticket, $newDepartment));
+                SafeMail::send($newDepartment->user->email, new TicketAssignedDepartmentMail($ticket, $newDepartment), [
+                    'source' => __CLASS__ . '@update',
+                    'ticket_id' => $ticket->id,
+                    'department_id' => $newDepartment->id,
+                ]);
             }
         }
 
@@ -237,7 +248,11 @@ class TicketController extends Controller
             $this->publishToAbly('ticket-updates', 'new-support-reply', $messageData);
 
             // Send email to customer
-            Mail::to($ticket->email)->send(new TicketRepliedMail($ticket, $messageRow));
+            SafeMail::send($ticket->email, new TicketRepliedMail($ticket, $messageRow), [
+                'source' => __CLASS__ . '@postSupportReply',
+                'ticket_id' => $ticket->id,
+                'message_id' => $messageRow->id,
+            ]);
         }
 
         return redirect()->back()->withSuccess(__('messages.type_sended_successfully', ['type' => __('main.message')]));
@@ -250,7 +265,10 @@ class TicketController extends Controller
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
         $this->authorize('view', $ticket);
-        Mail::to($ticket->email)->send(new TicketCopyMail($ticket));
+        SafeMail::send($ticket->email, new TicketCopyMail($ticket), [
+            'source' => __CLASS__ . '@sendCopyToCustomer',
+            'ticket_id' => $ticket->id,
+        ]);
         return redirect()->back()->withSuccess(__('messages.email_sent_successfully'));
     }
 }

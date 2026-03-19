@@ -61,7 +61,7 @@
                         <a href="#section-debug-ips" class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
                             data-section="debug-ips">
                             <i class="fas fa-network-wired text-blue-500 group-hover:scale-110 transition"></i>
-                            <span class="text-sm font-semibold text-gray-700">Debug IPs</span>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.settings_debug_ips') }}</span>
                         </a>
 
                         <!-- About Us -->
@@ -103,7 +103,7 @@
                         <a href="#section-inline-padding" class="settings-nav-item flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-200 transition-all duration-300 cursor-pointer group"
                             data-section="inline-padding">
                             <i class="fas fa-arrows-alt-h text-purple-500 group-hover:scale-110 transition"></i>
-                            <span class="text-sm font-semibold text-gray-700">Padding</span>
+                            <span class="text-sm font-semibold text-gray-700">{{ __('main.settings_inline_padding') }}</span>
                         </a>
                     </nav>
                 </div>
@@ -138,13 +138,13 @@
                                 <label for="site-whatsapp" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.site_whatsapp') }}</label>
                                 <input type="tel" id="site-whatsapp" name="site_whatsapp"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="WhatsApp Number" value="{{ $settings->site_whatsapp ?? '201212601601' }}">
+                                    placeholder="{{ __('main.settings_whatsapp_number') }}" value="{{ $settings->site_whatsapp ?? '201212601601' }}">
                             </div>
                             <div>
                                 <label for="site-phone" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.site_phone') }}</label>
                                 <input type="tel" id="site-phone" name="site_phone"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="Phone Number" value="{{ $settings->site_phone ?? '201212602602' }}">
+                                    placeholder="{{ __('main.settings_phone_number') }}" value="{{ $settings->site_phone ?? '201212602602' }}">
                             </div>
                         </div>
 
@@ -179,7 +179,7 @@
 
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -200,12 +200,12 @@
                     <form action="{{ route('dashboard.settings.toggleDebugMode') }}" method="POST" class="space-y-5" id="debug-mode-section">
                         @csrf
                         <p class="text-sm text-gray-500">
-                            When enabled, section flags will be visible on the website for debugging purposes.
+                            {{ __('main.settings_debug_mode_note') }}
                         </p>
                         <button type="submit"
                             class="flex items-center gap-2 px-4 py-2 cursor-pointer {{ $settings->debug_mode ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700' }} text-white font-semibold rounded-[9px] shadow-md">
                             <i class="fas {{ $settings->debug_mode ? 'fa-toggle-on' : 'fa-toggle-off' }}"></i>
-                            {{ $settings->debug_mode ? 'Disable Debug Mode' : 'Enable Debug Mode' }}
+                            {{ $settings->debug_mode ? __('main.settings_disable_debug_mode') : __('main.settings_enable_debug_mode') }}
                         </button>
                     </form>
                 </div>
@@ -229,15 +229,15 @@
 
                         <div class="mb-4">
                             <p class="text-sm text-gray-500 mb-3">
-                                <strong>Your Current IP:</strong> <span class="font-mono bg-blue-100 px-3 py-1 rounded text-blue-700">{{ getCurrentClientIp() }}</span>
+                                <strong>{{ __('main.settings_current_ip_label') }}:</strong> <span class="font-mono bg-blue-100 px-3 py-1 rounded text-blue-700">{{ getCurrentClientIp() }}</span>
                             </p>
                             <p class="text-sm text-gray-500">
-                                If left empty, debug flags will be visible to everyone when Debug Mode is enabled. Otherwise, add specific IPs to restrict access.
+                                {{ __('main.settings_debug_ips_empty_note') }}
                             </p>
                         </div>
 
                         <div>
-                            <label for="debug-ips" class="block text-sm font-semibold text-gray-600 mb-2">Allowed IPs (one per line)</label>
+                            <label for="debug-ips" class="block text-sm font-semibold text-gray-600 mb-2">{{ __('main.settings_allowed_ips_per_line') }}</label>
                             <textarea id="debug-ips" name="debug_ips"
                                 class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm font-mono text-sm"
                                 rows="4" placeholder="127.0.0.1&#10;192.168.1.100">{{ $settings->debug_ips ? implode("\n", json_decode($settings->debug_ips, true)) : '' }}</textarea>
@@ -246,19 +246,19 @@
                         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                             <p class="text-sm text-blue-700">
                                 <i class="fas fa-info-circle mr-2"></i>
-                                <strong>Quick add:</strong> Click the button below to add your current IP
+                                <strong>{{ __('main.settings_quick_add') }}:</strong> {{ __('main.settings_add_current_ip_note') }}
                             </p>
                         </div>
 
                         <div class="flex gap-3">
                             <button type="submit" class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary font-semibold rounded-[9px] shadow-md">
                                 <i class="fas fa-save"></i>
-                                Save IPs
+                                {{ __('main.settings_save_ips') }}
                             </button>
                             <button type="button" id="add-my-ip-btn"
                                 class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-green-600 hover:bg-green-700 font-semibold rounded-[9px] shadow-md">
                                 <i class="fas fa-plus"></i>
-                                Add My IP
+                                {{ __('main.settings_add_my_ip') }}
                             </button>
                         </div>
                     </form>
@@ -292,14 +292,14 @@
                                 <label for="about-us-title" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.about_us_title') }} (EN)</label>
                                 <input type="text" id="about-us-title" name="about_us_title"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="About Us Title" value="{{ $settings->about_us_title ?? '' }}">
+                                    placeholder="{{ __('main.settings_about_us_title_placeholder') }}" value="{{ $settings->about_us_title ?? '' }}">
                             </div>
                             <div>
                                 <label for="about-us-title-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.about_us_title') }}
                                     (AR)</label>
                                 <input type="text" id="about-us-title-ar" name="about_us_title_ar"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="عنوان عن الشركة" value="{{ $settings->about_us_title_ar ?? '' }}">
+                                    placeholder="{{ __('main.settings_about_us_title_ar_placeholder') }}" value="{{ $settings->about_us_title_ar ?? '' }}">
                             </div>
                         </div>
 
@@ -325,7 +325,7 @@
 
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -359,7 +359,7 @@
                                         <label for="website-design-title" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
                                         <input type="text" id="website-design-title" name="website_design_title"
                                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                            placeholder="Website Design Title" value="{{ $settings->website_design_title ?? '' }}">
+                                            placeholder="{{ __('main.settings_website_design_title_placeholder') }}" value="{{ $settings->website_design_title ?? '' }}">
                                     </div>
 
                                     {{-- Website Design Heading EN --}}
@@ -367,7 +367,7 @@
                                         <label for="website-design-heading" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
                                         <input type="text" id="website-design-heading" name="website_design_heading"
                                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                            placeholder="Website Design Heading" value="{{ $settings->website_design_heading ?? '' }}">
+                                            placeholder="{{ __('main.settings_website_design_heading_placeholder') }}" value="{{ $settings->website_design_heading ?? '' }}">
                                     </div>
 
                                     {{-- Website Design Description EN --}}
@@ -387,7 +387,7 @@
                                         <label for="website-design-title-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
                                         <input type="text" id="website-design-title-ar" name="website_design_title_ar"
                                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                            placeholder="عنوان تصميم المواقع" value="{{ $settings->website_design_title_ar ?? '' }}">
+                                            placeholder="{{ __('main.settings_website_design_title_ar_placeholder') }}" value="{{ $settings->website_design_title_ar ?? '' }}">
                                     </div>
 
                                     {{-- Website Design Heading AR --}}
@@ -395,7 +395,7 @@
                                         <label for="website-design-heading-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
                                         <input type="text" id="website-design-heading-ar" name="website_design_heading_ar"
                                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                            placeholder="عنوان تصميم المواقع" value="{{ $settings->website_design_heading_ar ?? '' }}">
+                                            placeholder="{{ __('main.settings_website_design_heading_ar_placeholder') }}" value="{{ $settings->website_design_heading_ar ?? '' }}">
                                     </div>
 
                                     {{-- Website Design Description AR --}}
@@ -428,7 +428,7 @@
 
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -468,7 +468,7 @@
                         </div>
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -546,7 +546,7 @@
                         </div>
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -582,7 +582,7 @@
                         </div>
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -619,7 +619,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="home-hero-section" name="home_hero_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="120" value="{{ $settings->home_hero_section ?? '200' }}">
+                                    placeholder="200" value="{{ $settings->home_hero_section ?? '200' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-services">
                                 <label for="home-services-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -657,6 +657,7 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->home_clients_section ?? '120' }}">
                             </div>
+
                             <div class="inline-padding-section" data-section="flag-about-us">
                                 <label for="about-us-steps" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-about-us</span>
@@ -682,8 +683,9 @@
                                 </label>
                                 <input type="number" minLength="1" id="line-works-section" name="work_lines_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->work_lines_section ?? '120' }}">
+                                    placeholder="120" value="{{ $settings->work_lines_section ?? '120' }}">
                             </div>
+
                             <div class="inline-padding-section" data-section="flag-portfolio">
                                 <label for="portfolio-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-portfolio</span>
@@ -691,7 +693,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="portfolio-section" name="portfolio_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->portfolio_section ?? '200' }}">
+                                    placeholder="200" value="{{ $settings->portfolio_section ?? '200' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-articles">
                                 <label for="blog-articles-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -720,6 +722,7 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="180" value="{{ $settings->contact_page_section ?? '180' }}">
                             </div>
+
                             <div class="inline-padding-section" data-section="flag-website-developer">
                                 <label for="website-developer-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-website-developer</span>
@@ -727,7 +730,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="website-developer-section" name="website_developer_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="180" value="{{ $settings->website_developer_section ?? '120' }}">
+                                    placeholder="120" value="{{ $settings->website_developer_section ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-programming">
                                 <label for="website-programming-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -736,7 +739,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="website-programming-section" name="website_programming_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="180" value="{{ $settings->website_programming_section ?? '200' }}">
+                                    placeholder="200" value="{{ $settings->website_programming_section ?? '200' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-website-designer">
                                 <label for="website-design-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -745,7 +748,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="website-design-section" name="website_design_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="180" value="{{ $settings->website_design_section ?? '60' }}">
+                                    placeholder="60" value="{{ $settings->website_design_section ?? '60' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-important-articles">
                                 <label for="website-important-articles-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -763,8 +766,9 @@
                                 </label>
                                 <input type="number" minLength="1" id="faqs-section" name="faqs_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="180" value="{{ $settings->faqs_section ?? '60' }}">
+                                    placeholder="60" value="{{ $settings->faqs_section ?? '60' }}">
                             </div>
+
                             <div class="inline-padding-section" data-section="flag-app-developer-hero">
                                 <label for="app-developer-hero-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-app-developer-hero</span>
@@ -826,9 +830,8 @@
                                 </label>
                                 <input type="number" minLength="1" id="your-domain-section" name="your_domain_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->your_domain_section ?? '240' }}">
+                                    placeholder="240" value="{{ $settings->your_domain_section ?? '240' }}">
                             </div>
-
                             <div class="inline-padding-section" data-section="flag-pest-domains">
                                 <label for="pest-domains-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
                                     <span>flag-pest-domains</span>
@@ -845,7 +848,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="why-us-section" name="why_us_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->why_us_section ?? '120' }}">
+                                    placeholder="120" value="{{ $settings->why_us_section ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-platform-management">
                                 <label for="platform-management-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -863,28 +866,7 @@
                                 </label>
                                 <input type="number" minLength="1" id="packages-marketing-section" name="packages_marketing_section"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->packages_marketing_section ?? '120' }}">
-                            </div>
-
-                            <div class="inline-padding-section" data-section="flag-order-app">
-                                <label for="order-app-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-order-app</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="order-app-section" name="order_your_app_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="170" value="{{ $settings->order_your_app_section ?? '170' }}">
-                            </div>
-
-
-                            <div class="inline-padding-section" data-section="flag-categories-programming">
-                                <label for="categories-programming-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
-                                    <span>flag-categories-programming</span>
-                                    <span>(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="categories-programming-section" name="categories_programming_section"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->categories_programming_section ?? '60' }}">
+                                    placeholder="120" value="{{ $settings->packages_marketing_section ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-dont-worry-hosting">
                                 <label for="dont-worry-hosting-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
@@ -895,18 +877,28 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->dont_worry_hosting_section ?? '60' }}">
                             </div>
-
-
-
-
-
-
-
-
+                            <div class="inline-padding-section" data-section="flag-order-app">
+                                <label for="order-app-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-order-app</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="order-app-section" name="order_your_app_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="170" value="{{ $settings->order_your_app_section ?? '170' }}">
+                            </div>
+                            <div class="inline-padding-section" data-section="flag-categories-programming">
+                                <label for="categories-programming-section" class="flex items-center justify-between gap-2 text-sm font-semibold text-primary mb-1" style="font-size: 12px">
+                                    <span>flag-categories-programming</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="categories-programming-section" name="categories_programming_section"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="200" value="{{ $settings->categories_programming_section ?? '200' }}">
+                            </div>
                         </div>
                         <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
                             <i class="fas fa-save"></i>
-                            Save Changes
+                            {{ __('main.settings_save_changes') }}
                         </button>
                     </form>
                 </div>
@@ -960,7 +952,7 @@
                     <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
                         <div>
                             <i class="fas fa-database text-blue-500"></i>
-                            قاعدة البيانات - Backup & Restore
+                            {{ __('main.settings_database_backup_restore') }}
                         </div>
 
                         <div class="toggle-icon" toggle-button data-section="database-backups-section">
@@ -972,10 +964,10 @@
                         <!-- Create Backup -->
                         <div class="bg-white rounded-lg shadow-md p-4">
                             <h5 class="text-lg font-semibold text-gray-700 mb-4">
-                                <i class="fas fa-plus-circle text-green-500"></i> إنشاء نسخة احتياطية جديدة
+                                <i class="fas fa-plus-circle text-green-500"></i> {{ __('main.settings_create_new_backup') }}
                             </h5>
                             <button id="create-backup-btn" class="flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition">
-                                <i class="fas fa-download"></i> عمل Backup الآن
+                                <i class="fas fa-download"></i> {{ __('main.settings_create_backup_now') }}
                             </button>
                             <div id="backup-status" class="mt-3 hidden"></div>
                         </div>
@@ -983,12 +975,12 @@
                         <!-- Backups List -->
                         <div class="bg-white rounded-lg shadow-md p-4">
                             <h5 class="text-lg font-semibold text-gray-700 mb-4">
-                                <i class="fas fa-list text-blue-500"></i> النسخ الاحتياطية المتاحة
+                                <i class="fas fa-list text-blue-500"></i> {{ __('main.settings_available_backups') }}
                             </h5>
                             <div id="backups-list" class="space-y-3 max-h-96 overflow-y-auto">
                                 <div class="text-center py-8">
                                     <i class="fas fa-spinner fa-spin text-2xl text-gray-400"></i>
-                                    <p class="text-gray-500 mt-2">جاري التحميل...</p>
+                                    <p class="text-gray-500 mt-2">{{ __('main.msg_loading') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -996,13 +988,13 @@
                         <!-- Backup Info -->
                         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                             <h5 class="font-semibold text-blue-900 mb-2">
-                                <i class="fas fa-info-circle"></i> معلومات مهمة
+                                <i class="fas fa-info-circle"></i> {{ __('main.settings_backup_important_info') }}
                             </h5>
                             <ul class="text-sm text-blue-800 space-y-1">
-                                <li>✓ يتم حفظ النسخ في مجلد آمن في الخادم</li>
-                                <li>✓ يمكنك استرجاع أي نسخة قديمة في أي وقت</li>
-                                <li>✓ يمكنك تحميل النسخة الاحتياطية على جهازك</li>
-                                <li>⚠️ استرجاع النسخة سيستبدل البيانات الحالية</li>
+                                <li>✓ {{ __('main.settings_backup_safe_storage') }}</li>
+                                <li>✓ {{ __('main.settings_backup_restore_anytime') }}</li>
+                                <li>✓ {{ __('main.settings_backup_download_local') }}</li>
+                                <li>⚠️ {{ __('main.settings_backup_restore_overwrite_warning') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -1449,10 +1441,10 @@
                                         </p>
                                     </div>
                                     <div class="flex gap-2">
-                                        <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="تحميل">
+                                        <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
                                             <i class="fas fa-download"></i>
                                         </button>
-                                        <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="استرجاع">
+                                        <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
                                             <i class="fas fa-redo-alt"></i>
                                         </button>
                                         <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
@@ -1465,7 +1457,7 @@
                             // Attach event listeners
                             attachBackupListeners();
                         } else {
-                            backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">لا توجد نسخ احتياطية</p>';
+                            backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
                         }
                     })
                     .catch(err => console.error('Error loading backups:', err));
@@ -1473,10 +1465,10 @@
 
             // Create backup
             createBtn.addEventListener('click', function() {
-                if (confirm('هل تريد عمل نسخة احتياطية الآن؟')) {
+                if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
                     createBtn.disabled = true;
                     statusDiv.classList.remove('hidden');
-                    statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> جاري إنشاء النسخة الاحتياطية...</div>';
+                    statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
 
                     fetch("{{ route('dashboard.backups.create') }}", {
                             method: 'POST',
@@ -1487,16 +1479,17 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> تم إنشاء النسخة الاحتياطية بنجاح</div>';
+                                statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
                                 loadBackups();
                             } else {
-                                statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> خطأ: ' + data.message + '</div>';
+                                statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
+                                    '</div>';
                             }
                             createBtn.disabled = false;
                             setTimeout(() => statusDiv.classList.add('hidden'), 4000);
                         })
                         .catch(err => {
-                            statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> خطأ في الاتصال</div>';
+                            statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
                             createBtn.disabled = false;
                             setTimeout(() => statusDiv.classList.add('hidden'), 4000);
                         });
@@ -1515,7 +1508,7 @@
                 document.querySelectorAll('.restore-backup').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const filename = this.dataset.filename;
-                        if (confirm('⚠️ تحذير: هذا سيستبدل جميع البيانات الحالية. هل تريد المتابعة؟')) {
+                        if (confirm('{{ __('main.settings_restore_confirm') }}')) {
                             const form = document.createElement('form');
                             form.method = 'POST';
                             form.action = "{{ route('dashboard.backups.restore') }}";
@@ -1526,7 +1519,7 @@
                             document.body.appendChild(form);
 
                             // Show loading message
-                            alert('⏳ جاري استرجاع النسخة الاحتياطية... يرجى الانتظار (قد يستغرق وقتاً طويلاً)');
+                            alert('{{ __('main.settings_restore_in_progress') }}');
                             form.submit();
                         }
                     });
@@ -1535,7 +1528,7 @@
                 document.querySelectorAll('.delete-backup').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const filename = this.dataset.filename;
-                        if (confirm('هل أنت متأكد من حذف هذه النسخة؟')) {
+                        if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
                             const form = document.createElement('form');
                             form.method = 'POST';
                             form.action = "{{ route('dashboard.backups.delete') }}";
@@ -1553,9 +1546,9 @@
 
             // Helper function to format bytes
             function formatBytes(bytes) {
-                if (bytes === 0) return '0 Bytes';
+                if (bytes === 0) return '0 {{ __('main.bytes') }}';
                 const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
                 const i = Math.floor(Math.log(bytes) / Math.log(k));
                 return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
             }

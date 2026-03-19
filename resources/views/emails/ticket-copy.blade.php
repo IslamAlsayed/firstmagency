@@ -82,7 +82,7 @@
                     <p class="mb-1"><b>{{ __('main.subject') }}:</b> {{ $ticket->subject }}</p>
                 </div>
                 <div class="space-y-2">
-                    <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticket->department }}</p>
+                    <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticket->department?->name }}</p>
                     <p class="mb-1"><b>{{ __('main.email_') }}:</b> {{ $ticket->email }}</p>
                     <p class="mb-1"><b>{{ __('main.date') }}:</b> {{ $ticket->created_at }}</p>
                 </div>

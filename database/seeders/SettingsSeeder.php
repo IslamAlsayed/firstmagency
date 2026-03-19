@@ -21,14 +21,16 @@ class SettingsSeeder extends Seeder
             ['site_email' => config('app.email')],
             [
                 // Colors
-                'primary_color' => '#5A8622',
+                // 'primary_color' => '#5A8622',
+                'primary_color' => '#3c3c39',
                 'secondary_color' => '#6c757d',
                 'success_color' => '#198754',
                 'danger_color' => '#dc3545',
                 'warning_color' => '#ffc107',
                 'info_color' => '#0dcaf0',
                 'accent_color' => '#dc3545',
-                'header_color' => '#5A8622',
+                // 'header_color' => '#5A8622',
+                'header_color' => '#413e3e',
                 'header_text_color' => '#f7f7f7',
                 'footer_color' => '#5A8622',
 

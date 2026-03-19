@@ -121,4 +121,18 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Temporarily Blocked Recipients
+    |--------------------------------------------------------------------------
+    |
+    | Use this list to skip sending emails to specific addresses temporarily,
+    | such as internal users that don't have a real mailbox yet.
+    |
+    */
+    'blocked_recipients' => array_filter(array_map('trim', explode(',', env(
+        'MAIL_BLOCKED_RECIPIENTS',
+        'superadmin@firstmagency.com,admin@firstmagency.com,content@firstmagency.com,support@firstmagency.com'
+    )))),
+
 ];

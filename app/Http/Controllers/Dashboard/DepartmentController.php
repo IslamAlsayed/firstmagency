@@ -9,10 +9,10 @@ use App\Mail\TicketAssignedDepartmentMail;
 use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Support\SafeMail;
 use App\Traits\AblyService;
 use App\Traits\GlobalDestroyTrait;
 use App\Traits\PhotoUploadTrait;
-use Illuminate\Support\Facades\Mail;
 
 class DepartmentController extends Controller
 {
@@ -150,9 +150,11 @@ class DepartmentController extends Controller
         // Get the user associated with the department
         if ($newDepartment && $newDepartment->user) {
             // Send email to the department user
-            Mail::to($newDepartment->user->email)->send(
-                new TicketAssignedDepartmentMail($ticketModel, $newDepartment)
-            );
+            SafeMail::send($newDepartment->user->email, new TicketAssignedDepartmentMail($ticketModel, $newDepartment), [
+                'source' => __CLASS__ . '@changeTicketDepartment',
+                'ticket_id' => $ticketModel->id,
+                'department_id' => $newDepartment->id,
+            ]);
         }
 
         // Publish update to Ably channel with department data

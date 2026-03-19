@@ -74,7 +74,7 @@
         <div class="email-badge">💬 {{ __('main.customer_message_received') ?? 'رسالة عميل جديدة' }}</div>
         <h2>{{ __('main.customer_replied_on_ticket_notification') }}</h2>
         <div>
-            <span>{{ __('main.hello') }} <strong>{{ $ticket->department?->user?->name ?? __('main.support') }}</strong>،</span>
+            <span>{{ __('main.hello') }} <strong>{{ $ticket->department?->name ?? __('main.support') }}</strong>،</span>
             <span>{{ $ticket->name }} {{ __('main.has_replied_on_your_ticket') }}</span>
         </div>
 

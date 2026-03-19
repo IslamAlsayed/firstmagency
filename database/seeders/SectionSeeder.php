@@ -49,12 +49,6 @@ class SectionSeeder extends Seeder
                 'view_file' => 'clients',
             ],
             [
-                'name' => 'About Us Section',
-                'flag' => 'flag-about-us',
-                'padding_setting_key' => 'about_us_section',
-                'view_file' => 'about-us',
-            ],
-            [
                 'name' => 'Partners Section',
                 'flag' => 'flag-partners',
                 'padding_setting_key' => 'about_us_partners_section',

@@ -92,7 +92,6 @@ class Setting extends Model
         'platform_management_section',
         'work_lines_section',
         'our_services_marketing_section',
-        'about_us_section',
         'marketing_hero_section',
         'order_app_section',
         'hosting_hero_section',

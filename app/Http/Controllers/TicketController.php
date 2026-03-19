@@ -15,10 +15,10 @@ use App\Models\TicketMessage;
 use App\Models\TicketRating;
 use App\Models\User;
 use App\Notifications\TicketActivityNotification;
+use App\Support\SafeMail;
 use App\Traits\AblyService;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -59,12 +59,19 @@ class TicketController extends Controller
         }
 
         // Send email to customer
-        Mail::to($ticket->email)->send(new TicketCreatedMail($ticket));
+        SafeMail::send($ticket->email, new TicketCreatedMail($ticket), [
+            'source' => __CLASS__ . '@store',
+            'ticket_id' => $ticket->id,
+        ]);
 
         // Send email to department user
         $department = Department::find($ticket->department_id);
         if ($department && $department->user) {
-            Mail::to($department->user->email)->send(new TicketAssignedDepartmentMail($ticket, $department));
+            SafeMail::send($department->user->email, new TicketAssignedDepartmentMail($ticket, $department), [
+                'source' => __CLASS__ . '@store',
+                'ticket_id' => $ticket->id,
+                'department_id' => $department->id,
+            ]);
         }
 
         // Notify all admins/superadmins about new ticket
@@ -134,7 +141,11 @@ class TicketController extends Controller
             // Send email to department user
             $department = $ticket->department;
             if ($department && $department->user) {
-                Mail::to($department->user->email)->send(new CustomerReplyOnTicketMail($ticket, $messageRow));
+                SafeMail::send($department->user->email, new CustomerReplyOnTicketMail($ticket, $messageRow), [
+                    'source' => __CLASS__ . '@message',
+                    'ticket_id' => $ticket->id,
+                    'message_id' => $messageRow->id,
+                ]);
             }
 
             $messageData = array_merge($messageRow->toArray(), [
@@ -316,7 +327,11 @@ class TicketController extends Controller
 
         // Send confirmation email
         // Mail::to($ticket->email)->send(new TicketRatingMail($ticket, $rating));
-        Mail::to($ticket->email)->send(new TicketThankForRatingMail($ticket, $rating));
+        SafeMail::send($ticket->email, new TicketThankForRatingMail($ticket, $rating), [
+            'source' => __CLASS__ . '@storeRating',
+            'ticket_id' => $ticket->id,
+            'rating_id' => $rating->id,
+        ]);
 
         // Notify all admins/superadmins about new rating
         $ratingNotification = new TicketActivityNotification(
