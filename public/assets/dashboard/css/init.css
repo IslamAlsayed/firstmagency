@@ -80,14 +80,21 @@ body:has(.sidebar.small-sidebar) {
 }
 
 * {
-    text-transform: capitalize;
     font-family: var(--font-family);
 }
 
-*:has([class*='@']),
-*:has([href*='@']) {
+body:not(.email) {
+    text-transform: capitalize;
+}
+
+.email {
     text-transform: lowercase !important;
 }
+
+/* *:has([class*='@']),
+*:has([href*='@']) {
+    text-transform: lowercase !important;
+} */
 
 a[href^="mailto:"] {
     text-transform: lowercase !important;

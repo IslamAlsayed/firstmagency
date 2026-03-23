@@ -20,8 +20,16 @@
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.in_progress') }}</small>
             </div>
             <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-red-600" id="stat-urgent">{{ $tickets->where('priority', 'urgent')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.urgent') }}</small>
+                <div class="text-2xl font-bold text-yellow-600" id="stat-processed">{{ $tickets->where('priority', 'processed')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.processed') }}</small>
+            </div>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-green-600" id="stat-replied">{{ $tickets->where('priority', 'replied')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.replied') }}</small>
+            </div>
+            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+                <div class="text-2xl font-bold text-gray-600" id="stat-closed">{{ $tickets->where('priority', 'closed')->count() }}</div>
+                <small class="text-primary font-semibold text-nowrap">{{ __('main.closed') }}</small>
             </div>
         </div>
 
@@ -59,15 +67,15 @@
                                     <td class="p-4 text-sm text-gray-600">
                                         <p>{{ $ticket->name }}</p>
                                         <p>
-                                            <a href="mailto:{{ $ticket->email }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                            <a href="mailto:{{ $ticket->email }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                                 {!! limitedText($ticket->email ?? '--', 30) !!}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         </p>
                                         <p>
-                                            <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                            <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                                 {!! limitedText($ticket->phone ?? '--', 30) !!}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         </p>
                                     </td>
@@ -83,7 +91,7 @@
                                             {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
                                         </span>
                                     </td>
-                                    <td class="p-4 text-sm">
+                                    <td class="p-4 text-sm text-gray-600">
                                         @include('dashboard.components.status-actions', [
                                             'record' => $ticket,
                                             'models' => 'tickets',
@@ -95,7 +103,7 @@
                                         </span>
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">{{ $ticket->created_at?->diffForHumans() }}</td>
-                                    <td class="p-4 text-sm">
+                                    <td class="p-4 text-sm text-gray-600">
                                         <div class="flex items-center gap-2 flex-wrap">
                                             <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white"
                                                 title="{{ __('main.send_copy_to_customer') }}">
@@ -116,6 +124,7 @@
                                             @include('dashboard.components.permissions-actions', [
                                                 'record' => $ticket,
                                                 'models' => 'tickets',
+                                                'modelClass' => 'ticket',
                                             ])
                                         </div>
                                     </td>
@@ -175,8 +184,9 @@
                 emptyRow.remove();
             }
 
-            // Fetch the full row HTML from the server
-            fetch(`/api/tickets/${ticket.id}/row-html`)
+            // Fetch the full row HTML from the authenticated dashboard endpoint
+            const rowHtmlUrlTemplate = @json(route('api.tickets.row-html', ['id' => '__ID__']));
+            fetch(rowHtmlUrlTemplate.replace('__ID__', ticket.id))
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);

@@ -53,7 +53,7 @@
                                 @if ($faq->creator)
                                     <a href="{{ route('dashboard.users.show', $faq->creator->id) }}" class="text-primary hover:underline">
                                         {{ $faq->creator->name }}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                     </a>
                                 @else
                                     <span class="text-gray-400 italic">N/A</span>
@@ -70,7 +70,7 @@
                                 @if ($faq->updater)
                                     <a href="{{ route('dashboard.users.show', $faq->updater->id) }}" class="text-primary hover:underline">
                                         {{ $faq->updater->name }}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                     </a>
                                 @else
                                     <span class="text-gray-400 italic">N/A</span>
@@ -138,8 +138,7 @@
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-2">{{ __('main.answer') }}</p>
-                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200 prose prose-sm max-w-none text-right"
-                                dir="rtl">
+                            <div class="text-gray-700 leading-relaxed bg-white p-3 rounded border border-gray-200 prose prose-sm max-w-none text-right" dir="rtl">
                                 {!! $faq->answer_ar ?? '-' !!}
                             </div>
                         </div>

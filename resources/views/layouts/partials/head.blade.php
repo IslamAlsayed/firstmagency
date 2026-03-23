@@ -1,4 +1,4 @@
-<title>@yield('title', 'First Magency')</title>
+﻿<title>@yield('title', 'First Magency')</title>
 <base href="../../">
 <script>
     window.USERID = "{{ getActiveUserId() }}";
@@ -72,40 +72,40 @@
 
         --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
 
-        --home-hero-section-inline-padding: {{ $settings->home_hero_section ?? 200 }}px;
-        --home-services-section-inline-padding: {{ $settings->home_services_section ?? 60 }}px;
-        --home-projects-section-inline-padding: {{ $settings->home_projects_section ?? 20 }}px;
-        --home-reviews-section-inline-padding: {{ $settings->home_reviews_section ?? 60 }}px;
-        --home-clients-section-inline-padding: {{ $settings->home_clients_section ?? 120 }}px;
+        --home-hero-section-inline-padding: {{ $settings->sections_padding['home_hero_section'] ?? 200 }}px;
+        --home-services-section-inline-padding: {{ $settings->sections_padding['home_services_section'] ?? 60 }}px;
+        --home-projects-section-inline-padding: {{ $settings->sections_padding['home_projects_section'] ?? 20 }}px;
+        --home-reviews-section-inline-padding: {{ $settings->sections_padding['home_reviews_section'] ?? 60 }}px;
+        --home-clients-section-inline-padding: {{ $settings->sections_padding['home_clients_section'] ?? 120 }}px;
 
-        --about-us-line-works-steps-section-inline-padding: {{ $settings->about_us_line_works_steps_section ?? 60 }}px;
-        --about-us-partners-section-inline-padding: {{ $settings->about_us_partners_section ?? 60 }}px;
+        --about-us-line-works-steps-section-inline-padding: {{ $settings->sections_padding['about_us_line_works_steps_section'] ?? 60 }}px;
+        --about-us-partners-section-inline-padding: {{ $settings->sections_padding['about_us_partners_section'] ?? 60 }}px;
 
-        --portfolio-section-inline-padding: {{ $settings->portfolio_section ?? 200 }}px;
-        --blog-articles-section-inline-padding: {{ $settings->blog_articles_section ?? 60 }}px;
-        --articles-page-section-inline-padding: {{ $settings->articles_page_section ?? 200 }}px;
-        --contact-page-section-inline-padding: {{ $settings->contact_page_section ?? 180 }}px;
+        --portfolio-section-inline-padding: {{ $settings->sections_padding['portfolio_section'] ?? 200 }}px;
+        --blog-articles-section-inline-padding: {{ $settings->sections_padding['blog_articles_section'] ?? 60 }}px;
+        --articles-page-section-inline-padding: {{ $settings->sections_padding['articles_page_section'] ?? 200 }}px;
+        --contact-page-section-inline-padding: {{ $settings->sections_padding['contact_page_section'] ?? 180 }}px;
 
-        --website-developer-section-inline-padding: {{ $settings->website_developer_section ?? 120 }}px;
-        --website-programming-section-inline-padding: {{ $settings->website_programming_section ?? 200 }}px;
-        --website-design-section-inline-padding: {{ $settings->website_design_section ?? 60 }}px;
-        --website-important-articles-section-inline-padding: {{ $settings->website_important_articles_section ?? 60 }}px;
-        --faqs-section-inline-padding: {{ $settings->faqs_section ?? 60 }}px;
+        --website-developer-section-inline-padding: {{ $settings->sections_padding['website_developer_section'] ?? 120 }}px;
+        --website-programming-section-inline-padding: {{ $settings->sections_padding['website_programming_section'] ?? 200 }}px;
+        --website-design-section-inline-padding: {{ $settings->sections_padding['website_design_section'] ?? 60 }}px;
+        --website-important-articles-section-inline-padding: {{ $settings->sections_padding['website_important_articles_section'] ?? 60 }}px;
+        --faqs-section-inline-padding: {{ $settings->sections_padding['faqs_section'] ?? 60 }}px;
 
-        --app-developer-hero-section-inline-padding: {{ $settings->app_developer_hero_section ?? 240 }}px;
-        --app-important-articles-section-inline-padding: {{ $settings->app_important_articles_section ?? 100 }}px;
-        --projects-steps-inline-padding: {{ $settings->projects_steps_section ?? 60 }}px;
-        --feature-section-inline-padding: {{ $settings->feature_section ?? 200 }}px;
-        --packages-section-inline-padding: {{ $settings->packages_section ?? 120 }}px;
-        --operations-systems-section-inline-padding: {{ $settings->operations_systems_section ?? 60 }}px;
-        --your-domain-section-inline-padding: {{ $settings->your_domain_section ?? 240 }}px;
-        --pest-domains-section-inline-padding: {{ $settings->pest_domains_section ?? 60 }}px;
-        --why-us-section-inline-padding: {{ $settings->why_us_section ?? 120 }}px;
-        --platform-management-section-inline-padding: {{ $settings->platform_management_section ?? 60 }}px;
-        --work-lines-section-inline-padding: {{ $settings->work_lines_section ?? 120 }}px;
-        --packages-marketing-section-inline-padding: {{ $settings->packages_marketing_section ?? 120 }}px;
-        --dont-worry-hosting-section-inline-padding: {{ $settings->dont_worry_hosting_section ?? 60 }}px;
-        --order-your-app-section-inline-padding: {{ $settings->order_your_app_section ?? 170 }}px;
-        --categories-programming-section-inline-padding: {{ $settings->categories_programming_section ?? 200 }}px;
+        --app-developer-hero-section-inline-padding: {{ $settings->sections_padding['app_developer_hero_section'] ?? 240 }}px;
+        --app-important-articles-section-inline-padding: {{ $settings->sections_padding['app_important_articles_section'] ?? 100 }}px;
+        --projects-steps-inline-padding: {{ $settings->sections_padding['projects_steps_section'] ?? 60 }}px;
+        --feature-section-inline-padding: {{ $settings->sections_padding['feature_section'] ?? 200 }}px;
+        --packages-section-inline-padding: {{ $settings->sections_padding['packages_section'] ?? 120 }}px;
+        --operations-systems-section-inline-padding: {{ $settings->sections_padding['operations_systems_section'] ?? 60 }}px;
+        --your-domain-section-inline-padding: {{ $settings->sections_padding['your_domain_section'] ?? 240 }}px;
+        --pest-domains-section-inline-padding: {{ $settings->sections_padding['pest_domains_section'] ?? 60 }}px;
+        --why-us-section-inline-padding: {{ $settings->sections_padding['why_us_section'] ?? 120 }}px;
+        --platform-management-section-inline-padding: {{ $settings->sections_padding['platform_management_section'] ?? 60 }}px;
+        --work-lines-section-inline-padding: {{ $settings->sections_padding['work_lines_section'] ?? 120 }}px;
+        --packages-marketing-section-inline-padding: {{ $settings->sections_padding['packages_marketing_section'] ?? 120 }}px;
+        --dont-worry-hosting-section-inline-padding: {{ $settings->sections_padding['dont_worry_hosting_section'] ?? 60 }}px;
+        --order-your-app-section-inline-padding: {{ $settings->sections_padding['order_your_app_section'] ?? 170 }}px;
+        --categories-programming-section-inline-padding: {{ $settings->sections_padding['categories_programming_section'] ?? 200 }}px;
     }
 </style>

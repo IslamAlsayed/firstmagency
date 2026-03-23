@@ -107,4 +107,9 @@ class WorkUsStepController extends Controller
             ? redirect()->route('dashboard.work-us-step.index')->withSuccess(__('messages.type_updated', ['type' => __('main.work_us_step')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.work_us_step')]));
     }
+
+    public function destroy(WorkUsStep $workUsStep)
+    {
+        return $this->destroyModel($workUsStep, 'work-us-step');
+    }
 }

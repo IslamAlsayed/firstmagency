@@ -99,4 +99,9 @@ class OfficialDomainController extends Controller
             ? redirect()->route('dashboard.official-domains.index')->withSuccess(__('messages.type_updated', ['type' => __('main.official_domain')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.official_domain')]));
     }
+
+    public function destroy(OfficialDomain $officialDomain)
+    {
+        return $this->destroyModel($officialDomain, 'official-domains');
+    }
 }

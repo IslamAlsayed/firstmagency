@@ -91,6 +91,10 @@
     font-family: var(--font-family);
 }
 
+.email {
+    text-transform: lowercase !important;
+}
+
 .container {
     /* width: calc(100% - 200px); */
     width: 1180px;
@@ -380,6 +384,11 @@ html[lang=en] {
     background-position: center center;
     background-size: contain;
     background-repeat: repeat;
+
+    &.blur {
+        transition: 0;
+        z-index: -1;
+    }
 
     &.scrolled {
         background-color: #ffffffc4;
@@ -1366,6 +1375,10 @@ swiper-slide img {
 .section {
     position: relative;
     z-index: 500;
+
+    &.blur {
+        z-index: -1 !important;
+    }
 }
 
 .section .title {
@@ -1458,14 +1471,18 @@ swiper-slide img {
     gap: 10px;
     align-items: center;
     color: var(--dark-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
     border: none;
+
+    &.blur {
+        display: none;
+    }
 
     .headphones {
         padding: 15px;
         cursor: pointer;
         border-radius: 50px;
         background-color: var(--light-color);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
 
         .icon {
             color: var(--main-color);
@@ -1474,8 +1491,10 @@ swiper-slide img {
 
     .fixed-support-content {
         overflow: hidden;
+        font-size: 16px;
         border-radius: 15px;
         background-color: var(--light-color);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
     }
 
     .fixed-support-header {
@@ -1486,7 +1505,6 @@ swiper-slide img {
 
     .fixed-support-body {
         padding: 15px;
-        font-size: 16px;
         border-block: 1px solid var(--color-gray-100);
 
         .fixed-support-title {
@@ -1801,6 +1819,50 @@ footer {
                     color: var(--light-color);
                 }
             }
+        }
+    }
+
+    .fixed-support {
+        width: 270px;
+
+        .fixed-support-content {
+            font-size: 10px;
+        }
+
+        .fixed-support-header,
+        .fixed-support-footer,
+        .fixed-support-body {
+            padding: 10px;
+        }
+
+        #close-fixed-support {
+            font-size: 12px;
+        }
+
+        .fixed-support-footer {
+            font-size: 10px;
+
+            .status {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        & .fixed-support-body {
+            & .fixed-support-list {
+                & .fixed-support-item {
+                    padding: 8px;
+
+                    &:not(:last-child) {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+
+        .headphones {
+            padding: 10px;
+            font-size: 8px;
         }
     }
 }

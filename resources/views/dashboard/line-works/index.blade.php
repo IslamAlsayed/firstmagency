@@ -26,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-cogs mr-2"></i> {{ __('main.line_works') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_line_works_placeholder') }}">
                     <a href="{{ route('dashboard.line-works.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_line_work') }}
@@ -51,13 +50,11 @@
                         </thead>
                         <tbody>
                             @forelse($lineWorks as $lineWork)
-                                <tr id="row-{{ $lineWork->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                    data-active="{{ (int) $lineWork->is_active }}">
+                                <tr id="row-{{ $lineWork->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $lineWork->is_active }}">
                                     <td title="{{ $lineWork->alt_text ?? ($lineWork->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
                                         <div class="relative w-fit">
                                             @if ($lineWork->image && checkExistFile($lineWork->image))
-                                                <img src="{{ asset('storage/' . $lineWork->image) }}"
-                                                    alt="{{ $lineWork->alt_text ?? ($lineWork->translations[app()->getLocale()]['title'] ?? '') }}"
+                                                <img src="{{ asset('storage/' . $lineWork->image) }}" alt="{{ $lineWork->alt_text ?? ($lineWork->translations[app()->getLocale()]['title'] ?? '') }}"
                                                     class="w-[90px] h-[35px] rounded-[9px] shrink-0">
                                             @else
                                                 <i class="fas fa-image text-2xl text-gray-400"></i>
@@ -84,9 +81,9 @@
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">
                                         @if ($lineWork->creator)
-                                            <a href="{{ route('dashboard.users.show', $lineWork->creator->id) }}" class="text-primary hover:underline">
+                                            <a href="{{ route('dashboard.users.show', $lineWork->creator->id) }}" class="text-blue-600 hover:underline">
                                                 {{ $lineWork->creator->name }}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         @else
                                             <span class="text-gray-400 italic">N/A</span>
@@ -98,6 +95,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $lineWork,
                                             'models' => 'line-works',
+                                            'modelClass' => 'line-work',
                                         ])
                                     </td>
                                 </tr>

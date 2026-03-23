@@ -74,9 +74,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
-        $user->delete();
-        return redirect()->route('dashboard.users.index')->withSuccess(__('messages.user_deleted'));
+        return $this->destroyModel($user, 'users');
     }
 
     /**

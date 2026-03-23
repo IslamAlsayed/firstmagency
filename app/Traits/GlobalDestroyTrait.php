@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait GlobalDestroyTrait
 {
     /**
@@ -10,7 +12,33 @@ trait GlobalDestroyTrait
      * @param $id - The ID of the resource to delete
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroyModel(Model $model, $models)
+    {
+        $this->authorize('delete', $model);
+        $deleted = $model->delete();
+
+        if (!$deleted) {
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.' . class_basename($model))]));
+        }
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => __('messages.type_deleted', ['type' => __('main.' . class_basename($model))]),
+            ], 200);
+        }
+
+        return redirect()->route("dashboard.$models.index")->withSuccess(__('messages.type_deleted', ['type' => __('main.' . class_basename($model))]));
+    }
+
+    /**
+     * Delete a resource and return JSON for AJAX or redirect for traditional requests
+     * 
+     * @param $id - The ID of the resource to delete
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function destroy2($id)
     {
         $modelClass = $this->getModelClass();
         $model = $modelClass::find($id);
@@ -37,7 +65,7 @@ trait GlobalDestroyTrait
         ];
 
         // Delete the model
-        $model->delete();
+        // $model->delete();
 
         // Publish Ably event for model deletion (if model has UUID like Ticket)
         if (isset($model->uuid) && method_exists($this, 'publishToAbly')) {

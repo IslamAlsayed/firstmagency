@@ -60,40 +60,8 @@ return new class extends Migration
             $table->string('dark_main_color')->default('#96310E');
 
             $table->boolean('debug_mode')->default(false);
+            $table->json('sections_padding')->nullable();
 
-            $table->string('home_hero_section')->default(200);
-            $table->string('home_services_section')->default(60);
-            $table->string('home_projects_section')->default(20);
-            $table->string('home_reviews_section')->default(60);
-            $table->string('home_clients_section')->default(120);
-            $table->string('about_us_line_works_steps_section')->default(60);
-            $table->string('about_us_partners_section')->default(60);
-            $table->string('portfolio_section')->default(200);
-            $table->string('blog_articles_section')->default(60);
-            $table->string('articles_page_section')->default(200);
-            $table->string('contact_page_section')->default(180);
-            $table->string('website_developer_section')->default(120);
-            $table->string('website_programming_section')->default(200);
-            $table->string('website_design_section')->default(60);
-            $table->string('website_important_articles_section')->default(60);
-            $table->string('faqs_section')->default(60);
-            $table->string('app_developer_hero_section')->default(240);
-            $table->string('app_important_articles_section')->default(100);
-            $table->string('projects_steps_section')->default(60);
-            $table->string('feature_section')->default(200);
-            $table->string('packages_section')->default(120);
-            $table->string('operations_systems_section')->default(60);
-            $table->string('your_domain_section')->default(240);
-            $table->string('pest_domains_section')->default(60);
-            $table->string('why_us_section')->default(120);
-            $table->string('platform_management_section')->default(60);
-            $table->string('work_lines_section')->default(120);
-            $table->string('packages_marketing_section')->default(120);
-            $table->string('dont_worry_hosting_section')->default(60);
-            $table->string('order_your_app_section')->default(170);
-            $table->string('categories_programming_section')->default(200);
-
-            $table->string('website_design_title')->nullable();
             $table->string('website_design_title_ar')->nullable();
             $table->string('website_design_heading')->nullable();
             $table->string('website_design_heading_ar')->nullable();

@@ -26,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-tools mr-2"></i> {{ __('main.dashboards_and_apps') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.dashboards_and_apps')]) }}">
                     <a href="{{ route('dashboard.dashboards-and-systems.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_dashboards_and_app') }}
@@ -78,9 +77,9 @@
                                     <td class="p-4 text-sm font-semibold text-gray-600">{{ $app->order ?? 0 }}</td>
                                     <td class="p-4 text-sm text-gray-600">
                                         @if ($app->creator)
-                                            <a href="{{ route('dashboard.users.show', $app->creator->id) }}" class="text-primary hover:underline">
+                                            <a href="{{ route('dashboard.users.show', $app->creator->id) }}" class="text-blue-600 hover:underline">
                                                 {{ $app->creator->name }}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         @else
                                             <span class="text-gray-400 italic">N/A</span>
@@ -91,6 +90,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $app,
                                             'models' => 'dashboards-and-systems',
+                                            'modelClass' => 'dashboards-and-system',
                                         ])
                                     </td>
                                 </tr>

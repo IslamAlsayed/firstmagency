@@ -105,4 +105,9 @@ class ProgrammingSystemController extends Controller
             ? redirect()->route('dashboard.programming-systems.index')->withSuccess(__('messages.type_updated', ['type' => __('main.programming_system')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.programming_system')]));
     }
+
+    public function destroy(ProgrammingSystem $programmingSystem)
+    {
+        return $this->destroyModel($programmingSystem, 'programming-systems');
+    }
 }

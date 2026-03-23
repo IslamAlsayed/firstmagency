@@ -26,6 +26,7 @@ return [
     'session_expired' => 'Session has expired. Please log in again.',
     'no_photo_available' => 'No photo available.',
     'no_type_available' => 'No :type available.',
+    'no_data_available' => 'No data available.',
     'more' => 'More',
     'less' => 'Less',
 

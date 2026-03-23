@@ -143,4 +143,9 @@ class ArticleController extends Controller
             ? redirect()->route('dashboard.articles.index')->withSuccess(__('messages.type_updated', ['type' => __('main.article')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.article')]));
     }
+
+    public function destroy(Article $article)
+    {
+        return $this->destroyModel($article, 'articles');
+    }
 }

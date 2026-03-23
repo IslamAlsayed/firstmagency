@@ -10,7 +10,7 @@
                 <h1 class="text-xl font-medium leading-none text-mono">
                     {{ $user->name }}
                 </h1>
-                <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
+                <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground email">
                     {{ $user->email }} • {{ $user->phone }}
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             </div>
                         @endif
                         @if ($user->email)
-                            <div>
+                            <div class="email">
                                 <label class="kt-label mb-1">{{ __('main.email') }}</label>
                                 <p class="text-sm text-secondary-foreground">{{ $user->email ?: __('main.na') }}</p>
                             </div>

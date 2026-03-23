@@ -5,7 +5,6 @@ if (! function_exists('getModelForGuard')) {
     {
         return Spatie\Permission\Guard::getModelForGuard($guard);
     }
-
 }
 
 if (! function_exists('setPermissionsTeamId')) {

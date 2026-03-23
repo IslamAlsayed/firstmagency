@@ -2059,6 +2059,7 @@ return [
     'download_backup' => 'Download Backup',
 
     // ==================== User Profile ====================
+    'profile' => 'Profile',
     'my_profile' => 'My Profile',
     'edit_profile' => 'Edit Profile',
     'profile_updated_successfully' => 'Profile updated successfully',

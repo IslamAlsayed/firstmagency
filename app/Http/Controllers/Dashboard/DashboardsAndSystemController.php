@@ -113,4 +113,9 @@ class DashboardsAndSystemController extends Controller
             ? redirect()->route('dashboard.dashboards-and-systems.show', $dashboardsAndSystem->id)->withSuccess(__('messages.type_updated', ['type' => __('main.dashboards_and_app')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.dashboards_and_app')]));
     }
+
+    public function destroy(DashboardsAndSystem $dashboardsAndSystem)
+    {
+        return $this->destroyModel($dashboardsAndSystem, 'dashboards-and-systems');
+    }
 }

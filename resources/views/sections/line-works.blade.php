@@ -9,21 +9,16 @@
     <div class="steps">
         @if (isset($lineWorks) && $lineWorks->count() > 0)
             @foreach ($lineWorks as $lineWork)
-                @php
-                    $locale = app()->getLocale();
-                    $title = $lineWork->translations[$locale]['title'] ?? ($lineWork->translations['ar']['title'] ?? 'Step');
-                    $desc = $lineWork->translations[$locale]['description'] ?? ($lineWork->translations['ar']['description'] ?? '');
-                @endphp
                 <div class="step">
                     <div class="text">
-                        <div class="heading font-semibold">{{ $title }}</div>
-                        <div class="details">{{ $desc }}</div>
+                        <div class="heading font-semibold">{{ $lineWork->translations[app()->getLocale()]['title'] }}</div>
+                        <div class="details">{{ $lineWork->translations[app()->getLocale()]['description'] }}</div>
                     </div>
                     <div class="image">
                         @if ($lineWork->image && checkExistFile($lineWork->image))
-                            <img src="{{ asset('storage/' . $lineWork->image) }}" alt="{{ $title }}" loading="lazy">
+                            <img src="{{ asset('storage/' . $lineWork->image) }}" alt="{{ $lineWork->translations[app()->getLocale()]['title'] }}" loading="lazy">
                         @else
-                            <img src="{{ asset('assets/images/website/line-works/' . $lineWork->order . '.png') }}" alt="{{ $title }}" loading="lazy">
+                            <img src="{{ asset('assets/images/website/line-works/' . $lineWork->order . '.png') }}" alt="{{ $lineWork->translations[app()->getLocale()]['title'] }}" loading="lazy">
                         @endif
                     </div>
                 </div>

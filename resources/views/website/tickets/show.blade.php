@@ -116,7 +116,7 @@
                                         $imagePath = asset('assets/images/avatars/avatar.png');
                                         $alt = __('main.client_icon');
                                     } else {
-                                        $imagePath = $message['user']['photo'] ? $message['user']['photo'] : asset('assets/images/avatars/avatar.png');
+                                        $imagePath = checkExistFile($message['user']['photo']) ? asset('storage/' . $message['user']['photo']) : asset('assets/images/avatars/avatar.png');
                                         $alt = __('main.support_icon');
                                     }
                                 @endphp
@@ -128,7 +128,7 @@
                                 <div class="meta">
                                     <div class="flex items-center gap-2 mb-2">
                                         <span class="who font-semibold">
-                                            {{ $message['sender_type'] == 'customer' ? $ticket->name : $message['user']['name'] ?? __('main.support') }}
+                                            {{ $message['sender_type'] == 'customer' ? $ticket->name : $message['user']['name'] ?? __('main.support_') }}
                                         </span>
                                         <span class="time mt-1">
                                             {{ $message['created_at'] }} - {{ $message['human_readable_date'] }}
@@ -138,7 +138,7 @@
                                     <div class="flex gap-2">
                                         <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message"
                                             style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--main-color)' }};">
-                                            {{ $message['sender_type'] == 'customer' ? __('main.customer') : $message['department']['name'] ?? __('main.support') }}
+                                            {{ $message['sender_type'] == 'customer' ? __('main.customer') : $message['department']['name'] ?? __('main.support_') }}
                                         </span>
                                     </div>
                                 </div>
@@ -154,30 +154,34 @@
                                     @endif
                                 </div>
 
-                                <div class="edit-form" style="display:none;">
-                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">{{ strip_tags($message['message']) }}</textarea>
-                                        <div class="edit-buttons flex gap-2 mt-3">
-                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="{{ $message['id'] }}">
-                                                {{ __('main.save') }}
-                                            </button>
-                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">
-                                                {{ __('main.cancel') }}
-                                            </button>
+                                @if ($message['sender_type'] == 'customer')
+                                    <div class="edit-form" style="display:none;">
+                                        <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                            <textarea class="edit-textarea w-full p-2 border rounded" rows="4">{{ strip_tags($message['message']) }}</textarea>
+                                            <div class="edit-buttons flex gap-2 mt-3">
+                                                <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="{{ $message['id'] }}">
+                                                    {{ __('main.save') }}
+                                                </button>
+                                                <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">
+                                                    {{ __('main.cancel') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="actions {{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'grid' }}">
-                            <button type="button" class="message-edit-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
-                                {{ __('main.edit') }}
-                            </button>
-                            <button type="button" class="message-delete-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
-                                {{ __('main.delete') }}
-                            </button>
-                        </div>
+                        @if ($message['sender_type'] == 'customer')
+                            <div class="actions {{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'grid' }}">
+                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
+                                    {{ __('main.edit') }}
+                                </button>
+                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="{{ $message['id'] }}">
+                                    {{ __('main.delete') }}
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -228,152 +232,151 @@
         // Translation variables for JavaScript
         const translations = {
             customer: '{{ __('main.customer') }}',
-            support: '{{ __('main.support') }}',
+            support: '{{ __('main.support_') }}',
             clientIcon: '{{ __('main.client_icon') }}'
         };
 
         // Initialize Ably for real-time ticket updates
         const ablyKey = '{{ config('app.ably_key') }}';
-        if (typeof Ably === 'undefined' || !ablyKey) {
+        if (typeof Ably == 'undefined' || !ablyKey) {
             console.warn('Ably is not available or ABLY_KEY is missing.');
-            return;
-        }
+        } else {
+            const ticketUpdates = new Ably.Realtime({
+                key: ablyKey,
+                logLevel: 1
+            });
+            window.ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
+            window.dispatchEvent(new CustomEvent('ticket-channel-ready'));
+            const ticketUpdatesChannel = window.ticketUpdatesChannel;
 
-        const ticketUpdates = new Ably.Realtime({
-            key: ablyKey,
-            logLevel: 1
-        });
-        window.ticketUpdatesChannel = ticketUpdates.channels.get('ticket-updates');
-        window.dispatchEvent(new CustomEvent('ticket-channel-ready'));
-        const ticketUpdatesChannel = window.ticketUpdatesChannel;
+            // Subscribe to ticket deletion events
+            ticketUpdatesChannel.subscribe('ticket-deleted', (ablyMessage) => {
+                const deletedData = ablyMessage.data;
 
-        // Subscribe to ticket deletion events
-        ticketUpdatesChannel.subscribe('ticket-deleted', (ablyMessage) => {
-            const deletedData = ablyMessage.data;
-
-            // If the deleted ticket is the current one, redirect user
-            if (deletedData.uuid === '{{ $ticket->uuid }}') {
-                // Show notification
-                if (window.showToast && typeof window.showToast === 'function') {
-                    window.showToast({
-                        type: 'warning',
-                        message: '{{ __('main.ticket_deleted_by_admin') }}'
-                    });
-                }
-
-                // Redirect after 3 seconds
-                setTimeout(() => {
-                    window.location.href = '{{ route('tickets.inquiry') }}';
-                }, 3000);
-            }
-        });
-
-        // Subscribe to new support replies
-        ticketUpdatesChannel.subscribe('new-support-reply', (ablyMessage) => {
-            const messageData = ablyMessage.data;
-            let messagesSection = document.getElementById('messages-section');
-            messagesSection.classList.remove('hidden');
-
-            // Only add message if it belongs to current ticket
-            if (messageData.ticket_uuid === '{{ $ticket->uuid }}') {
-                addNewMessageToPage(messageData);
-            }
-        });
-
-        // Subscribe to message updates
-        ticketUpdatesChannel.subscribe('message-updated', (ablyMessage) => {
-            const messageData = ablyMessage.data;
-            const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
-
-            if (messageElement) {
-                const contentDiv = messageElement.querySelector('.content');
-                if (contentDiv) {
-                    contentDiv.innerHTML = messageData.message;
-                }
-            }
-        });
-
-        // Subscribe to message deletions
-        ticketUpdatesChannel.subscribe('message-deleted', (ablyMessage) => {
-            const messageData = ablyMessage.data;
-            const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
-
-            let messagesSection = document.getElementById('messages-section');
-            if (messagesSection) {
-                const remainingMessages = messagesSection.querySelectorAll('.client');
-                if (remainingMessages.length === 1 && remainingMessages[0].dataset.messageId === messageData.id) {
-                    messagesSection.classList.add('hidden');
-                }
-            }
-
-            if (messageElement) {
-                messageElement.style.opacity = '0.3';
-                messageElement.style.textDecoration = 'line-through';
-                setTimeout(() => messageElement.remove(), 300);
-            }
-        });
-
-        // Subscribe to ticket status updates
-        ticketUpdatesChannel.subscribe('ticket-status-updated', (ablyMessage) => {
-            const updateData = ablyMessage.data;
-
-            // Only update if it belongs to current ticket
-            if (updateData.uuid === '{{ $ticket->uuid }}') {
-                // Update status if field is 'status'
-                if (updateData.field === 'status') {
-                    const statusBadge = document.getElementById('ticket-status-badge');
-                    if (statusBadge) {
-                        // Get the color class based on the new status
-                        const statusColorMap = {
-                            'open': 'bg-yellow-600',
-                            'in_progress': 'bg-blue-600',
-                            'processed': 'bg-violet-600',
-                            'replied': 'bg-green-600',
-                            'closed': 'bg-red-600'
-                        };
-
-                        // Update badge text and color
-                        statusBadge.textContent = updateData.status_label;
-
-                        // Remove all status color classes
-                        statusBadge.className = 'kt-badge text-white rounded-full';
-
-                        // Add the new color class
-                        const newColorClass = statusColorMap[updateData.new_status] || 'bg-gray-600';
-                        statusBadge.classList.add(newColorClass);
-                    }
-
-                    // Get all reply forms
-                    const replyForms = document.querySelectorAll('.tickets-message-form');
-                    replyForms.forEach(form => {
-                        form.closest('article').classList.toggle('hidden');
-                    });
-
-                    // Get all action buttons (edit/delete) for messages
-                    const messageActions = document.querySelectorAll('.client .actions');
-                    messageActions.forEach(actions => {
-                        actions.classList.toggle('hidden');
-                    });
-                }
-
-                // Update department if field is 'department.id'
-                if (updateData.field === 'department.id') {
-                    const departmentElement = document.getElementById('ticket-department');
-                    if (departmentElement) {
-                        departmentElement.textContent = updateData.status_label;
-                        departmentElement.style.backgroundColor = updateData.department.bg_color || '#f3f4f6';
-                    }
-
-                    // Show success message
-                    if (window.showToast && typeof window.showToast === 'function') {
+                // If the deleted ticket is the current one, redirect user
+                if (deletedData.uuid == '{{ $ticket->uuid }}') {
+                    // Show notification
+                    if (window.showToast && typeof window.showToast == 'function') {
                         window.showToast({
-                            type: 'success',
-                            message: '{{ __('main.ticket_transferred', ['department' => ':department']) }}'.replace(':department', updateData.status_label)
+                            type: 'warning',
+                            message: '{{ __('main.ticket_deleted_by_admin') }}'
                         });
                     }
+
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = '{{ route('tickets.inquiry') }}';
+                    }, 3000);
                 }
-            }
-        });
+            });
+
+            // Subscribe to new support replies
+            ticketUpdatesChannel.subscribe('new-support-reply', (ablyMessage) => {
+                const messageData = ablyMessage.data;
+                let messagesSection = document.getElementById('messages-section');
+                messagesSection.classList.remove('hidden');
+
+                // Only add message if it belongs to current ticket
+                if (messageData.ticket_uuid == '{{ $ticket->uuid }}') {
+                    addNewMessageToPage(messageData);
+                }
+            });
+
+            // Subscribe to message updates
+            ticketUpdatesChannel.subscribe('message-updated', (ablyMessage) => {
+                const messageData = ablyMessage.data;
+                const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
+
+                if (messageElement) {
+                    const contentDiv = messageElement.querySelector('.content');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = messageData.message;
+                    }
+                }
+            });
+
+            // Subscribe to message deletions
+            ticketUpdatesChannel.subscribe('message-deleted', (ablyMessage) => {
+                const messageData = ablyMessage.data;
+                const messageElement = document.querySelector(`[data-message-id="${messageData.id}"]`);
+
+                let messagesSection = document.getElementById('messages-section');
+                if (messagesSection) {
+                    const remainingMessages = messagesSection.querySelectorAll('.client');
+                    if (remainingMessages.length == 1 && remainingMessages[0].dataset.messageId == messageData.id) {
+                        messagesSection.classList.add('hidden');
+                    }
+                }
+
+                if (messageElement) {
+                    messageElement.style.opacity = '0.3';
+                    messageElement.style.textDecoration = 'line-through';
+                    setTimeout(() => messageElement.remove(), 300);
+                }
+            });
+
+            // Subscribe to ticket status updates
+            ticketUpdatesChannel.subscribe('ticket-status-updated', (ablyMessage) => {
+                const updateData = ablyMessage.data;
+
+                // Only update if it belongs to current ticket
+                if (updateData.uuid == '{{ $ticket->uuid }}') {
+                    // Update status if field is 'status'
+                    if (updateData.field == 'status') {
+                        const statusBadge = document.getElementById('ticket-status-badge');
+                        if (statusBadge) {
+                            // Get the color class based on the new status
+                            const statusColorMap = {
+                                'open': 'bg-yellow-600',
+                                'in_progress': 'bg-blue-600',
+                                'processed': 'bg-violet-600',
+                                'replied': 'bg-green-600',
+                                'closed': 'bg-red-600'
+                            };
+
+                            // Update badge text and color
+                            statusBadge.textContent = updateData.status_label;
+
+                            // Remove all status color classes
+                            statusBadge.className = 'kt-badge text-white rounded-full';
+
+                            // Add the new color class
+                            const newColorClass = statusColorMap[updateData.new_status] || 'bg-gray-600';
+                            statusBadge.classList.add(newColorClass);
+                        }
+
+                        // Get all reply forms
+                        const replyForms = document.querySelectorAll('.tickets-message-form');
+                        replyForms.forEach(form => {
+                            form.closest('article').classList.toggle('hidden');
+                        });
+
+                        // Get all action buttons (edit/delete) for messages
+                        const messageActions = document.querySelectorAll('.client .actions');
+                        messageActions.forEach(actions => {
+                            actions.classList.toggle('hidden');
+                        });
+                    }
+
+                    // Update department if field is 'department.id'
+                    if (updateData.field == 'department.id') {
+                        const departmentElement = document.getElementById('ticket-department');
+                        if (departmentElement) {
+                            departmentElement.textContent = updateData.status_label;
+                            departmentElement.style.backgroundColor = updateData.department.bg_color || '#f3f4f6';
+                        }
+
+                        // Show success message
+                        if (window.showToast && typeof window.showToast == 'function') {
+                            window.showToast({
+                                type: 'success',
+                                message: '{{ __('main.ticket_transferred', ['department' => ':department']) }}'.replace(':department', updateData.status_label)
+                            });
+                        }
+                    }
+                }
+            });
+        }
 
         /**
          * Add new message to the messages container without page reload
@@ -384,28 +387,29 @@
 
             // Current locale for border direction
             const locale = '{{ app()->getLocale() }}';
-            const borderDirection = locale === 'ar' ? 'left' : 'right';
+            const borderDirection = locale == 'ar' ? 'left' : 'right';
 
-            const isCustomer = messageData.sender_type === 'customer';
+            const isCustomer = messageData.sender_type == 'customer';
 
             // User & Department
             const user = messageData.user ?? {};
             const department = messageData.department ?? {};
 
             // Photo
-            const photoUrl = isCustomer ? '{{ asset('assets/images/avatars/avatar.png') }}' : user.photo || '{{ asset('assets/images/avatars/avatar.png') }}';
+            // const photoUrl = isCustomer ? '{{ asset('assets/images/avatars/avatar.png') }}' : user.photo || '{{ asset('assets/images/avatars/avatar.png') }}';
+            const photoUrl = isCustomer ? '{{ asset('assets/images/avatars/avatar.png') }}' : user.photo ?? '{{ asset('assets/images/avatars/avatar.png') }}';
 
             // Display Name
-            const displayName = isCustomer ? messageData.customer_name || '{{ __('main.customer') }}' : user.name || '{{ __('main.support') }}';
+            const displayName = isCustomer ? messageData.customer_name || '{{ __('main.customer') }}' : user.name || '{{ __('main.support_') }}';
 
             // Sender Label
-            const senderLabel = isCustomer ? '{{ __('main.customer') }}' : department.name || '{{ __('main.support') }}';
+            const senderLabel = isCustomer ? '{{ __('main.customer') }}' : department.name || '{{ __('main.support_') }}';
 
             // Styling
             const backgroundColor = `background-color: ${department.bg_color || "#f3f4f6"};`;
-            const borderColor = `border: 1px solid ${department.border_color || "#d1d5db"};`;
-            const borderMainColor = `border-${borderDirection}: 4px solid ${department.border_main_color || "#9ca3af"};`;
-            const badgeColor = `background-color: ${department.badge_color || "#1e40af"}; color: var(--light-color);`;
+            const borderColor = `border: 1px solid ${department.border_color || "var(--main-color)"};`;
+            const borderMainColor = `border-${borderDirection}: 4px solid ${department.border_main_color || "var(--main-color)"};`;
+            const badgeColor = `background-color: ${department.badge_color || "var(--main-color)"}; color: var(--light-color);`;
             const ticketStatus = '{{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'grid' }}';
 
             // Create message HTML
@@ -433,38 +437,40 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                                                                            <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                                                                <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                                                                {{ __('main.attachment') }}
-                                                                                                                                                            </div>`).join('')
+                                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                                            {{ __('main.attachment') }}
+                                                                                                                                        </div>`).join('')
                                     : ''
                                 }
                             </div>
 
-                            <div class="edit-form" style="display:none;">
-                                <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                    <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                    <div class="edit-buttons flex gap-2 mt-3">
-                                        <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                        <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                    </div>
-                                </div>
+                ${isCustomer ? `
+                                <div class="edit-form" style="display:none;">
+                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                        <div class="edit-buttons flex gap-2 mt-3">
+                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                            </div>
+                                            </div>
+                                            </div>` : ''}
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="actions ${ticketStatus}">
-                        <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                        <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                    </div>
-                </div>
+                            </div>
+                            
+                            ${isCustomer ? `
+                                            <div class="actions ${ticketStatus}">
+                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                            </div>
+                                        </div>` : ''}
                 `;
 
             // Append message
             messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
 
             // Rebind handlers if needed
-            if (typeof rebindMessageHandlers === 'function') rebindMessageHandlers();
+            if (typeof rebindMessageHandlers == 'function') rebindMessageHandlers();
 
             // Scroll smoothly
             setTimeout(() => {

@@ -107,4 +107,9 @@ class LineWorkController extends Controller
             ? redirect()->route('dashboard.line-works.index')->withSuccess(__('messages.type_updated', ['type' => __('main.line_work')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.line_work')]));
     }
+
+    public function destroy(LineWork $lineWork)
+    {
+        return $this->destroyModel($lineWork, 'line-works');
+    }
 }

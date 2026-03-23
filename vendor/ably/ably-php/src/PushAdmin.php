@@ -1,7 +1,9 @@
 <?php
+
 namespace Ably;
 
-class PushAdmin {
+class PushAdmin
+{
 
     private $ably;
     public $deviceRegistrations;
@@ -11,23 +13,24 @@ class PushAdmin {
      * Constructor
      * @param AblyRest $ably Ably API instance
      */
-    public function __construct( AblyRest $ably ) {
+    public function __construct(AblyRest $ably)
+    {
         $this->ably = $ably;
-        $this->deviceRegistrations = new PushDeviceRegistrations( $ably );
-        $this->channelSubscriptions = new PushChannelSubscriptions ( $ably );
+        $this->deviceRegistrations = new PushDeviceRegistrations($ably);
+        $this->channelSubscriptions = new PushChannelSubscriptions($ably);
     }
 
-    public function publish ( array $recipient, array $data, $returnHeaders = false ) {
-        if ( empty($recipient) ) {
+    public function publish(array $recipient, array $data, $returnHeaders = false)
+    {
+        if (empty($recipient)) {
             throw new \InvalidArgumentException('recipient is empty');
         }
 
-        if ( empty($data) ) {
+        if (empty($data)) {
             throw new \InvalidArgumentException('data is empty');
         }
 
-        $params = array_merge( $data, [ 'recipient' => $recipient ] );
-        $this->ably->post( '/push/publish', [], $params, $returnHeaders );
+        $params = array_merge($data, ['recipient' => $recipient]);
+        $this->ably->post('/push/publish', [], $params, $returnHeaders);
     }
-
 }

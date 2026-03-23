@@ -49,40 +49,42 @@
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.email') }}</p>
                             <p class="font-semibold text-gray-800">
-                                <a href="mailto:{{ $ticket->email }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                <a href="mailto:{{ $ticket->email }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                     {!! limitedText($ticket->email ?? '--', 30) !!}
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                 </a>
                             </p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.phone') }}</p>
                             <p class="font-semibold text-gray-800">
-                                <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                     {!! limitedText($ticket->phone ?? '--', 30) !!}
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                 </a>
                             </p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.status') }}
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
+                            </p>
+                            <div class="flex gap-2">
+                                @include('dashboard.components.status-actions', [
+                                    'record' => $ticket,
+                                    'models' => 'tickets',
+                                    'modelClass' => 'ticket',
+                                    'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
+                                ])
+                                <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }}">
                                     {{ __('main.' . $ticket->status) }}
                                 </span>
-                            </p>
-                            @include('dashboard.components.status-actions', [
-                                'record' => $ticket,
-                                'models' => 'tickets',
-                                'modelClass' => 'ticket',
-                                'availableOptions' => array_column(\App\Enum\TicketEnums::cases(), 'value'),
-                            ])
+                            </div>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 mb-2">{{ __('main.priority') }}</p>
                             <p class="text-sm text-secondary-foreground">
                                 <span
-                                    class="px-3 py-1 rounded-full font-semibold
+                                    class="kt-badge font-semibold
                                     @if ($ticket->priority === 'low') bg-gray-100 text-gray-800
                                     @elseif($ticket->priority === 'medium') bg-yellow-100 text-yellow-800
                                     @elseif($ticket->priority === 'high') bg-orange-100 text-orange-800
@@ -94,25 +96,18 @@
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.department') }}
-
+                            </p>
+                            <div class="flex gap-2">
+                                @include('dashboard.components.department-actions', [
+                                    'record' => $ticket,
+                                    'models' => 'tickets',
+                                    'modelClass' => 'ticket',
+                                    'availableOptions' => $departments->pluck('name', 'id')->toArray(),
+                                ])
                                 <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
                                     {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
                                 </span>
-                            </p>
-                            @include('dashboard.components.department-actions', [
-                                'record' => $ticket,
-                                'models' => 'tickets',
-                                'modelClass' => 'ticket',
-                                'availableOptions' => $departments->pluck('name', 'id')->toArray(),
-                            ])
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.created_at') }}</p>
-                            <p class="text-sm text-gray-800">{{ $ticket->created_at?->format('d/m/Y H:i') }}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">{{ __('main.updated_at') }}</p>
-                            <p class="text-sm text-gray-800">{{ $ticket->updated_at?->format('d/m/Y H:i') }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

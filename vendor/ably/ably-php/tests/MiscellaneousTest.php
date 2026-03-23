@@ -10,7 +10,8 @@ require_once __DIR__ . '/factories/TestApp.php';
 class MiscellaneousTest extends \PHPUnit\Framework\TestCase
 {
 
-    public function testDeepConvertObjectToArrayFromObject(){
+    public function testDeepConvertObjectToArrayFromObject()
+    {
         $msg = new Message();
         $msg_nested = new Message();
         $msg_nested->data = $msg;
@@ -48,11 +49,10 @@ class MiscellaneousTest extends \PHPUnit\Framework\TestCase
         $this->AssertArrayHasKey("timestamp", $msg_nested["data"], "Expected msg_nested['data'] to be an array containing key `data`");
         $this->AssertArrayHasKey("originalData", $msg_nested["data"], "Expected msg_nested['data'] to be an array containing key `data`");
         $this->AssertArrayHasKey("originalEncoding", $msg_nested["data"], "Expected msg_nested['data'] to be an array containing key `data`");
-
-
     }
 
-    public function testDeepConvertObjectToArrayFromArray(){
+    public function testDeepConvertObjectToArrayFromArray()
+    {
         $object = new Message();
         $array_test = [
             "name" => "test",
@@ -83,8 +83,5 @@ class MiscellaneousTest extends \PHPUnit\Framework\TestCase
         $this->AssertArrayHasKey("timestamp", $array_test["object"], "Expected msg_nested['data'] to be an array containing key `data`");
         $this->AssertArrayHasKey("originalData", $array_test["object"], "Expected msg_nested['data'] to be an array containing key `data`");
         $this->AssertArrayHasKey("originalEncoding", $array_test["object"], "Expected msg_nested['data'] to be an array containing key `data`");
-
-
     }
-
 }

@@ -23,16 +23,16 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }}</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="name" name="name" value="{{ old('name', $user->name) }}">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name"
+                                value="{{ old('name', $user->name) }}">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.email') }}</label>
-                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="email" name="email" value="{{ old('email', $user->email) }}">
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email" name="email"
+                                value="{{ old('email', $user->email) }}">
                             @error('email')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -53,16 +53,16 @@
                         </div>
                         <div>
                             <label for="mobile" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.mobile') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="mobile" name="mobile" value="{{ old('mobile', $user->mobile) }}">
+                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="mobile" name="mobile"
+                                value="{{ old('mobile', $user->mobile) }}">
                             @error('mobile')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.phone') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="phone" name="phone" value="{{ old('phone', $user->phone) }}">
+                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="phone" name="phone"
+                                value="{{ old('phone', $user->phone) }}">
                             @error('phone')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror

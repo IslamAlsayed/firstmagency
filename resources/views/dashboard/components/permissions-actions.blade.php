@@ -16,7 +16,7 @@
             @include('dashboard.components.delete-form', ['id' => $record->id, 'model' => 'dashboard.' . $models])
         @endif
         @if (getActiveUser()->can($models . '-force-delete'))
-            @include('dashboard.components.force-delete-form', ['id' => $record->id, 'model' => 'dashboard.' . $models])
+            @include('dashboard.components.force-delete-form', ['id' => $record->id, 'modelClass' => $modelClass])
         @endif
     @endif
 </div>

@@ -97,4 +97,9 @@ class ProjectStepController extends Controller
             ? redirect()->route('dashboard.project-steps.show', $projectStep->id)->withSuccess(__('messages.type_updated', ['type' => __('main.project_step')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.project_step')]));
     }
+
+    public function destroy(ProjectStep $projectStep)
+    {
+        return $this->destroyModel($projectStep, 'project-steps');
+    }
 }

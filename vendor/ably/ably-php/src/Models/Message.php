@@ -1,7 +1,9 @@
 <?php
+
 namespace Ably\Models;
 
-class Message extends BaseMessage {
+class Message extends BaseMessage
+{
 
     /**
      * @var string|null The event name of the message.
@@ -14,18 +16,18 @@ class Message extends BaseMessage {
      */
     public $connectionKey;
 
-    protected function encode() {
+    protected function encode()
+    {
         $msg = parent::encode();
 
-        if ( isset( $this->name ) && $this->name ) {
+        if (isset($this->name) && $this->name) {
             $msg->name = $this->name;
         }
 
-        if ( isset( $this->connectionKey ) && $this->connectionKey ) {
+        if (isset($this->connectionKey) && $this->connectionKey) {
             $msg->connectionKey = $this->connectionKey;
         }
 
         return $msg;
     }
-
 }

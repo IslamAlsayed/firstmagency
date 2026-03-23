@@ -33,7 +33,6 @@
         background: var(--orange-color);
         transform: translateX(-50%);
     }
-
 }
 
 .timeline .timeline-item {
@@ -383,6 +382,22 @@ html[lang=en] {
         margin-bottom: 30px;
         color: var(--muted-color);
     }
+
+    .timeline .timeline-item .timeline-icon {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        min-height: 70px;
+
+        &:after {
+            border-width: 5px;
+        }
+
+        & i,
+        & svg {
+            font-size: 20px;
+        }
+    }
 }
 
 @media(max-width: 768px) {
@@ -406,6 +421,58 @@ html[lang=en] {
 }
 
 @media(max-width: 425px) {
+    .project-steps {
+        padding: 50px var(--inline-padding);
+    }
+
+    .timeline {
+        &:before {
+            width: 3px;
+        }
+    }
+
+    .timeline .timeline-item {
+        gap: 0;
+        margin-bottom: 50px;
+    }
+
+    .timeline .timeline-item .timeline-icon {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
+        margin: 0;
+
+        &:after {
+            border-width: 3px;
+        }
+
+        & i,
+        & svg {
+            font-size: 12px;
+        }
+    }
+
+    .timeline .timeline-item .step-label .label,
+    .timeline .timeline-item .timeline-content {
+        border-radius: 7px;
+    }
+
+    .timeline .timeline-item .step-label .label {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .timeline .timeline-item {
+        &>div:first-child {
+            margin-block: 10px;
+        }
+
+        &>div:nth-child(2) {
+            order: -1;
+        }
+    }
+
     .faqs-section {
         &>.title {
             font-size: 12px;

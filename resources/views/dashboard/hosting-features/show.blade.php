@@ -49,7 +49,7 @@
                                 @if ($hostingFeature->creator)
                                     <a href="{{ route('dashboard.users.show', $hostingFeature->creator->id) }}" class="text-primary hover:underline">
                                         {{ $hostingFeature->creator->name }}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                     </a>
                                 @else
                                     <span class="text-gray-400 italic">N/A</span>

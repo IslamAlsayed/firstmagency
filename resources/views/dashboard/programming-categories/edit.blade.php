@@ -14,13 +14,13 @@
         </div>
 
         <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.programming-categories.update', $ourProgramming->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.programming-categories.update', $programmingCategory->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="grid gap-6">
                     <!-- Image Upload -->
                     <div class="grid grid-cols-1 gap-6">
-                        @include('dashboard.components.photo', ['column' => 'image', 'record' => $ourProgramming])
+                        @include('dashboard.components.photo', ['column' => 'image', 'record' => $programmingCategory])
                     </div>
 
                     <!-- Alt Text & Order -->
@@ -29,7 +29,7 @@
                             <label for="alt_text" class="mb-2 block text-sm font-semibold text-gray-700">
                                 {{ __('main.alt_text') }}
                             </label>
-                            <input type="text" id="alt_text" name="alt_text" value="{{ old('alt_text', $ourProgramming->alt_text) }}"
+                            <input type="text" id="alt_text" name="alt_text" value="{{ old('alt_text', $programmingCategory->alt_text) }}"
                                 class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('alt_text') border-red-500 @enderror"
                                 placeholder="{{ __('main.alt_text') }}">
                             @error('alt_text')
@@ -41,7 +41,7 @@
                             <label for="order" class="mb-2 block text-sm font-semibold text-gray-700">
                                 {{ __('main.order') }}
                             </label>
-                            <input type="number" id="order" name="order" value="{{ old('order', $ourProgramming->order) }}" min="0"
+                            <input type="number" id="order" name="order" value="{{ old('order', $programmingCategory->order) }}" min="0"
                                 class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                 'name' => 'is_active',
                                 'id' => 'is_active',
                                 'value' => '1',
-                                'checked' => $ourProgramming->is_active,
+                                'checked' => $programmingCategory->is_active,
                                 'label' => __('main.active'),
                             ])
                         </div>

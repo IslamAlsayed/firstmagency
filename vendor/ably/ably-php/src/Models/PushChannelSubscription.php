@@ -1,8 +1,10 @@
 <?php
+
 namespace Ably\Models;
 
 
-class PushChannelSubscription extends BaseOptions {
+class PushChannelSubscription extends BaseOptions
+{
 
     /**
      * @var string
@@ -19,8 +21,9 @@ class PushChannelSubscription extends BaseOptions {
      */
     public $channel;
 
-    public function __construct( array $options = [] ) {
-        parent::__construct( $options );
+    public function __construct(array $options = [])
+    {
+        parent::__construct($options);
 
         if ($this->deviceId && $this->clientId) {
             throw new \InvalidArgumentException(
@@ -28,5 +31,4 @@ class PushChannelSubscription extends BaseOptions {
             );
         }
     }
-
 }

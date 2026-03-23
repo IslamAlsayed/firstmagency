@@ -98,4 +98,9 @@ class PlatformManagementController extends Controller
             ? redirect()->route('dashboard.platform-management.index')->withSuccess(__('messages.type_updated', ['type' => __('main.platform_management')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.platform_management')]));
     }
+
+    public function destroy(PlatformManagement $platformManagement)
+    {
+        return $this->destroyModel($platformManagement, 'platform-management');
+    }
 }

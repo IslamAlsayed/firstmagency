@@ -107,4 +107,9 @@ class WhyUsController extends Controller
             ? redirect()->route('dashboard.why-us.index')->withSuccess(__('messages.type_updated', ['type' => __('main.why_us')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.why_us')]));
     }
+
+    public function destroy(WhyUs $whyUs)
+    {
+        return $this->destroyModel($whyUs, 'why-us');
+    }
 }

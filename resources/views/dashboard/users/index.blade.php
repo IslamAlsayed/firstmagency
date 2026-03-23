@@ -36,10 +36,14 @@
                                 <tr id="row-{{ $user->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition">
                                     <td title="{{ $user->name }}">
                                         <div class="relative w-fit">
-                                            @if ($user->photo)
-                                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                            @if ($user->photo && checkExistFile($user->photo))
+                                                <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
                                             @else
-                                                <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                                @if ($user->photo)
+                                                    <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                                @else
+                                                    <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                                @endif
                                             @endif
                                             @if (isset($models) && $models && $models == 'users')
                                                 <span class="real-active {{ $user->user_status == 'online' ? 'active heartbeat' : '' }} user-heartbeat-{{ $user->id }}"></span>
@@ -47,14 +51,14 @@
                                         </div>
                                     </td>
                                     <td class="p-4 text-sm text-gray-800">{{ $user->name }}</td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $user->email }}</td>
+                                    <td class="p-4 text-sm text-gray-600 email">{{ $user->email }}</td>
                                     <td class="p-4 text-sm">
                                         <span
                                             class="px-3 py-1 rounded-full text-xs font-semibold
                                         @if ($user->isSuperAdmin()) bg-red-100 text-red-800
                                         @elseif($user->isAdmin()) bg-yellow-100 text-yellow-800
                                         @else bg-blue-100 text-blue-800 @endif">
-                                            {{ $user->role }}
+                                            {{ __('main.' . $user->role) }}
                                         </span>
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">{{ $user->created_at->format('d/m/Y') }}</td>
@@ -70,6 +74,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $user,
                                             'models' => 'users',
+                                            'modelClass' => 'user',
                                         ])
                                     </td>
                                 </tr>
@@ -82,58 +87,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="layout hidden" id="layout">
-        <!-- مودال إضافة مستخدم -->
-        <div class="modal fade hidden rounded-[9px]" id="addUserModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header flex items-center justify-between gap-4 p-4 border-b border-gray-200">
-                        <h5 class="modal-title font-semibold text-gray-800">{{ __('main.add_new_user') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <form method="POST" action="{{ route('dashboard.users.store') ?? '#' }}">
-                        @csrf
-                        <div class="modal-body p-4 space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.name') }}</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.email') }}</label>
-                                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email" name="email"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.password') }}</label>
-                                <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password" name="password"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role') }}</label>
-                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="role" name="role" required>
-                                    <option value="content_manager">{{ __('main.content_manager') }}</option>
-                                    <option value="admin">{{ __('main.admin') }}</option>
-                                    <option value="superadmin">{{ __('main.super_admin') }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer bg-gray-50 border-t border-gray-200 p-4 flex justify-end gap-3">
-                            <button type="button" class="px-4 py-2 bg-danger text-white cursor-pointer rounded-lg text-sm font-medium" data-bs-dismiss="modal">
-                                <i class="fas fa-times mr-2"></i>
-                                إلغاء
-                            </button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-white cursor-pointer rounded-lg text-sm font-medium">
-                                <i class="fas fa-plus mr-2"></i>
-                                إضافة
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

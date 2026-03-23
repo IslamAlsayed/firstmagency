@@ -2,6 +2,20 @@
 
 @section('title', __('main.my_profile'))
 
+@push('styles')
+    <style>
+        .profileEditApp {
+            width: 70%;
+        }
+
+        @media (max-width: 768px) {
+            .profileEditApp {
+                width: 100%;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-12">
         <!-- Header -->
@@ -11,30 +25,34 @@
         </div>
 
         <!-- Main Content Grid -->
-        <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="flex flex-col gap-6 profileEditApp">
             <!-- Sidebar - Profile Photo & Quick Actions -->
-            <div class="lg:col-span-1">
+            <div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <!-- Profile Photo -->
                     <div class="px-6 pb-6 pt-0">
                         <!-- Avatar -->
                         <div class="flex flex-col items-center -mt-12 mb-4">
-                            @if ($user->photo)
-                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover">
+                            @if ($user->photo && checkExistFile($user->photo))
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover">
                             @else
-                                <div class="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-300 flex items-center justify-center">
-                                    <i class="fas fa-user text-3xl text-gray-600"></i>
-                                </div>
+                                @if ($user->photo)
+                                    <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover">
+                                @else
+                                    <div class="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-300 flex items-center justify-center">
+                                        <i class="fas fa-user text-3xl text-gray-600"></i>
+                                    </div>
+                                @endif
                             @endif
                         </div>
 
                         <!-- User Info -->
                         <div class="text-center mb-6">
                             <h2 class="text-2xl font-bold text-gray-900">{{ $user->name }}</h2>
-                            <p class="text-gray-600 mt-1">{{ $user->email }}</p>
+                            <p class="text-gray-600 mt-1 email">{{ $user->email }}</p>
                             <div class="mt-3">
                                 <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
-                                    {{ ucfirst(str_replace('_', ' ', $user->role)) }}
+                                    {{ __('main.' . strtolower($user->role)) }}
                                 </span>
                             </div>
                         </div>
@@ -43,12 +61,16 @@
                         <div class="space-y-3 mb-6 pb-6 border-b border-gray-200">
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-gray-600">{{ __('main.join_date') }}:</span>
-                                <span class="font-medium text-gray-900">{{ $user->created_at->format('M d, Y') }}</span>
+                                <span class="font-medium text-gray-900">
+                                    {{ $user->created_at->diffForHumans() }} -
+                                    {{ $user->created_at->format('M d, Y') }}
+                                </span>
                             </div>
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-gray-600">{{ __('main.last_login') }}:</span>
                                 <span class="font-medium text-gray-900">
                                     @if ($user->last_login_at)
+                                        {{ $user->last_login_at->diffForHumans() }} -
                                         {{ $user->last_login_at->format('M d, Y H:i') }}
                                     @else
                                         <span class="text-gray-400">{{ __('main.never') }}</span>
@@ -75,7 +97,7 @@
             </div>
 
             <!-- Main Content - Profile Details -->
-            <div class="lg:col-span-2">
+            <div>
                 <!-- Personal Information Card -->
                 <div class="bg-gray-100 rounded-lg shadow-lg p-6 mb-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-4 ">
@@ -87,13 +109,18 @@
                         <!-- Name -->
                         <div class="bg-gray-200 p-4 rounded-sm">
                             <label class="text-sm font-medium text-gray-700">{{ __('main.name') }}</label>
-                            <p class="mt-2 text-gray-900 font-medium">{{ $user->name }}</p>
+                            <p class="mt-2 text-gray-900 font-medium">{{ ucfirst($user->name ?? '--') }}</p>
                         </div>
 
                         <!-- Email -->
                         <div class="bg-gray-200 p-4 rounded-sm">
                             <label class="text-sm font-medium text-gray-700">{{ __('main.email') }}</label>
-                            <p class="mt-2 text-gray-900 font-medium">{{ $user->email }}</p>
+                            <p class="mt-2 text-gray-900 font-medium">
+                                <a href="mailto:{{ $user->email }}" target="_blank" class="inline-block text-blue-600 hover:underline font-medium">
+                                    {!! limitedText($user->email ?? '--', 30) !!}
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                </a>
+                            </p>
                         </div>
 
                         <!-- Phone -->
@@ -101,7 +128,10 @@
                             <label class="text-sm font-medium text-gray-700">{{ __('main.phone') }}</label>
                             <p class="mt-2 text-gray-900 font-medium">
                                 @if ($user->phone)
-                                    {{ $user->phone }}
+                                    <a href="tel:{{ $user->phone }}" target="_blank" class="inline-block text-blue-600 hover:underline font-medium">
+                                        {!! limitedText($user->phone ?? '--', 30) !!}
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    </a>
                                 @else
                                     <span class="text-gray-400 italic">{{ __('main.not_provided') }}</span>
                                 @endif
@@ -113,7 +143,10 @@
                             <label class="text-sm font-medium text-gray-700">{{ __('main.mobile') }}</label>
                             <p class="mt-2 text-gray-900 font-medium">
                                 @if ($user->mobile)
-                                    {{ $user->mobile }}
+                                    <a href="tel:{{ $user->mobile }}" target="_blank" class="inline-block text-blue-600 hover:underline font-medium">
+                                        {!! limitedText($user->mobile ?? '--', 30) !!}
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    </a>
                                 @else
                                     <span class="text-gray-400 italic">{{ __('main.not_provided') }}</span>
                                 @endif
@@ -126,7 +159,7 @@
                         <label class="text-sm font-medium text-gray-700">{{ __('main.address') }}</label>
                         <p class="mt-2 text-gray-900 font-medium">
                             @if ($user->address)
-                                {{ $user->address }}
+                                {!! $user->address !!}
                             @else
                                 <span class="text-gray-400 italic">{{ __('main.not_provided') }}</span>
                             @endif
@@ -175,7 +208,7 @@
                                 <p class="font-medium text-gray-900">{{ __('main.change_password') }}</p>
                                 <p class="text-sm text-gray-600">{{ __('main.update_your_password') }}</p>
                             </div>
-                            <a href="{{ route('password.request') }}" class="px-4 py-2 text-indigo-600 font-medium hover:text-indigo-700 transition">
+                            <a href="{{ route('dashboard.profile.edit') . '#forget-password' }}" class="px-4 py-2 text-indigo-600 font-medium hover:text-indigo-700 transition">
                                 {{ __('main.change') }}
                             </a>
                         </div>
@@ -187,16 +220,12 @@
                                 <p class="text-sm text-gray-600">{{ __('main.select_your_preferred_language') }}</p>
                             </div>
                             <div class="flex gap-2">
-                                <a href="{{ route('locale.change', 'ar') }}"
-                                    class="px-3 py-1 rounded text-sm font-medium transition 
-                                   {{ app()->getLocale() === 'ar' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }}">
-                                    العربية
-                                </a>
-                                <a href="{{ route('locale.change', 'en') }}"
-                                    class="px-3 py-1 rounded text-sm font-medium transition 
-                                   {{ app()->getLocale() === 'en' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }}">
-                                    English
-                                </a>
+                                @foreach (config('languages') as $lang => $language)
+                                    <a href="{{ route('locale.change', $lang) }}"
+                                        class="px-3 py-1 rounded text-sm font-medium transition {{ app()->getLocale() === $lang ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }}">
+                                        {{ app()->getLocale() == 'ar' ? $language['name_ar'] : $language['name'] }}
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -133,4 +133,9 @@ class MarketingPackageController extends Controller
             ? redirect()->route('dashboard.marketing-packages.index')->withSuccess(__('messages.type_updated', ['type' => __('main.marketing_package')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.marketing_package')]));
     }
+
+    public function destroy(MarketingPackage $marketingPackage)
+    {
+        return $this->destroyModel($marketingPackage, 'marketing-packages');
+    }
 }

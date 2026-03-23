@@ -181,4 +181,9 @@ class DepartmentController extends Controller
 
         return redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.department')]));
     }
+
+    public function destroy(Department $department)
+    {
+        return $this->destroyModel($department, 'departments');
+    }
 }

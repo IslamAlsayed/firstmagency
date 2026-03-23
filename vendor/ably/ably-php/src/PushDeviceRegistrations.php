@@ -1,10 +1,12 @@
 <?php
+
 namespace Ably;
 
 use Ably\Models\DeviceDetails;
 use Ably\Models\PaginatedResult;
 
-class PushDeviceRegistrations {
+class PushDeviceRegistrations
+{
 
     private $ably;
 
@@ -12,7 +14,8 @@ class PushDeviceRegistrations {
      * Constructor
      * @param AblyRest $ably Ably API instance
      */
-    public function __construct( AblyRest $ably ) {
+    public function __construct(AblyRest $ably)
+    {
         $this->ably = $ably;
     }
 
@@ -21,13 +24,14 @@ class PushDeviceRegistrations {
      *
      * @param array $device an array with the device information
      */
-    public function save ( $device ) {
-        $deviceDetails = new DeviceDetails( $device );
+    public function save($device)
+    {
+        $deviceDetails = new DeviceDetails($device);
         $path = '/push/deviceRegistrations/' . $deviceDetails->id;
         $params = $deviceDetails->toArray();
-        $body = $this->ably->put( $path, [], $params );
+        $body = $this->ably->put($path, [], $params);
         $body = json_decode(json_encode($body), true); // Convert stdClass to array
-        return new DeviceDetails ( $body );
+        return new DeviceDetails($body);
     }
 
     /**
@@ -36,11 +40,12 @@ class PushDeviceRegistrations {
      *
      *  @param string $deviceId the id of the device
      */
-    public function get ($deviceId) {
+    public function get($deviceId)
+    {
         $path = '/push/deviceRegistrations/' . $deviceId;
-        $body = $this->ably->get( $path );
+        $body = $this->ably->get($path);
         $body = json_decode(json_encode($body), true); // Convert stdClass to array
-        return new DeviceDetails ( $body );
+        return new DeviceDetails($body);
     }
 
     /**
@@ -49,9 +54,10 @@ class PushDeviceRegistrations {
      *
      *  @param array $params the parameters used to filter the list
      */
-    public function list_ (array $params = []) {
+    public function list_(array $params = [])
+    {
         $path = '/push/deviceRegistrations';
-        return new PaginatedResult( $this->ably, 'Ably\Models\DeviceDetails', $cipher = false, 'GET', $path, $params );
+        return new PaginatedResult($this->ably, 'Ably\Models\DeviceDetails', $cipher = false, 'GET', $path, $params);
     }
 
     /**
@@ -59,9 +65,10 @@ class PushDeviceRegistrations {
      *
      *  @param string $device_id the id of the device
      */
-    public function remove ($deviceId, $returnHeaders = false) {
+    public function remove($deviceId, $returnHeaders = false)
+    {
         $path = '/push/deviceRegistrations/' . $deviceId;
-        return $this->ably->delete( $path, [], [], $returnHeaders );
+        return $this->ably->delete($path, [], [], $returnHeaders);
     }
 
     /**
@@ -69,9 +76,9 @@ class PushDeviceRegistrations {
      *
      * @param array $params the parameters that identify the subscriptions to remove
      */
-    public function removeWhere(array $params, $returnHeaders = false) {
+    public function removeWhere(array $params, $returnHeaders = false)
+    {
         $path = '/push/deviceRegistrations';
-        return $this->ably->delete( $path, [], $params, $returnHeaders );
+        return $this->ably->delete($path, [], $params, $returnHeaders);
     }
-
 }

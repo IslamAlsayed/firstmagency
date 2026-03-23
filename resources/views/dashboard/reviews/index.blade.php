@@ -95,6 +95,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $review,
                                             'models' => 'reviews',
+                                            'modelClass' => 'review',
                                         ])
                                     </td>
                                 </tr>

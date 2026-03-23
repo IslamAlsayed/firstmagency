@@ -49,14 +49,16 @@
     <div class="our-review-review-wrapper">
         <div class="relative mb-4">
             <div class="review-title">{{ __('main.reviews_title_review') }}</div>
-            <div class="wrapper-actions">
-                <div class="action">
-                    <div class="swiper-button-next"></div>
+            @if ($reviews && count($reviews) > 0)
+                <div class="wrapper-actions">
+                    <div class="action">
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="action">
+                        <div class="swiper-button-prev"></div>
+                    </div>
                 </div>
-                <div class="action">
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
+            @endif
         </div>
         <div class="our-reviews-wrapper">
             <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="3" navigation="true" navigation-next-el=".swiper-button-next"
@@ -315,8 +317,14 @@
         const reviewForm = document.getElementById('reviewForm');
         const closeReviewBtn = document.getElementById('closeReviewBtn');
         const cancelReviewBtn = document.getElementById('cancelReviewBtn');
+        const sections = [
+            document.querySelector('.header'),
+            document.querySelector('.fixed-support'),
+            ...document.querySelectorAll('.section:not(.reviews-section)')
+        ];
 
         writeReviewBtn.addEventListener('click', () => {
+            sections.forEach(s => s.classList.add('blur'));
             reviewFormLayout.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             reviewFormLayout.scrollIntoView({
@@ -338,6 +346,7 @@
         function hideForm() {
             reviewFormLayout.classList.add('hidden');
             document.body.style.overflow = 'auto';
+            sections.forEach(s => s.classList.remove('blur'));
             reviewForm.reset();
             resetForm();
         }

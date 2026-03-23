@@ -51,7 +51,7 @@
             <div class="flex items-start justify-between mb-4">
                 <div>
                     <a href="{{ route('dashboard.users.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                         {{ __('main.total_users') }}
                     </a>
                     <p class="text-4xl font-bold text-gray-800 mt-2">{{ $stats['total_users'] ?? 0 }}</p>
@@ -78,7 +78,7 @@
             <div class="flex items-start justify-between mb-4">
                 <div>
                     <a href="{{ route('dashboard.articles.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                         {{ __('main.articles') }}
                     </a>
                     <p class="text-4xl font-bold text-gray-800 mt-2">{{ $contentStats['articles']['total'] ?? 0 }}</p>
@@ -98,7 +98,7 @@
             <div class="flex items-start justify-between mb-4">
                 <div>
                     <a href="{{ route('dashboard.projects.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                         {{ __('main.projects') }}
                     </a>
                     <p class="text-4xl font-bold text-gray-800 mt-2">{{ $contentStats['projects']['total'] ?? 0 }}</p>
@@ -117,7 +117,7 @@
             <div class="flex items-start justify-between mb-4">
                 <div>
                     <a href="{{ route('dashboard.tickets.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                         {{ __('main.tickets') }}
                     </a>
                     <p class="text-4xl font-bold text-gray-800 mt-2 tickets-count">{{ $supportStats['tickets']['total'] ?? 0 }}</p>
@@ -145,7 +145,7 @@
                 <div>
                     <h3 class="text-lg font-bold text-gray-800">
                         <a href="{{ route('dashboard.users.index') }}">
-                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                             {{ __('main.reviews') }}
                         </a>
                     </h3>
@@ -197,7 +197,7 @@
                 <div>
                     <h3 class="text-lg font-bold text-gray-800">
                         <a href="{{ route('dashboard.services.index') }}">
-                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                             {{ __('main.services') }}
                         </a>
                     </h3>
@@ -230,7 +230,7 @@
                 <div>
                     <h3 class="text-lg font-bold text-gray-800">
                         <a href="{{ route('dashboard.clients.index') }}">
-                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                             {{ __('main.clients') }}
                         </a>
                     </h3>

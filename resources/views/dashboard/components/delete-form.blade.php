@@ -1,6 +1,6 @@
 @if (isset($model) && isset($id))
-    <button type="button" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white delete-btn" data-route="{{ route("$model.destroy", $id) }}"
-        data-row-id="row-{{ $id }}" title={{ __('main.delete') }}>
+    <button type="button" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white delete-btn" data-route="{{ route("$model.destroy", $id) }}" data-row-id="row-{{ $id }}"
+        title={{ __('main.delete') }}>
 
         <span class="btn-text">
             @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')

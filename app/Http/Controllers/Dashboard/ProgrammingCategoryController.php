@@ -85,4 +85,9 @@ class ProgrammingCategoryController extends Controller
             ? redirect()->route('dashboard.programming-categories.show', $programmingCategory->id)->withSuccess(__('messages.type_updated', ['type' => __('main.programming_category')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.programming_category')]));
     }
+
+    public function destroy(ProgrammingCategory $programmingCategory)
+    {
+        return $this->destroyModel($programmingCategory, 'programming-categories');
+    }
 }

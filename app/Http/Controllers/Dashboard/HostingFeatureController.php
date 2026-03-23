@@ -115,4 +115,9 @@ class HostingFeatureController extends Controller
             ? redirect()->route('dashboard.hosting-features.show', $hostingFeatures->id)->withSuccess(__('messages.type_updated', ['type' => __('main.hosting_feature')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.hosting_feature')]));
     }
+
+    public function destroy(HostingFeature $hostingFeature)
+    {
+        return $this->destroyModel($hostingFeature, 'hosting-features');
+    }
 }

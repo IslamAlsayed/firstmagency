@@ -75,9 +75,9 @@
                                     </td>
                                     <td class="p-4 text-sm text-gray-600">
                                         @if ($service->creator)
-                                            <a href="{{ route('dashboard.users.show', $service->creator->id) }}" class="text-primary hover:underline">
+                                            <a href="{{ route('dashboard.users.show', $service->creator->id) }}" class="text-blue-600 hover:underline">
                                                 {{ $service->creator->name }}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         @else
                                             <span class="text-gray-400 italic">N/A</span>
@@ -89,6 +89,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $service,
                                             'models' => 'services',
+                                            'modelClass' => 'service',
                                         ])
                                     </td>
                                 </tr>

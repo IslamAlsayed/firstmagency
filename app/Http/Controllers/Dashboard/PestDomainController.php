@@ -83,4 +83,9 @@ class PestDomainController extends Controller
             ? redirect()->route('dashboard.pest-domains.index')->withSuccess(__('messages.type_updated', ['type' => __('main.pest_domain')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.pest_domain')]));
     }
+
+    public function destroy(PestDomain $pestDomain)
+    {
+        return $this->destroyModel($pestDomain, 'pest-domains');
+    }
 }

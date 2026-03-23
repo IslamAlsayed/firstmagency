@@ -617,7 +617,7 @@
                                     <span>flag-hero</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="home-hero-section" name="home_hero_section"
+                                <input type="number" minLength="1" id="home-hero-section" name="sections_padding[home_hero_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->home_hero_section ?? '200' }}">
                             </div>
@@ -626,7 +626,7 @@
                                     <span>flag-services</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="home-services-section" name="home_services_section"
+                                <input type="number" minLength="1" id="home-services-section" name="sections_padding[home_services_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->home_services_section ?? '60' }}">
                             </div>
@@ -635,7 +635,7 @@
                                     <span>flag-projects</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="home-projects-section" name="home_projects_section"
+                                <input type="number" minLength="1" id="home-projects-section" name="sections_padding[home_projects_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="20" value="{{ $settings->home_projects_section ?? '20' }}">
                             </div>
@@ -644,7 +644,7 @@
                                     <span>flag-reviews</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="home-reviews-section" name="home_reviews_section"
+                                <input type="number" minLength="1" id="home-reviews-section" name="sections_padding[home_reviews_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->home_reviews_section ?? '60' }}">
                             </div>
@@ -653,7 +653,7 @@
                                     <span>flag-clients</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="home-clients-section" name="home_clients_section"
+                                <input type="number" minLength="1" id="home-clients-section" name="sections_padding[home_clients_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->home_clients_section ?? '120' }}">
                             </div>
@@ -663,7 +663,7 @@
                                     <span>flag-about-us</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="about-us-steps" name="about_us_line_works_steps_section"
+                                <input type="number" minLength="1" id="about-us-steps" name="sections_padding[about_us_line_works_steps_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->about_us_line_works_steps_section ?? '60' }}">
                             </div>
@@ -672,7 +672,7 @@
                                     <span>flag-partners</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="about-us-partners" name="about_us_partners_section"
+                                <input type="number" minLength="1" id="about-us-partners" name="sections_padding[about_us_partners_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->about_us_partners_section ?? '60' }}">
                             </div>
@@ -681,7 +681,7 @@
                                     <span>flag-line-works</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="line-works-section" name="work_lines_section"
+                                <input type="number" minLength="1" id="line-works-section" name="sections_padding[work_lines_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->work_lines_section ?? '120' }}">
                             </div>
@@ -691,7 +691,7 @@
                                     <span>flag-portfolio</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="portfolio-section" name="portfolio_section"
+                                <input type="number" minLength="1" id="portfolio-section" name="sections_padding[portfolio_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->portfolio_section ?? '200' }}">
                             </div>
@@ -700,7 +700,7 @@
                                     <span>flag-articles</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="blog-articles-section" name="blog_articles_section"
+                                <input type="number" minLength="1" id="blog-articles-section" name="sections_padding[blog_articles_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->blog_articles_section ?? '60' }}">
                             </div>
@@ -709,7 +709,7 @@
                                     <span>flag-articles-page</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="articles-page-section" name="articles_page_section"
+                                <input type="number" minLength="1" id="articles-page-section" name="sections_padding[articles_page_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->articles_page_section ?? '200' }}">
                             </div>
@@ -718,7 +718,7 @@
                                     <span>flag-contact</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="contact-page" name="contact_page_section"
+                                <input type="number" minLength="1" id="contact-page" name="sections_padding[contact_page_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="180" value="{{ $settings->contact_page_section ?? '180' }}">
                             </div>
@@ -728,7 +728,7 @@
                                     <span>flag-website-developer</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="website-developer-section" name="website_developer_section"
+                                <input type="number" minLength="1" id="website-developer-section" name="sections_padding[website_developer_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->website_developer_section ?? '120' }}">
                             </div>
@@ -737,7 +737,7 @@
                                     <span>flag-programming</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="website-programming-section" name="website_programming_section"
+                                <input type="number" minLength="1" id="website-programming-section" name="sections_padding[website_programming_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->website_programming_section ?? '200' }}">
                             </div>
@@ -746,7 +746,7 @@
                                     <span>flag-website-designer</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="website-design-section" name="website_design_section"
+                                <input type="number" minLength="1" id="website-design-section" name="sections_padding[website_design_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->website_design_section ?? '60' }}">
                             </div>
@@ -755,7 +755,7 @@
                                     <span>flag-important-articles</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="website-important-articles-section" name="website_important_articles_section"
+                                <input type="number" minLength="1" id="website-important-articles-section" name="sections_padding[website_important_articles_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->website_important_articles_section ?? '60' }}">
                             </div>
@@ -764,7 +764,7 @@
                                     <span>flag-faq</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="faqs-section" name="faqs_section"
+                                <input type="number" minLength="1" id="faqs-section" name="sections_padding[faqs_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->faqs_section ?? '60' }}">
                             </div>
@@ -774,7 +774,7 @@
                                     <span>flag-app-developer-hero</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="app-developer-hero-section" name="app_developer_hero_section"
+                                <input type="number" minLength="1" id="app-developer-hero-section" name="sections_padding[app_developer_hero_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="240" value="{{ $settings->app_developer_hero_section ?? '240' }}">
                             </div>
@@ -783,7 +783,7 @@
                                     <span>flag-app-important-articles</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="app-important-articles-section" name="app_important_articles_section"
+                                <input type="number" minLength="1" id="app-important-articles-section" name="sections_padding[app_important_articles_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="100" value="{{ $settings->app_important_articles_section ?? '100' }}">
                             </div>
@@ -792,7 +792,7 @@
                                     <span>flag-projects-steps</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="projects-steps-section" name="projects_steps_section"
+                                <input type="number" minLength="1" id="projects-steps-section" name="sections_padding[projects_steps_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->projects_steps_section ?? '60' }}">
                             </div>
@@ -801,7 +801,7 @@
                                     <span>flag-app-developer</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="app-developer-section" name="feature_section"
+                                <input type="number" minLength="1" id="app-developer-section" name="sections_padding[feature_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->feature_section ?? '200' }}">
                             </div>
@@ -810,7 +810,7 @@
                                     <span>flag-packages</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="packages-section" name="packages_section"
+                                <input type="number" minLength="1" id="packages-section" name="sections_padding[packages_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->packages_section ?? '120' }}">
                             </div>
@@ -819,7 +819,7 @@
                                     <span>flag-operating-systems</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="operations-systems-section" name="operations_systems_section"
+                                <input type="number" minLength="1" id="operations-systems-section" name="sections_padding[operations_systems_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->operations_systems_section ?? '60' }}">
                             </div>
@@ -828,7 +828,7 @@
                                     <span>flag-your-domain</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="your-domain-section" name="your_domain_section"
+                                <input type="number" minLength="1" id="your-domain-section" name="sections_padding[your_domain_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="240" value="{{ $settings->your_domain_section ?? '240' }}">
                             </div>
@@ -837,7 +837,7 @@
                                     <span>flag-pest-domains</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="pest-domains-section" name="pest_domains_section"
+                                <input type="number" minLength="1" id="pest-domains-section" name="sections_padding[pest_domains_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->pest_domains_section ?? '60' }}">
                             </div>
@@ -846,7 +846,7 @@
                                     <span>flag-why-us</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="why-us-section" name="why_us_section"
+                                <input type="number" minLength="1" id="why-us-section" name="sections_padding[why_us_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->why_us_section ?? '120' }}">
                             </div>
@@ -855,7 +855,7 @@
                                     <span>flag-platform-management</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="platform-management-section" name="platform_management_section"
+                                <input type="number" minLength="1" id="platform-management-section" name="sections_padding[platform_management_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->platform_management_section ?? '60' }}">
                             </div>
@@ -864,7 +864,7 @@
                                     <span>flag-packages-marketing</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="packages-marketing-section" name="packages_marketing_section"
+                                <input type="number" minLength="1" id="packages-marketing-section" name="sections_padding[packages_marketing_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="120" value="{{ $settings->packages_marketing_section ?? '120' }}">
                             </div>
@@ -873,7 +873,7 @@
                                     <span>flag-dont-worry-hosting</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="dont-worry-hosting-section" name="dont_worry_hosting_section"
+                                <input type="number" minLength="1" id="dont-worry-hosting-section" name="sections_padding[dont_worry_hosting_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->dont_worry_hosting_section ?? '60' }}">
                             </div>
@@ -882,7 +882,7 @@
                                     <span>flag-order-app</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="order-app-section" name="order_your_app_section"
+                                <input type="number" minLength="1" id="order-app-section" name="sections_padding[order_your_app_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="170" value="{{ $settings->order_your_app_section ?? '170' }}">
                             </div>
@@ -891,7 +891,7 @@
                                     <span>flag-categories-programming</span>
                                     <span>(px)</span>
                                 </label>
-                                <input type="number" minLength="1" id="categories-programming-section" name="categories_programming_section"
+                                <input type="number" minLength="1" id="categories-programming-section" name="sections_padding[categories_programming_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->categories_programming_section ?? '200' }}">
                             </div>

@@ -95,4 +95,9 @@ class ReviewController extends Controller
 
         return redirect()->route('dashboard.reviews.show', $review)->withSuccess(__('messages.type_updated', ['type' => __('main.review')]));
     }
+
+    public function destroy(Review $review)
+    {
+        return $this->destroyModel($review, 'reviews');
+    }
 }

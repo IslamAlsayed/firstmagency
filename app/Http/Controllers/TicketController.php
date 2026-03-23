@@ -155,7 +155,7 @@ class TicketController extends Controller
                 'human_readable_date' => $messageRow->created_at->diffForHumans(),
                 'user' => [
                     'name' => $ticket->name,
-                    'photo' => asset('assets/images/avatars/avatar.png'),
+                    'photo' => checkExistFile(getActiveUser()->photo) ? asset('storage/' . getActiveUser()->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
                 'department' => $department ? [
                     'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
@@ -215,7 +215,7 @@ class TicketController extends Controller
 
                 'user' => [
                     'name' => $user?->name ?? __('main.customer'),
-                    'photo' => $user?->photo ? asset('assets/images/avatars/' . $user->photo) : asset('assets/images/avatars/avatar.png'),
+                    'photo' => checkExistFile($user?->photo) ? asset('storage/' . $user->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
 
                 'department' => [

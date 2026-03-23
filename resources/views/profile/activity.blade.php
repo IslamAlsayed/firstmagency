@@ -102,8 +102,8 @@
                             <div class="flex justify-between">
                                 <span class="text-gray-600">{{ __('main.email') }}:</span>
                                 <span class="text-gray-900 font-medium">
-                                    <a href="mailto:{{ $user->email }}" target="_blank" class="inline-block text-primary hover:underline font-medium">
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                    <a href="mailto:{{ $user->email }}" target="_blank" class="inline-block text-blue-600 hover:underline font-medium">
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                         {{ $user->email }}
                                     </a>
                                 </span>

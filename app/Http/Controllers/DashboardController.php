@@ -126,7 +126,7 @@ class DashboardController extends Controller
         return view('dashboard.settings');
     }
 
-    // Toggle field for any model
+    // Toggle field for any model [It Works]
     public function toggleField($modelClass, $id, $field)
     {
         $modelClass = str_replace('_', '-', $modelClass);
@@ -200,15 +200,14 @@ class DashboardController extends Controller
 
         $modelName = strtolower(class_basename($modelClass));
 
-        $delete = $model->delete();
+        $deleted = $model->delete();
 
-        if ($delete) {
-            return redirect()->route("$models.index")->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]));
-        }
-        return redirect()->back()->withError(__('messages.type_deletion_failed', ['type' => __('main.' . $modelName)]));
+        return $deleted
+            ? redirect()->route("$models.index")->withSuccess(__('messages.type_deleted', ['type' => __('main.' . $modelName)]))
+            : redirect()->back()->withError(__('messages.type_deletion_failed', ['type' => __('main.' . $modelName)]));
     }
 
-    // Force destroy (permanent delete) for any model
+    // Force destroy (permanent delete) for any model [It Works]
     public function forceDestroy($modelClass, $id)
     {
         $modelClass = str_replace('_', '-', $modelClass);
@@ -247,7 +246,7 @@ class DashboardController extends Controller
         return redirect()->back()->withSuccess(__('messages.type_force_deleted', ['type' => __('main.' . $modelName)]));
     }
 
-    // Change status for any model
+    // Change status for any model [It Works]
     public function changeStatus($models, $modelClass, $id, $status)
     {
         $modelClass = str_replace('_', '-', $modelClass);
@@ -299,7 +298,7 @@ class DashboardController extends Controller
         return redirect()->back()->withSuccess(__('messages.type_updated', ['type' => __('main.' . strtolower(class_basename($modelClass)))]) . ' - ' . $statusLabel);
     }
 
-    // Ticket status update Ably event publisher
+    // Ticket status update Ably event publisher [It Works]
     private function publishTicketStatusUpdate($ticket, $field, $newStatus)
     {
         $ticketData = [

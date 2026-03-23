@@ -35,8 +35,7 @@
                     <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-cube mr-2"></i> {{ __('main.hosting_packages') }}</h5>
 
                     <div class="flex justify-between items-center gap-4">
-                        <input type="text" id="searchBox"
-                            class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.hosting_packages')]) }}">
                         <a href="{{ route('dashboard.hosting-packages.create') }}" class="kt-btn kt-btn-outline-primary">
                             {{ __('main.create_type', ['type' => __('main.hosting_package')]) }}
@@ -45,8 +44,7 @@
                 </div>
 
                 <div class="flex justify-start gap-2 pt-4 flex-wrap px-4">
-                    <button type="button" class="filter-btn cursor-pointer px-4 py-2 rounded-lg border-2 border-primary text-primary font-medium active"
-                        data-filter="all">
+                    <button type="button" class="filter-btn cursor-pointer px-4 py-2 rounded-lg border-2 border-primary text-primary font-medium active" data-filter="all">
                         {{ __('main.all') }} ({{ $allItems }})
                     </button>
                     <button type="button" data-filter="hosting"
@@ -87,16 +85,13 @@
                         </thead>
                         <tbody>
                             @forelse($hostingPackages as $package)
-                                <tr id="row-{{ $package->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition package-row"
-                                    data-category="{{ $package->category }}">
+                                <tr id="row-{{ $package->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition package-row" data-category="{{ $package->category }}">
                                     <td class="p-4">
                                         @if ($package->image && checkExistFile($package->image))
-                                            <img src="{{ asset('storage/' . $package->image) }}"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? '' }}"
+                                            <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->translations[app()->getLocale()]['title'] ?? '' }}"
                                                 class="rounded-lg size-10 shrink-0 object-cover">
                                         @else
-                                            <img src="{{ asset('assets/images/avatar.png') }}"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? '' }}" class="rounded-lg size-10 shrink-0">
+                                            <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $package->translations[app()->getLocale()]['title'] ?? '' }}" class="rounded-lg size-10 shrink-0">
                                         @endif
                                     </td>
                                     <td class="p-4">
@@ -136,9 +131,9 @@
                                     <td class="p-4 text-sm text-gray-600">{{ $package->order }}</td>
                                     <td class="p-4 text-sm text-gray-600">
                                         @if ($package->creator)
-                                            <a href="{{ route('dashboard.users.show', $package->creator->id) }}" class="text-primary hover:underline">
+                                            <a href="{{ route('dashboard.users.show', $package->creator->id) }}" class="text-blue-600 hover:underline">
                                                 {{ $package->creator->name }}
-                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                             </a>
                                         @else
                                             <span class="text-gray-400 italic">N/A</span>
@@ -148,6 +143,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $package,
                                             'models' => 'hosting-packages',
+                                            'modelClass' => 'hosting-package',
                                         ])
                                     </td>
                                 </tr>

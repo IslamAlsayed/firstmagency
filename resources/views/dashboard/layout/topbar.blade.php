@@ -109,10 +109,14 @@
                     <p class="user-role {{ getActiveUser()?->role ?? 'superadmin' }}">{{ getActiveUser()?->role ?? 'superadmin' }}</p>
                 </div>
                 <div class="img-box">
-                    @if (getActiveUser())
-                        <img src="{{ asset('assets/images/avatars/' . getActiveUser()->photo) }}" class="h-32 w-32 rounded">
+                    @if (getActiveUser()?->photo && checkExistFile(getActiveUser()->photo))
+                        <img src="{{ asset('storage/' . getActiveUser()->photo) }}" alt="{{ getActiveUser()?->name }}" class="h-32 w-32 rounded">
                     @else
-                        <img src="{{ asset('assets/images/avatar.png') }}" alt="some user image">
+                        @if (getActiveUser())
+                            <img src="{{ asset('assets/images/avatars/' . getActiveUser()->photo) }}" class="h-32 w-32 rounded">
+                        @else
+                            <img src="{{ asset('assets/images/avatar.png') }}" alt="some user image" class="h-32 w-32 rounded">
+                        @endif
                     @endif
                 </div>
             </div>

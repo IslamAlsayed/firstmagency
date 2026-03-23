@@ -65,6 +65,7 @@
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $role,
                                             'models' => 'roles',
+                                            'modelClass' => 'role',
                                         ])
                                     </td>
                                 </tr>

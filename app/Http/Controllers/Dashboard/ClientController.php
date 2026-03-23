@@ -107,4 +107,9 @@ class ClientController extends Controller
             ? redirect()->route('dashboard.clients.index')->withSuccess(__('messages.type_updated', ['type' => __('main.client')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.client')]));
     }
+
+    public function destroy(Client $client)
+    {
+        return $this->destroyModel($client, 'clients');
+    }
 }

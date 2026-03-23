@@ -52,20 +52,20 @@
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_contact_sales') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="https://wa.me/201212601601" target="_blank" rel="noopener"
+                    <a class="fixed-support-item flex items-center gap-2" href="{{ route('tickets.index') }}" target="_blank" rel="noopener"
                         href="https://firstmagency.com/%d8%a7%d9%84%d8%a3%d8%aa%d8%b5%d9%80%d9%80%d9%80%d8%a7%d9%84-%d8%a8%d9%86%d8%a7/" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
                             <img src="https://firstmagency.com/wp-content/uploads/2025/08/724715.png" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_open_ticket') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="https://wa.me/201212601601" target="_blank" rel="noopener" href="tel:201212601601" target="_blank" rel="noopener">
+                    <a class="fixed-support-item flex items-center gap-2" href="tel:201212601601" target="_blank" rel="noopener" href="tel:201212601601" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
                             <img src="https://firstmagency.com/wp-content/uploads/2025/08/9999340.png" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_direct_call') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="https://wa.me/201212601601" target="_blank" rel="noopener" href="https://client.firstmagency.com/" target="_blank"
+                    <a class="fixed-support-item flex items-center gap-2" href="https://client.firstmagency.com" target="_blank" rel="noopener" href="https://client.firstmagency.com/" target="_blank"
                         rel="noopener">
                         <span class="fixed-support-image">
                             <img src="https://firstmagency.com/wp-content/uploads/2025/08/3437393.png" alt="">

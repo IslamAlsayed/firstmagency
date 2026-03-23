@@ -77,6 +77,7 @@
                                 <td class="px-4 py-3">
                                     @include('dashboard.components.permissions-actions', [
                                         'models' => 'dashboard.about-us',
+                                        'modelClass' => 'about-us',
                                         'id' => $item->id,
                                         'editRoute' => route('dashboard.about-us.edit', $item->id),
                                         'showRoute' => route('dashboard.about-us.show', $item->id),

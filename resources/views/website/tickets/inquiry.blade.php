@@ -6,7 +6,7 @@
             <div class="title font-semibold mb-4">{{ __('main.tickets_header') }}</div>
         </div>
 
-        <div class="container tickets-form">
+        <div class="tickets-form">
             {{-- Ticket Inquiry --}}
             <h2>{{ __('main.tickets_title') }}</h2>
 

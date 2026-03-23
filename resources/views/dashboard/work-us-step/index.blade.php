@@ -26,8 +26,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-briefcase mr-2"></i> {{ __('main.work_us_step') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_work_us_step') }}">
                     <a href="{{ route('dashboard.work-us-step.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_work_us_step') }}
@@ -51,13 +50,11 @@
                     </thead>
                     <tbody>
                         @forelse($workUsSteps as $item)
-                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                data-active="{{ (int) $item->is_active }}">
+                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $item->is_active }}">
                                 <td title="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($item->image && checkExistFile($item->image))
-                                            <img src="{{ asset('storage/' . $item->image) }}"
-                                                alt="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}"
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}"
                                                 class="w-[90px] h-[35px] rounded-[9px] shrink-0">
                                         @else
                                             <i class="fas fa-briefcase text-2xl text-gray-400"></i>
@@ -82,9 +79,9 @@
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">
                                     @if ($item->creator)
-                                        <a href="{{ route('dashboard.users.show', $item->creator->id) }}" class="text-primary hover:underline">
+                                        <a href="{{ route('dashboard.users.show', $item->creator->id) }}" class="text-blue-600 hover:underline">
                                             {{ $item->creator->name }}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                         </a>
                                     @else
                                         <span class="text-gray-400 italic">N/A</span>
@@ -105,6 +102,7 @@
                                     @include('dashboard.components.permissions-actions', [
                                         'record' => $item,
                                         'models' => 'work-us-step',
+                                        'modelClass' => 'work-us-step',
                                     ])
                                 </td>
                             </tr>

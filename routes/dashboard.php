@@ -36,9 +36,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::get('index2/', function () {
-        return view('dashboard.index2');
-    })->name('index2');
     Route::get('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
     Route::post('/account/switch', [UserController::class, 'switch'])->name('account.switch')->middleware('auth');
     Route::post('{modelClass}/{id}/toggle/{field}', [DashboardController::class, 'toggleField'])->name('toggleField');
@@ -121,4 +118,14 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     // Unified force-destroy route for all models
     Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');
+
+    // any route not found in the dashboard will redirect to the dashboard index (except for api routes)
+    Route::get('/{any}', function () {
+        return redirect()->route('dashboard.index');
+    })->where('any', '.*');
 });
+
+// any route not found in the website will redirect to the welcome index (except for api routes)
+Route::get('/{any}', function () {
+    return redirect()->route('welcome');
+})->where('any', '.*')->middleware('guest');

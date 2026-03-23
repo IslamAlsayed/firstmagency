@@ -107,4 +107,9 @@ class PartnerController extends Controller
             ? redirect()->route('dashboard.partners.index')->withSuccess(__('messages.type_updated', ['type' => __('main.partner')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.partner')]));
     }
+
+    public function destroy(Partner $partner)
+    {
+        return $this->destroyModel($partner, 'partners');
+    }
 }

@@ -17,6 +17,7 @@ class TicketController extends Controller
             Log::info('Fetching ticket row for ID: ' . $id);
 
             $ticket = Ticket::with(['messages'])->findOrFail($id);
+            $this->authorize('view', $ticket);
 
             Log::info('Ticket found: ' . $ticket->id);
 

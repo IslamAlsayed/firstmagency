@@ -1,7 +1,9 @@
 <?php
+
 namespace Ably;
 
-class Push {
+class Push
+{
 
     private $ably;
     public $admin;
@@ -10,9 +12,9 @@ class Push {
      * Constructor
      * @param AblyRest $ably Ably API instance
      */
-    public function __construct( AblyRest $ably ) {
+    public function __construct(AblyRest $ably)
+    {
         $this->ably = $ably;
-        $this->admin = new PushAdmin( $ably );
+        $this->admin = new PushAdmin($ably);
     }
-
 }

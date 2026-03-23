@@ -25,6 +25,7 @@ return [
     'session_expired' => 'انتهت الجلسة. برجاء تسجيل الدخول مرة أخرى.',
     'no_photo_available' => 'لا توجد صورة متاحة.',
     'no_type_available' => 'لا يوجد :type متاح.',
+    'no_data_available' => 'لا يوجد بيانات',
     'more' => 'المزيد',
     'less' => 'أقل',
 

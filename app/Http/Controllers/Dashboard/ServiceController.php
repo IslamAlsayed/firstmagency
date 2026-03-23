@@ -119,4 +119,9 @@ class ServiceController extends Controller
             ? redirect()->route('dashboard.services.index')->withSuccess(__('messages.type_updated', ['type' => __('main.service')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.service')]));
     }
+
+    public function destroy(Service $service)
+    {
+        return $this->destroyModel($service, 'services');
+    }
 }

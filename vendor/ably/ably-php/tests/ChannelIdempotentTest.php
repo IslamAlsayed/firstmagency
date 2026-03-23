@@ -1,5 +1,7 @@
 <?php
+
 namespace tests;
+
 use Ably\AblyRest;
 use Ably\Http;
 use Ably\Models\Message;
@@ -11,43 +13,49 @@ use MessagePack\PackOptions;
 require_once __DIR__ . '/factories/TestApp.php';
 
 
-class HttpMockIdempotent extends Http {
-    public function request( $method, $url, $headers = [], $params = [] ) {
+class HttpMockIdempotent extends Http
+{
+    public function request($method, $url, $headers = [], $params = [])
+    {
         static $failures = 0;
 
         $ret = parent::request($method, $url, $headers, $params);
-        if ( $method == 'POST' and $failures < 2) {
+        if ($method == 'POST' and $failures < 2) {
             $failures++;
-            throw new AblyRequestException( 'fake error', 50000, 500 );
+            throw new AblyRequestException('fake error', 50000, 500);
         }
         return $ret;
     }
 }
 
 
-class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
+class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase
+{
     protected static $testApp;
     protected static $defaultOptions;
     protected static $ably;
 
-    public static function setUpBeforeClass(): void {
+    public static function setUpBeforeClass(): void
+    {
         self::$testApp = new TestApp();
         self::$defaultOptions = self::$testApp->getOptions();
-        self::$ably = new AblyRest( array_merge( self::$defaultOptions, [
+        self::$ably = new AblyRest(array_merge(self::$defaultOptions, [
             'key' => self::$testApp->getAppKeyDefault()->string,
             'idempotentRestPublishing' => true,
-        ] ) );
+        ]));
     }
 
-    public static function tearDownAfterClass(): void {
+    public static function tearDownAfterClass(): void
+    {
         self::$testApp->release();
     }
 
     /**
      * RSL1j
      */
-    public function testMessageSerialization() {
-        $channel = self::$ably->channel( 'messageSerialization' );
+    public function testMessageSerialization()
+    {
+        $channel = self::$ably->channel('messageSerialization');
 
         $msg = new Message();
         $msg->name = 'name';
@@ -55,42 +63,41 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
         $msg->clientId = 'clientId';
         $msg->id = 'foobar';
 
-        $body = $channel->__publish_request_body( $msg );
-        if(self::$ably->options->useBinaryProtocol) {
+        $body = $channel->__publish_request_body($msg);
+        if (self::$ably->options->useBinaryProtocol) {
             $body = MessagePack::unpack($body);
             Miscellaneous::deepConvertArrayToObject($body);
-        }
-        else
+        } else
             $body = json_decode($body);
 
-        $this->assertTrue( property_exists($body, 'name') );
-        $this->assertTrue( property_exists($body, 'data') );
-        $this->assertTrue( property_exists($body, 'clientId') );
-        $this->assertTrue( property_exists($body, 'id') );
+        $this->assertTrue(property_exists($body, 'name'));
+        $this->assertTrue(property_exists($body, 'data'));
+        $this->assertTrue(property_exists($body, 'clientId'));
+        $this->assertTrue(property_exists($body, 'id'));
     }
 
     /**
      * RSL1k1
      */
-    public function testIdempotentLibraryGenerated() {
-        $channel = self::$ably->channel( 'idempotentLibraryGenerated' );
+    public function testIdempotentLibraryGenerated()
+    {
+        $channel = self::$ably->channel('idempotentLibraryGenerated');
 
         $msg = new Message();
         $msg->name = 'name';
         $msg->data = 'data';
 
-        $body = $channel->__publish_request_body( $msg );
-        if(self::$ably->options->useBinaryProtocol) {
+        $body = $channel->__publish_request_body($msg);
+        if (self::$ably->options->useBinaryProtocol) {
             $body = MessagePack::unpack($body);
             Miscellaneous::deepConvertArrayToObject($body);
-        }
-        else
+        } else
             $body = json_decode($body);
 
-        $id = explode ( ":", $body->id);
-        $this->assertEquals( count($id), 2);
-        $this->assertGreaterThanOrEqual( 9, strlen(base64_decode($id[0])) );
-        $this->assertEquals( $id[1], "0");
+        $id = explode(":", $body->id);
+        $this->assertEquals(count($id), 2);
+        $this->assertGreaterThanOrEqual(9, strlen(base64_decode($id[0])));
+        $this->assertEquals($id[1], "0");
 
         $channel->publish($msg);
         $messages = $channel->history();
@@ -101,23 +108,23 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
     /**
      * RSL1k2
      */
-    public function testIdempotentClientSupplied() {
-        $channel = self::$ably->channel( 'idempotentClientSupplied' );
+    public function testIdempotentClientSupplied()
+    {
+        $channel = self::$ably->channel('idempotentClientSupplied');
 
         $msg = new Message();
         $msg->name = 'name';
         $msg->data = 'data';
         $msg->id = 'foobar';
 
-        $body = $channel->__publish_request_body( $msg );
-        if(self::$ably->options->useBinaryProtocol) {
+        $body = $channel->__publish_request_body($msg);
+        if (self::$ably->options->useBinaryProtocol) {
             $body = MessagePack::unpack($body);
             Miscellaneous::deepConvertArrayToObject($body);
-        }
-        else
+        } else
             $body = json_decode($body);
 
-        $this->assertEquals( $body->id, "foobar" );
+        $this->assertEquals($body->id, "foobar");
 
         $channel->publish($msg);
         $messages = $channel->history();
@@ -128,8 +135,9 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
     /**
      * RSL1k3
      */
-    public function testIdempotentMixedIds() {
-        $channel = self::$ably->channel( 'idempotentMixedIds' );
+    public function testIdempotentMixedIds()
+    {
+        $channel = self::$ably->channel('idempotentMixedIds');
 
         $messages = [];
 
@@ -144,16 +152,15 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
         $msg->data = 'data';
         $messages[] = $msg;
 
-        $body = $channel->__publish_request_body( $messages );
-        if(self::$ably->options->useBinaryProtocol) {
+        $body = $channel->__publish_request_body($messages);
+        if (self::$ably->options->useBinaryProtocol) {
             $body = MessagePack::unpack($body);
             Miscellaneous::deepConvertArrayToObject($body);
-        }
-        else
+        } else
             $body = json_decode($body);
 
-        $this->assertEquals( $body[0]->id, "foobar" );
-        $this->assertFalse( property_exists($body[1], 'id') );
+        $this->assertEquals($body[0]->id, "foobar");
+        $this->assertFalse(property_exists($body[1], 'id'));
 
         $this->expectException(AblyRequestException::class);
         $channel->publish($messages);
@@ -162,8 +169,9 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
     /**
      * RSL1k4
      */
-    public function testIdempotentLibraryGeneratedPublish() {
-        $ably = new AblyRest( array_merge( self::$defaultOptions, [
+    public function testIdempotentLibraryGeneratedPublish()
+    {
+        $ably = new AblyRest(array_merge(self::$defaultOptions, [
             'key' => self::$testApp->getAppKeyDefault()->string,
             'idempotentRestPublishing' => true,
             'httpClass' => 'tests\HttpMockIdempotent',
@@ -172,37 +180,37 @@ class ChannelIdempotentTest extends \PHPUnit\Framework\TestCase {
                 self::$ably->options->getPrimaryRestHost(),
                 self::$ably->options->getPrimaryRestHost(),
             ],
-        ] ) );
+        ]));
 
-        $channel = $ably->channel( 'idempotentLibraryGeneratedPublish' );
+        $channel = $ably->channel('idempotentLibraryGeneratedPublish');
 
         $msg = new Message();
         $msg->name = 'name';
         $msg->data = 'data';
 
-        $body = $channel->publish( $msg );
+        $body = $channel->publish($msg);
 
         $messages = $channel->history();
-        $this->assertEquals( 1, count($messages->items));
+        $this->assertEquals(1, count($messages->items));
     }
 
     /**
      * RSL1k5
      */
-    public function testIdempotentClientSuppliedPublish() {
-        $channel = self::$ably->channel( 'idempotentClientSuppliedPublish' );
+    public function testIdempotentClientSuppliedPublish()
+    {
+        $channel = self::$ably->channel('idempotentClientSuppliedPublish');
 
         $msg = new Message();
         $msg->name = 'name';
         $msg->data = 'data';
         $msg->id = 'foobar';
 
-        $body = $channel->publish( $msg );
-        $body = $channel->publish( $msg );
-        $body = $channel->publish( $msg );
+        $body = $channel->publish($msg);
+        $body = $channel->publish($msg);
+        $body = $channel->publish($msg);
 
         $messages = $channel->history();
-        $this->assertEquals( 1, count($messages->items));
+        $this->assertEquals(1, count($messages->items));
     }
-
 }

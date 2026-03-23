@@ -5,10 +5,18 @@
             e.preventDefault();
 
             const btn = $(this);
-            const route = btn.data('route');
+            const route = btn.data('route') || btn.attr('data-route') || btn.attr('href') || btn.closest('form').attr('action');
             const rowId = btn.data('row-id');
             const btnLoader = btn.find('.container-loader');
             const btnText = btn.find('.btn-text');
+
+            if (!route) {
+                window.showToast({
+                    type: 'danger',
+                    message: '{{ __('messages.error_occurred') }}',
+                });
+                return;
+            }
 
             // Confirm before delete
             // if (!confirm(`{{ __('main.are_you_sure') }}؟`)) {
@@ -36,7 +44,6 @@
                     const priority = $row.data('priority');
 
                     // Remove the row from table with animation
-                    console.log('rowId: ', rowId);
                     $row.fadeOut(300, function() {
                         $(this).remove();
 

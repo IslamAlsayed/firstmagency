@@ -30,8 +30,7 @@
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-box mr-2"></i> {{ __('main.marketing_packages') }}</h5>
 
                 <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox"
-                        class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.marketing_packages')]) }}">
                     <a href="{{ route('dashboard.marketing-packages.create') }}" class="kt-btn kt-btn-outline-primary">
                         {{ __('main.create_type', ['type' => __('main.marketing_packages')]) }}
@@ -54,17 +53,15 @@
                     </thead>
                     <tbody>
                         @forelse($marketingPackages as $item)
-                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition"
-                                data-active="{{ (int) $item->is_active }}" data-popular="{{ (int) $item->is_popular }}">
+                            <tr id="row-{{ $item->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $item->is_active }}"
+                                data-popular="{{ (int) $item->is_popular }}">
                                 <td title="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
                                     <div class="relative w-fit">
                                         @if ($item->image && checkExistFile($item->image))
-                                            <img src="{{ asset('storage/' . $item->image) }}"
-                                                alt="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}"
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->alt_text ?? ($item->translations[app()->getLocale()]['title'] ?? '') }}"
                                                 class="w-[90px] h-[35px] rounded-[9px] shrink-0 object-cover">
                                         @else
-                                            <div
-                                                class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
+                                            <div class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
                                                 <i class="opacity-25">{{ __('main.null') }}</i>
                                             </div>
                                         @endif
@@ -94,9 +91,9 @@
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">
                                     @if ($item->creator)
-                                        <a href="{{ route('dashboard.users.show', $item->creator->id) }}" class="text-primary hover:underline">
+                                        <a href="{{ route('dashboard.users.show', $item->creator->id) }}" class="text-blue-600 hover:underline">
                                             {{ $item->creator->name }}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                         </a>
                                     @else
                                         <span class="text-gray-400 italic">N/A</span>
@@ -108,6 +105,7 @@
                                     @include('dashboard.components.permissions-actions', [
                                         'record' => $item,
                                         'models' => 'marketing-packages',
+                                        'modelClass' => 'marketing-package',
                                     ])
                                 </td>
                             </tr>

@@ -156,4 +156,9 @@ class HostingPackageController extends Controller
             ? redirect()->route('dashboard.hosting-packages.show', $hostingPackage->id)->withSuccess(__('messages.type_updated', ['type' => __('main.hosting_package')]))
             : redirect()->back()->withError(__('messages.type_update_failed', ['type' => __('main.hosting_package')]));
     }
+
+    public function destroy(HostingPackage $hostingPackage)
+    {
+        return $this->destroyModel($hostingPackage, 'hosting-packages');
+    }
 }

@@ -171,7 +171,7 @@ class TicketController extends Controller
 
                 'user' => [
                     'name' => $user?->name ?? __('main.customer'),
-                    'photo' => $user?->photo ? asset('assets/images/avatars/' . $user->photo) : asset('assets/images/avatars/avatar.png'),
+                    'photo' => checkExistFile($user?->photo) ? asset('storage/' . $user?->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
 
                 'department' => [
@@ -232,7 +232,7 @@ class TicketController extends Controller
                 'human_readable_date' => $messageRow->created_at->diffForHumans(),
                 'user' => [
                     'name' => $supportUser->name,
-                    'photo' => $supportUser->photo ? asset('assets/images/avatars/' . $supportUser->photo) : asset('assets/images/avatars/avatar.png'),
+                    'photo' => checkExistFile($supportUser->photo) ? asset('storage/' . $supportUser->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
                 'department' => $department ? [
                     'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support')),
@@ -270,5 +270,10 @@ class TicketController extends Controller
             'ticket_id' => $ticket->id,
         ]);
         return redirect()->back()->withSuccess(__('messages.email_sent_successfully'));
+    }
+
+    public function destroy(Ticket $ticket)
+    {
+        return $this->destroyModel($ticket, 'tickets');
     }
 }

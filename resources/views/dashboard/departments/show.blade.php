@@ -48,26 +48,28 @@
                             <div>
                                 <label class="kt-label mb-1">{{ __('main.email') }}</label>
                                 <p class="text-sm text-secondary-foreground">
-                                    <a href="mailto:{{ $department->user->email }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                    <a href="mailto:{{ $department->user->email }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                         {!! limitedText($department->user->email ?? '--', 30) !!}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                     </a>
                                 </p>
                             </div>
                             <div>
                                 <label class="kt-label mb-1">{{ __('main.phone') }}</label>
                                 <p class="text-sm text-secondary-foreground">
-                                    <a href="tel:{{ $department->user->phone }}" target="_blank" class="inline-block text-primary hover:underline text-xs font-medium">
+                                    <a href="tel:{{ $department->user->phone }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
                                         {!! limitedText($department->user->phone ?? '--', 30) !!}
-                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-primary"></i>
+                                        <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
                                     </a>
                                 </p>
                             </div>
                             <div>
                                 <label class="kt-label mb-1">{{ __('main.role') }}</label>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                    {{ $department->user->role }}
-                                </span>
+                                <p class="text-sm text-secondary-foreground">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+                                        {{ $department->user->role }}
+                                    </span>
+                                </p>
                             </div>
                         @else
                             <div colspan="4" class="text-center text-gray-400">

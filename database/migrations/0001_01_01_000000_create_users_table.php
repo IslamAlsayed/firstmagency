@@ -35,6 +35,7 @@ return new class extends Migration
                 $table->string('website_locale')->default('ar');
                 $table->string('dashboard_locale')->default('ar');
                 $table->rememberToken();
+                $table->softDeletes();
                 $table->timestamps();
             });
         }
