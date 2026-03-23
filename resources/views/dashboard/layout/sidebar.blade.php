@@ -433,17 +433,37 @@
             </li>
         @endif
 
-        {{-- Settings --}}
+        <!-- Settings -->
         @if (auth()->user()->can('settings-read'))
-            <li class="relative" data-item-id="settings" title="{{ __('main.settings') }}">
-                <a href="{{ route('dashboard.settings.index') }}" class="nav-link justify-between {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
+            <li class="relative group submenu-item" data-item-id="settings" title="{{ __('main.settings') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.settings') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.settings.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-3">
                         <span class="main-icon">⚙️</span>
                         <span class="span-text">{{ limitedText(__('main.settings'), 20) }}</span>
                     </div>
-
-                    <i class="fas fa-arrow-up-right-from-square text-sm nav-icon"></i>
-                </a>
+                    <i class="fas fa-chevron-down text-xs nav-icon"></i>
+                </button>
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.settings.*') ? 'show' : '' }}">
+                    @if (auth()->user()->can('settings-read'))
+                        <li class="relative" data-sub-id="settings" title="{{ __('main.settings') }}">
+                            <a href="{{ route('dashboard.settings.index') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.settings.index') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">⚙️</span>
+                                <span class="text-sm">{{ __('main.settings') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('inline-padding-update'))
+                        <li class="relative" data-sub-id="inline-padding" title="{{ __('main.inline_padding') }}">
+                            <a href="{{ route('dashboard.settings.inline-padding') }}"
+                                class="nav-link {{ request()->routeIs('dashboard.settings.inline-padding') ? 'active' : '' }} flex items-center gap-3 text-slate-300 hover:bg-slate-700 hover:text-white border-l-2 border-transparent hover:border-blue-500">
+                                <span class="main-icon">↔️</span>
+                                <span class="text-sm">{{ __('main.inline_padding') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
             </li>
         @endif
     </ul>
@@ -458,8 +478,12 @@
             const button = e.target.closest('[data-toggle="submenu"]');
             const isCompactRange = window.innerWidth >= 991 && window.innerWidth <= 1180;
 
-            const closeAllSubmenus = () => {
+            const closeAllSubmenus = (preserveActive = true) => {
                 document.querySelectorAll('.submenu-list.show').forEach(menu => {
+                    if (preserveActive && menu.querySelector('.nav-link.active')) {
+                        return;
+                    }
+
                     menu.classList.remove('show');
                     menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
                 });
@@ -480,7 +504,7 @@
             // Close all open submenus when clicking empty area inside sidebar,
             // except in compact range (991 - 1180).
             if (!isCompactRange && sidebar && sidebar.contains(e.target) && !(sidebarLogo && sidebarLogo.contains(e.target))) {
-                closeAllSubmenus();
+                closeAllSubmenus(true);
                 return;
             }
 
@@ -495,7 +519,7 @@
             }
 
             if (sidebar && !sidebar.contains(e.target)) {
-                closeAllSubmenus();
+                closeAllSubmenus(true);
 
                 // In mobile/off-canvas states, close sidebar if these classes are used.
                 sidebar.classList.remove('show', 'active');
@@ -715,8 +739,12 @@
 
             const isCompactSidebarViewport = () => window.innerWidth >= 991 && window.innerWidth <= 1180;
 
-            const closeOpenSubmenus = () => {
+            const closeOpenSubmenus = (preserveActive = true) => {
                 document.querySelectorAll('.submenu-list.show').forEach(menu => {
+                    if (preserveActive && menu.querySelector('.nav-link.active')) {
+                        return;
+                    }
+
                     menu.classList.remove('show');
                     menu.closest('.submenu-item')?.querySelector('[data-toggle="submenu"]')?.classList.remove('active');
                 });
@@ -729,7 +757,7 @@
                     sidebar.classList.add('small-sidebar');
                 } else {
                     sidebar.classList.remove('small-sidebar');
-                    closeOpenSubmenus();
+                    closeOpenSubmenus(true);
                 }
             };
 
@@ -754,7 +782,7 @@
                 if (!sidebar.contains(e.target) && !Array.from(submenuBtns).some(btn => btn.contains(e.target))) {
                     sidebar.classList.add('small-sidebar');
                     sidebar.classList.remove('show', 'active');
-                    closeOpenSubmenus();
+                    closeOpenSubmenus(true);
                 }
             });
 

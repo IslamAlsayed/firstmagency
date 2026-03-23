@@ -115,6 +115,7 @@ return [
     'button_display_mode' => 'Change Button Display Mode',
     'chat' => 'Chat',
     'go_to_chat' => 'Go to chat',
+    'inline_padding' => 'Inline Padding',
     'settings_debug_ips' => 'Debug IPs',
     'settings_inline_padding' => 'Inline Padding',
     'settings_whatsapp_number' => 'WhatsApp Number',

@@ -63,7 +63,6 @@
 <link href="{{ asset('assets/css/pages/hostingPage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/domainsPage.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/pages/servicesMarketingPage.css') }}" rel="stylesheet" />
-
 <style>
     :root {
         --main-color: {{ $settings->main_color ?? '#d05423' }};

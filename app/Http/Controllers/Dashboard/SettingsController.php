@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Log;
 class SettingsController extends Controller
 {
     use PhotoUploadTrait;
+
     public function index()
     {
         $settings = Setting::first();
-        return view('dashboard.settings', compact('settings'));
+        return view('dashboard.settings.index', compact('settings'));
     }
 
     public function update(SettingRequest $request)
@@ -44,6 +45,11 @@ class SettingsController extends Controller
         $settings->update($request->all());
 
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_fonts_applied'));
+    }
+
+    public function inlinePadding()
+    {
+        return view('dashboard.settings.inline-padding');
     }
 
     public function updateInlinePadding(SettingRequest $request)

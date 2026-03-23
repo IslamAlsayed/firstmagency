@@ -11,11 +11,10 @@
         </button>
     </div>
     <div class="image">
-        <img src="{{ asset('assets/' . $settings->about_us_image) }}"
-            alt="{{ app()->getLocale() == 'en' ? $settings->about_us_title : $settings->about_us_title_ar }}" loading="lazy">
+        <img src="{{ asset('assets/' . $settings->about_us_image) }}" alt="{{ app()->getLocale() == 'en' ? $settings->about_us_title : $settings->about_us_title_ar }}" loading="lazy">
     </div>
 
-    @if (isDebugModeEnabled())
+    {{-- @if (isDebugModeEnabled())
         <div class="debug-flag-badge">🚩 flag-about-us</div>
-    @endif
+    @endif --}}
 </section>

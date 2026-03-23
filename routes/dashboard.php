@@ -47,14 +47,17 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::put('/updateColorsWebsite', [SettingsController::class, 'updateColorsWebsite'])->name('settings.updateColorsWebsite');
     Route::put('/updateColors', [SettingsController::class, 'updateColors'])->name('settings.updateColors');
     Route::put('/updateFonts', [SettingsController::class, 'updateFonts'])->name('settings.updateFonts');
-    Route::put('/updateInlinePadding', [SettingsController::class, 'updateInlinePadding'])->name('settings.updateInlinePadding');
     Route::put('/updateGeneral', [SettingsController::class, 'updateGeneral'])->name('settings.updateGeneral');
     Route::put('/updateAboutUs', [SettingsController::class, 'updateAboutUs'])->name('settings.updateAboutUs');
     Route::put('/updateWebsiteDesign', [SettingsController::class, 'updateWebsiteDesign'])->name('settings.updateWebsiteDesign');
     Route::post('/toggleDebugMode', [SettingsController::class, 'toggleDebugMode'])->name('settings.toggleDebugMode');
     Route::put('/updateDebugIps', [SettingsController::class, 'updateDebugIps'])->name('settings.updateDebugIps');
     Route::post('/addMyIpToDebug', [SettingsController::class, 'addMyIpToDebug'])->name('settings.addMyIpToDebug');
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+
+    Route::get('/settings/inline-padding', [SettingsController::class, 'inlinePadding'])->name('settings.inline-padding');
+    Route::put('/settings/inline-padding', [SettingsController::class, 'updateInlinePadding'])->name('settings.inline-padding.update');
+    Route::resource('settings', SettingsController::class)->names('settings');
+    // Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 
     // Sidebar Preference Routes
     Route::post('/sidebar/save', [SidebarController::class, 'save'])->name('sidebar.save');

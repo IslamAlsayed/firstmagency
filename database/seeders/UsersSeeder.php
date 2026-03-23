@@ -20,7 +20,6 @@ class UsersSeeder extends Seeder
         // Super Admin
         $superadmin = User::firstOrCreate(
             ['email' => 'superadmin@firstmagency.com'],
-
             [
                 'name' => 'Super Admin',
                 'password' => '12345678',
@@ -38,6 +37,8 @@ class UsersSeeder extends Seeder
                 'is_active' => true,
                 'created_by' => null,
                 'updated_by' => null,
+                'website_locale' => 'ar',
+                'dashboard_locale' => 'ar',
             ]
         );
 
@@ -46,7 +47,6 @@ class UsersSeeder extends Seeder
         // Admin
         $admin = User::firstOrCreate(
             ['email' => 'admin@firstmagency.com'],
-
             [
                 'name' => 'Admin',
                 'password' => '12345678',
@@ -64,6 +64,8 @@ class UsersSeeder extends Seeder
                 'is_active' => true,
                 'created_by' => null,
                 'updated_by' => null,
+                'website_locale' => 'ar',
+                'dashboard_locale' => 'en',
             ]
         );
 
@@ -72,7 +74,6 @@ class UsersSeeder extends Seeder
         // Content Manager
         $content_manager = User::firstOrCreate(
             ['email' => 'content@firstmagency.com'],
-
             [
                 'name' => 'Content Manager',
                 'password' => '12345678',
@@ -90,6 +91,8 @@ class UsersSeeder extends Seeder
                 'is_active' => true,
                 'created_by' => null,
                 'updated_by' => null,
+                'website_locale' => 'ar',
+                'dashboard_locale' => 'ar',
             ]
         );
 

@@ -115,6 +115,7 @@ return [
     'button_display_mode' => 'تغيير وضع العرض',
     'chat' => 'الدردشة',
     'go_to_chat' => 'الذهاب إلى الدردشة',
+    'inline_padding' => 'المسافات الداخلية',
     'settings_debug_ips' => 'عناوين IP للتصحيح',
     'settings_inline_padding' => 'المسافات الداخلية',
     'settings_whatsapp_number' => 'رقم واتساب',

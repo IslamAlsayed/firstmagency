@@ -17,7 +17,7 @@ class SettingsSeeder extends Seeder
         Setting::truncate();
         Schema::enableForeignKeyConstraints();
 
-        Setting::updateOrCreate(
+        Setting::create(
             ['site_email' => config('app.email')],
             [
                 // Colors

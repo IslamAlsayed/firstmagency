@@ -8,13 +8,11 @@
                 @foreach ($services as $service)
                     <swiper-slide class="service-item">
                         <a href="" class="service-image">
-                            <img src="{{ asset('storage/' . ($service->image ?? ($service['image'] ?? ''))) }}"
-                                alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
+                            <img src="{{ asset('storage/' . ($service->image ?? ($service['image'] ?? ''))) }}" alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
                         </a>
                         <div class="service-text">
                             <div class="icon">
-                                <img src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}"
-                                    alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
+                                <img src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}" alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
                             </div>
                             <div class="service-title font-semibold">{{ $service['translations'][app()->getLocale()]['title'] ?? ($service['slug'] ?? '') }}
                             </div>
