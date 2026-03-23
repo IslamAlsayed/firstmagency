@@ -440,6 +440,20 @@ td {
             display: none;
         }
     }
+
+    html[lang=ar] {
+        .sidebar.small-sidebar {
+            .nav-menu .nav-link.submenu-btn:not(.active) {
+                &::before {
+                    left: auto;
+                    right: 80%;
+                    border-radius: 8px;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+        }
+    }
 }
 
 html[lang=ar] {
@@ -692,19 +706,6 @@ html[lang=ar] {
         width: 100%;
     }
 
-    .profile {
-        gap: 8px;
-    }
-
-    .profile .user-name {
-        font-size: 12px;
-    }
-
-    .profile .img-box {
-        width: 40px;
-        height: 40px;
-    }
-
     .sidebar-logo {
         min-height: 45px;
         margin-bottom: 15px;
@@ -717,6 +718,31 @@ html[lang=ar] {
     .nav-menu .nav-link {
         padding: 10px 12px;
         font-size: 14px;
+    }
+}
+
+@media (max-width: 425px) {
+    .sidebar {
+
+        .nav-menu .nav-link>li,
+        .nav-menu .nav-link>svg {
+            width: 10px;
+        }
+
+        .nav-menu .nav-link {
+            gap: 5px;
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+    }
+
+    .action-button {
+        width: 25px !important;
+        height: 25px !important;
+        padding: 6px !important;
+        font-size: 10px !important;
+        border-radius: 5px !important;
     }
 }
 
@@ -1085,6 +1111,53 @@ html[lang=ar] {
 
         .profile .user {
             display: none;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    #toggleSidebar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topbar {
+        padding: 10px;
+
+        & .user-actions {
+            margin: 0;
+
+            i,
+            svg {
+                width: 14px;
+            }
+        }
+
+        h2 {
+            font-size: 14px;
+            text-wrap: nowrap;
+        }
+    }
+
+    #topbar-notifications-badge {
+        top: -3px;
+        right: -3px;
+    }
+
+    .profile {
+        gap: 8px;
+    }
+
+    .profile .user-name {
+        font-size: 12px;
+    }
+
+    .topbar {
+        & .profile {
+            .img-box {
+                width: 40px;
+                height: 40px;
+            }
         }
     }
 }

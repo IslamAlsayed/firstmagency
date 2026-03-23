@@ -1,5 +1,6 @@
 /* Start Hero Section */
 .hero-section {
+    margin-top: -25px;
     padding-block: 120px 0;
     padding-inline: var(--home-hero-section-inline-padding);
     position: relative;
@@ -18,7 +19,7 @@
         content: '';
         position: absolute;
         width: 170%;
-        height: 118%;
+        height: 130%;
         top: 0;
         right: -528px;
         z-index: -10;
@@ -994,7 +995,7 @@ html[lang=ar] {
     & .clients-items {
         gap: 15px;
         border-radius: 15px;
-        padding: 15px var(--main-inline-padding) 50px;
+        padding: 15px var(--home-clients-section-inline-padding) 50px;
 
         & .client {
             max-height: 150px;

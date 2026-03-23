@@ -361,6 +361,6 @@
     </div>
 
     @if (isDebugModeEnabled())
-        <div class="debug-flag-badge">🚩 flag-packages</div>
+        <div class="debug-flag-badge">🚩 flag-hosting-packages</div>
     @endif
 </section>

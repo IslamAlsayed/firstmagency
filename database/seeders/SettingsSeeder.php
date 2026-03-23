@@ -17,9 +17,7 @@ class SettingsSeeder extends Seeder
         Setting::truncate();
         Schema::enableForeignKeyConstraints();
 
-        Setting::create(
-            ['site_email' => config('app.email')],
-            [
+        Setting::create([
                 // Colors
                 // 'primary_color' => '#5A8622',
                 'primary_color' => '#3c3c39',
@@ -62,40 +60,7 @@ class SettingsSeeder extends Seeder
                 'about_us_image2' => 'images/website/about/text-bg.png',
 
                 // Inline Padding Sections
-                'sections_padding' => [
-                    "home_hero_section" => 200,
-                    "home_services_section" => 60,
-                    "home_projects_section" => 20,
-                    "home_reviews_section" => 60,
-                    "home_clients_section" => 120,
-                    "about_us_line_works_steps_section" => 60,
-                    "about_us_partners_section" => 60,
-                    "portfolio_section" => 200,
-                    "blog_articles_section" => 60,
-                    "articles_page_section" => 200,
-                    "contact_page_section" => 180,
-                    "website_developer_section" => 120,
-                    "website_programming_section" => 200,
-                    "website_design_section" => 60,
-                    "website_important_articles_section" => 60,
-                    "faqs_section" => 60,
-                    "app_developer_hero_section" => 240,
-                    "app_important_articles_section" => 100,
-                    "projects_steps_section" => 60,
-                    "feature_section" => 200,
-                    "packages_section" => 120,
-                    "operations_systems_section" => 60,
-                    "your_domain_section" => 240,
-                    "pest_domains_section" => 60,
-                    "why_us_section" => 120,
-                    "platform_management_section" => 60,
-                    "work_lines_section" => 120,
-                    "packages_marketing_section" => 120,
-                    "dont_worry_hosting_section" => 60,
-                    "order_your_app_section" => 170,
-                    "categories_programming_section" => 200
-                ]
-            ]
-        );
+                'sections_padding' => config('inline_padding.defaults', []),
+            ]);
     }
 }

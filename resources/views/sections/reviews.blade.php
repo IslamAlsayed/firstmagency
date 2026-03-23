@@ -289,7 +289,7 @@
 
             <!-- Submit Button -->
             <div class="flex flex-row-reverse items-center justify-between gap-3">
-                <p>سيتم مراجعة الرأي قبل نشره.</p>
+                <p>{{ __('main.review_will_be_checked') ?? 'سيتم مراجعة الرأي قبل نشره.' }}</p>
 
                 <div class="flex gap-3">
                     <button type="submit"

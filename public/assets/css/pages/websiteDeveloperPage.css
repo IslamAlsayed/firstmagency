@@ -221,7 +221,7 @@
 
 .important-articles {
     margin-top: 0;
-    padding: 50px calc(var(--app-important-articles-section-inline-padding) * 2);
+    padding: 50px calc(var(--important-articles-section-inline-padding) * 2);
 
     &>.title {
         font-size: 30px;
@@ -230,7 +230,7 @@
 
 .website-developer .important-articles {
     position: relative;
-    padding: 50px calc(var(--app-important-articles-section-inline-padding) * 2);
+    padding: 50px calc(var(--important-articles-section-inline-padding) * 2);
     background-color: var(--website-articles-background-color);
 
     &::before {
@@ -251,7 +251,7 @@
 
     .website-developer .important-articles,
     .important-articles {
-        padding: 50px var(--app-important-articles-section-inline-padding);
+        padding: 50px var(--important-articles-section-inline-padding);
     }
 }
 
@@ -259,7 +259,7 @@
 
     .website-developer .important-articles,
     .important-articles {
-        padding: 50px calc(var(--app-important-articles-section-inline-padding) / 2);
+        padding: 50px calc(var(--important-articles-section-inline-padding) / 2);
     }
 }
 

@@ -1,4 +1,4 @@
-<section class="section partners-section text-center">
+<section class="section partners-section text-center relative">
     <div class="title font-semibold">{{ __('main.partners_title') }} <span class="title-badge">{{ __('main.brand_short') }}</span></div>
     <div class="description">{{ __('main.partners_description') }}</div>
 
@@ -9,8 +9,7 @@
                     @if ($partner->website)
                         <a href="{{ $partner->website }}" target="_blank" title="{{ $partner->translations[app()->getLocale()]['name'] ?? '' }}">
                             @if ($partner->image && checkExistFile($partner->image))
-                                <img src="{{ asset('storage/' . $partner->image) }}"
-                                    alt="{{ $partner->alt_text ?? ($partner->translations[app()->getLocale()]['name'] ?? '') }}">
+                                <img src="{{ asset('storage/' . $partner->image) }}" alt="{{ $partner->alt_text ?? ($partner->translations[app()->getLocale()]['name'] ?? '') }}">
                             @else
                                 <div class="flex items-center justify-center h-24 bg-gray-200 rounded">
                                     <i class="fas fa-users text-3xl text-gray-400"></i>
@@ -20,8 +19,7 @@
                     @else
                         <div title="{{ $partner->translations[app()->getLocale()]['name'] ?? '' }}">
                             @if ($partner->image && checkExistFile($partner->image))
-                                <img src="{{ asset('storage/' . $partner->image) }}"
-                                    alt="{{ $partner->alt_text ?? ($partner->translations[app()->getLocale()]['name'] ?? '') }}">
+                                <img src="{{ asset('storage/' . $partner->image) }}" alt="{{ $partner->alt_text ?? ($partner->translations[app()->getLocale()]['name'] ?? '') }}">
                             @else
                                 <div class="flex items-center justify-center h-24 bg-gray-200 rounded">
                                     <i class="fas fa-users text-3xl text-gray-400"></i>
@@ -41,4 +39,8 @@
             @endfor
         @endif
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-partners</div>
+    @endif
 </section>

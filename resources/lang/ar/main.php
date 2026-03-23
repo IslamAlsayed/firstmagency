@@ -131,6 +131,8 @@ return [
     'settings_add_current_ip_note' => 'اضغط الزر بالأسفل لإضافة عنوان IP الحالي',
     'settings_save_ips' => 'حفظ عناوين IP',
     'settings_add_my_ip' => 'أضف عنوان IP الخاص بي',
+    'reset_default_inline_paddings' => 'إعادة تعيين المسافات الداخلية الافتراضية',
+    'reset_default_inline_paddings_note' => 'سيتم استرجاع جميع قيم المسافات الداخلية إلى القيم الافتراضية المحفوظة.',
     'settings_about_us_title_placeholder' => 'عنوان من نحن',
     'settings_about_us_title_ar_placeholder' => 'عنوان عن الشركة',
     'settings_website_design_title_placeholder' => 'عنوان تصميم المواقع',
@@ -2174,4 +2176,5 @@ return [
     'select_your_preferred_language' => 'اختر لغتك المفضلة',
     'unverified' => 'غير موثق',
     'update_your_password' => 'تحديث كلمة المرور الخاصة بك',
+    'review_will_be_checked' => 'سيتم مراجعة الرأي قبل نشره.',
 ];

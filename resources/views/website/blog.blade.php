@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="articles-page">
+    <div class="articles-page relative">
         <section class="articles-section">
             <div class="heading-title">
                 <div class="title font-semibold">مدونة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
@@ -18,12 +18,8 @@
                             @if (isset($paginate) && $key < $paginate)
                                 @php
                                     $locale = app()->getLocale();
-                                    $title = is_object($article)
-                                        ? $article->translations[$locale]['title'] ?? ''
-                                        : $article['translations'][$locale]['title'] ?? '';
-                                    $description = is_object($article)
-                                        ? $article->translations[$locale]['description'] ?? ''
-                                        : $article['translations'][$locale]['description'] ?? '';
+                                    $title = is_object($article) ? $article->translations[$locale]['title'] ?? '' : $article['translations'][$locale]['title'] ?? '';
+                                    $description = is_object($article) ? $article->translations[$locale]['description'] ?? '' : $article['translations'][$locale]['description'] ?? '';
                                     $slug = is_object($article) ? $article->slug : $article['slug'] ?? '';
                                 @endphp
                                 <div class="article">
@@ -38,8 +34,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="body">
-                                            <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $slug]) }}"
-                                                class="title font-semibold">{{ limitedText(strip_tags($title), 30) }}</a>
+                                            <a href="{{ route('blog.show', ['id' => $article->id, 'slug' => $slug]) }}" class="title font-semibold">{{ limitedText(strip_tags($title), 30) }}</a>
                                             <div class="description">{{ limitedText(strip_tags($description), 60) }}</div>
                                         </div>
                                         <div class="actions">
@@ -150,6 +145,10 @@
                 </script>
             @endif
         </section>
+
+        @if (isDebugModeEnabled())
+            <div class="debug-flag-badge">🚩 flag-articles</div>
+        @endif
     </div>
 @endsection
 

@@ -59,6 +59,20 @@ class SettingsController extends Controller
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_general_applied'));
     }
 
+    public function resetInlinePadding()
+    {
+        $settings = Setting::first();
+        $defaultSectionsPadding = config('inline_padding.defaults', []);
+
+        if (!is_array($defaultSectionsPadding)) {
+            $defaultSectionsPadding = [];
+        }
+
+        $settings->update(['sections_padding' => $defaultSectionsPadding]);
+
+        return redirect()->back()->withSuccess(__('messages.inline_padding_reset'));
+    }
+
     public function updateGeneral(SettingRequest $request)
     {
         // Update user preferences if button_display_mode is sent

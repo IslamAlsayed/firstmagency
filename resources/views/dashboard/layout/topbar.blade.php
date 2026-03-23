@@ -1,3 +1,16 @@
+<style>
+    #topbar-notifications-list {
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: var(--color-gray-400);
+        }
+    }
+</style>
+
 <div class="topbar">
     <div class="flex items-center gap-4">
         <!-- Toggle Sidebar Button -->
@@ -49,7 +62,7 @@
                         @forelse($unreadNotifications as $notification)
                             <form method="POST" action="{{ route('dashboard.notifications.read', $notification->id) }}">
                                 @csrf
-                                <button type="submit" class="w-full text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
+                                <button type="submit" class="w-full cursor-pointer text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
                                     <div class="flex items-start gap-3">
                                         <div class="mt-0.5 w-5 text-center">
                                             @if ($notification->data['type'] === 'new_ticket')

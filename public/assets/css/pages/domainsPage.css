@@ -232,6 +232,7 @@
 
     .pest-domains-sections.official-domains {
         background-color: #FFF9F2;
+        padding-inline: var(--official-domains-section-inline-padding);
 
         & .title,
         & .description {

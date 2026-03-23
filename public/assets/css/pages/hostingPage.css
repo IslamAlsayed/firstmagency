@@ -3,7 +3,7 @@
 
     & .developer-section {
         min-height: 500px;
-        padding: 150px var(--main-inline-padding) 50px;
+        padding: 150px var(--hosting-hero-section-inline-padding) 50px;
         background-color: var(--dark2-color);
         overflow: hidden;
         position: relative;
@@ -85,7 +85,7 @@
     }
 
     & .feature-section {
-        padding-inline: var(--feature-section-inline-padding);
+        padding-inline: var(--hosting-features-section-inline-padding);
 
         & .title {
             .title-badge::before {
@@ -95,7 +95,7 @@
     }
 
     & .packages-sections {
-        padding: 50px var(--packages-section-inline-padding);
+        padding: 50px var(--hosting-packages-section-inline-padding);
         background-color: var(--light-color);
     }
 
@@ -326,7 +326,7 @@
     }
 
     .easy-management {
-        padding: 100px var(--inline-padding);
+        padding: 100px var(--easy-management-section-inline-padding);
         position: relative;
         background: #FAFAFA;
 
@@ -570,13 +570,13 @@
 
     @media (max-width: 1440px) {
         .feature-section {
-            padding-inline: calc(var(--feature-section-inline-padding) / 2);
+            padding-inline: calc(var(--hosting-features-section-inline-padding) / 2);
         }
     }
 
     @media (max-width: 1180px) {
         .feature-section {
-            padding-inline: calc(var(--feature-section-inline-padding) / 4);
+            padding-inline: calc(var(--hosting-features-section-inline-padding) / 4);
         }
 
         .dont-worry-sections {
@@ -613,6 +613,10 @@
             padding-inline: calc(var(--dont-worry-hosting-section-inline-padding) / 4);
         }
 
+        .easy-management-sections {
+            padding-inline: calc(var(--easy-management-section-inline-padding) / 4);
+        }
+
         .operations-systems-sections {
             padding: 50px calc(var(--operations-systems-section-inline-padding) / 2);
         }
@@ -620,6 +624,10 @@
 
     @media (max-width: 435px) {
         .dont-worry-sections {
+            padding-inline: var(--small-inline-padding);
+        }
+
+        .easy-management-sections {
             padding-inline: var(--small-inline-padding);
         }
 
@@ -639,7 +647,7 @@
     }
 
     .support-sections {
-        padding: 50px var(--main-inline-padding);
+        padding: 50px var(--support-hosting-section-inline-padding);
 
         .content {
             gap: 100px;

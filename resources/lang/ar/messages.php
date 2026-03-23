@@ -229,6 +229,7 @@ return [
     'about_us_settings_updated' => 'تم تحديث إعدادات من نحن بنجاح!',
     'debug_mode_toggled' => 'تم تفعيل وضع التصحيح :status بنجاح!',
     'debug_ips_saved' => 'تم حفظ :count عنوان IP بنجاح!',
+    'inline_padding_reset' => 'تمت إعادة تعيين المسافات الداخلية إلى القيم الافتراضية بنجاح!',
     'your_ip_added' => 'تم إضافة عنوان IP الخاص بك (:ip) إلى قائمة عناوين IP للتصحيح!',
     'your_ip_already_exists' => 'عنوان IP الخاص بك (:ip) موجود بالفعل في قائمة عناوين IP للتصحيح!',
 

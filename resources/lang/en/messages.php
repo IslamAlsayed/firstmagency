@@ -232,6 +232,7 @@ return [
     'about_us_settings_updated' => 'About Us settings updated successfully!',
     'debug_mode_toggled' => 'Debug mode :status successfully!',
     'debug_ips_saved' => ':count IP(s) saved successfully!',
+    'inline_padding_reset' => 'Inline paddings were reset to defaults successfully!',
     'your_ip_added' => 'Your IP (:ip) has been added to debug IPs!',
     'your_ip_already_exists' => 'Your IP (:ip) is already in the debug IPs list!',
 

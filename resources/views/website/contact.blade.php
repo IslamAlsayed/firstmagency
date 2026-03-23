@@ -142,7 +142,7 @@
         </div>
 
         @if (isDebugModeEnabled())
-            <div class="debug-flag-badge">🚩 flag-contact</div>
+            <div class="debug-flag-badge">🚩 flag-tickets</div>
         @endif
     </section>
 @endsection

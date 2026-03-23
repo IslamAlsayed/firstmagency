@@ -1,6 +1,6 @@
 .contact-sections {
     margin: 0;
-    padding: 140px var(--contact-page-section-inline-padding) 50px;
+    padding: 140px var(--tickets-page-section-inline-padding) 50px;
     background-color: var(--articles-background-color);
 
     background-image: url(https://firstmagency.com/wp-content/uploads/2024/07/White-logo.png);
@@ -281,13 +281,13 @@ html[lang=en] {
 
 @media (max-width: 1080px) {
     .contact-sections {
-        padding-inline: calc(var(--contact-page-section-inline-padding) / 2);
+        padding-inline: calc(var(--tickets-page-section-inline-padding) / 2);
     }
 }
 
 @media (max-width: 992px) {
     .contact-sections {
-        padding-inline: calc(var(--contact-page-section-inline-padding) / 4);
+        padding-inline: calc(var(--tickets-page-section-inline-padding) / 4);
     }
 }
 

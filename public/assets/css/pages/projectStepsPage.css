@@ -1,6 +1,6 @@
 .project-steps {
     text-align: center;
-    padding: 50px var(--projects-steps-inline-padding) 50px;
+    padding: 50px var(--projects-steps-section-inline-padding) 50px;
     background: var(--projects-steps-background-color);
 }
 

@@ -55,22 +55,16 @@ class SectionSeeder extends Seeder
                 'view_file' => 'partners',
             ],
             [
-                'name' => 'Line Works Section',
-                'flag' => 'flag-line-works',
-                'padding_setting_key' => 'work_lines_section',
-                'view_file' => 'line-works',
-            ],
-            [
                 'name' => 'Articles Section',
                 'flag' => 'flag-articles',
                 'padding_setting_key' => 'blog_articles_section',
                 'view_file' => 'articles',
             ],
             [
-                'name' => 'Contact Section',
-                'flag' => 'flag-contact',
-                'padding_setting_key' => 'contact_page_section',
-                'view_file' => 'contact',
+                'name' => 'Tickets Section',
+                'flag' => 'flag-tickets',
+                'padding_setting_key' => 'tickets_section',
+                'view_file' => 'tickets',
             ],
             [
                 'name' => 'Website Designer Section',
@@ -97,6 +91,12 @@ class SectionSeeder extends Seeder
                 'view_file' => 'platform-management',
             ],
             [
+                'name' => 'Line Works Section',
+                'flag' => 'flag-line-works',
+                'padding_setting_key' => 'work_lines_section',
+                'view_file' => 'line-works',
+            ],
+            [
                 'name' => 'Operating Systems Section',
                 'flag' => 'flag-operating-systems',
                 'padding_setting_key' => 'operations_systems_section',
@@ -109,16 +109,16 @@ class SectionSeeder extends Seeder
                 'view_file' => 'your-domain',
             ],
             [
-                'name' => 'Official Domains Section',
-                'flag' => 'flag-official-domains',
-                'padding_setting_key' => 'pest_domains_section',
-                'view_file' => 'official-domains',
-            ],
-            [
                 'name' => 'Pest Domains Section',
                 'flag' => 'flag-pest-domains',
                 'padding_setting_key' => 'pest_domains_section',
                 'view_file' => 'pest-domains',
+            ],
+            [
+                'name' => 'Official Domains Section',
+                'flag' => 'flag-official-domains',
+                'padding_setting_key' => 'official_domains_section',
+                'view_file' => 'official-domains',
             ],
             [
                 'name' => 'Frequently Asked Questions Section',
@@ -170,9 +170,15 @@ class SectionSeeder extends Seeder
             ],
             [
                 'name' => 'Hosting Packages Section',
-                'flag' => 'flag-packages',
-                'padding_setting_key' => 'packages_hosting_section',
+                'flag' => 'flag-hosting-packages',
+                'padding_setting_key' => 'hosting_packages_section',
                 'view_file' => 'packages-hosting',
+            ],
+            [
+                'name' => 'Support Hosting Section',
+                'flag' => 'flag-support-hosting',
+                'padding_setting_key' => 'support_hosting_section',
+                'view_file' => 'support-hosting',
             ],
             [
                 'name' => 'Categories Programming Section',
@@ -217,10 +223,10 @@ class SectionSeeder extends Seeder
                 'view_file' => 'important-articles-marketing',
             ],
             [
-                'name' => 'Project Steps Section',
-                'flag' => 'flag-project-steps',
-                'padding_setting_key' => 'project_steps_section',
-                'view_file' => 'project-steps',
+                'name' => 'Projects Steps Section',
+                'flag' => 'flag-projects-steps',
+                'padding_setting_key' => 'projects_steps_section',
+                'view_file' => 'projects-steps',
             ],
             [
                 'name' => 'Ready Hosting Section',
@@ -233,6 +239,12 @@ class SectionSeeder extends Seeder
                 'flag' => 'flag-support-hosting',
                 'padding_setting_key' => 'support_hosting_section',
                 'view_file' => 'support-hosting',
+            ],
+            [
+                'name' => 'Marketing Hero Section',
+                'flag' => 'flag-marketing-hero',
+                'padding_setting_key' => 'marketing_hero_section',
+                'view_file' => 'hero-marketing',
             ],
             [
                 'name' => 'Work Line Section',

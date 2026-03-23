@@ -17,7 +17,8 @@
             </a>
         </div>
     </div>
-    @if (isDebugModeEnabled())
+
+    {{-- @if (isDebugModeEnabled())
         <div class="debug-flag-badge">🚩 flag-ready-hosting</div>
-    @endif
+    @endif --}}
 </section>

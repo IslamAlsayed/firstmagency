@@ -40,8 +40,8 @@
                 </div>
                 <div class="social">
                     <button class="btn-link main-color dark-hover font-semibold">
-                        <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}"
-                            target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a>
                     </button>
                     <button class="btn-link main-color dark-hover font-semibold">
                         <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -100,8 +100,7 @@
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('about-us') }}"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
+                    <a href="{{ route('about-us') }}" class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'about-us' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.about_us') }}</span>
                     </a>
@@ -144,8 +143,7 @@
                     </div>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('portfolio') }}"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'portfolio' ? 'active' : '' }}">
+                    <a href="{{ route('portfolio') }}" class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'portfolio' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.our_works') }}</span>
                     </a>
@@ -165,8 +163,7 @@
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="{{ route('tickets.index') }}"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'contact' ? 'active' : '' }}">
+                    <a href="{{ route('tickets.index') }}" class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ $currentRoute == 'tickets.index' ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.contact') }}</span>
                     </a>
@@ -211,8 +208,7 @@
             </div>
 
             <div class="btn-link main-color font-semibold whatsapp">
-                <a href="https://api.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_whatsapp ?? ('' ?? '') }}&text&type=phone_number&app_absent=0"
-                    class="whatsapp-link">
+                <a href="https://api.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_whatsapp ?? ('' ?? '') }}&text&type=phone_number&app_absent=0" class="whatsapp-link">
                     <span>{{ __('main.whatsapp_contact') }}</span>
                     <i class="icon fab fa-whatsapp"></i>
                 </a>

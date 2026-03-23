@@ -118,7 +118,8 @@
             </div>
         @endif
     </div>
+
     @if (isDebugModeEnabled())
-        <div class="debug-flag-badge">🚩 flag-project-steps</div>
+        <div class="debug-flag-badge">🚩 flag-projects-steps</div>
     @endif
 </section>

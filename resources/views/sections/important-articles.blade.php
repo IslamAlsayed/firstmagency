@@ -1,7 +1,6 @@
 <section class="section important-articles text-center relative">
     {{-- <div class="title font-semibold">{{ __('main.important_articles_title') }} <span class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div> --}}
-    <div class="title font-semibold">{{ $title ?? __('main.important_articles_title') }} <span
-            class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div>
+    <div class="title font-semibold">{{ $title ?? __('main.important_articles_title') }} <span class="title-badge">{{ __('main.important_articles_subtitle') }}</span></div>
     <div class="description">{{ $desc ?? __('main.important_articles_description') }}</div>
 
     <div class="main-articles-section">
@@ -16,8 +15,7 @@
                         <div class="article">
                             <div class="image">
                                 @if (rand(0, 1) == 1)
-                                    <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}"
-                                        alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}">
+                                    <img src="{{ asset('assets/images/website/projects/' . rand(1, 12) . '.png') }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}">
                                 @endif
                             </div>
                             <div class="visitor">
@@ -58,8 +56,7 @@
                             </div>
                             <div class="content">
                                 <div class="body">
-                                    <a href="{{ route('blog.show', ['id' => $key + 1]) }}"
-                                        class="title font-semibold">{{ limitedText($article['title'] ?? '', 30) }}</a>
+                                    <a href="{{ route('blog.show', ['id' => $key + 1]) }}" class="title font-semibold">{{ limitedText($article['title'] ?? '', 30) }}</a>
                                     <div class="description">{{ limitedText($article['description'] ?? '', 120) }}</div>
                                 </div>
                                 <div class="actions">

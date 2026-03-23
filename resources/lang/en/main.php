@@ -131,6 +131,8 @@ return [
     'settings_add_current_ip_note' => 'Click the button below to add your current IP',
     'settings_save_ips' => 'Save IPs',
     'settings_add_my_ip' => 'Add My IP',
+    'reset_default_inline_paddings' => 'Reset Default Inline Paddings',
+    'reset_default_inline_paddings_note' => 'This will restore all inline padding values to the saved defaults.',
     'settings_about_us_title_placeholder' => 'About Us Title',
     'settings_about_us_title_ar_placeholder' => 'About Us Title (Arabic)',
     'settings_website_design_title_placeholder' => 'Website Design Title',
@@ -2152,4 +2154,5 @@ return [
     'select_your_preferred_language' => 'Select your preferred language',
     'unverified' => 'Unverified',
     'update_your_password' => 'Update Your Password',
+    'review_will_be_checked' => 'Your review will be checked before being published.',
 ];

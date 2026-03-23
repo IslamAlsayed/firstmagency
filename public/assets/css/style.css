@@ -60,7 +60,7 @@
     --portfolio-section-inline-padding: 200px;
     --blog-articles-section-inline-padding: 60px;
     --articles-page-section-inline-padding: 200px;
-    --contact-page-section-inline-padding: 180px;
+    --tickets-page-section-inline-padding: 180px;
 
     --website-developer-section-inline-padding: 120px;
     --website-programming-section-inline-padding: 200px;
@@ -69,18 +69,23 @@
     --faqs-section-inline-padding: 60px;
 
     --app-developer-hero-section-inline-padding: 240px;
-    --app-important-articles-section-inline-padding: 100px;
-    --projects-steps-inline-padding: 60px;
-    --feature-section-inline-padding: 200px;
-    --packages-section-inline-padding: 120px;
+    --important-articles-section-inline-padding: 100px;
+    --hosting-hero-section-inline-padding: 240px;
+    --projects-steps-section-inline-padding: 60px;
+    --hosting-features-section-inline-padding: 200px;
+    --hosting-packages-section-inline-padding: 120px;
+    --support-hosting-section-inline-padding: 120px;
     --operations-systems-section-inline-padding: 60px;
     --your-domain-section-inline-padding: 240px;
     --pest-domains-section-inline-padding: 60px;
+    --official-domains-section-inline-padding: 120px;
     --why-us-section-inline-padding: 120px;
     --platform-management-section-inline-padding: 60px;
-    --work-lines-section-inline-padding: 120px;
+    --marketing-hero-section-inline-padding: 240px;
     --packages-marketing-section-inline-padding: 120px;
+    --work-lines-section-inline-padding: 120px;
     --dont-worry-hosting-section-inline-padding: 60px;
+    --easy-management-section-inline-padding: 60px;
     --order-your-app-section-inline-padding: 170px;
     --categories-programming-section-inline-padding: 200px;
 

@@ -1,16 +1,15 @@
 <style>
     .custom-dropdown {
+        width: 300px;
         border-radius: calc(var(--radius) - 2px);
-        border-style: var(--tw-border-style);
-        border-width: 1px;
-        border-color: var(--border);
+        border-style: 1px var(--tw-border-style) var(--border);
         color: var(--primary);
         background-color: var(--light-color);
         --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
         box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-        position: fixed;
+        position: absolute;
         top: 70px;
-        right: 160px;
+        right: 0;
         left: auto;
         z-index: 50;
     }
@@ -27,8 +26,8 @@
     }
 
     html[lang=ar] .custom-dropdown {
+        left: 0;
         right: auto;
-        left: 160px;
     }
 </style>
 
