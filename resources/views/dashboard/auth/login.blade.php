@@ -29,12 +29,11 @@
                     <label class="kt-form-label font-normal text-mono">
                         {{ __('auth.email_label') }}
                     </label>
-                    <input class="kt-input h-[45px]" placeholder="e@e.com" type="email" name="email" autocomplete="off"
-                        value="{{ old('email', 'superadmin@example.com') }}" list="emails" />
+                    <input class="kt-input h-[45px]" placeholder="e@e.com" type="email" name="email" autocomplete="off" value="{{ old('email', 'superadmin@firstmagency.com') }}" list="emails" />
                     <datalist id="emails">
-                        <option value="superadmin@example.com">
-                        <option value="admin@example.com">
-                        <option value="content@example.com">
+                        <option value="superadmin@firstmagency.com">
+                        <option value="admin@firstmagency.com">
+                        <option value="content@firstmagency.com">
                     </datalist>
                 </div>
                 <div class="flex flex-col gap-1">
