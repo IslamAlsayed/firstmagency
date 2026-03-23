@@ -129,6 +129,6 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 });
 
 // any route not found in the website will redirect to the welcome index (except for api routes)
-Route::get('/{any}', function () {
-    return redirect()->route('welcome');
-})->where('any', '.*')->middleware('guest');
+// Route::get('/{any}', function () {
+//     return redirect()->route('welcome');
+// })->where('any', '.*')->middleware('guest');
