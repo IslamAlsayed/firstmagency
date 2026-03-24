@@ -492,6 +492,15 @@
                             </a>
                         </li>
                     @endif
+                    @if (auth()->user()->can('website-update'))
+                        <li class="relative" data-sub-id="website" title="{{ __('main.website') }}">
+                            <a href="{{ route('dashboard.settings.website') }}"
+                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.website') ? 'active' : '' }}">
+                                <span class="main-icon"><i class="fas fa-globe" aria-hidden="true"></i></span>
+                                <span class="text-sm">{{ __('main.website_settings') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

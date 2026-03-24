@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.faq')]) }}</h3>
 
-            <a href="{{ route('dashboard.faqs.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.faqs.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.faqs')]) }}
             </a>
         </div>
@@ -20,8 +20,7 @@
                     <!-- Category -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="category" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }} <span
-                                    class="text-red-500">*</span></label>
+                            <label for="category" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }} <span class="text-red-500">*</span></label>
                             <select class="kt-select basic-single" id="category" name="category" required>
                                 <option value="">{{ __('main.select_category') }}</option>
                                 @foreach ($categories as $key => $label)
@@ -37,8 +36,8 @@
 
                         <div>
                             <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" class="w-full h-[45px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="order"
-                                name="order" value="{{ old('order', 0) }}" min="0">
+                            <input type="number" class="w-full h-[45px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="order" name="order"
+                                value="{{ old('order', 0) }}" min="0">
                             @error('order')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -55,8 +54,8 @@
                                 <label for="question" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.question') }} (EN) <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question"
-                                    name="question" required value="{{ old('question') }}" placeholder="Enter question in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question" name="question" required
+                                    value="{{ old('question') }}" placeholder="Enter question in English">
                                 @error('question')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -77,8 +76,8 @@
                                 <label for="question_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.question') }} (AR) <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question_ar"
-                                    name="question_ar" required value="{{ old('question_ar') }}" placeholder="أدخل السؤال بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question_ar" name="question_ar" required
+                                    value="{{ old('question_ar') }}" placeholder="أدخل السؤال بالعربية">
                                 @error('question_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror

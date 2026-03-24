@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.edit_type', ['type' => __('main.dashboards_and_app')]) }}</h3>
 
-            <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.dashboards_and_apps')]) }}
             </a>
         </div>
@@ -27,10 +27,8 @@
                                 <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title') }}
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en"
-                                    name="title_en" value="{{ old('title_en', $dashboardsAndSystem->translations['en']['title'] ?? '') }}"
-                                    placeholder="Enter title in English" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                    value="{{ old('title_en', $dashboardsAndSystem->translations['en']['title'] ?? '') }}" placeholder="Enter title in English" required>
                                 @error('title_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -45,10 +43,8 @@
                                 <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title') }}
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar"
-                                    name="title_ar" value="{{ old('title_ar', $dashboardsAndSystem->translations['ar']['title'] ?? '') }}"
-                                    placeholder="أدخل العنوان بالعربية" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                    value="{{ old('title_ar', $dashboardsAndSystem->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية" required>
                                 @error('title_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror

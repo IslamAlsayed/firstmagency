@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_role') }}</h3>
 
-            <a href="{{ route('dashboard.roles.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.roles.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.roles')]) }}
             </a>
         </div>
@@ -18,10 +18,9 @@
                 <div class="grid gap-4 lg:gap-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="name" name="name" required value="{{ old('name') }}" placeholder="مثال: محرر، مدير">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('main.role_name') }} <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name" required
+                                value="{{ old('name') }}" placeholder="مثال: محرر، مدير">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror

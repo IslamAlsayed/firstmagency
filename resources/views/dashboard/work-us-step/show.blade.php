@@ -12,7 +12,7 @@
                 <a href="{{ route('dashboard.work-us-step.edit', $workUsStep->id) }}" class="kt-btn kt-btn-outline-info">
                     {{ __('main.edit') }}
                 </a>
-                <a href="{{ route('dashboard.work-us-step.index') }}" class="kt-btn kt-btn-outline-primary">
+                <a href="{{ route('dashboard.work-us-step.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('main.back_to_work_us_step') }}
                 </a>
             </div>

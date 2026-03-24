@@ -33,8 +33,7 @@
                         <div class="form-group">
                             <label for="image">{{ __('main.image') }} <span class="text-danger">*</span></label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image" accept="image/*"
-                                    required>
+                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image" accept="image/*" required>
                                 <label class="custom-file-label" for="image">{{ __('main.choose_image') }}</label>
                             </div>
                             <small class="form-text text-muted">{{ __('main.allowed_formats') }}: JPG, PNG, GIF | {{ __('main.max_size') }}: 5MB</small>
@@ -46,8 +45,8 @@
                         {{-- Alt Text --}}
                         <div class="form-group">
                             <label for="alt_text">{{ __('main.alt_text') }}</label>
-                            <input type="text" class="form-control @error('alt_text') is-invalid @enderror" id="alt_text" name="alt_text"
-                                placeholder="{{ __('main.alt_text') }}" value="{{ old('alt_text') }}" maxlength="255">
+                            <input type="text" class="form-control @error('alt_text') is-invalid @enderror" id="alt_text" name="alt_text" placeholder="{{ __('main.alt_text') }}"
+                                value="{{ old('alt_text') }}" maxlength="255">
                             @error('alt_text')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -56,8 +55,7 @@
                         {{-- Order --}}
                         <div class="form-group">
                             <label for="order">{{ __('main.order') }}</label>
-                            <input type="number" class="form-control @error('order') is-invalid @enderror" id="order" name="order" placeholder="0"
-                                value="{{ old('order', 0) }}" min="0">
+                            <input type="number" class="form-control @error('order') is-invalid @enderror" id="order" name="order" placeholder="0" value="{{ old('order', 0) }}" min="0">
                             @error('order')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -66,8 +64,7 @@
                         {{-- Is Active --}}
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="is_active" name="is_active" value="1"
-                                    {{ old('is_active', true) ? 'checked' : '' }}>
+                                <input type="checkbox" class="custom-control-input" id="is_active" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="is_active">{{ __('main.active') }}</label>
                             </div>
                         </div>

@@ -143,7 +143,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('main.cancel') }}</button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-save"></i> {{ __('main.save_changes') }}
                     </button>
                 </div>

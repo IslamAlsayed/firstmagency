@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.edit_hosting_package') }}</h3>
 
-            <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.hosting_packages')]) }}
             </a>
         </div>
@@ -26,10 +26,8 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en"
-                                    name="title_en" value="{{ old('title_en', $hostingPackage->translations['en']['title']) }}"
-                                    placeholder="Enter title in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                    value="{{ old('title_en', $hostingPackage->translations['en']['title']) }}" placeholder="Enter title in English">
                                 @error('title_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -37,8 +35,8 @@
 
                             <div>
                                 <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description_en') }}</label>
-                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="description_en"
-                                    name="description_en" rows="3" placeholder="Enter description in English">{{ old('description_en', $hostingPackage->translations['en']['description']) }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="description_en" name="description_en" rows="3"
+                                    placeholder="Enter description in English">{{ old('description_en', $hostingPackage->translations['en']['description']) }}</textarea>
                                 @error('description_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -53,10 +51,8 @@
                                 <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title_ar') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar"
-                                    name="title_ar" required value="{{ old('title_ar', $hostingPackage->translations['ar']['title']) }}"
-                                    placeholder="أدخل العنوان بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                    required value="{{ old('title_ar', $hostingPackage->translations['ar']['title']) }}" placeholder="أدخل العنوان بالعربية">
                                 @error('title_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -64,8 +60,8 @@
 
                             <div>
                                 <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description_ar') }}</label>
-                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="description_ar"
-                                    name="description_ar" rows="3" placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $hostingPackage->translations['ar']['description']) }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="description_ar" name="description_ar" rows="3"
+                                    placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $hostingPackage->translations['ar']['description']) }}</textarea>
                                 @error('description_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -76,8 +72,7 @@
                     <!-- Pricing -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="monthly_price" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.monthly_price') }} <span
-                                    class="text-red-500">*</span></label>
+                            <label for="monthly_price" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.monthly_price') }} <span class="text-red-500">*</span></label>
                             <input type="number" step="0.01" id="monthly_price" name="monthly_price"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 value="{{ old('monthly_price', $hostingPackage->monthly_price) }}" required placeholder="0.00">
@@ -87,8 +82,7 @@
                         </div>
 
                         <div>
-                            <label for="yearly_price" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.yearly_price') }} <span
-                                    class="text-red-500">*</span></label>
+                            <label for="yearly_price" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.yearly_price') }} <span class="text-red-500">*</span></label>
                             <input type="number" step="0.01" id="yearly_price" name="yearly_price"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 value="{{ old('yearly_price', $hostingPackage->yearly_price) }}" required placeholder="0.00">
@@ -124,8 +118,8 @@
                         <div>
                             <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
                             <input type="number" id="order" name="order" min="0"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                value="{{ old('order', $hostingPackage->order) }}" placeholder="0">
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" value="{{ old('order', $hostingPackage->order) }}"
+                                placeholder="0">
                             @error('order')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror

@@ -24,7 +24,7 @@
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.tickets.show', $ticket->id) }}" class="kt-btn kt-btn-outline-primary">
+                <a href="{{ route('dashboard.tickets.show', $ticket->id) }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('main.details') }}
                 </a>
                 <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
@@ -359,33 +359,33 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                                                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                                                                                                    {{ __('main.attachment') }}
-                                                                                                                                                                                                </div>`).join('')
+                                                                                                                                                                                                    <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                                                                                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                                                                                                        {{ __('main.attachment') }}
+                                                                                                                                                                                                    </div>`).join('')
                                     : ''
                                 }
                             </div>
 
                     ${!isCustomer ? `
-                                                                                                                            <div class="edit-form" style="display:none;">
-                                                                                                                                <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                                                                                                    <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                                                                                                                    <div class="edit-buttons flex gap-2 mt-3">
-                                                                                                                                        <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                                                                                                        <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                                                                <div class="edit-form" style="display:none;">
+                                                                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                                                                                                        <div class="edit-buttons flex gap-2 mt-3">
+                                                                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                                                                        </div>
                                                                                                                                     </div>
-                                                                                                                                </div>
-                                                                                                                                </div>` : ''}
+                                                                                                                                    </div>` : ''}
                         </div>
                     </div>
 
                     ${!isCustomer ? `
-                                                                                                                                            <div class="actions ${ticketStatus}">
-                                                                                                                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                                                                                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                                                                                                            </div>
-                                                                                                                                        </div>` : ''}
+                                                                                                                                                <div class="actions ${ticketStatus}">
+                                                                                                                                                    <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                                                                                                    <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                                                                                                </div>
+                                                                                                                                            </div>` : ''}
                 `;
 
             // Append message

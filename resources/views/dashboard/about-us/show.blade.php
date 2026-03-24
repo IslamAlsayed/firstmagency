@@ -37,8 +37,7 @@
                 <!-- Status -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-600 mb-2">{{ __('main.status') }}</label>
-                    <span
-                        class="px-3 py-1 rounded-full text-xs font-semibold {{ $aboutUs->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $aboutUs->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                         {{ $aboutUs->is_active ? __('main.active') : __('main.inactive') }}
                     </span>
                 </div>
@@ -58,7 +57,7 @@
 
             <div class="kt-card-footer flex gap-3">
                 @can('update', $aboutUs)
-                    <a href="{{ route('dashboard.about-us.edit', $aboutUs->id) }}" class="kt-btn kt-btn-primary">
+                    <a href="{{ route('dashboard.about-us.edit', $aboutUs->id) }}" class="kt-btn kt-btn-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-edit"></i>
                         {{ __('main.edit') }}
                     </a>

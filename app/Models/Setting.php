@@ -20,23 +20,6 @@ class Setting extends Model
     ];
 
     protected $fillable = [
-        // Dashboard Colors
-        'primary_color',
-        'secondary_color',
-        'success_color',
-        'danger_color',
-        'warning_color',
-        'info_color',
-        'accent_color',
-
-        // Website Colors
-        'main_color',
-        'dark_main_color',
-        'light_main_color',
-        'header_color',
-        'header_text_color',
-        'footer_color',
-
         'font_url',
         'font_name',
         'font_size',
@@ -69,7 +52,8 @@ class Setting extends Model
         'website_design_years_experience',
         'website_design_image',
 
-        // Inline Padding (JSON)
+        // columns (JSON)
+        'colors',
         'sections_padding',
     ];
 
@@ -77,6 +61,7 @@ class Setting extends Model
         'font_size' => 'integer',
         'line_height' => 'float',
         'debug_mode' => 'boolean',
+        'colors' => 'array',
         'sections_padding' => 'array',
     ];
 

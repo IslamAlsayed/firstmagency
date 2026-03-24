@@ -34,7 +34,7 @@
                 <div class="flex justify-between items-center gap-4">
                     <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
-                    <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary">
+                    <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         {{ __('main.create_article') }}
                     </a>
                 </div>

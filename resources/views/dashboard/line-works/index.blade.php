@@ -28,7 +28,7 @@
                 <div class="flex justify-between items-center gap-4">
                     <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         placeholder="{{ __('main.search_line_works_placeholder') }}">
-                    <a href="{{ route('dashboard.line-works.create') }}" class="kt-btn kt-btn-outline-primary">
+                    <a href="{{ route('dashboard.line-works.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         {{ __('main.create_line_work') }}
                     </a>
                 </div>

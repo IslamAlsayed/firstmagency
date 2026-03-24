@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'defaults' => [
+    'inline_padding' => [
         'home_hero_section' => 200,
         'home_services_section' => 60,
         'home_projects_section' => 20,
@@ -38,4 +38,15 @@ return [
         'easy_management_section' => 60,
         'packages_marketing_section' => 120,
     ],
+    'colors' => [
+        'dash_primary_color' => '#0074F7',
+        'text_color' => '#ffffff',
+        'icon_color' => '#4a5565',
+        'button_color' => '#0074F7',
+
+        // Website colors
+        'main_color' => '#d05423',
+        'light_main_color' => '#F97316',
+        'dark_main_color' => '#96310E',
+    ]
 ];

@@ -226,6 +226,7 @@ return [
 
     // Settings
     'settings_updated' => 'Settings Updated Successfully',
+    'website_settings_updated' => 'Website settings updated successfully!',
     'settings_colors_fonts_applied' => 'Colors and fonts have been applied to the site.',
     'settings_colors_applied' => 'Website colors have been applied to the site.',
     'settings_fonts_applied' => 'Fonts have been applied to the site.',

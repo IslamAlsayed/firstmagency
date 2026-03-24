@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.review')]) }}</h3>
 
-            <a href="{{ route('dashboard.reviews.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.reviews.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.reviews')]) }}
             </a>
         </div>
@@ -132,8 +132,7 @@
 
                                     <!-- Tabs for Audio Upload and Recording -->
                                     <div class="flex gap-2 mb-3">
-                                        <button type="button" class="audio-tab cursor-pointer px-4 py-2 border-custom-b-2 border-custom-color font-medium"
-                                            data-tab="upload">
+                                        <button type="button" class="audio-tab cursor-pointer px-4 py-2 border-custom-b-2 border-custom-color font-medium" data-tab="upload">
                                             📁 {{ __('main.upload') }}
                                         </button>
                                         <button type="button" class="audio-tab cursor-pointer px-4 py-2 text-gray-600" data-tab="record">
@@ -164,8 +163,7 @@
                                                 </button>
                                             </div>
                                             <div id="audioPlayback" style="display: none;" class="mt-3">
-                                                <audio id="audioPreview" controls class="w-[300px]"
-                                                    style="border: 1px solid #cacacc; border-radius: 50px;"></audio>
+                                                <audio id="audioPreview" controls class="w-[300px]" style="border: 1px solid #cacacc; border-radius: 50px;"></audio>
                                                 <button type="button" id="removeAudio" class="kt-btn bg-danger mt-2 text-sm">{{ __('main.remove') }}</button>
                                             </div>
                                         </div>

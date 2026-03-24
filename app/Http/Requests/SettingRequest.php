@@ -20,21 +20,6 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'primary_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'secondary_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'success_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'danger_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'warning_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'info_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'accent_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'header_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'header_text_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'footer_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-
-            'main_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'dark_main_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'light_main_color' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
-
             'font_url' => 'nullable|string|url',
             'font_name' => 'nullable|string|max:255',
             'font_size',
@@ -63,6 +48,9 @@ class SettingRequest extends FormRequest
             'website_design_description_ar' => 'nullable|string',
             'website_design_years_experience' => 'nullable|numeric|max:999',
             'website_design_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+
+            'colors' => 'nullable|array',
+            'colors.*' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
 
             'sections_padding' => 'nullable|array',
             'sections_padding.*' => 'nullable|numeric|min:0|max:1000',

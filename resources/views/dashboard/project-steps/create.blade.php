@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.project_step')]) }}</h3>
 
-            <a href="{{ route('dashboard.project-steps.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.project-steps.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.project_steps')]) }}
             </a>
         </div>
@@ -42,8 +42,7 @@
                                     {{ __('main.content') }} <span class="text-red-500">*</span>
                                 </label>
                                 <textarea id="content_en" name="content_en" rows="5"
-                                    class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_en') border-red-500 @enderror"
-                                    placeholder="Enter content in English">{{ old('content_en') }}</textarea>
+                                    class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_en') border-red-500 @enderror" placeholder="Enter content in English">{{ old('content_en') }}</textarea>
                                 @error('content_en')
                                     <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -73,8 +72,7 @@
                                     {{ __('main.content') }} <span class="text-red-500">*</span>
                                 </label>
                                 <textarea id="content_ar" name="content_ar" rows="5"
-                                    class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_ar') border-red-500 @enderror"
-                                    placeholder="أدخل المحتوى بالعربية">{{ old('content_ar') }}</textarea>
+                                    class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('content_ar') border-red-500 @enderror" placeholder="أدخل المحتوى بالعربية">{{ old('content_ar') }}</textarea>
                                 @error('content_ar')
                                     <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -98,8 +96,7 @@
                             </label>
                             <div class="flex items-center gap-2">
                                 <input type="text" id="icon" name="icon" value="{{ old('icon') }}"
-                                    class="flex-1 rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('icon') border-red-500 @enderror"
-                                    placeholder="fas fa-chart-pie">
+                                    class="flex-1 rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('icon') border-red-500 @enderror" placeholder="fas fa-chart-pie">
                             </div>
                             @error('icon')
                                 <div class="mt-1 text-sm text-red-600">{{ $message }}</div>

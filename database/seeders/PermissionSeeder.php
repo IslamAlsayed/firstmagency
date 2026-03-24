@@ -246,6 +246,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'settings-read', 'guard_name' => 'web', 'description' => 'View settings'],
             ['name' => 'settings-update', 'guard_name' => 'web', 'description' => 'Edit settings'],
             ['name' => 'inline-padding-update', 'guard_name' => 'web', 'description' => 'Edit inline padding settings'],
+            ['name' => 'website-update', 'guard_name' => 'web', 'description' => 'Edit website settings'],
         ];
 
         // Create permissions
@@ -428,6 +429,7 @@ class PermissionSeeder extends Seeder
             'settings-read',
             'settings-update',
             'inline-padding-update',
+            'website-update'
         ])->get();
         $contentManagerRole->syncPermissions($contentManagerPermissions);
 

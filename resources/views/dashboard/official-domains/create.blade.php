@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.official_domain')]) }}</h3>
 
-            <a href="{{ route('dashboard.official-domains.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.official-domains.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.official_domains')]) }}
             </a>
         </div>
@@ -21,8 +21,8 @@
                         <label for="title" class="block text-sm font-medium text-gray-600 mb-1">
                             {{ __('main.title') }} <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            id="title" name="title" value="{{ old('title') }}" placeholder="Enter title">
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title" name="title"
+                            value="{{ old('title') }}" placeholder="Enter title">
                         @error('title')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -38,9 +38,8 @@
                                 <label for="badge_en" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.badge') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="badge_en"
-                                    name="badge_en" value="{{ old('badge_en') }}" placeholder="Enter badge in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="badge_en" name="badge_en"
+                                    value="{{ old('badge_en') }}" placeholder="Enter badge in English">
                                 @error('badge_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -48,9 +47,8 @@
 
                             <div>
                                 <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror"
-                                    id="description_en" name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en') }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror" id="description_en"
+                                    name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en') }}</textarea>
                                 @error('description_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -65,9 +63,8 @@
                                 <label for="badge_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.badge') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="badge_ar"
-                                    name="badge_ar" required value="{{ old('badge_ar') }}" placeholder="أدخل الاسم بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="badge_ar" name="badge_ar"
+                                    required value="{{ old('badge_ar') }}" placeholder="أدخل الاسم بالعربية">
                                 @error('badge_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -75,9 +72,8 @@
 
                             <div>
                                 <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror"
-                                    id="description_ar" name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar') }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror" id="description_ar"
+                                    name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar') }}</textarea>
                                 @error('description_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror

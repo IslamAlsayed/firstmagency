@@ -21,24 +21,7 @@ class SettingsSeeder extends Seeder
 
         Setting::create([
             // Colors
-            // 'primary_color' => '#5A8622',
-            'dash_primary_color' => '#0074F7',
-            'text_color' => '#ffffff',
-            'secondary_color' => '#6c757d',
-            'success_color' => '#198754',
-            'danger_color' => '#dc3545',
-            'warning_color' => '#ffc107',
-            'info_color' => '#0dcaf0',
-            'accent_color' => '#dc3545',
-            // 'header_color' => '#5A8622',
-            'header_color' => '#413e3e',
-            'header_text_color' => '#f7f7f7',
-            'footer_color' => '#5A8622',
-
-            // Website colors
-            'main_color' => '#d05423',
-            'light_main_color' => '#F97316',
-            'dark_main_color' => '#96310E',
+            'colors' => config('settings.colors', []),
 
             // Fonts
             'font_url' => 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap',
@@ -63,7 +46,7 @@ class SettingsSeeder extends Seeder
             'about_us_image2' => 'images/website/about/text-bg.png',
 
             // Inline Padding Sections
-            'sections_padding' => config('inline_padding.defaults', []),
+            'sections_padding' => config('settings.inline_padding', []),
         ]);
     }
 }

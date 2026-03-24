@@ -18,22 +18,7 @@ return new class extends Migration
             $table->id();
 
             // Color Settings
-            $table->string('dash_primary_color')->default('#0074F7');
-            $table->string('text_color')->default('#ffffff');
-            $table->string('secondary_color')->default('#6c757d');
-            $table->string('success_color')->default('#198754');
-            $table->string('danger_color')->default('#dc3545');
-            $table->string('warning_color')->default('#ffc107');
-            $table->string('info_color')->default('#0dcaf0');
-            $table->string('accent_color')->default('#dc3545');
-            $table->string('header_color')->default('#5A8622');
-            $table->string('header_text_color')->default('#f7f7f7');
-            $table->string('footer_color')->default('#5A8622');
-
-            // Website colors
-            // $table->string('main_color')->default('#d05423');
-            // $table->string('dark_main_color')->default('#96310E');
-            // $table->string('light_main_color')->default('#F97316');
+            $table->json('colors')->nullable();
 
             // Font Settings
             $table->string('font_url')->default('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800&family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
@@ -55,10 +40,6 @@ return new class extends Migration
             $table->longText('about_us_description_ar')->nullable();
             $table->string('about_us_image')->nullable();
             $table->string('about_us_image2')->nullable();
-
-            $table->string('main_color')->default('#d05423');
-            $table->string('light_main_color')->default('#F97316');
-            $table->string('dark_main_color')->default('#96310E');
 
             $table->boolean('debug_mode')->default(false);
             $table->json('sections_padding')->nullable();

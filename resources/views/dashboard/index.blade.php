@@ -36,7 +36,7 @@
                     <h1 class="text-4xl font-bold mb-2">{{ __('main.welcome') }}, {{ auth()->user()->name }}! 👋</h1>
                     <p class="text-indigo-100 text-lg">{{ __('main.dashboard') }} - {{ now()->format('l, d F Y') }}</p>
                 </div>
-                <div class="text-6xl opacity-20" style="color: var(--dark-color)">
+                <div class="text-6xl opacity-20" style="color: var(--icon_color)">
                     <i class="fas fa-chart-line"></i>
                 </div>
             </div>
@@ -52,13 +52,13 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.users.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                            <a href="{{ route('dashboard.users.index') }}" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--icon_color)">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                 {{ __('main.total_users') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $stats['total_users'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold mt-2" style="color: var(--icon_color)">{{ $stats['total_users'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-gray-600 transition-all">
+                        <div class="radius-lg p-3 text-white shadow-sm group-hover:bg-gray-600 transition-all" style="background-color: var(--icon_color)">
                             <i class="fas fa-users text-2xl"></i>
                         </div>
                     </div>
@@ -79,13 +79,13 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.articles.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                            <a href="{{ route('dashboard.articles.index') }}" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--icon_color)">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                 {{ __('main.articles') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $contentStats['articles']['total'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold mt-2" style="color: var(--icon_color)">{{ $contentStats['articles']['total'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-purple-600 transition-all">
+                        <div class="radius-lg p-3 text-white shadow-sm group-hover:bg-purple-600 transition-all" style="background-color: var(--icon_color)">
                             <i class="fas fa-newspaper text-2xl"></i>
                         </div>
                     </div>
@@ -99,13 +99,13 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.projects.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                            <a href="{{ route('dashboard.projects.index') }}" class="text-sm font-semibold uppercase tracking-wide" style="color: var(--icon_color)">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                 {{ __('main.projects') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $contentStats['projects']['total'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold mt-2" style="color: var(--icon_color)">{{ $contentStats['projects']['total'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-green-600 transition-all">
+                        <div class="radius-lg p-3 text-white shadow-sm group-hover:bg-green-600 transition-all" style="background-color: var(--icon_color)">
                             <i class="fas fa-project-diagram text-2xl"></i>
                         </div>
                     </div>
@@ -120,13 +120,13 @@
                 <!-- Reviews & Ratings -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-gray-600 radius-lg p-3 text-white">
+                        <div class="radius-lg p-3 text-white" style="background-color: var(--icon_color)">
                             <i class="fas fa-star text-2xl"></i>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-gray-600">
-                                <a href="{{ route('dashboard.users.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                                <a href="{{ route('dashboard.users.index') }}" style="color: var(--icon_color)">
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                     {{ __('main.reviews') }}
                                 </a>
                             </h3>
@@ -172,13 +172,13 @@
                 <!-- Services -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-gray-600 radius-lg p-3 text-white">
+                        <div class="radius-lg p-3 text-white" style="background-color: var(--icon_color)">
                             <i class="fas fa-cogs text-2xl"></i>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-gray-600">
-                                <a href="{{ route('dashboard.services.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                                <a href="{{ route('dashboard.services.index') }}" style="color: var(--icon_color)">
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                     {{ __('main.services') }}
                                 </a>
                             </h3>
@@ -205,13 +205,13 @@
                 <!-- Clients & Business -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-gray-600 radius-lg p-3 text-white">
+                        <div class="radius-lg p-3 text-white" style="background-color: var(--icon_color)">
                             <i class="fas fa-handshake text-2xl"></i>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-gray-600">
-                                <a href="{{ route('dashboard.clients.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                                <a href="{{ route('dashboard.clients.index') }}" style="color: var(--icon_color)">
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                     {{ __('main.clients') }}
                                 </a>
                             </h3>
@@ -246,13 +246,13 @@
             <div class="">
                 <div class="flex items-center justify-between gap-3 mb-4 pb-4 border-b border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="bg-gray-600 radius-lg p-3 text-white">
+                        <div class="radius-lg p-3 text-white" style="background-color: var(--icon_color)">
                             <i class="fas fa-ticket-alt text-2xl"></i>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-gray-600">
-                                <a href="{{ route('dashboard.tickets.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                                <a href="{{ route('dashboard.tickets.index') }}" style="color: var(--icon_color)">
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square"></i>
                                     {{ __('main.tickets') }}
                                 </a>
                             </h3>
@@ -296,7 +296,7 @@
                                     <span class="kt-badge text-white px-4"
                                         style="background-color: {{ $item->department?->border_main_color ?? 'default' }};">{{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $item->department['name'] ?? 'no_department'))) }}</span>
                                 </div>
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square" style="color: var(--icon_color)"></i>
                             </a>
                         @endforeach
                     </div>
@@ -311,7 +311,7 @@
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-600 flex items-center gap-2">
-                    <i class="fas fa-server text-green-600 text-lg"></i>
+                    <i class="fas fa-server text-lg" style="color: var(--icon_color)"></i>
                     {{ __('main.system_status') }}
                 </h4>
                 <span class="w-3 h-3 bg-green-600 rounded-full animate-pulse"></span>
@@ -324,7 +324,7 @@
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-600 flex items-center gap-2">
-                    <i class="fas fa-database text-gray-600 text-lg"></i>
+                    <i class="fas fa-database text-lg" style="color: var(--icon_color)"></i>
                     {{ __('main.database_status') }}
                 </h4>
                 <span class="w-3 h-3 bg-gray-600 rounded-full animate-pulse"></span>
@@ -337,7 +337,7 @@
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-600 flex items-center gap-2">
-                    <i class="fas fa-sync-alt text-purple-600"></i>
+                    <i class="fas fa-sync-alt text-lg" style="color: var(--icon_color)"></i>
                     {{ __('main.last_update') }}
                 </h4>
             </div>

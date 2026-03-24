@@ -73,6 +73,11 @@ class SettingsController extends Controller
         return redirect()->back()->withSuccess(__('messages.inline_padding_reset'));
     }
 
+    public function websiteSettings()
+    {
+        return view('dashboard.settings.website');
+    }
+
     public function updateGeneral(SettingRequest $request)
     {
         // Update user preferences if button_display_mode is sent

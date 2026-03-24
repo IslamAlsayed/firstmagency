@@ -57,7 +57,7 @@
                         </button>
                     </div>
                 </div>
-                <button class="kt-btn kt-btn-primary flex justify-center grow" type="submit" toggle-button>
+                <button class="kt-btn kt-btn-primary flex justify-center grow" type="submit" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('auth.sign_in') }}
                 </button>
             </form>

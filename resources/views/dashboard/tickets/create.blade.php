@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.ticket')]) }}</h3>
 
-            <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
             </a>
         </div>
@@ -48,8 +48,7 @@
                             <label for="department_id" class="mb-2 block text-sm font-semibold text-gray-700">
                                 {{ __('main.department') }} <span class="text-red-500">*</span>
                             </label>
-                            <select id="department_id" name="department_id"
-                                class="w-full basic-single rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
+                            <select id="department_id" name="department_id" class="w-full basic-single rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
                                 <option value="">{{ __('main.select') . ' ' . __('main.department') }}</option>
                                 @foreach ($departments as $dept)
                                     <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>
@@ -83,8 +82,7 @@
                         <label for="subject" class="mb-2 block text-sm font-semibold text-gray-700">
                             {{ __('main.contact_form_subject') }} <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="subject" name="subject" value="{{ old('subject', $ticket->subject ?? '') }}" required
-                            placeholder="{{ __('main.contact_form_subject_placeholder') }}"
+                        <input type="text" id="subject" name="subject" value="{{ old('subject', $ticket->subject ?? '') }}" required placeholder="{{ __('main.contact_form_subject_placeholder') }}"
                             class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40 @error('subject') border-red-500 @enderror">
                         @error('subject')
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
@@ -113,8 +111,7 @@
 
                     <div>
                         <label for="verification" class="mb-2 block text-sm font-semibold text-gray-700">{{ __('main.contact_form_verification') }}</label>
-                        <input type="number" id="verification" name="verification" minlength="1" maxlength="9" value="{{ old('verification') }}"
-                            placeholder="{{ __('main.contact_form_answer') }}"
+                        <input type="number" id="verification" name="verification" minlength="1" maxlength="9" value="{{ old('verification') }}" placeholder="{{ __('main.contact_form_answer') }}"
                             class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
                     </div>
 

@@ -22,7 +22,8 @@
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-outline-primary">
+                <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-outline-primary"
+                    style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('main.chat') }}
                 </a>
                 <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">

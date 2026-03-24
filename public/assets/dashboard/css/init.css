@@ -36,16 +36,9 @@
     --main-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
     --dash_primary_color: #0074F7;
-    --text-color: #ffffff;
-    --secondary: #6c757d;
-    --success: #198754;
-    --danger: #dc3545;
-    --warning: #ffc107;
-    --info: #0dcaf0;
-    --accent-color: #dc3545;
-    --header-color: #dddddd;
-    --header-text-color: #000000;
-    --footer-color: #dddddd;
+    --text_color: #ffffff;
+    --icon_color: #4a5565;
+    --button_color: #0074F7;
 
     --font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
 
@@ -306,14 +299,14 @@ td {
     }
 
     .nav-menu .nav-link.active {
-        color: var(--text-color);
+        color: var(--text_color);
         /* color: var(--dash_primary_color); */
         background-color: var(--dash_primary_color);
         font-weight: 600;
     }
 
     .nav-menu .nav-link.submenu-btn:not(.active):hover {
-        color: var(--text-color);
+        color: var(--text_color);
         background-color: var(--dash_primary_color);
     }
 

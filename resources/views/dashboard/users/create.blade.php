@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_user') }}</h3>
 
-            <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.users')]) }}
             </a>
         </div>
@@ -21,44 +21,38 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="name" name="name" required value="{{ old('name') }}">
+                            <label for="name" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }} <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name" required
+                                value="{{ old('name') }}">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.email') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="email" name="email" required value="{{ old('email') }}">
+                            <label for="email" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.email') }} <span class="text-red-500">*</span></label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email" name="email" required
+                                value="{{ old('email') }}">
                             @error('email')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.password') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="password" name="password" required>
+                            <label for="password" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.password') }} <span class="text-red-500">*</span></label>
+                            <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password" name="password" required>
                             @error('password')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.confirm_password') }} <span
-                                    class="text-red-500">*</span></label>
-                            <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="password_confirmation" name="password_confirmation" required>
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.confirm_password') }} <span class="text-red-500">*</span></label>
+                            <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="password_confirmation"
+                                name="password_confirmation" required>
                             @error('password_confirmation')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
-                            <label for="role" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.role') }} <span
-                                    class="text-red-500">*</span></label>
+                            <label for="role" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.role') }} <span class="text-red-500">*</span></label>
                             <select class="kt-select basic-single" id="role" name="role" required>
                                 <option value="" selected>--</option>
                                 <option value="superadmin" {{ old('role') == 'superadmin' ? 'selected' : '' }}>{{ __('main.super_admin') }}</option>
@@ -72,16 +66,16 @@
                         </div>
                         <div>
                             <label for="mobile" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.mobile') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="mobile" name="mobile" value="{{ old('mobile') }}">
+                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="mobile" name="mobile"
+                                value="{{ old('mobile') }}">
                             @error('mobile')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.phone') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                id="phone" name="phone" value="{{ old('phone') }}">
+                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="phone" name="phone"
+                                value="{{ old('phone') }}">
                             @error('phone')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror

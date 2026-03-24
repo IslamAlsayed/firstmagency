@@ -1,5 +1,5 @@
 <div class="flex items-center gap-4">
-    <button type="submit" class="kt-btn kt-btn-primary">
+    <button type="submit" class="kt-btn kt-btn-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
         <i class="ki-filled ki-check text-sm me-2"></i>
         {{ __('main.update_type', ['type' => __('main.' . (isset($model) ? $model : singularLowerCaseName($models)))]) }}
     </button>

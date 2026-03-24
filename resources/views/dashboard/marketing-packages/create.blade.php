@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.marketing_package')]) }}</h3>
 
-            <a href="{{ route('dashboard.marketing-packages.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.marketing-packages.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.marketing_packages')]) }}
             </a>
         </div>
@@ -25,9 +25,8 @@
                         <div class="grid gap-4">
                             <div>
                                 <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en"
-                                    name="title_en" value="{{ old('title_en') }}" placeholder="Enter title in English">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                    value="{{ old('title_en') }}" placeholder="Enter title in English">
                                 @error('title_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -42,9 +41,8 @@
                                 <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
                                     {{ __('main.title_ar') }} <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar"
-                                    name="title_ar" required value="{{ old('title_ar') }}" placeholder="أدخل العنوان بالعربية">
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                    required value="{{ old('title_ar') }}" placeholder="أدخل العنوان بالعربية">
                                 @error('title_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -57,8 +55,7 @@
                         <div>
                             <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
                             <input type="number" id="order" name="order" min="0"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                                value="{{ old('order', 0) }}" placeholder="0">
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" value="{{ old('order', 0) }}" placeholder="0">
                             @error('order')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror

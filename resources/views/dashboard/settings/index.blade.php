@@ -167,171 +167,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
-                        <i class="fas fa-save"></i>
-                        {{ __('main.settings_save_changes') }}
-                    </button>
-                </form>
-            </div>
-
-            <!-- About Us Settings -->
-            <div class="bg-white radius-lg shadow-lg p-6">
-                <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                    <div>
-                        <i class="fas fa-info-circle text-amber-500"></i>
-                        {{ __('main.about_us') }}
-                    </div>
-
-                    <div class="toggle-icon" toggle-button data-section="about-us-section">
-                        <i class="fa-solid fa-angle-down"></i>
-                    </div>
-                </h6>
-
-                <form action="{{ route('dashboard.settings.updateAboutUs') }}" method="POST" enctype="multipart/form-data" class="space-y-5" id="about-us-section">
-                    @csrf
-                    @method('PUT')
-
-                    {{-- About Us Title --}}
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label for="about-us-title" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.about_us_title') }} (EN)</label>
-                            <input type="text" id="about-us-title" name="about_us_title"
-                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                placeholder="{{ __('main.settings_about_us_title_placeholder') }}" value="{{ $settings->about_us_title ?? '' }}">
-                        </div>
-                        <div>
-                            <label for="about-us-title-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.about_us_title') }}
-                                (AR)</label>
-                            <input type="text" id="about-us-title-ar" name="about_us_title_ar"
-                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                placeholder="{{ __('main.settings_about_us_title_ar_placeholder') }}" value="{{ $settings->about_us_title_ar ?? '' }}">
-                        </div>
-                    </div>
-
-                    {{-- About Us Description (English) --}}
-                    <div class="col-span-full">
-                        @include('dashboard.components.input-text-editor', [
-                            'name' => 'about_us_description',
-                            'value' => $settings->about_us_description,
-                            'classes' => 'mb-4',
-                        ])
-
-                        @include('dashboard.components.input-text-editor', [
-                            'name' => 'about_us_description_ar',
-                            'value' => $settings->about_us_description_ar,
-                        ])
-                    </div>
-
-                    {{-- About Us Image --}}
-                    @include('dashboard.components.photo', ['record' => $settings, 'column' => 'about_us_image'])
-
-                    {{-- About Us Image 2 --}}
-                    @include('dashboard.components.photo', ['record' => $settings, 'column' => 'about_us_image2'])
-
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
-                        <i class="fas fa-save"></i>
-                        {{ __('main.settings_save_changes') }}
-                    </button>
-                </form>
-            </div>
-
-            <!-- Website Design Settings -->
-            <div class="bg-white radius-lg shadow-lg p-6">
-                <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
-                    <div>
-                        <i class="fas fa-laptop-code text-blue-500"></i>
-                        {{ __('main.website_design_title') }}
-                    </div>
-
-                    <div class="toggle-icon" toggle-button data-section="website-design-section">
-                        <i class="fa-solid fa-angle-down"></i>
-                    </div>
-                </h6>
-
-                <form action="{{ route('dashboard.settings.updateWebsiteDesign') }}" method="POST" enctype="multipart/form-data" class="space-y-5" id="website-design-section">
-                    @csrf
-                    @method('PUT')
-
-                    <div class="grid gap-4">
-                        <!-- Tabs Navigation -->
-                        @include('dashboard.components.tabs-navigation')
-
-                        <!-- English Tab Content -->
-                        <div class="language-content" data-lang="en">
-                            <div class="grid gap-4">
-                                {{-- Website Design Title EN --}}
-                                <div>
-                                    <label for="website-design-title" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
-                                    <input type="text" id="website-design-title" name="website_design_title"
-                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                        placeholder="{{ __('main.settings_website_design_title_placeholder') }}" value="{{ $settings->website_design_title ?? '' }}">
-                                </div>
-
-                                {{-- Website Design Heading EN --}}
-                                <div>
-                                    <label for="website-design-heading" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
-                                    <input type="text" id="website-design-heading" name="website_design_heading"
-                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                        placeholder="{{ __('main.settings_website_design_heading_placeholder') }}" value="{{ $settings->website_design_heading ?? '' }}">
-                                </div>
-
-                                {{-- Website Design Description EN --}}
-                                @include('dashboard.components.input-text-editor', [
-                                    'name' => 'website_design_description',
-                                    'value' => $settings->website_design_description ?? '',
-                                    'classes' => 'mb-4',
-                                ])
-                            </div>
-                        </div>
-
-                        <!-- Arabic Tab Content -->
-                        <div class="language-content hidden" data-lang="ar">
-                            <div class="grid gap-4">
-                                {{-- Website Design Title AR --}}
-                                <div>
-                                    <label for="website-design-title-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.title') }}</label>
-                                    <input type="text" id="website-design-title-ar" name="website_design_title_ar"
-                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                        placeholder="{{ __('main.settings_website_design_title_ar_placeholder') }}" value="{{ $settings->website_design_title_ar ?? '' }}">
-                                </div>
-
-                                {{-- Website Design Heading AR --}}
-                                <div>
-                                    <label for="website-design-heading-ar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.heading') }}</label>
-                                    <input type="text" id="website-design-heading-ar" name="website_design_heading_ar"
-                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                        placeholder="{{ __('main.settings_website_design_heading_ar_placeholder') }}" value="{{ $settings->website_design_heading_ar ?? '' }}">
-                                </div>
-
-                                {{-- Website Design Description AR --}}
-                                @include('dashboard.components.input-text-editor', [
-                                    'name' => 'website_design_description_ar',
-                                    'value' => $settings->website_design_description_ar ?? '',
-                                    'classes' => 'mb-4',
-                                ])
-                            </div>
-                        </div>
-
-                        {{-- Website Design Image --}}
-                        @include('dashboard.components.photo', ['record' => $settings, 'column' => 'website_design_image'])
-
-                        {{-- Website Design Years Experience --}}
-                        <div class="grid grid-cols-1 gap-4">
-                            <div>
-                                <label for="website-design-years" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.website_design_years_experience') }}</label>
-                                <input type="number" id="website-design-years" name="website_design_years_experience"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="8" value="{{ $settings->website_design_years_experience ?? 8 }}" min="0">
-                            </div>
-                            <div class="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg">
-                                <p><strong>{{ __('main.website_design_clients') }}:</strong> {{ App\Models\Client::count() }}</p>
-                                <p><strong>{{ __('main.website_design_projects') }}:</strong> {{ App\Models\Project::count() }}</p>
-                                <p><strong>{{ __('main.website_design_support_ticket') }}:</strong> {{ App\Models\Ticket::count() }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
+                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer font-semibold radius-lg shadow-md"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-save"></i>
                         {{ __('main.settings_save_changes') }}
                     </button>
@@ -371,7 +208,8 @@
                                 value="{{ $settings->light_main_color ?? '#F97316' }}">
                         </div>
                     </div>
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
+                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer font-semibold radius-lg shadow-md"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-save"></i>
                         {{ __('main.settings_save_changes') }}
                     </button>
@@ -379,7 +217,7 @@
             </div>
 
             <!-- Colors Settings -->
-            <div class="hidden bg-white radius-lg shadow-lg p-6">
+            <div class="bg-white radius-lg shadow-lg p-6">
                 <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
                     <div>
                         <i class="fas fa-palette text-blue-500"></i>
@@ -396,42 +234,27 @@
                     @method('PUT')
                     <div class="flex items-center flex-wrap gap-4">
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="primary-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.primary_color') }}</label>
-                            <input type="color" id="primary-color" name="primary_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->primary_color ?? '#6f42c1' }}">
+                            <label for="dash_primary_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.main_color') }}</label>
+                            <input type="color" id="dash_primary_color" name="colors[dash_primary_color]" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                value="{{ $settings->colors['dash_primary_color'] ?? '#0074F7' }}">
                         </div>
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="secondary-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.secondary_color') }}</label>
-                            <input type="color" id="secondary-color" name="secondary_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->secondary_color ?? '#6c757d' }}">
+                            <label for="text_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.text_color') }}</label>
+                            <input type="color" id="text_color" name="colors[text_color]" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                value="{{ $settings->colors['text_color'] ?? '#ffffff' }}">
                         </div>
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="success-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.success_color') }}</label>
-                            <input type="color" id="success-color" name="success_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->success_color ?? '#198754' }}">
+                            <label for="icon_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.icon_color') }}</label>
+                            <input type="color" id="icon_color" name="colors[icon_color]" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                value="{{ $settings->colors['icon_color'] ?? '#4a5565' }}">
                         </div>
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="danger-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.danger_color') }}</label>
-                            <input type="color" id="danger-color" name="danger_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->danger_color ?? '#dc3545' }}">
-                        </div>
-                        <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="warning-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.warning_color') }}</label>
-                            <input type="color" id="warning-color" name="warning_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->warning_color ?? '#ffc107' }}">
-                        </div>
-                        <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="info-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.info_color') }}</label>
-                            <input type="color" id="info-color" name="info_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->info_color ?? '#0dcaf0' }}">
-                        </div>
-                        <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="accent-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.accent_color') }}</label>
-                            <input type="color" id="accent-color" name="accent_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->accent_color ?? '#dc3545' }}">
+                            <label for="button_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.button_color') }}</label>
+                            <input type="color" id="button_color" name="colors[button_color]" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
+                                value="{{ $settings->colors['button_color'] ?? '#0074F7' }}">
                         </div>
                     </div>
-                    <div class="flex items-center flex-wrap gap-4">
+                    {{-- <div class="flex items-center flex-wrap gap-4">
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                             <label for="header-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.header_color') }}</label>
                             <input type="color" id="header-color" name="header_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
@@ -442,14 +265,9 @@
                             <input type="color" id="header-text-color" name="header_text_color" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
                                 value="{{ $settings->header_text_color ?? '#f7f7f7' }}">
                         </div>
-                        {{-- <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
-                            <label for="footer-color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.footer_color') }}</label>
-                            <input type="color" id="footer-color" name="footer_color"
-                                class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->footer_color ?? '#2d3748' }}">
-                        </div> --}}
-                    </div>
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
+                    </div> --}}
+                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white font-semibold radius-lg shadow-md"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-save"></i>
                         {{ __('main.settings_save_changes') }}
                     </button>
@@ -485,7 +303,8 @@
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                             placeholder="Tajawal" value="{{ $settings->font_name ?? 'Tajawal' }}">
                     </div>
-                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-primary text-gray-600 font-semibold rounded-[9px] shadow-md">
+                    <button type="submit" toggle-button class="flex items-center gap-2 px-4 py-2 cursor-pointer font-semibold radius-lg shadow-md"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-save"></i>
                         {{ __('main.settings_save_changes') }}
                     </button>
@@ -508,17 +327,14 @@
 @push('styles')
     <style>
         :root {
-            --dash_primary_color: {{ $settings->primary_color ?? '#fff' }};
-            --secondary: {{ $settings->secondary_color ?? '#6c757d' }};
-            --success: {{ $settings->success_color ?? '#198754' }};
-            --danger: {{ $settings->danger_color ?? '#dc3545' }};
-            --warning: {{ $settings->warning_color ?? '#ffc107' }};
-            --info: {{ $settings->info_color ?? '#0dcaf0' }};
-            --accent-color: {{ $settings->accent_color ?? '#dc3545' }};
+            --dash_primary_color: {{ $settings->colors['dash_primary_color'] ?? '#fff' }};
+            --text_color: {{ $settings->colors['text_color'] ?? '#6c757d' }};
+            --icon_color: {{ $settings->colors['icon_color'] ?? '#198754' }};
+            --button_color: {{ $settings->colors['button_color'] ?? '#dc3545' }};
 
-            --main-color: {{ $settings->main_color ?? '#d05423' }};
-            --dark-main-color: {{ $settings->dark_main_color ?? '#96310E' }};
-            --light-main-color: {{ $settings->light_main_color ?? '#F97316' }};
+            --main-color: {{ $settings->colors['main_color'] ?? '#d05423' }};
+            --dark-main-color: {{ $settings->colors['dark_main_color'] ?? '#96310E' }};
+            --light-main-color: {{ $settings->colors['light_main_color'] ?? '#F97316' }};
         }
 
         /* Live preview styles */
@@ -526,24 +342,16 @@
             color: var(--dash_primary_color);
         }
 
-        [style*="--secondary"] {
-            color: var(--secondary);
+        [style*="--text_color"] {
+            color: var(--text_color);
         }
 
-        [style*="--success"] {
-            color: var(--success);
+        [style*="--icon_color"] {
+            color: var(--icon_color);
         }
 
-        [style*="--danger"] {
-            color: var(--danger);
-        }
-
-        [style*="--warning"] {
-            color: var(--warning);
-        }
-
-        [style*="--info"] {
-            color: var(--info);
+        [style*="--button_color"] {
+            color: var(--button_color);
         }
 
         /* Custom Sidebar Fixed Position */
@@ -583,6 +391,61 @@
 
 @push('scripts')
     <script>
+        // Live Header Color Preview
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const headerColorInput = document.getElementById('header-color');
+        //     const headerTextColorInput = document.getElementById('header-text-color');
+        //     const headerElement = document.getElementById('topbar') || document.querySelector('.topbar');
+
+        //     if (headerElement && headerColorInput) {
+        //         headerColorInput.addEventListener('input', function() {
+        //             const selectedColor = this.value;
+        //             document.documentElement.style.setProperty('--header-color', selectedColor);
+        //             headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
+        //         });
+        //     }
+
+        //     if (headerElement && headerTextColorInput) {
+        //         headerTextColorInput.addEventListener('input', function() {
+        //             const selectedColor = this.value;
+        //             document.documentElement.style.setProperty('--header-text-color', selectedColor);
+        //             headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
+        //         });
+        //     }
+        // });
+
+        // Live color preview
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dashboard colors
+            const dashboardColors = {
+                'dash_primary_color': '--dash_primary_color',
+                'text_color': '--text_color',
+                'icon_color': '--icon_color',
+                'button_color': '--button_color',
+            };
+
+            // Website colors
+            const websiteColors = {
+                'main-color': '--main-color',
+                'dark-main-color': '--dark-main-color',
+                'light-main-color': '--light-main-color'
+            };
+
+            const allColors = {
+                ...dashboardColors,
+                ...websiteColors
+            };
+
+            Object.entries(allColors).forEach(([inputId, cssVar]) => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('input', function(e) {
+                        document.documentElement.style.setProperty(cssVar, e.target.value);
+                    });
+                }
+            });
+        });
+
         // Custom Fixed Sidebar
         // document.addEventListener('DOMContentLoaded', function() {
         //     const sidebar = document.getElementById('settings-sidebar');
@@ -726,30 +589,6 @@
             });
         });
 
-
-        // Live Header Color Preview
-        document.addEventListener('DOMContentLoaded', function() {
-            const headerColorInput = document.getElementById('header-color');
-            const headerTextColorInput = document.getElementById('header-text-color');
-            const headerElement = document.getElementById('topbar') || document.querySelector('.topbar');
-
-            if (headerElement && headerColorInput) {
-                headerColorInput.addEventListener('input', function() {
-                    const selectedColor = this.value;
-                    document.documentElement.style.setProperty('--header-color', selectedColor);
-                    headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
-                });
-            }
-
-            if (headerElement && headerTextColorInput) {
-                headerTextColorInput.addEventListener('input', function() {
-                    const selectedColor = this.value;
-                    document.documentElement.style.setProperty('--header-text-color', selectedColor);
-                    headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
-                });
-            }
-        });
-
         // Sidebar Navigation & Smooth Scroll
         document.addEventListener('DOMContentLoaded', function() {
             const navItems = document.querySelectorAll('.settings-nav-item');
@@ -825,180 +664,145 @@
             });
         });
 
-        // Live color preview
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dashboard colors
-            const dashboardColors = {
-                'dash_primary_color': '--dash_primary_color',
-                'secondary-color': '--secondary',
-                'success-color': '--success',
-                'danger-color': '--danger',
-                'warning-color': '--warning',
-                'info-color': '--info',
-                'accent-color': '--accent-color'
-            };
-
-            // Website colors
-            const websiteColors = {
-                'main-color': '--main-color',
-                'dark-main-color': '--dark-main-color',
-                'light-main-color': '--light-main-color'
-            };
-
-            const allColors = {
-                ...dashboardColors,
-                ...websiteColors
-            };
-
-            Object.entries(allColors).forEach(([inputId, cssVar]) => {
-                const input = document.getElementById(inputId);
-                if (input) {
-                    input.addEventListener('input', function(e) {
-                        document.documentElement.style.setProperty(cssVar, e.target.value);
-                    });
-                }
-            });
-        });
-
         // Database Backups Management
-        document.addEventListener('DOMContentLoaded', function() {
-            const createBtn = document.getElementById('create-backup-btn');
-            const backupsList = document.getElementById('backups-list');
-            const statusDiv = document.getElementById('backup-status');
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const createBtn = document.getElementById('create-backup-btn');
+        //     const backupsList = document.getElementById('backups-list');
+        //     const statusDiv = document.getElementById('backup-status');
 
-            // Load backups list
-            function loadBackups() {
-                fetch("{{ route('dashboard.backups.list') }}")
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success && data.backups.length > 0) {
-                            backupsList.innerHTML = data.backups.map(backup => `
-                                <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
-                                    <div class="flex-1">
-                                        <p class="font-semibold text-gray-700">
-                                            <i class="fas fa-file-archive text-orange-500"></i>
-                                            ${backup.filename}
-                                        </p>
-                                        <p class="text-sm text-gray-500">
-                                            <i class="fas fa-calendar"></i> ${new Date(backup.created_at).toLocaleString('ar-EG')} | 
-                                            <i class="fas fa-database"></i> ${formatBytes(backup.size)}
-                                        </p>
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
-                                            <i class="fas fa-download"></i>
-                                        </button>
-                                        <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
-                                            <i class="fas fa-redo-alt"></i>
-                                        </button>
-                                        <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            `).join('');
+        //     // Load backups list
+        //     function loadBackups() {
+        //         fetch("{{ route('dashboard.backups.list') }}")
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 if (data.success && data.backups.length > 0) {
+        //                     backupsList.innerHTML = data.backups.map(backup => `
+    //                         <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
+    //                             <div class="flex-1">
+    //                                 <p class="font-semibold text-gray-700">
+    //                                     <i class="fas fa-file-archive text-orange-500"></i>
+    //                                     ${backup.filename}
+    //                                 </p>
+    //                                 <p class="text-sm text-gray-500">
+    //                                     <i class="fas fa-calendar"></i> ${new Date(backup.created_at).toLocaleString('ar-EG')} | 
+    //                                     <i class="fas fa-database"></i> ${formatBytes(backup.size)}
+    //                                 </p>
+    //                             </div>
+    //                             <div class="flex gap-2">
+    //                                 <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
+    //                                     <i class="fas fa-download"></i>
+    //                                 </button>
+    //                                 <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
+    //                                     <i class="fas fa-redo-alt"></i>
+    //                                 </button>
+    //                                 <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
+    //                                     <i class="fas fa-trash"></i>
+    //                                 </button>
+    //                             </div>
+    //                         </div>
+    //                     `).join('');
 
-                            // Attach event listeners
-                            attachBackupListeners();
-                        } else {
-                            backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
-                        }
-                    })
-                    .catch(err => console.error('Error loading backups:', err));
-            }
+        //                     // Attach event listeners
+        //                     attachBackupListeners();
+        //                 } else {
+        //                     backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
+        //                 }
+        //             })
+        //             .catch(err => console.error('Error loading backups:', err));
+        //     }
 
-            // Create backup
-            createBtn.addEventListener('click', function() {
-                if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
-                    createBtn.disabled = true;
-                    statusDiv.classList.remove('hidden');
-                    statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
+        //     // Create backup
+        //     createBtn.addEventListener('click', function() {
+        //         if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
+        //             createBtn.disabled = true;
+        //             statusDiv.classList.remove('hidden');
+        //             statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
 
-                    fetch("{{ route('dashboard.backups.create') }}", {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
-                                loadBackups();
-                            } else {
-                                statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
-                                    '</div>';
-                            }
-                            createBtn.disabled = false;
-                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-                        })
-                        .catch(err => {
-                            statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
-                            createBtn.disabled = false;
-                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-                        });
-                }
-            });
+        //             fetch("{{ route('dashboard.backups.create') }}", {
+        //                     method: 'POST',
+        //                     headers: {
+        //                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //                     }
+        //                 })
+        //                 .then(res => res.json())
+        //                 .then(data => {
+        //                     if (data.success) {
+        //                         statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
+        //                         loadBackups();
+        //                     } else {
+        //                         statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
+        //                             '</div>';
+        //                     }
+        //                     createBtn.disabled = false;
+        //                     setTimeout(() => statusDiv.classList.add('hidden'), 4000);
+        //                 })
+        //                 .catch(err => {
+        //                     statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
+        //                     createBtn.disabled = false;
+        //                     setTimeout(() => statusDiv.classList.add('hidden'), 4000);
+        //                 });
+        //         }
+        //     });
 
-            // Attach listeners for backup actions
-            function attachBackupListeners() {
-                document.querySelectorAll('.download-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        window.location.href = "{{ url('dashboard/backups/download') }}/" + filename;
-                    });
-                });
+        //     // Attach listeners for backup actions
+        //     function attachBackupListeners() {
+        //         document.querySelectorAll('.download-backup').forEach(btn => {
+        //             btn.addEventListener('click', function() {
+        //                 const filename = this.dataset.filename;
+        //                 window.location.href = "{{ url('dashboard/backups/download') }}/" + filename;
+        //             });
+        //         });
 
-                document.querySelectorAll('.restore-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        if (confirm('{{ __('main.settings_restore_confirm') }}')) {
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = "{{ route('dashboard.backups.restore') }}";
-                            form.innerHTML = `
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="filename" value="${filename}">
-                            `;
-                            document.body.appendChild(form);
+        //         document.querySelectorAll('.restore-backup').forEach(btn => {
+        //             btn.addEventListener('click', function() {
+        //                 const filename = this.dataset.filename;
+        //                 if (confirm('{{ __('main.settings_restore_confirm') }}')) {
+        //                     const form = document.createElement('form');
+        //                     form.method = 'POST';
+        //                     form.action = "{{ route('dashboard.backups.restore') }}";
+        //                     form.innerHTML = `
+    //                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    //                         <input type="hidden" name="filename" value="${filename}">
+    //                     `;
+        //                     document.body.appendChild(form);
 
-                            // Show loading message
-                            alert('{{ __('main.settings_restore_in_progress') }}');
-                            form.submit();
-                        }
-                    });
-                });
+        //                     // Show loading message
+        //                     alert('{{ __('main.settings_restore_in_progress') }}');
+        //                     form.submit();
+        //                 }
+        //             });
+        //         });
 
-                document.querySelectorAll('.delete-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = "{{ route('dashboard.backups.delete') }}";
-                            form.innerHTML = `
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="filename" value="${filename}">
-                                <input type="hidden" name="_method" value="DELETE">
-                            `;
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                    });
-                });
-            }
+        //         document.querySelectorAll('.delete-backup').forEach(btn => {
+        //             btn.addEventListener('click', function() {
+        //                 const filename = this.dataset.filename;
+        //                 if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
+        //                     const form = document.createElement('form');
+        //                     form.method = 'POST';
+        //                     form.action = "{{ route('dashboard.backups.delete') }}";
+        //                     form.innerHTML = `
+    //                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    //                         <input type="hidden" name="filename" value="${filename}">
+    //                         <input type="hidden" name="_method" value="DELETE">
+    //                     `;
+        //                     document.body.appendChild(form);
+        //                     form.submit();
+        //                 }
+        //             });
+        //         });
+        //     }
 
-            // Helper function to format bytes
-            function formatBytes(bytes) {
-                if (bytes === 0) return '0 {{ __('main.bytes') }}';
-                const k = 1024;
-                const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
+        //     // Helper function to format bytes
+        //     function formatBytes(bytes) {
+        //         if (bytes === 0) return '0 {{ __('main.bytes') }}';
+        //         const k = 1024;
+        //         const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
+        //         const i = Math.floor(Math.log(bytes) / Math.log(k));
+        //         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        //     }
 
-            // Load backups on page load
-            loadBackups();
-        });
+        //     // Load backups on page load
+        //     loadBackups();
+        // });
     </script>
 @endpush

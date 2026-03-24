@@ -12,7 +12,7 @@
                 <a href="{{ route('dashboard.marketing-packages.edit', $marketingPackage->id) }}" class="kt-btn kt-btn-outline-info">
                     {{ __('main.edit') }}
                 </a>
-                <a href="{{ route('dashboard.marketing-packages.index') }}" class="kt-btn kt-btn-outline-primary">
+                <a href="{{ route('dashboard.marketing-packages.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('main.back_to_marketing_package') }}
                 </a>
             </div>
@@ -97,8 +97,8 @@
                 <div class="mt-6">
                     <label class="block text-sm font-medium text-gray-600 mb-3">{{ __('main.image') }}</label>
                     <div class="border border-gray-300 rounded-lg overflow-hidden max-w-md">
-                        <img src="{{ asset('storage/' . $marketingPackage->image) }}"
-                            alt="{{ $marketingPackage->alt_text ?? ($marketingPackage->translations[app()->getLocale()]['title'] ?? '') }}" class="w-full h-auto">
+                        <img src="{{ asset('storage/' . $marketingPackage->image) }}" alt="{{ $marketingPackage->alt_text ?? ($marketingPackage->translations[app()->getLocale()]['title'] ?? '') }}"
+                            class="w-full h-auto">
                     </div>
                 </div>
             @endif

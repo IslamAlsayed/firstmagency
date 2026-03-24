@@ -8,7 +8,7 @@
         <div class="kt-card-header flex items-center justify-between gap-4">
             <h3 class="kt-card-title">{{ __('main.edit_client') }}</h3>
 
-            <a href="{{ route('dashboard.clients.index') }}" class="kt-btn kt-btn-outline-primary">
+            <a href="{{ route('dashboard.clients.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                 {{ __('main.back_to_types', ['types' => __('main.clients')]) }}
             </a>
         </div>

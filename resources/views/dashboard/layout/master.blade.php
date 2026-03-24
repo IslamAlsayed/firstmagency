@@ -8,17 +8,10 @@
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         :root {
-            --dash_primary_color: {{ $settings->dash_primary_color ?? '#0074F7' }};
-            --text-color: {{ $settings->text_color ?? '#ffffff' }};
-            --secondary: {{ $settings->secondary_color ?? '#6c757d' }};
-            --success: {{ $settings->success_color ?? '#198754' }};
-            --danger: {{ $settings->danger_color ?? '#dc3545' }};
-            --warning: {{ $settings->warning_color ?? '#ffc107' }};
-            --info: {{ $settings->info_color ?? '#0dcaf0' }};
-            --accent-color: {{ $settings->accent_color ?? '#dc3545' }};
-            --header-color: {{ $settings->header_color ?? '#ffffff' }};
-            --header-text-color: {{ $settings->header_text_color ?? '#f7f7f7' }};
-            --footer-color: {{ $settings->footer_color ?? '#2d3748' }};
+            --dash_primary_color: {{ $settings->colors['dash_primary_color'] ?? '#0074F7' }};
+            --text_color: {{ $settings->colors['text_color'] ?? '#ffffff' }};
+            --icon_color: {{ $settings->colors['icon_color'] ?? '#4a5565' }};
+            --button_color: {{ $settings->colors['button_color'] ?? '#0074F7' }};
 
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}";
         }

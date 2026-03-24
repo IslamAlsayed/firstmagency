@@ -66,9 +66,9 @@
 <link href="{{ asset('assets/css/pages/servicesMarketingPage.css') }}" rel="stylesheet" />
 <style>
     :root {
-        --main-color: {{ $settings->main_color ?? '#d05423' }};
-        --dark-main-color: {{ $settings->dark_main_color ?? '#96310E' }};
-        --light-main-color: {{ $settings->light_main_color ?? '#F97316' }};
+        --main-color: {{ $settings->colors['main_color'] ?? '#d05423' }};
+        --dark-main-color: {{ $settings->colors['dark_main_color'] ?? '#96310E' }};
+        --light-main-color: {{ $settings->colors['light_main_color'] ?? '#F97316' }};
 
         --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
 

@@ -223,6 +223,7 @@ return [
 
     // Settings
     'settings_updated' => 'تم تحديث الإعدادات بنجاح',
+    'website_settings_updated' => 'تم تحديث إعدادات الموقع بنجاح!',
     'settings_colors_fonts_applied' => 'تم تطبيق الألوان والخطوط على الموقع.',
     'settings_colors_applied' => 'تم تطبيق ألوان الموقع على الموقع.',
     'settings_fonts_applied' => 'تم تطبيق الخطوط على الموقع.',
