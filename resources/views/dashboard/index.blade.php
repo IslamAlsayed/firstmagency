@@ -49,7 +49,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <!-- Total Users Card -->
                 <!-- System Overview Cards (Top Row) -->
-                <div class="bg-white group bg-gradient-to-br from-blue-50 to-blue-100 radius-lg shadow-sm p-6 border border-gray-100">
+                <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <a href="{{ route('dashboard.users.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- Articles -->
-                <div class="bg-white group bg-gradient-to-br from-purple-50 to-purple-100 radius-lg shadow-sm p-6 border border-gray-100">
+                <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <a href="{{ route('dashboard.articles.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- Projects -->
-                <div class="bg-white group bg-gradient-to-br from-green-50 to-green-100 radius-lg shadow-sm p-6 border border-gray-100">
+                <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
                             <a href="{{ route('dashboard.projects.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
@@ -308,7 +308,7 @@
     <!-- Quick Stats Footer -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- System Status -->
-        <div class="bg-gradient-to-br from-green-50 to-teal-50 radius-lg shadow-sm p-6 border border-gray-100">
+        <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-800 flex items-center gap-2">
                     <i class="fas fa-server text-green-600 text-lg"></i>
@@ -321,7 +321,7 @@
         </div>
 
         <!-- Database Status -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 radius-lg shadow-sm p-6 border border-gray-100">
+        <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-800 flex items-center gap-2">
                     <i class="fas fa-database text-primary text-lg"></i>
@@ -334,7 +334,7 @@
         </div>
 
         <!-- Last Update -->
-        <div class="bg-gradient-to-br from-purple-50 to-pink-50 radius-lg shadow-sm p-6 border border-gray-100">
+        <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="font-semibold text-gray-800 flex items-center gap-2">
                     <i class="fas fa-sync-alt text-purple-600"></i>

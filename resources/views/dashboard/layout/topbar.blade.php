@@ -102,7 +102,7 @@
 
             <!-- Switch Language Toggle -->
             <a href="{{ route('dashboard.locale.change', ['locale' => session('dashboard_locale', 'ar') == 'ar' ? 'en' : 'ar']) }}"
-                class="action-button cursor-pointer p-2 radius-md hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="{{ __('main.switch_language') }}">
+                class="action-button cursor-pointer p-2 radius-md shadow-sm hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="{{ __('main.switch_language') }}">
                 <i class="fas fa-language text-lg"></i>
             </a>
 
