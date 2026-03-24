@@ -17,10 +17,10 @@ class RoleController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Role::class);
-        $roles = Role::all();
+        $roles = Role::query()->withCount('permissions')->get();
         $allItems = Role::count();
-        $totalPermissions = $roles->sum(fn($r) => $r->permissions->count());
-        $rolesWithPermissions = $roles->filter(fn($r) => $r->permissions->count() > 0)->count();
+        $totalPermissions = (int) $roles->sum('permissions_count');
+        $rolesWithPermissions = (int) $roles->where('permissions_count', '>', 0)->count();
         return view('dashboard.roles.index', compact('roles', 'allItems', 'totalPermissions', 'rolesWithPermissions'));
     }
 

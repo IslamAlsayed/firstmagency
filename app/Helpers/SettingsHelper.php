@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 
 class SettingsHelper
 {
@@ -12,10 +13,12 @@ class SettingsHelper
     public static function get($key = null, $default = null)
     {
         try {
-            $settings = Setting::first();
+            static $settings = null;
 
-            if (!$settings) {
-                $settings = Setting::create();
+            if ($settings === null) {
+                $settings = Cache::remember('app_settings.first', now()->addMinutes(15), function () {
+                    return Setting::query()->first() ?? Setting::query()->create();
+                });
             }
 
             if ($key) {
@@ -49,7 +52,7 @@ class SettingsHelper
         ];
 
         if (!$settings) {
-            $primary = $defaults['primary_color'];
+            $dash_primary_color = $defaults['dash_primary_color'];
             $secondary = $defaults['secondary_color'];
             $success = $defaults['success_color'];
             $danger = $defaults['danger_color'];

@@ -1,7 +1,7 @@
 <?php
 
+use App\Helpers\SettingsHelper;
 use App\Models\Section;
-use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserSidebarPreference;
 use Illuminate\Support\Facades\Auth;
@@ -227,7 +227,7 @@ if (!function_exists('isDebugModeEnabled')) {
         static $debugMode = null;
 
         if ($debugMode === null) {
-            $settings = Setting::first();
+            $settings = SettingsHelper::get();
 
             // Check if debug mode is globally enabled
             if (!$settings || !$settings->debug_mode) {

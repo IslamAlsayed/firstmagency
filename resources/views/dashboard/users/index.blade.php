@@ -36,12 +36,12 @@
                                 <td title="{{ $user->name }}">
                                     <div class="relative w-fit">
                                         @if ($user->photo && checkExistFile($user->photo))
-                                            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" loading="lazy" class="rounded-full size-9 shrink-0">
                                         @else
                                             @if ($user->photo)
-                                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" loading="lazy" class="rounded-full size-9 shrink-0">
                                             @else
-                                                <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $user->name }}" class="rounded-full size-9 shrink-0">
+                                                <img src="{{ asset('assets/images/avatar.png') }}" alt="{{ $user->name }}" loading="lazy" class="rounded-full size-9 shrink-0">
                                             @endif
                                         @endif
                                         @if (isset($models) && $models && $models == 'users')
@@ -86,6 +86,12 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                @if ($users->hasPages())
+                    <div class="mt-6 border-t pt-4">
+                        {{ $users->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

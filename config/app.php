@@ -36,6 +36,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cross-Device & Multi-Domain Configuration
+    |--------------------------------------------------------------------------
+    | 
+    | Dynamic URLs for supporting multiple domains and environments
+    */
+
+    'whatsapp_link' => env('APP_WHATSAPP_LINK', 'https://wa.me/201212601601'),
+    'phone_link' => env('APP_PHONE_LINK', 'tel:+201212601601'),
+    'client_portal_url' => env('APP_CLIENT_PORTAL_URL', 'https://client.firstmagency.com'),
+    'support_images' => [
+        'logo' => env('APP_SUPPORT_IMAGE_LOGO', '/assets/images/White-logo.png'),
+        'sales' => env('APP_SUPPORT_IMAGE_SALES', '/assets/images/support/sales.png'),
+        'tickets' => env('APP_SUPPORT_IMAGE_TICKETS', '/assets/images/support/tickets.png'),
+        'phone' => env('APP_SUPPORT_IMAGE_PHONE', '/assets/images/support/phone.png'),
+        'account' => env('APP_SUPPORT_IMAGE_ACCOUNT', '/assets/images/support/account.png'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |

@@ -61,9 +61,10 @@ class CachePageResponse
             return $next($request);
         }
 
-        // المفتاح الفريد للصفحة (تشمل اللغة)
+        // المفتاح الفريد للصفحة (تشمل اللغة والدومين والبروتوكول)
         $locale = app()->getLocale();
-        $cacheKey = "page_response_{$locale}_" . md5($request->getPathInfo());
+        $cacheKeyBase = "{$locale}_{$request->getHost()}_{$request->getScheme()}_{$request->getPathInfo()}";
+        $cacheKey = "page_response_" . md5($cacheKeyBase);
 
         // هل الصفحة موجودة في الـ Cache؟
         if (Cache::has($cacheKey)) {

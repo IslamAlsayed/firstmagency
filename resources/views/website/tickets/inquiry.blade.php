@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="contact-sections tickets-section">
+    <section class="contact-sections tickets-section" style="background-image: url('{{ \App\Helpers\CrossDeviceHelper::getSupportImage('logo') }}');">
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.tickets_header') }}</div>
         </div>

@@ -20,9 +20,12 @@ class ReviewController extends Controller
     {
         $this->authorize('viewAny', Review::class);
         $reviews = Review::withTrashed()->latest()->paginate(15);
-        $pendingCount = Review::where('status', 'pending')->count();
-        $approvedCount = Review::where('status', 'approved')->count();
-        $rejectedCount = Review::where('status', 'rejected')->count();
+
+        $statusCounts = Review::query()->selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
+
+        $pendingCount = (int) ($statusCounts['pending'] ?? 0);
+        $approvedCount = (int) ($statusCounts['approved'] ?? 0);
+        $rejectedCount = (int) ($statusCounts['rejected'] ?? 0);
 
         return view('dashboard.reviews.index', compact('reviews', 'pendingCount', 'approvedCount', 'rejectedCount'));
     }

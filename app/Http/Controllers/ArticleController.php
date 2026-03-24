@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
     public function show($id, $slug)
     {
-        $article = Article::find($id);
+        $article = Article::with(['category', 'creator'])->find($id);
         if (!$article)
             return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.article')]));
 

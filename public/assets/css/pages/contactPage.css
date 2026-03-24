@@ -3,7 +3,6 @@
     padding: 140px var(--tickets-page-section-inline-padding) 50px;
     background-color: var(--articles-background-color);
 
-    background-image: url(https://firstmagency.com/wp-content/uploads/2024/07/White-logo.png);
     background-size: 5% auto;
     transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 

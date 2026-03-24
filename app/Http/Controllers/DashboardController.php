@@ -54,29 +54,37 @@ class DashboardController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
+        $userRoleStats = User::query()->selectRaw('role, COUNT(*) as total')->groupBy('role')->pluck('total', 'role');
+        $articleStatusStats = Article::query()->selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
+        $ticketStatusStats = Ticket::query()->selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
+        $reviewStatusStats = Review::query()->selectRaw('status, COUNT(*) as total')->groupBy('status')->pluck('total', 'status');
+        $serviceStats = Service::query()->selectRaw('COUNT(*) as total, SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END) as active')->first();
+        $projectStats = Project::query()->selectRaw('COUNT(*) as total, SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END) as active')->first();
+        $clientStats = Client::query()->selectRaw('COUNT(*) as total, SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END) as active')->first();
+
         // User Statistics
         $stats = [
             'total_users' => User::count(),
-            'superadmins' => User::where('role', 'superadmin')->count(),
-            'admins' => User::where('role', 'admin')->count(),
-            'content_managers' => User::where('role', 'content_manager')->count(),
+            'superadmins' => (int) ($userRoleStats['superadmin'] ?? 0),
+            'admins' => (int) ($userRoleStats['admin'] ?? 0),
+            'content_managers' => (int) ($userRoleStats['content_manager'] ?? 0),
         ];
 
         // Content Statistics
         $contentStats = [
             'articles' => [
                 'total' => Article::count(),
-                'published' => Article::where('status', 'published')->count(),
-                'draft' => Article::where('status', 'draft')->count(),
+                'published' => (int) ($articleStatusStats['published'] ?? 0),
+                'draft' => (int) ($articleStatusStats['draft'] ?? 0),
                 'views' => Article::sum('view_count') ?? 0,
             ],
             'services' => [
-                'total' => Service::count(),
-                'active' => Service::where('is_active', true)->count(),
+                'total' => (int) ($serviceStats?->total ?? 0),
+                'active' => (int) ($serviceStats?->active ?? 0),
             ],
             'projects' => [
-                'total' => Project::count(),
-                'active' => Project::where('is_active', true)->count(),
+                'total' => (int) ($projectStats?->total ?? 0),
+                'active' => (int) ($projectStats?->active ?? 0),
             ],
         ];
 
@@ -84,15 +92,15 @@ class DashboardController extends Controller
         $supportStats = [
             'tickets' => [
                 'total' => Ticket::count(),
-                'open' => Ticket::where('status', 'open')->count(),
-                'in_progress' => Ticket::where('status', 'in_progress')->count(),
-                'closed' => Ticket::where('status', 'closed')->count(),
-                'latest' => Ticket::latest()->limit(4)->get(),
+                'open' => (int) ($ticketStatusStats['open'] ?? 0),
+                'in_progress' => (int) ($ticketStatusStats['in_progress'] ?? 0),
+                'closed' => (int) ($ticketStatusStats['closed'] ?? 0),
+                'latest' => Ticket::query()->with('department:id,name,border_main_color')->latest()->limit(4)->get(),
             ],
             'reviews' => [
                 'total' => Review::count(),
-                'approved' => Review::where('status', 'approved')->count(),
-                'pending' => Review::where('status', 'pending')->count(),
+                'approved' => (int) ($reviewStatusStats['approved'] ?? 0),
+                'pending' => (int) ($reviewStatusStats['pending'] ?? 0),
                 'average_rate' => Review::where('status', 'approved')->avg('rate') ?? 0,
             ],
         ];
@@ -100,8 +108,8 @@ class DashboardController extends Controller
         // Business Statistics
         $businessStats = [
             'clients' => [
-                'total' => Client::count(),
-                'active' => Client::where('is_active', true)->count(),
+                'total' => (int) ($clientStats?->total ?? 0),
+                'active' => (int) ($clientStats?->active ?? 0),
             ],
         ];
 

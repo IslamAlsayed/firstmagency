@@ -55,7 +55,7 @@
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">
                                     <span class="px-2 py-1 bg-pink-100 text-pink-800 rounded text-xs font-medium">
-                                        {{ $role->permissions->count() }} {{ __('main.permissions') }}
+                                        {{ $role->permissions_count }} {{ __('main.permissions') }}
                                     </span>
                                 </td>
                                 <td class="p-4 text-sm text-gray-600">{{ $role->created_at->format('d/m/Y') }}</td>

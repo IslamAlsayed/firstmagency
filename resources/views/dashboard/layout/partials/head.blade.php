@@ -1,5 +1,6 @@
 <title>@yield('title', 'FirstMagency')</title>
-<base href="../../">
+{{-- Dynamic base tag for cross-device URL consistency --}}
+<base href="{{ url('/') }}/">
 <meta charset="utf-8" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script>

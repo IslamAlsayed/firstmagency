@@ -32,7 +32,7 @@
             <div class="share-your-articles mb-4">
                 <div class="title">{{ __('main.blog_share_article') }}</div>
                 <div class="links grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffirstmagency.com%2F%25d8%25b4%25d8%25b1%25d9%2583%25d8%25a9-%25d8%25aa%25d8%25b5%25d9%2585%25d9%258a%25d9%2585-%25d9%2585%25d9%2588%25d8%25a7%25d9%2582%25d8%25b9-%25d8%25a7%25d8%25ad%25d8%25aa%25d8%25b1%25d8%25a7%25d9%2581%25d9%258a%25d8%25a9-2026%2F"
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
                         class="link flex items-center justify-between gap-2">
                         <div class="icon" data-color="#3b5998">
                             <i class="fab fa-facebook-f"></i>
@@ -40,7 +40,7 @@
                         {{ __('main.social_facebook') }}
                         <i class="arrow fas fa-square-arrow-up-right"></i>
                     </a>
-                    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffirstmagency.com%2F%25d8%25b4%25d8%25b1%25d9%2583%25d8%25a9-%25d8%25aa%25d8%25b5%25d9%2585%25d9%258a%25d9%2585-%25d9%2585%25d9%2588%25d8%25a7%25d9%2582%25d8%25b9-%25d8%25a7%25d8%25ad%25d8%25aa%25d8%25b1%25d8%25a7%25d9%2581%25d9%258a%25d8%25a9-2026%2F&amp;text=%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%88%D8%A7%D9%82%D8%B9%20%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9"
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&amp;text={{ urlencode($article->title ?? '') }}"
                         class="link flex items-center justify-between gap-2">
                         <div class="icon" data-color="#000000">
                             <i class="fab fa-x-twitter"></i>
@@ -48,7 +48,7 @@
                         {{ __('main.social_twitter') }}
                         <i class="arrow fas fa-square-arrow-up-right"></i>
                     </a>
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffirstmagency.com%2F%25d8%25b4%25d8%25b1%25d9%2583%25d8%25a9-%25d8%25aa%25d8%25b5%25d9%2585%25d9%258a%25d9%2585-%25d9%2585%25d9%2588%25d8%25a7%25d9%2582%25d8%25b9-%25d8%25a7%25d8%25ad%25d8%25aa%25d8%25b1%25d8%25a7%25d9%2581%25d9%258a%25d8%25a9-2026%2F"
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}"
                         class="link flex items-center justify-between gap-2">
                         <div class="icon" data-color="#0077B5">
                             <i class="fab fa-linkedin-in"></i>
@@ -56,7 +56,7 @@
                         {{ __('main.social_linkedin') }}
                         <i class="arrow fas fa-square-arrow-up-right"></i>
                     </a>
-                    <a href="https://wa.me/?text=%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%88%D8%A7%D9%82%D8%B9%20%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9%20https%3A%2F%2Ffirstmagency.com%2F%25d8%25b4%25d8%25b1%25d9%2583%25d8%25a9-%25d8%25aa%25d8%25b5%25d9%2585%25d9%258a%25d9%2585-%25d9%2585%25d9%2588%25d8%25a7%25d9%2582%25d8%25b9-%25d8%25a7%25d8%25ad%25d8%25aa%25d8%25b1%25d8%25a7%25d9%2581%25d9%258a%25d8%25a9-2026%2F"
+                    <a href="https://wa.me/?text={{ urlencode(($article->title ?? '') . ' ' . url()->current()) }}"
                         class="link flex items-center justify-between gap-2">
                         <div class="icon" data-color="#25D366">
                             <i class="fab fa-whatsapp"></i>
@@ -64,7 +64,7 @@
                         {{ __('main.social_whatsapp') }}
                         <i class="arrow fas fa-square-arrow-up-right"></i>
                     </a>
-                    <a href="https://t.me/share/url?url=https%3A%2F%2Ffirstmagency.com%2F%25d8%25b4%25d8%25b1%25d9%2583%25d8%25a9-%25d8%25aa%25d8%25b5%25d9%2585%25d9%258a%25d9%2585-%25d9%2585%25d9%2588%25d8%25a7%25d9%2582%25d8%25b9-%25d8%25a7%25d8%25ad%25d8%25aa%25d8%25b1%25d8%25a7%25d9%2581%25d9%258a%25d8%25a9-2026%2F&amp;text=%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%88%D8%A7%D9%82%D8%B9%20%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9"
+                    <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&amp;text={{ urlencode($article->title ?? '') }}"
                         class="link flex items-center justify-between gap-2">
                         <div class="icon" data-color="#0088cc">
                             <i class="fab fa-telegram-plane"></i>

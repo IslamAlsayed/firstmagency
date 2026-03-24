@@ -46,29 +46,27 @@
                 <div class="fixed-support-welcome">{{ __('main.fixed_support_welcome') }}</div>
                 <div class="fixed-support-title">{{ __('main.fixed_support_choose_methods') }}</div>
                 <div class="fixed-support-list">
-                    <a class="fixed-support-item flex items-center gap-2" href="https://wa.me/201212601601" target="_blank" rel="noopener">
+                    <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.whatsapp_link', 'https://wa.me/201212601601') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="https://firstmagency.com/wp-content/uploads/2025/08/4782351.png" alt="">
+                            <img src="{{ config('app.support_images.sales', asset('assets/images/support/sales.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_contact_sales') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="{{ route('tickets.index') }}" target="_blank" rel="noopener"
-                        href="https://firstmagency.com/%d8%a7%d9%84%d8%a3%d8%aa%d8%b5%d9%80%d9%80%d9%80%d8%a7%d9%84-%d8%a8%d9%86%d8%a7/" target="_blank" rel="noopener">
+                    <a class="fixed-support-item flex items-center gap-2" href="{{ route('tickets.index') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="https://firstmagency.com/wp-content/uploads/2025/08/724715.png" alt="">
+                            <img src="{{ config('app.support_images.tickets', asset('assets/images/support/tickets.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_open_ticket') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="tel:201212601601" target="_blank" rel="noopener" href="tel:201212601601" target="_blank" rel="noopener">
+                    <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.phone_link', 'tel:201212601601') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="https://firstmagency.com/wp-content/uploads/2025/08/9999340.png" alt="">
+                            <img src="{{ config('app.support_images.phone', asset('assets/images/support/phone.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_direct_call') }}</span>
                     </a>
-                    <a class="fixed-support-item flex items-center gap-2" href="https://client.firstmagency.com" target="_blank" rel="noopener" href="https://client.firstmagency.com/" target="_blank"
-                        rel="noopener">
+                    <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.client_portal_url', '#') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="https://firstmagency.com/wp-content/uploads/2025/08/3437393.png" alt="">
+                            <img src="{{ config('app.support_images.account', asset('assets/images/support/account.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_manage_account') }}</span>
                     </a>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="contact-sections relative">
+    <section class="contact-sections relative" style="background-image: url('{{ \App\Helpers\CrossDeviceHelper::getSupportImage('logo') }}');">
         <div class="text">
             <div class="title font-semibold mb-4">{{ __('main.contact_form_header') }}</div>
             <button class="btn-link light-main-color dark-hover font-semibold mb-8">

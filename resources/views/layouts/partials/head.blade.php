@@ -1,5 +1,6 @@
 ﻿<title>@yield('title', 'First Magency')</title>
-<base href="../../">
+{{-- Dynamic base tag for cross-device URL consistency --}}
+<base href="{{ url('/') }}/">
 <script>
     window.USERID = "{{ getActiveUserId() }}";
 </script>

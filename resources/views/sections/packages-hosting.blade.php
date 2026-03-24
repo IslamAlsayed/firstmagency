@@ -112,7 +112,7 @@
                                     @endif
                                 </ul>
 
-                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                <a href="{{ \App\Helpers\CrossDeviceHelper::getPurchaseLink() }}"
                                     class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
                                 </a>
@@ -173,7 +173,7 @@
                                     @endif
                                 </ul>
 
-                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                <a href="{{ \App\Helpers\CrossDeviceHelper::getPurchaseLink() }}"
                                     class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
                                 </a>
@@ -234,7 +234,7 @@
                                     @endif
                                 </ul>
 
-                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                <a href="{{ \App\Helpers\CrossDeviceHelper::getPurchaseLink() }}"
                                     class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
                                 </a>
@@ -295,7 +295,7 @@
                                     @endif
                                 </ul>
 
-                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                <a href="{{ \App\Helpers\CrossDeviceHelper::getPurchaseLink() }}"
                                     class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
                                 </a>
@@ -348,7 +348,7 @@
                                     @endforeach
                                 </ul>
 
-                                <a href="https://client.firstmagency.com/store/stdf-at-mshtrk-at/bq-at-stdf-at-lml"
+                                <a href="{{ \App\Helpers\CrossDeviceHelper::getPurchaseLink() }}"
                                     class="main-button w-full block py-3 rounded-xl text-blue-600 font-semibold cursor-pointer transition-all">
                                     {{ __('main.btn_request_now') }}
                                 </a>

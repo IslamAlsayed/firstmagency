@@ -20,11 +20,13 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('viewAny', User::class);
-        $users = User::all();
+        $users = User::query()->latest()->paginate(25);
+        $roleStats = User::query()->selectRaw('role, COUNT(*) as total')->groupBy('role')->pluck('total', 'role');
+
         $allItems = User::count();
-        $superAdmins = $users->where('role', 'superadmin')->count();
-        $admins = $users->where('role', 'admin')->count();
-        $contentManagers = $users->where('role', 'content_manager')->count();
+        $superAdmins = (int) ($roleStats['superadmin'] ?? 0);
+        $admins = (int) ($roleStats['admin'] ?? 0);
+        $contentManagers = (int) ($roleStats['content_manager'] ?? 0);
         return view('dashboard.users.index', compact('users', 'allItems', 'superAdmins', 'admins', 'contentManagers'));
     }
 

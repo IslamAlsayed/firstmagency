@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -20,9 +19,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('*', function ($view) {
-            $settings = Setting::withoutGlobalScopes()->first() ?? null;
-            $view->with('settings', $settings);
-        });
+        // Settings are shared from SettingsServiceProvider.
     }
 }

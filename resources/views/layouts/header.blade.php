@@ -156,8 +156,8 @@
                     </a>
                 </li>
                 <li class="flex items-center">
-                    <a href="https://client.firstmagency.com"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ request()->url() == 'https://client.firstmagency.com' ? 'active' : '' }}">
+                    <a href="{{ config('app.client_portal_url', '#') }}"
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ url(config('app.client_portal_url', 'x')) ) == request()->url() ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.clients') }}</span>
                     </a>

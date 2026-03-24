@@ -51,7 +51,7 @@
 @endpush
 
 @section('content')
-    <section class="ticket-show-sections relative">
+    <section class="ticket-show-sections relative"  style="background-image: url('{{ \App\Helpers\CrossDeviceHelper::getSupportImage('logo') }}');">
         {{-- Heading --}}
         <article>
             <div class="flex items-center justify-between gap-4">
