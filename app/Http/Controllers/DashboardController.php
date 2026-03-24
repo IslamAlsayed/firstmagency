@@ -87,7 +87,7 @@ class DashboardController extends Controller
                 'open' => Ticket::where('status', 'open')->count(),
                 'in_progress' => Ticket::where('status', 'in_progress')->count(),
                 'closed' => Ticket::where('status', 'closed')->count(),
-                'latest' => Ticket::latest()->limit(5)->get(),
+                'latest' => Ticket::latest()->limit(4)->get(),
             ],
             'reviews' => [
                 'total' => Review::count(),

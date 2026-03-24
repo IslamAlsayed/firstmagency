@@ -289,7 +289,7 @@
                     <div class="space-y-3 mt-4">
                         @foreach ($supportStats['tickets']['latest'] as $item)
                             <a href="{{ route('dashboard.tickets.show', $item->id) }}"
-                                class="flex items-center justify-between gap-4 shadow-sm radius-lg px-4 py-2 cursor-pointer hover:bg-gray-100 transition">
+                                class="flex items-center justify-between gap-4 shadow-sm radius-lg px-4 py-4 cursor-pointer hover:bg-gray-200 transition">
                                 <div class="flex items-center gap-3">
                                     <span>{{ $item->name }}</span>
                                     <span class="kt-badge text-white px-4 {{ \App\Enum\TicketEnums::from($item->status)->badgeColor() }}">{{ __('main.' . $item->status) }}</span>
