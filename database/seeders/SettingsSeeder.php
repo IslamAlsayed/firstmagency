@@ -20,8 +20,8 @@ class SettingsSeeder extends Seeder
         Setting::create([
             // Colors
             // 'primary_color' => '#5A8622',
-            'primary_color' => '#3c3c39',
-            'text_color' => '#323232',
+            'dash_primary_color' => '#0074F7',
+            'text_color' => '#ffffff',
             'secondary_color' => '#6c757d',
             'success_color' => '#198754',
             'danger_color' => '#dc3545',
