@@ -379,7 +379,7 @@
             </div>
 
             <!-- Colors Settings -->
-            <div class="bg-white radius-lg shadow-lg p-6">
+            <div class="hidden bg-white radius-lg shadow-lg p-6">
                 <h6 class="flex items-center justify-between gap-4 text-xl font-semibold text-gray-600 mb-6 pb-3 border-b-2 border-purple-300">
                     <div>
                         <i class="fas fa-palette text-blue-500"></i>
