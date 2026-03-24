@@ -1,5 +1,20 @@
 @extends('layouts.master')
 
+@if ($article instanceof \App\Models\Article)
+    @php
+        $articleTitle = $article->translations[app()->getLocale()]['title'] ?? ($article->translations['en']['title'] ?? $article->slug);
+        $articleDescription = $article->translations[app()->getLocale()]['description'] ?? ($article->translations['en']['description'] ?? '');
+    @endphp
+
+    @section('title', $articleTitle . ' | ' . __('main.brand_name'))
+    @section('meta_title', $articleTitle . ' | ' . __('main.brand_name'))
+    @section('meta_description', \Illuminate\Support\Str::limit(strip_tags($articleDescription), 160))
+@else
+    @section('title', __('main.article_not_found') . ' | ' . __('main.brand_name'))
+    @section('meta_title', __('main.article_not_found') . ' | ' . __('main.brand_name'))
+    @section('meta_description', __('main.please_try_again'))
+@endif
+
 @section('content')
     <div class="blog-show">
         <section class="blog-content">

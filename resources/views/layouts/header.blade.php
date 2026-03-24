@@ -2,7 +2,7 @@
     <div class="inner">
         <div class="logo">
             <a href="{{ url('/') }}" class="shineEffect">
-                <img src="{{ asset('assets/images/website/logo.png.webp') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
+                <img src="{{ asset('assets/images/website/logo.png') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
             </a>
 
             <div class="contact-fast">
@@ -76,15 +76,13 @@
 
             <div class="contact-actions flex items-center gap-4">
                 <button>
-                    <a href="https://apicontact-actions.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}&text&type=phone_number&app_absent=0"
-                        class="flex items-center gap-2">
+                    <a href="https://api.whatsapp.com/send?phone={{ isset($settings) && $settings->site_whatsapp ? $settings->site_whatsapp : '' }}" class="flex items-center gap-2">
                         <i class="fab fa-whatsapp"></i>
                         {{ __('main.header_whatsapp') }}
                     </a>
                 </button>
                 <button>
-                    <a href="https://apicontact-actions.whatsapp.com/send/?phone={{ isset($settings) && $settings->site_phone ? $settings->site_phone : '' }}&text&type=phone_number&app_absent=0"
-                        class="flex items-center gap-2">
+                    <a href="tel:{{ isset($settings) && $settings->site_phone ? preg_replace('/[^0-9+]/', '', $settings->site_phone) : '' }}" class="flex items-center gap-2">
                         <i class="fa-solid fa-phone fa-flip"></i>
                         {{ __('main.header_call_now') }}
                     </a>
@@ -157,7 +155,7 @@
                 </li>
                 <li class="flex items-center">
                     <a href="{{ config('app.client_portal_url', '#') }}"
-                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ url(config('app.client_portal_url', 'x')) ) == request()->url() ? 'active' : '' }}">
+                        class="nav-link btn-link flex items-center gap-2 font-semibold hover {{ url(config('app.client_portal_url', 'x')) == request()->url() ? 'active' : '' }}">
                         <div class="pseudo-element"></div>
                         <span>{{ __('main.clients') }}</span>
                     </a>

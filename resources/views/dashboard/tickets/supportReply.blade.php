@@ -4,8 +4,8 @@
 @section('page-title', '🎫 ' . limitedText($ticket->subject, 30))
 
 @section('content')
-    <div class="kt-container-fixed p-0">
-        <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
+    <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100 mb-6">
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-4">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
                     {{ $ticket->subject ?? __('main.ticket_details') }} - <span
@@ -34,14 +34,14 @@
         </div>
     </div>
 
-    <div class="kt-container-fixed p-0">
+    <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
         <div class="grid gap-4">
             {{-- Messages Section --}}
             <article id="messages-section" class="messages-section {{ $ticketData['messages'] && count($ticketData['messages']) > 0 ? '' : 'hidden' }}" style="padding-inline-end: 3px;">
                 <div class="flex flex-col gap-4 messages-container">
                     @foreach ($ticketData['messages'] as $message)
                         <div class="flex justify-between gap-4 client {{ $message['sender_type'] == 'customer' ? 'customer' : '' }}" data-message-id="{{ $message['id'] }}"
-                            style="background-color: {{ $message['department']['bg_color'] ?? '' }}; border: 1px solid {{ $message['department']['border_color'] ?? 'var(--light-color)' }}; border-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 4px solid {{ $message['department']['border_main_color'] ?? 'var(--light-color)' }};">
+                            style="background-color: {{ $message['department']['bg_color'] ?? 'var(--light-color)' }}; border: 1px solid {{ $message['department']['border_color'] ?? 'var(--color-gray-300)' }}; border-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 4px solid {{ $message['department']['border_main_color'] ?? 'var(--dash_primary_color)' }};">
                             <div class="flex gap-4">
                                 <div class="avatar">
                                     @php
@@ -70,7 +70,7 @@
 
                                         <div class="flex gap-2">
                                             <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message"
-                                                style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--light-color)' }};">
+                                                style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--dash_primary_color)' }};">
                                                 {{ $message['sender_type'] == 'customer' ? __('main.customer') : $message['department']['name'] ?? __('main.support') }}
                                             </span>
                                         </div>
@@ -328,10 +328,10 @@
             const senderLabel = isCustomer ? '{{ __('main.customer') }}' : department.name || '{{ __('main.support') }}';
 
             // Styling
-            const backgroundColor = `background-color: ${department.bg_color || "#f3f4f6"};`;
-            const borderColor = `border: 1px solid ${department.border_color || "#d1d5db"};`;
-            const borderMainColor = `border-${borderDirection}: 4px solid ${department.border_main_color || "#9ca3af"};`;
-            const badgeColor = `background-color: ${department.badge_color || "#1e40af"}; color: var(--light-color);`;
+            const backgroundColor = `background-color: ${department.bg_color || "var(--light-color)"};`;
+            const borderColor = `border: 1px solid ${department.border_color || "var(--color-gray-300)"};`;
+            const borderMainColor = `border-${borderDirection}: 4px solid ${department.border_main_color || "var(--dash_primary_color)"};`;
+            const badgeColor = `background-color: ${department.badge_color || "var(--dash_primary_color)"}; color: var(--light-color);`;
             const ticketStatus = '{{ $ticket->status == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : 'flex' }}';
 
             // Create message HTML
@@ -359,33 +359,33 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                                    <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                        {{ __('main.attachment') }}
-                                                                                                                    </div>`).join('')
+                                                                                                                                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                                                                                                    {{ __('main.attachment') }}
+                                                                                                                                                                                                </div>`).join('')
                                     : ''
                                 }
                             </div>
 
                     ${!isCustomer ? `
-                                                <div class="edit-form" style="display:none;">
-                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                                        <div class="edit-buttons flex gap-2 mt-3">
-                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                                        </div>
-                                                    </div>
-                                                    </div>` : ''}
+                                                                                                                            <div class="edit-form" style="display:none;">
+                                                                                                                                <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                                                                                                    <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                                                                                                    <div class="edit-buttons flex gap-2 mt-3">
+                                                                                                                                        <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                                                                                                        <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                </div>` : ''}
                         </div>
                     </div>
 
                     ${!isCustomer ? `
-                                                                <div class="actions ${ticketStatus}">
-                                                                    <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                                    <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                                </div>
-                                                            </div>` : ''}
+                                                                                                                                            <div class="actions ${ticketStatus}">
+                                                                                                                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                                                                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                                                                                            </div>
+                                                                                                                                        </div>` : ''}
                 `;
 
             // Append message

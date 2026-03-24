@@ -49,7 +49,7 @@
                                         <td class="text-start p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
                                         <td class="text-start p-4 text-sm text-gray-600">
                                             <span class="kt-badge text-white rounded-full" style="background-color: {{ $ticket->department['border_main_color'] ?? 'var(--main-color)' }};">
-                                                {{ __('main.' . $ticket->department?->name) }}
+                                                {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
                                             </span>
                                         </td>
                                         <td class="text-start p-4 text-sm">

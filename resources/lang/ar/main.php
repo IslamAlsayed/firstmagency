@@ -197,7 +197,7 @@ return [
     'services_and_projects' => 'الخدمات والمشاريع',
     'programmings' => 'البرمجيات',
     'programming_and_development' => 'البرمجة والتطوير',
-    'faqs_and_reviews' => 'الأسئلة الشائعة والتقييمات',
+    'faqs_and_reviews' => 'الأسئلة والمراجعات',
     'packages_and_domains' => 'الباقات والنطاقات',
     'projects_and_steps' => 'المشاريع والخطوات',
     'features_and_system' => 'الميزات والنظام',

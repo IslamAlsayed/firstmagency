@@ -48,25 +48,25 @@
                 <div class="fixed-support-list">
                     <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.whatsapp_link', 'https://wa.me/201212601601') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="{{ config('app.support_images.sales', asset('assets/images/support/sales.png')) }}" alt="">
+                            <img src="{{ config('app.support_images.sales', asset('assets/images/website/support/sales.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_contact_sales') }}</span>
                     </a>
                     <a class="fixed-support-item flex items-center gap-2" href="{{ route('tickets.index') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="{{ config('app.support_images.tickets', asset('assets/images/support/tickets.png')) }}" alt="">
+                            <img src="{{ config('app.support_images.tickets', asset('assets/images/website/support/tickets.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_open_ticket') }}</span>
                     </a>
                     <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.phone_link', 'tel:201212601601') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="{{ config('app.support_images.phone', asset('assets/images/support/phone.png')) }}" alt="">
+                            <img src="{{ config('app.support_images.phone', asset('assets/images/website/support/phone.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_direct_call') }}</span>
                     </a>
                     <a class="fixed-support-item flex items-center gap-2" href="{{ config('app.client_portal_url', '#') }}" target="_blank" rel="noopener">
                         <span class="fixed-support-image">
-                            <img src="{{ config('app.support_images.account', asset('assets/images/support/account.png')) }}" alt="">
+                            <img src="{{ config('app.support_images.account', asset('assets/images/website/support/account.png')) }}" alt="">
                         </span>
                         <span class="fixed-support-t">{{ __('main.fixed_support_manage_account') }}</span>
                     </a>

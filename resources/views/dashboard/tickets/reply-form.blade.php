@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <button class="submit btn-link light-main-color font-semibold">
+    <button class="submit cursor-pointer btn-link light-main-color font-semibold" toggle-button>
         {{ __('main.send_reply') }}
     </button>
 </form>

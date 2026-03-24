@@ -1,6 +1,6 @@
 {{-- ? Start plugins --}}
 {{-- jquery-3.7.1 --}}
-<script defer src="{{ asset('assets/plugins/jquery@3.7.1/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery@3.7.1/jquery-3.7.1.min.js') }}"></script>
 {{-- Multiple select plugin --}}
 <script defer src="{{ asset('assets/plugins/select2@4.1.0-rc.0/js/select2.min.js') }}"></script>
 {{-- Swiper slider --}}
@@ -10,7 +10,7 @@
 {{-- Fontawesome icons pro --}}
 <script defer src="{{ asset('assets/plugins/fontawesome-icons/js/all.min.js') }}"></script>
 {{-- Ably realtime --}}
-<script defer src="{{ asset('assets/plugins/local-ably-cdn/ably.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/local-ably-cdn/ably.min.js') }}"></script>
 {{-- <script src="{{ asset('assets/plugins/local-ably-cdn/setup.js') }}"></script> --}}
 
 {{-- ? End plugins --}}

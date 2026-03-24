@@ -1,4 +1,4 @@
-﻿<title>@yield('title', 'First Magency')</title>
+﻿<title>@yield('title', config('app.name', 'First Magency'))</title>
 {{-- Dynamic base tag for cross-device URL consistency --}}
 <base href="{{ url('/') }}/">
 <script>
@@ -9,19 +9,19 @@
 <meta content="follow, index" name="robots" />
 <link href="{{ url(request()->path()) }}" rel="canonical" />
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-<meta content="Sign in page" name="description" />
+<meta content="@yield('meta_description', __('main.brand_name'))" name="description" />
 <meta content="@firstmagency" name="twitter:site" />
 <meta content="@firstmagency" name="twitter:creator" />
 <meta content="summary_large_image" name="twitter:card" />
-<meta content="Metronic" name="twitter:title" />
-<meta content="Sign in page" name="twitter:description" />
+<meta content="@yield('meta_title', trim($__env->yieldContent('title', config('app.name', 'First Magency'))))" name="twitter:title" />
+<meta content="@yield('meta_description', __('main.brand_name'))" name="twitter:description" />
 
 <meta content="{{ url(request()->path()) }}" property="og:url" />
 <meta content="en_US" property="og:locale" />
 <meta content="website" property="og:type" />
 <meta content="@firstmagency" property="og:site_name" />
-<meta content="First Magency" property="og:title" />
-<meta content="Sign in page" property="og:description" />
+<meta content="@yield('meta_title', trim($__env->yieldContent('title', config('app.name', 'First Magency'))))" property="og:title" />
+<meta content="@yield('meta_description', __('main.brand_name'))" property="og:description" />
 
 {{-- Google Fonts + Cairo for bolder weights --}}
 <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -20,7 +20,7 @@ class CrossDeviceHelper
     public static function getPurchaseLink($packageId = 'stdf-at-mshtrk-at', $productId = 'bq-at-stdf-at-lml')
     {
         $portalUrl = config('app.client_portal_url', 'https://client.firstmagency.com');
-        
+
         return "{$portalUrl}/store/{$packageId}/{$productId}";
     }
 
@@ -34,14 +34,14 @@ class CrossDeviceHelper
     public static function getSupportImage($type = 'sales')
     {
         $images = config('app.support_images', [
-            'logo' => asset('assets/images/White-logo.png'),
-            'sales' => asset('assets/images/support/sales.png'),
-            'tickets' => asset('assets/images/support/tickets.png'),
-            'phone' => asset('assets/images/support/phone.png'),
-            'account' => asset('assets/images/support/account.png'),
+            'logo' => asset('assets/images/website/reviews-bg.jpg'),
+            'sales' => asset('assets/images/website/support/sales.png'),
+            'tickets' => asset('assets/images/website/support/tickets.png'),
+            'phone' => asset('assets/images/website/support/phone.png'),
+            'account' => asset('assets/images/website/support/account.png'),
         ]);
 
-        return $images[$type] ?? asset('assets/images/support/' . $type . '.png');
+        return $images[$type] ?? asset('assets/images/website/support/' . $type . '.png');
     }
 
     /**
@@ -76,7 +76,7 @@ class CrossDeviceHelper
     {
         $domain = self::getCurrentDomain();
         $scheme = self::getCurrentScheme();
-        
+
         return "{$baseKey}_{$scheme}_{$domain}";
     }
 }

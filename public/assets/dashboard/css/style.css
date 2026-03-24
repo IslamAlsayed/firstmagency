@@ -193,7 +193,7 @@ html[lang=ar] {
         margin-top: 10px;
         border-radius: 7px;
         color: var(--light-color);
-        background-color: var(--light-color);
+        background-color: var(--dash_primary_color);
     }
 }
 

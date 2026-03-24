@@ -52,24 +52,24 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.users.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                            <a href="{{ route('dashboard.users.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                 {{ __('main.total_users') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-800 mt-2">{{ $stats['total_users'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $stats['total_users'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-primary radius-lg p-3 text-white shadow-sm group-hover:bg-blue-600 transition-all">
+                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-gray-600 transition-all">
                             <i class="fas fa-users text-2xl"></i>
                         </div>
                     </div>
-                    <div class="flex flex-wrap gap-2 text-primary text-xs font-semibold">
-                        <span class="w-fit bg-blue-100 px-2 py-1 rounded-full">
+                    <div class="flex flex-wrap gap-2 text-gray-600 text-xs font-semibold">
+                        <span class="w-fit bg-gray-100 px-2 py-1 rounded-full">
                             {{ $stats['superadmins'] }} {{ __('main.superadmins') }}
                         </span>
-                        <span class="w-fit bg-blue-100 px-2 py-1 rounded-full">
+                        <span class="w-fit bg-gray-100 px-2 py-1 rounded-full">
                             {{ $stats['admins'] }} {{ __('main.admins') }}
                         </span>
-                        <span class="w-fit bg-blue-100 px-2 py-1 rounded-full">
+                        <span class="w-fit bg-gray-100 px-2 py-1 rounded-full">
                             {{ $stats['content_managers'] }} {{ __('main.content_managers') }}
                         </span>
                     </div>
@@ -79,13 +79,13 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.articles.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                            <a href="{{ route('dashboard.articles.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                 {{ __('main.articles') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-800 mt-2">{{ $contentStats['articles']['total'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $contentStats['articles']['total'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-primary radius-lg p-3 text-white shadow-sm group-hover:bg-purple-600 transition-all">
+                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-purple-600 transition-all">
                             <i class="fas fa-newspaper text-2xl"></i>
                         </div>
                     </div>
@@ -99,17 +99,17 @@
                 <div class="bg-white group radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <a href="{{ route('dashboard.projects.index') }}" class="text-primary text-sm font-semibold uppercase tracking-wide">
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                            <a href="{{ route('dashboard.projects.index') }}" class="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                 {{ __('main.projects') }}
                             </a>
-                            <p class="text-4xl font-bold text-gray-800 mt-2">{{ $contentStats['projects']['total'] ?? 0 }}</p>
+                            <p class="text-4xl font-bold text-gray-600 mt-2">{{ $contentStats['projects']['total'] ?? 0 }}</p>
                         </div>
-                        <div class="bg-primary radius-lg p-3 text-white shadow-sm group-hover:bg-green-600 transition-all">
+                        <div class="bg-gray-600 radius-lg p-3 text-white shadow-sm group-hover:bg-green-600 transition-all">
                             <i class="fas fa-project-diagram text-2xl"></i>
                         </div>
                     </div>
-                    <div class="text-primary text-xs font-semibold">
+                    <div class="text-gray-600 text-xs font-semibold">
                         <span class="bg-green-100 px-2 py-1 rounded-full">✅ {{ $contentStats['projects']['active'] ?? 0 }} {{ __('main.active') }}</span>
                     </div>
                 </div>
@@ -120,13 +120,13 @@
                 <!-- Reviews & Ratings -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-primary radius-lg p-3 text-white">
+                        <div class="bg-gray-600 radius-lg p-3 text-white">
                             <i class="fas fa-star text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-800">
+                            <h3 class="text-lg font-bold text-gray-600">
                                 <a href="{{ route('dashboard.users.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                     {{ __('main.reviews') }}
                                 </a>
                             </h3>
@@ -135,20 +135,20 @@
                     </div>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.total_reviews') }}</span>
-                            <span class="text-2xl font-bold text-gray-800">{{ $supportStats['reviews']['total'] ?? 0 }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.total_reviews') }}</span>
+                            <span class="text-2xl font-bold text-gray-600">{{ $supportStats['reviews']['total'] ?? 0 }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.approved') }} ✓</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.approved') }} ✓</span>
                             <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $supportStats['reviews']['approved'] ?? 0 }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.pending_review') }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.pending_review') }}</span>
                             <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $supportStats['reviews']['pending'] ?? 0 }}</span>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-200">
                             <div class="flex items-center justify-between">
-                                <span class="text-primary text-sm font-semibold">{{ __('main.avg_rating') }}</span>
+                                <span class="text-gray-600 text-sm font-semibold">{{ __('main.avg_rating') }}</span>
                                 <div class="flex items-center gap-1">
                                     @php
                                         $avgRating = round($supportStats['reviews']['average_rate'], 1);
@@ -172,13 +172,13 @@
                 <!-- Services -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-primary radius-lg p-3 text-white">
+                        <div class="bg-gray-600 radius-lg p-3 text-white">
                             <i class="fas fa-cogs text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-800">
+                            <h3 class="text-lg font-bold text-gray-600">
                                 <a href="{{ route('dashboard.services.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                     {{ __('main.services') }}
                                 </a>
                             </h3>
@@ -187,15 +187,15 @@
                     </div>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.total_services') }}</span>
-                            <span class="text-2xl font-bold text-gray-800">{{ $contentStats['services']['total'] ?? 0 }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.total_services') }}</span>
+                            <span class="text-2xl font-bold text-gray-600">{{ $contentStats['services']['total'] ?? 0 }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.active') }}</span>
-                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $contentStats['services']['active'] ?? 0 }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.active') }}</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $contentStats['services']['active'] ?? 0 }}</span>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-200 text-center">
-                            <p class="text-2xl font-bold text-gradient bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+                            <p class="text-2xl font-bold text-gradient bg-gradient-to-r from-cyan-500 to-gray-500 bg-clip-text text-transparent">
                                 {{ $contentStats['services']['total'] > 0 ? '🟢 ' . __('main.active') : '🔴 ' . __('main.no_services') }}
                             </p>
                         </div>
@@ -205,13 +205,13 @@
                 <!-- Clients & Business -->
                 <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                        <div class="bg-primary radius-lg p-3 text-white">
+                        <div class="bg-gray-600 radius-lg p-3 text-white">
                             <i class="fas fa-handshake text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-800">
+                            <h3 class="text-lg font-bold text-gray-600">
                                 <a href="{{ route('dashboard.clients.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                     {{ __('main.clients') }}
                                 </a>
                             </h3>
@@ -220,11 +220,11 @@
                     </div>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.total_clients') }}</span>
-                            <span class="text-2xl font-bold text-gray-800">{{ $businessStats['clients']['total'] ?? 0 }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.total_clients') }}</span>
+                            <span class="text-2xl font-bold text-gray-600">{{ $businessStats['clients']['total'] ?? 0 }}</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-primary text-sm">{{ __('main.active') }}</span>
+                            <span class="text-gray-600 text-sm">{{ __('main.active') }}</span>
                             <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $businessStats['clients']['active'] ?? 0 }}</span>
                         </div>
                         <div class="mt-6">
@@ -246,13 +246,13 @@
             <div class="">
                 <div class="flex items-center justify-between gap-3 mb-4 pb-4 border-b border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="bg-primary radius-lg p-3 text-white">
+                        <div class="bg-gray-600 radius-lg p-3 text-white">
                             <i class="fas fa-ticket-alt text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-gray-800">
+                            <h3 class="text-lg font-bold text-gray-600">
                                 <a href="{{ route('dashboard.tickets.index') }}">
-                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                    <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                                     {{ __('main.tickets') }}
                                 </a>
                             </h3>
@@ -262,17 +262,17 @@
 
                     <div class="flex gap-2 text-xs">
                         <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full font-semibold">🔴 {{ $supportStats['tickets']['open'] ?? 0 }}</span>
-                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">⏳ {{ $supportStats['tickets']['in_progress'] ?? 0 }}</span>
+                        <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-semibold">⏳ {{ $supportStats['tickets']['in_progress'] ?? 0 }}</span>
                         <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">✅ {{ $supportStats['tickets']['closed'] ?? 0 }}</span>
                     </div>
                 </div>
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
-                        <span class="text-primary text-sm">{{ __('main.total_tickets') }}</span>
-                        <span class="text-2xl font-bold text-gray-800">{{ $supportStats['tickets']['total'] ?? 0 }}</span>
+                        <span class="text-gray-600 text-sm">{{ __('main.total_tickets') }}</span>
+                        <span class="text-2xl font-bold text-gray-600">{{ $supportStats['tickets']['total'] ?? 0 }}</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-primary text-sm">{{ __('main.active') }}</span>
+                        <span class="text-gray-600 text-sm">{{ __('main.active') }}</span>
                         <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $supportStats['tickets']['open'] ?? 0 }}</span>
                     </div>
                     <div class="mt-6">
@@ -296,7 +296,7 @@
                                     <span class="kt-badge text-white px-4"
                                         style="background-color: {{ $item->department?->border_main_color ?? 'default' }};">{{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $item->department['name'] ?? 'no_department'))) }}</span>
                                 </div>
-                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-gray-600"></i>
                             </a>
                         @endforeach
                     </div>
@@ -310,7 +310,7 @@
         <!-- System Status -->
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
-                <h4 class="font-semibold text-gray-800 flex items-center gap-2">
+                <h4 class="font-semibold text-gray-600 flex items-center gap-2">
                     <i class="fas fa-server text-green-600 text-lg"></i>
                     {{ __('main.system_status') }}
                 </h4>
@@ -323,11 +323,11 @@
         <!-- Database Status -->
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
-                <h4 class="font-semibold text-gray-800 flex items-center gap-2">
-                    <i class="fas fa-database text-primary text-lg"></i>
+                <h4 class="font-semibold text-gray-600 flex items-center gap-2">
+                    <i class="fas fa-database text-gray-600 text-lg"></i>
                     {{ __('main.database_status') }}
                 </h4>
-                <span class="w-3 h-3 bg-blue-600 rounded-full animate-pulse"></span>
+                <span class="w-3 h-3 bg-gray-600 rounded-full animate-pulse"></span>
             </div>
             <p class="text-sm text-gray-600 font-semibold">{{ __('main.database_connected') }}</p>
             <p class="text-xs text-gray-500 mt-2">✓ {{ __('main.sync_complete') }}</p>
@@ -336,7 +336,7 @@
         <!-- Last Update -->
         <div class="bg-white radius-lg shadow-sm p-6 border border-gray-100">
             <div class="flex items-center justify-between mb-3">
-                <h4 class="font-semibold text-gray-800 flex items-center gap-2">
+                <h4 class="font-semibold text-gray-600 flex items-center gap-2">
                     <i class="fas fa-sync-alt text-purple-600"></i>
                     {{ __('main.last_update') }}
                 </h4>

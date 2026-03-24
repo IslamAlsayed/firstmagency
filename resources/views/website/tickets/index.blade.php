@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title', __('main.tickets'))
+@section('meta_title', __('main.tickets') . ' | ' . __('main.brand_name'))
+@section('meta_description', __('main.contact_enter_data'))
+
 @section('content')
     <section class="contact-sections relative" style="background-image: url('{{ \App\Helpers\CrossDeviceHelper::getSupportImage('logo') }}');">
         <div class="text">
@@ -25,11 +29,15 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('name') border: 1px solid red @enderror">
-                            <input type="text" id="name" name="name" required placeholder="{{ __('main.contact_form_name') }}" value="{{ old('name') }}">
+                            <input type="text" id="name" name="name" required placeholder="{{ __('main.contact_form_name') }}" value="{{ old('name') }}"
+                                aria-invalid="{{ $errors->has('name') ? 'true' : 'false' }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/user.svg') }}" alt="{{ __('main.contact_form_name') }}">
                             </div>
                         </div>
+                        @error('name')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                     {{-- email --}}
                     <div>
@@ -38,11 +46,15 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('email') border: 1px solid red @enderror">
-                            <input type="email" id="email" name="email" required placeholder="{{ __('main.contact_form_email') }}" value="{{ old('email') }}">
+                            <input type="email" id="email" name="email" required placeholder="{{ __('main.contact_form_email') }}" value="{{ old('email') }}"
+                                aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/email.svg') }}" alt="{{ __('main.contact_form_email') }}">
                             </div>
                         </div>
+                        @error('email')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -51,11 +63,15 @@
                     <div>
                         <label for="phone" class="font-semibold">{{ __('main.contact_form_phone') }}</label>
                         <div class="input flex" style="@error('phone') border: 1px solid red @enderror">
-                            <input type="text" id="phone" name="phone" placeholder="{{ __('main.contact_form_phone') }}" value="{{ old('phone') }}">
+                            <input type="text" id="phone" name="phone" placeholder="{{ __('main.contact_form_phone') }}" value="{{ old('phone') }}"
+                                aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/phone.svg') }}" alt="{{ __('main.contact_form_phone') }}">
                             </div>
                         </div>
+                        @error('phone')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                     {{-- Select Department --}}
                     <div>
@@ -64,7 +80,7 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('department_id') border: 1px solid red @enderror">
-                            <select id="department_id" name="department_id" required>
+                            <select id="department_id" name="department_id" required aria-invalid="{{ $errors->has('department_id') ? 'true' : 'false' }}">
                                 <option value="" {{ old('department_id') == '' ? 'selected' : '' }}>
                                     {{ __('main.department') }}
                                 </option>
@@ -76,6 +92,9 @@
                                 <img src="{{ asset('assets/images/website/icons/pin.svg') }}" alt="{{ __('main.contact_form_department') }}">
                             </div>
                         </div>
+                        @error('department_id')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -87,11 +106,15 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('subject') border: 1px solid red @enderror">
-                            <input type="text" id="subject" name="subject" required placeholder="{{ __('main.contact_form_subject_placeholder') }}" value="{{ old('subject') }}">
+                            <input type="text" id="subject" name="subject" required placeholder="{{ __('main.contact_form_subject_placeholder') }}" value="{{ old('subject') }}"
+                                aria-invalid="{{ $errors->has('subject') ? 'true' : 'false' }}">
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/sheet.svg') }}" alt="{{ __('main.contact_form_subject') }}">
                             </div>
                         </div>
+                        @error('subject')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="group flex items-center">
@@ -102,11 +125,14 @@
                             <span class="text-red-600">*</span>
                         </label>
                         <div class="input flex" style="@error('message') border: 1px solid red @enderror">
-                            <textarea id="message" name="message" rows="5" required placeholder="{{ __('main.contact_form_message_placeholder') }}">{{ old('message') }}</textarea>
+                            <textarea id="message" name="message" rows="5" required placeholder="{{ __('main.contact_form_message_placeholder') }}" aria-invalid="{{ $errors->has('message') ? 'true' : 'false' }}">{{ old('message') }}</textarea>
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/message.svg') }}" alt="{{ __('main.contact_form_message') }}">
                             </div>
                         </div>
+                        @error('message')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -117,6 +143,9 @@
                         <div class="input flex" style="@error('attachments') border: 1px solid red @enderror" data-message="{{ __('messages.no_file_chosen') }}">
                             <input type="file" id="attachments" name="attachments[]">
                         </div>
+                        @error('attachments')
+                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="add-attachment-input" id="add-attachment-btn" style="cursor: pointer;">
@@ -134,7 +163,7 @@
                                 <div class="input flex items-center" style="@error('verification') border: 1px solid red @enderror" data-message="{{ __('messages.no_file_chosen') }}">
                                     <input type="number" id="verification" name="verification" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
                                         style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important" placeholder="{{ __('main.contact_form_answer') }}"
-                                        value="{{ old('verification') }}">
+                                        value="{{ old('verification') }}" aria-invalid="{{ $errors->has('verification') ? 'true' : 'false' }}">
                                 </div>
                             </div>
                             <div class="question font-semibold">
@@ -142,10 +171,13 @@
                             </div>
                         </div>
                     </div>
+                    @error('verification')
+                        <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <button class="ticket-submit btn-link light-main-color font-semibold">
-                    {{ __('main.submit') }}
+                <button type="submit" class="ticket-submit btn-link light-main-color font-semibold" data-default-text="{{ __('main.submit') }}" data-loading-text="{{ __('main.contact_sending') }}">
+                    <span class="ticket-submit-text">{{ __('main.submit') }}</span>
                 </button>
             </div>
         </form>
@@ -208,6 +240,20 @@
                     console.error('Error:', error);
                     rotateBtn.style.transform = 'rotate(0deg)';
                 });
+        });
+
+        // Submit loading state for better UX
+        const ticketForm = document.querySelector('.contact-form');
+        ticketForm?.addEventListener('submit', function() {
+            const submitBtn = ticketForm.querySelector('.ticket-submit');
+            const textNode = ticketForm.querySelector('.ticket-submit-text');
+
+            if (!submitBtn || !textNode) return;
+
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'not-allowed';
+            textNode.textContent = submitBtn.dataset.loadingText || textNode.textContent;
         });
     </script>
 @endpush
