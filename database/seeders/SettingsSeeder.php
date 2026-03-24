@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Tonysm\RichTextLaravel\Models\RichText;
 
 class SettingsSeeder extends Seeder
 {
@@ -15,6 +16,7 @@ class SettingsSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Setting::truncate();
+        RichText::where('record_type', 'like', '%setting%')->delete();
         Schema::enableForeignKeyConstraints();
 
         Setting::create([
