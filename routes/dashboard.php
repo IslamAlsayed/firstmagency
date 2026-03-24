@@ -58,6 +58,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::put('/settings/inline-padding', [SettingsController::class, 'updateInlinePadding'])->name('settings.inline-padding.update');
     Route::post('/settings/inline-padding/reset', [SettingsController::class, 'resetInlinePadding'])->name('settings.inline-padding.reset');
     Route::get('/settings/website', [SettingsController::class, 'websiteSettings'])->name('settings.website');
+    Route::get('/settings/backups', [SettingsController::class, 'backupSettings'])->name('settings.backups');
     Route::resource('settings', SettingsController::class)->names('settings');
     // Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 

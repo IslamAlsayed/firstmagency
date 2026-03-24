@@ -78,6 +78,11 @@ class SettingsController extends Controller
         return view('dashboard.settings.website');
     }
 
+    public function backupSettings()
+    {
+        return view('dashboard.settings.backups');
+    }
+
     public function updateGeneral(SettingRequest $request)
     {
         // Update user preferences if button_display_mode is sent

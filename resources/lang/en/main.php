@@ -150,6 +150,7 @@ return [
     'settings_backup_restore_overwrite_warning' => 'Restoring a backup will overwrite current data',
     'settings_download' => 'Download',
     'settings_restore' => 'Restore',
+    'settings_delete' => 'Delete',
     'settings_no_backups' => 'No backups available',
     'settings_create_backup_confirm' => 'Do you want to create a backup now?',
     'settings_creating_backup' => 'Creating backup...',

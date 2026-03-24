@@ -501,6 +501,15 @@
                             </a>
                         </li>
                     @endif
+                    @if (auth()->user()->can('backup-management'))
+                        <li class="relative" data-sub-id="backups" title="{{ __('main.backup_management') }}">
+                            <a href="{{ route('dashboard.settings.backups') }}"
+                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.backups') ? 'active' : '' }}">
+                                <span class="main-icon"><i class="fas fa-database" aria-hidden="true"></i></span>
+                                <span class="text-sm">{{ __('main.backup_management') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

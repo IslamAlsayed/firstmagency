@@ -150,6 +150,7 @@ return [
     'settings_backup_restore_overwrite_warning' => 'استرجاع النسخة سيستبدل البيانات الحالية',
     'settings_download' => 'تحميل',
     'settings_restore' => 'استرجاع',
+    'settings_delete' => 'حذف',
     'settings_no_backups' => 'لا توجد نسخ احتياطية',
     'settings_create_backup_confirm' => 'هل تريد إنشاء نسخة احتياطية الآن؟',
     'settings_creating_backup' => 'جاري إنشاء النسخة الاحتياطية...',

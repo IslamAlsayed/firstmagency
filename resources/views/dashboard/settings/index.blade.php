@@ -391,29 +391,6 @@
 
 @push('scripts')
     <script>
-        // Live Header Color Preview
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const headerColorInput = document.getElementById('header-color');
-        //     const headerTextColorInput = document.getElementById('header-text-color');
-        //     const headerElement = document.getElementById('topbar') || document.querySelector('.topbar');
-
-        //     if (headerElement && headerColorInput) {
-        //         headerColorInput.addEventListener('input', function() {
-        //             const selectedColor = this.value;
-        //             document.documentElement.style.setProperty('--header-color', selectedColor);
-        //             headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
-        //         });
-        //     }
-
-        //     if (headerElement && headerTextColorInput) {
-        //         headerTextColorInput.addEventListener('input', function() {
-        //             const selectedColor = this.value;
-        //             document.documentElement.style.setProperty('--header-text-color', selectedColor);
-        //             headerElement.style.cssText = `position: fixed; width: calc(100% - var(--sidebar-width)); left: var(--sidebar-width);`;
-        //         });
-        //     }
-        // });
-
         // Live color preview
         document.addEventListener('DOMContentLoaded', function() {
             // Dashboard colors
@@ -442,59 +419,6 @@
                     input.addEventListener('input', function(e) {
                         document.documentElement.style.setProperty(cssVar, e.target.value);
                     });
-                }
-            });
-        });
-
-        // Custom Fixed Sidebar
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const sidebar = document.getElementById('settings-sidebar');
-        //     const sidebarContainer = sidebar.parentElement;
-        //     const contentContainer = document.querySelector('.lg\\:col-span-3');
-
-        //     function handleSidebarPosition() {
-        //         const sidebarRect = sidebar.getBoundingClientRect();
-        //         const containerRect = sidebarContainer.getBoundingClientRect();
-        //         const contentRect = contentContainer.getBoundingClientRect();
-
-        //         // Check if we need to make sidebar fixed
-        //         if (window.scrollY > sidebarContainer.offsetTop && contentRect.bottom > window.innerHeight) {
-        //             sidebar.classList.add('fixed-sidebar');
-        //         } else {
-        //             sidebar.classList.remove('fixed-sidebar');
-        //         }
-        //     }
-
-        //     window.addEventListener('scroll', handleSidebarPosition);
-        //     window.addEventListener('resize', handleSidebarPosition);
-        // });
-
-        // Save order button handler
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('click', function(e) {
-                const saveBtnElement = e.target.closest('#save-sidebar-order');
-                if (saveBtnElement) {
-                    e.preventDefault();
-                    console.log('💾 Save button clicked');
-                    if (typeof window.saveSidebarOrderFromSettings === 'function') {
-                        window.saveSidebarOrderFromSettings();
-                    } else {
-                        alert('الدالة غير متاحة حالياً');
-                        console.error('saveSidebarOrderFromSettings is not defined');
-                    }
-                }
-
-                // Reset order button handler
-                const resetBtnElement = e.target.closest('#reset-sidebar-order');
-                if (resetBtnElement) {
-                    e.preventDefault();
-                    console.log('🔄 Reset button clicked');
-                    if (typeof window.resetSidebarOrder === 'function') {
-                        window.resetSidebarOrder();
-                    } else {
-                        alert('الدالة غير متاحة حالياً');
-                        console.error('resetSidebarOrder is not defined');
-                    }
                 }
             });
         });
@@ -665,144 +589,144 @@
         });
 
         // Database Backups Management
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const createBtn = document.getElementById('create-backup-btn');
-        //     const backupsList = document.getElementById('backups-list');
-        //     const statusDiv = document.getElementById('backup-status');
+        document.addEventListener('DOMContentLoaded', function() {
+            const createBtn = document.getElementById('create-backup-btn');
+            const backupsList = document.getElementById('backups-list');
+            const statusDiv = document.getElementById('backup-status');
 
-        //     // Load backups list
-        //     function loadBackups() {
-        //         fetch("{{ route('dashboard.backups.list') }}")
-        //             .then(res => res.json())
-        //             .then(data => {
-        //                 if (data.success && data.backups.length > 0) {
-        //                     backupsList.innerHTML = data.backups.map(backup => `
-    //                         <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
-    //                             <div class="flex-1">
-    //                                 <p class="font-semibold text-gray-700">
-    //                                     <i class="fas fa-file-archive text-orange-500"></i>
-    //                                     ${backup.filename}
-    //                                 </p>
-    //                                 <p class="text-sm text-gray-500">
-    //                                     <i class="fas fa-calendar"></i> ${new Date(backup.created_at).toLocaleString('ar-EG')} | 
-    //                                     <i class="fas fa-database"></i> ${formatBytes(backup.size)}
-    //                                 </p>
-    //                             </div>
-    //                             <div class="flex gap-2">
-    //                                 <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
-    //                                     <i class="fas fa-download"></i>
-    //                                 </button>
-    //                                 <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
-    //                                     <i class="fas fa-redo-alt"></i>
-    //                                 </button>
-    //                                 <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
-    //                                     <i class="fas fa-trash"></i>
-    //                                 </button>
-    //                             </div>
-    //                         </div>
-    //                     `).join('');
+            // Load backups list
+            function loadBackups() {
+                fetch("{{ route('dashboard.backups.list') }}")
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.backups.length > 0) {
+                            backupsList.innerHTML = data.backups.map(backup => `
+                            <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
+                                <div class="flex-1">
+                                    <p class="font-semibold text-gray-700">
+                                        <i class="fas fa-file-archive text-orange-500"></i>
+                                        ${backup.filename}
+                                    </p>
+                                    <p class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar"></i> ${new Date(backup.created_at).toLocaleString('ar-EG')} | 
+                                        <i class="fas fa-database"></i> ${formatBytes(backup.size)}
+                                    </p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
+                                        <i class="fas fa-redo-alt"></i>
+                                    </button>
+                                    <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('');
 
-        //                     // Attach event listeners
-        //                     attachBackupListeners();
-        //                 } else {
-        //                     backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
-        //                 }
-        //             })
-        //             .catch(err => console.error('Error loading backups:', err));
-        //     }
+                            // Attach event listeners
+                            attachBackupListeners();
+                        } else {
+                            backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
+                        }
+                    })
+                    .catch(err => console.error('Error loading backups:', err));
+            }
 
-        //     // Create backup
-        //     createBtn.addEventListener('click', function() {
-        //         if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
-        //             createBtn.disabled = true;
-        //             statusDiv.classList.remove('hidden');
-        //             statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
+            // Create backup
+            createBtn.addEventListener('click', function() {
+                if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
+                    createBtn.disabled = true;
+                    statusDiv.classList.remove('hidden');
+                    statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
 
-        //             fetch("{{ route('dashboard.backups.create') }}", {
-        //                     method: 'POST',
-        //                     headers: {
-        //                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        //                     }
-        //                 })
-        //                 .then(res => res.json())
-        //                 .then(data => {
-        //                     if (data.success) {
-        //                         statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
-        //                         loadBackups();
-        //                     } else {
-        //                         statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
-        //                             '</div>';
-        //                     }
-        //                     createBtn.disabled = false;
-        //                     setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-        //                 })
-        //                 .catch(err => {
-        //                     statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
-        //                     createBtn.disabled = false;
-        //                     setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-        //                 });
-        //         }
-        //     });
+                    fetch("{{ route('dashboard.backups.create') }}", {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
+                                loadBackups();
+                            } else {
+                                statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
+                                    '</div>';
+                            }
+                            createBtn.disabled = false;
+                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
+                        })
+                        .catch(err => {
+                            statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
+                            createBtn.disabled = false;
+                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
+                        });
+                }
+            });
 
-        //     // Attach listeners for backup actions
-        //     function attachBackupListeners() {
-        //         document.querySelectorAll('.download-backup').forEach(btn => {
-        //             btn.addEventListener('click', function() {
-        //                 const filename = this.dataset.filename;
-        //                 window.location.href = "{{ url('dashboard/backups/download') }}/" + filename;
-        //             });
-        //         });
+            // Attach listeners for backup actions
+            function attachBackupListeners() {
+                document.querySelectorAll('.download-backup').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const filename = this.dataset.filename;
+                        window.location.href = "{{ url('dashboard/backups/download') }}/" + filename;
+                    });
+                });
 
-        //         document.querySelectorAll('.restore-backup').forEach(btn => {
-        //             btn.addEventListener('click', function() {
-        //                 const filename = this.dataset.filename;
-        //                 if (confirm('{{ __('main.settings_restore_confirm') }}')) {
-        //                     const form = document.createElement('form');
-        //                     form.method = 'POST';
-        //                     form.action = "{{ route('dashboard.backups.restore') }}";
-        //                     form.innerHTML = `
-    //                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    //                         <input type="hidden" name="filename" value="${filename}">
-    //                     `;
-        //                     document.body.appendChild(form);
+                document.querySelectorAll('.restore-backup').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const filename = this.dataset.filename;
+                        if (confirm('{{ __('main.settings_restore_confirm') }}')) {
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = "{{ route('dashboard.backups.restore') }}";
+                            form.innerHTML = `
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="filename" value="${filename}">
+                        `;
+                            document.body.appendChild(form);
 
-        //                     // Show loading message
-        //                     alert('{{ __('main.settings_restore_in_progress') }}');
-        //                     form.submit();
-        //                 }
-        //             });
-        //         });
+                            // Show loading message
+                            alert('{{ __('main.settings_restore_in_progress') }}');
+                            form.submit();
+                        }
+                    });
+                });
 
-        //         document.querySelectorAll('.delete-backup').forEach(btn => {
-        //             btn.addEventListener('click', function() {
-        //                 const filename = this.dataset.filename;
-        //                 if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
-        //                     const form = document.createElement('form');
-        //                     form.method = 'POST';
-        //                     form.action = "{{ route('dashboard.backups.delete') }}";
-        //                     form.innerHTML = `
-    //                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    //                         <input type="hidden" name="filename" value="${filename}">
-    //                         <input type="hidden" name="_method" value="DELETE">
-    //                     `;
-        //                     document.body.appendChild(form);
-        //                     form.submit();
-        //                 }
-        //             });
-        //         });
-        //     }
+                document.querySelectorAll('.delete-backup').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const filename = this.dataset.filename;
+                        if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = "{{ route('dashboard.backups.delete') }}";
+                            form.innerHTML = `
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="filename" value="${filename}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        `;
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                });
+            }
 
-        //     // Helper function to format bytes
-        //     function formatBytes(bytes) {
-        //         if (bytes === 0) return '0 {{ __('main.bytes') }}';
-        //         const k = 1024;
-        //         const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
-        //         const i = Math.floor(Math.log(bytes) / Math.log(k));
-        //         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        //     }
+            // Helper function to format bytes
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 {{ __('main.bytes') }}';
+                const k = 1024;
+                const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
 
-        //     // Load backups on page load
-        //     loadBackups();
-        // });
+            // Load backups on page load
+            loadBackups();
+        });
     </script>
 @endpush
