@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', (e) => {
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'auto' : 'hidden';
+            document.body.style.overflow = navLinks.classList.contains('active') ? '' : 'hidden';
 
             navLinks.classList.toggle('active');
             ourServicesItems.forEach(item => item?.classList.remove('active'));
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (closeBtn && navLinks) {
         closeBtn.addEventListener('click', (e) => {
             navLinks.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         });
     }
 
@@ -189,14 +189,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!e.target.closest("#header")) {
             if (navLinks.classList.contains("active")) {
                 navLinks.classList.remove("active");
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = '';
             }
             // Close services menu if clicking outside
             if (window.innerWidth <= 768) {
                 ourServicesItems.forEach(item => {
                     if (!item.contains(e.target)) {
                         item.classList.remove('active');
-                        document.body.style.overflow = 'auto';
+                        document.body.style.overflow = '';
                     }
                 });
             }

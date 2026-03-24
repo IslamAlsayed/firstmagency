@@ -96,6 +96,10 @@
     font-family: var(--font-family);
 }
 
+body.index-blur {
+    overflow: hidden !important;
+}
+
 .email {
     text-transform: lowercase !important;
 }
@@ -390,7 +394,7 @@ html[lang=en] {
     background-size: contain;
     background-repeat: repeat;
 
-    &.blur {
+    &.index-blur {
         transition: 0;
         z-index: -1;
     }
@@ -1381,7 +1385,7 @@ swiper-slide img {
     position: relative;
     z-index: 500;
 
-    &.blur {
+    &.index-blur {
         z-index: -1 !important;
     }
 }
@@ -1478,7 +1482,7 @@ swiper-slide img {
     color: var(--dark-color);
     border: none;
 
-    &.blur {
+    &.index-blur {
         display: none;
     }
 

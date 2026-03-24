@@ -94,10 +94,11 @@ class UserController extends Controller
         // Log in as the new user
         Auth::login($user, remember: true);
 
-        if (in_array($user->role, ['superadmin', 'admin'])) {
-            return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
-        }
+        return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
 
-        return redirect()->route('dashboard.index')->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
+        // if (in_array($user->role, ['superadmin', 'admin'])) {
+        //     return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
+        // }
+        // return redirect()->route('dashboard.index')->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
     }
 }

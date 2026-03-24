@@ -15,7 +15,7 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --primary: #6f42c1;
+            --dash_primary_color: #fff;
             --secondary: #6c757d;
             --success: #198754;
             --danger: #dc3545;
@@ -35,7 +35,7 @@
 
         .sidebar {
             width: 260px;
-            background: linear-gradient(135deg, var(--primary) 0%, #5a32a3 100%);
+            background: linear-gradient(135deg, var(--light-color) 0%, #5a32a3 100%);
             color: white;
             padding: 20px;
             position: fixed;
@@ -129,7 +129,7 @@
             font-size: 12px;
             padding: 4px 10px;
             border-radius: 20px;
-            background: var(--primary);
+            background: var(--light-color);
             color: white;
             font-weight: bold;
         }
@@ -162,7 +162,7 @@
         }
 
         .dashboard-card-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #5a32a3 100%);
+            background: linear-gradient(135deg, var(--light-color) 0%, #5a32a3 100%);
             color: white;
             padding: 20px;
             border-radius: 10px 10px 0 0;

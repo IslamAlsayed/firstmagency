@@ -16,7 +16,7 @@
     padding: 20px;
     color: var(--light-color);
     border-radius: 10px 10px 0 0;
-    background: linear-gradient(135deg, var(--primary) 0%, #5a32a3 100%);
+    background: linear-gradient(135deg, var(--light-color) 0%, #5a32a3 100%);
 }
 
 .dashboard-card-body {
@@ -193,7 +193,7 @@ html[lang=ar] {
         margin-top: 10px;
         border-radius: 7px;
         color: var(--light-color);
-        background-color: var(--primary);
+        background-color: var(--light-color);
     }
 }
 
@@ -221,13 +221,13 @@ html[lang=ar] {
 }
 
 .support {
-    background-color: var(--primary) !important;
-    border: 1px solid var(--primary) !important;
-    border-left: 4px solid var(--primary) !important;
+    background-color: var(--light-color) !important;
+    border: 1px solid var(--light-color) !important;
+    border-left: 4px solid var(--light-color) !important;
 
     & .badge-message {
         color: var(--light-color) !important;
-        background-color: var(--primary) !important;
+        background-color: var(--light-color) !important;
     }
 }
 
@@ -238,8 +238,8 @@ html[lang=en] {
     }
 
     .support {
-        border-left: 1px solid var(--primary) !important;
-        border-right: 4px solid var(--primary) !important;
+        border-left: 1px solid var(--light-color) !important;
+        border-right: 4px solid var(--light-color) !important;
     }
 }
 

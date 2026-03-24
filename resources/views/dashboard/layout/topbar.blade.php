@@ -11,10 +11,10 @@
     }
 </style>
 
-<div class="topbar">
+<div class="topbar shadow-sm">
     <div class="flex items-center gap-4">
         <!-- Toggle Sidebar Button -->
-        <button id="toggleSidebar" class="p-2 cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300">
+        <button id="toggleSidebar" class="p-2 cursor-pointer radius-md hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300">
             <i class="fas fa-bars text-xl"></i>
         </button>
 
@@ -24,12 +24,12 @@
     <div class="flex items-center gap-6 user-actions">
         <div class="flex items-center gap-3">
             {{-- button go to website --}}
-            <a href="{{ route('welcome') }}" target="_blank" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+            <a href="{{ route('welcome') }}" target="_blank" class="action-button cursor-pointer p-2 flex items-center justify-center radius-md shadow-sm relative">
                 <i class="fas fa-arrow-up-right-from-square text-sm"></i>
             </a>
 
             <!-- Messages -->
-            {{-- <button class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+            {{-- <button class="action-button cursor-pointer p-2 flex items-center justify-center radius-md shadow-sm relative">
                 <i class="fas fa-envelope text-lg"></i>
                 <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
             </button> --}}
@@ -40,7 +40,7 @@
                 $unreadCount = $unreadNotifications->count();
             @endphp
             <div class="relative group" id="topbar-notifications">
-                <button id="topbar-notifications-button" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg relative">
+                <button id="topbar-notifications-button" class="action-button cursor-pointer p-2 flex items-center justify-center radius-md shadow-sm relative">
                     <i class="fas fa-bell text-lg"></i>
                     @if ($unreadCount > 0)
                         <span id="topbar-notifications-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-orange-500 rounded-full"></span>
@@ -48,7 +48,7 @@
                 </button>
 
                 <!-- Notifications Dropdown -->
-                <div id="topbar-notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-lg shadow-lg group-hover:opacity-100 z-50">
+                <div id="topbar-notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 radius-md shadow-lg group-hover:opacity-100 z-50">
                     <div class="p-4 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
                         <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('main.notifications') }}</h3>
                         @if ($unreadCount > 0)
@@ -96,23 +96,20 @@
             </div>
 
             <!-- Full Screen Toggle -->
-            <button id="fullscreenBtn" class="action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="{{ __('main.full_screen') }}">
+            <button id="fullscreenBtn" class="action-button cursor-pointer p-2 flex items-center justify-center radius-md shadow-sm" title="{{ __('main.full_screen') }}">
                 <i class="fas fa-expand text-lg"></i>
             </button>
 
             <!-- Switch Language Toggle -->
             <a href="{{ route('dashboard.locale.change', ['locale' => session('dashboard_locale', 'ar') == 'ar' ? 'en' : 'ar']) }}"
-                class="action-button cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="{{ __('main.switch_language') }}">
+                class="action-button cursor-pointer p-2 radius-md hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300" title="{{ __('main.switch_language') }}">
                 <i class="fas fa-language text-lg"></i>
             </a>
 
             <!-- Dark/Light Mode Toggle -->
-            {{-- <button id="themeToggle" class="hidden action-button cursor-pointer p-2 flex items-center justify-center rounded-lg" title="Toggle Dark Mode">
+            {{-- <button id="themeToggle" class="hidden action-button cursor-pointer p-2 flex items-center justify-center radius-md shadow-sm" title="Toggle Dark Mode">
                 <i class="fas fa-sun mode-icon text-lg"></i>
             </button> --}}
-
-            <!-- Account Switcher -->
-            @include('dashboard.components.account-switcher', ['availableUsers' => \App\Models\User::all()])
         </div>
 
         <div class="relative">
@@ -145,18 +142,6 @@
                         <a href="{{ route('dashboard.profile.show') }}" class="menu-link">
                             <i class="ph-bold ph-user"></i>
                             &nbsp;{{ __('main.my_profile') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('dashboard.profile.edit') }}" class="menu-link">
-                            <i class="ph-bold ph-pencil"></i>
-                            &nbsp;{{ __('main.edit_profile') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('dashboard.profile.activity') }}" class="menu-link">
-                            <i class="ph-bold ph-clock"></i>
-                            &nbsp;{{ __('main.activity') }}
                         </a>
                     </li>
                     <li>

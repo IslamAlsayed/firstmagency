@@ -7,21 +7,21 @@
     <div class="w-full">
         <!-- Statistics -->
         <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $whyUs->total() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.total_why_us') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $whyUs->where('is_active', true)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $whyUs->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow">
+        <div class="bg-white shadow-lg radius-lg">
             <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-star mr-2"></i> {{ __('main.why_us') }}</h5>
 
@@ -37,14 +37,14 @@
                 <table class="w-full border-collapse">
                     <thead>
                         <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +60,7 @@
                                         @endif
                                     </div>
                                 </td>
-                                <td title="{{ $item->translations[app()->getLocale()]['title'] ?? '--' }}">
+                                <td class="p-4" title="{{ $item->translations[app()->getLocale()]['title'] ?? '--' }}">
                                     <span class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
                                         {{ limitedText($item->translations[app()->getLocale()]['title'] ?? '--', 25) }}
                                     </span>

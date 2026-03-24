@@ -220,6 +220,7 @@ return [
     'confirm_approve_role_message' => 'Are you sure you want to approve this role request? This action will assign the requested role to the user.',
 
     // Account Switching
+    'switch_to_anther_user' => 'Switch to anther user',
     'switched_to_user' => 'Switched to account: :name',
     'dev_account_switcher' => 'Development feature - Test different roles',
 

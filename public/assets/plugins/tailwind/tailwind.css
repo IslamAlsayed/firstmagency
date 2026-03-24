@@ -3653,6 +3653,14 @@
         }
     }
 
+    .bg-light {
+        background-color: var(--color-light);
+    }
+
+    .bg-black {
+        background-color: var(--color-black);
+    }
+
     .bg-black\/25 {
         background-color: color-mix(in srgb, #000 25%, transparent);
 

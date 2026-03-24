@@ -37,7 +37,7 @@ class SettingsHelper
 
         // Default colors if settings not found
         $defaults = [
-            'primary_color' => '#6f42c1',
+            'dash_primary_color' => '#fff',
             'secondary_color' => '#6c757d',
             'success_color' => '#198754',
             'danger_color' => '#dc3545',
@@ -59,7 +59,7 @@ class SettingsHelper
             $fontSize = $defaults['font_size'];
             $lineHeight = $defaults['line_height'];
         } else {
-            $primary = $settings->primary_color ?? $defaults['primary_color'];
+            $dash_primary_color = $settings->dash_primary_color ?? $defaults['dash_primary_color'];
             $secondary = $settings->secondary_color ?? $defaults['secondary_color'];
             $success = $settings->success_color ?? $defaults['success_color'];
             $danger = $settings->danger_color ?? $defaults['danger_color'];
@@ -71,7 +71,7 @@ class SettingsHelper
         }
 
         return ":root {
-            --primary: {$primary};
+            --dash_primary_color: {$dash_primary_color};
             --secondary: {$secondary};
             --success: {$success};
             --danger: {$danger};

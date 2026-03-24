@@ -1408,6 +1408,7 @@ return [
     'featured' => 'Featured',
     'no_services' => 'No Services',
     'client_network' => 'Client Network',
+    'ticket_network' => 'Ticket Network',
     'total_clients' => 'Total Clients',
     'system_online' => 'System Online',
     'database_connected' => 'Database Connected',

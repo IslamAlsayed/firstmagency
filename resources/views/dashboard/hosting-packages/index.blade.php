@@ -7,29 +7,29 @@
     <div class="w-full">
         <!-- Statistics -->
         <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-gray-800">{{ $allItems }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.hosting_packages')]) }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-blue-600">{{ $hostingCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.shared') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-green-600">{{ $resellerCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.reseller') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-purple-600">{{ $vpsCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.vps') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-orange-600">{{ $serversCount }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.dedicated') }}</small>
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow">
+        <div class="bg-white shadow-lg radius-lg">
             <div class="border-b border-gray-200">
                 <div class="flex justify-between items-center p-4 border-gray-200">
                     <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-cube mr-2"></i> {{ __('main.hosting_packages') }}</h5>
@@ -71,16 +71,16 @@
                     <table class="w-full border-collapse" id="packagesTable">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.monthly_label') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.yearly_label') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.popular') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.monthly_label') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.yearly_label') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.popular') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

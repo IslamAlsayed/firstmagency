@@ -47,10 +47,10 @@
     transition: .1s
 }
 
-.tagify {
+/* .tagify {
     --tags-focus-border-color: var(--primary);
     --tag-bg: var(--primary);
-}
+} */
 
 @keyframes tags--bump {
     30% {

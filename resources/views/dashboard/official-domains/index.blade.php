@@ -7,21 +7,21 @@
     <div class="w-full">
         <!-- Statistics -->
         <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($officialDomains) }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.total_official_domains') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $officialDomains->where('is_active', true)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
             </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 rounded-lg border border-gray-200 z--1">
+            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
                 <div class="text-2xl font-bold text-red-600" id="stat-inactive">{{ $officialDomains->where('is_active', false)->count() }}</div>
                 <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow">
+        <div class="bg-white shadow-lg radius-lg">
             <div class="flex justify-between items-center p-4 border-gray-200">
                 <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-globe mr-2"></i> {{ __('main.official_domains') }}</h5>
 
@@ -37,14 +37,14 @@
                 <table class="w-full border-collapse">
                     <thead>
                         <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.badge') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.badge') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>

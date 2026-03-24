@@ -28,11 +28,15 @@
     --sidebar-width: 270px;
     --sidebar-transition-duration: 300ms;
     --sidebar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --light-color: #fff;
+    --dark-color: #000;
+    --radius: 12px;
 
     --main-transition-duration: 300ms;
     --main-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
-    --primary: #5A8622;
+    --dash_primary_color: #0074F7;
+    --text-color: #ffffff;
     --secondary: #6c757d;
     --success: #198754;
     --danger: #dc3545;
@@ -83,18 +87,38 @@ body:has(.sidebar.small-sidebar) {
     font-family: var(--font-family);
 }
 
-body:not(.email) {
-    text-transform: capitalize;
-}
-
 .email {
     text-transform: lowercase !important;
+}
+
+.radius-lg {
+    border-radius: var(--radius);
+}
+
+.radius-md {
+    border-radius: calc(var(--radius) / 2);
+}
+
+.radius-sm {
+    border-radius: calc(var(--radius) / 4);
+}
+
+.shadow-sm {
+    box-shadow: 0 5px 14px 7px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* *:has([class*='@']),
 *:has([href*='@']) {
     text-transform: lowercase !important;
-} */
+    } */
 
 a[href^="mailto:"] {
     text-transform: lowercase !important;
@@ -102,7 +126,9 @@ a[href^="mailto:"] {
 
 body {
     position: relative;
-    /* background-color: var(--light-background-color); */
+    background-color: #f5f5f5;
+    background-color: #f5f6ff;
+    background-color: #fdfdff;
 
     &.sidebar-closed::after {
         content: '';
@@ -114,6 +140,14 @@ body {
         z-index: 998;
         background-color: #00000014;
     }
+}
+
+body:not(.email) {
+    text-transform: capitalize;
+}
+
+body.index-blur {
+    overflow: hidden !important;
 }
 
 .dashboard-container {
@@ -172,8 +206,9 @@ td {
     left: auto;
     top: 0;
     z-index: 1000;
-    color: var(--light-color);
-    background-color: var(--primary);
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    background-color: var(--light-color);
     transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -184,7 +219,7 @@ td {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--primary);
+        background-color: var(--light-color);
         z-index: 1;
         opacity: 1;
         visibility: visible;
@@ -214,7 +249,7 @@ td {
     }
 
     &:hover:not(.active) {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .sidebar-logo {
@@ -266,26 +301,24 @@ td {
         white-space: nowrap;
         text-decoration: none;
         text-overflow: ellipsis;
-        color: var(--hover-light-8);
+        color: var(--dark-color);
         transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
     }
 
-    .nav-menu .nav-link:hover,
     .nav-menu .nav-link.active {
-        color: var(--light-color);
+        color: var(--text-color);
+        /* color: var(--dash_primary_color); */
+        background-color: var(--dash_primary_color);
+        font-weight: 600;
+    }
+
+    .nav-menu .nav-link.submenu-btn:not(.active):hover {
+        color: var(--text-color);
+        background-color: var(--dash_primary_color);
     }
 
     .nav-menu .nav-link:not(.submenu-btn):hover span:not(.main-icon) {
         transform: translateX(5px);
-    }
-
-    .nav-menu .nav-link.submenu-btn:not(.active):hover {
-        background-color: var(--hover-light-1);
-    }
-
-    .nav-menu .nav-link.active {
-        background-color: var(--hover-light-2);
-        font-weight: 600;
     }
 
     .nav-menu .nav-link>li,
@@ -331,7 +364,7 @@ td {
         transition: max-height var(--main-transition-duration) var(--main-transition-timing);
         overflow: hidden;
         filter: saturate(1.5);
-        background-color: var(--primary);
+        background-color: var(--hover-dark-1);
     }
 
     .nav-menu .submenu-list.show {
@@ -353,14 +386,6 @@ td {
         margin-top: 5px;
     }
 
-    .nav-menu .submenu-list .nav-link:hover {
-        background-color: var(--hover-light-3);
-    }
-
-    .nav-menu .submenu-list .nav-link.active {
-        background-color: var(--hover-light-4);
-    }
-
     .nav-menu .submenu-list .nav-link {
         cursor: pointer;
     }
@@ -369,18 +394,6 @@ td {
     .nav-menu .submenu-list .nav-link.active {
         cursor: default !important;
         pointer-events: none !important;
-    }
-
-    .nav-menu .submenu-list::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        border-radius: 0 0 8px 8px;
-        background-color: var(--hover-light-1);
     }
 }
 
@@ -407,7 +420,8 @@ td {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
                 transform: translateY(-50%);
-                background-color: var(--primary);
+                color: var(--dark-color);
+                background-color: var(--light-color);
                 opacity: 0;
                 visibility: hidden;
                 transition: all var(--main-transition-duration) var(--main-transition-timing);
@@ -419,7 +433,7 @@ td {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             filter: saturate(2.5);
-            background-color: var(--primary);
+            background-color: var(--light-color);
 
             &::before {
                 opacity: 1;
@@ -702,6 +716,10 @@ html[lang=ar] {
         font-size: 13px;
     }
 
+    .action-button#fullscreenBtn {
+        display: none;
+    }
+
     .topbar .user-actions {
         width: 100%;
     }
@@ -791,7 +809,7 @@ html[lang=ar] {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--primary);
+    background: var(--light-color);
 
     body.sidebar-closed .header {
         width: calc(100% - var(--sidebar-width));
@@ -810,10 +828,11 @@ html[lang=ar] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--header-text-color);
-    background: var(--header-color);
+    color: var(--dark-color);
+    background-color: var(--light-color);
     border-bottom: 1px solid var(--hover-light-1);
-    box-shadow: 0 2px 4px var(--hover-light-2), -2px 0 4px var(--hover-light-2), inset 2px 0 4px var(--hover-light-1);
+    /* box-shadow: 0 2px 4px var(--hover-light-2), -2px 0 4px var(--hover-light-2), inset 2px 0 4px var(--hover-light-1); */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     gap: 15px;
     flex-wrap: wrap;
     position: sticky;
@@ -835,7 +854,7 @@ html[lang=ar] {
         i,
         svg {
             color: var(--light-color);
-            color: var(--header-text-color);
+            color: var(--dark-color);
             transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
         }
 
@@ -852,9 +871,9 @@ html[lang=ar] {
             position: relative;
             align-items: center;
             justify-content: center;
-            color: var(--header-text-color);
+            color: var(--dark-color);
             background-color: var(--hover-light-1);
-            box-shadow: 0 5px 8px -3px var(--hover-dark-1);
+            /* box-shadow: 0 5px 8px -3px var(--hover-dark-1); */
             transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
         }
 
@@ -1049,7 +1068,7 @@ html[lang=ar] {
             padding: 12px 15px;
             align-items: center;
             text-decoration: none;
-            color: var(--primary);
+            color: var(--dark-color);
             transition: all var(--main-transition-duration) var(--main-transition-timing);
             font-size: 14px;
             border: none;
@@ -1065,7 +1084,7 @@ html[lang=ar] {
         ul li .menu-link i,
         ul li .menu-link svg {
             font-size: 1.1em;
-            color: var(--primary);
+            color: var(--light-color);
         }
     }
 }
@@ -1260,4 +1279,8 @@ html[lang=ar] {
 .text-capitalize,
 .text-capitalize * {
     text-transform: capitalize !important;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }

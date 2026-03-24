@@ -8,7 +8,8 @@
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         :root {
-            --primary: {{ $settings->primary_color ?? '#6f42c1' }};
+            --dash_primary_color: {{ $settings->dash_primary_color ?? '#0074F7' }};
+            --text-color: {{ $settings->text_color ?? '#ffffff' }};
             --secondary: {{ $settings->secondary_color ?? '#6c757d' }};
             --success: {{ $settings->success_color ?? '#198754' }};
             --danger: {{ $settings->danger_color ?? '#dc3545' }};
@@ -37,7 +38,7 @@
         <main class="main-content">
             @include('dashboard.layout.topbar')
 
-            <div class="p-4">
+            <div class="p-6">
                 <!-- Page Content -->
                 @yield('content')
             </div>

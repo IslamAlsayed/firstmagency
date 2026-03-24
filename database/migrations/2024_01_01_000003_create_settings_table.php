@@ -19,6 +19,7 @@ return new class extends Migration
 
             // Color Settings
             $table->string('primary_color')->default('#5A8622');
+            $table->string('text_color')->default('#323232');
             $table->string('secondary_color')->default('#6c757d');
             $table->string('success_color')->default('#198754');
             $table->string('danger_color')->default('#dc3545');

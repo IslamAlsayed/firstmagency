@@ -5,10 +5,10 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: #00000024;
 
         &,
         & * {
@@ -21,7 +21,7 @@
 
         #reviewForm {
             position: fixed;
-            top: 30px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
@@ -38,6 +38,34 @@
                 border-radius: 4px;
                 background-color: var(--color-gray-400);
             }
+        }
+    }
+
+    #closeReviewBtn {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        color: var(--color-gray-400);
+        border: 2px solid var(--color-gray-400);
+
+        & i,
+        & svg {
+            width: 12px;
+        }
+
+        &:hover {
+            color: var(--color-gray-600);
+            border: 2px solid var(--color-gray-600);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .submit-layout {
+            flex-direction: column;
+            align-items: stretch;
         }
     }
 </style>
@@ -115,10 +143,9 @@
     </div>
 
     <div class="layout hidden" id="reviewFormLayout">
-        <form id="reviewForm" class="mt-8 mx-auto bg-white rounded-[9px] shadow-lg p-6 border border-gray-200" enctype="multipart/form-data">
+        <form id="reviewForm" class="mx-auto bg-white rounded-[9px] shadow-lg p-6 border border-gray-200" enctype="multipart/form-data">
             <!-- Close Button -->
-            <button type="button" id="closeReviewBtn" class="absolute cursor-pointer text-red-600 hover:text-red-800 transition"
-                style="top: 10px; {{ app()->getLocale() == 'ar' ? 'left: 10px' : 'right: 10px' }}">
+            <button type="button" id="closeReviewBtn" class="absolute cursor-pointer transition" style="top: 10px; {{ app()->getLocale() == 'ar' ? 'left: 10px' : 'right: 10px' }}">
                 <i class="fas fa-times text-2xl"></i>
             </button>
 
@@ -288,15 +315,15 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="flex flex-row-reverse items-center justify-between gap-3">
+            <div class="flex flex-row-reverse items-center justify-between gap-3 submit-layout">
                 <p>{{ __('main.review_will_be_checked') ?? 'سيتم مراجعة الرأي قبل نشره.' }}</p>
 
                 <div class="flex gap-3">
                     <button type="submit"
-                        class="flex-1 p-3 bg-primary hover:bg-dark-primary text-white text-nowrap cursor-pointer rounded-lg transition font-semibold flex items-center justify-center gap-2 shadow-md">
+                        class="flex-1 px-3 py-2 bg-primary hover:bg-dark-primary text-white text-nowrap cursor-pointer rounded-lg transition font-semibold flex items-center justify-center gap-2 shadow-md">
                         <i class="fas fa-paper-plane"></i> {{ __('main.send_review') ?? 'إرسال المراجعة' }}
                     </button>
-                    <button type="button" id="cancelReviewBtn" class="flex-1 p-3 bg-gray-300 text-gray-700  text-nowrap cursor-pointer rounded-lg hover:bg-gray-400 transition font-semibold">
+                    <button type="button" id="cancelReviewBtn" class="flex-1 px-3 py-2 bg-gray-300 text-gray-700  text-nowrap cursor-pointer rounded-lg hover:bg-gray-400 transition font-semibold">
                         {{ __('main.cancel') ?? 'إلغاء' }}
                     </button>
                 </div>
@@ -318,13 +345,14 @@
         const closeReviewBtn = document.getElementById('closeReviewBtn');
         const cancelReviewBtn = document.getElementById('cancelReviewBtn');
         const sections = [
+            document.body,
             document.querySelector('.header'),
             document.querySelector('.fixed-support'),
             ...document.querySelectorAll('.section:not(.reviews-section)')
         ];
 
         writeReviewBtn.addEventListener('click', () => {
-            sections.forEach(s => s.classList.add('blur'));
+            sections?.forEach(s => s.classList.add('index-blur'));
             reviewFormLayout.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             reviewFormLayout.scrollIntoView({
@@ -345,8 +373,8 @@
 
         function hideForm() {
             reviewFormLayout.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            sections.forEach(s => s.classList.remove('blur'));
+            document.body.style.overflow = '';
+            sections?.forEach(s => s.classList.remove('index-blur'));
             reviewForm.reset();
             resetForm();
         }

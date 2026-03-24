@@ -41,7 +41,7 @@
                 <div class="flex flex-col gap-4 messages-container">
                     @foreach ($ticketData['messages'] as $message)
                         <div class="flex justify-between gap-4 client {{ $message['sender_type'] == 'customer' ? 'customer' : '' }}" data-message-id="{{ $message['id'] }}"
-                            style="background-color: {{ $message['department']['bg_color'] ?? '' }}; border: 1px solid {{ $message['department']['border_color'] ?? 'var(--primary)' }}; border-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 4px solid {{ $message['department']['border_main_color'] ?? 'var(--primary)' }};">
+                            style="background-color: {{ $message['department']['bg_color'] ?? '' }}; border: 1px solid {{ $message['department']['border_color'] ?? 'var(--light-color)' }}; border-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 4px solid {{ $message['department']['border_main_color'] ?? 'var(--light-color)' }};">
                             <div class="flex gap-4">
                                 <div class="avatar">
                                     @php
@@ -70,7 +70,7 @@
 
                                         <div class="flex gap-2">
                                             <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message"
-                                                style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--primary)' }};">
+                                                style="color: var(--light-color); background-color: {{ $message['department']['badge_color'] ?? 'var(--light-color)' }};">
                                                 {{ $message['sender_type'] == 'customer' ? __('main.customer') : $message['department']['name'] ?? __('main.support') }}
                                             </span>
                                         </div>
@@ -359,33 +359,33 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                            {{ __('main.attachment') }}
-                                                                                                        </div>`).join('')
+                                                                                                                    <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                        {{ __('main.attachment') }}
+                                                                                                                    </div>`).join('')
                                     : ''
                                 }
                             </div>
 
                     ${!isCustomer ? `
-                                    <div class="edit-form" style="display:none;">
-                                        <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                            <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                            <div class="edit-buttons flex gap-2 mt-3">
-                                                <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                            </div>
-                                        </div>
-                                        </div>` : ''}
+                                                <div class="edit-form" style="display:none;">
+                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                        <div class="edit-buttons flex gap-2 mt-3">
+                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>` : ''}
                         </div>
                     </div>
 
                     ${!isCustomer ? `
-                                                    <div class="actions ${ticketStatus}">
-                                                        <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                        <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                    </div>
-                                                </div>` : ''}
+                                                                <div class="actions ${ticketStatus}">
+                                                                    <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                    <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                </div>
+                                                            </div>` : ''}
                 `;
 
             // Append message

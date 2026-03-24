@@ -1421,6 +1421,7 @@ return [
     'featured' => 'مميز',
     'no_services' => 'بدون خدمات',
     'client_network' => 'شبكة العملاء',
+    'ticket_network' => 'شبكة التذاكر',
     'total_clients' => 'إجمالي العملاء',
     'system_online' => 'النظام متصل',
     'database_connected' => 'قاعدة البيانات متصلة',

@@ -11,9 +11,6 @@
 <script src="{{ asset('assets/plugins/local-ably-cdn/ably.min.js') }}"></script>
 {{-- ? End plugins --}}
 
-<!-- Bootstrap JS -->
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></link> --}}
-
 {{-- Custom Js --}}
 <script src="{{ asset('assets/dashboard/js/main.js') }}"></script>
 @vite(['resources/js/app.js'])
