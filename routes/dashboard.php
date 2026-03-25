@@ -120,6 +120,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('tickets/{ticketId}/support-reply', [TicketController::class, 'supportReply'])->name('tickets.support-reply');
     Route::post('tickets/{ticketId}/support-reply', [TicketController::class, 'postSupportReply'])->name('tickets.support-reply.store');
     Route::get('tickets/{ticketId}/send-copy', [TicketController::class, 'sendCopyToCustomer'])->name('tickets.sendCopyToCustomer');
+    Route::get('tickets/deleted/list', [TicketController::class, 'deleted'])->name('tickets.deleted')->middleware('can:tickets-restore');
+    Route::patch('tickets/{id}/restore', [TicketController::class, 'restore'])->name('tickets.restore')->middleware('can:tickets-restore');
     Route::resource('tickets', TicketController::class)->names('tickets');
 
     // Unified force-destroy route for all models

@@ -15,6 +15,7 @@ trait GlobalDestroyTrait
     public function destroyModel(Model $model, $models)
     {
         $this->authorize('delete', $model);
+
         $deleted = $model->delete();
 
         if (!$deleted) {

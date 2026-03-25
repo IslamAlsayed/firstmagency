@@ -1764,6 +1764,7 @@ return [
     // ==================== Tickets ====================
     'tickets' => 'التذاكر',
     'total_tickets' => 'إجمالي التذاكر',
+    'deleted_tickets' => 'التذاكر المحذوفة',
     'ticket' => 'تذكرة',
     'create_ticket' => 'إنشاء تذكرة',
     'edit_ticket' => 'تعديل التذكرة',

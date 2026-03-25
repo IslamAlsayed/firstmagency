@@ -116,7 +116,7 @@
         @endif
 
         <!-- Tickets -->
-        @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create'))
+        @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create') || auth()->user()->can('tickets-restore'))
             <li class="relative group submenu-item" data-item-id="tickets" title="{{ __('main.tickets') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.tickets') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.tickets.*') ? 'active' : '' }}">
@@ -135,6 +135,15 @@
                             <span class="text-sm">{{ __('main.tickets') }}</span>
                         </a>
                     </li>
+                    @if (auth()->user()->can('tickets-restore'))
+                        <li class="relative" data-sub-id="deleted-tickets" title="{{ __('main.deleted_tickets') }}">
+                            <a href="{{ route('dashboard.tickets.deleted') }}"
+                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.tickets.deleted') ? 'active' : '' }}">
+                                <span class="main-icon"><i class="fas fa-trash-restore" aria-hidden="true"></i></span>
+                                <span class="text-sm">{{ __('main.deleted_tickets') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

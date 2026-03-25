@@ -34,6 +34,32 @@ class TicketController extends Controller
         return view('dashboard.tickets.index', compact('tickets'));
     }
 
+    public function deleted()
+    {
+        $tickets = Ticket::onlyTrashed()->with(['assignedTo', 'department']);
+        if (getActiveUser()->role == 'support' && getActiveUser()->department) {
+            $tickets = $tickets->where('department_id', getActiveUser()->department->id);
+        }
+
+        $tickets = $tickets->latest('deleted_at')->paginate(15);
+
+        return view('dashboard.tickets.deleted', compact('tickets'));
+    }
+
+    public function restore($id)
+    {
+        $ticket = Ticket::withTrashed()->find($id);
+        if (!$ticket) {
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
+        }
+
+        $this->authorize('restore', $ticket);
+
+        $ticket->restore();
+
+        return redirect()->route('dashboard.tickets.deleted')->withSuccess(__('main.ticket') . ' ' . __('main.restored'));
+    }
+
     public function create()
     {
         $this->authorize('create', Ticket::class);

@@ -1754,6 +1754,7 @@ return [
     // ==================== Tickets ====================
     'tickets' => 'Tickets',
     'total_tickets' => 'Total Tickets',
+    'deleted_tickets' => 'Deleted Tickets',
     'ticket' => 'Ticket',
     'create_ticket' => 'Create Ticket',
     'edit_ticket' => 'Edit Ticket',

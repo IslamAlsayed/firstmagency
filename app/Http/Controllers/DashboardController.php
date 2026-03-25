@@ -200,6 +200,7 @@ class DashboardController extends Controller
         }
         $modelClass = '\\App\\Models\\' . $modelClass;
         $model = $modelClass::withTrashed()->find($id);
+        dd($model, $modelClass);
 
         if (!$model) {
             return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.' . strtolower(class_basename($modelClass)))]));

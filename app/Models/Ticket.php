@@ -18,6 +18,7 @@ class Ticket extends Model
         'subject',
         'department_id',
         'status',
+        'status_before_delete',
         'priority',
         'is_active',
         'assigned_to',
@@ -46,6 +47,27 @@ class Ticket extends Model
             if (!$model->uuid) {
                 $model->uuid = mt_rand(100000000, 999999999);
             }
+        });
+
+        static::deleting(function ($model) {
+            // Keep original status before soft delete, then mark as closed.
+            if (method_exists($model, 'isForceDeleting') && $model->isForceDeleting()) {
+                return;
+            }
+
+            $model->status_before_delete = $model->status;
+            $model->status = 'closed';
+            $model->saveQuietly();
+        });
+
+        static::restored(function ($model) {
+            if (!$model->status_before_delete) {
+                return;
+            }
+
+            $model->status = $model->status_before_delete;
+            $model->status_before_delete = null;
+            $model->saveQuietly();
         });
     }
 
