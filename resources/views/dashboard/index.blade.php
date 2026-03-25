@@ -22,8 +22,8 @@
             padding: 1.75rem;
             color: #fff;
             background:
-                radial-gradient(circle at top right, #d05423, transparent 24%),
-                linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, #96310E 0%, #F97316 100%);
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 24%),
+                linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, var(--dark-color) 0%, var(--light-color) 100%);
             box-shadow: 0 24px 50px rgba(15, 23, 42, 0.18);
         }
 
