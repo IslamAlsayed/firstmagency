@@ -1,5 +1,9 @@
 @extends('dashboard.layouts.app')
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -69,8 +73,7 @@
                             @foreach ($images as $image)
                                 <div class="col-md-4 mb-3">
                                     <div class="card">
-                                        <img src="{{ Storage::url($image->image) }}" class="card-img-top" alt="{{ $image->alt_text }}"
-                                            style="height: 200px; object-fit: cover;">
+                                        <img src="{{ Storage::url($image->image) }}" class="card-img-top" alt="{{ $image->alt_text }}" style="height: 200px; object-fit: cover;">
                                         <div class="card-body">
                                             <p class="card-text">
                                                 <strong>{{ __('main.alt_text') }}:</strong> {{ $image->alt_text ?? '-' }}<br>

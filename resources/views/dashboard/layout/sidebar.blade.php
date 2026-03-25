@@ -84,7 +84,7 @@
         @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create') || auth()->user()->can('permissions-read') || auth()->user()->can('permissions-create'))
             <li class="relative group submenu-item" data-item-id="roles-permissions" title="{{ __('main.permissions') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.permissions') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.roles.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.roles.*', 'dashboard.permissions.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.permissions'), 20) }}</span>
@@ -92,7 +92,7 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.roles.*') ? 'show' : '' }}">
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.roles.*', 'dashboard.permissions.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('roles-read') || auth()->user()->can('roles-create'))
                         <li class="relative" data-sub-id="roles" title="{{ __('main.roles') }}">
                             <a href="{{ route('dashboard.roles.index') }}"
@@ -178,7 +178,7 @@
         @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create') || auth()->user()->can('partners-read') || auth()->user()->can('partners-create'))
             <li class="relative group submenu-item" data-item-id="clients-partners" title="{{ __('main.clients_and_partners') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.clients_and_partners') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.clients.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.clients.*', 'dashboard.partners.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-handshake" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.clients_and_partners'), 20) }}</span>
@@ -186,7 +186,7 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.clients.*') ? 'show' : '' }}">
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.clients.*', 'dashboard.partners.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('clients-read') || auth()->user()->can('clients-create'))
                         <li class="relative" data-sub-id="clients" title="{{ __('main.clients') }}">
                             <a href="{{ route('dashboard.clients.index') }}"
@@ -213,7 +213,7 @@
         @if (auth()->user()->can('services-read') || auth()->user()->can('services-create') || auth()->user()->can('projects-read') || auth()->user()->can('projects-create'))
             <li class="relative group submenu-item" data-item-id="services-projects" title="{{ __('main.services_and_projects') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.services_and_projects') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.services.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.services.*', 'dashboard.projects.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.services_and_projects'), 20) }}</span>
@@ -221,7 +221,7 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.services.*') ? 'show' : '' }}">
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.services.*', 'dashboard.projects.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('services-read') || auth()->user()->can('services-create'))
                         <li class="relative" data-sub-id="services" title="{{ __('main.service') }}">
                             <a href="{{ route('dashboard.services.index') }}"
@@ -251,7 +251,7 @@
                 auth()->user()->can('programming-categories-create'))
             <li class="relative group submenu-item" data-item-id="programming-development" title="{{ __('main.programmings') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.programmings') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.programming-systems.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.programming-systems.*', 'dashboard.programming-categories.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-code" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.programmings'), 20) }}</span>
@@ -259,7 +259,8 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.programming-systems.*') ? 'show' : '' }}">
+                <ul
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.programming-systems.*', 'dashboard.programming-categories.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('programming-systems-read') || auth()->user()->can('programming-systems-create'))
                         <li class="relative" data-sub-id="programming-systems" title="{{ __('main.programming-systems') }}">
                             <a href="{{ route('dashboard.programming-systems.index') }}"
@@ -286,7 +287,7 @@
         @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create') || auth()->user()->can('reviews-read') || auth()->user()->can('reviews-create'))
             <li class="relative group submenu-item" data-item-id="faqs-reviews" title="{{ __('main.faqs_and_reviews') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.faqs_and_reviews') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.faqs.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.faqs.*', 'dashboard.reviews.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-comments" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.faqs_and_reviews'), 20) }}</span>
@@ -294,7 +295,7 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.faqs.*') ? 'show' : '' }}">
+                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.faqs.*', 'dashboard.reviews.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('faqs-read') || auth()->user()->can('faqs-create'))
                         <li class="relative" data-sub-id="faqs" title="{{ __('main.faqs') }}">
                             <a href="{{ route('dashboard.faqs.index') }}"
@@ -324,7 +325,7 @@
                 auth()->user()->can('marketing-packages-create'))
             <li class="relative group submenu-item" data-item-id="packages-domains" title="{{ __('main.packages_and_domains') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.packages_and_domains') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-box-open" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.packages_and_domains'), 20) }}</span>
@@ -332,7 +333,8 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*') ? 'show' : '' }}">
+                <ul
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('hosting-packages-read') || auth()->user()->can('hosting-packages-create'))
                         <li class="relative" data-sub-id="hosting-packages" title="{{ __('main.hosting_packages') }}">
                             <a href="{{ route('dashboard.hosting-packages.index') }}"
@@ -373,19 +375,20 @@
             </li>
         @endif
 
-        <!-- Projects & Steps -->
-        @if (auth()->user()->can('projects-read') || auth()->user()->can('projects-create') || auth()->user()->can('steps-read') || auth()->user()->can('steps-create'))
-            <li class="relative group submenu-item" data-item-id="projects-steps" title="{{ __('main.projects_and_steps') }}">
-                <button type="button" data-toggle="submenu" data-label="{{ __('main.projects_and_steps') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.project-steps.*') ? 'active' : '' }}">
+        <!-- Works & Steps -->
+        @if (auth()->user()->can('line-works-read') || auth()->user()->can('project-steps-read') || auth()->user()->can('work-us-step-read') || auth()->user()->can('why-us-read'))
+            <li class="relative group submenu-item" data-item-id="works-steps" title="{{ __('main.works_and_steps') }}">
+                <button type="button" data-toggle="submenu" data-label="{{ __('main.works_and_steps') }}"
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.line-works.*', 'dashboard.project-steps.*', 'dashboard.work-us-step.*', 'dashboard.why-us.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-tasks" aria-hidden="true"></i></span>
-                        <span class="span-text">{{ limitedText(__('main.projects_and_steps'), 20) }}</span>
+                        <span class="span-text">{{ limitedText(__('main.works_and_steps'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.project-steps.*') ? 'show' : '' }}">
+                <ul
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.line-works.*', 'dashboard.project-steps.*', 'dashboard.work-us-step.*', 'dashboard.why-us.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('line-works-read') || auth()->user()->can('line-works-create'))
                         <li class="relative" data-sub-id="line-works" title="{{ __('main.line_works') }}">
                             <a href="{{ route('dashboard.line-works.index') }}"
@@ -433,7 +436,7 @@
                 auth()->user()->can('dashboards-and-systems-create'))
             <li class="relative group submenu-item" data-item-id="hosting-features" title="{{ __('main.features_and_system') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.features_and_system') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-features.*', 'dashboard.dashboards-and-systems.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-gift" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.features_and_system'), 20) }}</span>
@@ -441,7 +444,8 @@
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
 
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-features.*') ? 'show' : '' }}">
+                <ul
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-features.*', 'dashboard.dashboards-and-systems.*', 'dashboard.platform-management.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('hosting-features-read') || auth()->user()->can('hosting-features-create'))
                         <li class="relative" data-sub-id="hosting-features" title="{{ __('main.features_hostings') }}">
                             <a href="{{ route('dashboard.hosting-features.index') }}"
@@ -477,14 +481,15 @@
         @if (auth()->user()->can('settings-read'))
             <li class="relative group submenu-item" data-item-id="settings" title="{{ __('main.settings') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.settings') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.settings.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.settings.*', 'dashboard.settings.inline-padding', 'dashboard.settings.website') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-cogs" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.settings'), 20) }}</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs nav-icon"></i>
                 </button>
-                <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.settings.*') ? 'show' : '' }}">
+                <ul
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.settings.*', 'dashboard.settings.inline-padding', 'dashboard.settings.website') ? 'show' : '' }}">
                     @if (auth()->user()->can('settings-read'))
                         <li class="relative" data-sub-id="settings" title="{{ __('main.settings') }}">
                             <a href="{{ route('dashboard.settings.index') }}"

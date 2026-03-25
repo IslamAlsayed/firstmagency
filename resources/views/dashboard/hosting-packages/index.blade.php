@@ -3,48 +3,66 @@
 @section('title', __('main.hosting_packages'))
 @section('page-title', '📦 ' . __('main.hosting_packages'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
+
 @section('content')
-    <div class="w-full">
-        <!-- Statistics -->
-        <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800">{{ $allItems }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.hosting_packages')]) }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600">{{ $hostingCount }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.shared') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600">{{ $resellerCount }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.reseller') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-purple-600">{{ $vpsCount }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.vps') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-orange-600">{{ $serversCount }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.dedicated') }}</small>
-            </div>
-        </div>
+    <div class="entity-index-page" style="--page-accent: #2563eb;">
+        <section class="entity-hero">
+            <div class="entity-hero-grid">
+                <div>
+                    <span class="entity-kicker">
+                        <i class="fas fa-cube"></i>
+                        {{ __('main.hosting_packages') }}
+                    </span>
 
-        <div class="bg-white shadow-lg radius-lg">
-            <div class="border-b border-gray-200">
-                <div class="flex justify-between items-center p-4 border-gray-200">
-                    <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-cube mr-2"></i> {{ __('main.hosting_packages') }}</h5>
+                    <h1 class="entity-hero-title">{{ __('main.hosting_packages') }}</h1>
+                    <p class="entity-hero-subtitle">{{ __('main.dashboard') }} - {{ __('main.total_types', ['types' => __('main.hosting_packages')]) }}</p>
 
-                    <div class="flex justify-between items-center gap-4">
-                        <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.hosting_packages')]) }}">
-                        <a href="{{ route('dashboard.hosting-packages.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);"
-                            toggle-button>
+                    <div class="entity-hero-actions">
+                        <a href="{{ route('dashboard.hosting-packages.create') }}" class="entity-hero-action">
+                            <i class="fas fa-plus-circle"></i>
                             {{ __('main.create_type', ['type' => __('main.hosting_package')]) }}
                         </a>
                     </div>
                 </div>
 
-                <div class="flex justify-start gap-2 pt-4 flex-wrap px-4">
+                @include('dashboard.components.entity-hero-summary', [
+                    'icon' => 'fas fa-server',
+                    'items' => [
+                        ['id' => 'stat-total', 'value' => $allItems, 'label' => __('main.total_types', ['types' => __('main.hosting_packages')])],
+                        ['id' => 'stat-hosting', 'value' => $hostingCount, 'label' => __('main.shared')],
+                        ['id' => 'stat-reseller', 'value' => $resellerCount, 'label' => __('main.reseller')],
+                        ['id' => 'stat-vps', 'value' => $vpsCount, 'label' => __('main.vps')],
+                        ['id' => 'stat-servers', 'value' => $serversCount, 'label' => __('main.dedicated')],
+                    ],
+                ])
+            </div>
+        </section>
+
+        <section class="entity-panel">
+            @include('dashboard.components.entity-panel-heading', [
+                'icon' => 'fas fa-cube',
+                'title' => __('main.hosting_packages'),
+                'description' => __('main.search_types_placeholder', ['types' => __('main.hosting_packages')]),
+            ])
+
+            <div class="entity-toolbar">
+                <div class="entity-toolbar-group">
+                    <input type="text" id="searchBox" class="entity-input" placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.hosting_packages')]) }}">
+                </div>
+
+                <div class="entity-toolbar-group">
+                    <a href="{{ route('dashboard.hosting-packages.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
+                        {{ __('main.create_type', ['type' => __('main.hosting_package')]) }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="entity-content">
+                <div class="flex justify-start gap-2 flex-wrap px-2 pb-4">
                     <button type="button" class="filter-btn cursor-pointer px-4 py-2 rounded-lg border-2 border-primary text-primary font-medium active" data-filter="all">
                         {{ __('main.all') }} ({{ $allItems }})
                     </button>
@@ -65,11 +83,9 @@
                         {{ __('main.dedicated') }} ({{ $serversCount }})
                     </button>
                 </div>
-            </div>
 
-            <div class="scroll-container">
-                <div class="p-4">
-                    <table class="w-full border-collapse" id="packagesTable">
+                <div class="entity-table-shell scroll-container">
+                    <table class="entity-table w-full border-collapse" id="packagesTable">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
                                 <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
@@ -157,15 +173,15 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
 
-                @if ($hostingPackages->hasPages())
-                    <div class="mt-6 border-t pt-4">
-                        {{ $hostingPackages->links() }}
-                    </div>
-                @endif
+                    @if ($hostingPackages->hasPages())
+                        <div class="entity-pagination">
+                            {{ $hostingPackages->links() }}
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection
 

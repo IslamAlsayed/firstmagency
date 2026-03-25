@@ -1,5 +1,9 @@
 @extends('dashboard.layout.master')
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
 @section('content')
     <div class="container">
         <!-- Header -->
@@ -69,8 +73,7 @@
                                     @endif
                                 </td>
                                 <td class="px-4 py-3">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs font-semibold {{ $item->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $item->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                         {{ $item->is_active ? __('main.active') : __('main.inactive') }}
                                     </span>
                                 </td>

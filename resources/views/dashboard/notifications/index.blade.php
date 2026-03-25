@@ -3,6 +3,11 @@
 @section('title', __('main.notifications'))
 @section('page-title', '🔔 ' . __('main.notifications'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
+
 @section('content')
     <div class="kt-card">
         <div class="kt-card-header flex items-center justify-between gap-4 flex-wrap">

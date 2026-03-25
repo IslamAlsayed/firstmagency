@@ -3,46 +3,104 @@
 @section('title', __('main.deleted') . ' ' . __('main.tickets'))
 @section('page-title', '🗑️ ' . __('main.deleted') . ' ' . __('main.tickets'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
 @section('content')
-    <div class="w-full">
-        <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($tickets) }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.tickets')]) }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-open">{{ $tickets->where('status', 'open')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.open') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600" id="stat-in_progress">{{ $tickets->where('status', 'in_progress')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.in_progress') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-yellow-600" id="stat-processed">{{ $tickets->where('priority', 'processed')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.processed') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600" id="stat-replied">{{ $tickets->where('priority', 'replied')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.replied') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-600" id="stat-closed">{{ $tickets->where('priority', 'closed')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.closed') }}</small>
-            </div>
-        </div>
+    <div class="entity-index-page" style="--page-accent: #059669;">
+        <section class="entity-hero">
+            <div class="entity-hero-grid">
+                <div>
+                    <span class="entity-kicker">
+                        <i class="fas fa-trash-restore"></i>
+                        {{ __('main.deleted_tickets') }}
+                    </span>
 
-        <div class="bg-white shadow-lg radius-lg">
-            <div class="flex justify-between items-center p-4 border-gray-200">
-                <h5 class="text-lg font-semibold text-gray-800">
-                    <i class="fas fa-trash-restore mr-2"></i> {{ __('main.deleted') }} {{ __('main.tickets') }}
-                </h5>
+                    <h1 class="entity-hero-title">{{ __('main.deleted_tickets') }}</h1>
+                    <p class="entity-hero-subtitle">{{ __('main.deleted') }} {{ __('main.tickets') }} - {{ __('main.restore') }}</p>
 
-                <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    <div class="entity-hero-actions">
+                        <a href="{{ route('dashboard.tickets.index') }}" class="entity-hero-action">
+                            <i class="fas fa-ticket-alt"></i>
+                            {{ __('main.tickets') }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="entity-hero-side">
+                    <div class="flex items-center justify-between gap-3">
+                        <div>
+                            <p class="text-sm font-bold text-white/85">{{ __('main.last_update') }}</p>
+                            <p class="text-xs text-white/70">{{ now()->format('d M Y - H:i A') }}</p>
+                        </div>
+                        <div class="text-4xl text-white/20">
+                            <i class="fas fa-box-archive"></i>
+                        </div>
+                    </div>
+
+                    <div class="entity-hero-side-grid">
+                        <div class="entity-hero-side-item">
+                            <strong id="stat-total">{{ count($tickets) }}</strong>
+                            <span class="text-sm text-white/80">{{ __('main.total_tickets') }}</span>
+                        </div>
+                        <div class="entity-hero-side-item">
+                            <strong id="stat-open">{{ $tickets->where('status', 'open')->count() }}</strong>
+                            <span class="text-sm text-white/80">{{ __('main.open') }}</span>
+                        </div>
+                        <div class="entity-hero-side-item">
+                            <strong id="stat-in_progress">{{ $tickets->where('status', 'in_progress')->count() }}</strong>
+                            <span class="text-sm text-white/80">{{ __('main.in_progress') }}</span>
+                        </div>
+                        <div class="entity-hero-side-item">
+                            <strong id="stat-closed">{{ $tickets->where('priority', 'closed')->count() }}</strong>
+                            <span class="text-sm text-white/80">{{ __('main.closed') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="entity-stat-grid">
+            <article class="entity-stat-card">
+                <span><i class="fas fa-box-archive"></i> {{ __('main.total_tickets') }}</span>
+                <strong>{{ count($tickets) }}</strong>
+            </article>
+            <article class="entity-stat-card">
+                <span><i class="fas fa-circle text-blue-500"></i> {{ __('main.open') }}</span>
+                <strong>{{ $tickets->where('status', 'open')->count() }}</strong>
+            </article>
+            <article class="entity-stat-card">
+                <span><i class="fas fa-clock text-amber-500"></i> {{ __('main.in_progress') }}</span>
+                <strong>{{ $tickets->where('status', 'in_progress')->count() }}</strong>
+            </article>
+            <article class="entity-stat-card">
+                <span><i class="fas fa-reply text-emerald-500"></i> {{ __('main.replied') }}</span>
+                <strong>{{ $tickets->where('priority', 'replied')->count() }}</strong>
+            </article>
+            <article class="entity-stat-card">
+                <span><i class="fas fa-lock text-slate-500"></i> {{ __('main.closed') }}</span>
+                <strong>{{ $tickets->where('priority', 'closed')->count() }}</strong>
+            </article>
+        </section>
+
+        <section class="entity-panel">
+            <div class="entity-panel-header">
+                <div class="entity-panel-title">
+                    <span class="entity-panel-title-icon"><i class="fas fa-trash-restore"></i></span>
+                    <div>
+                        <h2>{{ __('main.deleted_tickets') }}</h2>
+                        <p>{{ __('main.restore') }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entity-toolbar">
+                <div class="entity-toolbar-group">
+                    <input type="text" id="searchBox" class="entity-input"
                         placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.tickets')]) }}">
 
-                    <select id="statusFilter" class="w-[180px] px-4 py-2 border border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                    <select id="statusFilter" class="entity-select">
                         <option value="">{{ __('main.all') }} - {{ __('main.status') }}</option>
                         <option value="open">{{ __('main.open') }}</option>
                         <option value="in_progress">{{ __('main.in_progress') }}</option>
@@ -50,85 +108,91 @@
                         <option value="replied">{{ __('main.replied') }}</option>
                         <option value="closed">{{ __('main.closed') }}</option>
                     </select>
+                </div>
 
+                <div class="entity-toolbar-group">
                     <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         {{ __('main.tickets') }}
                     </a>
                 </div>
             </div>
 
-            <div class="scroll-container">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.number') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.name') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.subject') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.department') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.deleted') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($tickets as $ticket)
-                            <tr class="border-b border-gray-200 hover:bg-gray-50 transition" id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
-                                <td class="p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    <p>{{ $ticket->name }}</p>
-                                    <p>
-                                        <a href="mailto:{{ $ticket->email }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
+            <div class="entity-content">
+                <div class="entity-table-shell scroll-container">
+                    <table class="entity-table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('main.number') }}</th>
+                                <th>{{ __('main.name') }}</th>
+                                <th>{{ __('main.subject') }}</th>
+                                <th>{{ __('main.department') }}</th>
+                                <th>{{ __('main.status') }}</th>
+                                <th>{{ __('main.deleted') }}</th>
+                                <th>{{ __('main.actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($tickets as $ticket)
+                            <tr id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
+                                <td><span class="entity-primary-text">{{ $ticket->uuid }}</span></td>
+                                <td>
+                                    <p class="entity-primary-text">{{ $ticket->name }}</p>
+                                    <p class="entity-secondary-text">
+                                        <a href="mailto:{{ $ticket->email }}" target="_blank" class="entity-contact-link">
                                             {!! limitedText($ticket->email ?? '--', 30) !!}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                         </a>
                                     </p>
-                                    <p>
-                                        <a href="tel:{{ $ticket->phone }}" target="_blank" class="inline-block text-blue-600 hover:underline text-xs font-medium">
+                                    <p class="entity-secondary-text">
+                                        <a href="tel:{{ $ticket->phone }}" target="_blank" class="entity-contact-link">
                                             {!! limitedText($ticket->phone ?? '--', 30) !!}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                         </a>
                                     </p>
                                 </td>
-                                <td class="p-4 text-sm text-gray-600">{{ limitedText($ticket->subject ?? '', 30) }}</td>
-                                <td class="p-4 text-sm text-gray-600">
+                                <td><span class="entity-primary-text">{{ limitedText($ticket->subject ?? '', 40) }}</span></td>
+                                <td>
                                     <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
                                         {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
                                     </span>
                                 </td>
-                                <td class="p-4 text-sm text-gray-600">
+                                <td>
                                     <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
                                         {{ __('main.' . $ticket->status) }}
                                     </span>
                                 </td>
-                                <td class="p-4 text-sm text-gray-600">{{ $ticket->deleted_at?->diffForHumans() }}</td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    <form action="{{ route('dashboard.tickets.restore', $ticket->id) }}" method="POST" class="inline-block" onsubmit="return confirm('{{ __('main.are_you_sure') }}');">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" title="{{ __('main.restore') }}">
-                                            <i class="fas fa-trash-restore text-white"></i>
-                                            {{ __('main.restore') }}
-                                        </button>
-                                    </form>
+                                <td><span class="entity-secondary-text">{{ $ticket->deleted_at?->diffForHumans() }}</span></td>
+                                <td>
+                                    <div class="entity-actions">
+                                        <form action="{{ route('dashboard.tickets.restore', $ticket->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" title="{{ __('main.restore') }}">
+                                                <i class="fas fa-trash-restore text-white"></i>
+                                                {{ __('main.restore') }}
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-8 text-center text-gray-400">
+                                <td colspan="7" class="entity-empty">
                                     {{ __('messages.no_records_found') }}
                                 </td>
                             </tr>
                         @endforelse
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 
                 @if ($tickets->hasPages())
-                    <div class="mt-6 border-t pt-4">
+                    <div class="entity-pagination">
                         {{ $tickets->links() }}
                     </div>
                 @endif
             </div>
-        </div>
+        </section>
     </div>
 @endsection
 

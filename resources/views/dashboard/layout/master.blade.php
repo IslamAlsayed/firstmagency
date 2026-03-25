@@ -16,6 +16,12 @@
 
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}";
         }
+
+        @media (max-width: 425px) {
+            .page-content {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -32,7 +38,7 @@
         <main class="main-content">
             @include('dashboard.layout.topbar')
 
-            <div class="p-6">
+            <div class="p-6 page-content">
                 <!-- Page Content -->
                 @yield('content')
             </div>

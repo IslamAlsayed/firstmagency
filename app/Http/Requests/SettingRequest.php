@@ -48,6 +48,7 @@ class SettingRequest extends FormRequest
             'website_design_description_ar' => 'nullable|string',
             'website_design_years_experience' => 'nullable|numeric|max:999',
             'website_design_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'ably_key' => 'nullable|string|max:255',
 
             'colors' => 'nullable|array',
             'colors.*' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',

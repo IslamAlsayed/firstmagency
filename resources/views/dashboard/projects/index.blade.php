@@ -3,6 +3,11 @@
 @section('title', __('main.projects'))
 @section('page-title', '🏢 ' . __('main.projects'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
+
 @section('content')
     <div class="w-full">
         <!-- Statistics -->

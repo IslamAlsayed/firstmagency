@@ -121,6 +121,9 @@ return [
     'settings_whatsapp_number' => 'WhatsApp Number',
     'settings_phone_number' => 'Phone Number',
     'width_logo_sidebar' => 'Width of Logo in Sidebar',
+    'settings_width_logo_sidebar' => 'Width of Logo in Sidebar',
+    'ably_key' => 'Ably Key',
+    'settings_ably_key' => 'Ably Key',
     'settings_save_changes' => 'Save Changes',
     'settings_debug_mode_note' => 'When enabled, section flags will be visible on the website for debugging purposes.',
     'settings_disable_debug_mode' => 'Disable Debug Mode',
@@ -203,6 +206,7 @@ return [
     'faqs_and_reviews' => 'FAQs and Reviews',
     'packages_and_domains' => 'Packages and Domains',
     'projects_and_steps' => 'Projects and Steps',
+    'works_and_steps' => 'Works and Steps',
     'features_and_system' => 'Features and System',
 
     // ==================== Services ====================

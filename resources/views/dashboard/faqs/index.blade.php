@@ -3,113 +3,142 @@
 @section('title', __('main.faqs'))
 @section('page-title', '❓ ' . __('main.faqs'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
+
 @section('content')
-    <div class="w-full">
-        <!-- Statistics -->
-        <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ count($faqs) }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_faqs') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600" id="stat-active">{{ $faqs->where('is_active', 1)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.active') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-blue-600" id="stat-categories">{{ $faqs->unique('category')->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.categories') }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-orange-600" id="stat-inactive">{{ $faqs->where('is_active', 0)->count() }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.inactive') }}</small>
-            </div>
-        </div>
+    <div class="entity-index-page" style="--page-accent: #f59e0b;">
+        <section class="entity-hero">
+            <div class="entity-hero-grid">
+                <div>
+                    <span class="entity-kicker">
+                        <i class="fas fa-question-circle"></i>
+                        {{ __('main.faqs') }}
+                    </span>
 
-        <div class="bg-white shadow-lg radius-lg">
-            <div class="flex justify-between items-center p-4 border-gray-200">
-                <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-question-circle mr-2"></i> {{ __('main.faqs') }}</h5>
+                    <h1 class="entity-hero-title">{{ __('main.faqs') }}</h1>
+                    <p class="entity-hero-subtitle">{{ __('main.dashboard') }} - {{ __('main.total_faqs') }}</p>
 
-                <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                        placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.faqs')]) }}">
-                    <a href="{{ route('dashboard.faqs.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                        {{ __('main.create_type', ['type' => __('main.faq')]) }}
-                    </a>
+                    @if (auth()->user()->can('faqs-create'))
+                        <div class="entity-hero-actions">
+                            <a href="{{ route('dashboard.faqs.create') }}" class="entity-hero-action">
+                                <i class="fas fa-plus-circle"></i>
+                                {{ __('main.create_type', ['type' => __('main.faq')]) }}
+                            </a>
+                        </div>
+                    @endif
+                </div>
+
+                @include('dashboard.components.entity-hero-summary', [
+                    'icon' => 'fas fa-circle-question',
+                    'items' => [
+                        ['id' => 'stat-total', 'value' => count($faqs), 'label' => __('main.total_faqs')],
+                        ['id' => 'stat-active', 'value' => $faqs->where('is_active', 1)->count(), 'label' => __('main.active')],
+                        ['id' => 'stat-categories', 'value' => $faqs->unique('category')->count(), 'label' => __('main.categories')],
+                        ['id' => 'stat-inactive', 'value' => $faqs->where('is_active', 0)->count(), 'label' => __('main.inactive')],
+                    ],
+                ])
+            </div>
+        </section>
+
+        <section class="entity-panel">
+            @include('dashboard.components.entity-panel-heading', [
+                'icon' => 'fas fa-question-circle',
+                'title' => __('main.faqs'),
+                'description' => __('main.search_types_placeholder', ['types' => __('main.faqs')]),
+            ])
+
+            <div class="entity-toolbar">
+                <div class="entity-toolbar-group">
+                    <input type="text" id="searchBox" class="entity-input" placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.faqs')]) }}">
+                </div>
+
+                <div class="entity-toolbar-group">
+                    @if (auth()->user()->can('faqs-create'))
+                        <a href="{{ route('dashboard.faqs.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
+                            {{ __('main.create_type', ['type' => __('main.faq')]) }}
+                        </a>
+                    @endif
                 </div>
             </div>
-            <div class="scroll-container">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.question') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($faqs as $faq)
-                            <tr id="row-{{ $faq->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition searchable-row"
-                                data-search="{{ strtolower($faq->question . ' ' . $faq->question_ar . ' ' . $faq->category) }}" data-active="{{ (int) $faq->is_active }}">
-                                <td class="p-4">
-                                    <strong class="text-sm text-gray-800 block">
-                                        {{ limitedText($faq->question, 50) }}
-                                    </strong>
-                                    <small class="text-gray-600">{{ limitedText($faq->question_ar, 50) }}</small>
-                                </td>
-                                <td class="p-4 text-sm">
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                        {{ $faq->CATEGORIES[$faq->category] ?? $faq->category }}
-                                    </span>
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">{{ $faq->order ?? 0 }}</td>
-                                <td class="p-4 text-sm">
-                                    @include('dashboard.components.toggle-hold', [
-                                        'modelId' => $faq->id,
-                                        'field' => 'is_active',
-                                        'value' => (bool) $faq->is_active,
-                                        'modelClass' => 'faq',
-                                    ])
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    @if ($faq->creator)
-                                        <a href="{{ route('dashboard.users.show', $faq->creator->id) }}" class="text-blue-600 hover:underline">
-                                            {{ $faq->creator->name }}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
-                                        </a>
-                                    @else
-                                        <span class="text-gray-400 italic">N/A</span>
-                                    @endif
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">{{ $faq->created_at?->format('d/m/Y') }}</td>
-                                <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                    @include('dashboard.components.permissions-actions', [
-                                        'record' => $faq,
-                                        'models' => 'faqs',
-                                        'modelClass' => 'faq',
-                                    ])
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="px-6 py-8 text-center text-gray-400">
-                                    {{ __('messages.no_records_found') }}
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
 
-                @if ($faqs->hasPages())
-                    <div class="mt-6 border-t pt-4 p-4">
-                        {{ $faqs->links() }}
-                    </div>
-                @endif
+            <div class="entity-content">
+                <div class="entity-table-shell scroll-container">
+                    <table class="entity-table w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 border-b-2 border-gray-300">
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.question') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.category') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($faqs as $faq)
+                                <tr id="row-{{ $faq->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition searchable-row"
+                                    data-search="{{ strtolower($faq->question . ' ' . $faq->question_ar . ' ' . $faq->category) }}" data-active="{{ (int) $faq->is_active }}">
+                                    <td class="p-4">
+                                        <strong class="text-sm text-gray-800 block">
+                                            {{ limitedText($faq->question, 50) }}
+                                        </strong>
+                                        <small class="text-gray-600">{{ limitedText($faq->question_ar, 50) }}</small>
+                                    </td>
+                                    <td class="p-4 text-sm">
+                                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+                                            {{ $faq->CATEGORIES[$faq->category] ?? $faq->category }}
+                                        </span>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $faq->order ?? 0 }}</td>
+                                    <td class="p-4 text-sm">
+                                        @include('dashboard.components.toggle-hold', [
+                                            'modelId' => $faq->id,
+                                            'field' => 'is_active',
+                                            'value' => (bool) $faq->is_active,
+                                            'modelClass' => 'faq',
+                                        ])
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">
+                                        @if ($faq->creator)
+                                            <a href="{{ route('dashboard.users.show', $faq->creator->id) }}" class="text-blue-600 hover:underline">
+                                                {{ $faq->creator->name }}
+                                                <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
+                                            </a>
+                                        @else
+                                            <span class="text-gray-400 italic">N/A</span>
+                                        @endif
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $faq->created_at?->format('d/m/Y') }}</td>
+                                    <td class="p-4 text-sm space-x-2 flex items-center gap-2">
+                                        @include('dashboard.components.permissions-actions', [
+                                            'record' => $faq,
+                                            'models' => 'faqs',
+                                            'modelClass' => 'faq',
+                                        ])
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="px-6 py-8 text-center text-gray-400">
+                                        {{ __('messages.no_records_found') }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+
+                    @if ($faqs->hasPages())
+                        <div class="entity-pagination">
+                            {{ $faqs->links() }}
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection
 

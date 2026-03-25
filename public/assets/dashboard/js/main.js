@@ -13,14 +13,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function normalizeSearchText(value) {
+        if (!value) return '';
+
+        return value
+            .toString()
+            .toLowerCase()
+            .normalize('NFKC')
+            // Remove Arabic diacritics and tatweel.
+            .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, '')
+            // Normalize common Arabic letter variants.
+            .replace(/[أإآٱ]/g, 'ا')
+            .replace(/[ؤئ]/g, 'ء')
+            .replace(/ى/g, 'ي')
+            .replace(/ة/g, 'ه')
+            // Normalize Arabic/Persian digits to Western digits.
+            .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+            .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+    }
+
     const searchBox = document.getElementById('searchBox');
     if (searchBox) {
-        searchBox.addEventListener('keyup', function () {
-            const search = this.value.trim();
+        searchBox.addEventListener('input', function () {
+            const search = normalizeSearchText(this.value.trim());
             const rows = document.querySelectorAll('tbody tr');
             rows.forEach(row => {
-                const text = row.textContent;
-                const match = text.includes(search) || text.toLowerCase().includes(search.toLowerCase());
+                const text = normalizeSearchText(row.textContent);
+                const match = text.includes(search);
                 row.style.display = match ? '' : 'none';
             });
         });

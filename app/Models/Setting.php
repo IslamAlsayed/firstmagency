@@ -52,6 +52,7 @@ class Setting extends Model
         'website_design_years_experience',
         'website_design_image',
         'width_logo_sidebar',
+        'ably_key',
 
         // columns (JSON)
         'colors',

@@ -3,140 +3,211 @@
 @section('title', __('main.articles'))
 @section('page-title', '📝 ' . __('main.articles'))
 
+@push('styles')
+    @include('dashboard.components.entity-index-styles')
+@endpush
+
 @section('content')
-    <div class="w-full">
-        <!-- {{ __('main.statistics') }} -->
-        <div class="flex flex-wrap gap-4 mb-6">
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-gray-800" id="stat-total">{{ $allItems }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.total_types', ['types' => __('main.articles')]) }}</small>
-            </div>
-            <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                <div class="text-2xl font-bold text-green-600" id="stat-published">{{ $published }}</div>
-                <small class="text-primary font-semibold text-nowrap">{{ __('main.published') }}</small>
-            </div>
-            @if (in_array(getActiveUser()->role, ['admin', 'superadmin']))
-                <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                    <div class="text-2xl font-bold text-yellow-600" id="stat-draft">{{ $draft }}</div>
-                    <small class="text-primary font-semibold text-nowrap">{{ __('main.draft') }}</small>
-                </div>
-                <div class="flex-1 text-center p-4 bg-gray-50 shadow-lg radius-lg border border-gray-200 z--1">
-                    <div class="text-2xl font-bold text-red-600" id="stat-archived">{{ $archived }}</div>
-                    <small class="text-primary font-semibold text-nowrap">{{ __('main.archived') }}</small>
-                </div>
-            @endif
-        </div>
+    <div class="entity-index-page" style="--page-accent: #0f766e;">
+        <section class="entity-hero">
+            <div class="entity-hero-grid">
+                <div>
+                    <span class="entity-kicker">
+                        <i class="fas fa-newspaper"></i>
+                        {{ __('main.articles') }}
+                    </span>
 
-        <div class="bg-white shadow-lg radius-lg">
-            <div class="flex justify-between items-center p-4 border-gray-200">
-                <h5 class="text-lg font-semibold text-gray-800"><i class="fas fa-newspaper mr-2"></i> {{ __('main.articles') }}</h5>
+                    <h1 class="entity-hero-title">{{ __('main.articles') }}</h1>
+                    <p class="entity-hero-subtitle">{{ __('main.dashboard') }} - {{ __('main.total_types', ['types' => __('main.articles')]) }}</p>
 
-                <div class="flex justify-between items-center gap-4">
-                    <input type="text" id="searchBox" class="w-[250px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                        placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
-                    <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                        {{ __('main.create_article') }}
-                    </a>
+                    @if (auth()->user()->can('articles-create'))
+                        <div class="entity-hero-actions">
+                            <a href="{{ route('dashboard.articles.create') }}" class="entity-hero-action">
+                                <i class="fas fa-plus-circle"></i>
+                                {{ __('main.create_article') }}
+                            </a>
+                        </div>
+                    @endif
                 </div>
+
+                @include('dashboard.components.entity-hero-summary', [
+                    'icon' => 'fas fa-pen-nib',
+                    'items' => array_values(
+                        array_filter([
+                            ['id' => 'stat-total', 'value' => $allItems, 'label' => __('main.total_types', ['types' => __('main.articles')])],
+                            ['id' => 'stat-published', 'value' => $published, 'label' => __('main.published')],
+                            in_array(getActiveUser()->role, ['admin', 'superadmin']) ? ['id' => 'stat-draft', 'value' => $draft, 'label' => __('main.draft')] : null,
+                            in_array(getActiveUser()->role, ['admin', 'superadmin']) ? ['id' => 'stat-archived', 'value' => $archived, 'label' => __('main.archived')] : null,
+                        ])),
+                ])
             </div>
-            <div class="scroll-container">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.views') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.status') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
-                            <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($articles as $article)
-                            <tr id="row-{{ $article->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-status="{{ $article->status }}"
-                                data-active="{{ (int) $article->is_active }}">
-                                <td title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}" class="p-4">
-                                    <div class="relative w-fit">
-                                        @if ($article->image && checkExistFile($article->image))
-                                            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}"
-                                                class="rounded-full size-9 shrink-0">
-                                        @else
-                                            <i class="fas fa-pencil" title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}"></i>
-                                        @endif
-                                    </div>
-                                </td>
-                                <td class="p-4">
-                                    <strong class="text-sm text-gray-800 block">
-                                        {{ limitedText($article->translations[app()->getLocale()]['title'] ?? '', 50) }}
-                                    </strong>
-                                </td>
-                                <td class="p-4">
-                                    @include('dashboard.components.toggle-hold', [
-                                        'modelId' => $article->id,
-                                        'field' => 'is_active',
-                                        'value' => (bool) $article->is_active,
-                                        'modelClass' => 'article',
-                                    ])
-                                </td>
-                                <td class="p-4 text-sm">
-                                    @include('dashboard.components.status-actions', [
-                                        'record' => $article,
-                                        'models' => 'articles',
-                                        'modelClass' => 'article',
-                                        'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
-                                    ])
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs font-semibold
-                                        @if ($article->status === 'published') bg-green-100 text-green-800
-                                        @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
-                                        @else bg-red-100 text-red-800 @endif">
-                                        {{ __('main.' . $article->status) }}
-                                    </span>
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    <i class="fas fa-eye text-blue-500"></i> {{ $article->view_count ?? 0 }}
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">
-                                    @if ($article->creator)
-                                        <a href="{{ route('dashboard.users.show', $article->creator->id) }}" class="text-blue-600 hover:underline">
-                                            {{ $article->creator->name }}
-                                            <i class="fa-duotone fa-solid fa-arrow-up-right-from-square text-blue-600"></i>
-                                        </a>
-                                    @else
-                                        <span class="text-gray-400 italic">N/A</span>
-                                    @endif
-                                </td>
-                                <td class="p-4 text-sm text-gray-600">{{ $article->created_at?->format('d/m/Y') }}</td>
-                                <td class="p-4 text-sm space-x-2 flex items-center gap-2">
-                                    @include('dashboard.components.permissions-actions', [
-                                        'record' => $article,
-                                        'models' => 'articles',
-                                        'modelClass' => 'article',
-                                    ])
-                                </td>
-                            </tr>
-                        @empty
+        </section>
+
+        <section class="entity-panel">
+            @include('dashboard.components.entity-panel-heading', [
+                'icon' => 'fas fa-newspaper',
+                'title' => __('main.articles'),
+                'description' => __('main.search_types_placeholder', ['types' => __('main.articles')]),
+            ])
+
+            <div class="entity-toolbar">
+                <div class="entity-toolbar-group">
+                    <input type="text" id="searchBox" class="entity-input" placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.articles')]) }}">
+
+                    <select id="statusFilter" class="entity-select">
+                        <option value="">{{ __('main.all') }} - {{ __('main.status') }}</option>
+                        <option value="published">{{ __('main.published') }}</option>
+                        @if (in_array(getActiveUser()->role, ['admin', 'superadmin']))
+                            <option value="draft">{{ __('main.draft') }}</option>
+                            <option value="archived">{{ __('main.archived') }}</option>
+                        @endif
+                    </select>
+
+                    <select id="activeFilter" class="entity-select">
+                        <option value="">{{ __('main.all') }} - {{ __('main.active') }}</option>
+                        <option value="1">{{ __('main.active') }}</option>
+                        <option value="0">{{ __('main.inactive') }}</option>
+                    </select>
+                </div>
+
+                @if (auth()->user()->can('articles-create'))
+                    <div class="entity-toolbar-group">
+                        <a href="{{ route('dashboard.articles.create') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
+                            {{ __('main.create_article') }}
+                        </a>
+                    </div>
+                @endif
+            </div>
+
+            <div class="entity-content">
+                <div class="entity-table-shell scroll-container">
+                    <table class="entity-table">
+                        <thead>
                             <tr>
-                                <td colspan="8" class="px-6 py-8 text-center text-gray-400">
-                                    {{ __('messages.no_records_found') }}
-                                </td>
+                                <th>{{ __('main.image') }}</th>
+                                <th>{{ __('main.title') }}</th>
+                                <th>{{ __('main.active') }}</th>
+                                <th>{{ __('main.status') }}</th>
+                                <th>{{ __('main.views') }}</th>
+                                <th>{{ __('main.created_by') }}</th>
+                                <th>{{ __('main.created_at') }}</th>
+                                <th>{{ __('main.actions') }}</th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse($articles as $article)
+                                <tr id="row-{{ $article->id }}" data-status="{{ $article->status }}" data-active="{{ (int) $article->is_active }}">
+                                    <td title="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}">
+                                        <div class="relative w-fit">
+                                            @if ($article->image && checkExistFile($article->image))
+                                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? '' }}"
+                                                    class="rounded-full size-10 shrink-0 object-cover">
+                                            @else
+                                                <span class="entity-panel-title-icon"><i class="fas fa-pencil"></i></span>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong class="entity-primary-text block">
+                                            {{ limitedText($article->translations[app()->getLocale()]['title'] ?? '', 50) }}
+                                        </strong>
+                                        <span class="entity-secondary-text">{{ __('main.article') }} #{{ $article->id }}</span>
+                                    </td>
+                                    <td>
+                                        @include('dashboard.components.toggle-hold', [
+                                            'modelId' => $article->id,
+                                            'field' => 'is_active',
+                                            'value' => (bool) $article->is_active,
+                                            'modelClass' => 'article',
+                                        ])
+                                    </td>
+                                    <td>
+                                        @include('dashboard.components.status-actions', [
+                                            'record' => $article,
+                                            'models' => 'articles',
+                                            'modelClass' => 'article',
+                                            'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
+                                        ])
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold
+                                            @if ($article->status === 'published') bg-green-100 text-green-800
+                                            @elseif($article->status === 'draft') bg-yellow-100 text-yellow-800
+                                            @else bg-red-100 text-red-800 @endif">
+                                            {{ __('main.' . $article->status) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="entity-primary-text"><i class="fas fa-eye text-sky-500"></i> {{ $article->view_count ?? 0 }}</span>
+                                    </td>
+                                    <td>
+                                        @if ($article->creator)
+                                            <a href="{{ route('dashboard.users.show', $article->creator->id) }}" class="entity-contact-link">
+                                                {{ $article->creator->name }}
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        @else
+                                            <span class="entity-secondary-text">N/A</span>
+                                        @endif
+                                    </td>
+                                    <td><span class="entity-secondary-text">{{ $article->created_at?->format('d/m/Y') }}</span></td>
+                                    <td>
+                                        <div class="entity-actions">
+                                            @include('dashboard.components.permissions-actions', [
+                                                'record' => $article,
+                                                'models' => 'articles',
+                                                'modelClass' => 'article',
+                                            ])
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="entity-empty">
+                                        {{ __('messages.no_records_found') }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
 
                 @if ($articles->hasPages())
-                    <div class="mt-6 border-t pt-4">
+                    <div class="entity-pagination">
                         {{ $articles->links() }}
                     </div>
                 @endif
             </div>
-        </div>
+        </section>
     </div>
 @endsection
 
 @push('scripts')
     @include('dashboard.components.toggle-hold-script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBox = document.getElementById('searchBox');
+            const statusFilter = document.getElementById('statusFilter');
+            const activeFilter = document.getElementById('activeFilter');
+            const rows = Array.from(document.querySelectorAll('tbody tr[id^="row-"]'));
+
+            function filterArticles() {
+                const searchValue = (searchBox?.value || '').toLowerCase().trim();
+                const statusValue = statusFilter?.value || '';
+                const activeValue = activeFilter?.value || '';
+
+                rows.forEach(function(row) {
+                    const text = row.textContent.toLowerCase();
+                    const matchesSearch = !searchValue || text.includes(searchValue);
+                    const matchesStatus = !statusValue || row.dataset.status === statusValue;
+                    const matchesActive = !activeValue || row.dataset.active === activeValue;
+
+                    row.style.display = matchesSearch && matchesStatus && matchesActive ? '' : 'none';
+                });
+            }
+
+            searchBox?.addEventListener('input', filterArticles);
+            statusFilter?.addEventListener('change', filterArticles);
+            activeFilter?.addEventListener('change', filterArticles);
+        });
+    </script>
 @endpush

@@ -45,6 +45,7 @@ class SettingsSeeder extends Seeder
             'about_us_image' => 'images/website/about/main-image.png',
             'about_us_image2' => 'images/website/about/text-bg.png',
             'width_logo_sidebar' => '70',
+            'ably_key' => 'YfoutQ.0ANKLQ:l9mrZvEjJGo07yZsKnU8XU33MkgnlX9k7JfmsQUKJe4',
 
             // Inline Padding Sections
             'sections_padding' => config('settings.inline_padding', []),

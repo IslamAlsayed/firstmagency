@@ -121,6 +121,9 @@ return [
     'settings_whatsapp_number' => 'رقم واتساب',
     'settings_phone_number' => 'رقم الهاتف',
     'width_logo_sidebar' => 'عرض الشعار في الشريط الجانبي',
+    'settings_width_logo_sidebar' => 'عرض الشعار في الشريط الجانبي',
+    'ably_key' => 'مفتاح Ably',
+    'settings_ably_key' => 'مفتاح Ably',
     'settings_save_changes' => 'حفظ التغييرات',
     'settings_debug_mode_note' => 'عند التفعيل، ستظهر علامات الأقسام على الموقع لأغراض التصحيح.',
     'settings_disable_debug_mode' => 'تعطيل وضع التصحيح',
@@ -202,6 +205,7 @@ return [
     'faqs_and_reviews' => 'الأسئلة والمراجعات',
     'packages_and_domains' => 'الباقات والنطاقات',
     'projects_and_steps' => 'المشاريع والخطوات',
+    'works_and_steps' => 'سابقة الأعمال والخطوات',
     'features_and_system' => 'الميزات والنظام',
 
     // ==================== Services ====================

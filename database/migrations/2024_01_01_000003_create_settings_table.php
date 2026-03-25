@@ -51,6 +51,7 @@ return new class extends Migration
             $table->longText('website_design_description_ar')->nullable();
             $table->integer('website_design_years_experience')->default(8);
             $table->string('website_design_image')->nullable();
+            $table->string('ably_key')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

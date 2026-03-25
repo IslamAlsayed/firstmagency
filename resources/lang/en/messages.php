@@ -257,4 +257,5 @@ return [
     'thank_you' => 'Thank You',
     'already_rated' => 'You have already rated this ticket',
     'rating_helps_us' => 'Your rating helps us improve our services continuously',
+    'instant_messaging' => 'Instant Messaging',
 ];

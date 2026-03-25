@@ -79,12 +79,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'services-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete services'],
 
             // Project Permissions
-            ['name' => 'project-create', 'guard_name' => 'web', 'description' => 'Create project'],
-            ['name' => 'project-read', 'guard_name' => 'web', 'description' => 'View project'],
-            ['name' => 'project-update', 'guard_name' => 'web', 'description' => 'Edit project'],
-            ['name' => 'project-delete', 'guard_name' => 'web', 'description' => 'Delete project'],
-            ['name' => 'project-restore', 'guard_name' => 'web', 'description' => 'Restore project'],
-            ['name' => 'project-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete project'],
+            ['name' => 'projects-create', 'guard_name' => 'web', 'description' => 'Create projects'],
+            ['name' => 'projects-read', 'guard_name' => 'web', 'description' => 'View projects'],
+            ['name' => 'projects-update', 'guard_name' => 'web', 'description' => 'Edit projects'],
+            ['name' => 'projects-delete', 'guard_name' => 'web', 'description' => 'Delete projects'],
+            ['name' => 'projects-restore', 'guard_name' => 'web', 'description' => 'Restore projects'],
+            ['name' => 'projects-force-delete', 'guard_name' => 'web', 'description' => 'Permanently delete projects'],
 
             // Companies Permissions
             ['name' => 'companies-create', 'guard_name' => 'web', 'description' => 'Create companies'],
