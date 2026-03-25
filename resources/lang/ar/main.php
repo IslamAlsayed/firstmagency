@@ -120,6 +120,7 @@ return [
     'settings_inline_padding' => 'المسافات الداخلية',
     'settings_whatsapp_number' => 'رقم واتساب',
     'settings_phone_number' => 'رقم الهاتف',
+    'width_logo_sidebar' => 'عرض الشعار في الشريط الجانبي',
     'settings_save_changes' => 'حفظ التغييرات',
     'settings_debug_mode_note' => 'عند التفعيل، ستظهر علامات الأقسام على الموقع لأغراض التصحيح.',
     'settings_disable_debug_mode' => 'تعطيل وضع التصحيح',

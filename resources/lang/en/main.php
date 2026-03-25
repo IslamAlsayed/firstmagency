@@ -120,6 +120,7 @@ return [
     'settings_inline_padding' => 'Inline Padding',
     'settings_whatsapp_number' => 'WhatsApp Number',
     'settings_phone_number' => 'Phone Number',
+    'width_logo_sidebar' => 'Width of Logo in Sidebar',
     'settings_save_changes' => 'Save Changes',
     'settings_debug_mode_note' => 'When enabled, section flags will be visible on the website for debugging purposes.',
     'settings_disable_debug_mode' => 'Disable Debug Mode',

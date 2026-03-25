@@ -12,6 +12,7 @@
             --text_color: {{ $settings->colors['text_color'] ?? '#ffffff' }};
             --icon_color: {{ $settings->colors['icon_color'] ?? '#4a5565' }};
             --button_color: {{ $settings->colors['button_color'] ?? '#0074F7' }};
+            --width_logo_sidebar: {{ $settings->width_logo_sidebar ?? '70' }}px;
 
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}";
         }

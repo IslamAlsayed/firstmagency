@@ -51,6 +51,7 @@ class Setting extends Model
         'website_design_description_ar',
         'website_design_years_experience',
         'website_design_image',
+        'width_logo_sidebar',
 
         // columns (JSON)
         'colors',

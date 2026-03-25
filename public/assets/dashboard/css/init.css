@@ -31,6 +31,7 @@
     --light-color: #fff;
     --dark-color: #000;
     --radius: 12px;
+    --width_logo_sidebar: 70px;
 
     --main-transition-duration: 300ms;
     --main-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -975,22 +976,22 @@ html[lang=ar] {
             font-weight: bold;
             border-radius: 20px;
             color: var(--light-color);
-            background: var(--secondary);
+            background: var(--color-gray-600);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .user-role.superadmin {
-            background: var(--accent-color);
+            background: var(--color-red-600);
         }
 
         .user-role.admin {
             color: var(--dark-color);
-            background: var(--warning);
+            background: var(--color-yellow-600);
         }
 
         .user-role.content_manager {
-            background: var(--info);
+            background: var(--color-blue-600);
         }
     }
 

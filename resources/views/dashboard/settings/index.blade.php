@@ -137,6 +137,12 @@
                                 class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                 placeholder="{{ __('main.settings_phone_number') }}" value="{{ $settings->site_phone ?? '201212602602' }}">
                         </div>
+                        <div>
+                            <label for="width_logo_sidebar" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.width_logo_sidebar') }}</label>
+                            <input type="number" id="width_logo_sidebar" name="width_logo_sidebar"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                placeholder="{{ __('main.settings_width_logo_sidebar') }}" value="{{ $settings->width_logo_sidebar ?? 70 }}">
+                        </div>
                     </div>
 
                     <div class="col-span-full">
@@ -154,7 +160,8 @@
 
                     <div>
                         <label class="kt-label mb-2">{{ __('main.button_display_mode') }}</label>
-                        <select name="button_display_mode" id="button_display_mode" class="kt-select basic-single" data-kt-select="true" data-kt-select-placeholder="{{ __('main.button_display_mode') }}">
+                        <select name="button_display_mode" id="button_display_mode" class="kt-select basic-single" data-kt-select="true"
+                            data-kt-select-placeholder="{{ __('main.button_display_mode') }}">
                             <option value="text" {{ getActiveUser()->button_display_mode == 'text' ? 'selected' : '' }}>
                                 {{ __('main.text') }}
                             </option>
@@ -423,6 +430,16 @@
             });
         });
 
+        // Live styles
+        document.addEventListener('DOMContentLoaded', function() {
+            const width_logo_sidebar = document.getElementById("width_logo_sidebar");
+            if (width_logo_sidebar) {
+                width_logo_sidebar.addEventListener('input', function(e) {
+                    document.documentElement.style.setProperty('--width_logo_sidebar', e.target.value + 'px');
+                });
+            }
+        });
+
         // Toggle Sections - Save State to LocalStorage
         document.addEventListener('DOMContentLoaded', function() {
             const STORAGE_KEY = 'settingsSectionsState';
@@ -586,147 +603,6 @@
                     }
                 }
             });
-        });
-
-        // Database Backups Management
-        document.addEventListener('DOMContentLoaded', function() {
-            const createBtn = document.getElementById('create-backup-btn');
-            const backupsList = document.getElementById('backups-list');
-            const statusDiv = document.getElementById('backup-status');
-
-            // Load backups list
-            function loadBackups() {
-                fetch("{{ route('dashboard.backups.list') }}")
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success && data.backups.length > 0) {
-                            backupsList.innerHTML = data.backups.map(backup => `
-                            <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
-                                <div class="flex-1">
-                                    <p class="font-semibold text-gray-700">
-                                        <i class="fas fa-file-archive text-orange-500"></i>
-                                        ${backup.filename}
-                                    </p>
-                                    <p class="text-sm text-gray-500">
-                                        <i class="fas fa-calendar"></i> ${new Date(backup.created_at).toLocaleString('ar-EG')} | 
-                                        <i class="fas fa-database"></i> ${formatBytes(backup.size)}
-                                    </p>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
-                                        <i class="fas fa-redo-alt"></i>
-                                    </button>
-                                    <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="حذف">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('');
-
-                            // Attach event listeners
-                            attachBackupListeners();
-                        } else {
-                            backupsList.innerHTML = '<p class="text-center text-gray-500 py-8">{{ __('main.settings_no_backups') }}</p>';
-                        }
-                    })
-                    .catch(err => console.error('Error loading backups:', err));
-            }
-
-            // Create backup
-            createBtn.addEventListener('click', function() {
-                if (confirm('{{ __('main.settings_create_backup_confirm') }}')) {
-                    createBtn.disabled = true;
-                    statusDiv.classList.remove('hidden');
-                    statusDiv.innerHTML = '<div class="text-blue-600"><i class="fas fa-spinner fa-spin"></i> {{ __('main.settings_creating_backup') }}</div>';
-
-                    fetch("{{ route('dashboard.backups.create') }}", {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            }
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                statusDiv.innerHTML = '<div class="text-green-600"><i class="fas fa-check-circle"></i> {{ __('main.settings_backup_created_success') }}</div>';
-                                loadBackups();
-                            } else {
-                                statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_error_prefix') }}: ' + data.message +
-                                    '</div>';
-                            }
-                            createBtn.disabled = false;
-                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-                        })
-                        .catch(err => {
-                            statusDiv.innerHTML = '<div class="text-red-600"><i class="fas fa-times-circle"></i> {{ __('main.settings_connection_error') }}</div>';
-                            createBtn.disabled = false;
-                            setTimeout(() => statusDiv.classList.add('hidden'), 4000);
-                        });
-                }
-            });
-
-            // Attach listeners for backup actions
-            function attachBackupListeners() {
-                document.querySelectorAll('.download-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        window.location.href = "{{ url('dashboard/backups/download') }}/" + filename;
-                    });
-                });
-
-                document.querySelectorAll('.restore-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        if (confirm('{{ __('main.settings_restore_confirm') }}')) {
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = "{{ route('dashboard.backups.restore') }}";
-                            form.innerHTML = `
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="filename" value="${filename}">
-                        `;
-                            document.body.appendChild(form);
-
-                            // Show loading message
-                            alert('{{ __('main.settings_restore_in_progress') }}');
-                            form.submit();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.delete-backup').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filename = this.dataset.filename;
-                        if (confirm('{{ __('main.settings_delete_backup_confirm') }}')) {
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = "{{ route('dashboard.backups.delete') }}";
-                            form.innerHTML = `
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="filename" value="${filename}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        `;
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                    });
-                });
-            }
-
-            // Helper function to format bytes
-            function formatBytes(bytes) {
-                if (bytes === 0) return '0 {{ __('main.bytes') }}';
-                const k = 1024;
-                const sizes = ['{{ __('main.bytes') }}', '{{ __('main.kb') }}', '{{ __('main.mb') }}', '{{ __('main.gb') }}'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            // Load backups on page load
-            loadBackups();
         });
     </script>
 @endpush

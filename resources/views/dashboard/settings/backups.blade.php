@@ -65,23 +65,22 @@
                 </h6>
 
                 <div class="space-y-5">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-emerald-50 border border-emerald-100 rounded-lg p-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-emerald-50 border border-emerald-100 radius-lg p-4">
                         <div>
                             <p class="text-sm font-semibold text-emerald-800">{{ __('main.settings_create_new_backup') }}</p>
                             <p class="text-xs text-emerald-700">{{ __('main.settings_backup_safe_storage') }}</p>
                         </div>
 
-                        <button id="create-backup-btn" type="button"
-                            class="cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-white shadow-sm transition"
+                        <button id="create-backup-btn" type="button" class="cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-2 radius-lg font-semibold text-white shadow-sm transition"
                             style="background-color: var(--button_color); color: var(--text_color);">
                             <i class="fas fa-plus-circle"></i>
                             {{ __('main.settings_create_backup_now') }}
                         </button>
                     </div>
 
-                    <div id="backup-status" class="hidden rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm"></div>
+                    <div id="backup-status" class="hidden radius-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm"></div>
 
-                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div class="bg-gray-50 border border-gray-200 radius-lg p-4">
                         <h6 class="text-sm font-semibold text-gray-700 mb-3">
                             <i class="fas fa-list text-blue-500"></i>
                             {{ __('main.settings_available_backups') }}
@@ -92,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                    <div class="radius-lg border border-amber-200 bg-amber-50 p-4">
                         <h6 class="text-sm font-semibold text-amber-800 mb-2">
                             <i class="fas fa-circle-info"></i>
                             {{ __('main.settings_backup_important_info') }}
@@ -125,7 +124,7 @@
                     .then(data => {
                         if (data.success && data.backups.length > 0) {
                             backupsList.innerHTML = data.backups.map(backup => `
-                            <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg hover:bg-gray-150 transition">
+                            <div class="flex items-center justify-between bg-gray-100 p-4 radius-lg hover:bg-gray-150 transition">
                                 <div class="flex-1">
                                     <p class="font-semibold text-gray-700">
                                         <i class="fas fa-file-archive text-orange-500"></i>
@@ -137,13 +136,13 @@
                                     </p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
+                                    <button class="cursor-pointer download-backup px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white radius-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_download') }}">
                                         <i class="fas fa-download"></i>
                                     </button>
-                                    <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
+                                    <button class="cursor-pointer restore-backup px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white radius-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_restore') }}">
                                         <i class="fas fa-redo-alt"></i>
                                     </button>
-                                    <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_delete') }}">
+                                    <button class="cursor-pointer delete-backup px-3 py-2 bg-red-500 hover:bg-red-600 text-white radius-lg transition" data-filename="${backup.filename}" title="{{ __('main.settings_delete') }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
