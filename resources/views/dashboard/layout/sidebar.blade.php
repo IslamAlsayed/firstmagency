@@ -128,15 +128,13 @@
                 </button>
 
                 <ul class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.tickets.*') ? 'show' : '' }}">
-                    @if (auth()->user()->can('tickets-read') || auth()->user()->can('tickets-create'))
-                        <li class="relative" data-sub-id="tickets" title="{{ __('main.tickets') }}">
-                            <a href="{{ route('dashboard.tickets.index') }}"
-                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.tickets.*') && !request()->routeIs('dashboard.tickets.deleted') ? 'active' : '' }}">
-                                <span class="main-icon"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
-                                <span class="text-sm">{{ __('main.tickets') }}</span>
-                            </a>
-                        </li>
-                    @endif
+                    <li class="relative" data-sub-id="tickets" title="{{ __('main.tickets') }}">
+                        <a href="{{ route('dashboard.tickets.index') }}"
+                            class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.tickets.*') && !request()->routeIs('dashboard.tickets.deleted') ? 'active' : '' }}">
+                            <span class="main-icon"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
+                            <span class="text-sm">{{ __('main.tickets') }}</span>
+                        </a>
+                    </li>
                     @if (auth()->user()->can('tickets-restore'))
                         <li class="relative" data-sub-id="deleted-tickets" title="{{ __('main.deleted_tickets') }}">
                             <a href="{{ route('dashboard.tickets.deleted') }}"

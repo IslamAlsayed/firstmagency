@@ -13,6 +13,7 @@ class Department extends Model
     protected $fillable = [
         'id',
         'name',
+        'name_ar',
         'bg_color',
         'border_color',
         'border_main_color',
