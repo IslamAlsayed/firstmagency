@@ -506,13 +506,6 @@
     }
 
     @media (max-width: 980px) {
-
-        .entity-hero-grid,
-        .entity-hero-side-grid,
-        .entity-stat-grid {
-            grid-template-columns: 1fr;
-        }
-
         .entity-toolbar {
             align-items: stretch;
         }
@@ -538,6 +531,12 @@
     }
 
     @media (max-width: 768px) {
+
+        .entity-hero-grid,
+        .entity-stat-grid {
+            grid-template-columns: 1fr;
+        }
+
         .entity-hero {
             padding: 1.2rem;
         }
@@ -582,6 +581,12 @@
             border-radius: 1rem;
             background: #fff;
             box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+        }
+    }
+
+    @media (max-width: 425px) {
+        .entity-hero-side-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
