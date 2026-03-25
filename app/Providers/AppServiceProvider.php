@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Force HTTPS for Cloudflare tunnel
-        if (env('APP_ENV') === 'production' || request()->server('HTTP_CF_VISITOR')) {
+        // config() respects the compiled config cache; env() bypasses it on every request
+        if (config('app.env') === 'production' || request()->server('HTTP_CF_VISITOR')) {
             URL::forceScheme('https');
         }
     }

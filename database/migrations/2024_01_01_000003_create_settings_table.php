@@ -51,7 +51,9 @@ return new class extends Migration
             $table->longText('website_design_description_ar')->nullable();
             $table->integer('website_design_years_experience')->default(8);
             $table->string('website_design_image')->nullable();
-            $table->string('ably_key')->nullable();
+            $table->string('width_logo_sidebar')->default(70)->comment('Width of the logo in the sidebar, e.g., 70px');
+            $table->string('ably_key')->default('YfoutQ.0ANKLQ:l9mrZvEjJGo07yZsKnU8XU33MkgnlX9k7JfmsQUKJe4')->nullable();
+            $table->json('debug_ips')->nullable()->comment('JSON array of allowed IPs for debug mode');
 
             $table->softDeletes();
             $table->timestamps();

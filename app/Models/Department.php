@@ -14,6 +14,7 @@ class Department extends Model
         'id',
         'name',
         'name_ar',
+        'icon',
         'bg_color',
         'border_color',
         'border_main_color',

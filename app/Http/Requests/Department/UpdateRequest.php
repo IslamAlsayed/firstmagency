@@ -22,6 +22,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'nullable|string|max:255',
             'name_ar' => 'nullable|string|max:255',
+            'icon' => 'nullable|string|max:100',
             'bg_color' => 'nullable|string|max:7',
             'border_color' => 'nullable|string|max:7',
             'border_main_color' => 'nullable|string|max:7',

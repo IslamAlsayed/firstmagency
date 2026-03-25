@@ -2,303 +2,246 @@
 
 @section('title', __('main.edit_type', ['type' => __('main.profile')]))
 
-@push('styles')
-    <style>
-        .profileEditApp {
-            width: 70%;
-        }
-
-        @keyframes sectionBlink {
-
-            0%,
-            100% {
-                opacity: 1;
-                background-color: #d0e3fb;
-            }
-
-            50% {
-                opacity: 0.75;
-                background-color: #d0e3fb;
-            }
-        }
-
-        .flash-on-load {
-            animation: sectionBlink 0.7s ease-in-out 3;
-        }
-
-        @media (max-width: 768px) {
-            .profileEditApp {
-                width: 100%;
-            }
-        }
-    </style>
-@endpush
+@include('profile._theme')
 
 @section('content')
-    <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-12">
-        <!-- Header -->
-        <div class="mb-8">
-            <a href="{{ route('dashboard.profile.show') }}" class="text-indigo-600 hover:text-indigo-700 flex items-center mb-4">
-                <i class="fas fa-arrow-right mx-2"></i>{{ __('main.back') }}
-            </a>
-            <h1 class="text-3xl font-bold text-gray-900">{{ __('main.edit_type', ['type' => __('main.profile')]) }}</h1>
-            <p class="text-gray-600 mt-2">{{ __('main.update_your_profile_information') }}</p>
-        </div>
+    <div class="profile-shell">
+        <section class="profile-hero profile-animate">
+            <div class="profile-hero-grid">
+                <div>
+                    <a href="{{ route('dashboard.profile.show') }}" class="profile-kicker"><i class="fas fa-arrow-left-long"></i> {{ __('main.back') }}</a>
+                    <h1 class="profile-title">{{ __('main.edit_type', ['type' => __('main.profile')]) }}</h1>
+                    <p class="profile-subtitle">{{ __('main.update_your_profile_information') }}</p>
 
-        <div class="flex flex-col gap-6 profileEditApp">
-            <!-- Avatar Upload Card -->
-            <div>
-                <div class="bg-gray-100 rounded-lg shadow-lg p-6 sticky top-4">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-4">
-                        <i class="fas fa-image text-indigo-600 mx-3"></i>
-                        {{ __('main.profile_photo') }}
-                    </h3>
-
-                    <!-- Current Photo -->
-                    <div class="mb-6 text-center">
-                        @if ($user->photo && checkExistFile($user->photo))
-                            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-32 h-32 rounded-full shadow-lg object-cover mx-auto">
-                        @else
-                            @if ($user->photo)
-                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}" id="photoPreview" class="w-32 h-32 rounded-full shadow-lg object-cover mx-auto">
-                            @else
-                                <div id="photoPreview" class="w-32 h-32 rounded-full shadow-lg bg-gray-300 flex items-center justify-center mx-auto">
-                                    <i class="fas fa-user text-5xl text-gray-600"></i>
-                                </div>
-                            @endif
-                        @endif
+                    <div class="profile-hero-actions">
+                        <a href="{{ route('dashboard.profile.show') }}" class="profile-action"><i class="fas fa-user-pen"></i>{{ __('main.personal_information') }}</a>
+                        {{-- <a href="{{ route('dashboard.profile.edit') }}" class="profile-action-secondary" data-password-jump><i class="fas fa-key"></i>{{ __('main.change_password') }}</a> --}}
                     </div>
+                </div>
 
-                    <!-- Upload Form -->
-                    <form action="{{ route('dashboard.profile.updatePhoto') }}" method="POST" enctype="multipart/form-data" id="photoForm">
-                        @csrf
-                        @method('POST')
-
-                        <div class="mb-4">
-                            <label for="photo" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ __('main.choose_photo') }}
-                            </label>
-                            <input type="file" id="photo" name="photo" accept="image/*"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" onchange="previewPhoto(this)">
-                            @error('photo')
-                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                            <p class="text-gray-500 text-xs mt-2">{{ __('main.max_5mb') }}</p>
+                <div class="profile-side-card">
+                    <div class="profile-avatar-wrap">
+                        <div class="profile-upload-preview" id="photoPreview">
+                            @if ($user->photo && checkExistFile($user->photo))
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}">
+                            @elseif ($user->photo)
+                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}">
+                            @else
+                                <i class="fas fa-user text-5xl"></i>
+                            @endif
                         </div>
 
-                        <button type="submit" class="cursor-pointer w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
-                            <i class="fas fa-upload mx-2"></i>{{ __('main.upload_photo') }}
-                        </button>
-                    </form>
-
-                    <!-- Delete Photo Button -->
-                    @if ($user->photo)
-                        <form action="{{ route('dashboard.profile.deletePhoto') }}" method="POST" class="mt-3" onsubmit="return confirm('{{ __('main.are_you_sure') }}');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="cursor-pointer w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium">
-                                <i class="fas fa-trash mx-2"></i>{{ __('main.delete_photo') }}
-                            </button>
-                        </form>
-                    @endif
+                        <div>
+                            <div class="text-sm opacity-80">{{ __('main.profile_photo') }}</div>
+                            <div class="text-xl font-black">{{ $user->name }}</div>
+                            {{-- <span class="profile-badge"><i class="fas fa-image"></i> {{ __('main.upload_photo') }}</span> --}}
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Profile Form -->
-            <div>
-                <div class="bg-gray-100 rounded-lg shadow-lg p-6">
+        <div class="profile-grid">
+            <div class="flex flex-col gap-6">
+                <section class="profile-form-panel profile-animate profile-delay-1">
+                    <div class="profile-panel-head">
+                        <div class="profile-panel-title">
+                            <div class="profile-panel-icon"><i class="fas fa-camera-retro"></i></div>
+                            <div>
+                                <h3>{{ __('main.profile_photo') }}</h3>
+                                <p>{{ __('main.choose_photo') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-upload-card">
+                        <div class="profile-upload-preview" id="photoPreviewPanel">
+                            @if ($user->photo && checkExistFile($user->photo))
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}">
+                            @elseif ($user->photo)
+                                <img src="{{ asset('assets/images/avatars/' . $user->photo) }}" alt="{{ $user->name }}">
+                            @else
+                                <i class="fas fa-user text-5xl"></i>
+                            @endif
+                        </div>
+
+                        <div>
+                            <form action="{{ route('dashboard.profile.updatePhoto') }}" method="POST" enctype="multipart/form-data" id="photoForm">
+                                @csrf
+                                <div class="profile-field full">
+                                    <label class="profile-label" for="photo">{{ __('main.choose_photo') }}</label>
+                                    <input type="file" id="photo" name="photo" accept="image/*" class="profile-file" onchange="previewPhoto(this)">
+                                    @error('photo')
+                                        <div class="profile-error">{{ $message }}</div>
+                                    @enderror
+                                    <div class="profile-help">{{ __('main.max_5mb') }}</div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-3 mt-4">
+                                    <button type="submit" class="profile-button cursor-pointer"><i class="fas fa-upload"></i>{{ __('main.upload_photo') }}</button>
+                                </div>
+                            </form>
+
+                            @if ($user->photo)
+                                <form action="{{ route('dashboard.profile.deletePhoto') }}" method="POST" class="mt-3" onsubmit="return confirm('{{ __('main.are_you_sure') }}');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="profile-danger cursor-pointer"><i class="fas fa-trash"></i>{{ __('main.delete_photo') }}</button>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
+                </section>
+
+                <section class="profile-form-panel profile-animate profile-delay-2" id="profile-form">
+                    <div class="profile-panel-head">
+                        <div class="profile-panel-title">
+                            <div class="profile-panel-icon"><i class="fas fa-user-gear"></i></div>
+                            <div>
+                                <h3>{{ __('main.personal_information') }}</h3>
+                                <p>{{ __('main.update_your_profile_information') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <form action="{{ route('dashboard.profile.update') }}" method="POST">
                         @csrf
                         @method('PUT')
 
-                        <!-- Personal Information Section -->
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-4">
-                                <i class="fas fa-user text-indigo-600 mx-3"></i>
-                                {{ __('main.personal_information') }}
-                            </h3>
-
-                            <!-- Name -->
-                            <div class="mb-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ __('main.name') }} <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="{{ __('main.enter_your_name') }}">
+                        <div class="profile-form-grid">
+                            <div class="profile-field">
+                                <label class="profile-label" for="name">{{ __('main.name') }}</label>
+                                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" class="profile-input" placeholder="{{ __('main.enter_your_name') }}">
                                 @error('name')
-                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    <div class="profile-error">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Email -->
-                            <div class="mb-6">
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ __('main.email') }} <span class="text-red-500">*</span>
-                                </label>
-                                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="{{ __('main.enter_your_email') }}">
+                            <div class="profile-field">
+                                <label class="profile-label" for="email">{{ __('main.email') }}</label>
+                                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" class="profile-input" placeholder="{{ __('main.enter_your_email') }}">
                                 @error('email')
-                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    <div class="profile-error">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Grid for Phone and Mobile -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <!-- Phone -->
-                                <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                                        {{ __('main.phone') }}
-                                    </label>
-                                    <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="+1 (555) 000-0000">
-                                    @error('phone')
-                                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <!-- Mobile -->
-                                <div>
-                                    <label for="mobile" class="block text-sm font-medium text-gray-700 mb-2">
-                                        {{ __('main.mobile') }}
-                                    </label>
-                                    <input type="tel" id="mobile" name="mobile" value="{{ old('mobile', $user->mobile) }}"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="+1 (555) 000-0000">
-                                    @error('mobile')
-                                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                            <div class="profile-field">
+                                <label class="profile-label" for="phone">{{ __('main.phone') }}</label>
+                                <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" class="profile-input" placeholder="+1 (555) 000-0000">
+                                @error('phone')
+                                    <div class="profile-error">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            <!-- Address -->
-                            <div class="mb-6">
-                                <label for="address" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ __('main.address') }}
-                                </label>
-                                <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="{{ __('main.enter_your_address') }}">
+                            <div class="profile-field">
+                                <label class="profile-label" for="mobile">{{ __('main.mobile') }}</label>
+                                <input type="tel" id="mobile" name="mobile" value="{{ old('mobile', $user->mobile) }}" class="profile-input" placeholder="+1 (555) 000-0000">
+                                @error('mobile')
+                                    <div class="profile-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="profile-field full">
+                                <label class="profile-label" for="address">{{ __('main.address') }}</label>
+                                <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}" class="profile-input"
+                                    placeholder="{{ __('main.enter_your_address') }}">
                                 @error('address')
-                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    <div class="profile-error">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Bio -->
-                            <div class="mb-6">
-                                <label for="bio" class="block text-sm font-medium text-gray-700 mb-2">
-                                    {{ __('main.bio') }}
-                                </label>
-                                <textarea id="bio" name="bio" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 rich-editor"
-                                    placeholder="{{ __('main.tell_us_about_yourself') }}">{{ old('bio', $user->bio) }}</textarea>
+                            <div class="profile-field full">
+                                <label class="profile-label" for="bio">{{ __('main.bio') }}</label>
+                                <textarea id="bio" name="bio" rows="5" class="profile-textarea rich-editor" placeholder="{{ __('main.tell_us_about_yourself') }}">{{ old('bio', $user->bio) }}</textarea>
                                 @error('bio')
-                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    <div class="profile-error">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
 
-                        <!-- Language Preferences Section -->
-                        <div class="mb-8 pb-8 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-4">
-                                <i class="fas fa-globe text-indigo-600 mx-3"></i>
-                                {{ __('main.language_preferences') }}
-                            </h3>
+                            <div class="profile-field">
+                                <label class="profile-label" for="website_locale">{{ __('main.website_language') }}</label>
+                                <select id="website_locale" name="website_locale" class="profile-select">
+                                    <option value="">{{ __('main.select') }}</option>
+                                    @foreach (config('languages') as $code => $language)
+                                        <option value="{{ $code }}" {{ old('website_locale', $user->website_locale) === $code ? 'selected' : '' }}>
+                                            {{ app()->getLocale() == 'ar' ? $language['name_ar'] : $language['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Website Locale -->
-                                <div>
-                                    <label for="website_locale" class="block text-sm font-medium text-gray-700 mb-2">
-                                        {{ __('main.website_language') }}
-                                    </label>
-                                    <select id="website_locale" name="website_locale" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="">{{ __('main.select') }}</option>
-                                        @foreach (config('languages') as $code => $language)
-                                            <option value="{{ $code }}" {{ old('website_locale', $user->website_locale) === $code ? 'selected' : '' }}>
-                                                {{ app()->getLocale() == 'ar' ? $language['name_ar'] : $language['name'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Dashboard Locale -->
-                                <div>
-                                    <label for="dashboard_locale" class="block text-sm font-medium text-gray-700 mb-2">
-                                        {{ __('main.dashboard_language') }}
-                                    </label>
-                                    <select id="dashboard_locale" name="dashboard_locale"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="">{{ __('main.select') }}</option>
-                                        @foreach (config('languages') as $code => $language)
-                                            <option value="{{ $code }}" {{ old('dashboard_locale', $user->dashboard_locale) === $code ? 'selected' : '' }}>
-                                                {{ app()->getLocale() == 'ar' ? $language['name_ar'] : $language['name'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="profile-field">
+                                <label class="profile-label" for="dashboard_locale">{{ __('main.dashboard_language') }}</label>
+                                <select id="dashboard_locale" name="dashboard_locale" class="profile-select">
+                                    <option value="">{{ __('main.select') }}</option>
+                                    @foreach (config('languages') as $code => $language)
+                                        <option value="{{ $code }}" {{ old('dashboard_locale', $user->dashboard_locale) === $code ? 'selected' : '' }}>
+                                            {{ app()->getLocale() == 'ar' ? $language['name_ar'] : $language['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
-                        <!-- Action Buttons -->
-                        <div class="flex gap-4">
-                            <button type="submit" class="px-6 py-2 cursor-pointer bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium flex items-center">
-                                <i class="fas fa-save mx-2"></i>{{ __('main.save_changes') }}
-                            </button>
-                            <a href="{{ route('dashboard.profile.show') }}" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition font-medium">
-                                {{ __('main.cancel') }}
-                            </a>
+                        <div class="flex flex-wrap gap-3 mt-6">
+                            <button type="submit" class="profile-button cursor-pointer"><i class="fas fa-floppy-disk"></i>{{ __('main.save_changes') }}</button>
+                            <a href="{{ route('dashboard.profile.show') }}" class="profile-action-secondary">{{ __('main.cancel') }}</a>
                         </div>
                     </form>
-                </div>
-
-                <!-- Change Password Card -->
-                <div class="bg-gray-100 rounded-lg shadow-lg p-6 mt-6" id="forget-password">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-4">
-                        <i class="fas fa-lock text-indigo-600 mx-3"></i>
-                        {{ __('main.change_password') }}
-                    </h3>
-
-                    <form action="{{ route('dashboard.profile.changePassword') }}" method="POST">
-                        @csrf
-
-                        <!-- Current Password -->
-                        <div class="mb-6">
-                            <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ __('main.current_password') }} <span class="text-red-500">*</span>
-                            </label>
-                            <input type="password" id="current_password" name="current_password"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="{{ __('main.enter_current_password') }}">
-                            @error('current_password')
-                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- New Password -->
-                        <div class="mb-6">
-                            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ __('main.new_password') }} <span class="text-red-500">*</span>
-                            </label>
-                            <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                placeholder="{{ __('main.enter_new_password') }}">
-                            @error('password')
-                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="mb-6">
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
-                                {{ __('main.confirm_password') }} <span class="text-red-500">*</span>
-                            </label>
-                            <input type="password" id="password_confirmation" name="password_confirmation"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="{{ __('main.confirm_new_password') }}">
-                            @error('password_confirmation')
-                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
-                            <i class="fas fa-key mx-2"></i>{{ __('main.update_password') }}
-                        </button>
-                    </form>
-                </div>
+                </section>
             </div>
+
+            <section class="profile-form-panel profile-animate profile-delay-3" id="change-password">
+                <div class="profile-panel-head">
+                    <div class="profile-panel-title">
+                        <div class="profile-panel-icon"><i class="fas fa-key"></i></div>
+                        <div>
+                            <h3>{{ __('main.change_password') }}</h3>
+                            <p>{{ __('main.update_your_password') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="{{ route('dashboard.profile.changePassword') }}" method="POST">
+                    @csrf
+                    <div class="profile-form-grid">
+                        <div class="profile-field full">
+                            <label class="profile-label" for="current_password">{{ __('main.current_password') }}</label>
+                            <input type="password" id="current_password" name="current_password" class="profile-input" placeholder="{{ __('main.enter_current_password') }}">
+                            @error('current_password')
+                                <div class="profile-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="profile-field">
+                            <label class="profile-label" for="password">{{ __('main.new_password') }}</label>
+                            <input type="password" id="password" name="password" class="profile-input" placeholder="{{ __('main.enter_new_password') }}">
+                            @error('password')
+                                <div class="profile-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="profile-field">
+                            <label class="profile-label" for="password_confirmation">{{ __('main.confirm_password') }}</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="profile-input" placeholder="{{ __('main.confirm_new_password') }}">
+                            @error('password_confirmation')
+                                <div class="profile-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="profile-security-list mt-5">
+                        <ul>
+                            <li><i class="fas fa-shield-check text-emerald-600 mt-1"></i><span>{{ __('main.security_strong_password') }}</span></li>
+                            <li><i class="fas fa-user-lock text-sky-600 mt-1"></i><span>{{ __('main.security_monitor_activity') }}</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-5">
+                        <button type="submit" class="profile-button cursor-pointer"><i class="fas fa-key"></i>{{ __('main.update_password') }}</button>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
 
@@ -308,21 +251,29 @@
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        document.getElementById('photoPreview').innerHTML =
-                            `<img src="${e.target.result}" alt="Preview" class="w-32 h-32 rounded-full border-4 border-indigo-100 shadow-lg object-cover">`;
+                        const markup = `<img src="${e.target.result}" alt="Preview">`;
+                        const heroPreview = document.getElementById('photoPreview');
+                        const panelPreview = document.getElementById('photoPreviewPanel');
+                        if (heroPreview) heroPreview.innerHTML = markup;
+                        if (panelPreview) panelPreview.innerHTML = markup;
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
             }
 
             document.addEventListener('DOMContentLoaded', function() {
-                const element = document.getElementById('forget-password');
-                if (!element) return;
+                const passwordPanel = document.getElementById('change-password');
+                if (!passwordPanel) return;
 
-                // Re-trigger animation in case the page is restored from browser cache.
-                element.classList.remove('flash-on-load');
-                requestAnimationFrame(() => {
-                    element.classList.add('flash-on-load');
+                const triggerFlash = () => {
+                    passwordPanel.classList.remove('flash-on-load');
+                    requestAnimationFrame(() => {
+                        passwordPanel.classList.add('flash-on-load');
+                    });
+                };
+
+                document.querySelectorAll('[data-password-jump]').forEach((link) => {
+                    link.addEventListener('click', triggerFlash);
                 });
             });
         </script>

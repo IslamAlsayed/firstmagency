@@ -10,11 +10,17 @@
         overflow: hidden;
         border-radius: 1.5rem;
         padding: 1.5rem;
+        color: #fff;
         background:
             radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 26%),
             linear-gradient(135deg, color-mix(in srgb, var(--page-accent, var(--icon_color)) 90%, #0f172a) 0%, #0f172a 100%);
-        color: #fff;
         box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+    }
+
+    html[lang=ar] .entity-hero {
+        background:
+            radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 26%),
+            linear-gradient(225deg, color-mix(in srgb, var(--page-accent, var(--icon_color)) 90%, #0f172a) 0%, #0f172a 100%);
     }
 
     .entity-hero::after {

@@ -2,27 +2,23 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         //
     }
 
     /**
-     * Bootstrap services.
+     * $settings is already shared globally by SettingsServiceProvider via
+     * view()->share('settings', ...) using a 15-minute cache.
+     * The wildcard composer that was here caused one uncached DB query per
+     * rendered view (layout + partials = 10+ queries/request).
      */
     public function boot(): void
     {
-        view()->composer('*', function ($view) {
-            $settings = Setting::withoutGlobalScopes()->first() ?? null;
-            $view->with('settings', $settings);
-        });
+        //
     }
 }

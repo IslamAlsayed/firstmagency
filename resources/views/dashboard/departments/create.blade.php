@@ -16,7 +16,7 @@
             <form method="POST" action="{{ route('dashboard.departments.store') ?? '#' }}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 lg:gap-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }} <span class="text-red-500">*</span></label>
                             <input type="text" name="name" id="name" class="kt-input h-[45px]" required />
@@ -27,7 +27,7 @@
                         <div>
                             <label for="name_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }} (عربي)<span class="text-red-500">*</span></label>
                             <input type="text" name="name_ar" id="name_ar" class="kt-input h-[45px]" required />
-                            @error('name')
+                            @error('name_ar')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -40,6 +40,14 @@
                                 @endforeach
                             </select>
                             @error('user_id')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div>
+                            <label for="icon" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.icon') }}</label>
+                            <input type="text" name="icon" id="icon" class="kt-input h-[45px]" value="{{ old('icon', 'fas fa-building') }}" placeholder="fas fa-user">
+                            <small class="text-gray-500 text-xs mt-1 block email">{{ __('main.icon') }}: fas fa-user / fa-solid fa-headset</small>
+                            @error('icon')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -92,6 +100,7 @@
 
                                                     <div class="flex gap-2">
                                                         <span id="badgePreview" class="w-fit block text-xs px-2 py-1 rounded-full badge-message text-white" style="background-color: #1e40af;">
+                                                            <i id="iconPreview" class="fas fa-building me-1"></i>
                                                             {{ __('main.support') }}
                                                         </span>
                                                     </div>
@@ -163,12 +172,15 @@
         const borderMainColorCode = document.getElementById('borderMainColorCode');
         const badgeColorBox = document.getElementById('badgeColorBox');
         const badgeColorCode = document.getElementById('badgeColorCode');
+        const iconInput = document.getElementById('icon');
+        const iconPreview = document.getElementById('iconPreview');
 
         function updatePreview() {
             const bgColor = document.getElementById('bg_color').value;
             const borderColor = document.getElementById('border_color').value;
             const borderMainColor = document.getElementById('border_main_color').value;
             const badgeColor = document.getElementById('badge_color').value;
+            const iconClass = iconInput?.value?.trim() || 'fas fa-building';
 
             // Update message preview
             messagePreview.style.backgroundColor = bgColor;
@@ -190,6 +202,10 @@
 
             badgeColorBox.style.backgroundColor = badgeColor;
             badgeColorCode.textContent = badgeColor;
+
+            if (iconPreview) {
+                iconPreview.className = iconClass + ' me-1';
+            }
         }
 
         // Add event listeners
@@ -197,6 +213,8 @@
             input.addEventListener('change', updatePreview);
             input.addEventListener('input', updatePreview);
         });
+
+        iconInput?.addEventListener('input', updatePreview);
 
         // Initial preview
         updatePreview();

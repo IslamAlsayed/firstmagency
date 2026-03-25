@@ -491,6 +491,10 @@ return [
     'current' => 'الحالي',
     'to_replace' => 'لاستبداله بـ واحد جديد',
     'basic_information' => 'المعلومات الأساسية',
+    'password_weak' => 'ضعيفة',
+    'password_fair' => 'مقبولة',
+    'password_good' => 'جيدة',
+    'password_strong' => 'قوية جداً',
     'content' => 'المحتوى',
     'word_count' => 'عدد الكلمات',
     'audio_not_editable' => 'لا يمكن تعديل الصوت بعد الإنشاء',
@@ -543,6 +547,7 @@ return [
     'contact_form_verification' => 'تحقق',
     'contact_form_answer' => 'الاجابة',
     'contact_form_verification_text' => 'تحقق:',
+    'verification' => 'تحقق',
 
     // ==================== Line Works Section ====================
     'line_works_title' => 'مسار عملنا',

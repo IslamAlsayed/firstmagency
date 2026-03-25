@@ -1,124 +1,162 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('main.edit_user'))
-@section('page-title', '👤 ' . __('main.edit_user'))
+@section('title', __('main.edit_type', ['type' => __('main.user')]))
+@section('page-title', '👤 ' . __('main.edit_type', ['type' => __('main.user')]))
+
+@push('styles')
+    <link href="{{ asset('assets/dashboard/css/users.css') }}" rel="stylesheet" />
+@endpush
 
 @section('content')
-    <div class="kt-card mb-4">
-        <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('main.edit_user') }}</h3>
+    <div class="shadow-lg radius-lg p-4">
+        <form method="POST" action="{{ route('dashboard.users.update', $user->id) ?? '#' }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="grid gap-6 lg:gap-8">
 
-            <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                {{ __('main.back_to_types', ['types' => __('main.users')]) }}
-            </a>
-        </div>
-        <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.users.update', $user->id) ?? '#' }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="grid gap-4 lg:gap-6">
-                    <!-- معلومات الوسائط -->
-                    @include('dashboard.components.photo', ['record' => $user])
+                @include('dashboard.components.photo', ['record' => $user])
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.name') }}</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="name" name="name"
-                                value="{{ old('name', $user->name) }}">
-                            @error('name')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.email') }}</label>
-                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="email" name="email"
-                                value="{{ old('email', $user->email) }}">
-                            @error('email')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="role" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.role') }}</label>
-                            <select class="kt-select basic-single" id="role" name="role">
-                                <option value="" selected>--</option>
-                                <option value="superadmin" {{ old('role', $user->role) == 'superadmin' ? 'selected' : '' }}>{{ __('main.super_admin') }}
-                                </option>
-                                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>{{ __('main.admin') }}</option>
-                                <option value="content_manager" {{ old('role', $user->role) == 'content_manager' ? 'selected' : '' }}>
-                                    {{ __('main.content_manager') }}</option>
-                            </select>
-                            @error('role')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="mobile" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.mobile') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="mobile" name="mobile"
-                                value="{{ old('mobile', $user->mobile) }}">
-                            @error('mobile')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.phone') }}</label>
-                            <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="phone" name="phone"
-                                value="{{ old('phone', $user->phone) }}">
-                            @error('phone')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-6">
-                        {{-- العنوان --}}
-                        @include('dashboard.components.input-text-editor', [
-                            'name' => 'address',
-                            'value' => old('address', $user->address),
-                        ])
-
-                        {{-- السيرة الذاتية --}}
-                        @include('dashboard.components.input-text-editor', [
-                            'name' => 'bio',
-                            'value' => old('bio', $user->bio),
-                        ])
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div>
-                            <label for="status" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.status') }}</label>
-                            <select class="kt-select basic-single" id="status" name="status">
-                                <option value="active" {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>{{ __('main.active') }}</option>
-                                <option value="inactive" {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>{{ __('main.inactive') }}</option>
-                                <option value="suspended" {{ old('status', $user->status) == 'suspended' ? 'selected' : '' }}>{{ __('main.suspended') }}</option>
-                            </select>
-                            @error('status')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- هل نشط -->
-                    <div class="flex flex-wrap" style="gap: 10px 40px;">
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="is_active" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'is_active',
-                                'id' => 'is_active',
-                                'value' => '1',
-                                'checked' => old('is_active', $user->is_active),
-                                'label' => __('main.is_active'),
-                            ])
-                        </div>
-                    </div>
-
-                    <!-- حقول مخفية للنظام -->
-                    <input type="hidden" name="created_by" value="{{ old('created_by', $user->created_by) }}">
-                    <input type="hidden" name="updated_by" value="{{ old('updated_by', $user->updated_by) }}">
-
-                    <!-- زر التحديث -->
-                    @include('dashboard.components.update-submit', ['models' => 'dashboard.users', 'model' => 'user'])
+                <div class="ff-section ff-anim">
+                    <div class="ff-s-icon"><i class="fas fa-user-pen"></i></div>
+                    <div class="ff-s-title">{{ __('main.basic_information') }}</div>
                 </div>
-            </form>
-        </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 ff-grid">
+                    <div class="ff-anim">
+                        <div class="ff-group">
+                            <input type="text" class="ff-input" id="name" name="name" placeholder=" " value="{{ old('name', $user->name) }}">
+                            <label class="ff-label" for="name">{{ __('main.name') }}</label>
+                            <i class="fas fa-user ff-icon"></i>
+                        </div>
+                        @error('name')
+                            <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="ff-anim">
+                        <div class="ff-group">
+                            <input type="email" class="ff-input" id="email" name="email" placeholder=" " value="{{ old('email', $user->email) }}">
+                            <label class="ff-label" for="email">{{ __('main.email') }}</label>
+                            <i class="fas fa-envelope ff-icon"></i>
+                        </div>
+                        @error('email')
+                            <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="ff-anim">
+                        <div class="ff-group">
+                            <input type="tel" class="ff-input" id="mobile" name="mobile" placeholder=" " value="{{ old('mobile', $user->mobile) }}">
+                            <label class="ff-label" for="mobile">{{ __('main.mobile') }}</label>
+                            <i class="fas fa-mobile-screen ff-icon"></i>
+                        </div>
+                        @error('mobile')
+                            <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="ff-anim">
+                        <div class="ff-group">
+                            <input type="tel" class="ff-input" id="phone" name="phone" placeholder=" " value="{{ old('phone', $user->phone) }}">
+                            <label class="ff-label" for="phone">{{ __('main.phone') }}</label>
+                            <i class="fas fa-phone ff-icon"></i>
+                        </div>
+                        @error('phone')
+                            <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6">
+                    @include('dashboard.components.input-text-editor', [
+                        'name' => 'address',
+                        'value' => old('address', $user->address),
+                    ])
+
+                    @include('dashboard.components.input-text-editor', [
+                        'name' => 'bio',
+                        'value' => old('bio', $user->bio),
+                    ])
+                </div>
+
+                <div class="ff-section ff-anim">
+                    <div class="ff-s-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="ff-s-title">{{ __('main.permissions') }}</div>
+                </div>
+
+                <div class="ff-anim">
+                    <div class="text-sm font-semibold mb-3 text-gray-500">{{ __('main.role') }}</div>
+                    <div class="role-cards" id="role-cards">
+                        <label class="role-card {{ old('role', $user->role) == 'superadmin' ? 'active' : '' }}">
+                            <input type="radio" name="role" value="superadmin" {{ old('role', $user->role) == 'superadmin' ? 'checked' : '' }}>
+                            <span class="rc-icon">🛡️</span>
+                            <div class="rc-label">{{ __('main.super_admin') }}</div>
+                        </label>
+                        <label class="role-card {{ old('role', $user->role) == 'admin' ? 'active' : '' }}">
+                            <input type="radio" name="role" value="admin" {{ old('role', $user->role) == 'admin' ? 'checked' : '' }}>
+                            <span class="rc-icon">⚙️</span>
+                            <div class="rc-label">{{ __('main.admin') }}</div>
+                        </label>
+                        <label class="role-card {{ old('role', $user->role) == 'content_manager' ? 'active' : '' }}">
+                            <input type="radio" name="role" value="content_manager" {{ old('role', $user->role) == 'content_manager' ? 'checked' : '' }}>
+                            <span class="rc-icon">✍️</span>
+                            <div class="rc-label">{{ __('main.content_manager') }}</div>
+                        </label>
+                    </div>
+                    @error('role')
+                        <div class="ff-err mt-2"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="ff-anim">
+                    <div class="text-sm font-semibold mb-3 text-gray-500">{{ __('main.status') }}</div>
+                    @php $oldStatus = old('status', $user->status); @endphp
+                    <div class="status-pills" id="status-pills">
+                        <label class="status-pill {{ $oldStatus == 'active' ? 'active' : '' }}" data-val="active">
+                            <input type="radio" name="status" value="active" {{ $oldStatus == 'active' ? 'checked' : '' }}>
+                            ✅ {{ __('main.active') }}
+                        </label>
+                        <label class="status-pill {{ $oldStatus == 'inactive' ? 'active' : '' }}" data-val="inactive">
+                            <input type="radio" name="status" value="inactive" {{ $oldStatus == 'inactive' ? 'checked' : '' }}>
+                            ⏸️ {{ __('main.inactive') }}
+                        </label>
+                        <label class="status-pill {{ $oldStatus == 'suspended' ? 'active' : '' }}" data-val="suspended">
+                            <input type="radio" name="status" value="suspended" {{ $oldStatus == 'suspended' ? 'checked' : '' }}>
+                            🚫 {{ __('main.suspended') }}
+                        </label>
+                    </div>
+                    @error('status')
+                        <div class="ff-err mt-2"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <input type="hidden" name="created_by" value="{{ old('created_by', $user->created_by) }}">
+                <input type="hidden" name="updated_by" value="{{ old('updated_by', $user->updated_by) }}">
+
+                @include('dashboard.components.update-submit', ['models' => 'dashboard.users', 'model' => 'user'])
+            </div>
+        </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.querySelectorAll('#role-cards .role-card').forEach(function(card) {
+            card.addEventListener('change', function() {
+                document.querySelectorAll('#role-cards .role-card').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('#status-pills .status-pill').forEach(function(pill) {
+            pill.addEventListener('change', function() {
+                document.querySelectorAll('#status-pills .status-pill').forEach(function(p) {
+                    p.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+@endpush

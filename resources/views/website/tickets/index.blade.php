@@ -79,15 +79,54 @@
                             {{ __('main.contact_form_department') }}
                             <span class="text-red-600">*</span>
                         </label>
-                        <div class="input flex" style="@error('department_id') border: 1px solid red @enderror">
-                            <select id="department_id" name="department_id" required aria-invalid="{{ $errors->has('department_id') ? 'true' : 'false' }}">
-                                <option value="" {{ old('department_id') == '' ? 'selected' : '' }}>
-                                    {{ __('main.department') }}
-                                </option>
-                                @foreach ($departments as $dept)
-                                    <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>{{ __('main.' . str_replace('-', '_', $dept->name)) }}</option>
-                                @endforeach
-                            </select>
+                        <div class="input flex" style="@error('department_id') border: 1px solid red @enderror; overflow: visible; position: relative;">
+                            <div class="custom-dept-select" id="custom-dept-select" data-old="{{ old('department_id') }}">
+                                {{-- Trigger button --}}
+                                <div class="dept-select-trigger" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-label="{{ __('main.contact_form_department') }}">
+                                    <span class="dept-trigger-icon">
+                                        <i class="fas fa-building"></i>
+                                    </span>
+                                    <span class="dept-trigger-label">{{ __('main.department') }}</span>
+                                    <span class="dept-trigger-arrow"><i class="fas fa-chevron-down"></i></span>
+                                </div>
+
+                                {{-- Options dropdown --}}
+                                <div class="dept-select-dropdown" role="listbox">
+                                    <div class="dept-select-option" data-value="" data-icon="fas fa-building" data-color="" role="option">
+                                        <span class="dept-opt-icon"><i class="fas fa-building"></i></span>
+                                        <span>{{ __('main.department') }}</span>
+                                    </div>
+
+                                    @foreach ($departments as $dept)
+                                        @php
+                                            $translationKey = 'main.' . str_replace('-', '_', $dept->name);
+                                            $translatedName = __($translationKey);
+                                            $fallbackEnName = $translatedName !== $translationKey ? $translatedName : ucwords(str_replace(['-', '_'], ' ', $dept->name));
+
+                                            $deptLabel = app()->getLocale() === 'ar' ? ($dept->name_ar ?: $fallbackEnName) : $fallbackEnName;
+
+                                            $deptIcon = $dept->icon ?: 'fas fa-building';
+                                            $deptColor = $dept->badge_color ?? '';
+                                        @endphp
+                                        <div class="dept-select-option {{ old('department_id') == $dept->id ? 'selected' : '' }}" data-value="{{ $dept->id }}" data-icon="{{ $deptIcon }}"
+                                            data-color="{{ $deptColor }}" role="option" {{ old('department_id') == $dept->id ? 'aria-selected=true' : '' }}>
+                                            <span class="dept-opt-icon" style="{{ $deptColor ? 'color:' . $deptColor . ';background:' . $deptColor . '1a' : '' }}">
+                                                <i class="{{ $deptIcon }}"></i>
+                                            </span>
+                                            <span>{{ $deptLabel }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                {{-- Hidden native select for form submission & server-side validation --}}
+                                <select id="department_id" name="department_id" class="dept-hidden-select" aria-hidden="true" tabindex="-1">
+                                    <option value=""></option>
+                                    @foreach ($departments as $dept)
+                                        <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}></option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="icon">
                                 <img src="{{ asset('assets/images/website/icons/pin.svg') }}" alt="{{ __('main.contact_form_department') }}">
                             </div>
@@ -255,5 +294,78 @@
             submitBtn.style.cursor = 'not-allowed';
             textNode.textContent = submitBtn.dataset.loadingText || textNode.textContent;
         });
+
+        // ── Custom Department Select ──────────────────────────────
+        (function() {
+            const wrapper = document.getElementById('custom-dept-select');
+            if (!wrapper) return;
+
+            const trigger = wrapper.querySelector('.dept-select-trigger');
+            const dropdown = wrapper.querySelector('.dept-select-dropdown');
+            const hiddenSel = wrapper.querySelector('.dept-hidden-select');
+            const trigIcon = wrapper.querySelector('.dept-trigger-icon');
+            const trigLabel = wrapper.querySelector('.dept-trigger-label');
+            const options = wrapper.querySelectorAll('.dept-select-option');
+
+            // Restore a previously-selected option (after a validation failure)
+            const preSelected = wrapper.querySelector('.dept-select-option.selected');
+            if (preSelected && preSelected.dataset.value) {
+                applySelection(preSelected, false);
+            }
+
+            // Toggle open/close on trigger click
+            trigger.addEventListener('click', toggleDropdown);
+            trigger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleDropdown();
+                }
+                if (e.key === 'Escape') closeDropdown();
+            });
+
+            // Select an option
+            options.forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    options.forEach(o => {
+                        o.classList.remove('selected');
+                        o.removeAttribute('aria-selected');
+                    });
+                    opt.classList.add('selected');
+                    opt.setAttribute('aria-selected', 'true');
+                    hiddenSel.value = opt.dataset.value;
+                    applySelection(opt, true);
+                    closeDropdown();
+                });
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) closeDropdown();
+            });
+
+            function toggleDropdown() {
+                wrapper.classList.toggle('open');
+                trigger.setAttribute('aria-expanded', wrapper.classList.contains('open'));
+            }
+
+            function closeDropdown() {
+                wrapper.classList.remove('open');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+
+            function applySelection(opt, animate) {
+                const icon = opt.dataset.icon || 'fas fa-building';
+                const color = opt.dataset.color || '';
+                const label = opt.querySelector('span:last-child')?.textContent.trim() ?? '';
+                const isEmpty = !opt.dataset.value;
+
+                trigIcon.innerHTML = `<i class="${icon}"></i>`;
+                trigIcon.style.color = color || '';
+                trigIcon.style.background = color ? color + '1a' : '';
+
+                trigLabel.textContent = label;
+                trigLabel.classList.toggle('has-value', !isEmpty);
+            }
+        })();
     </script>
 @endpush

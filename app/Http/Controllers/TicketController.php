@@ -28,7 +28,7 @@ class TicketController extends Controller
     {
         $a = rand(1, 9);
         $b = rand(1, 9);
-        $departments = Department::get(['id', 'name']);
+        $departments = Department::get(['id', 'name', 'name_ar', 'icon', 'badge_color']);
         session(['ticket_verification' => $a + $b]);
         return view('website.tickets.index', compact('a', 'b', 'departments'));
     }
@@ -158,11 +158,12 @@ class TicketController extends Controller
                     'photo' => checkExistFile(getActiveUser()->photo) ? asset('storage/' . getActiveUser()->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
                 'department' => $department ? [
-                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
+                    'name' => $this->getLocalizedDepartmentName($department),
                     'bg_color' => $department->bg_color,
                     'border_color' => $department->border_color,
                     'border_main_color' => $department->border_main_color,
                     'badge_color' => $department->badge_color,
+                    'icon' => $department->icon,
                 ] : null,
                 'attachments' => $messageRow->attachments ?? [],
             ]);
@@ -219,11 +220,12 @@ class TicketController extends Controller
                 ],
 
                 'department' => [
-                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support_')),
+                    'name' => $this->getLocalizedDepartmentName($department),
                     'bg_color' => $department?->bg_color,
                     'border_color' => $department?->border_color,
                     'border_main_color' => $department?->border_main_color,
                     'badge_color' => $department?->badge_color,
+                    'icon' => $department?->icon,
                 ],
 
                 'attachments' => $message->attachments ?? [],
@@ -355,5 +357,24 @@ class TicketController extends Controller
 
         return redirect()->route('tickets.support_pro_rating', [$ticket->uuid, $ticket->token])->withSuccess(__('messages.rating_submitted_successfully'));
         // return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.rating_submitted_successfully'));
+    }
+
+    private function getLocalizedDepartmentName(?Department $department): string
+    {
+        if (!$department) {
+            return __('main.support_');
+        }
+
+        $fallbackKey = 'main.' . str_replace('-', '_', $department->name);
+        $translated = __($fallbackKey);
+        $enName = $translated !== $fallbackKey
+            ? $translated
+            : ucwords(str_replace(['-', '_'], ' ', (string) $department->name));
+
+        if (app()->getLocale() === 'ar' && !empty($department->name_ar)) {
+            return $department->name_ar;
+        }
+
+        return $enName;
     }
 }

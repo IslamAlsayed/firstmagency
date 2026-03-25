@@ -494,6 +494,10 @@ return [
     'current' => 'Current',
     'to_replace' => 'to replace with new one',
     'basic_information' => 'Basic Information',
+    'password_weak' => 'Weak',
+    'password_fair' => 'Fair',
+    'password_good' => 'Good',
+    'password_strong' => 'Strong',
     'content' => 'Content',
     'word_count' => 'Word Count',
     'audio_not_editable' => 'Audio cannot be edited after creation',
@@ -546,6 +550,7 @@ return [
     'contact_form_verification' => 'Verification',
     'contact_form_answer' => 'Answer',
     'contact_form_verification_text' => 'Verify:',
+    'verification' => 'Verification',
 
     // ==================== Line Works Section ====================
     'line_works_title' => 'How We Work',

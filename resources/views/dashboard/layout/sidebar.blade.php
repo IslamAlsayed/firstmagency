@@ -727,9 +727,7 @@
             fetch("{{ route('dashboard.sidebar.order') }}")
                 .then(res => res.json())
                 .then(res => {
-
-                    if (res.status !== 'success') return;
-
+                    if (res.status != 'success') return;
                     sidebarLayout.classList.add('hide');
 
                     const menuOrder = res.data.menu_order || [];
