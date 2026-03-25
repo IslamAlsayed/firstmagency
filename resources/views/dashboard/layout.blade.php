@@ -15,12 +15,11 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --dash_primary_color: #fff;
-            --secondary: #6c757d;
-            --success: #198754;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --info: #0dcaf0;
+            --dash_primary_color: {{ $settings->colors['dash_primary_color'] ?? '#F54900' }};
+            --text_color: {{ $settings->colors['text_color'] ?? '#ffffff' }};
+            --icon_color: {{ $settings->colors['icon_color'] ?? '#4a5565' }};
+            --button_color: {{ $settings->colors['button_color'] ?? '#0074F7' }};
+            --width_logo_sidebar: {{ $settings->width_logo_sidebar ?? '70' }}px;
         }
 
         body {

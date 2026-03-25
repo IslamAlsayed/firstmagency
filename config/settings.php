@@ -39,7 +39,7 @@ return [
         'packages_marketing_section' => 120,
     ],
     'colors' => [
-        'dash_primary_color' => '#0074F7',
+        'dash_primary_color' => '#F54900',
         'text_color' => '#ffffff',
         'icon_color' => '#4a5565',
         'button_color' => '#0074F7',

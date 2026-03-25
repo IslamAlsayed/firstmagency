@@ -243,7 +243,7 @@
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                             <label for="dash_primary_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.main_color') }}</label>
                             <input type="color" id="dash_primary_color" name="colors[dash_primary_color]" class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300 shadow-sm"
-                                value="{{ $settings->colors['dash_primary_color'] ?? '#0074F7' }}">
+                                value="{{ $settings->colors['dash_primary_color'] ?? '#F54900' }}">
                         </div>
                         <div class="flex-1 text-nowrap" style="min-width: 100px; max-width: 200px;">
                             <label for="text_color" class="block text-sm font-semibold text-gray-600 mb-1">{{ __('main.text_color') }}</label>
@@ -334,7 +334,7 @@
 @push('styles')
     <style>
         :root {
-            --dash_primary_color: {{ $settings->colors['dash_primary_color'] ?? '#fff' }};
+            --dash_primary_color: {{ $settings->colors['dash_primary_color'] ?? '#F54900' }};
             --text_color: {{ $settings->colors['text_color'] ?? '#6c757d' }};
             --icon_color: {{ $settings->colors['icon_color'] ?? '#198754' }};
             --button_color: {{ $settings->colors['button_color'] ?? '#dc3545' }};

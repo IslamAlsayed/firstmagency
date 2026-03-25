@@ -40,47 +40,37 @@ class SettingsHelper
 
         // Default colors if settings not found
         $defaults = [
-            'dash_primary_color' => '#fff',
-            'secondary_color' => '#6c757d',
-            'success_color' => '#198754',
-            'danger_color' => '#dc3545',
-            'warning_color' => '#ffc107',
-            'info_color' => '#0dcaf0',
-            'accent_color' => '#dc3545',
+            'dash_primary_color' => '#F54900',
+            'text_color' => '#ffffff',
+            'icon_color' => '#4a5565',
+            'button_color' => '#0074F7',
+            'width_logo_sidebar' => '70',
             'font_size' => 16,
             'line_height' => 1.5,
         ];
 
         if (!$settings) {
             $dash_primary_color = $defaults['dash_primary_color'];
-            $secondary = $defaults['secondary_color'];
-            $success = $defaults['success_color'];
-            $danger = $defaults['danger_color'];
-            $warning = $defaults['warning_color'];
-            $info = $defaults['info_color'];
-            $accent = $defaults['accent_color'];
-            $fontSize = $defaults['font_size'];
-            $lineHeight = $defaults['line_height'];
+            $text_color = $defaults['text_color'];
+            $icon_color = $defaults['icon_color'];
+            $button_color = $defaults['button_color'];
+            $width_logo_sidebar = $defaults['width_logo_sidebar'];
         } else {
             $dash_primary_color = $settings->dash_primary_color ?? $defaults['dash_primary_color'];
-            $secondary = $settings->secondary_color ?? $defaults['secondary_color'];
-            $success = $settings->success_color ?? $defaults['success_color'];
-            $danger = $settings->danger_color ?? $defaults['danger_color'];
-            $warning = $settings->warning_color ?? $defaults['warning_color'];
-            $info = $settings->info_color ?? $defaults['info_color'];
-            $accent = $settings->accent_color ?? $defaults['accent_color'];
-            $fontSize = $settings->font_size ?? $defaults['font_size'];
-            $lineHeight = $settings->line_height ?? $defaults['line_height'];
+            $text_color = $settings->text_color ?? $defaults['text_color'];
+            $icon_color = $settings->icon_color ?? $defaults['icon_color'];
+            $button_color = $settings->button_color ?? $defaults['button_color'];
+            $width_logo_sidebar = $settings->width_logo_sidebar ?? $defaults['width_logo_sidebar'];
+            $fontSize = $defaults['font_size'];
+            $lineHeight = $defaults['line_height'];
         }
 
         return ":root {
             --dash_primary_color: {$dash_primary_color};
-            --secondary: {$secondary};
-            --success: {$success};
-            --danger: {$danger};
-            --warning: {$warning};
-            --info: {$info};
-            --accent-color: {$accent};
+            --text_color: {$text_color};
+            --icon_color: {$icon_color};
+            --button_color: {$button_color};
+            --width_logo_sidebar: {$width_logo_sidebar}px;
             --font-size-base: {$fontSize}px;
             --line-height-base: {$lineHeight};
         }";
