@@ -16,6 +16,14 @@
                     <div class="profile-hero-actions">
                         <a href="{{ route('dashboard.profile.show') }}" class="profile-action"><i class="fas fa-user-pen"></i>{{ __('main.personal_information') }}</a>
                         {{-- <a href="{{ route('dashboard.profile.edit') }}" class="profile-action-secondary" data-password-jump><i class="fas fa-key"></i>{{ __('main.change_password') }}</a> --}}
+
+                        <form method="POST" action="{{ route('logout') }}" class="">
+                            @csrf
+                            <button type="submit" class="profile-danger menu-link w-full h-full cursor-pointer">
+                                <i class="ph-bold ph-sign-out"></i>
+                                &nbsp;{{ __('main.sign_out') }}
+                            </button>
+                        </form>
                     </div>
                 </div>
 

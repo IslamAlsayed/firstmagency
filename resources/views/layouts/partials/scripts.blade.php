@@ -54,6 +54,7 @@
     setInterval(calculateRemainingTime, 1000);
 
     document.addEventListener('DOMContentLoaded', function() {
+        let fixedSupport = document.getElementById('fixed-support');
         let openSupportContent = document.getElementById('open-fixed-support');
         let closeSupportContent = document.getElementById('close-fixed-support');
         let fixedSupportContent = document.getElementById('fixed-support-content');
@@ -71,12 +72,15 @@
                 openSupportContent.classList.remove('hidden');
             });
         }
-        document.addEventListener('click', function(e) {
-            if (!document.getElementById('fixed-support').contains(e.target)) {
-                fixedSupportContent.classList.add('hidden');
-                openSupportContent.classList.remove('hidden');
-            }
-        });
+
+        if (fixedSupport) {
+            document.addEventListener('click', function(e) {
+                if (!fixedSupport.contains(e.target)) {
+                    fixedSupportContent.classList.add('hidden');
+                    openSupportContent.classList.remove('hidden');
+                }
+            });
+        }
 
         const copyTextToClipboard = async function(text) {
             if (!text) return false;
@@ -100,35 +104,37 @@
         };
 
         const flagElements = document.querySelectorAll('.debug-flag-badge');
-        flagElements.forEach(function(element) {
-            element.classList.add('js-copy-flag');
-            element.style.cursor = 'pointer';
-            element.setAttribute('title', 'Click to copy flag');
+        if (flagElements.length > 0) {
+            flagElements.forEach(function(element) {
+                element.classList.add('js-copy-flag');
+                element.style.cursor = 'pointer';
+                element.setAttribute('title', 'Click to copy flag');
 
-            element.addEventListener('click', async function() {
-                const extracted = (element.textContent || '').match(/flag-[a-z0-9\-_]+/i);
-                const flagText = extracted ? extracted[0] : (element.textContent || '').trim();
-                if (!flagText) return;
+                element.addEventListener('click', async function() {
+                    const extracted = (element.textContent || '').match(/flag-[a-z0-9\-_]+/i);
+                    const flagText = extracted ? extracted[0] : (element.textContent || '').trim();
+                    if (!flagText) return;
 
-                try {
-                    const copied = await copyTextToClipboard(flagText);
-                    if (!copied) throw new Error('copy_failed');
+                    try {
+                        const copied = await copyTextToClipboard(flagText);
+                        if (!copied) throw new Error('copy_failed');
 
-                    if (window.showToast && typeof window.showToast === 'function') {
-                        window.showToast({
-                            type: 'success',
-                            message: 'Copied: ' + flagText,
-                        });
+                        if (window.showToast && typeof window.showToast === 'function') {
+                            window.showToast({
+                                type: 'success',
+                                message: 'Copied: ' + flagText,
+                            });
+                        }
+                    } catch (error) {
+                        if (window.showToast && typeof window.showToast === 'function') {
+                            window.showToast({
+                                type: 'error',
+                                message: 'Failed to copy flag',
+                            });
+                        }
                     }
-                } catch (error) {
-                    if (window.showToast && typeof window.showToast === 'function') {
-                        window.showToast({
-                            type: 'error',
-                            message: 'Failed to copy flag',
-                        });
-                    }
-                }
+                });
             });
-        });
+        }
     });
 </script>

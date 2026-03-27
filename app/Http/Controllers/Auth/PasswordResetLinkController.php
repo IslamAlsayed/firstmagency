@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
@@ -14,7 +15,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): View
     {
-        return view('dashboard.forgot-password');
+        return view('dashboard.auth.forgot-password');
     }
 
     /**
@@ -31,13 +32,7 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink($request->only('email'));
 
         if ($status == Password::RESET_LINK_SENT) {
-            $user = \Modules\Core\Entities\User::where('email', $request->email)->first();
-            if ($user) {
-                activity()->causedBy($user)->performedOn($user)->useLog('models')->event('password_reset_request')->withProperties([
-                    'ip_address' => $request->ip(),
-                    'request_time' => now()->toDateTimeString(),
-                ])->log('Password reset link requested');
-            }
+            $user = User::where('email', $request->email)->first();
         }
         return $status == Password::RESET_LINK_SENT
             ? back()->with('status', __($status))

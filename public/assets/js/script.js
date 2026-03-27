@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener("click", (e) => {
         if (!e.target.closest("#header")) {
-            if (navLinks.classList.contains("active")) {
+            if (navLinks && navLinks.classList.contains("active")) {
                 navLinks.classList.remove("active");
                 document.body.style.overflow = '';
             }

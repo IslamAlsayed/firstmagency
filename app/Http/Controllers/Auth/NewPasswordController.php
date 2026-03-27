@@ -18,7 +18,7 @@ class NewPasswordController extends Controller
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create(Request $request)
     {
         return view('dashboard.auth.reset-password', ['request' => $request]);
     }
@@ -28,7 +28,7 @@ class NewPasswordController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'token' => ['required'],
@@ -47,10 +47,6 @@ class NewPasswordController extends Controller
                     'password_changed_at' => now(),
                     'remember_token' => Str::random(60),
                 ])->save();
-                activity()->causedBy($user)->performedOn($user)->useLog('models')->event('password_reset')->withProperties([
-                    'ip_address' => $request->ip(),
-                    'reset_time' => now()->toDateTimeString(),
-                ])->log('Password has been reset');
                 event(new PasswordReset($user));
             }
         );
@@ -59,8 +55,13 @@ class NewPasswordController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $status == Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+            ? redirect()->route('login')->withSuccess(__('auth.password_reset_success'))
+            : back()->withInput($request->only('email'))->withErrors([
+                'email' => __($status === Password::INVALID_TOKEN
+                    ? 'auth.invalid_token'
+                    : ($status === Password::INVALID_USER
+                        ? 'auth.invalid_user'
+                        : $status))
+            ]);
     }
 }

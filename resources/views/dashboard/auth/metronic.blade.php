@@ -3,7 +3,6 @@
 
 <head>
     @include('layouts.partials.head')
-    @vite('resources/css/app.css')
     @stack('styles')
 
     {{-- FontAwesome Icons --}}
@@ -45,24 +44,9 @@
         @include('vendor.toasts.toasts')
     @endif
 
-    {{-- <div id="kt_theme_mode_menu">
-        <div class="flex items-center justify-between gap-2">
-            <span class="flex items-center gap-2">
-                <i class="text-base ki-filled ki-moon text-gray-600" id="icon-theme-mode"></i>
-                <span class="font-medium text-2sm text-gray-600" id="text-theme-mode">
-                    {{ __('main.dark_mode') }}
-                </span>
-            </span>
-            <input class="kt-switch" id="switch-theme-mode" type="checkbox" value="1" />
-        </div>
-    </div> --}}
-
     @yield('content')
-
-    @include('layouts.partials.scripts')
-    @vite('resources/js/app.js')
-    {{-- Theme Mode --}}
-    @include('dashboard.components.script-theme')
+    @yield('scripts')
+    @stack('scripts')
 </body>
 
 </html>

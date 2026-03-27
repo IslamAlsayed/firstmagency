@@ -482,8 +482,12 @@
 
         .health-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.85rem;
+        }
+
+        .health-card:nth-child(odd):last-child {
+            grid-column: span 2;
         }
 
         .health-card {

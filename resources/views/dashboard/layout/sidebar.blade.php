@@ -28,18 +28,18 @@
 <aside id="sidebar" class="sidebar fixed top-0 left-0 bg-gray-900 text-white shadow-sm flex flex-col" data-sortable-group="sidebar-menu">
     <div class="layout"></div>
     <div class="sidebar-logo flex flex-col gap-2">
-        <a href="{{ route('dashboard.index') }}">
-            <div class="shineEffect" style="width: var(--width_logo_sidebar) ; margin: auto;">
+        <div>
+            <a href="{{ route('dashboard.index') }}" class="shineEffect" style="width: var(--width_logo_sidebar) ; margin: auto;">
                 <img src="{{ asset('assets/images/website/logo.png') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
-            </div>
+            </a>
 
             <div class="flex items-center justify-between">
                 <!-- Close button for small screens -->
-                <button id="closeSidebar" class="p-2 rounded-lg hover:bg-slate-700">
+                <button type="button" id="closeSidebar" class="cursor-pointer" toggle-button>
                     <i class="fas fa-xmark text-xl text-red-600"></i>
                 </button>
             </div>
-        </a>
+        </div>
     </div>
 
     <ul id="sidebarMenu" class="nav-menu sortable-menu" data-group="sidebar-items">
