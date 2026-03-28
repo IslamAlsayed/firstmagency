@@ -6,13 +6,28 @@
         @endif
     </label>
 
-    <input id="{{ $name ?? $column }}" type="hidden" name="{{ $name ?? $column }}" value="{{ $value ?? (old($name ?? $column) ?? '') }}">
 
-    <trix-editor input="{{ $name ?? $column }}" placeholder="{{ isset($placeholder) && $placeholder ? $placeholder : '' }}"></trix-editor>
+    <textarea id="{{ $name ?? $column }}" name="{{ $name ?? $column }}" class="ckeditor" placeholder="{{ isset($placeholder) && $placeholder ? $placeholder : '' }}">{{ $value ?? (old($name ?? $column) ?? '') }}</textarea>
 
     @error($name ?? $column)
         <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
     @enderror
+
+    @push('scripts')
+        <script src="/assets/plugins/ckeditor/ckeditor.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('.ckeditor').forEach(function(el) {
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id);
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                }
+            });
+        </script>
+    @endpush
 </div>
 
 {{-- <script>
