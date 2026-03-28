@@ -8,10 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
-    'Tonysm\\RichTextLaravel\\Database\\Factories\\' => array($vendorDir . '/tonysm/rich-text-laravel/database/factories'),
-    'Tonysm\\RichTextLaravel\\' => array($vendorDir . '/tonysm/rich-text-laravel/src'),
-    'Tonysm\\GlobalId\\Database\\Factories\\' => array($vendorDir . '/tonysm/globalid-laravel/database/factories'),
-    'Tonysm\\GlobalId\\' => array($vendorDir . '/tonysm/globalid-laravel/src'),
     'TijsVerkoyen\\CssToInlineStyles\\' => array($vendorDir . '/tijsverkoyen/css-to-inline-styles/src'),
     'Tests\\' => array($baseDir . '/tests'),
     'Termwind\\' => array($vendorDir . '/nunomaduro/termwind/src'),
@@ -46,7 +42,6 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Symfony\\Component\\Clock\\' => array($vendorDir . '/symfony/clock'),
     'Spatie\\Permission\\' => array($vendorDir . '/spatie/laravel-permission/src'),
-    'Spatie\\LaravelPackageTools\\' => array($vendorDir . '/spatie/laravel-package-tools/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),

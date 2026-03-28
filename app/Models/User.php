@@ -13,9 +13,8 @@ use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, SoftDeletes, HasRoles, Notifiable, HasRichText;
+    use HasFactory, SoftDeletes, HasRoles, Notifiable;
     protected $richTextAttributes = [
-        'bio',
     ];
 
     /**

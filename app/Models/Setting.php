@@ -9,14 +9,8 @@ use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Setting extends Model
 {
-    use HasFactory, SoftDeletes, HasRichText;
+    use HasFactory, SoftDeletes;
     protected $richTextAttributes = [
-        'site_description',
-        'site_description_ar',
-        'about_us_description',
-        'about_us_description_ar',
-        'website_design_description',
-        'website_design_description_ar',
     ];
 
     protected $fillable = [
