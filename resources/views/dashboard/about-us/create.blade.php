@@ -6,15 +6,14 @@
             {{ __('main.create_about_us') }}
         </h1>
 
-        <form action="{{ route('dashboard.about-us.store') }}" method="POST" enctype="multipart/form-data" class="kt-card">
+        <form action="{{ route('dashboard.about-us.store') }}" method="POST" enctype="multipart/form-data" class="shadow-md radius-lg">
             @csrf
 
             <div class="kt-card-body">
                 <!-- Title -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">{{ __('main.title') }} *</label>
-                    <input type="text" name="title" value="{{ old('title') }}" class="kt-input w-full @error('title') error @enderror"
-                        placeholder="{{ __('main.title') }}">
+                    <input type="text" name="title" value="{{ old('title') }}" class="kt-input w-full @error('title') error @enderror" placeholder="{{ __('main.title') }}">
                     @error('title')
                         <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                     @enderror

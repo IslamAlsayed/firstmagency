@@ -377,11 +377,11 @@ body.index-blur {
         cursor: pointer;
     }
 
-    .nav-menu .submenu-item .submenu-btn.active,
+    /* .nav-menu .submenu-item .submenu-btn.active,
     .nav-menu .submenu-list .nav-link.active {
         cursor: default !important;
         pointer-events: none !important;
-    }
+    } */
 }
 
 .sidebar.small-sidebar {

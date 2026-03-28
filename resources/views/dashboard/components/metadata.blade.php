@@ -1,5 +1,5 @@
 <!-- Metadata -->
-<div class="kt-card">
+<div class="shadow-md radius-lg">
     <div class="kt-card-header">
         <h3 class="kt-card-title">{{ __('main.metadata') }}</h3>
     </div>

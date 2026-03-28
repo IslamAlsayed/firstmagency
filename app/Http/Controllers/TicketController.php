@@ -186,7 +186,7 @@ class TicketController extends Controller
                 'type' => 'customer_reply',
                 'subject' => $ticket->subject,
                 'body' => __('main.customer') . ': ' . $ticket->name,
-                'url' => route('dashboard.tickets.show', $ticket->id),
+                'url' => request()->getSchemeAndHttpHost() . route('dashboard.tickets.show', $ticket->id, false),
                 'created_at' => now()->toIso8601String(),
                 'created_at_human' => now()->diffForHumans(),
             ]);

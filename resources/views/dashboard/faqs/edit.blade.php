@@ -4,112 +4,102 @@
 @section('page-title', '❓ ' . __('main.edit_type', ['type' => __('main.faq')]))
 
 @section('content')
-    <div class="kt-card mb-4">
-        <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('main.edit_type', ['type' => __('main.faq')]) }}</h3>
-
-            <a href="{{ route('dashboard.faqs.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                {{ __('main.back_to_types', ['types' => __('main.faqs')]) }}
-            </a>
-        </div>
-
-        <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.faqs.update', $faq) }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="grid gap-4 lg:gap-6">
-                    <!-- Category -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="category" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }} <span class="text-red-500">*</span></label>
-                            <select class="kt-select basic-single" id="category" name="category" required>
-                                <option value="">{{ __('main.select_category') }}</option>
-                                @foreach ($categories as $key => $label)
-                                    <option value="{{ $key }}" {{ old('category', $faq->category) === $key ? 'selected' : '' }}>
-                                        {{ $label }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('category')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" class="w-full h-[45px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="order" name="order"
-                                value="{{ old('order', $faq->order) }}" min="0">
-                            @error('order')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
+    <div class="shadow-lg radius-lg p-4">
+        <form method="POST" action="{{ route('dashboard.faqs.update', $faq) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="grid gap-4 lg:gap-6">
+                <!-- Category -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }} <span class="text-red-500">*</span></label>
+                        <select class="kt-select basic-single" id="category" name="category" required>
+                            <option value="">{{ __('main.select_category') }}</option>
+                            @foreach ($categories as $key => $label)
+                                <option value="{{ $key }}" {{ old('category', $faq->category) === $key ? 'selected' : '' }}>
+                                    {{ $label }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
-                    <!-- Tabs Navigation -->
-                    @include('dashboard.components.tabs-navigation')
-
-                    <!-- English Tab Content -->
-                    <div class="language-content" data-lang="en">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="question" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.question') }} (EN)
-                                </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question" name="question"
-                                    value="{{ old('question', $faq->question) }}" placeholder="Enter question in English">
-                                @error('question')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            @include('dashboard.components.input-text-editor', [
-                                'name' => 'answer',
-                                'value' => old('answer', $faq->answer),
-                                'placeholder' => 'Enter answer in English',
-                            ])
-                        </div>
+                    <div>
+                        <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
+                        <input type="number" class="w-full h-[45px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="order" name="order"
+                            value="{{ old('order', $faq->order) }}" min="0">
+                        @error('order')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
-
-                    <!-- Arabic Tab Content -->
-                    <div class="language-content hidden" data-lang="ar">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="question_ar" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.question') }} (AR)
-                                </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question_ar" name="question_ar"
-                                    value="{{ old('question_ar', $faq->question_ar) }}" placeholder="أدخل السؤال بالعربية">
-                                @error('question_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            @include('dashboard.components.input-text-editor', [
-                                'name' => 'answer_ar',
-                                'value' => old('answer_ar', $faq->answer_ar),
-                                'placeholder' => 'أدخل الإجابة بالعربية',
-                            ])
-                        </div>
-                    </div>
-
-                    <!-- Checkboxes -->
-                    <div class="flex flex-wrap" style="gap: 10px 40px;">
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="is_active" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'is_active',
-                                'id' => 'is_active',
-                                'value' => '1',
-                                'checked' => $faq->is_active,
-                                'label' => __('main.active'),
-                            ])
-                        </div>
-                    </div>
-
-                    <!-- Update Button -->
-                    @include('dashboard.components.update-submit', ['models' => 'dashboard.faqs', 'model' => 'faq'])
                 </div>
-            </form>
-        </div>
+
+                <!-- Tabs Navigation -->
+                @include('dashboard.components.tabs-navigation')
+
+                <!-- English Tab Content -->
+                <div class="language-content" data-lang="en">
+                    <div class="grid gap-4">
+                        <div>
+                            <label for="question" class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.question') }} (EN)
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question" name="question"
+                                value="{{ old('question', $faq->question) }}" placeholder="Enter question in English">
+                            @error('question')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        @include('dashboard.components.input-text-editor', [
+                            'name' => 'answer',
+                            'value' => old('answer', $faq->answer),
+                            'placeholder' => 'Enter answer in English',
+                        ])
+                    </div>
+                </div>
+
+                <!-- Arabic Tab Content -->
+                <div class="language-content hidden" data-lang="ar">
+                    <div class="grid gap-4">
+                        <div>
+                            <label for="question_ar" class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.question') }} (AR)
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1" id="question_ar" name="question_ar"
+                                value="{{ old('question_ar', $faq->question_ar) }}" placeholder="أدخل السؤال بالعربية">
+                            @error('question_ar')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        @include('dashboard.components.input-text-editor', [
+                            'name' => 'answer_ar',
+                            'value' => old('answer_ar', $faq->answer_ar),
+                            'placeholder' => 'أدخل الإجابة بالعربية',
+                        ])
+                    </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="flex flex-wrap" style="gap: 10px 40px;">
+                    <div class="flex items-center gap-3">
+                        <input type="hidden" name="is_active" value="0">
+                        @include('dashboard.components.checkbox-button', [
+                            'name' => 'is_active',
+                            'id' => 'is_active',
+                            'value' => '1',
+                            'checked' => $faq->is_active,
+                            'label' => __('main.active'),
+                        ])
+                    </div>
+                </div>
+
+                <!-- Update Button -->
+                @include('dashboard.components.update-submit', ['models' => 'dashboard.faqs', 'model' => 'faq'])
+            </div>
+        </form>
     </div>
 @endsection

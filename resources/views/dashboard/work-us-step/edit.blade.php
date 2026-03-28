@@ -4,119 +4,109 @@
 @section('page-title', '👔 ' . __('main.edit_type', ['type' => __('main.work_us_step')]))
 
 @section('content')
-    <div class="kt-card mb-4">
-        <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('main.edit_type', ['type' => __('main.work_us_step')]) }}</h3>
+    <div class="shadow-lg radius-lg p-4">
+        <form method="POST" action="{{ route('dashboard.work-us-step.update', $workUsStep->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="grid gap-4">
+                <!-- Tabs Navigation -->
+                @include('dashboard.components.tabs-navigation')
 
-            <a href="{{ route('dashboard.work-us-step.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                {{ __('main.back_to_work_us_step') }}
-            </a>
-        </div>
-
-        <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.work-us-step.update', $workUsStep->id) }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="grid gap-4">
-                    <!-- Tabs Navigation -->
-                    @include('dashboard.components.tabs-navigation')
-
-                    <!-- English Tab Content -->
-                    <div class="language-content" data-lang="en">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.title') }}
-                                </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
-                                    value="{{ old('title_en', $workUsStep->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
-                                @error('title_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror" id="description_en"
-                                    name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en', $workUsStep->translations['en']['description'] ?? '') }}</textarea>
-                                @error('description_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Arabic Tab Content -->
-                    <div class="language-content hidden" data-lang="ar">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.title') }}
-                                </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
-                                    value="{{ old('title_ar', $workUsStep->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية">
-                                @error('title_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
-                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror" id="description_ar"
-                                    name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $workUsStep->translations['ar']['description'] ?? '') }}</textarea>
-                                @error('description_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Media & Other Fields -->
-                    <div class="grid grid-cols-1 gap-6">
-                        @include('dashboard.components.photo', ['column' => 'image', 'model' => $workUsStep, 'folder' => 'work-us-step'])
-                    </div>
-
-                    <!-- Common Fields -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- English Tab Content -->
+                <div class="language-content" data-lang="en">
+                    <div class="grid gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.alt_text') }}</label>
-                            <input type="text" name="alt_text" value="{{ old('alt_text', $workUsStep->alt_text) }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('alt_text') border-red-500 @enderror"
-                                placeholder="{{ __('main.alt_text') }}">
-                            @error('alt_text')
+                            <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.title') }}
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                value="{{ old('title_en', $workUsStep->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
+                            @error('title_en')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" name="order" value="{{ old('order', $workUsStep->order) }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
+                            <label for="description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_en') border-red-500 @enderror" id="description_en"
+                                name="description_en" rows="5" placeholder="Enter description in English">{{ old('description_en', $workUsStep->translations['en']['description'] ?? '') }}</textarea>
+                            @error('description_en')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
-
-                    <!-- Checkboxes -->
-                    <div class="flex flex-wrap" style="gap: 10px 40px;">
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="is_active" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'is_active',
-                                'id' => 'is_active',
-                                'value' => '1',
-                                'checked' => $workUsStep->is_active,
-                                'label' => __('main.active'),
-                            ])
-                        </div>
-                    </div>
-
-                    <!-- Save Button -->
-                    @include('dashboard.components.save-submit', [
-                        'models' => 'dashboard.work-us-step',
-                        'model' => 'work_us_step',
-                        'action' => 'edit',
-                    ])
                 </div>
-            </form>
-        </div>
+
+                <!-- Arabic Tab Content -->
+                <div class="language-content hidden" data-lang="ar">
+                    <div class="grid gap-4">
+                        <div>
+                            <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.title') }}
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
+                                value="{{ old('title_ar', $workUsStep->translations['ar']['title'] ?? '') }}" placeholder="أدخل العنوان بالعربية">
+                            @error('title_ar')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="description_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.description') }}</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('description_ar') border-red-500 @enderror" id="description_ar"
+                                name="description_ar" rows="5" placeholder="أدخل الوصف بالعربية">{{ old('description_ar', $workUsStep->translations['ar']['description'] ?? '') }}</textarea>
+                            @error('description_ar')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media & Other Fields -->
+                <div class="grid grid-cols-1 gap-6">
+                    @include('dashboard.components.photo', ['column' => 'image', 'model' => $workUsStep, 'folder' => 'work-us-step'])
+                </div>
+
+                <!-- Common Fields -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.alt_text') }}</label>
+                        <input type="text" name="alt_text" value="{{ old('alt_text', $workUsStep->alt_text) }}"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('alt_text') border-red-500 @enderror"
+                            placeholder="{{ __('main.alt_text') }}">
+                        @error('alt_text')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
+                        <input type="number" name="order" value="{{ old('order', $workUsStep->order) }}"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
+                    </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="flex flex-wrap" style="gap: 10px 40px;">
+                    <div class="flex items-center gap-3">
+                        <input type="hidden" name="is_active" value="0">
+                        @include('dashboard.components.checkbox-button', [
+                            'name' => 'is_active',
+                            'id' => 'is_active',
+                            'value' => '1',
+                            'checked' => $workUsStep->is_active,
+                            'label' => __('main.active'),
+                        ])
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                @include('dashboard.components.save-submit', [
+                    'models' => 'dashboard.work-us-step',
+                    'model' => 'work_us_step',
+                    'action' => 'edit',
+                ])
+            </div>
+        </form>
     </div>
 @endsection

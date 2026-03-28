@@ -4,7 +4,7 @@
 @section('page-title', '🏢 ' . __('main.department'))
 
 @section('content')
-    <div class="kt-container-fixed">
+    <div class="shadow-md radius-lg p-6">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <div class="flex items-center gap-3">
@@ -27,13 +27,10 @@
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="kt-container-fixed">
         <div class="grid gap-4 lg:gap-6">
-
             <!-- Support User Information -->
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title">{{ __('main.type_information', ['type' => __('main.support_user')]) }}</h3>
                 </div>
@@ -81,7 +78,7 @@
             </div>
 
             <!-- Colors Information -->
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title">{{ __('main.styling') }}</h3>
                 </div>

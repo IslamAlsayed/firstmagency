@@ -4,7 +4,7 @@
 @section('page-title', '⭐ ' . __('main.edit_type', ['type' => __('main.review')]))
 
 @section('content')
-    <div class="kt-container-fixed p-0">
+    <div class="shadow-md radius-lg p-6">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
@@ -20,16 +20,14 @@
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="kt-container-fixed p-0">
         <form action="{{ route('dashboard.reviews.update', $review) }}" method="POST" enctype="multipart/form-data" id="reviewForm">
             @csrf
             @method('PUT')
 
             <div class="grid gap-4 lg:gap-6">
                 <!-- Basic Information Card -->
-                <div class="kt-card">
+                <div class="shadow-md radius-lg">
                     <div class="kt-card-header">
                         <h3 class="kt-card-title">{{ __('main.basic_information') }}</h3>
                     </div>
@@ -96,7 +94,7 @@
                 </div>
 
                 <!-- Review Content Card -->
-                <div class="kt-card">
+                <div class="shadow-md radius-lg">
                     <div class="kt-card-header">
                         <h3 class="kt-card-title">{{ __('main.content') }}</h3>
                     </div>
@@ -119,7 +117,7 @@
                 </div>
 
                 <!-- Media Card -->
-                <div class="kt-card">
+                <div class="shadow-md radius-lg">
                     <div class="kt-card-header">
                         <h3 class="kt-card-title">{{ __('main.media') }}</h3>
                     </div>
@@ -149,8 +147,7 @@
                                 @else
                                     <!-- Tabs for Audio Upload and Recording -->
                                     <div class="flex gap-2 mb-3">
-                                        <button type="button" class="audio-tab cursor-pointer px-4 py-2 border-custom-b-2 border-custom-color font-medium"
-                                            data-tab="upload">
+                                        <button type="button" class="audio-tab cursor-pointer px-4 py-2 border-custom-b-2 border-custom-color font-medium" data-tab="upload">
                                             📁 {{ __('main.upload') }}
                                         </button>
                                         <button type="button" class="audio-tab cursor-pointer px-4 py-2 text-gray-600" data-tab="record">
@@ -181,8 +178,7 @@
                                                 </button>
                                             </div>
                                             <div id="audioPlayback" style="display: none;" class="mt-3">
-                                                <audio id="audioPreview" controls class="w-[300px]"
-                                                    style="border: 1px solid #cacacc; border-radius: 50px;"></audio>
+                                                <audio id="audioPreview" controls class="w-[300px]" style="border: 1px solid #cacacc; border-radius: 50px;"></audio>
                                                 <button type="button" id="removeAudio" class="kt-btn bg-danger mt-2 text-sm">{{ __('main.remove') }}</button>
                                             </div>
                                         </div>

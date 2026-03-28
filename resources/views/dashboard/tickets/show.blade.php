@@ -4,7 +4,7 @@
 @section('page-title', '🎫 ' . limitedText($ticket->subject, 30))
 
 @section('content')
-    <div class="kt-container-fixed p-0">
+    <div class="shadow-md radius-lg p-6">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
@@ -31,9 +31,7 @@
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="kt-container-fixed p-0">
         <div class="grid gap-4">
             {{-- Ticket Information --}}
             <div class="kt-card ">

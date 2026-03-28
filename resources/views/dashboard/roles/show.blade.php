@@ -30,7 +30,8 @@
                 </div>
 
                 <div class="flex gap-2 mt-6">
-                    <a href="{{ route('dashboard.roles.edit', $role->id) }}" class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition">
+                    <a href="{{ route('dashboard.roles.edit', $role->id) }}" class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-edit mr-2"></i> {{ __('main.edit') }}
                     </a>
                     <a href="{{ route('dashboard.roles.index') }}" class="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">

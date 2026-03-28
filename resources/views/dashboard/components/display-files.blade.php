@@ -3,7 +3,7 @@
     $record = $record ?? null;
 @endphp
 
-<div class="kt-card">
+<div class="shadow-md radius-lg">
     <div class="kt-card-header">
         <h3 class="kt-card-title">{{ __('main.' . $columnName) }} <span class="font-semibold text-primary">({{ count($record->{$columnName}) ?? 0 }})</span></h3>
     </div>
@@ -14,8 +14,7 @@
                     @foreach ($record->{$columnName} as $index => $file)
                         <div class="image-container shadow-sm">
                             @if ($file)
-                                <img src="{{ asset('storage/' . $file) }}" alt="{{ __('main.' . $columnName) }} {{ $index + 1 }}"
-                                    class="w-full h-32 object-cover" loading="lazy">
+                                <img src="{{ asset('storage/' . $file) }}" alt="{{ __('main.' . $columnName) }} {{ $index + 1 }}" class="w-full h-32 object-cover" loading="lazy">
                             @else
                                 <div class="w-full h-32 bg-gray-200 flex items-center justify-center">
                                     <p class="text-xs text-secondary-foreground">{{ __('main.na') }}</p>

@@ -6,7 +6,7 @@
             {{ __('main.edit_about_us') }}
         </h1>
 
-        <form action="{{ route('dashboard.about-us.update', $aboutUs->id) }}" method="POST" enctype="multipart/form-data" class="kt-card">
+        <form action="{{ route('dashboard.about-us.update', $aboutUs->id) }}" method="POST" enctype="multipart/form-data" class="shadow-md radius-lg">
             @csrf
             @method('PUT')
 
@@ -14,8 +14,7 @@
                 <!-- Title -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">{{ __('main.title') }} *</label>
-                    <input type="text" name="title" value="{{ old('title', $aboutUs->title) }}" class="kt-input w-full @error('title') error @enderror"
-                        placeholder="{{ __('main.title') }}">
+                    <input type="text" name="title" value="{{ old('title', $aboutUs->title) }}" class="kt-input w-full @error('title') error @enderror" placeholder="{{ __('main.title') }}">
                     @error('title')
                         <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                     @enderror
@@ -50,15 +49,13 @@
                 <!-- Alt Text -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">{{ __('main.alt_text') }}</label>
-                    <input type="text" name="alt_text" value="{{ old('alt_text', $aboutUs->alt_text) }}" class="kt-input w-full"
-                        placeholder="{{ __('main.alt_text') }}">
+                    <input type="text" name="alt_text" value="{{ old('alt_text', $aboutUs->alt_text) }}" class="kt-input w-full" placeholder="{{ __('main.alt_text') }}">
                 </div>
 
                 <!-- Order -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">{{ __('main.order') }} *</label>
-                    <input type="number" name="order" value="{{ old('order', $aboutUs->order) }}" class="kt-input w-full @error('order') error @enderror"
-                        min="0">
+                    <input type="number" name="order" value="{{ old('order', $aboutUs->order) }}" class="kt-input w-full @error('order') error @enderror" min="0">
                     @error('order')
                         <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                     @enderror

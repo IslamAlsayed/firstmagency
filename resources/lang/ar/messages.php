@@ -172,6 +172,9 @@ return [
     'closing time must be after opening time.' => 'يجب أن يكون وقت الإغلاق بعد وقت الافتتاح.',
     'capacity must be at least 1.' => 'يجب أن تكون السعة 1 على الأقل.',
     // Notification messages
+    'selected_notifications_deleted' => 'تم حذف الإشعارات المحددة بنجاح.',
+    'all_notifications_deleted' => 'تم حذف جميع الإشعارات بنجاح.',
+    'no_notifications_selected' => 'لم يتم تحديد أي إشعارات.',
     'notification_marked_read' => 'تم وضع الإشعار كمقروء.',
     'notification_marked_unread' => 'تم وضع الإشعار كغير مقروء.',
     'all_notifications_marked_read' => 'تم وضع كل الإشعارات كمقروءة.',

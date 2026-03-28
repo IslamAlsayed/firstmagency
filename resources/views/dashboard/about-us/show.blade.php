@@ -6,7 +6,7 @@
             {{ __('main.view_about_us') }}
         </h1>
 
-        <div class="kt-card">
+        <div class="shadow-md radius-lg">
             <div class="kt-card-body">
                 <!-- Title -->
                 <div class="mb-6">

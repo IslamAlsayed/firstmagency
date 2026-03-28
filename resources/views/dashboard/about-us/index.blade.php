@@ -22,19 +22,19 @@
 
         <!-- Statistics -->
         <div class="grid grid-cols-3 gap-4 mb-6">
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-body">
                     <div class="text-gray-600 text-sm">{{ __('main.total') }}</div>
                     <div class="text-2xl font-bold">{{ $aboutUs->total() }}</div>
                 </div>
             </div>
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-body">
                     <div class="text-gray-600 text-sm">{{ __('main.active') }}</div>
                     <div class="text-2xl font-bold text-green-600">{{ $aboutUs->where('is_active', true)->count() }}</div>
                 </div>
             </div>
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-body">
                     <div class="text-gray-600 text-sm">{{ __('main.inactive') }}</div>
                     <div class="text-2xl font-bold text-red-600">{{ $aboutUs->where('is_active', false)->count() }}</div>
@@ -48,7 +48,7 @@
         </div>
 
         <!-- Table -->
-        <div class="kt-card">
+        <div class="shadow-md radius-lg">
             <div class="kt-card-body overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead class="bg-gray-100 border-b">

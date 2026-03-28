@@ -3,7 +3,7 @@
 @endphp
 
 <!-- Media Files -->
-<div class="kt-card">
+<div class="shadow-md radius-lg">
     <div class="kt-card-header">
         <h3 class="kt-card-title">{{ __('main.media_resources') }}</h3>
     </div>

@@ -7,14 +7,13 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Permission Details -->
         <div class="lg:col-span-1">
-            <div class="background rounded-lg shadow p-4">
-                <div class="bg-indigo-50 mb-6 rounded">
+            <div class="shadow-md radius-lg rounded-lg shadow p-4">
+                <div class="bg-indigo-50 mb-6 rounded p-2">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-key text-yellow-500 text-xl"></i>
                         <h3 class="text-lg font-semibold text-gray-800">{{ $permission->name }}</h3>
                     </div>
-                    <p class="text-sm text-gray-600 mt-1">{{ __('main.guard') }}: <span
-                            class="px-2 py-1 bg-gray-100 rounded text-xs">{{ $permission->guard_name }}</span></p>
+                    <p class="text-sm text-gray-600 mt-1">{{ __('main.guard') }}: <span class="px-2 py-1 bg-gray-100 rounded text-xs">{{ $permission->guard_name }}</span></p>
                 </div>
 
                 <div class="space-y-3">
@@ -34,11 +33,11 @@
 
                 <div class="flex gap-2 mt-6">
                     <a href="{{ route('dashboard.permissions.edit', $permission->id) }}"
-                        class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition">
+                        class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition"
+                        style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-edit mr-2"></i> {{ __('main.edit') }}
                     </a>
-                    <a href="{{ route('dashboard.permissions.index') }}"
-                        class="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">
+                    <a href="{{ route('dashboard.permissions.index') }}" class="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">
                         <i class="fas fa-arrow-left mr-2"></i> {{ __('main.back') }}
                     </a>
                 </div>
@@ -47,9 +46,9 @@
 
         <!-- Roles with this permission -->
         <div class="lg:col-span-2">
-            <div class="background rounded-lg shadow p-4">
+            <div class="shadow-md radius-lg rounded-lg shadow p-4">
                 <div class="bg-purple-50 mb-6 rounded">
-                    <h4 class="text-sm font-semibold text-purple-900">{{ __('main.roles_with_this_permission') }}</h4>
+                    <h4 class="text-sm font-semibold text-purple-900 p-2">{{ __('main.roles_with_this_permission') }}</h4>
                 </div>
 
                 @php
@@ -61,15 +60,15 @@
                 @if ($rolesWithPermission->count() > 0)
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         @foreach ($rolesWithPermission as $role)
-                            <div class="rounded-lg p-4 hover:shadow-md transition">
+                            <div class="shadow-sm radius-lg p-4 transition">
                                 <div class="flex items-center justify-between mb-2">
                                     <h5 class="font-semibold text-gray-800">{{ $role->name }}</h5>
                                     <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">{{ $role->guard_name }}</span>
                                 </div>
-                                <p class="text-xs text-gray-600">تم الإنشاء: {{ $role->created_at->format('d/m/Y') }}</p>
-                                <a href="{{ route('dashboard.roles.show', $role->id) }}"
-                                    class="mt-3 kt-btn kt-btn-outline-primary text-sm text-indigo-600 font-medium">
-                                    عرض الدور <i class="fas fa-arrow-right ml-1"></i>
+                                <p class="text-xs text-gray-600">{{ __('main.created_by') }}: {{ $role->created_at->format('d/m/Y') }}</p>
+                                <a href="{{ route('dashboard.roles.show', $role->id) }}" class="mt-3 kt-btn kt-btn-outline-primary text-white text-sm font-medium"
+                                    style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
+                                    {{ __('main.view_type', ['type' => __('main.role')]) }} <i class="fas fa-arrow-right ml-1"></i>
                                 </a>
                             </div>
                         @endforeach

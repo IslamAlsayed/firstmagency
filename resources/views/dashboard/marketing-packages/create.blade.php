@@ -4,100 +4,90 @@
 @section('page-title', '📦 ' . __('main.create_type', ['type' => __('main.marketing_package')]))
 
 @section('content')
-    <div class="kt-card mb-4">
-        <div class="kt-card-header flex items-center justify-between gap-4">
-            <h3 class="kt-card-title">{{ __('main.create_type', ['type' => __('main.marketing_package')]) }}</h3>
+    <div class="shadow-lg radius-lg p-4">
+        <form method="POST" action="{{ route('dashboard.marketing-packages.store') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="grid gap-4 lg:gap-6">
+                <!-- Tabs Navigation -->
+                @include('dashboard.components.tabs-navigation')
 
-            <a href="{{ route('dashboard.marketing-packages.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
-                {{ __('main.back_to_types', ['types' => __('main.marketing_packages')]) }}
-            </a>
-        </div>
-
-        <div class="kt-card-body p-4">
-            <form method="POST" action="{{ route('dashboard.marketing-packages.store') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="grid gap-4 lg:gap-6">
-                    <!-- Tabs Navigation -->
-                    @include('dashboard.components.tabs-navigation')
-
-                    <!-- English Tab Content -->
-                    <div class="language-content" data-lang="en">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
-                                    value="{{ old('title_en') }}" placeholder="Enter title in English">
-                                @error('title_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Arabic Tab Content -->
-                    <div class="language-content hidden" data-lang="ar">
-                        <div class="grid gap-4">
-                            <div>
-                                <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
-                                    {{ __('main.title_ar') }} <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar"
-                                    required value="{{ old('title_ar') }}" placeholder="أدخل العنوان بالعربية">
-                                @error('title_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Order (Common) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- English Tab Content -->
+                <div class="language-content" data-lang="en">
+                    <div class="grid gap-4">
                         <div>
-                            <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
-                            <input type="number" id="order" name="order" min="0"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" value="{{ old('order', 0) }}" placeholder="0">
-                            @error('order')
+                            <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                value="{{ old('title_en') }}" placeholder="Enter title in English">
+                            @error('title_en')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-
-                    <!-- Photo Upload -->
-                    @include('dashboard.components.photo', ['column' => 'image'])
-
-                    <!-- Features -->
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <h6 class="block text-sm font-medium text-gray-600">{{ __('main.features') }}</h6>
-                            <button type="button" id="addFeatureBtn" class="kt-btn kt-btn-sm kt-btn-outline-primary">
-                                <i class="fas fa-plus mr-2"></i> {{ __('main.add_feature') }}
-                            </button>
-                        </div>
-
-                        <div id="featuresContainer" class="space-y-4">
-                            <!-- Features will be added here -->
-                        </div>
-                    </div>
-
-                    <!-- Checkboxes -->
-                    <div class="flex flex-wrap" style="gap: 10px 40px;">
-                        <div class="flex items-center gap-3">
-                            <input type="hidden" name="is_active" value="0">
-                            @include('dashboard.components.checkbox-button', [
-                                'name' => 'is_active',
-                                'id' => 'is_active',
-                                'value' => '1',
-                                'checked' => old('is_active', 1),
-                                'label' => __('main.active'),
-                            ])
-                        </div>
-                    </div>
-
-                    <!-- Save Submit -->
-                    @include('dashboard.components.save-submit', ['models' => 'dashboard.marketing-packages', 'model' => 'marketing_package'])
                 </div>
-            </form>
-        </div>
+
+                <!-- Arabic Tab Content -->
+                <div class="language-content hidden" data-lang="ar">
+                    <div class="grid gap-4">
+                        <div>
+                            <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
+                                {{ __('main.title_ar') }} <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_ar" name="title_ar" required
+                                value="{{ old('title_ar') }}" placeholder="أدخل العنوان بالعربية">
+                            @error('title_ar')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order (Common) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="order" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.order') }}</label>
+                        <input type="number" id="order" name="order" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            value="{{ old('order', 0) }}" placeholder="0">
+                        @error('order')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Photo Upload -->
+                @include('dashboard.components.photo', ['column' => 'image'])
+
+                <!-- Features -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h6 class="block text-sm font-medium text-gray-600">{{ __('main.features') }}</h6>
+                        <button type="button" id="addFeatureBtn" class="kt-btn kt-btn-sm kt-btn-outline-primary">
+                            <i class="fas fa-plus mr-2"></i> {{ __('main.add_feature') }}
+                        </button>
+                    </div>
+
+                    <div id="featuresContainer" class="space-y-4">
+                        <!-- Features will be added here -->
+                    </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="flex flex-wrap" style="gap: 10px 40px;">
+                    <div class="flex items-center gap-3">
+                        <input type="hidden" name="is_active" value="0">
+                        @include('dashboard.components.checkbox-button', [
+                            'name' => 'is_active',
+                            'id' => 'is_active',
+                            'value' => '1',
+                            'checked' => old('is_active', 1),
+                            'label' => __('main.active'),
+                        ])
+                    </div>
+                </div>
+
+                <!-- Save Submit -->
+                @include('dashboard.components.save-submit', ['models' => 'dashboard.marketing-packages', 'model' => 'marketing_package'])
+            </div>
+        </form>
     </div>
 @endsection
 

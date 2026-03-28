@@ -175,6 +175,9 @@ return [
     'closing time must be after opening time.' => 'Closing time must be after opening time.',
     'capacity must be at least 1.' => 'Capacity must be at least 1.',
     // Notification messages
+    'selected_notifications_deleted' => 'Selected notifications deleted successfully.',
+    'all_notifications_deleted' => 'All notifications deleted successfully.',
+    'no_notifications_selected' => 'No notifications selected.',
     'notification_marked_read' => 'Notification marked as read.',
     'notification_marked_unread' => 'Notification marked as unread.',
     'all_notifications_marked_read' => 'All notifications marked as read.',

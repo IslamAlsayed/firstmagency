@@ -4,7 +4,7 @@
 @section('page-title', '📄 ' . $service->slug)
 
 @section('content')
-    <div class="kt-container-fixed p-0">
+    <div class="shadow-md radius-lg p-6">
         <div class="flex flex-wrap items-center lg:items-end justify-between gap-4 pb-6">
             <div class="flex flex-col justify-center gap-2">
                 <h1 class="text-xl font-medium leading-none text-mono">
@@ -26,12 +26,10 @@
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="kt-container-fixed p-0">
         <div class="grid gap-4 lg:gap-6">
             <!-- Main Content -->
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title">{{ __('main.type_information', ['type' => __('main.service')]) }}</h3>
                 </div>
@@ -74,7 +72,7 @@
             </div>
 
             <!-- Translations with Language Tabs -->
-            <div class="kt-card">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title"><i class="fas fa-language mr-2"></i>{{ __('main.translations') }}</h3>
                 </div>

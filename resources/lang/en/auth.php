@@ -46,4 +46,9 @@ return [
     'submit' => 'Submit',
     'dashboard_title' => 'Dashboard',
     'system_name' => 'System',
+    'failed' => 'These credentials do not match our records.',
+    'failed_login' => 'Login failed. Please check your email and password.',
+    'password_reset_success' => 'Password reset successfully. You can now log in with your new password.',
+    'invalid_token' => 'Invalid password reset token.',
+    'invalid_user' => 'No user found with this email address.',
 ];
