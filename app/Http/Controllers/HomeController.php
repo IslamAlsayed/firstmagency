@@ -15,21 +15,21 @@ class HomeController extends Controller
     public function index(): View
     {
         $data = [
-            'settings' => Cache::remember('home_settings', 3600, function () {
+            'settings' => Cache::remember('home_settings', config('app.cache_time'), function () {
                 return Setting::first();
             }),
 
-            'services' => Cache::remember('home_services', 1800, function () {
+            'services' => Cache::remember('home_services', config('app.cache_time'), function () {
                 return Service::active()->orderBy('order')->get();
             }),
 
-            'projects' => Cache::remember('home_projects', 1800, function () {
+            'projects' => Cache::remember('home_projects', config('app.cache_time'), function () {
                 return Project::active()->orderBy('order')->get();
             }),
 
             'reviews' => Review::approved()->orderBy('created_at', 'desc')->get(),
 
-            // 'reviews' => Cache::remember('home_reviews', 1800, function () {
+            // 'reviews' => Cache::remember('home_reviews', config('app.cache_time'), function () {
             //     return Review::approved()->orderBy('created_at', 'desc')->get();
             // }),
 

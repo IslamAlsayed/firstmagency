@@ -12,11 +12,11 @@ class AboutController extends Controller
     public function index(): View
     {
         $data = [
-            'lineWorks' => Cache::remember('home_line_works', 1800, function () {
+            'lineWorks' => Cache::remember('home_line_works', config('app.cache_time'), function () {
                 return LineWork::active()->published()->orderBy('order')->get();
             }),
 
-            'partners' => Cache::remember('home_partners', 1800, function () {
+            'partners' => Cache::remember('home_partners', config('app.cache_time'), function () {
                 return Partner::active()->orderBy('order')->get();
             }),
         ];

@@ -8,20 +8,20 @@
         <!-- Dropdown Menu -->
         <div class="absolute right-0 mt-1 w-48 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
             <div class="py-1 max-h-64 overflow-y-auto">
-                @forelse ($availableOptions as $departmentId => $departmentName)
+                @forelse ($availableOptions as $department)
                     @php
-                        $isSelected = ($record->department_id ?? null) == $departmentId;
+                        $isSelected = ($record->department_id ?? null) == $department['id'];
                     @endphp
-                    <form method="POST" action="{{ route('dashboard.departments.change-ticket-department', [$departmentId, $record->id]) }}" style="display:inline;">
+                    <form method="POST" action="{{ route('dashboard.departments.change-ticket-department', [$department['id'], $record->id]) }}" style="display:inline;">
                         @csrf
                         @method('PATCH')
-                        <input type="hidden" name="department_id" value="{{ $departmentId }}">
+                        <input type="hidden" name="department_id" value="{{ $department['id'] }}">
                         <button type="submit"
                             class="w-full text-start cursor-pointer px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2 transition
                             @if ($isSelected) bg-blue-100 text-blue-900 @endif">
 
                             <i class="fas fa-building text-primary"></i>
-                            <span class="flex-1">{{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $departmentName))) }}</span>
+                            <span class="flex-1">{{ app()->getLocale() == 'ar' ? $department['name_ar'] : $department['name'] }}</span>
 
                             @if ($isSelected)
                                 <i class="fas fa-check text-green-600 ms-2"></i>

@@ -61,16 +61,16 @@
                         <div>
                             <p class="text-sm text-gray-500 mb-2">
                                 {{ __('main.status') }}
+                                @include('dashboard.components.status-actions', [
+                                    'record' => $article,
+                                    'models' => 'articles',
+                                    'modelClass' => 'article',
+                                    'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
+                                ])
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold text-white {{ \App\Enum\ArticleEnums::from($article->status)->badgeColor() }}">
                                     {{ __('main.' . $article->status) }}
                                 </span>
                             </p>
-                            @include('dashboard.components.status-actions', [
-                                'record' => $article,
-                                'models' => 'articles',
-                                'modelClass' => 'article',
-                                'availableOptions' => array_column(\App\Enum\ArticleEnums::cases(), 'value'),
-                            ])
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
@@ -132,8 +132,7 @@
                                 <label class="kt-label mb-1">{{ __('main.category') }}</label>
                                 <p class="text-sm text-secondary-foreground">
                                     <span class="kt-badge kt-badge-primary">
-                                        {{-- {{ __('main.' . $article->category->name) }} --}}
-                                        {{ $article->category->name }}
+                                        {{ $article->category->alt_text }}
                                     </span>
                                 </p>
                             </div>
@@ -166,11 +165,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Media Files -->
-            @if (!empty($article->image))
-                @include('dashboard.components.display-photo', ['record' => $article, 'column' => 'image', 'alt' => $article->title . ' Image'])
-            @endif
 
             @if (!empty($article->thumbnail))
                 @include('dashboard.components.display-photo', [

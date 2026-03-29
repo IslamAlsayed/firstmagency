@@ -6,14 +6,14 @@
         text-align: center;
         padding: 150px var(--your-domain-section-inline-padding) 0;
         position: relative;
-        background-color: #F8F8F8;
+        background-color: #f8f8f8;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
         &::after {
-            content: '';
+            content: "";
             width: 100%;
             height: 100%;
             position: absolute;
@@ -55,13 +55,13 @@
             border-radius: 10px;
             box-shadow: 0 0px 15px -2px rgba(0, 0, 0, 0.1);
 
-            &>div {
+            & > div {
                 gap: 10px;
                 padding: 5px;
             }
 
             &::before {
-                content: '';
+                content: "";
                 width: 100%;
                 height: 100%;
                 position: absolute;
@@ -69,7 +69,7 @@
                 left: 0;
                 z-index: -1;
                 border-radius: inherit;
-                background-color: #FFEDDB;
+                background-color: #ffeddb;
                 background-color: var(--hover-color);
             }
 
@@ -178,14 +178,19 @@
             position: relative;
 
             &::before {
-                content: '';
+                content: "";
                 width: 300px;
                 height: 300px;
                 position: absolute;
                 top: -150px;
                 left: -150px;
                 border-radius: 50%;
-                background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.08) 30%, transparent 70%);
+                background: radial-gradient(
+                    circle,
+                    rgba(0, 0, 0, 0.15) 0%,
+                    rgba(0, 0, 0, 0.08) 30%,
+                    transparent 70%
+                );
                 pointer-events: none;
                 filter: blur(20px);
                 opacity: 0.4;
@@ -199,7 +204,12 @@
                 top: 50%;
                 left: 50%;
                 opacity: 0;
-                background: linear-gradient(90deg, transparent 0%, var(--light-color) 50%, transparent 100%);
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    var(--light-color) 50%,
+                    transparent 100%
+                );
                 transform: translateX(-100%) translateY(-100%) rotate(45deg);
                 pointer-events: none;
             }
@@ -231,7 +241,7 @@
     }
 
     .pest-domains-sections.official-domains {
-        background-color: #FFF9F2;
+        background-color: #fff9f2;
         padding-inline: var(--official-domains-section-inline-padding);
 
         & .title,
@@ -245,10 +255,12 @@
             padding: 15px 25px 15px;
             border-radius: 15px;
             transition: 0.2s ease;
-            background-color: #FFF3D4;
+            background-color: #fff3d4;
             /* border: 1px solid var(--light-muted-color); */
             /* box-shadow: 0 4px 6px -5px var(--light-muted-color); */
-            box-shadow: 0 4px 6px -5px #c1c4c7, 0 0 4px var(--dark-muted-color);
+            box-shadow:
+                0 4px 6px -5px #c1c4c7,
+                0 0 4px var(--dark-muted-color);
 
             & .question {
                 font-size: 24px;
@@ -257,7 +269,7 @@
                 color: var(--dark-main-color);
 
                 &::before {
-                    content: '';
+                    content: "";
                     width: calc(100% + 30px);
                     height: calc(100% + 30px);
                     position: absolute;
@@ -302,7 +314,7 @@
                 z-index: 10;
 
                 &::before {
-                    content: '';
+                    content: "";
                     width: 35px;
                     height: 35px;
                     position: absolute;
@@ -356,7 +368,7 @@
         background-color: var(--articles-background-color);
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             width: 100%;
             height: 100%;
@@ -386,10 +398,23 @@
             max-height: fit-content;
             text-align: start;
             border: 1px solid var(--dark-muted-color);
-            box-shadow: 0 12px 26px rgba(0, 0, 0, .07);
-            background: radial-gradient(circle at 15% 15%, rgba(146, 149, 255, 0.18), transparent 55%),
-                radial-gradient(circle at 85% 25%, rgba(6, 182, 212, .10), transparent 55%),
-                radial-gradient(circle at 30% 90%, rgba(245, 158, 11, .10), transparent 55%);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.07);
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(146, 149, 255, 0.18),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    rgba(6, 182, 212, 0.1),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    circle at 30% 90%,
+                    rgba(245, 158, 11, 0.1),
+                    transparent 55%
+                );
 
             &::before {
                 height: 300%;
@@ -424,6 +449,96 @@
         & .description {
             font-size: 18px;
             font-weight: bold;
+        }
+    }
+
+    .payments-section {
+        background-color: #f1f1f1;
+        padding: 100px 20px;
+        border-radius: 8px;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            top: 0;
+            right: 0;
+            opacity: 0.15;
+            background-image: url(assets/images/website/payments/bg.png);
+            background-position: right;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        & .title {
+            font-weight: 900;
+            font-size: 30px;
+        }
+
+        & .description {
+            font-size: 16px;
+        }
+
+        .payments-items {
+            flex-direction: row-reverse;
+        }
+
+        .payment-label {
+            display: none;
+        }
+
+        .payment-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 3px #f9741630;
+
+            img {
+                filter: grayscale(100%) brightness(1.2);
+            }
+
+            .payment-label {
+                display: block;
+            }
+        }
+
+        .payment-image {
+            width: 110px;
+            height: 110px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--light-muted-color);
+            position: relative;
+
+            .payment-label {
+                position: absolute;
+                left: 50%;
+                bottom: 5px;
+                font-size: 12px;
+                padding: 2px 6px;
+                text-wrap: nowrap;
+                border-radius: 15px;
+                color: var(--light-color);
+                transform: translateX(-50%);
+                background-color: var(--main-color);
+                font-weight: 500;
+                z-index: 10;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    html[lang="en"] {
+        .payments-section {
+            &::before {
+                right: auto;
+                left: 0;
+            }
         }
     }
 }
@@ -485,9 +600,33 @@
         }
 
         .pest-domains-sections {
-            &>div {
+            & > div {
                 display: flex;
                 flex-direction: column;
+            }
+        }
+
+        .payments-section {
+            padding: 50px 15px;
+
+            &::before {
+                width: 200px;
+                height: 200px;
+                top: -50px;
+                right: -50px;
+            }
+
+            & .title {
+                font-size: 20px;
+            }
+
+            & .description {
+                font-size: 12px;
+            }
+
+            .payment-image {
+                width: 80px;
+                height: 80px;
             }
         }
     }
@@ -506,12 +645,12 @@
                 font-size: 20px;
             }
 
-            h2+p {
+            h2 + p {
                 font-size: 12px;
             }
 
             .filter-domains {
-                &>div {
+                & > div {
                     margin-bottom: 20px;
                 }
 
@@ -530,7 +669,7 @@
                     height: 35px;
                 }
 
-                &>div:last-child {
+                & > div:last-child {
                     width: 100%;
                     margin-bottom: 20px;
 
@@ -540,7 +679,7 @@
                 }
 
                 .domain-extension {
-                    width: 100%
+                    width: 100%;
                 }
             }
         }

@@ -14,6 +14,7 @@ class ProgrammingCategory extends Model
     protected $fillable = [
         'slug',
         'name',
+        'name_ar',
         'image',
         'alt_text',
         'order',

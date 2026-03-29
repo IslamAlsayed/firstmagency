@@ -51,7 +51,7 @@
                                                 'id' => 'permission_' . $permission->id,
                                                 'value' => $permission->id,
                                                 'checked' => in_array($permission->id, old('permissions', $rolePermissions)) ? 'checked' : '',
-                                                'label' => __('main.' . strtolower($permission->name)),
+                                                'label' => __('main.' . str_replace(' ', '-', str_replace('_', '-', $permission->name))),
                                             ])
                                         </div>
                                     @endforeach

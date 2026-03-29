@@ -18,6 +18,12 @@
             <i class="fas fa-bars text-xl"></i>
         </button>
 
+        @if (getActiveUser()->role == 'support' && !request()->routeIs('dashboard.index'))
+            <a href="{{ route('dashboard.index') }}" class="shineEffect" style="width: calc(var(--width_logo_sidebar) / 1.5) ; margin: auto;">
+                <img src="{{ asset('assets/images/website/logo.png') }}" alt="{{ __('main.brand_name') }} {{ __('main.logo') }}">
+            </a>
+        @endif
+
         <h2>@yield('page-title')</h2>
     </div>
 
@@ -116,7 +122,7 @@
             <div class="profile">
                 <div class="user">
                     <div class="user-name">{{ getActiveUser()?->name ?? __('main.super_admin') }}</div>
-                    <p class="user-role {{ getActiveUser()?->role ?? 'superadmin' }}">{{ getActiveUser()?->role ?? 'superadmin' }}</p>
+                    <p class="user-role">{{ getActiveUser()?->role ?? 'superadmin' }}</p>
                 </div>
                 <div class="img-box">
                     @if (getActiveUser()?->photo && checkExistFile(getActiveUser()->photo))
@@ -133,9 +139,9 @@
             <div class="menu">
                 <ul>
                     <li>
-                        <a href="{{ route('dashboard.roles.show', getActiveUserId()) }}" class="menu-link">
+                        <a href="{{ route('dashboard.myPermissions') }}" class="menu-link">
                             <i class="ph-bold ph-user"></i>
-                            {{ __('main.my_roles_and_permissions') }}
+                            {{ __('main.my_permissions') }}
                         </a>
                     </li>
                     <li>
@@ -144,11 +150,13 @@
                             &nbsp;{{ __('main.my_profile') }}
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('dashboard.settings.index') }}" class="menu-link">
-                            <i class="ph-bold ph-gear-six"></i>&nbsp;{{ __('main.settings') }}
-                        </a>
-                    </li>
+                    @can('settings-read')
+                        <li>
+                            <a href="{{ route('dashboard.settings.index') }}" class="menu-link">
+                                <i class="ph-bold ph-gear-six"></i>&nbsp;{{ __('main.settings') }}
+                            </a>
+                        </li>
+                    @endcan
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="">
                             @csrf

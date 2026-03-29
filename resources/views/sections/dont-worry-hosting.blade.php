@@ -12,7 +12,8 @@
             </a>
         </div>
         <div class="image">
-            <img src="{{ asset('assets/images/website/hosting/dont-worry-bg.png') }}" alt="{{ __('main.dont_worry_image') }}" class="img-fluid">
+            <img src="{{ asset('assets/images/website/hosting/dont-worry-bg.png') }}" alt="{{ __('main.dont_worry_image') }}" class="img-fluid clickable-img" loading="lazy"
+                data-src="{{ asset('assets/images/website/hosting/dont-worry-bg.png') }}">
         </div>
     </div>
     @if (isDebugModeEnabled())

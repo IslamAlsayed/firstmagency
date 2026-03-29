@@ -29,7 +29,8 @@
                     <div class="image">
                         @if ($domain instanceof \App\Models\PestDomain)
                             @if ($domain->image)
-                                <img src="{{ asset('storage/' . $domain->image) }}" alt="{{ $domain->slug ?? '' }}">
+                                <img src="{{ asset('storage/' . $domain->image) }}" alt="{{ $domain->slug ?? '' }}" class="clickable-img" loading="lazy"
+                                    data-src="{{ asset('storage/' . $domain->image) }}">
                             @else
                                 <i class="fas fa-globe text-4xl text-gray-400"></i>
                             @endif

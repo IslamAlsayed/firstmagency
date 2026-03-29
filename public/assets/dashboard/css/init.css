@@ -36,12 +36,13 @@
     --main-transition-duration: 300ms;
     --main-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
-    --dash_primary_color: #F54900;
+    --dash_primary_color: #f54900;
     --text_color: #ffffff;
     --icon_color: #4a5565;
-    --button_color: #0074F7;
+    --button_color: #0074f7;
 
-    --font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
+    --font-family:
+        "Tajawal", system-ui, -apple-system, Segoe UI, Aria !important;
 
     --hover-light-1: #ffffff1a;
     --hover-light-2: #ffffff33;
@@ -86,27 +87,27 @@ body:has(.sidebar.small-sidebar) {
 }
 
 .radius-lg {
-    border-radius: var(--radius);
+    border-radius: var(--radius) !important;
 }
 
 .radius-md {
-    border-radius: calc(var(--radius) / 2);
+    border-radius: calc(var(--radius) / 2) !important;
 }
 
 .radius-sm {
-    border-radius: calc(var(--radius) / 4);
+    border-radius: calc(var(--radius) / 4) !important;
 }
 
 .shadow-sm {
-    box-shadow: 0 5px 14px 7px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 14px 7px rgba(0, 0, 0, 0.05) !important;
 }
 
 .shadow-md {
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
 .shadow-lg {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* *:has([class*='@']),
@@ -125,7 +126,7 @@ body {
     background-color: #fdfdff;
 
     &.sidebar-closed::after {
-        content: '';
+        content: "";
         position: fixed;
         top: 0;
         left: 0;
@@ -166,7 +167,8 @@ body.index-blur {
 
 .scroll-container::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    scrollbar-color: var(--scrollbar-thumb-color, var(--color-input)) transparent;
+    scrollbar-color: var(--scrollbar-thumb-color, var(--color-input))
+        transparent;
     background-color: var(--scrollbar-thumb-color, var(--color-input));
 }
 
@@ -174,12 +176,16 @@ body.index-blur {
     background-color: transparent;
 }
 
-
 .main-content {
-    /* flex: 1; */
     width: calc(100% - var(--sidebar-width));
     margin-inline-start: var(--sidebar-width);
-    transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    transition: all var(--sidebar-transition-duration)
+        var(--sidebar-transition-timing);
+
+    &.no-sidebar {
+        width: 100% !important;
+        margin-inline-start: 0 !important;
+    }
 }
 
 .sidebar {
@@ -194,7 +200,8 @@ body.index-blur {
     color: var(--dark-color);
     background-color: var(--light-color);
     background-color: var(--light-color);
-    transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    transition: all var(--sidebar-transition-duration)
+        var(--sidebar-transition-timing);
     box-shadow: inset 2px 2px 23px -15px var(--dark-color);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -209,7 +216,8 @@ body.index-blur {
         z-index: 1;
         opacity: 1;
         visibility: visible;
-        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: all var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
 
         &.hide {
             opacity: 0;
@@ -246,7 +254,8 @@ body.index-blur {
         margin-bottom: 5px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: all var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
     }
 
     .sidebar-logo h4 {
@@ -254,7 +263,8 @@ body.index-blur {
         font-size: 22px;
         font-weight: bold;
         white-space: nowrap;
-        transition: opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: opacity var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
     }
 
     .sidebar-logo button {
@@ -262,7 +272,8 @@ body.index-blur {
     }
 
     .sidebar-logo span {
-        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: all var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
         display: inline;
     }
 
@@ -288,7 +299,8 @@ body.index-blur {
         text-decoration: none;
         text-overflow: ellipsis;
         color: var(--dark-color);
-        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: all var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
     }
 
     .nav-menu .nav-link.active {
@@ -308,8 +320,8 @@ body.index-blur {
         transform: translateX(5px);
     }
 
-    .nav-menu .nav-link>li,
-    .nav-menu .nav-link>svg {
+    .nav-menu .nav-link > li,
+    .nav-menu .nav-link > svg {
         width: 15px;
         height: 15px;
         font-size: 18px;
@@ -337,10 +349,11 @@ body.index-blur {
         border-radius: 8px 8px 0 0 !important;
     }
 
-    .nav-menu .submenu-item .submenu-btn.active>i,
-    .nav-menu .submenu-item .submenu-btn.active>svg {
+    .nav-menu .submenu-item .submenu-btn.active > i,
+    .nav-menu .submenu-item .submenu-btn.active > svg {
         transform: rotate(180deg);
-        transition: var(--main-transition-duration) var(--main-transition-timing);
+        transition: var(--main-transition-duration)
+            var(--main-transition-timing);
     }
 
     .nav-menu .submenu-list {
@@ -348,7 +361,8 @@ body.index-blur {
         position: relative;
         /* cursor: pointer; */
         border-radius: 0 0 8px 8px;
-        transition: max-height var(--main-transition-duration) var(--main-transition-timing);
+        transition: max-height var(--main-transition-duration)
+            var(--main-transition-timing);
         overflow: hidden;
         filter: saturate(1.5);
         background-color: var(--hover-dark-1);
@@ -356,7 +370,8 @@ body.index-blur {
 
     .nav-menu .submenu-list.show {
         max-height: 500px;
-        transition: max-height calc(var(--main-transition-duration) * 1.5) var(--main-transition-timing);
+        transition: max-height calc(var(--main-transition-duration) * 1.5)
+            var(--main-transition-timing);
     }
 
     .nav-menu .submenu-list li:not(:last-child),
@@ -390,7 +405,6 @@ body.index-blur {
     }
 }
 
-
 @media (min-width: 991px) and (max-width: 1180px) {
     .sidebar.small-sidebar {
         overflow: visible;
@@ -418,7 +432,8 @@ body.index-blur {
                 background-color: var(--light-color);
                 opacity: 0;
                 visibility: hidden;
-                transition: all var(--main-transition-duration) var(--main-transition-timing);
+                transition: all var(--main-transition-duration)
+                    var(--main-transition-timing);
             }
         }
 
@@ -441,7 +456,7 @@ body.index-blur {
         }
 
         .span-brand,
-        .nav-menu>li .span-text,
+        .nav-menu > li .span-text,
         .nav-menu .nav-link .nav-icon,
         .nav-menu .nav-link .text-sm,
         .nav-menu .nav-link .span-text {
@@ -449,7 +464,7 @@ body.index-blur {
         }
     }
 
-    html[lang=ar] {
+    html[lang="ar"] {
         .sidebar.small-sidebar {
             .nav-menu .nav-link.submenu-btn:not(.active) {
                 &::before {
@@ -464,7 +479,7 @@ body.index-blur {
     }
 }
 
-html[lang=ar] {
+html[lang="ar"] {
     .sidebar {
         .nav-menu .nav-link:not(.submenu-btn):hover span:not(.main-icon) {
             transform: translateX(-5px);
@@ -473,7 +488,7 @@ html[lang=ar] {
 }
 
 @media (min-width: 991px) {
-    html[lang=en] {
+    html[lang="en"] {
         .sidebar {
             left: 0;
             right: auto;
@@ -503,7 +518,7 @@ html[lang=ar] {
         left: 0;
     }
 
-    html[lang=ar] {
+    html[lang="ar"] {
         .sidebar {
             right: -100%;
             left: auto;
@@ -538,7 +553,8 @@ html[lang=ar] {
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: all var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
     }
 
     #closeSidebar:hover {
@@ -582,7 +598,8 @@ html[lang=ar] {
     .sidebar {
         left: auto;
         right: -100%;
-        transition: left var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+        transition: left var(--sidebar-transition-duration)
+            var(--sidebar-transition-timing);
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     }
 
@@ -591,8 +608,8 @@ html[lang=ar] {
     }
 
     /* Hide submenu arrow icon in small screens */
-    .nav-menu .submenu-item .submenu-btn>i:last-of-type,
-    .nav-menu .submenu-item .submenu-btn>svg:last-of-type {
+    .nav-menu .submenu-item .submenu-btn > i:last-of-type,
+    .nav-menu .submenu-item .submenu-btn > svg:last-of-type {
         display: none !important;
     }
 
@@ -666,7 +683,7 @@ html[lang=ar] {
         gap: 10px;
     }
 
-    .topbar>div:first-child {
+    .topbar > div:first-child {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -702,7 +719,7 @@ html[lang=ar] {
         font-size: 14px;
     }
 
-    .topbar>div>div {
+    .topbar > div > div {
         gap: 6px;
     }
 
@@ -738,9 +755,8 @@ html[lang=ar] {
 
 @media (max-width: 425px) {
     .sidebar {
-
-        .nav-menu .nav-link>li,
-        .nav-menu .nav-link>svg {
+        .nav-menu .nav-link > li,
+        .nav-menu .nav-link > svg {
             width: 10px;
         }
 
@@ -770,7 +786,8 @@ html[lang=ar] {
     background-color: var(--hover-light-1) !important;
     border-radius: 8px;
     cursor: pointer;
-    transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    transition: all var(--sidebar-transition-duration)
+        var(--sidebar-transition-timing);
     flex-shrink: 0;
 }
 
@@ -784,7 +801,8 @@ html[lang=ar] {
 }
 
 #toggleSidebar i {
-    transition: transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    transition: transform var(--sidebar-transition-duration)
+        var(--sidebar-transition-timing);
 }
 
 [toggle-button]:active {
@@ -802,7 +820,8 @@ html[lang=ar] {
 .header {
     width: calc(100% - var(--sidebar-width));
     margin-inline-start: var(--sidebar-width);
-    transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    transition: all var(--sidebar-transition-duration)
+        var(--sidebar-transition-timing);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -852,7 +871,8 @@ html[lang=ar] {
         svg {
             color: var(--light-color);
             color: var(--dark-color);
-            transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+            transition: all var(--sidebar-transition-duration)
+                var(--sidebar-transition-timing);
         }
 
         .action-button {
@@ -871,7 +891,8 @@ html[lang=ar] {
             color: var(--dark-color);
             background-color: var(--hover-light-1);
             /* box-shadow: 0 5px 8px -3px var(--hover-dark-1); */
-            transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+            transition: all var(--sidebar-transition-duration)
+                var(--sidebar-transition-timing);
         }
 
         .action-button:hover {
@@ -916,12 +937,14 @@ html[lang=ar] {
     }
 
     .menu-toggle::before {
-        content: '';
+        content: "";
         position: absolute;
         width: 24px;
         height: 4px;
         background: #000;
-        box-shadow: 0 8px 0 #000, 0 -8px 0 #000;
+        box-shadow:
+            0 8px 0 #000,
+            0 -8px 0 #000;
     }
 
     .profile {
@@ -949,7 +972,8 @@ html[lang=ar] {
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--hover-light-2);
-            transition: all var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+            transition: all var(--sidebar-transition-duration)
+                var(--sidebar-transition-timing);
         }
 
         .img-box img {
@@ -1012,11 +1036,12 @@ html[lang=ar] {
         transform: translateY(-10px);
         background: var(--light-color);
         box-shadow: 0 10px 30px var(--hover-dark-2);
-        transition: all var(--main-transition-duration) var(--main-transition-timing);
+        transition: all var(--main-transition-duration)
+            var(--main-transition-timing);
         /* overflow: hidden; */
 
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: -10px;
             right: 14px;
@@ -1066,7 +1091,8 @@ html[lang=ar] {
             align-items: center;
             text-decoration: none;
             color: var(--dark-color);
-            transition: all var(--main-transition-duration) var(--main-transition-timing);
+            transition: all var(--main-transition-duration)
+                var(--main-transition-timing);
             font-size: 14px;
             border: none;
             background: none;
@@ -1086,7 +1112,7 @@ html[lang=ar] {
     }
 }
 
-html[lang=ar] {
+html[lang="ar"] {
     .topbar {
         .profile {
             justify-content: flex-start;
@@ -1295,4 +1321,9 @@ tbody tr:nth-child(odd) {
 
 td:first-child {
     padding-inline-start: 10px;
+}
+
+.marker {
+    color: black;
+    background-color: yellow;
 }

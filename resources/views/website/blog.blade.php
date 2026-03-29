@@ -53,13 +53,19 @@
                                 </div>
                             @endif
                         @endforeach
+                    @else
+                        <div class="col-span-full text-center py-10">
+                            <p class="text-gray-500">{{ __('main.no_articles_found') }}</p>
+                        </div>
                     @endif
                 </div>
             </div>
 
-            <button class="btn-link font-semibold details more" id="loadMoreBtn">
-                <span>{{ __('main.more') }}</span>
-            </button>
+            @if ($articles && count($articles) > 0)
+                <button class="btn-link font-semibold details more" id="loadMoreBtn">
+                    <span>{{ __('main.more') }}</span>
+                </button>
+            @endif
 
             @if ($articles && count($articles) > 0)
                 <script>

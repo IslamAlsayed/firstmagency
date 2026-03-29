@@ -31,7 +31,8 @@ class TicketController extends Controller
             $tickets = $tickets->where('department_id', getActiveUser()->department->id);
         }
         $tickets = $tickets->latest()->paginate(15);
-        return view('dashboard.tickets.index', compact('tickets'));
+        $departments = Department::get(['id', 'name', 'name_ar', 'user_id']);
+        return view('dashboard.tickets.index', compact('tickets', 'departments'));
     }
 
     public function deleted()
@@ -40,23 +41,18 @@ class TicketController extends Controller
         if (getActiveUser()->role == 'support' && getActiveUser()->department) {
             $tickets = $tickets->where('department_id', getActiveUser()->department->id);
         }
-
         $tickets = $tickets->latest('deleted_at')->paginate(15);
-
-        return view('dashboard.tickets.deleted', compact('tickets'));
+        $departments = Department::get(['id', 'name', 'name_ar', 'user_id']);
+        return view('dashboard.tickets.deleted', compact('tickets', 'departments'));
     }
 
     public function restore($id)
     {
         $ticket = Ticket::withTrashed()->find($id);
-        if (!$ticket) {
+        if (!$ticket)
             return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
-        }
-
         $this->authorize('restore', $ticket);
-
         $ticket->restore();
-
         return redirect()->route('dashboard.tickets.deleted')->withSuccess(__('main.ticket') . ' ' . __('main.restored'));
     }
 
@@ -64,8 +60,7 @@ class TicketController extends Controller
     {
         $this->authorize('create', Ticket::class);
         $users = User::whereIn('role', ['superadmin', 'admin', 'support'])->get();
-        $departments = Department::get(['id', 'name']);
-
+        $departments = Department::get(['id', 'name', 'name_ar', 'user_id']);
         $a = rand(1, 9);
         $b = rand(1, 9);
         session(['ticket_verification' => $a + $b]);
@@ -120,7 +115,7 @@ class TicketController extends Controller
     {
         // $ticket = Ticket::with(['assignedTo', 'messages.department', 'messages.user', 'department.supportUser'])->find($id);
         $ticket = Ticket::with(['assignedTo', 'department.user'])->find($id);
-        $departments = Department::get(['id', 'name', 'user_id']);
+        $departments = Department::get(['id', 'name', 'name_ar', 'user_id']);
         $this->authorize('view', $ticket);
         if (!$ticket)
             return redirect()->route('dashboard.tickets.index')->withError(__('messages.type_not_found', ['type' => __('main.ticket')]));
@@ -183,6 +178,10 @@ class TicketController extends Controller
     public function supportReply($ticketId)
     {
         $ticket = Ticket::with(['messages', 'messages.user.department'])->find($ticketId);
+        $user = getActiveUser();
+        if ($user->role === 'support' && $user->department && $ticket->department_id != $user->department->id) {
+            return redirect()->route('dashboard.tickets.index')->withError(__('messages.unauthorized_action'));
+        }
 
         $messagesData = $ticket->messages->map(function ($message) {
             $user = $message->user;

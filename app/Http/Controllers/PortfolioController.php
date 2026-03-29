@@ -9,7 +9,7 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $portfolio = Cache::remember('home_portfolio', 1800, function () {
+        $portfolio = Cache::remember('home_portfolio', config('app.cache_time'), function () {
             return Portfolio::active()->orderBy('order')->get();
         });
 

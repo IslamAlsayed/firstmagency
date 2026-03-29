@@ -21,7 +21,7 @@ class ArticleController extends Controller
         $this->authorize('viewAny', Article::class);
         $isAdmin = in_array(getActiveUser()->role, ['admin', 'superadmin']);
 
-        $articles = Article::with(['category', 'creator']);
+        $articles = Article::select(['id', 'category_id', 'created_by', 'status', 'created_at', 'updated_at', 'deleted_at'])->with(['category', 'creator']);
         if (!$isAdmin) {
             $articles = $articles->published();
         }
@@ -48,6 +48,7 @@ class ArticleController extends Controller
     {
         $this->authorize('create', Article::class);
         $categories = ProgrammingCategory::active()->get();
+        // dd($categories->toArray());
         return view('dashboard.articles.create', compact('categories'));
     }
 
@@ -73,9 +74,6 @@ class ArticleController extends Controller
         $validated['translations'] = $translations;
         $article = Article::create($validated);
 
-        if ($request->hasFile('image')) {
-            $this->uploadSinglePhoto($request, $article, 'image', 'articles/images');
-        }
         if ($request->hasFile('thumbnail')) {
             $this->uploadSinglePhoto($request, $article, 'thumbnail', 'articles/thumbnails');
         }
@@ -132,9 +130,6 @@ class ArticleController extends Controller
         $validated['translations'] = $translations;
         $updated = $article->update($validated);
 
-        if ($request->hasFile('image')) {
-            $this->uploadSinglePhoto($request, $article, 'image', 'articles/images');
-        }
         if ($request->hasFile('thumbnail')) {
             $this->uploadSinglePhoto($request, $article, 'thumbnail', 'articles/thumbnails');
         }

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -29,5 +30,13 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (AccessDeniedHttpException $e, $request) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'message' => __('auth.unauthorized_action')
+                ], 403);
+            }
+
+            return redirect()->route('dashboard.index')->withError(__('auth.forbidden'));
+        });
     })->create();

@@ -44,9 +44,9 @@
                                 </a>
                             </button>
                             <button class="btn-link main-color font-semibold">
-                                <a href="#contact">
+                                <span class="clickable-img" data-src="{{ asset('storage/' . $work->image) }}">
                                     <i class="icon fa-solid fa-search"></i>
-                                </a>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -83,9 +83,9 @@
                                 </div>
                             </button>
                             <button class="btn-link main-color font-semibold">
-                                <a href="{{ route('portfolio.show', ['id' => $i + 1, 'slug' => $work['title']]) }}">
+                                <span class="clickable-img" data-src="{{ asset('assets/images/website/portfolio/' . ($i + 1) . '.jpg') }}">
                                     <i class="icon fa-solid fa-search"></i>
-                                </a>
+                                </span>
                             </button>
                         </div>
                     </div>

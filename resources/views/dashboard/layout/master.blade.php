@@ -32,10 +32,13 @@
 
     <!-- Page -->
     <div class="dashboard-container">
-        @include('dashboard.layout.sidebar')
+        @if (getActiveUser()->role != 'support')
+            @include('dashboard.layout.sidebar')
+        @endif
 
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content {{ getActiveUser()->role == 'support' ? 'no-sidebar' : '' }}">
+            {{-- <main class="main-content"> --}}
             @include('dashboard.layout.topbar')
 
             <div class="p-6 page-content">

@@ -34,7 +34,7 @@
 
         <div class="grid gap-4">
             {{-- Ticket Information --}}
-            <div class="kt-card ">
+            <div class="shadow-md radius-lg">
                 <div class="kt-card-header">
                     <h3 class="kt-card-title">{{ __('main.ticket_information') }}</h3>
                 </div>
@@ -101,10 +101,10 @@
                                     'record' => $ticket,
                                     'models' => 'tickets',
                                     'modelClass' => 'ticket',
-                                    'availableOptions' => $departments->pluck('name', 'id')->toArray(),
+                                    'availableOptions' => $departments,
                                 ])
                                 <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
-                                    {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
+                                    {{ app()->getLocale() == 'ar' ? $ticket->department?->name_ar : $ticket->department?->name }}
                                 </span>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                 @endphp
 
                 @if (count($allAttachments) > 0)
-                    <div class="kt-card ">
+                    <div class="shadow-md radius-lg">
                         <div class="kt-card-header">
                             <h3 class="kt-card-title">{{ __('main.attachments') }} <span class="font-semibold text-primary">({{ count($allAttachments) ?? 0 }})</span></h3>
                         </div>

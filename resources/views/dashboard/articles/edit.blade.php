@@ -17,10 +17,10 @@
                     <div>
                         <label for="category_id" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }}</label>
                         <select class="kt-select basic-single" id="category_id" name="category_id">
-                            <option value="">--</option>
+                            <option value="" selected disabled>--</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ old('category_id', $article->category_id) == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
+                                    {{ $category->alt_text }}
                                 </option>
                             @endforeach
                         </select>
@@ -47,6 +47,7 @@
 
                 <!-- Arabic Tab Content -->
                 <div class="language-content" data-lang="ar">
+
                     <div class="grid gap-4">
                         <div>
                             <label for="title_ar" class="block text-sm font-medium text-gray-600 mb-1">
@@ -60,14 +61,12 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- الوصف --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_ar',
                                 'value' => old('description_ar', $article->translations['ar']['description'] ?? ''),
                                 'placeholder' => 'أدخل الوصف بالعربية',
                             ])
 
-                            {{-- المحتوى --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_ar',
                                 'value' => old('content_ar', $article->translations['ar']['content'] ?? ''),
@@ -78,8 +77,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label for="keywords_ar" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_ar') }}</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="keywords_ar" name="keywords_ar"
-                                    value="{{ old('keywords_ar', $article->translations['ar']['keywords'] ?? '') }}" placeholder="كلمة1، كلمة2، كلمة3">
+                                <input type="text" name="keywords_ar" id="keywords_ar" class="kt-input h-fit tagify-container"
+                                    value="{{ old('keywords_ar', $article->translations['ar']['keywords'] ?? '') }}" placeholder="كلمة">
                                 @error('keywords_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -100,6 +99,7 @@
 
                 <!-- English Tab Content -->
                 <div class="language-content hidden" data-lang="en">
+
                     <div class="grid gap-4">
                         <div>
                             <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
@@ -111,14 +111,12 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- Description --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_en',
                                 'value' => old('description_en', $article->translations['en']['description'] ?? ''),
                                 'placeholder' => 'Enter description in English',
                             ])
 
-                            {{-- Content --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_en',
                                 'value' => old('content_en', $article->translations['en']['content'] ?? ''),
@@ -129,8 +127,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label for="keywords_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_en') }}</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="keywords_en" name="keywords_en"
-                                    value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}" placeholder="keyword1, keyword2, keyword3">
+                                <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container"
+                                    value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}" placeholder="word">
                                 @error('keywords_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -151,7 +149,6 @@
 
                 <!-- Media & Other Fields -->
                 <div class="grid grid-cols-1 gap-6">
-                    @include('dashboard.components.photo', ['column' => 'image', 'record' => $article])
                     @include('dashboard.components.photo', ['column' => 'thumbnail', 'record' => $article])
                 </div>
 
@@ -175,3 +172,47 @@
         </form>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tagify
+            var inputs = document.querySelectorAll('.tagify-container');
+            if (inputs) {
+                inputs.forEach(input => {
+                    new Tagify(input, {
+                        maxTags: 20,
+                        dropdown: {
+                            maxItems: 20,
+                            classname: "tags-look",
+                            enabled: 0,
+                            closeOnSelect: false
+                        }
+                    });
+                });
+            }
+            // CKEditor
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 500
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
+        });
+    </script>
+@endpush

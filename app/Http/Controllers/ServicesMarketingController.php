@@ -14,23 +14,23 @@ class ServicesMarketingController extends Controller
     public function index()
     {
         $data = [
-            'platforms' => Cache::remember('marketing_platforms', 1800, function () {
+            'platforms' => Cache::remember('marketing_platforms', config('app.cache_time'), function () {
                 return PlatformManagement::active()->ordered()->get();
             }),
 
-            'work_steps' => Cache::remember('marketing_work_steps', 1800, function () {
+            'work_steps' => Cache::remember('marketing_work_steps', config('app.cache_time'), function () {
                 return WorkUsStep::active()->ordered()->get();
             }),
 
-            'packages' => Cache::remember('marketing_packages', 1800, function () {
+            'packages' => Cache::remember('marketing_packages', config('app.cache_time'), function () {
                 return MarketingPackage::active()->ordered()->get();
             }),
 
-            'articles' => Cache::remember('marketing_articles', 1800, function () {
+            'articles' => Cache::remember('marketing_articles', config('app.cache_time'), function () {
                 return Article::active()->forMarketing()->limit(4)->get();
             }),
 
-            'faqs' => Cache::remember('marketing_faqs', 1800, function () {
+            'faqs' => Cache::remember('marketing_faqs', config('app.cache_time'), function () {
                 return FAQ::active()->servicesMarketing()->get();
             }),
         ];

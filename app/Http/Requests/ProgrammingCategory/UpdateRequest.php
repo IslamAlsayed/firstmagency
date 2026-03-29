@@ -20,6 +20,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'nullable|string|max:255',
+            'name_ar' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'alt_text' => 'nullable|string|max:255',
             'order' => 'nullable|integer|min:0',

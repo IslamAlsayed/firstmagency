@@ -16,7 +16,8 @@
             <button data-target="hosting" class="filter-btn-package active flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/website/hosting/hosting-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/hosting-packages/icon.png') }}" alt="" class="clickable-img"
+                            data-src="{{ asset('assets/images/website/hosting/hosting-packages/icon.png') }}">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_shared') }}</span>
                 </div>
@@ -25,7 +26,8 @@
             <button data-target="reseller" class="filter-btn-package flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/website/hosting/reseller-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/reseller-packages/icon.png') }}" alt="" class="clickable-img"
+                            data-src="{{ asset('assets/images/website/hosting/reseller-packages/icon.png') }}">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_reseller') }}</span>
                 </div>
@@ -34,7 +36,8 @@
             <button data-target="vps" class="filter-btn-package flex items-center justify-between gap-2 cursor-pointer">
                 <div class="flex items-center justify-between gap-2">
                     <div class="image">
-                        <img src="{{ asset('assets/images/website/hosting/vps-packages/icon.png') }}" alt="">
+                        <img src="{{ asset('assets/images/website/hosting/vps-packages/icon.png') }}" alt="" class="clickable-img"
+                            data-src="{{ asset('assets/images/website/hosting/vps-packages/icon.png') }}">
                     </div>
                     <span class="font-semibold">{{ __('main.hosting_packages_vps') }}</span>
                 </div>
@@ -73,10 +76,11 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if ($package->image)
-                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
+                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4 clickable-img"
+                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}" data-src="{{ Storage::url($package->image) }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ __('main.placeholder') }}"
+                                                data-src="{{ asset('assets/images/website/placeholder.png') }}">
                                         @endif
                                     </div>
                                     <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
@@ -133,10 +137,11 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if ($package->image)
-                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
+                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4 clickable-img"
+                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}" data-src="{{ Storage::url($package->image) }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ __('main.placeholder') }}"
+                                                data-src="{{ asset('assets/images/website/placeholder.png') }}">
                                         @endif
                                     </div>
                                     <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
@@ -194,10 +199,11 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if ($package->image)
-                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
+                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4 clickable-img"
+                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}" data-src="{{ Storage::url($package->image) }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ __('main.placeholder') }}"
+                                                data-src="{{ asset('assets/images/website/placeholder.png') }}">
                                         @endif
                                     </div>
                                     <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
@@ -255,10 +261,11 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if ($package->image)
-                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4"
-                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}">
+                                            <img src="{{ Storage::url($package->image) }}" class="w-16 mx-auto mb-4 clickable-img"
+                                                alt="{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}" data-src="{{ Storage::url($package->image) }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ __('main.placeholder') }}"
+                                                data-src="{{ asset('assets/images/website/placeholder.png') }}">
                                         @endif
                                     </div>
                                     <h3 class="package-title text-xl font-semibold">{{ $package->translations[app()->getLocale()]['title'] ?? $package->slug }}</h3>
@@ -315,9 +322,11 @@
                                 <div class="mb-6">
                                     <div class="image">
                                         @if (isset($package['image']))
-                                            <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4" alt="{{ $package['name'] }}">
+                                            <img src="{{ asset('assets/images/website/' . $package['image']) }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ $package['name'] }}"
+                                                data-src="{{ asset('assets/images/website/' . $package['image']) }}">
                                         @else
-                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4" alt="{{ __('main.placeholder') }}">
+                                            <img src="{{ asset('assets/images/website/placeholder.png') }}" class="w-16 mx-auto mb-4 clickable-img" alt="{{ __('main.placeholder') }}"
+                                                data-src="{{ asset('assets/images/website/placeholder.png') }}">
                                         @endif
                                     </div>
                                     <h3 class="package-title text-xl font-semibold">{{ $package['name'] }}</h3>

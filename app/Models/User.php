@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, SoftDeletes, HasRoles, Notifiable;
-    protected $richTextAttributes = [
-    ];
 
     /**
      * The attributes that are mass assignable.

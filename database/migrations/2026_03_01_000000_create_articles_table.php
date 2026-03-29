@@ -19,7 +19,6 @@ return new class extends Migration
             $table->json('translations'); // All content in JSON (ar/en)
 
             // Media
-            $table->string('image')->nullable();
             $table->string('thumbnail')->nullable();
 
             // Relations

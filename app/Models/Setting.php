@@ -5,13 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class Setting extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $richTextAttributes = [
-    ];
 
     protected $fillable = [
         'font_url',
@@ -47,6 +44,7 @@ class Setting extends Model
         'website_design_image',
         'width_logo_sidebar',
         'ably_key',
+        'cache_time',
 
         // columns (JSON)
         'colors',

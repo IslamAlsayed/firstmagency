@@ -3,6 +3,7 @@
     @include('dashboard.components.input-text-editor', [
         'name' => 'your_reply',
         'value' => old('your_reply'),
+        'height' => '150px',
     ])
 
     <div class="group mt-4">

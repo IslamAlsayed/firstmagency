@@ -16,7 +16,7 @@ class SettingsHelper
             static $settings = null;
 
             if ($settings === null) {
-                $settings = Cache::remember('app_settings.first', now()->addMinutes(15), function () {
+                $settings = Cache::remember('app_settings.first', config('app.cache_time'), function () {
                     return Setting::query()->first() ?? Setting::query()->create();
                 });
             }

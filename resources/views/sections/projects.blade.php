@@ -48,9 +48,9 @@
                             </a>
                         </button>
                         <button class="btn-link main-color font-semibold">
-                            <a href="{{ route('portfolio.show', ['id' => $project->id ?? $project['id'], 'slug' => $slug]) }}">
+                            <span class="clickable-img" data-src="{{ asset('assets/images/website/projects/' . $project['order'] . '.png') }}">
                                 <i class="icon fa-solid fa-search"></i>
-                            </a>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -73,8 +73,7 @@
                     <div class="project-item" data-tags="{{ $tagsString }}">
                         <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => str_replace(' ', '-', strtolower($project['title']))]) }}">
                             <div class="project-image">
-                                <img src="{{ asset('assets/images/website/projects/' . $project['order'] . '.png') }}" alt="{{ $project['title'] }}"
-                                    loading="lazy">
+                                <img src="{{ asset('assets/images/website/projects/' . $project['order'] . '.png') }}" alt="{{ $project['title'] }}" loading="lazy">
                             </div>
                             <div class="project-text">
                                 <div class="project-title font-semibold">{{ $project['title'] }}</div>
@@ -87,9 +86,9 @@
                                 </a>
                             </button>
                             <button class="btn-link main-color font-semibold">
-                                <a href="{{ route('portfolio.show', ['id' => $id, 'slug' => str_replace(' ', '-', strtolower($project['title']))]) }}">
+                                <span class="clickable-img" data-src="{{ asset('assets/images/website/projects/' . $project['order'] . '.png') }}">
                                     <i class="icon fa-solid fa-search"></i>
-                                </a>
+                                </span>
                             </button>
                         </div>
                     </div>

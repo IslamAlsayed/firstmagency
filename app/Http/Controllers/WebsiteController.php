@@ -15,15 +15,15 @@ class WebsiteController extends Controller
     public function index()
     {
         $data = [
-            'programming_systems' => Cache::remember('home_programming_systems', 1800, function () {
+            'programming_systems' => Cache::remember('home_programming_systems', config('app.cache_time'), function () {
                 return ProgrammingSystem::active()->orderBy('order')->get();
             }),
 
-            'articles' => Cache::remember('home_articles', 1800, function () {
+            'articles' => Cache::remember('home_articles', config('app.cache_time'), function () {
                 return Article::active()->forWebsites()->limit(4)->get();
             }),
 
-            'website_design' => Cache::remember('website_design_stats', 1800, function () {
+            'website_design' => Cache::remember('website_design_stats', config('app.cache_time'), function () {
                 return [
                     'clients_count' => Client::count(),
                     'projects_count' => Project::count(),
@@ -31,7 +31,7 @@ class WebsiteController extends Controller
                 ];
             }),
 
-            'faqs' => Cache::remember('home_faqs', 1800, function () {
+            'faqs' => Cache::remember('home_faqs', config('app.cache_time'), function () {
                 return FAQ::active()->websites()->get();
             }),
         ];

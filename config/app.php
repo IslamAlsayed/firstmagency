@@ -33,6 +33,7 @@ return [
     'ably_key' => env('ABLY_KEY', ''),
     'start_work_time' => env('START_WORK_TIME', ''),
     'end_work_time' => env('END_WORK_TIME', ''),
+    'cache_time' => env('CACHE_TIME', 300),
 
     /*
     |--------------------------------------------------------------------------

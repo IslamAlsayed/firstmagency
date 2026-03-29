@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Cache::remember('home_articles', 1800, function () {
+        $articles = Cache::remember('home_articles', config('app.cache_time'), function () {
             return Article::active()->published()->get();
         });
         return view('website.blog', compact('articles'));
@@ -32,13 +32,15 @@ class ArticleController extends Controller
         $article->increment('visitors');
         $article->refresh();
 
-        $categories = ProgrammingCategory::withCount('articles')->get();
+        $categories = ProgrammingCategory::withCount(['articles as published_articles_count' => function ($query) {
+            $query->where('status', 'published')->where('is_active', true);
+        }])->get();
 
-        $articles = Cache::remember('home_articles', 1800, function () {
+        $articles = Cache::remember('home_articles', config('app.cache_time'), function () {
             return Article::active()->published()->limit(10)->get();
         });
 
-        $mostReadArticles = Cache::remember('most_read_articles', 1800, function () {
+        $mostReadArticles = Cache::remember('most_read_articles', config('app.cache_time'), function () {
             return Article::active()->published()->orderBy('visitors', 'desc')->limit(7)->get();
         });
 

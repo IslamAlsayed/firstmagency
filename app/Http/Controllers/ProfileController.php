@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Requests\Profile\UpdatePhotoRequest;
+use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Models\User;
 use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,17 @@ class ProfileController extends Controller
         $user = getActiveUser();
         if (!$user)
             return redirect()->route('dashboard.index')->withErrors(__('messages.type_not_found', ['type' => __('main.user')]));
-        return view('profile.show', compact('user'));
+
+        if ($user->hasRole('superadmin')) {
+            $users = User::all();
+        } elseif ($user->hasRole('admin')) {
+            $users = User::whereDoesntHave('roles', function ($q) {
+                $q->where('name', 'superadmin');
+            })->get();
+        } else {
+            $users = collect([$user]);
+        }
+        return view('profile.show', compact('user', 'users'));
     }
 
     public function edit()

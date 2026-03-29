@@ -30,14 +30,11 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- الوصف --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_ar',
                                 'value' => old('description_ar'),
                                 'placeholder' => 'أدخل الوصف بالعربية',
                             ])
-
-                            {{-- المحتوى --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_ar',
                                 'value' => old('content_ar'),
@@ -81,14 +78,11 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- Description --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_en',
                                 'value' => old('description_en'),
                                 'placeholder' => 'Enter description in English',
                             ])
-
-                            {{-- Content --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_en',
                                 'value' => old('content_en'),
@@ -177,6 +171,32 @@
                     });
                 });
             }
+        });
+    </script>
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 300
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
         });
     </script>
 @endpush

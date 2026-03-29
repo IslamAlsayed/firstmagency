@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
-use App\Traits\PhotoUploadTrait;
 use App\Traits\GlobalDestroyTrait;
+use App\Traits\PhotoUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 
 class UserController extends Controller
 {
@@ -21,13 +24,14 @@ class UserController extends Controller
     {
         $this->authorize('viewAny', User::class);
         $users = User::query()->latest()->paginate(25);
+        $roles = Role::pluck('name')->toArray();
         $roleStats = User::query()->selectRaw('role, COUNT(*) as total')->groupBy('role')->pluck('total', 'role');
 
         $allItems = User::count();
         $superAdmins = (int) ($roleStats['superadmin'] ?? 0);
         $admins = (int) ($roleStats['admin'] ?? 0);
         $contentManagers = (int) ($roleStats['content_manager'] ?? 0);
-        return view('dashboard.users.index', compact('users', 'allItems', 'superAdmins', 'admins', 'contentManagers'));
+        return view('dashboard.users.index', compact('users', 'allItems', 'superAdmins', 'admins', 'contentManagers', 'roles'));
     }
 
     public function create()
@@ -102,5 +106,40 @@ class UserController extends Controller
         //     return redirect()->back()->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
         // }
         // return redirect()->route('dashboard.index')->withSuccess(__('messages.switched_to_user', ['name' => $user->name]));
+    }
+
+    /**
+     * Show the current user's permissions (direct and via roles).
+     */
+    public function myPermissions()
+    {
+        $user = getActiveUser();
+        $allPermissions = $user->getAllPermissions();
+        $directPermissions = $user->permissions;
+        $rolePermissions = $allPermissions->diff($directPermissions);
+        $roles = $user->roles;
+        return view('dashboard.users.my-permissions', compact('user', 'allPermissions', 'directPermissions', 'rolePermissions', 'roles'));
+    }
+
+    /**
+     * Show the form for editing a user's direct permissions.
+     */
+    public function editPermissions(User $user)
+    {
+        $this->authorize('update', $user);
+        $permissions = Permission::all();
+        return view('dashboard.users.permissions', compact('user', 'permissions'));
+    }
+
+    /**
+     * Update a user's direct permissions.
+     */
+    public function updatePermissions(Request $request, User $user)
+    {
+        $this->authorize('update', $user);
+        $permissions = $request->input('permissions', []);
+        $permissions = array_filter($permissions); // remove zeros
+        $user->syncPermissions($permissions);
+        return redirect()->route('dashboard.users.editPermissions', $user->id)->withSuccess(__('messages.permissions_updated'));
     }
 }

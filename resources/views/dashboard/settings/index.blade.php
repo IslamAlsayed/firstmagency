@@ -131,11 +131,13 @@
                                     'name' => 'site_description',
                                     'value' => $settings->site_description,
                                     'classes' => 'mb-4',
+                                    'height' => '300px',
                                 ])
 
                                 @include('dashboard.components.input-text-editor', [
                                     'name' => 'site_description_ar',
                                     'value' => $settings->site_description_ar,
+                                    'height' => '300px',
                                 ])
                             </div>
 
@@ -143,6 +145,15 @@
                                 <label class="block text-sm font-semibold text-gray-600 mb-2">{{ __('main.ably_key') }}</label>
                                 <input type="text" name="ably_key" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
                                     value="{{ $settings->ably_key ?? '' }}">
+                                <span class="text-xs text-gray-500">{{ __('main.ably_key_desc', ['default' => config('app.ably_key')]) }}</span>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-600 mb-2">{{ __('main.cache_time') }}</label>
+                                <input type="number" name="cache_time" min="60" step="60"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
+                                    value="{{ $settings->cache_time ?? config('app.cache_time') }}">
+                                <span class="text-xs text-gray-500">{{ __('main.cache_time_desc', ['default' => config('app.cache_time')]) }}</span>
                             </div>
 
                             <div>
@@ -319,6 +330,32 @@
                     document.querySelector(`[data-tab="${tabName}"].settings-content`).classList.add('active');
                 });
             });
+        });
+    </script>
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 300
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
         });
     </script>
 @endpush

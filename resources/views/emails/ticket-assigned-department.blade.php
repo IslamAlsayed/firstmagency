@@ -17,7 +17,7 @@
                 <strong>{{ __('main.ticket_assigned_to_department_notification') }}</strong>
             </p>
             <p style="font-size: 13px; color: #777; margin-top: 10px;">
-                {!! __('main.new_ticket_in_department', ['department' => __('main.' . str_replace('-', '_', str_replace(' ', '_', $department->name)))]) !!}
+                {!! __('main.new_ticket_in_department', ['department' => app()->getLocale() == 'ar' ? $department->name_ar : $department->name]) !!}
             </p>
         </div>
 

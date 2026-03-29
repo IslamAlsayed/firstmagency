@@ -53,6 +53,7 @@ return new class extends Migration
             $table->string('website_design_image')->nullable();
             $table->string('width_logo_sidebar')->default(70)->comment('Width of the logo in the sidebar, e.g., 70px');
             $table->string('ably_key')->default('YfoutQ.0ANKLQ:l9mrZvEjJGo07yZsKnU8XU33MkgnlX9k7JfmsQUKJe4')->nullable();
+            $table->integer('cache_time')->default(300);
             $table->json('debug_ips')->nullable()->comment('JSON array of allowed IPs for debug mode');
 
             $table->softDeletes();

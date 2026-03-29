@@ -11,7 +11,7 @@
                 <div class="website">
                     <div class="image cursor-pointer">
                         @if ($feature->image && checkExistFile($feature->image))
-                            <img src="{{ asset('storage/' . $feature->image) }}" alt="{{ $feature->slug }}">
+                            <img src="{{ asset('storage/' . $feature->image) }}" alt="{{ $feature->slug }}" class="clickable-img" data-src="{{ asset('storage/' . $feature->image) }}">
                         @endif
                     </div>
                     <div class="title font-semibold">{{ $feature->translations[app()->getLocale()]['title'] }}</div>
@@ -22,7 +22,8 @@
             @foreach (config('hosting-features') as $data)
                 <div class="website">
                     <div class="image cursor-pointer">
-                        <img src="{{ asset('assets/images/website/' . $data['image']) }}" alt="{{ __('main.' . $data['title']) }}">
+                        <img src="{{ asset('assets/images/website/' . $data['image']) }}" alt="{{ __('main.' . $data['title']) }}" class="clickable-img"
+                            data-src="{{ asset('assets/images/website/' . $data['image']) }}">
                     </div>
                     <div class="title font-semibold">{{ __('main.' . $data['title']) }}</div>
                     <div class="description">{{ __('main.' . $data['description']) }}</div>

@@ -1,7 +1,7 @@
 @extends('dashboard.layout.master')
 
-@section('title', __('main.deleted') . ' ' . __('main.tickets'))
-@section('page-title', '🗑️ ' . __('main.deleted') . ' ' . __('main.tickets'))
+@section('title', __('main.deleted_tickets'))
+@section('page-title', '🗑️ ' . __('main.deleted_tickets'))
 
 @push('styles')
     @include('dashboard.components.entity-index-styles')
@@ -18,7 +18,7 @@
                     </span>
 
                     <h1 class="entity-hero-title">{{ __('main.deleted_tickets') }}</h1>
-                    <p class="entity-hero-subtitle">{{ __('main.deleted') }} {{ __('main.tickets') }} - {{ __('main.restore') }}</p>
+                    <p class="entity-hero-subtitle">{{ __('main.deleted_tickets') }} - {{ __('main.restore') }}</p>
 
                     <div class="entity-hero-actions">
                         <a href="{{ route('dashboard.tickets.index') }}" class="entity-hero-action">
@@ -97,8 +97,7 @@
 
             <div class="entity-toolbar">
                 <div class="entity-toolbar-group">
-                    <input type="text" id="searchBox" class="entity-input"
-                        placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.tickets')]) }}">
+                    <input type="text" id="searchBox" class="entity-input" placeholder="{{ __('main.search_types_placeholder', ['types' => __('main.tickets')]) }}">
 
                     <select id="statusFilter" class="entity-select">
                         <option value="">{{ __('main.all') }} - {{ __('main.status') }}</option>
@@ -133,55 +132,63 @@
                         </thead>
                         <tbody>
                             @forelse($tickets as $ticket)
-                            <tr id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
-                                <td><span class="entity-primary-text">{{ $ticket->uuid }}</span></td>
-                                <td>
-                                    <p class="entity-primary-text">{{ $ticket->name }}</p>
-                                    <p class="entity-secondary-text">
-                                        <a href="mailto:{{ $ticket->email }}" target="_blank" class="entity-contact-link">
-                                            {!! limitedText($ticket->email ?? '--', 30) !!}
-                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                        </a>
-                                    </p>
-                                    <p class="entity-secondary-text">
-                                        <a href="tel:{{ $ticket->phone }}" target="_blank" class="entity-contact-link">
-                                            {!! limitedText($ticket->phone ?? '--', 30) !!}
-                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                        </a>
-                                    </p>
-                                </td>
-                                <td><span class="entity-primary-text">{{ limitedText($ticket->subject ?? '', 40) }}</span></td>
-                                <td>
-                                    <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
-                                        {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
-                                        {{ __('main.' . $ticket->status) }}
-                                    </span>
-                                </td>
-                                <td><span class="entity-secondary-text">{{ $ticket->deleted_at?->diffForHumans() }}</span></td>
-                                <td>
-                                    <div class="entity-actions">
-                                        <form action="{{ route('dashboard.tickets.restore', $ticket->id) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" title="{{ __('main.restore') }}">
-                                                <i class="fas fa-trash-restore text-white"></i>
-                                                {{ __('main.restore') }}
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="entity-empty">
-                                    {{ __('messages.no_records_found') }}
-                                </td>
-                            </tr>
-                        @endforelse
+                                <tr id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
+                                    <td><span class="entity-primary-text">{{ $ticket->uuid }}</span></td>
+                                    <td>
+                                        <p class="entity-primary-text">{{ $ticket->name }}</p>
+                                        <p class="entity-secondary-text">
+                                            <a href="mailto:{{ $ticket->email }}" target="_blank" class="entity-contact-link">
+                                                {!! limitedText($ticket->email ?? '--', 30) !!}
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        </p>
+                                        <p class="entity-secondary-text">
+                                            <a href="tel:{{ $ticket->phone }}" target="_blank" class="entity-contact-link">
+                                                {!! limitedText($ticket->phone ?? '--', 30) !!}
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </a>
+                                        </p>
+                                    </td>
+                                    <td><span class="entity-primary-text">{{ limitedText($ticket->subject ?? '', 40) }}</span></td>
+                                    <td class="font-semibold">
+                                        @include('dashboard.components.department-actions', [
+                                            'record' => $ticket,
+                                            'models' => 'tickets',
+                                            'modelClass' => 'ticket',
+                                            'availableOptions' => $departments->toArray(),
+                                        ])
+                                        <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
+                                            {{ app()->getLocale() == 'ar' ? $ticket->department?->name_ar : $ticket->department?->name ?? 'no_department' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($ticket->status)->badgeColor() }} rounded-full">
+                                            {{ __('main.' . $ticket->status) }}
+                                        </span>
+                                    </td>
+                                    <td><span class="entity-secondary-text">{{ $ticket->deleted_at?->diffForHumans() }}</span></td>
+                                    <td>
+                                        @if (auth()->user()->can('tickets-restore'))
+                                            <div class="entity-actions">
+                                                <form action="{{ route('dashboard.tickets.restore', $ticket->id) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" title="{{ __('main.restore') }}">
+                                                        <i class="fas fa-trash-restore text-white"></i>
+                                                        {{ __('main.restore') }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="entity-empty">
+                                        {{ __('messages.no_records_found') }}
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

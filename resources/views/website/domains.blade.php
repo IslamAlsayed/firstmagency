@@ -14,8 +14,11 @@
         {{-- Why Us Section --}}
         @include('sections.why-us', ['whyUs' => $data['why_us'] ?? []])
 
-        {{-- Are You Ready Section --}}
+        {{-- Frequently Asked Questions Section --}}
         @include('sections.frequently-asked-questions', ['faqs' => $data['faqs'] ?? config('faqs-domains')])
+
+        {{-- Available Payments Section --}}
+        @include('sections.available-payment', ['payments' => $data['payments'] ?? config('payments')])
     </div>
 @endsection
 

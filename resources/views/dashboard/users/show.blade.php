@@ -11,14 +11,30 @@
                     {{ $user->name }}
                 </h1>
                 <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground email">
-                    {{ $user->email }} • {{ $user->phone }}
+                    <a href="mailto:{{ $user->email }}" target="_blank" class="text-blue-600 hover:underline">
+                        {!! limitedText($user->email ?? '--', 30) !!}
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    •
+                    <a href="tel:{{ $user->phone }}" target="_blank" class="text-blue-600 hover:underline">
+                        {!! limitedText($user->phone ?? '--', 30) !!}
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </div>
             </div>
             <div class="flex items-center gap-2.5">
-                <a href="{{ route('dashboard.users.edit', $user->id) }}" class="kt-btn kt-btn-primary md:hidden">
-                    <i class="ki-filled ki-pencil text-sm me-2"></i>
-                    {{ __('main.edit') }}
-                </a>
+                @can('permissions-update')
+                    <a href="{{ route('dashboard.users.editPermissions', $user->id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-pink-500 text-white">
+                        <i class="fas fa-key text-white"></i>
+                        {{ __('main.permissions') }}
+                    </a>
+                @endcan
+                @can('update', $user)
+                    <a href="{{ route('dashboard.users.edit', $user->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                        <i class="ki-filled ki-pencil text-sm me-2"></i>
+                        {{ __('main.edit') }}
+                    </a>
+                @endcan
                 <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline">
                     {{ __('main.back_to_types', ['types' => __('main.users')]) }}
                 </a>
@@ -43,19 +59,34 @@
                         @if ($user->email)
                             <div class="email">
                                 <label class="kt-label mb-1">{{ __('main.email') }}</label>
-                                <p class="text-sm text-secondary-foreground">{{ $user->email ?: __('main.na') }}</p>
+                                <p class="text-sm text-secondary-foreground">
+                                    <a href="mailto:{{ $user->email }}" target="_blank" class="text-blue-600 hover:underline">
+                                        {!! limitedText($user->email ?? '--', 30) !!}
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </p>
                             </div>
                         @endif
                         @if ($user->phone)
                             <div>
                                 <label class="kt-label mb-1">{{ __('main.phone') }}</label>
-                                <p class="text-sm text-secondary-foreground">{{ $user->phone ?: __('main.na') }}</p>
+                                <p class="text-sm text-secondary-foreground">
+                                    <a href="tel:{{ $user->phone }}" target="_blank" class="text-blue-600 hover:underline">
+                                        {!! limitedText($user->phone ?? '--', 30) !!}
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </p>
                             </div>
                         @endif
                         @if ($user->mobile)
                             <div>
                                 <label class="kt-label mb-1">{{ __('main.mobile') }}</label>
-                                <p class="text-sm text-secondary-foreground">{{ $user->mobile }}</p>
+                                <p class="text-sm text-secondary-foreground">
+                                    <a href="tel:{{ $user->mobile }}" target="_blank" class="text-blue-600 hover:underline">
+                                        {!! limitedText($user->mobile ?? '--', 30) !!}
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </p>
                             </div>
                         @endif
                         @include('dashboard.components.displayable-rich-text', [

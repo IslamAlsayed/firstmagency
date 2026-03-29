@@ -13,19 +13,19 @@ class DomainController extends Controller
     public function index()
     {
         $data = [
-            'pest_domains' => Cache::remember('pest_domains', 1800, function () {
+            'pest_domains' => Cache::remember('pest_domains', config('app.cache_time'), function () {
                 return PestDomain::active()->ordered()->get();
             }),
 
-            'official_domains' => Cache::remember('official_domains', 1800, function () {
+            'official_domains' => Cache::remember('official_domains', config('app.cache_time'), function () {
                 return OfficialDomain::active()->ordered()->get();
             }),
 
-            'why_us' => Cache::remember('domain_why_us', 1800, function () {
+            'why_us' => Cache::remember('domain_why_us', config('app.cache_time'), function () {
                 return WhyUs::active()->ordered()->get();
             }),
 
-            'faqs' => Cache::remember('domain_faqs', 1800, function () {
+            'faqs' => Cache::remember('domain_faqs', config('app.cache_time'), function () {
                 return FAQ::active()->domains()->get();
             }),
         ];

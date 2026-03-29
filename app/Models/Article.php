@@ -13,7 +13,6 @@ class Article extends Model
 
     protected $fillable = [
         'slug',
-        'image',
         'thumbnail',
         'category_id',
         'visitors',

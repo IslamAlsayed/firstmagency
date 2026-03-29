@@ -31,21 +31,11 @@ class UpdateRequest extends FormRequest
             'meta_description_en' => 'nullable|string|max:300',
 
             // Media & Common Fields
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'category_id' => 'nullable|integer|exists:categories,id',
+            'category_id' => 'nullable|integer|exists:programming_categories,id',
             'status' => 'required|string|in:draft,published,archived',
             'is_active' => 'nullable|boolean',
             'published_at' => 'nullable|date',
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'title_ar.required' => __('validation.required', ['attribute' => __('main.title_ar')]),
-            'description_ar.required' => __('validation.required', ['attribute' => __('main.description_ar')]),
-            'status.required' => __('validation.required', ['attribute' => __('main.status')]),
         ];
     }
 }

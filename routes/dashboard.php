@@ -89,6 +89,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/profile/activity', [ProfileController::class, 'activity'])->name('profile.activity');
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 
+    Route::get('/my-permissions', [UserController::class, 'myPermissions'])->name('myPermissions');
+    Route::get('/users/{user}/permissions', [UserController::class, 'editPermissions'])->name('users.editPermissions');
+    Route::put('/users/{user}/permissions', [UserController::class, 'updatePermissions'])->name('users.updatePermissions');
     Route::resource('users', UserController::class)->names('users');
     Route::resource('roles', RoleController::class)->names('roles');
     Route::resource('permissions', PermissionController::class)->names('permissions');
@@ -109,8 +112,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::resource('programming-systems', ProgrammingSystemController::class)->names('programming-systems');
     Route::resource('project-steps', ProjectStepController::class)->names('project-steps');
     Route::resource('hosting-features', HostingFeatureController::class)->names('hosting-features');
-    Route::resource('dashboards-and-systems', DashboardsAndSystemController::class)->names('dashboards-and-systems');
     Route::resource('hosting-packages', HostingPackageController::class)->names('hosting-packages');
+    Route::resource('dashboards-and-systems', DashboardsAndSystemController::class)->names('dashboards-and-systems');
     Route::resource('faqs', FAQController::class)->names('faqs');
 
     // Department Routes
@@ -130,9 +133,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');
 
     // any route not found in the dashboard will redirect to the dashboard index (except for api routes)
-    Route::get('/{any}', function () {
-        return redirect()->route('dashboard.index');
-    })->where('any', '.*');
+    // Route::get('/{any}', function () {
+    //     return redirect()->route('dashboard.index');
+    // })->where('any', '.*');
 });
 
 // any route not found in the website will redirect to the welcome index (except for api routes)

@@ -321,11 +321,17 @@
         <!-- Hosting Packages -->
         @if (auth()->user()->can('hosting-packages-read') ||
                 auth()->user()->can('hosting-packages-create') ||
+                auth()->user()->can('hosting-features-read') ||
+                auth()->user()->can('hosting-features-create') ||
                 auth()->user()->can('marketing-packages-read') ||
-                auth()->user()->can('marketing-packages-create'))
+                auth()->user()->can('marketing-packages-create') ||
+                auth()->user()->can('pest-domains-read') ||
+                auth()->user()->can('pest-domains-create') ||
+                auth()->user()->can('official-domains-read') ||
+                auth()->user()->can('official-domains-create'))
             <li class="relative group submenu-item" data-item-id="packages-domains" title="{{ __('main.packages_and_domains') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.packages_and_domains') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.hosting-features.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-box-open" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.packages_and_domains'), 20) }}</span>
@@ -334,13 +340,22 @@
                 </button>
 
                 <ul
-                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'show' : '' }}">
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-packages.*', 'dashboard.hosting-features.*', 'dashboard.marketing-packages.*', 'dashboard.pest-domains.*', 'dashboard.official-domains.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('hosting-packages-read') || auth()->user()->can('hosting-packages-create'))
                         <li class="relative" data-sub-id="hosting-packages" title="{{ __('main.hosting_packages') }}">
                             <a href="{{ route('dashboard.hosting-packages.index') }}"
                                 class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.hosting-packages.*') ? 'active' : '' }}">
                                 <span class="main-icon"><i class="fas fa-server" aria-hidden="true"></i></span>
                                 <span class="text-sm">{{ __('main.hosting_packages') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->can('hosting-features-read') || auth()->user()->can('hosting-features-create'))
+                        <li class="relative" data-sub-id="hosting-features" title="{{ __('main.hostings_features') }}">
+                            <a href="{{ route('dashboard.hosting-features.index') }}"
+                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }}">
+                                <span class="main-icon"><i class="fas fa-gift" aria-hidden="true"></i></span>
+                                <span class="text-sm">{{ __('main.hostings_features') }}</span>
                             </a>
                         </li>
                     @endif
@@ -430,13 +445,10 @@
         @endif
 
         <!-- Features Hosting -->
-        @if (auth()->user()->can('hosting-features-read') ||
-                auth()->user()->can('hosting-features-create') ||
-                auth()->user()->can('dashboards-and-systems-read') ||
-                auth()->user()->can('dashboards-and-systems-create'))
-            <li class="relative group submenu-item" data-item-id="hosting-features" title="{{ __('main.features_and_system') }}">
+        @if (auth()->user()->can('dashboards-and-systems-read') || auth()->user()->can('dashboards-and-systems-create'))
+            <li class="relative group submenu-item" data-item-id="features-and-system" title="{{ __('main.features_and_system') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.features_and_system') }}"
-                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.hosting-features.*', 'dashboard.dashboards-and-systems.*') ? 'active' : '' }}">
+                    class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.dashboards-and-systems.*', 'dashboard.platform-management.*') ? 'active' : '' }}">
                     <div class="flex items-center gap-2">
                         <span class="main-icon"><i class="fas fa-gift" aria-hidden="true"></i></span>
                         <span class="span-text">{{ limitedText(__('main.features_and_system'), 20) }}</span>
@@ -445,16 +457,7 @@
                 </button>
 
                 <ul
-                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.hosting-features.*', 'dashboard.dashboards-and-systems.*', 'dashboard.platform-management.*') ? 'show' : '' }}">
-                    @if (auth()->user()->can('hosting-features-read') || auth()->user()->can('hosting-features-create'))
-                        <li class="relative" data-sub-id="hosting-features" title="{{ __('main.features_hostings') }}">
-                            <a href="{{ route('dashboard.hosting-features.index') }}"
-                                class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.hosting-features.*') ? 'active' : '' }}">
-                                <span class="main-icon"><i class="fas fa-gift" aria-hidden="true"></i></span>
-                                <span class="text-sm">{{ __('main.features_hostings') }}</span>
-                            </a>
-                        </li>
-                    @endif
+                    class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.dashboards-and-systems.*', 'dashboard.platform-management.*') ? 'show' : '' }}">
                     @if (auth()->user()->can('dashboards-and-systems-read') || auth()->user()->can('dashboards-and-systems-create'))
                         <li class="relative" data-sub-id="dashboards-and-systems" title="{{ __('main.dashboards_and_apps') }}">
                             <a href="{{ route('dashboard.dashboards-and-systems.index') }}"

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
-use Tonysm\RichTextLaravel\Models\RichText;
 
 class SettingsSeeder extends Seeder
 {
@@ -16,7 +15,6 @@ class SettingsSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         Setting::truncate();
-        RichText::where('record_type', 'like', '%setting%')->delete();
         Schema::enableForeignKeyConstraints();
 
         Setting::create([
@@ -34,8 +32,8 @@ class SettingsSeeder extends Seeder
             'site_email' => config('app.email'),
             'site_whatsapp' => config('app.whatsapp'),
             'site_phone' => config('app.phone'),
-            'site_description' => 'Welcome to First Ma\'Agency - Your trusted digital solutions partner.',
-            'site_description_ar' => 'مرحبًا بكم في فرست ما\'أجنسي - شريككم الموثوق للحلول الرقمية.',
+            'site_description' => 'Official registered company, specialized in website design, mobile applications, electronic marketing with hosting services, servers and technical support. First Marketing is the ideal partner in providing digital services.',
+            'site_description_ar' => 'شركة رسمية مسجلة، متخصصة في مجال تصميم المواقع وتطبيقات الجوال والتسويق الإلكتروني مع خدمات الاستضافة والسيرفرات والدعم الفني فرست ماركتينج شريك الامثل تقديم الخدمات الرقمية',
 
             // About Us
             'about_us_title' => 'About Us',

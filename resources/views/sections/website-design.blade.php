@@ -77,7 +77,8 @@
         </div>
 
         <div class="image">
-            <img src="{{ asset('assets/images/website/developer/design.png') }}" alt="{{ __('main.design_title') }}">
+            <img src="{{ asset('assets/images/website/developer/design.png') }}" alt="{{ __('main.design_title') }}" class="clickable-img"
+                data-src="{{ asset('assets/images/website/developer/design.png') }}">
         </div>
     </div>
     @if (isDebugModeEnabled())

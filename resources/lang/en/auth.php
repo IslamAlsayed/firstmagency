@@ -51,4 +51,6 @@ return [
     'password_reset_success' => 'Password reset successfully. You can now log in with your new password.',
     'invalid_token' => 'Invalid password reset token.',
     'invalid_user' => 'No user found with this email address.',
+    'unauthorized_action' => 'You are not authorized to perform this action',
+    'forbidden' => 'Forbidden - You do not have permission to access this resource',
 ];

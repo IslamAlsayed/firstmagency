@@ -55,9 +55,9 @@
 
                     <select id="roleFilter" class="entity-select">
                         <option value="">{{ __('main.all') }} - {{ __('main.role') }}</option>
-                        <option value="superadmin">{{ __('main.superadmin') }}</option>
-                        <option value="admin">{{ __('main.admin') }}</option>
-                        <option value="content_manager">{{ __('main.content_manager') }}</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role }}">{{ __('main.' . $role) }}</option>
+                        @endforeach
                     </select>
 
                     <select id="activeFilter" class="entity-select">
@@ -139,6 +139,16 @@
                                     </td>
                                     <td>
                                         <div class="entity-actions">
+                                            <a href="{{ route('dashboard.users.editPermissions', $user->id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-pink-500 text-white">
+                                                @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
+                                                    {!! __('main.permissions') !!}
+                                                @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')
+                                                    <i class="fas fa-key text-white"></i>
+                                                @else
+                                                    <i class="fas fa-key text-white"></i>
+                                                    {!! __('main.permissions') !!}
+                                                @endif
+                                            </a>
                                             @include('dashboard.components.permissions-actions', [
                                                 'record' => $user,
                                                 'models' => 'users',

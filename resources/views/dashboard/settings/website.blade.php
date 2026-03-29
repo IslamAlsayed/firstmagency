@@ -210,3 +210,29 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 300
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
+        });
+    </script>
+@endpush

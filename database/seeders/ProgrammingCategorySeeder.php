@@ -29,27 +29,37 @@ class ProgrammingCategorySeeder extends Seeder
 
         $programmingCategories = [
             [
+                'name' => 'Web Development',
+                'name_ar' => 'تطوير الويب',
                 'alt_text' => 'Web Development',
                 'image' => '1.png',
                 'order' => 1,
             ],
             [
+                'name' => 'Mobile App Development',
+                'name_ar' => 'تطوير تطبيقات الجوال',
                 'alt_text' => 'Mobile App Development',
                 'image' => '2.png',
                 'order' => 2,
             ],
             [
+                'name' => 'E-Commerce Solutions',
+                'name_ar' => 'حلول التجارة الإلكترونية',
                 'alt_text' => 'E-Commerce Solutions',
                 'image' => '3.png',
                 'order' => 3,
             ],
             [
+                'name' => 'API Development',
+                'name_ar' => 'تطوير واجهات برمجة التطبيقات',
                 'alt_text' => 'API Development',
                 'image' => '4.png',
                 'order' => 4,
             ],
             [
-                'alt_text' => 'API Development',
+                'name' => 'Cloud Services',
+                'name_ar' => 'خدمات السحابة',
+                'alt_text' => 'Cloud Services',
                 'image' => '5.png',
                 'order' => 5,
             ],

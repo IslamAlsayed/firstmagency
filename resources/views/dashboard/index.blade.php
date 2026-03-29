@@ -9,564 +9,10 @@
 
 @push('styles')
     <style>
-        .dashboard-home {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
         .dashboard-hero {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            padding: 1.75rem;
-            color: #fff;
-            box-shadow: 0 24px 50px rgba(15, 23, 42, 0.18);
             background:
                 radial-gradient(circle at top right, #d05423, transparent 24%),
-                linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, #96310E 0%, #F97316 100%);
-        }
-
-        .dashboard-hero::after {
-            content: '';
-            position: absolute;
-            inset-inline-end: -3rem;
-            bottom: -4rem;
-            width: 12rem;
-            height: 12rem;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .dashboard-hero-grid {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
-            gap: 1.25rem;
-            align-items: start;
-        }
-
-        .hero-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.14);
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
-        .hero-title {
-            margin-top: 1rem;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            line-height: 1.08;
-            font-weight: 800;
-        }
-
-        .hero-subtitle {
-            margin-top: 0.85rem;
-            max-width: 52rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-size: 1rem;
-        }
-
-        .quick-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1.35rem;
-        }
-
-        .quick-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.65rem;
-            padding: 0.8rem 1rem;
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #fff;
-            font-weight: 700;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .quick-action:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.18);
-        }
-
-        .hero-focus-card {
-            border-radius: 1.25rem;
-            background: rgba(7, 10, 24, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            padding: 1.1rem;
-            backdrop-filter: blur(8px);
-        }
-
-        .hero-focus-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .hero-focus-item {
-            border-radius: 1rem;
-            padding: 0.9rem;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .hero-focus-item strong {
-            display: block;
-            font-size: 1.4rem;
-            line-height: 1;
-            margin-bottom: 0.35rem;
-        }
-
-        .dashboard-kpis {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .dashboard-kpi {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.25rem;
-            padding: 1.2rem;
-            background: #fff;
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-        }
-
-        .dashboard-kpi::before {
-            content: '';
-            position: absolute;
-            inset-inline-start: 0;
-            top: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent, var(--icon_color));
-        }
-
-        .kpi-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .kpi-icon {
-            width: 3rem;
-            height: 3rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1rem;
-            color: #fff;
-            background: var(--accent, var(--icon_color));
-            box-shadow: 0 10px 25px color-mix(in srgb, var(--accent, var(--icon_color)) 25%, transparent);
-        }
-
-        .kpi-label {
-            color: #64748b;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .kpi-value {
-            font-size: clamp(2rem, 4vw, 2.6rem);
-            line-height: 1;
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        .kpi-note {
-            margin-top: 0.75rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .kpi-chip {
-            padding: 0.35rem 0.65rem;
-            border-radius: 9999px;
-            background: #f8fafc;
-            color: #475569;
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
-        .dashboard-main-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.7fr) minmax(320px, 0.95fr);
-            gap: 1.5rem;
-        }
-
-        .dashboard-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .dashboard-panel {
-            background: #fff;
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 1.35rem;
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
-            overflow: hidden;
-        }
-
-        .dashboard-panel-body {
-            padding: 1.35rem;
-        }
-
-        .dashboard-panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .panel-title {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .panel-title-icon {
-            width: 2.75rem;
-            height: 2.75rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.95rem;
-            background: color-mix(in srgb, var(--icon_color) 14%, white);
-            color: var(--icon_color);
-        }
-
-        .panel-title h3 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 1.05rem;
-            font-weight: 800;
-        }
-
-        .panel-title p {
-            margin: 0.2rem 0 0;
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        .panel-link {
-            color: var(--icon_color);
-            font-size: 0.82rem;
-            font-weight: 800;
-        }
-
-        .snapshot-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .snapshot-card {
-            border-radius: 1.1rem;
-            padding: 1rem;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .snapshot-card strong {
-            display: block;
-            margin-top: 0.85rem;
-            font-size: 1.95rem;
-            line-height: 1;
-            color: #0f172a;
-        }
-
-        .snapshot-card small {
-            display: block;
-            margin-top: 0.45rem;
-            color: #64748b;
-            font-weight: 700;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 0.5rem;
-            border-radius: 9999px;
-            background: #e2e8f0;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--icon_color), color-mix(in srgb, var(--icon_color) 55%, #22c55e));
-        }
-
-        .stats-inline {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.85rem;
-        }
-
-        .stats-pill {
-            padding: 0.4rem 0.65rem;
-            border-radius: 9999px;
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
-        .stats-pill.success {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .stats-pill.warning {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .stats-pill.info {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .support-overview-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .support-stat {
-            border-radius: 1rem;
-            padding: 0.9rem;
-            background: #f8fafc;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .support-stat strong {
-            display: block;
-            font-size: 1.4rem;
-            color: #0f172a;
-        }
-
-        .support-stat span {
-            color: #64748b;
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
-        .ticket-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .ticket-item {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            background: #f8fafc;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .ticket-item:hover {
-            transform: translateY(-2px);
-            background: #f1f5f9;
-        }
-
-        .ticket-item-main {
-            min-width: 0;
-        }
-
-        .ticket-item-main h4 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 0.95rem;
-            font-weight: 800;
-        }
-
-        .ticket-item-main p {
-            margin: 0.25rem 0 0;
-            color: #64748b;
-            font-size: 0.8rem;
-        }
-
-        .ticket-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: 0.65rem;
-        }
-
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .activity-column {
-            border-radius: 1rem;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-            background: #f8fafc;
-            overflow: hidden;
-        }
-
-        .activity-column-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.9rem 1rem;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.14);
-            background: #fff;
-        }
-
-        .activity-column-header h4 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 0.9rem;
-            font-weight: 800;
-        }
-
-        .activity-list {
-            list-style: none;
-            margin: 0;
-            padding: 0.35rem;
-        }
-
-        .activity-item {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 0.75rem;
-            padding: 0.85rem;
-            border-radius: 0.85rem;
-        }
-
-        .activity-item+.activity-item {
-            margin-top: 0.2rem;
-        }
-
-        .activity-item:hover {
-            background: rgba(255, 255, 255, 0.78);
-        }
-
-        .activity-item strong {
-            display: block;
-            color: #0f172a;
-            font-size: 0.87rem;
-        }
-
-        .activity-item span {
-            display: block;
-            margin-top: 0.2rem;
-            color: #64748b;
-            font-size: 0.77rem;
-        }
-
-        .health-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.85rem;
-        }
-
-        .health-card:nth-child(odd):last-child {
-            grid-column: span 2;
-        }
-
-        .health-card {
-            border-radius: 1rem;
-            padding: 1rem;
-            background: #f8fafc;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .health-card .dot {
-            width: 0.7rem;
-            height: 0.7rem;
-            border-radius: 9999px;
-            display: inline-block;
-            margin-inline-end: 0.4rem;
-        }
-
-        .health-card h4 {
-            margin: 0 0 0.55rem;
-            color: #0f172a;
-            font-size: 0.88rem;
-            font-weight: 800;
-        }
-
-        .health-card p {
-            margin: 0;
-            color: #475569;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-
-        .health-card small {
-            display: block;
-            margin-top: 0.45rem;
-            color: #64748b;
-            font-size: 0.76rem;
-        }
-
-        @media (max-width: 1280px) {
-            .dashboard-kpis {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .dashboard-main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 900px) {
-
-            .dashboard-hero-grid,
-            .activity-grid,
-            .snapshot-grid,
-            .health-grid,
-            .support-overview-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-hero {
-                padding: 1.25rem;
-            }
-
-            .hero-title {
-                font-size: 1.9rem;
-            }
-
-            .hero-subtitle {
-                font-size: 0.92rem;
-            }
-
-            .dashboard-kpis {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-panel-body {
-                padding: 1rem;
-            }
+                linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, #96310e 0%, #f97316 100%);
         }
     </style>
 @endpush
@@ -594,30 +40,30 @@
                     <p class="hero-subtitle">{{ __('main.dashboard') }} - {{ now()->format('l, d F Y') }}</p>
 
                     <div class="quick-actions">
-                        @if (auth()->user()->can('tickets-create'))
+                        @can('tickets-create')
                             <a href="{{ route('dashboard.tickets.create') }}" class="quick-action">
                                 <i class="fas fa-ticket-alt"></i>
                                 {{ __('main.create_type', ['type' => __('main.ticket')]) }}
                             </a>
-                        @endif
-                        @if (auth()->user()->can('articles-create'))
+                        @endcan
+                        @can('articles-create')
                             <a href="{{ route('dashboard.articles.create') }}" class="quick-action">
                                 <i class="fas fa-newspaper"></i>
                                 {{ __('main.create_type', ['type' => __('main.article')]) }}
                             </a>
-                        @endif
-                        @if (auth()->user()->can('projects-create'))
+                        @endcan
+                        @can('projects-create')
                             <a href="{{ route('dashboard.projects.create') }}" class="quick-action">
                                 <i class="fas fa-project-diagram"></i>
                                 {{ __('main.create_type', ['type' => __('main.project')]) }}
                             </a>
-                        @endif
-                        @if (auth()->user()->can('services-create'))
+                        @endcan
+                        @can('services-create')
                             <a href="{{ route('dashboard.services.create') }}" class="quick-action">
                                 <i class="fas fa-cogs"></i>
                                 {{ __('main.create_type', ['type' => __('main.service')]) }}
                             </a>
-                        @endif
+                        @endcan
                     </div>
                 </div>
 
@@ -725,7 +171,9 @@
                                     <p>{{ __('main.dashboard') }}</p>
                                 </div>
                             </div>
-                            <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.articles') }}</a>
+                            @can('articles-read')
+                                <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.articles') }}</a>
+                            @endcan
                         </div>
 
                         <div class="snapshot-grid">
@@ -797,7 +245,9 @@
                             <section class="activity-column">
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.articles') }}</h4>
-                                    <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.content_management') }}</a>
+                                    @can('articles-read')
+                                        <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.content_management') }}</a>
+                                    @endcan
                                 </div>
                                 <ul class="activity-list">
                                     @forelse ($recentActivities['latest_articles'] as $item)
@@ -817,7 +267,9 @@
                             <section class="activity-column">
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.projects') }}</h4>
-                                    <a class="panel-link" href="{{ route('dashboard.projects.index') }}">{{ __('main.projects') }}</a>
+                                    @can('projects-read')
+                                        <a class="panel-link" href="{{ route('dashboard.projects.index') }}">{{ __('main.projects') }}</a>
+                                    @endcan
                                 </div>
                                 <ul class="activity-list">
                                     @forelse ($recentActivities['latest_projects'] as $item)
@@ -836,7 +288,9 @@
                             <section class="activity-column">
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.tickets') }}</h4>
-                                    <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.ticket_network') }}</a>
+                                    @can('tickets-read')
+                                        <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.ticket_network') }}</a>
+                                    @endcan
                                 </div>
                                 <ul class="activity-list">
                                     @forelse ($recentActivities['latest_tickets'] as $item)
@@ -856,7 +310,9 @@
                             <section class="activity-column">
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.reviews') }}</h4>
-                                    <a class="panel-link" href="{{ route('dashboard.reviews.index') }}">{{ __('main.customer_feedback') }}</a>
+                                    @can('reviews-read')
+                                        <a class="panel-link" href="{{ route('dashboard.reviews.index') }}">{{ __('main.customer_feedback') }}</a>
+                                    @endcan
                                 </div>
                                 <ul class="activity-list">
                                     @forelse ($recentActivities['latest_reviews'] as $item)
@@ -888,7 +344,9 @@
                                     <p>{{ __('main.dashboard') }}</p>
                                 </div>
                             </div>
-                            <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.tickets') }}</a>
+                            @can('tickets-read')
+                                <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.tickets') }}</a>
+                            @endcan
                         </div>
 
                         <div class="support-overview-grid">
@@ -913,19 +371,21 @@
 
                         <div class="ticket-list">
                             @forelse ($supportStats['tickets']['latest'] as $item)
-                                <a href="{{ route('dashboard.tickets.show', $item->id) }}" class="ticket-item">
-                                    <div class="ticket-item-main">
-                                        <h4>{{ $item->name }}</h4>
-                                        <p>{{ limitedText($item->subject ?? '', 56) }}</p>
-                                        <div class="ticket-badges">
-                                            <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($item->status)->badgeColor() }}">{{ __('main.' . $item->status) }}</span>
-                                            <span class="kt-badge text-white" style="background-color: {{ $item->department?->border_main_color ?? 'default' }};">
-                                                {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $item->department?->name ?? 'no_department'))) }}
-                                            </span>
+                                @can('tickets-read')
+                                    <a href="{{ route('dashboard.tickets.show', $item->id) }}" class="ticket-item">
+                                        <div class="ticket-item-main">
+                                            <h4>{{ $item->name }}</h4>
+                                            <p>{{ limitedText($item->subject ?? '', 56) }}</p>
+                                            <div class="ticket-badges">
+                                                <span class="kt-badge text-white {{ \App\Enum\TicketEnums::from($item->status)->badgeColor() }}">{{ __('main.' . $item->status) }}</span>
+                                                <span class="kt-badge text-white" style="background-color: {{ $item->department?->border_main_color ?? 'default' }};">
+                                                    {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $item->department?->name ?? 'no_department'))) }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--icon_color)"></i>
-                                </a>
+                                        <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--icon_color)"></i>
+                                    </a>
+                                @endcan
                             @empty
                                 <div class="ticket-item">
                                     <div class="ticket-item-main">

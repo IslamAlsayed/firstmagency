@@ -16,6 +16,8 @@ return new class extends Migration
         }
         Schema::create('programming_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->string('name_ar')->nullable();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->string('alt_text')->nullable(); // للـ alt attribute

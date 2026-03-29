@@ -7,12 +7,13 @@
             @if ($services && count($services) > 0)
                 @foreach ($services as $service)
                     <swiper-slide class="service-item">
-                        <a href="" class="service-image">
+                        <div class="service-image cursor-pointer clickable-img" data-src="{{ asset('storage/' . ($service->image ?? ($service['icon'] ?? ''))) }}">
                             <img src="{{ asset('storage/' . ($service->image ?? ($service['image'] ?? ''))) }}" alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
-                        </a>
+                        </div>
                         <div class="service-text">
                             <div class="icon">
-                                <img src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}" alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy">
+                                <img src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}" alt="{{ $service->slug ?? ($service['slug'] ?? '') }}" loading="lazy"
+                                    class="clickable-img" data-src="{{ asset('storage/' . ($service->icon ?? ($service['icon'] ?? ''))) }}">
                             </div>
                             <div class="service-title font-semibold">{{ $service['translations'][app()->getLocale()]['title'] ?? ($service['slug'] ?? '') }}
                             </div>

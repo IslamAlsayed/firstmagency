@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'session_expired_reload' => 'انتهت الجلسة، برجاء إعادة تحميل الصفحة',
+    'session_expired_login' => 'انتهت الجلسة، سجل الدخول مرة أخرى',
     'please_login_to_continue' => 'يرجى تسجيل الدخول للمتابعة',
     'welcome_back_name' => 'مرحباً بعودتك، :name!',
     'you_logged_in' => 'لقد قمت بتسجيل الدخول بنجاح.',
@@ -67,7 +69,7 @@ return [
     'no_file_chosen' => 'لم يتم اختيار ملف.',
 
     // Authorization Messages
-    'unauthorized_action' => 'أنت غير مخول للقيام بهذا الإجراء.',
+    'unauthorized_action' => 'إجراء غير مصرح به',
     'forbidden' => 'ممنوع',
     'not_authenticated' => 'يجب أن تكون مصدقًا للوصول إلى هذا المورد.',
     'permission_denied' => 'تم رفض الإذن',
@@ -208,6 +210,7 @@ return [
     'no_permissions_available' => 'لا توجد صلاحيات متاحة.',
     'no_permissions_assigned' => 'لم يتم تعيين أي صلاحيات لهذا الدور.',
     'permissions_count' => 'عدد الصلاحيات: :count',
+    'permissions_updated' => 'تم تحديث الصلاحيات بنجاح.',
     'permission_name_format' => 'استخدم صيغة الثعبان (snake_case) مثل: create_users, edit_posts, delete_comments',
     'showing_all_items' => 'عرض كل :total عناصر',
     'showing_first_items' => 'عرض أول :count عناصر من أصل :total',

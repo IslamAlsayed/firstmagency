@@ -1,7 +1,8 @@
 <section class="section order-your-app-section relative">
     <div class="content flex items-center">
         <div class="image">
-            <img src="{{ asset('assets/images/website/app-developer/order-app.png') }}" alt="{{ __('main.btn_order_app') }}">
+            <img src="{{ asset('assets/images/website/app-developer/order-app.png') }}" alt="{{ __('main.btn_order_app') }}" class="clickable-img"
+                data-src="{{ asset('assets/images/website/app-developer/order-app.png') }}">
         </div>
         <div class="text">
             <div class="title font-semibold">{{ __('main.order_app_title') }} <span class="title-badge">{{ __('main.brand_short') }}</span></div>

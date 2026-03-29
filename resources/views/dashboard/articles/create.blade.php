@@ -20,10 +20,10 @@
                     <div>
                         <label for="category_id" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.category') }}</label>
                         <select class="kt-select basic-single" id="category_id" name="category_id">
-                            <option value="">--</option>
+                            <option value="" selected disabled>--</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
+                                    {{ $category->alt_text }}
                                 </option>
                             @endforeach
                         </select>
@@ -62,14 +62,12 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- الوصف --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_ar',
                                 'value' => old('description_ar'),
                                 'placeholder' => 'أدخل الوصف بالعربية',
                             ])
 
-                            {{-- المحتوى --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_ar',
                                 'value' => old('content_ar'),
@@ -78,7 +76,6 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- keywords Arabic (Tagify) -->
                             <div>
                                 <label for="keywords_ar" class="kt-label">{{ __('main.keywords_ar') }}</label>
                                 <input type="text" name="keywords_ar" id="keywords_ar" class="kt-input h-fit tagify-container" value="{{ old('keywords_ar') }}" placeholder="كلمة">
@@ -113,14 +110,12 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-6">
-                            {{-- Description --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'description_en',
                                 'value' => old('description_en'),
                                 'placeholder' => 'Enter description in English',
                             ])
 
-                            {{-- Content --}}
                             @include('dashboard.components.input-text-editor', [
                                 'name' => 'content_en',
                                 'value' => old('content_en'),
@@ -129,7 +124,6 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- keywords English (Tagify) -->
                             <div>
                                 <label for="keywords_en" class="kt-label">{{ __('main.keywords_en') }}</label>
                                 <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container" value="{{ old('keywords_en') }}" placeholder="word">
@@ -153,7 +147,6 @@
 
                 <!-- Media & Other Fields -->
                 <div class="grid grid-cols-1 gap-6">
-                    @include('dashboard.components.photo', ['column' => 'image'])
                     @include('dashboard.components.photo', ['column' => 'thumbnail'])
                 </div>
 
@@ -198,6 +191,32 @@
                     });
                 });
             }
+        });
+    </script>
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 500
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
         });
     </script>
 @endpush

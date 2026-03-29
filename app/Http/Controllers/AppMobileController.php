@@ -13,19 +13,19 @@ class AppMobileController extends Controller
     public function index()
     {
         $data = [
-            'programming_categories' => Cache::remember('app_mobile_programming_categories', 1800, function () {
+            'programming_categories' => Cache::remember('app_mobile_programming_categories', config('app.cache_time'), function () {
                 return ProgrammingCategory::active()->limit(3)->get();
             }),
 
-            'project_steps' => Cache::remember('app_mobile_project_steps', 1800, function () {
+            'project_steps' => Cache::remember('app_mobile_project_steps', config('app.cache_time'), function () {
                 return ProjectStep::ordered()->get();
             }),
 
-            'articles' => Cache::remember('app_mobile_articles', 1800, function () {
+            'articles' => Cache::remember('app_mobile_articles', config('app.cache_time'), function () {
                 return Article::active()->forAppMobiles()->limit(4)->get();
             }),
 
-            'faqs' => Cache::remember('app_mobile_faqs', 1800, function () {
+            'faqs' => Cache::remember('app_mobile_faqs', config('app.cache_time'), function () {
                 return FAQ::active()->apps()->get();
             }),
         ];

@@ -109,7 +109,7 @@
                     <div class="profile-info-card">
                         <span>{{ __('main.email_verified') }}</span>
                         <div class="profile-value">
-                            <span class="profile-state-badge {{ $user->email_verified_at ? 'success' : 'warning' }}">
+                            <span class="profile-state-badge w-fit {{ $user->email_verified_at ? 'success' : 'warning' }}">
                                 <i class="fas {{ $user->email_verified_at ? 'fa-circle-check' : 'fa-clock' }}"></i>
                                 {{ $user->email_verified_at ? __('main.verified') : __('main.unverified') }}
                             </span>
@@ -171,18 +171,20 @@
                     </div>
                 </section>
 
-                <section class="profile-panel profile-animate profile-delay-3">
-                    <div class="profile-panel-head">
-                        <div class="profile-panel-title">
-                            <div class="profile-panel-icon"><i class="ki-filled ki-arrow-right-left"></i></div>
-                            <div>
-                                <h3>{{ __('messages.switch_to_anther_user') }}</h3>
-                                <p>{{ __('main.account_information') }}</p>
+                @if (getActiveUser()->can('dashboard-switch-account'))
+                    <section class="profile-panel profile-animate profile-delay-3">
+                        <div class="profile-panel-head">
+                            <div class="profile-panel-title">
+                                <div class="profile-panel-icon"><i class="ki-filled ki-arrow-right-left"></i></div>
+                                <div>
+                                    <h3>{{ __('messages.switch_to_anther_user') }}</h3>
+                                    <p>{{ __('main.account_information') }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @include('dashboard.components.account-switcher', ['availableUsers' => \App\Models\User::all()])
-                </section>
+                        @include('dashboard.components.account-switcher', ['availableUsers' => $users])
+                    </section>
+                @endif
             </div>
         </div>
     </div>

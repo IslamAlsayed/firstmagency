@@ -17,13 +17,13 @@
                         $title = $client['translations'][$locale]['name'] ?? $slug;
                     }
                 @endphp
-                <div class="client cursor-pointer" title="{{ $title }}">
+                <div class="client cursor-pointer clickable-img" title="{{ $title }}" data-src="{{ asset('storage/' . $image) }}">
                     <img src="{{ asset('storage/' . $image) }}" alt="{{ $altText ?? $slug }}" loading="lazy">
                 </div>
             @endforeach
         @else
             @for ($i = 1; $i <= 12; $i++)
-                <div class="client cursor-pointer" title="{{ 'Client ' . $i . ' Logo' }}">
+                <div class="client cursor-pointer clickable-img" title="{{ 'Client ' . $i . ' Logo' }}" data-src="{{ asset('assets/images/website/clients/' . $i . '.png') }}">
                     <img src="{{ asset('assets/images/website/clients/' . $i . '.png') }}" alt="Client {{ $i }} Logo" loading="lazy">
                 </div>
             @endfor

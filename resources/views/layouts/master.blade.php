@@ -4,6 +4,13 @@
 <head>
     @include('layouts.partials.head')
     @stack('styles')
+
+    <style>
+        #content {
+            position: relative;
+            top: -30px;
+        }
+    </style>
 </head>
 
 <body>

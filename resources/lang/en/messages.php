@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'session_expired_reload' => 'Session expired, please reload the page',
+    'session_expired_login' => 'Session expired, please login again',
     'please_login_to_continue' => 'Please login to continue.',
     'welcome_back_name' => 'Welcome back, :name!',
     'you_logged_in' => 'You logged in successfully.',
@@ -211,6 +213,7 @@ return [
     'no_permissions_available' => 'No permissions available.',
     'no_permissions_assigned' => 'No permissions assigned to this role.',
     'permissions_count' => 'Permissions count: :count',
+    'permissions_updated' => 'Permissions updated successfully.',
     'permission_name_format' => 'Use snake_case format like: create_users, edit_posts, delete_comments',
     'showing_all_items' => 'Showing all :total items',
     'showing_first_items' => 'Showing first :count items out of :total',
