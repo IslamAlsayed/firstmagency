@@ -1,4 +1,5 @@
 <tr class="border-b border-gray-200 hover:bg-gray-50 transition" id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
+    <td class="p-4 text-sm text-gray-600">{{ $ticket->id }}</td>
     <td class="p-4 text-sm text-gray-600">{{ $ticket->uuid }}</td>
     <td class="p-4 text-sm text-gray-600">
         <p>{{ $ticket->name }}</p>

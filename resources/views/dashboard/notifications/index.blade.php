@@ -29,7 +29,7 @@
                         <form id="delete_all_form" method="POST" action="{{ route('dashboard.notifications.destroyAll') }}" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" id="delete_all" class="kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
+                            <button type="submit" id="delete_all" class="kt-btn bg-danger text-sm hidden" onclick="return confirm('{{ __('main.are_you_sure') }}');">
                                 <i class="fas fa-trash me-1"></i>
                                 {{ __('main.delete_all') }}
                             </button>
@@ -38,7 +38,7 @@
                         <form id="delete_selected_form" method="POST" action="{{ route('dashboard.notifications.destroyAll') }}" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" id="delete_selected" class="hidden kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
+                            <button type="submit" id="delete_selected" class="kt-btn bg-danger text-sm hidden" onclick="return confirm('{{ __('main.are_you_sure') }}');">
                                 <i class="fas fa-trash me-1"></i>
                                 {{ __('main.delete_selected') }}
                             </button>
@@ -150,6 +150,13 @@
                 } else {
                     if (deleteAllBtn) deleteAllBtn.classList.remove('hidden');
                     if (deleteSelectedBtn) deleteSelectedBtn.classList.add('hidden');
+                }
+                // إخفاء كل الأزرار في البداية
+                if (deleteAllBtn) deleteAllBtn.classList.add('hidden');
+                if (deleteSelectedBtn) deleteSelectedBtn.classList.add('hidden');
+                // إظهار الزر المناسب فقط
+                if (checked > 0) {
+                    if (deleteSelectedBtn) deleteSelectedBtn.classList.remove('hidden');
                 }
             }
             document.querySelectorAll('.notification-checkbox').forEach(cb => {

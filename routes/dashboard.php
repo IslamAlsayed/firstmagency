@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Dashboard\ArticleController;
 use App\Http\Controllers\Dashboard\BackupController;
-use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\DashboardsAndSystemController;
 use App\Http\Controllers\Dashboard\DepartmentController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\Dashboard\HostingFeatureController;
 use App\Http\Controllers\Dashboard\HostingPackageController;
 use App\Http\Controllers\Dashboard\LineWorkController;
 use App\Http\Controllers\Dashboard\MarketingPackageController;
+use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\OfficialDomainController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\PermissionController;
@@ -32,7 +32,23 @@ use App\Http\Controllers\Dashboard\WorkUsStepController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+Route::get('test-cpanel-mail', function () {
+    $email = 'eslamalsayed8133@gmail.com';
+    $details = [
+        'title' => 'CPanel SMTP Test',
+        'body' => 'This is a test email sent using CPanel SMTP settings.'
+    ];
+    try {
+        Mail::to($email)->send(new TestEmail($details));
+        return 'Email sent successfully! Check your inbox.';
+    } catch (\Exception $e) {
+        return 'Mail send failed: ' . $e->getMessage();
+    }
+});
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
