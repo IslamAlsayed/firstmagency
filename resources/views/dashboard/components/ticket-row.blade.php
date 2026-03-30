@@ -21,7 +21,7 @@
             'record' => $ticket,
             'models' => 'tickets',
             'modelClass' => 'ticket',
-            'availableOptions' => \App\Models\Department::pluck('name', 'id')->toArray(),
+            'availableOptions' => \App\Models\Department::get(['id', 'name', 'name_ar', 'user_id'])->toArray(),
         ])
         <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
             {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}

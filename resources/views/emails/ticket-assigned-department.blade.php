@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 8px; background-color: #f0f0f0; font-weight: bold; color: #333;">{{ __('main.department') }}:</td>
-                    <td style="padding: 8px; color: #555;">{{ $department->name }}</td>
+                    <td style="padding: 8px; color: #555;">{{ app()->getLocale() == 'ar' ? $department->name_ar : $department->name }}</td>
                 </tr>
                 <tr>
                     <td style="padding: 8px; background-color: #f0f0f0; font-weight: bold; color: #333;">{{ __('main.priority') }}:</td>

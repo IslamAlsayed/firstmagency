@@ -19,10 +19,10 @@ class UsersSeeder extends Seeder
 
         // Super Admin
         $superadmin = User::firstOrCreate(
-            ['email' => 'superadmin@firstmagency.com'],
+            ['email' => 'superadmin@live4.firstmagency.com'],
             [
                 'name' => 'Super Admin',
-                'password' => '12345678',
+                'password' => 'superadminsystem',
                 'email_verified_at' => now(),
                 'address' => fake()->address(),
                 'bio' => fake()->text(),
@@ -41,15 +41,14 @@ class UsersSeeder extends Seeder
                 'dashboard_locale' => 'ar',
             ]
         );
-
         $superadmin->assignRole('superadmin');
 
         // Admin
         $admin = User::firstOrCreate(
-            ['email' => 'admin@firstmagency.com'],
+            ['email' => 'admin@live4.firstmagency.com'],
             [
                 'name' => 'Admin',
-                'password' => '12345678',
+                'password' => 'adminsystem',
                 'email_verified_at' => now(),
                 'address' => fake()->address(),
                 'bio' => fake()->text(),
@@ -68,15 +67,14 @@ class UsersSeeder extends Seeder
                 'dashboard_locale' => 'en',
             ]
         );
-
         $admin->assignRole('admin');
 
         // Content Manager
         $content_manager = User::firstOrCreate(
-            ['email' => 'content@firstmagency.com'],
+            ['email' => 'contentmanager@live4.firstmagency.com'],
             [
                 'name' => 'Content Manager',
-                'password' => '12345678',
+                'password' => 'contentmanagersystem',
                 'email_verified_at' => now(),
                 'address' => fake()->address(),
                 'bio' => fake()->text(),
@@ -95,115 +93,112 @@ class UsersSeeder extends Seeder
                 'dashboard_locale' => 'ar',
             ]
         );
-
         $content_manager->assignRole('content_manager');
 
         // Support - Technical Support
-        $support_technical = User::firstOrCreate(
-            ['email' => 'support@firstmagency.com'],
-
-            [
-                'name' => 'محمد احمد',
-                'password' => '12345678',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '8.png',
-                'role' => 'support',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'active',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'en',
-                'dashboard_locale' => 'en',
-            ]
-        );
-        $support_technical->assignRole('support');
+        // $support_technical = User::firstOrCreate(
+        //     ['email' => 'support@live4.firstmagency.com'],
+        //     [
+        //         'name' => 'محمد احمد',
+        //         'password' => 'supportsystem',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '8.png',
+        //         'role' => 'support',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'active',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'en',
+        //         'dashboard_locale' => 'en',
+        //     ]
+        // );
+        // $support_technical->assignRole('support');
 
         // Support - Sales
-        $support_sales = User::firstOrCreate(
-            ['email' => 'sales@firstmagency.com'],
+        // $support_sales = User::firstOrCreate(
+        //     ['email' => 'sales@firstmagency.com'],
+        //     [
+        //         'name' => 'احمد محمد',
+        //         'password' => '12345678',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '6.png',
+        //         'role' => 'support',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'active',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'en',
+        //         'dashboard_locale' => 'en',
+        //     ]
+        // );
+        // $support_sales->assignRole('support');
 
-            [
-                'name' => 'احمد محمد',
-                'password' => '12345678',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '6.png',
-                'role' => 'support',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'active',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'en',
-                'dashboard_locale' => 'en',
-            ]
-        );
-        $support_sales->assignRole('support');
+        // // Support - Billing
+        // $support_billing = User::firstOrCreate(
+        //     ['email' => 'billing@firstmagency.com'],
 
-        // Support - Billing
-        $support_billing = User::firstOrCreate(
-            ['email' => 'billing@firstmagency.com'],
+        //     [
+        //         'name' => 'علي حسن',
+        //         'password' => '12345678',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '9.png',
+        //         'role' => 'support',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'active',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'en',
+        //         'dashboard_locale' => 'en',
+        //     ]
+        // );
+        // $support_billing->assignRole('support');
 
-            [
-                'name' => 'علي حسن',
-                'password' => '12345678',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '9.png',
-                'role' => 'support',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'active',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'en',
-                'dashboard_locale' => 'en',
-            ]
-        );
-        $support_billing->assignRole('support');
+        // // Support - Complaints
+        // $support_complaints = User::firstOrCreate(
+        //     ['email' => 'complaints@firstmagency.com'],
 
-        // Support - Complaints
-        $support_complaints = User::firstOrCreate(
-            ['email' => 'complaints@firstmagency.com'],
-
-            [
-                'name' => 'سارة علي',
-                'password' => '12345678',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '3.png',
-                'role' => 'support',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'active',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'en',
-                'dashboard_locale' => 'en',
-            ]
-        );
-        $support_complaints->assignRole('support');
+        //     [
+        //         'name' => 'سارة علي',
+        //         'password' => '12345678',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '3.png',
+        //         'role' => 'support',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'active',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'en',
+        //         'dashboard_locale' => 'en',
+        //     ]
+        // );
+        // $support_complaints->assignRole('support');
     }
 }

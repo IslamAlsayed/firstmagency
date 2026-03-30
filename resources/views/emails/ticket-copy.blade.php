@@ -44,11 +44,24 @@
             }
         }
 
-        .print-ticket {
+        body {
             width: 100%;
+            height: 100%;
+            display: flex;
             padding: 20px;
+            align-items: center;
+            justify-content: center;
+            background: rgb(235, 235, 235);
+        }
+
+        .print-ticket {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
             display: block;
+            border-radius: 10px;
             position: relative;
+            background: white;
 
             .date,
             .page {
@@ -64,17 +77,65 @@
                 bottom: 20px;
             }
         }
+
+        @media (max-width: 600px) {
+            .print-ticket {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            * {
+                font-size: 12px;
+            }
+
+            .heading {
+                font-size: 16px !important;
+            }
+
+            .info * {
+                font-size: 10px !important;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .print-ticket {
+                padding: 10px;
+                border-radius: 7px;
+            }
+
+            .rounded {
+                border-radius: 7px !important;
+            }
+
+            * {
+                font-size: 8px;
+            }
+
+            .heading {
+                font-size: 12px !important;
+            }
+
+            .info {
+                gap: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .info * {
+                font-size: 8px !important;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="print-ticket">
         <!-- title -->
-        <h1 class="text-3xl font-bold text-right mb-6">{{ __('main.ticket_copy') }} #{{ $ticket->uuid }}</h1>
+        <h1 class="text-3xl font-bold text-right mb-6 heading">{{ __('main.ticket_copy') }} #{{ $ticket->uuid }}</h1>
         <p class="mb-2">{{ __('main.ticket_copy_message') }}</p>
 
         <!-- ticket info -->
-        <div class="border rounded-xl p-4 mb-4">
+        <div class="border rounded-xl p-4 mb-4 info rounded">
             <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-2">
                     <p class="mb-1"><b>{{ __('main.status') }}:</b> {{ $ticket->status }}</p>
@@ -100,7 +161,7 @@
         <!-- messages -->
         <div class="flex flex-col gap-4">
             @foreach ($ticket->messages as $message)
-                <div class="border rounded-xl p-2 {{ $message->sender_type == 'customer' ? 'bg-blue-50' : 'bg-red-50' }}">
+                <div class="border rounded-xl p-2 {{ $message->sender_type == 'customer' ? 'bg-blue-50' : 'bg-red-50' }} rounded">
                     <div class="text-sm text-gray-700">
                         {{ $message->sender_type == 'customer' ? $message->ticket->name : $message->user->name }}
                         —
@@ -108,10 +169,10 @@
                     </div>
                     <div class="text-gray-800">
                         {!! $message->message !!}
-                        <div class="files flex items-center gap-2 mt-3">
+                        <div class="files flex items-center gap-2">
                             @if ($message->attachments && is_array($message->attachments) && count($message->attachments) > 0)
                                 @foreach ($message->attachments as $attachment)
-                                    <a href="{{ asset('storage/' . $attachment) }}" class="client-attachment flex items-center gap-2" target="_blank" download>
+                                    <a href="{{ asset('storage/' . $attachment) }}" target="_blank" class="client-attachment flex items-center gap-2">
                                         <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
                                         {{ __('main.attachment') }}
                                     </a>

@@ -25,14 +25,24 @@
                         </form>
                     @endif
                     @if (auth()->user()->notifications->count() > 0)
-                        <button type="submit" id="delete_all" class="kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
-                            <i class="fas fa-trash me-1"></i>
-                            {{ __('main.delete_all') }}
-                        </button>
-                        <button type="submit" id="delete_selected" class="hidden kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
-                            <i class="fas fa-trash me-1"></i>
-                            {{ __('main.delete_selected') }}
-                        </button>
+                        <!-- Delete All Form -->
+                        <form id="delete_all_form" method="POST" action="{{ route('dashboard.notifications.destroyAll') }}" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="delete_all" class="kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
+                                <i class="fas fa-trash me-1"></i>
+                                {{ __('main.delete_all') }}
+                            </button>
+                        </form>
+                        <!-- Delete Selected Form -->
+                        <form id="delete_selected_form" method="POST" action="{{ route('dashboard.notifications.destroyAll') }}" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="delete_selected" class="hidden kt-btn bg-danger text-sm" onclick="return confirm('{{ __('main.are_you_sure') }}');">
+                                <i class="fas fa-trash me-1"></i>
+                                {{ __('main.delete_selected') }}
+                            </button>
+                        </form>
                     @endif
                 </div>
             </div>
@@ -124,11 +134,13 @@
 
 @push('scripts')
     <script>
-        // Select/Deselect all checkboxes
+        // Select/Deselect all checkboxes and handle delete selected
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.querySelector('.notifications-header');
             const deleteAllBtn = document.getElementById('delete_all');
             const deleteSelectedBtn = document.getElementById('delete_selected');
+            const deleteSelectedForm = document.getElementById('delete_selected_form');
+            const selectedInput = document.getElementById('selected_notifications_input');
 
             function updateDeleteButtons() {
                 const checked = document.querySelectorAll('.notification-checkbox:checked').length;
@@ -166,6 +178,29 @@
                 header.prepend(selectAllDiv);
             }
             updateDeleteButtons();
+
+            // Handle delete selected form submission
+            if (deleteSelectedForm) {
+                deleteSelectedForm.addEventListener('submit', function(e) {
+                    // Remove any old hidden inputs
+                    deleteSelectedForm.querySelectorAll('input[name="selected_notifications[]"]').forEach(el => el.remove());
+                    const checked = Array.from(document.querySelectorAll('.notification-checkbox'))
+                        .filter(cb => cb.checked && cb.id.startsWith('notification_'))
+                        .map(cb => cb.value);
+                    if (checked.length === 0) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    // Add hidden inputs for each selected notification
+                    checked.forEach(id => {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'selected_notifications[]';
+                        input.value = id;
+                        deleteSelectedForm.appendChild(input);
+                    });
+                });
+            }
         });
     </script>
 @endpush

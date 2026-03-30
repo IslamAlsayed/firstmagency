@@ -83,6 +83,7 @@
                     <table class="entity-table">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>{{ __('main.number') }}</th>
                                 <th>{{ __('main.name') }}</th>
                                 <th>{{ __('main.subject') }}</th>
@@ -95,6 +96,7 @@
                         <tbody>
                             @forelse($tickets as $ticket)
                                 <tr id="row-{{ $ticket->id }}" data-status="{{ $ticket->status }}" data-priority="{{ $ticket->priority }}">
+                                    <td>{{ $ticket->id }}</td>
                                     <td><span class="entity-primary-text">{{ $ticket->uuid }}</span></td>
                                     <td>
                                         <p class="entity-primary-text">{{ $ticket->name }}</p>

@@ -186,7 +186,7 @@ class TicketController extends Controller
                 'type' => 'customer_reply',
                 'subject' => $ticket->subject,
                 'body' => __('main.customer') . ': ' . $ticket->name,
-                'url' => request()->getSchemeAndHttpHost() . route('dashboard.tickets.show', $ticket->id, false),
+                'url' => request()->getSchemeAndHttpHost() . route('dashboard.tickets.support-reply', $ticket->id, false),
                 'created_at' => now()->toIso8601String(),
                 'created_at_human' => now()->diffForHumans(),
             ]);
@@ -220,7 +220,8 @@ class TicketController extends Controller
                 ],
 
                 'department' => [
-                    'name' => $this->getLocalizedDepartmentName($department),
+                    'name' => $department?->name ?? 'support_',
+                    'name_ar' => $department?->name_ar ?? 'support_',
                     'bg_color' => $department?->bg_color,
                     'border_color' => $department?->border_color,
                     'border_main_color' => $department?->border_main_color,

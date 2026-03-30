@@ -11,7 +11,8 @@
                 <p class="mb-1"><b>{{ __('main.subject') }}:</b> {{ $ticketData['subject'] }}</p>
             </div>
             <div class="space-y-2">
-                <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticketData['department']['name'] ?? __('main.no_department') }}</p>
+                <p class="mb-1"><b>{{ __('main.department') }}:</b>
+                    {{ app()->getLocale() == 'ar' ? $ticketData['department']['name_ar'] : $ticketData['department']['name'] ?? __('main.no_department') }}</p>
                 <p class="mb-1"><b>{{ __('main.email_') }}:</b> {{ $ticketData['email'] }}</p>
                 <p class="mb-1"><b>{{ __('main.date') }}:</b> {{ $ticketData['created_at'] }}</p>
             </div>
