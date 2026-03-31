@@ -17,7 +17,7 @@
 
 <body dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
     <div style="background: #fff; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid #0284c7;">
-        <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; margin-bottom: 22px;">
+        <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;margin-bottom: 10px;border-radius: 10px 10px 0 0;">
             <h2 style="color: #28a745; margin: 0; font-size: 22px; letter-spacing: 0.5px;">{{ __('main.support_pro') }}</h2>
         </div>
         <div style="padding-bottom: 18px;">

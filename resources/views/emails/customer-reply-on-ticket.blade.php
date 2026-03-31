@@ -53,34 +53,3 @@
 </body>
 
 </html>
-
-<div class="ticket-box">
-    <strong>{{ __('main.customer_message') }}:</strong>
-    <div class="px-3 py-1 rounded-md text-sm font-medium" style="border: 1px solid #00000050;">
-        {!! $messageRow->message !!}
-    </div>
-</div>
-
-@if ($messageRow->attachments)
-    <div class="ticket-box">
-        <strong>{{ __('main.attachments') }}:</strong>
-        <div class="px-3 py-2 rounded-md text-sm font-medium" style="border: 1px solid #00000050;">
-            <ul style="margin: 0; padding-inline-start: 18px;">
-                @foreach ($messageRow->attachments as $attachment)
-                    <li>
-                        <a href="{{ asset('storage/' . $attachment) }}" target="_blank" style="color: #2563eb; text-decoration: underline;">
-                            {{ basename($attachment) }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-@endif
-
-<a href="{{ $ticketLink }}" class="button">{{ __('main.view_ticket') }}</a>
-<p style="margin-top:30px;color:#666">{{ __('main.customer_needs_response') }}</p>
-</div>
-</body>
-
-</html>

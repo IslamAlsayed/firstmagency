@@ -3,25 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ __('main.ticket_received') }}</title>
+    <title>{{ __('main.ticket_copy') }}</title>
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         body {
-            background: #ebebeb;
+            background: #f5f5f5;
             width: 100%;
             min-height: 100vh;
             padding: 20px;
             margin: 0;
             font-family: '{{ $settings->font_name ?? 'Tajawal' }}', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
 
 <body dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
-    <div style="max-width: 700px; margin: auto; padding: 30px; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(2,6,23,0.06); position: relative; width: 100%;">
+    <div style="background: #fff; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid #0284c7;">
         <!-- title -->
         <h1 style="font-size: 28px; font-weight: bold; text-align: right; margin-bottom: 24px; margin-top: 0;">{{ __('main.ticket_copy') }} #{{ $ticket->uuid }}</h1>
         <p style="margin-bottom: 12px; color: #333; font-size: 15px;">{{ __('main.ticket_copy_message') }}</p>

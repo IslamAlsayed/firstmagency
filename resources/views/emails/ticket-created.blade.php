@@ -7,7 +7,7 @@
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         body {
-            background: #fff;
+            background: #f5f5f5;
             padding: 30px;
             border-radius: 10px;
             max-width: 600px;
@@ -32,7 +32,7 @@
             </span>
         </div>
         <a href="{{ $viewLink }}"
-            style="display: inline-block; padding: 12px 20px; background: #2563eb; color: #fff !important; text-decoration: none; border-radius: 6px; margin-top: 20px; font-weight: 600; font-size: 15px;">{{ __('main.view_ticket') }}</a>
+            style="display: inline-block; padding: 12px 20px; background: #2563eb; color: #fff !important; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">{{ __('main.view_ticket') }}</a>
         <p style="margin-top:30px;color:#666; font-size: 14px;">{{ __('main.support_team_response') }}</p>
     </div>
 </body>

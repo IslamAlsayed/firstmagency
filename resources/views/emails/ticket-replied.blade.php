@@ -7,12 +7,8 @@
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         body {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-            border-left: 4px solid #0284c7;
+            background: #f5f5f5;
+            padding: 20px;
             font-family: '{{ $settings->font_name ?? 'Tajawal' }}', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
         }
     </style>
@@ -52,7 +48,7 @@
         @endif
         <a href="{{ $viewLink }}"
             style="display: inline-block; padding: 12px 20px; background: #0c4a6e; color: #fff !important; text-decoration: none; border-radius: 6px; margin-top: 20px; font-weight: 600;">{{ __('main.view_ticket') }}</a>
-        <p style="margin-top:30px;color:#666">{{ __('main.support_team_response') }}</p>
+        <p style="margin:20px 0 0;color:#666">{{ __('main.support_team_response') }}</p>
     </div>
 </body>
 
