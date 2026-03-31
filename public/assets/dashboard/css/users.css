@@ -17,30 +17,34 @@
     font-family: inherit;
     background: transparent;
     color: inherit;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
     outline: none;
     appearance: none;
     -webkit-appearance: none;
 }
 
-html[lang=ar] {
-
-    .ff-grid>*:nth-child(1) .ff-input,
-    .ff-grid>*:nth-child(2) .ff-input {
+html[lang="ar"] {
+    .ff-grid > *:nth-child(1) .ff-input,
+    .ff-grid > *:nth-child(2) .ff-input,
+    .ff-grid > *:nth-child(3) .ff-input {
         text-align: start;
         padding-inline: 44px 16px;
     }
 
-    .ff-grid>*:nth-child(3) .ff-input,
-    .ff-grid>*:nth-child(4) .ff-input {
+    .ff-grid > *:nth-child(3) .ff-input,
+    .ff-grid > *:nth-child(4) .ff-input {
         text-align: right;
         padding-inline: 16px 44px;
+        padding-inline: 44px 16px;
     }
 }
 
 .ff-input:focus {
-    border-color: var(--button_color, #0074F7);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--button_color, #0074F7) 12%, transparent);
+    border-color: var(--button_color, #0074f7);
+    box-shadow: 0 0 0 4px
+        color-mix(in srgb, var(--button_color, #0074f7) 12%, transparent);
 }
 
 .ff-label {
@@ -55,13 +59,13 @@ html[lang=ar] {
     white-space: nowrap;
 }
 
-.ff-input:focus~.ff-label,
-.ff-input:not(:placeholder-shown)~.ff-label {
+.ff-input:focus ~ .ff-label,
+.ff-input:not(:placeholder-shown) ~ .ff-label {
     top: 10px;
     transform: none;
     font-size: 10px;
     font-weight: 700;
-    color: var(--button_color, #0074F7);
+    color: var(--button_color, #0074f7);
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -74,11 +78,13 @@ html[lang=ar] {
     font-size: 14px;
     color: #94a3b8;
     pointer-events: none;
-    transition: color 0.25s ease, transform 0.25s ease;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .ff-group:has(.ff-input:focus) .ff-icon {
-    color: var(--button_color, #0074F7);
+    color: var(--button_color, #0074f7);
     transform: translateY(-50%) scale(1.15);
 }
 
@@ -103,29 +109,31 @@ html[lang=ar] {
 }
 
 .ff-section::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to var(--ff-grad-dir, left),
-            color-mix(in srgb, var(--button_color, #0074F7) 8%, transparent),
-            color-mix(in srgb, var(--dash_primary_color, #F54900) 5%, transparent));
+    background: linear-gradient(
+        to var(--ff-grad-dir, left),
+        color-mix(in srgb, var(--button_color, #0074f7) 8%, transparent),
+        color-mix(in srgb, var(--dash_primary_color, #f54900) 5%, transparent)
+    );
 }
 
 .ff-section::after {
-    content: '';
+    content: "";
     position: absolute;
     inset-block: 0;
     inset-inline-end: 0;
     width: 3px;
-    background: var(--button_color, #0074F7);
+    background: var(--button_color, #0074f7);
     border-radius: 4px;
 }
 
-html[lang=ar] .ff-section {
+html[lang="ar"] .ff-section {
     --ff-grad-dir: right;
 }
 
-html[lang=ar] .ff-section::after {
+html[lang="ar"] .ff-section::after {
     inset-inline-end: auto;
     inset-inline-start: 0;
 }
@@ -135,14 +143,15 @@ html[lang=ar] .ff-section::after {
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: var(--button_color, #0074F7);
+    background: var(--button_color, #0074f7);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
     flex-shrink: 0;
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--button_color, #0074F7) 40%, transparent);
+    box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--button_color, #0074f7) 40%, transparent);
 }
 
 .ff-section .ff-s-title {
@@ -203,9 +212,10 @@ html[lang=ar] .ff-section::after {
 }
 
 .role-card:hover {
-    border-color: var(--button_color, #0074F7);
+    border-color: var(--button_color, #0074f7);
     transform: translateY(-3px);
-    box-shadow: 0 8px 22px color-mix(in srgb, var(--button_color, #0074F7) 20%, transparent);
+    box-shadow: 0 8px 22px
+        color-mix(in srgb, var(--button_color, #0074f7) 20%, transparent);
 }
 
 .role-card:hover .rc-icon {
@@ -213,17 +223,21 @@ html[lang=ar] .ff-section::after {
 }
 
 .role-card.active {
-    border-color: var(--button_color, #0074F7);
-    background: color-mix(in srgb, var(--button_color, #0074F7) 7%, transparent);
+    border-color: var(--button_color, #0074f7);
+    background: color-mix(
+        in srgb,
+        var(--button_color, #0074f7) 7%,
+        transparent
+    );
 }
 
 .role-card.active .rc-label {
-    color: var(--button_color, #0074F7);
+    color: var(--button_color, #0074f7);
 }
 
 .role-card.active::after {
-    content: '\f00c';
-    font-family: 'FontAwesome';
+    content: "\f00c";
+    font-family: "FontAwesome";
     font-weight: 900;
     position: absolute;
     top: 7px;
@@ -231,7 +245,7 @@ html[lang=ar] .ff-section::after {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--button_color, #0074F7);
+    background: var(--button_color, #0074f7);
     color: #fff;
     font-size: 9px;
     display: flex;
@@ -308,22 +322,22 @@ html[lang=ar] .ff-section::after {
     animation: ffUp 0.4s ease forwards;
 }
 
-.ff-grid>*:nth-child(1) {
+.ff-grid > *:nth-child(1) {
     animation-delay: 0.05s;
 }
 
-.ff-grid>*:nth-child(2) {
-    animation-delay: 0.10s;
+.ff-grid > *:nth-child(2) {
+    animation-delay: 0.1s;
 }
 
-.ff-grid>*:nth-child(3) {
+.ff-grid > *:nth-child(3) {
     animation-delay: 0.15s;
 }
 
-.ff-grid>*:nth-child(4) {
-    animation-delay: 0.20s;
+.ff-grid > *:nth-child(4) {
+    animation-delay: 0.2s;
 }
 
-.ff-grid>*:nth-child(5) {
+.ff-grid > *:nth-child(5) {
     animation-delay: 0.25s;
 }

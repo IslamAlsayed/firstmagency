@@ -266,7 +266,7 @@
                             {{ __('main.department') }} <span class="text-red-500">*</span>
                         </label>
                         <select id="department_id" name="department_id" class="w-full basic-single rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/40">
-                            <option value="">{{ __('main.select') . ' ' . __('main.department') }}</option>
+                            <option value="" selected disabled>--</option>
                             @foreach ($departments as $dept)
                                 <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>
                                     {{ $dept->name }}
@@ -282,14 +282,14 @@
                         <label for="assigned_to" class="mb-2 block text-sm font-semibold text-gray-500">{{ __('main.assigned_to') }}</label>
                         <div class="ff-group">
                             <select id="assigned_to" name="assigned_to" class="ff-input basic-single" style="padding-block: 10px;">
-                                <option value="">{{ __('main.select_user') }}</option>
+                                <option value="" selected disabled>--</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}" {{ old('assigned_to', $ticket->assigned_to ?? '') == $user->id ? 'selected' : '' }}>
                                         {{ $user->name }} ({{ $user->role }})
                                     </option>
                                 @endforeach
                             </select>
-                            <i class="fas fa-user-check ff-icon"></i>
+                            {{-- <i class="fas fa-user-check ff-icon"></i> --}}
                         </div>
                         @error('assigned_to')
                             <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
@@ -319,10 +319,6 @@
                 <input type="hidden" name="status" value="{{ old('status', 'open') }}">
                 <input type="hidden" name="priority" value="{{ old('priority', 'medium') }}">
 
-                <div class="ff-anim">
-                    @include('dashboard.components.upload-file', ['column' => 'attachments'])
-                </div>
-
                 <div class="ff-section ff-anim">
                     <div class="ff-s-icon"><i class="fas fa-shield-halved"></i></div>
                     <div class="ff-s-title">{{ __('main.verification') }}</div>
@@ -342,6 +338,7 @@
                     @enderror
                 </div>
 
+                {{-- Save Submit --}}
                 @include('dashboard.components.save-submit', ['models' => 'dashboard.tickets', 'model' => 'ticket'])
             </div>
         </form>

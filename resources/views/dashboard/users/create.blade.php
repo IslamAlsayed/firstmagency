@@ -13,7 +13,7 @@
             @csrf
             <div class="grid gap-6 lg:gap-8">
                 {{-- Photo --}}
-                @include('dashboard.components.photo')
+                @include('dashboard.components.photo', ['record' => $user, 'columnName' => 'photo'])
 
                 {{-- ── Section: Basic Info ────────────────────────────────── --}}
                 <div class="ff-section ff-anim">

@@ -113,7 +113,6 @@ class TicketController extends Controller
 
     public function show($id)
     {
-        // $ticket = Ticket::with(['assignedTo', 'messages.department', 'messages.user', 'department.supportUser'])->find($id);
         $ticket = Ticket::with(['assignedTo', 'department.user'])->find($id);
         $departments = Department::get(['id', 'name', 'name_ar', 'user_id']);
         $this->authorize('view', $ticket);
