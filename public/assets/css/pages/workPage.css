@@ -27,7 +27,7 @@
     .banner img {
         width: 100%;
         height: 70svh;
-        object-fit: fill;
+        object-fit: cover;
     }
 
     .back {
