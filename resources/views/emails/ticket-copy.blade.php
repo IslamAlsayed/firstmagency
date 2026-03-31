@@ -1,179 +1,69 @@
 <!DOCTYPE html>
-<html class="h-full" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
+<html dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="UTF-8">
     <title>{{ __('main.ticket_received') }}</title>
     <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
-        :root {
-            --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
-        }
-
-        * {
-            font-family: var(--font-family) !important;
-        }
-    </style>
-
-    <!-- Tailwind CSS -->
-    <link href="{{ asset('assets/plugins/tailwind/tailwind.css') }}" rel="stylesheet">
-    {{-- custom css --}}
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-
-    <style>
-        .client-attachment {
-            min-height: 30px;
-            font-size: 12px;
-            padding: 5px 10px;
-            width: fit-content;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background-color 0.1s ease;
-            background-color: var(--light-color);
-            border: 1px solid var(--color-gray-300);
-            box-shadow: 0 8px 24px rgba(2, 6, 23, .06);
-
-            &:hover {
-                background-color: var(--color-blue-50);
-                border: 1px solid var(--color-blue-200);
-            }
-
-            img {
-                width: 16px;
-                height: 16px;
-            }
-        }
-
         body {
+            background: #ebebeb;
             width: 100%;
-            height: 100%;
-            display: flex;
+            min-height: 100vh;
             padding: 20px;
+            margin: 0;
+            font-family: '{{ $settings->font_name ?? 'Tajawal' }}', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: rgb(235, 235, 235);
-        }
-
-        .print-ticket {
-            max-width: 700px;
-            margin: auto;
-            padding: 30px;
-            display: block;
-            border-radius: 10px;
-            position: relative;
-            background: white;
-
-            .date,
-            .page {
-                position: absolute;
-                left: 20px;
-            }
-
-            .date {
-                top: 20px;
-            }
-
-            .page {
-                bottom: 20px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .print-ticket {
-                max-width: 100%;
-                padding: 15px;
-            }
-
-            * {
-                font-size: 12px;
-            }
-
-            .heading {
-                font-size: 16px !important;
-            }
-
-            .info * {
-                font-size: 10px !important;
-            }
-        }
-
-        @media (max-width: 425px) {
-            .print-ticket {
-                padding: 10px;
-                border-radius: 7px;
-            }
-
-            .rounded {
-                border-radius: 7px !important;
-            }
-
-            * {
-                font-size: 8px;
-            }
-
-            .heading {
-                font-size: 12px !important;
-            }
-
-            .info {
-                gap: 0;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .info * {
-                font-size: 8px !important;
-            }
         }
     </style>
 </head>
 
-<body>
-    <div class="print-ticket">
+<body dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
+    <div style="max-width: 700px; margin: auto; padding: 30px; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(2,6,23,0.06); position: relative; width: 100%;">
         <!-- title -->
-        <h1 class="text-3xl font-bold text-right mb-6 heading">{{ __('main.ticket_copy') }} #{{ $ticket->uuid }}</h1>
-        <p class="mb-2">{{ __('main.ticket_copy_message') }}</p>
+        <h1 style="font-size: 28px; font-weight: bold; text-align: right; margin-bottom: 24px; margin-top: 0;">{{ __('main.ticket_copy') }} #{{ $ticket->uuid }}</h1>
+        <p style="margin-bottom: 12px; color: #333; font-size: 15px;">{{ __('main.ticket_copy_message') }}</p>
 
         <!-- ticket info -->
-        <div class="border rounded-xl p-4 mb-4 info rounded">
-            <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <p class="mb-1"><b>{{ __('main.status') }}:</b> {{ $ticket->status }}</p>
-                    <p class="mb-1"><b>{{ __('main.customer') }}:</b> {{ $ticket->name }}</p>
-                    <p class="mb-1"><b>{{ __('main.subject') }}:</b> {{ $ticket->subject }}</p>
+        <div style="border: 1px solid #eae8e8; border-radius: 12px; padding: 16px; margin-bottom: 18px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+                <div style="flex: 1 1 200px; min-width: 180px;">
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.status') }}:</b> {{ $ticket->status }}</p>
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.customer') }}:</b> {{ $ticket->name }}</p>
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.subject') }}:</b> {{ $ticket->subject }}</p>
                 </div>
-                <div class="space-y-2">
-                    <p class="mb-1"><b>{{ __('main.department') }}:</b> {{ $ticket->department?->name }}</p>
-                    <p class="mb-1"><b>{{ __('main.email_') }}:</b> {{ $ticket->email }}</p>
-                    <p class="mb-1"><b>{{ __('main.date') }}:</b> {{ $ticket->created_at }}</p>
+                <div style="flex: 1 1 200px; min-width: 180px;">
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.department') }}:</b> {{ $ticket->department?->name }}</p>
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.email_') }}:</b> {{ $ticket->email }}</p>
+                    <p style="margin-bottom: 6px; color: #222; font-size: 14px;"><b>{{ __('main.date') }}:</b> {{ $ticket->created_at }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="flex justify-center mb-4">
-            <button class="btn-link light-main-color font-semibold">
-                <a href="{{ route('tickets.show', $ticket->uuid) }}">{{ __('main.contact_ticket_inquiry') }}</a>
-            </button>
+        <div style="text-align: center; margin-bottom: 18px;">
+            <a href="{{ route('tickets.show', $ticket->uuid) }}"
+                style="display: inline-block; background: #f97316; color: #fff; font-weight: 600; border-radius: 24px; padding: 10px 28px; text-decoration: none; font-size: 15px;">{{ __('main.contact_ticket_inquiry') }}</a>
         </div>
 
-        <h2 class="mb-2">{{ __('main.full_conversation') }}</h2>
+        <h2 style="margin-bottom: 12px; color: #222; font-size: 18px; font-weight: bold;">{{ __('main.full_conversation') }}</h2>
 
         <!-- messages -->
-        <div class="flex flex-col gap-4">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
             @foreach ($ticket->messages as $message)
-                <div class="border rounded-xl p-2 {{ $message->sender_type == 'customer' ? 'bg-blue-50' : 'bg-red-50' }} rounded">
-                    <div class="text-sm text-gray-700">
-                        {{ $message->sender_type == 'customer' ? $message->ticket->name : $message->user->name }}
-                        —
-                        {{ $message->created_at }}
+                <div style="border: 1px solid #eae8e8; border-radius: 12px; padding: 10px 14px; background: {{ $message->sender_type == 'customer' ? '#eff6ff' : '#fef2f2' }};">
+                    <div style="font-size: 13px; color: #555; margin-bottom: 6px;">
+                        {{ $message->sender_type == 'customer' ? $message->ticket->name : $message->user->name }} — {{ $message->created_at }}
                     </div>
-                    <div class="text-gray-800">
+                    <div style="color: #222; font-size: 15px;">
                         {!! $message->message !!}
-                        <div class="files flex items-center gap-2">
+                        <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                             @if ($message->attachments && is_array($message->attachments) && count($message->attachments) > 0)
                                 @foreach ($message->attachments as $attachment)
-                                    <a href="{{ asset('storage/' . $attachment) }}" target="_blank" class="client-attachment flex items-center gap-2">
-                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                    <a href="{{ asset('storage/' . $attachment) }}" target="_blank"
+                                        style="min-height: 30px; font-size: 12px; padding: 5px 10px; border-radius: 50px; background: #fff; border: 1px solid #e5e7eb; box-shadow: 0 8px 24px rgba(2,6,23,0.06); color: #f97316; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; margin-bottom: 4px;">
+                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg" style="width: 16px; height: 16px;">
                                         {{ __('main.attachment') }}
                                     </a>
                                 @endforeach

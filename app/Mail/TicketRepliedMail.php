@@ -30,7 +30,7 @@ class TicketRepliedMail extends Mailable
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), config('mail.from.name')),
-            subject: __('main.ticket_received_mail_subject', ['uuid' => $this->ticket->uuid]),
+            subject: __('main.ticket_replied', ['uuid' => $this->ticket->uuid]),
         );
     }
 
