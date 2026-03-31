@@ -5,7 +5,7 @@
     <div class="websites-items grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @if ($programming_systems && count($programming_systems) > 0)
             @foreach ($programming_systems as $data)
-                <a href="" class="website clickable-img" data-src="{{ asset('storage/' . $data->image) }}">
+                <a href="" class="website">
                     <div class="image">
                         <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->title }}">
                     </div>
@@ -15,7 +15,7 @@
         @else
             @if (config('programming-systems') && count(config('programming-systems')) > 0)
                 @foreach (config('programming-systems') as $data)
-                    <a href="" class="website clickable-img" data-src="{{ asset('assets/images/website/developer/' . $data['image']) }}">
+                    <a href="" class="website">
                         <div class="image">
                             <img src="{{ asset('assets/images/website/developer/' . $data['image']) }}" alt="{{ $data['title'] }}">
                         </div>
