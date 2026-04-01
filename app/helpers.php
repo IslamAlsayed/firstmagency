@@ -80,7 +80,75 @@ if (!function_exists('userSidebarPreference')) {
 if (!function_exists('limitedText')) {
     function limitedText($text, $limit, $end = '...'): string
     {
-        return \Illuminate\Support\Str::limit($text, $limit, $end);
+        if (!$text) {
+            return '';
+        }
+        if ($limit == 0) {
+            return $text;
+        }
+
+        // Strip tags to count visible text length
+        $plainText = strip_tags($text);
+
+        // If text is shorter than limit, return as is
+        if (strlen($plainText) <= $limit) {
+            return $text;
+        }
+
+        // Truncate plain text to limit
+        $truncated = \Illuminate\Support\Str::limit($plainText, $limit, '');
+
+        // Now find where this truncated text ends in the original HTML
+        $pos = 0;
+        $truncatedPos = 0;
+        $result = '';
+        $openTags = [];
+
+        $len = strlen($text);
+        while ($pos < $len && $truncatedPos < strlen($truncated)) {
+            // Check if we're at a tag
+            if ($text[$pos] === '<') {
+                // Find the end of the tag
+                $tagEnd = strpos($text, '>', $pos);
+                if ($tagEnd !== false) {
+                    $tag = substr($text, $pos, $tagEnd - $pos + 1);
+                    $result .= $tag;
+
+                    // Track opening and closing tags
+                    if (preg_match('/<\/(\w+)/', $tag, $matches)) {
+                        // Closing tag
+                        $tagName = $matches[1];
+                        if (in_array($tagName, $openTags)) {
+                            unset($openTags[array_search($tagName, $openTags)]);
+                        }
+                    } elseif (preg_match('/<(\w+)(?:\s|>)/', $tag, $matches) && !preg_match('/\/$/', $tag)) {
+                        // Opening tag (not self-closing)
+                        $tagName = $matches[1];
+                        if (!in_array($tagName, $openTags)) {
+                            $openTags[] = $tagName;
+                        }
+                    }
+
+                    $pos = $tagEnd + 1;
+                } else {
+                    $result .= $text[$pos];
+                    $pos++;
+                }
+            } else {
+                // Regular character
+                $result .= $text[$pos];
+                $truncatedPos++;
+                $pos++;
+            }
+        }
+
+        // Close any remaining open tags
+        $closeTags = '';
+        foreach (array_reverse($openTags) as $tag) {
+            $closeTags .= '</' . $tag . '>';
+        }
+
+        return $result . $end . $closeTags;
     }
 }
 

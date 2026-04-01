@@ -13,8 +13,9 @@ class ProgrammingSystem extends Model
 
     protected $fillable = [
         'slug',
-        'title',
-        'image',
+        'translations',
+        'icon',
+        'images',
         'alt_text',
         'order',
         'is_active',
@@ -23,9 +24,10 @@ class ProgrammingSystem extends Model
     ];
 
     protected $casts = [
+        'translations' => 'array',
+        'images' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'translations' => 'array',
         'is_active' => 'boolean',
     ];
 
@@ -36,7 +38,7 @@ class ProgrammingSystem extends Model
 
         static::creating(function ($model) {
             if (!$model->slug) {
-                $model->slug = Str::slug($model->title);
+                $model->slug = Str::slug(str_replace(' ', '-', str_replace('_', '-', $model->translations['en']['name'] ?? 'programming-system-' . time()))) ?? 'programming-system-' . time();
             }
         });
     }

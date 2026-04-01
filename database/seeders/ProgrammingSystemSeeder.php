@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 class ProgrammingSystemSeeder extends Seeder
 {
@@ -20,8 +19,8 @@ class ProgrammingSystemSeeder extends Seeder
         ProgrammingSystem::truncate();
         Schema::enableForeignKeyConstraints();
 
-        // Get current user or find content user
-        $user = getActiveUser() ?? User::where('email', 'content@firstmagency.com')->first() ?? User::first();
+        // Get current user or find admin user
+        $user = getActiveUser() ?? User::where('email', 'admin@firstmagency.com')->first() ?? User::first();
 
         if (!$user) {
             echo "⚠️  No users found. Please create users first.\n";
@@ -40,7 +39,7 @@ class ProgrammingSystemSeeder extends Seeder
         }
 
         foreach ($programmingSystems as $i => $data) {
-            $sourceImageFile = $sourcePath . '/' . $data['image'];
+            $sourceImageFile = $sourcePath . '/' . $data['icon'];
 
             if (!File::exists($sourceImageFile)) {
                 echo "⚠️  Source file not found for programming system index " . $i . ": $sourceImageFile\n";
@@ -54,19 +53,17 @@ class ProgrammingSystemSeeder extends Seeder
             }
 
             // Copy the main image
-            $destImageFile = $mainDir . '/' . $data['image'];
+            $destImageFile = $mainDir . '/' . $data['icon'];
             if (!File::exists($destImageFile)) {
                 File::copy($sourceImageFile, $destImageFile);
             }
 
             // Save relative paths for database storage
-            $data['image'] = 'uploads/programming-systems/' . ($i + 1) . '/' . $data['image'];
+            $data['icon'] = 'uploads/programming-systems/' . ($i + 1) . '/' . $data['icon'];
 
             ProgrammingSystem::create([
                 ...$data,
-                'slug' => Str::slug($data['title']),
-                'image' => $data['image'],
-                'alt_text' => $data['title'],
+                'alt_text' => $data['translations']['en']['name'],
                 'is_active' => true,
                 'created_by' => $user->id,
                 'updated_by' => $user->id,

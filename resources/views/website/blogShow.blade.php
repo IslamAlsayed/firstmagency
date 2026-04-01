@@ -1,5 +1,70 @@
 @extends('layouts.master')
 
+@push('styles')
+    .system-article {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #374151;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+    margin: 20px 0 10px 0;
+    font-weight: 800;
+    color: #1f2937;
+    }
+
+    h1 {
+    font-size: 28px;
+    }
+
+    h2 {
+    font-size: 24px;
+    }
+
+    h3 {
+    font-size: 20px;
+    }
+
+    p {
+    margin: 10px 0;
+    }
+
+    ul,
+    ol {
+    margin: 15px 0;
+    padding-right: 30px;
+    }
+
+    li {
+    margin: 8px 0;
+    }
+
+    a {
+    color: #ff7a00;
+    text-decoration: none;
+
+    &:hover {
+    text-decoration: underline;
+    }
+    }
+
+    strong {
+    font-weight: 800;
+    color: #1f2937;
+    }
+
+    br {
+    display: block;
+    content: "";
+    margin: 10px 0;
+    }
+    }
+@endpush
+
 @if ($article instanceof \App\Models\Article)
     @php
         $articleTitle = $article->translations[app()->getLocale()]['title'] ?? ($article->translations['en']['title'] ?? $article->slug);
@@ -31,7 +96,7 @@
                             <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->translations[app()->getLocale()]['title'] ?? $article->slug }}">
                         </div>
                     @endif
-                    <div class="description">
+                    <div class="description system-article">
                         {!! $article->translations[app()->getLocale()]['content'] ?? ($article->translations['en']['content'] ?? '') !!}
                     </div>
                 @else
@@ -105,7 +170,7 @@
                                         <div class="body">
                                             <a href="{{ route('blog.show', ['id' => $similar->id, 'slug' => $similar->slug]) }}"
                                                 class="title font-semibold">{{ limitedText($similar->translations[app()->getLocale()]['title'] ?? $similar->slug, 30) }}</a>
-                                            <div class="description">{{ limitedText($similar->translations[app()->getLocale()]['description'] ?? '', 60) }}</div>
+                                            <div class="description system-article">{{ limitedText($similar->translations[app()->getLocale()]['description'] ?? '', 60) }}</div>
                                         </div>
                                         <div class="actions">
                                             <button class="btn-link font-semibold details">

@@ -23,6 +23,7 @@ Route::get('/blog', [ArticleController::class, 'index'])->name('blog');
 Route::get('/blog/category/{id}', [ArticleController::class, 'category'])->name('blog.category');
 Route::get('/blog/{id}/{slug?}', [ArticleController::class, 'show'])->name('blog.show');
 Route::get('/website-developer', [WebsiteController::class, 'index'])->name('website.developer');
+Route::get('/website-developer/{slug}', [WebsiteController::class, 'show'])->name('website.developer.show');
 Route::get('/app-mobile', [AppMobileController::class, 'index'])->name('app.mobile');
 Route::get('/hosting', [HostingController::class, 'index'])->name('hosting');
 Route::get('/domains', [DomainController::class, 'index'])->name('domains');

@@ -103,7 +103,7 @@
                             'name' => 'is_active',
                             'id' => 'is_active',
                             'value' => '1',
-                            'checked' => 0,
+                            'checked' => 1,
                             'label' => __('main.active'),
                         ])
                     </div>

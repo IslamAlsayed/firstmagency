@@ -5,21 +5,21 @@
     <div class="websites-items grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @if ($programming_systems && count($programming_systems) > 0)
             @foreach ($programming_systems as $data)
-                <a href="" class="website">
+                <a href="{{ route('website.developer.show', $data->slug) }}" class="website">
                     <div class="image">
-                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->title }}">
+                        <img src="{{ asset('storage/' . $data->icon) }}" alt="{{ $data->translations[app()->getLocale()]['name'] }}">
                     </div>
-                    <div class="title font-semibold">{{ $data->title }}</div>
+                    <div class="title font-semibold">{{ $data->translations[app()->getLocale()]['name'] }}</div>
                 </a>
             @endforeach
         @else
             @if (config('programming-systems') && count(config('programming-systems')) > 0)
                 @foreach (config('programming-systems') as $data)
-                    <a href="" class="website">
+                    <a href="{{ route('website.developer.show', $data['slug']) }}" class="website">
                         <div class="image">
-                            <img src="{{ asset('assets/images/website/developer/' . $data['image']) }}" alt="{{ $data['title'] }}">
+                            <img src="{{ asset('assets/images/website/developer/' . $data['image']) }}" alt="{{ $data['translations'][app()->getLocale()]['name'] }}">
                         </div>
-                        <div class="title font-semibold">{{ $data['title'] }}</div>
+                        <div class="title font-semibold">{{ $data['translations'][app()->getLocale()]['name'] }}</div>
                     </a>
                 @endforeach
             @else

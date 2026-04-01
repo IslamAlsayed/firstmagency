@@ -69,32 +69,57 @@
                     <table class="entity-table w-full border-collapse min-w-max">
                         <thead>
                             <tr class="bg-gray-100 border-b-2 border-gray-300">
-                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.image') }}</th>
-                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.title') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.icon') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.images') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.name') }}</th>
                                 <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.active') }}</th>
                                 <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_by') }}</th>
-                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.order') }}</th>
+                                <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.created_at') }}</th>
                                 <th class="p-4 text-left text-sm font-semibold text-gray-700">{{ __('main.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($programmingSystems as $programmingSystem)
                                 <tr id="row-{{ $programmingSystem->id }}" class="border-b border-gray-200 hover:bg-gray-50 transition" data-active="{{ (int) $programmingSystem->is_active }}">
-                                    <td title="{{ $programmingSystem->alt_text ?? ($programmingSystem->translations[app()->getLocale()]['title'] ?? '') }}" class="p-4">
+                                    <td title="{{ $programmingSystem->alt_text ?? ($programmingSystem->translations[app()->getLocale()]['name'] ?? '') }}" class="p-4">
                                         <div class="relative w-fit">
-                                            @if ($programmingSystem->image && checkExistFile($programmingSystem->image))
-                                                <img src="{{ asset('storage/' . $programmingSystem->image) }}"
-                                                    alt="{{ $programmingSystem->alt_text ?? ($programmingSystem->translations[app()->getLocale()]['title'] ?? '') }}"
-                                                    class="w-[90px] h-[35px] rounded-[9px] shrink-0">
+                                            @if ($programmingSystem->icon && checkExistFile($programmingSystem->icon))
+                                                <img src="{{ asset('storage/' . $programmingSystem->icon) }}"
+                                                    alt="{{ $programmingSystem->alt_text ?? ($programmingSystem->translations[app()->getLocale()]['name'] ?? '') }}"
+                                                    class="w-[90px] h-[35px] rounded-[9px] shrink-0" style="object-fit: contain;">
                                             @else
                                                 <i class="fas fa-code text-2xl text-gray-400"></i>
                                             @endif
                                         </div>
                                     </td>
-                                    <td class="p-4" title="{{ $programmingSystem->translations[app()->getLocale()]['title'] ?? '--' }}">
+                                    <td title="{{ __('main.gallery') }} - {{ __('main.total_images') }}: {{ $programmingSystem->images ? count($programmingSystem->images) : 0 }}">
+                                        <div class="relative w-fit">
+                                            <div class="flex items-center -space-x-2">
+                                                @if ($programmingSystem->images && count($programmingSystem->images) > 0)
+                                                    @foreach ($programmingSystem->images as $key => $image)
+                                                        @if ($key >= 5)
+                                                            @break
+                                                        @endif
+                                                        <img src="{{ $image && checkExistFile($image) ? asset('storage/' . $image) : asset('metronic/media/avatars/blank.png') }}"
+                                                            alt="{{ $image }}" class="hover:z-5 relative shrink-0 rounded-full ring-1 ring-background size-10">
+                                                    @endforeach
+                                                    @if (count($programmingSystem->images) > 5)
+                                                        <div class="h-fit inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2">
+                                                            +{{ count($programmingSystem->images) - 5 }}
+                                                        </div>
+                                                    @endif
+                                                @else
+                                                    <div class="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-[7px] ms-2 user-select-none">
+                                                        <i class="opacity-25">{{ __('main.null') }}</i>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-4" title="{{ $programmingSystem->translations[app()->getLocale()]['name'] ?? '--' }}">
                                         <strong class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-[7px]">
-                                            {{ limitedText($programmingSystem->translations[app()->getLocale()]['title'] ?? '--', 25) }}
+                                            {{ limitedText($programmingSystem->translations[app()->getLocale()]['name'] ?? '--', 25) }}
                                         </strong>
                                     </td>
                                     <td class="p-4 text-sm">
@@ -115,8 +140,8 @@
                                             <span class="text-gray-400 italic">N/A</span>
                                         @endif
                                     </td>
-                                    <td class="p-4 text-sm text-gray-600">{{ $programmingSystem->created_at?->format('d/m/Y') }}</td>
                                     <td class="p-4 text-sm text-gray-600">{{ $programmingSystem->order ?? 0 }}</td>
+                                    <td class="p-4 text-sm text-gray-600">{{ $programmingSystem->created_at?->format('d/m/Y') }}</td>
                                     <td class="p-4 text-sm space-x-2 flex items-center gap-2">
                                         @include('dashboard.components.permissions-actions', [
                                             'record' => $programmingSystem,

@@ -137,7 +137,14 @@ trait PhotoUploadTrait
             throw new \Exception("Invalid request parameter. Expected Request or UploadedFile");
         }
 
+        // Clean the existing files array - remove empty entries and normalize
         $files = $model->{$column} ?? [];
+        $files = array_filter($files, function ($item) {
+            return !empty($item) && is_string($item);
+        });
+        $files = array_values($files); // Re-index array
+
+        // Add new files
         foreach ($filesToUpload as $file) {
             $files[] = $file->store("uploads/{$folder}/{$model->id}/{$column}", 'public');
         }

@@ -17,8 +17,9 @@ return new class extends Migration
         Schema::create('programming_systems', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique()->nullable();
-            $table->string('title')->nullable();
-            $table->string('image')->nullable();
+            $table->json('translations')->nullable();
+            $table->string('icon')->nullable();
+            $table->json('images')->nullable();
             $table->string('alt_text')->nullable();
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);

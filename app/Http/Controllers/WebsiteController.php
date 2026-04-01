@@ -38,4 +38,12 @@ class WebsiteController extends Controller
 
         return view('website.websiteDeveloper', compact('data'));
     }
+
+    public function show($slug)
+    {
+        $programmingSystem = ProgrammingSystem::where('slug', $slug)->firstOrFail();
+        if (!$programmingSystem)
+            return redirect()->back()->withError(__('messages.type_not_found', ['type' => __('main.programming_system')]));
+        return view('website.programming-system', compact('programmingSystem'));
+    }
 }

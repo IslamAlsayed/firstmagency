@@ -3,6 +3,10 @@
 @section('title', __('main.edit_type', ['type' => __('main.programming_system')]))
 @section('page-title', '✏️ ' . __('main.edit_type', ['type' => __('main.programming_system')]))
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/tagify/tagify.css') }}">
+@endpush
+
 @section('content')
     <div class="shadow-lg radius-lg p-4">
         <form method="POST" action="{{ route('dashboard.programming-systems.update', $programmingSystem->id) }}" enctype="multipart/form-data">
@@ -25,6 +29,25 @@
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div>
+                            <label for="keywords_en" class="kt-label">{{ __('main.keywords_en') }}</label>
+                            <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container"
+                                value="{{ old('keywords_en', is_array($programmingSystem->translations['en']['keywords'] ?? null) ? json_encode($programmingSystem->translations['en']['keywords']) : '') }}"
+                                placeholder="word">
+                            <span class="text-xs text-gray-500 mt-1">{{ __('main.tagify_desc') }}</span>
+                            @error('keywords_en')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-6">
+                            @include('dashboard.components.input-text-editor', [
+                                'name' => 'content_en',
+                                'value' => old('content_en', $programmingSystem->translations['en']['content'] ?? ''),
+                                'placeholder' => 'Enter content in English',
+                            ])
+                        </div>
                     </div>
                 </div>
 
@@ -41,7 +64,36 @@
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div>
+                            <label for="keywords_ar" class="kt-label">{{ __('main.keywords_ar') }}</label>
+                            <input type="text" name="keywords_ar" id="keywords_ar" class="kt-input h-fit tagify-container"
+                                value="{{ old('keywords_ar', is_array($programmingSystem->translations['ar']['keywords'] ?? null) ? json_encode($programmingSystem->translations['ar']['keywords']) : '') }}"
+                                placeholder="كلمة">
+                            <span class="text-xs text-gray-500 mt-1">{{ __('main.tagify_desc') }}</span>
+                            @error('keywords_ar')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-6">
+                            @include('dashboard.components.input-text-editor', [
+                                'name' => 'content_ar',
+                                'value' => old('content_ar', $programmingSystem->translations['ar']['content'] ?? ''),
+                                'placeholder' => 'أدخل المحتوى بالعربية',
+                            ])
+                        </div>
                     </div>
+                </div>
+
+                <!-- Icon -->
+                <div class="grid grid-cols-1 gap-6">
+                    @include('dashboard.components.photo', ['label' => 'icon', 'column' => 'icon', 'record' => $programmingSystem])
+                </div>
+
+                <!-- Images -->
+                <div class="grid grid-cols-1 gap-6">
+                    @include('dashboard.components.upload-file', ['label' => 'images', 'column' => 'images', 'record' => $programmingSystem])
                 </div>
 
                 <!-- Common Fields -->
@@ -61,11 +113,6 @@
                         <input type="number" name="order" value="{{ old('order', $programmingSystem->order) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" min="0">
                     </div>
-                </div>
-
-                <!-- Media & Other Fields -->
-                <div class="grid grid-cols-1 gap-6">
-                    @include('dashboard.components.photo', ['column' => 'image', 'record' => $programming])
                 </div>
 
                 <!-- Checkboxes -->
@@ -88,3 +135,48 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    @include('dashboard.components.drag-drop-images')
+
+    <script script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Tagify on Route Itinerary
+            var inputs = document.querySelectorAll('.tagify-container');
+            if (inputs) {
+                inputs.forEach(input => {
+                    new Tagify(input, {
+                        maxTags: 20,
+                        dropdown: {
+                            maxItems: 20, // <- mixumum allowed rendered suggestions
+                            classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+                            enabled: 0, // <- show suggestions on focus
+                            closeOnSelect: false // <- do not hide the suggestions dropdown once an item has been selected
+                        }
+                    });
+                });
+            }
+
+            function initCkEditors() {
+                if (window.CKEDITOR) {
+                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
+                        if (el.id && CKEDITOR.instances[el.id]) {
+                            CKEDITOR.instances[el.id].destroy(true);
+                        }
+                        if (!el.classList.contains('ckeditor-initialized')) {
+                            CKEDITOR.replace(el.id, {
+                                height: 500
+                            });
+                            el.classList.add('ckeditor-initialized');
+                        }
+                    });
+                } else {
+                    setTimeout(initCkEditors, 300);
+                }
+            }
+            initCkEditors();
+        });
+    </script>
+@endpush

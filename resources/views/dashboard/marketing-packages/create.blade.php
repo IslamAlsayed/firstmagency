@@ -78,7 +78,7 @@
                             'name' => 'is_active',
                             'id' => 'is_active',
                             'value' => '1',
-                            'checked' => old('is_active', 1),
+                            'checked' => 1,
                             'label' => __('main.active'),
                         ])
                     </div>

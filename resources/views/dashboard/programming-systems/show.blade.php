@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-2.5">
-                @can('update', $programming)
+                @can('update', $programmingSystem)
                     <a href="{{ route('dashboard.programming-systems.edit', $programmingSystem->id) }}" class="kt-btn kt-btn-primary md:hidden">
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
@@ -59,19 +59,6 @@
                             <p class="font-semibold text-gray-800">{{ $programmingSystem->created_at?->format('d/m/Y H:i') }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">{{ __('main.status') }}</p>
-                            <p class="text-sm text-secondary-foreground">
-                                <span
-                                    class="px-3 py-1 rounded-full text-xs font-semibold
-                            @if ($programmingSystem->status === 'published') bg-green-100 text-green-800
-                            @elseif($programmingSystem->status === 'draft') bg-yellow-100 text-yellow-800
-                            @else bg-red-100 text-red-800 @endif">
-                                    {{ __('main.' . $programmingSystem->status) }}
-                                </span>
-                            </p>
-                        </div>
-
-                        <div>
                             <p class="text-sm text-gray-500">{{ __('main.active') }}</p>
                             @include('dashboard.components.toggle-hold', [
                                 'modelId' => $programmingSystem->id,
@@ -84,11 +71,20 @@
                 </div>
             </div>
 
-            <!-- Image -->
-            @if (!empty($programmingSystem->image))
+            <!-- Icon -->
+            @if (!empty($programmingSystem->icon))
                 @include('dashboard.components.display-photo', [
                     'record' => $programmingSystem,
-                    'column' => 'image',
+                    'column' => 'icon',
+                    'alt' => $programmingSystem->translations[app()->getLocale()]['name'] ?? 'Programming System',
+                ])
+            @endif
+
+            <!-- Images -->
+            @if (!empty($programmingSystem->images))
+                @include('dashboard.components.display-files', [
+                    'record' => $programmingSystem,
+                    'column' => 'images',
                     'alt' => $programmingSystem->translations[app()->getLocale()]['name'] ?? 'Programming System',
                 ])
             @endif

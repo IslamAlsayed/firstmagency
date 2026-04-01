@@ -76,14 +76,17 @@
             // File change event (when user selects via dialog)
             input.addEventListener('change', () => {
 
-                // If there is an existing photo, remove it
-                // const existingDiv = document.getElementById('existing-' + inputId);
-                const existingDivs = document.querySelectorAll('[id^="existing-' + inputId + '"]');
+                // If there is an existing photo, remove it - use more specific selector
+                const existingDivs = document.querySelectorAll('[id="existing-' + inputId + '"], [id^="existing-' + inputId + '-"]');
                 if (existingDivs.length > 0 && input.files.length > 0) {
                     existingDivs.forEach(div => div.remove());
                     const removeInput = document.getElementById('remove_' + inputId);
                     if (removeInput) {
                         removeInput.value = 1;
+                    }
+                    const removedInput = document.getElementById('removed_' + inputId);
+                    if (removedInput) {
+                        removedInput.value = JSON.stringify([]);
                     }
                 }
 
@@ -120,7 +123,7 @@
             <img src="${URL.createObjectURL(file)}"
                  class="h-24 w-24 object-cover rounded">
             <button type="button"
-                    class="remove-new absolute -top-2 -right-2 bg-danger text-white w-6 h-6 rounded-full"
+                    class="remove-new absolute -top-2 -right-2 cursor-pointer bg-danger text-white w-6 h-6 rounded-full"
                     data-index="${displayIndex}"
                     data-input-id="${input.id}">
                 ×
@@ -134,38 +137,41 @@
         document.addEventListener('click', function(e) {
 
             /* ---- remove existing file ---- */
-            if (e.target.classList.contains('remove-existing-photo') ||
-                e.target.classList.contains('remove-existing-gallery') ||
-                e.target.getAttribute('class')?.includes('remove-existing-')) {
+            // Check if button has a class starting with 'remove-existing-'
+            const classList = Array.from(e.target.classList);
+            const removeExistingClass = classList.find(c => c.startsWith('remove-existing-'));
 
-                // الحصول على اسم العمود من class
-                const classList = Array.from(e.target.classList);
-                const removeExistingClass = classList.find(c => c.startsWith('remove-existing-'));
+            if (removeExistingClass) {
+                console.log('Remove clicked:', removeExistingClass);
+                const columnName = removeExistingClass.replace('remove-existing-', '');
+                const index = e.target.dataset.index;
+                const path = e.target.dataset.path;
 
-                if (removeExistingClass) {
-                    const columnName = removeExistingClass.replace('remove-existing-', '');
+                console.log('Column:', columnName, 'Index:', index, 'Path:', path);
 
-                    // لـ photo
-                    if (columnName === 'photo' || !columnName.includes('_')) {
-                        const existingDiv = document.getElementById('existing-' + columnName);
-                        if (existingDiv) existingDiv.remove();
+                // Remove the image element by ID
+                const existingDiv = document.getElementById('existing-' + columnName + '-' + index);
+                if (existingDiv) {
+                    console.log('Found and removing:', 'existing-' + columnName + '-' + index);
+                    existingDiv.remove();
 
-                        const removeInput = document.getElementById('remove_' + columnName);
-                        if (removeInput) removeInput.value = 1;
-                    }
-                    // for Multiple
-                    else {
-                        const index = e.target.dataset.index;
-                        const path = e.target.dataset.path;
-                        document.getElementById('existing_' + columnName + '_' + index)?.remove();
-
-                        const input = document.getElementById('removed_' + columnName);
-                        if (input) {
-                            const data = JSON.parse(input.value);
-                            data.push(path);
-                            input.value = JSON.stringify(data);
+                    // Add to removed list
+                    const removedInput = document.getElementById('removed_' + columnName);
+                    if (removedInput) {
+                        let data = [];
+                        try {
+                            data = JSON.parse(removedInput.value);
+                        } catch (e) {
+                            data = [];
                         }
+                        if (!data.includes(path)) {
+                            data.push(path);
+                        }
+                        removedInput.value = JSON.stringify(data);
+                        console.log('Updated removed list:', removedInput.value);
                     }
+                } else {
+                    console.warn('Element not found:', 'existing-' + columnName + '-' + index);
                 }
                 return;
             }
