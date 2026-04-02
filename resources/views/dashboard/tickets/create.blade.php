@@ -5,160 +5,8 @@
 
 @push('styles')
     <link href="{{ asset('assets/dashboard/css/users.css') }}" rel="stylesheet" />
-    <style>
-        .shadow-lg.radius-lg,
-        .shadow-lg.radius-lg form,
-        .shadow-lg.radius-lg .grid,
-        .shadow-lg.radius-lg .ff-group {
-            overflow: visible !important;
-        }
-
-        .custom-dept-select {
-            position: relative;
-            width: 100%;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .dept-select-trigger {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
-            cursor: pointer;
-            width: 100%;
-            min-height: 35px;
-            user-select: none;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            background: color-mix(in srgb, var(--light-color, #fff) 96%, #000 4%);
-            transition: background 0.15s, border-color 0.2s;
-            flex-direction: row-reverse;
-            text-align: right;
-        }
-
-        .dept-select-trigger:hover {
-            background: color-mix(in srgb, var(--light-color, #fff) 92%, #000 8%);
-        }
-
-        .dept-trigger-icon {
-            width: 26px;
-            height: 26px;
-            border-radius: 6px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0;
-            background: color-mix(in srgb, var(--dark-color, #111) 8%, transparent);
-            color: var(--button_color, #0074F7);
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .dept-trigger-label {
-            flex: 1;
-            font-size: 13px;
-            color: color-mix(in srgb, var(--dark-color, #111) 45%, transparent);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: color 0.15s;
-        }
-
-        .dept-trigger-label.has-value {
-            color: var(--dark-color, #111);
-            font-weight: 500;
-        }
-
-        .dept-trigger-arrow {
-            font-size: 10px;
-            color: color-mix(in srgb, var(--dark-color, #111) 45%, transparent);
-            transition: transform 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .custom-dept-select.open .dept-trigger-arrow {
-            transform: rotate(180deg);
-        }
-
-        .dept-select-dropdown {
-            position: absolute;
-            top: calc(100% + 6px);
-            left: -5px;
-            right: -5px;
-            background-color: var(--light-color, #fff);
-            border: 1px solid color-mix(in srgb, var(--dark-color, #111) 18%, transparent);
-            border-radius: 12px;
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
-            z-index: 9999;
-            overflow: hidden;
-            display: none;
-            padding: 4px;
-            max-height: 260px;
-            overflow-y: auto;
-            animation: deptDropIn 0.18s ease;
-        }
-
-        .custom-dept-select.open .dept-select-dropdown {
-            display: block;
-        }
-
-        .dept-select-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 10px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background 0.15s;
-            font-size: 13px;
-            justify-content: end;
-            flex-direction: row-reverse;
-        }
-
-        .dept-select-option:hover {
-            background-color: color-mix(in srgb, var(--button_color, #0074F7) 8%, transparent);
-        }
-
-        .dept-select-option.selected {
-            font-weight: 600;
-            background-color: color-mix(in srgb, var(--button_color, #0074F7) 12%, transparent);
-        }
-
-        .dept-opt-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            background: color-mix(in srgb, var(--dark-color, #111) 8%, transparent);
-            color: var(--button_color, #0074F7);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0;
-            transition: background 0.2s;
-        }
-
-        .dept-hidden-select {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @keyframes deptDropIn {
-            from {
-                opacity: 0;
-                transform: translateY(-6px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <link href="{{ asset('assets/dashboard/css/tickets.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/dashboard/css/custom-select.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -213,54 +61,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {{-- <div class="ff-anim">
-                        <label for="department_id" class="mb-2 block text-sm font-semibold text-gray-500">{{ __('main.department') }} <span class="text-red-400">*</span></label>
-                        <div class="ff-group" style="overflow: visible;">
-                            <div class="custom-dept-select" id="custom-dept-select-dashboard">
-                                <div class="dept-select-trigger" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-label="{{ __('main.department') }}">
-                                    <span class="dept-trigger-icon"><i class="fas fa-building"></i></span>
-                                    <span class="dept-trigger-label">{{ __('main.select') . ' ' . __('main.department') }}</span>
-                                    <span class="dept-trigger-arrow"><i class="fas fa-chevron-down"></i></span>
-                                </div>
-
-                                <div class="dept-select-dropdown" role="listbox">
-                                    <div class="dept-select-option" data-value="" data-icon="fas fa-building" data-color="" role="option">
-                                        <span class="dept-opt-icon"><i class="fas fa-building"></i></span>
-                                        <span>{{ __('main.select') . ' ' . __('main.department') }}</span>
-                                    </div>
-
-                                    @foreach ($departments as $dept)
-                                        @php
-                                            $translationKey = 'main.' . str_replace('-', '_', $dept->name);
-                                            $translatedName = __($translationKey);
-                                            $fallbackEnName = $translatedName !== $translationKey ? $translatedName : ucwords(str_replace(['-', '_'], ' ', $dept->name));
-                                            $deptLabel = app()->getLocale() === 'ar' ? (data_get($dept, 'name_ar') ?: $fallbackEnName) : $fallbackEnName;
-                                            $deptIcon = data_get($dept, 'icon', 'fas fa-building');
-                                            $deptColor = data_get($dept, 'badge_color', '');
-                                        @endphp
-                                        <div class="dept-select-option {{ old('department_id') == $dept->id ? 'selected' : '' }}" data-value="{{ $dept->id }}" data-icon="{{ $deptIcon }}"
-                                            data-color="{{ $deptColor }}" role="option" {{ old('department_id') == $dept->id ? 'aria-selected=true' : '' }}>
-                                            <span class="dept-opt-icon" style="{{ $deptColor ? 'color:' . $deptColor . ';background:' . $deptColor . '1a' : '' }}">
-                                                <i class="{{ $deptIcon }}"></i>
-                                            </span>
-                                            <span>{{ $deptLabel }}</span>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <select id="department_id" name="department_id" class="dept-hidden-select" required aria-hidden="true" tabindex="-1">
-                                    <option value=""></option>
-                                    @foreach ($departments as $dept)
-                                        <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}></option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @error('department_id')
-                            <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
-                        @enderror
-                    </div> --}}
-
                     <div>
                         <label for="department_id" class="mb-2 block text-sm font-semibold text-gray-700">
                             {{ __('main.department') }} <span class="text-red-500">*</span>
@@ -269,7 +69,7 @@
                             <option value="" selected disabled>--</option>
                             @foreach ($departments as $dept)
                                 <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>
-                                    {{ $dept->name }}
+                                    {{ app()->getLocale() === 'ar' ? $dept->name_ar ?? $dept->name : $dept->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -289,7 +89,6 @@
                                     </option>
                                 @endforeach
                             </select>
-                            {{-- <i class="fas fa-user-check ff-icon"></i> --}}
                         </div>
                         @error('assigned_to')
                             <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>

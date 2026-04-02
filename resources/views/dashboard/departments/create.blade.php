@@ -36,7 +36,12 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="icon" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.icon') }}</label>
+                        <label for="icon" class="flex justify-between items-center gap-4 text-sm font-medium text-gray-600 mb-1">
+                            {{ __('main.icon') }}
+                            <div class="preview-icon" id="preview-icon" style="display: inline-block; margin-left: 10px; color: #6c757d;">
+                                <i class="fas fa-building"></i>
+                            </div>
+                        </label>
                         <input type="text" name="icon" id="icon" class="kt-input h-[45px]" value="{{ old('icon', 'fas fa-building') }}" placeholder="fas fa-user">
                         <small class="text-gray-500 text-xs mt-1 block email">{{ __('main.icon') }}: fas fa-user / fa-solid fa-headset</small>
                         @error('icon')
@@ -209,5 +214,12 @@
 
         // Initial preview
         updatePreview();
+
+        // logic preview icon
+        const previewIcon = document.getElementById('preview-icon');
+        iconInput.addEventListener('input', function() {
+            const iconClass = this.value.trim() || 'fas fa-building';
+            previewIcon.innerHTML = `<i class="${iconClass}"></i>`;
+        });
     </script>
 @endpush

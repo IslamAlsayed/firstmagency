@@ -170,7 +170,10 @@
             </div>
         </form>
     </div>
+@endsection
 
+@push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script>
         // Language tab switching
         document.querySelectorAll('.language-tab').forEach(button => {
@@ -194,4 +197,4 @@
             });
         });
     </script>
-@endsection
+@endpush

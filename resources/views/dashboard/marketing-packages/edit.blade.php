@@ -93,6 +93,7 @@
 @endsection
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const addFeatureBtn = document.getElementById('addFeatureBtn');

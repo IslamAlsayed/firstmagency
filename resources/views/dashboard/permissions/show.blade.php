@@ -4,7 +4,7 @@
 @section('page-title', '🔑 ' . __('main.view_permission'))
 
 @section('content')
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="flex flex-col gap-6">
         <!-- Permission Details -->
         <div class="lg:col-span-1">
             <div class="shadow-md radius-lg rounded-lg shadow p-4">
@@ -16,7 +16,7 @@
                     <p class="text-sm text-gray-600 mt-1">{{ __('main.guard') }}: <span class="px-2 py-1 bg-gray-100 rounded text-xs">{{ $permission->guard_name }}</span></p>
                 </div>
 
-                <div class="space-y-3">
+                <div class="space-y-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div>
                         <label class="text-sm font-semibold text-gray-700">{{ __('main.description') }}</label>
                         <p class="text-sm text-gray-600 mt-1">{{ $permission->description ?? '—' }}</p>
@@ -33,11 +33,11 @@
 
                 <div class="flex gap-2 mt-6">
                     <a href="{{ route('dashboard.permissions.edit', $permission->id) }}"
-                        class="flex-1 px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition"
+                        class="w-fit px-4 py-2 kt-btn kt-btn-outline-primary text-white rounded-lg text-center text-sm font-medium transition"
                         style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                         <i class="fas fa-edit mr-2"></i> {{ __('main.edit') }}
                     </a>
-                    <a href="{{ route('dashboard.permissions.index') }}" class="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">
+                    <a href="{{ route('dashboard.permissions.index') }}" class="w-fit px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 text-center text-sm font-medium transition">
                         <i class="fas fa-arrow-left mr-2"></i> {{ __('main.back') }}
                     </a>
                 </div>

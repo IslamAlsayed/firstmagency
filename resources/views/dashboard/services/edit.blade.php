@@ -157,8 +157,9 @@
 @endsection
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
-
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Tagify on Route Itinerary
@@ -176,14 +177,7 @@
                     });
                 });
             }
-        });
-    </script>
-@endpush
 
-@push('scripts')
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
             function initCkEditors() {
                 if (window.CKEDITOR) {
                     document.querySelectorAll('textarea.ckeditor').forEach(function(el) {

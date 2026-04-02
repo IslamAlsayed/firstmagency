@@ -26,7 +26,7 @@
             <p class="text-xs text-gray-500">{{ __('main.all_permissions_you_have') ?? 'جميع الصلاحيات التي تملكها (مباشرة أو من الدور)' }}</p>
         </div>
 
-        <div class="grid gap-6 lg:gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @php
                 $groupedPermissions = $allPermissions->groupBy(function ($p) {
                     $parts = explode('-', $p->name);

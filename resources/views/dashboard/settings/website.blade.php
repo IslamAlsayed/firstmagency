@@ -212,6 +212,7 @@
 @endsection
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

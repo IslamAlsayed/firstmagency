@@ -4,8 +4,8 @@
 
 <div>
     <label for="{{ $columnName }}" class="kt-label">{{ __('main.' . $columnName) }}</label>
-    <div class="dropzone mt-2 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-primary transition-colors cursor-pointer"
-        data-input="{{ $columnName }}" @if (isset($record) && $record) data-preview="preview-{{ $columnName }}" @endif>
+    <div class="dropzone mt-2 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-primary transition-colors cursor-pointer" data-input="{{ $columnName }}"
+        @if (isset($record) && $record) data-preview="preview-{{ $columnName }}" @endif>
         <i class="far fa-cloud-arrow-up text-5xl text-gray-600"></i>
         <p class="mt-4">{{ __('main.click_or_drag_image_here_multiple') }}</p>
     </div>
@@ -28,9 +28,3 @@
 
     <div id="preview-{{ $columnName }}" class="hidden flex flex-wrap gap-4 mt-6"></div>
 </div>
-
-@once
-    @push('scripts')
-        @include('dashboard.components.drag-drop-images')
-    @endpush
-@endonce

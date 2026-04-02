@@ -106,3 +106,7 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    @include('dashboard.components.drag-drop-images')
+@endpush

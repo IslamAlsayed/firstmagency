@@ -25,6 +25,10 @@
     -webkit-appearance: none;
 }
 
+.ff-input[type="password"] {
+    text-align: left;
+}
+
 html[lang="ar"] {
     .ff-grid > *:nth-child(1) .ff-input,
     .ff-grid > *:nth-child(2) .ff-input,
@@ -36,8 +40,16 @@ html[lang="ar"] {
     .ff-grid > *:nth-child(3) .ff-input,
     .ff-grid > *:nth-child(4) .ff-input {
         text-align: right;
-        padding-inline: 16px 44px;
         padding-inline: 44px 16px;
+        padding-inline: 16px 44px;
+    }
+
+    .ff-input {
+        text-align: right;
+    }
+
+    .ff-input[type="password"] {
+        text-align: right;
     }
 }
 
@@ -81,6 +93,27 @@ html[lang="ar"] {
     transition:
         color 0.25s ease,
         transform 0.25s ease;
+}
+
+.ff-eye,
+.ff-eye-slash {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    right: auto;
+    z-index: 1005;
+    font-size: 14px;
+    cursor: pointer;
+    color: #94a3b8;
+    transform: translateY(-50%);
+}
+
+html[lang="en"] {
+    .ff-eye,
+    .ff-eye-slash {
+        left: auto;
+        right: 15px;
+    }
 }
 
 .ff-group:has(.ff-input:focus) .ff-icon {

@@ -140,31 +140,29 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.querySelectorAll('#role-cards .role-card').forEach(function(card) {
-            card.addEventListener('change', function() {
-                document.querySelectorAll('#role-cards .role-card').forEach(function(c) {
-                    c.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        document.querySelectorAll('#status-pills .status-pill').forEach(function(pill) {
-            pill.addEventListener('change', function() {
-                document.querySelectorAll('#status-pills .status-pill').forEach(function(p) {
-                    p.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-    </script>
-@endpush
-
-@push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('#role-cards .role-card').forEach(function(card) {
+                card.addEventListener('change', function() {
+                    document.querySelectorAll('#role-cards .role-card').forEach(function(c) {
+                        c.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('#status-pills .status-pill').forEach(function(pill) {
+                pill.addEventListener('change', function() {
+                    document.querySelectorAll('#status-pills .status-pill').forEach(function(p) {
+                        p.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
             function initCkEditors() {
                 if (window.CKEDITOR) {
                     document.querySelectorAll('textarea.ckeditor').forEach(function(el) {

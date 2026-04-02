@@ -34,7 +34,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['auth', 'dashboard'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
     Route::post('/account/switch', [UserController::class, 'switch'])->name('account.switch')->middleware('auth');

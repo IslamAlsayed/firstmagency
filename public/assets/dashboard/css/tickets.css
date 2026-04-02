@@ -1,0 +1,165 @@
+.shadow-lg.radius-lg,
+.shadow-lg.radius-lg form,
+.shadow-lg.radius-lg .grid,
+.shadow-lg.radius-lg .ff-group {
+    overflow: visible !important;
+}
+
+.custom-dept-select {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+}
+
+.dept-select-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    width: 100%;
+    min-height: 35px;
+    user-select: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: color-mix(in srgb, var(--light-color, #fff) 96%, #000 4%);
+    transition:
+        background 0.15s,
+        border-color 0.2s;
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.dept-select-trigger:hover {
+    background: color-mix(in srgb, var(--light-color, #fff) 92%, #000 8%);
+}
+
+.dept-trigger-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--dark-color, #111) 8%, transparent);
+    color: var(--button_color, #0074f7);
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+
+.dept-trigger-label {
+    flex: 1;
+    font-size: 13px;
+    color: color-mix(in srgb, var(--dark-color, #111) 45%, transparent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+}
+
+.dept-trigger-label.has-value {
+    color: var(--dark-color, #111);
+    font-weight: 500;
+}
+
+.dept-trigger-arrow {
+    font-size: 10px;
+    color: color-mix(in srgb, var(--dark-color, #111) 45%, transparent);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.custom-dept-select.open .dept-trigger-arrow {
+    transform: rotate(180deg);
+}
+
+.dept-select-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: -5px;
+    right: -5px;
+    background-color: var(--light-color, #fff);
+    border: 1px solid
+        color-mix(in srgb, var(--dark-color, #111) 18%, transparent);
+    border-radius: 12px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+    z-index: 9999;
+    overflow: hidden;
+    display: none;
+    padding: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+    animation: deptDropIn 0.18s ease;
+}
+
+.custom-dept-select.open .dept-select-dropdown {
+    display: block;
+}
+
+.dept-select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s;
+    font-size: 13px;
+    justify-content: end;
+    flex-direction: row-reverse;
+}
+
+.dept-select-option:hover {
+    background-color: color-mix(
+        in srgb,
+        var(--button_color, #0074f7) 8%,
+        transparent
+    );
+}
+
+.dept-select-option.selected {
+    font-weight: 600;
+    background-color: color-mix(
+        in srgb,
+        var(--button_color, #0074f7) 12%,
+        transparent
+    );
+}
+
+.dept-opt-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--dark-color, #111) 8%, transparent);
+    color: var(--button_color, #0074f7);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.dept-hidden-select {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes deptDropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

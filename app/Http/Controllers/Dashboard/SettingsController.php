@@ -49,7 +49,8 @@ class SettingsController extends Controller
 
     public function inlinePadding()
     {
-        return view('dashboard.settings.inline-padding');
+        $settings = Setting::first();
+        return view('dashboard.settings.inline-padding', compact('settings'));
     }
 
     public function updateInlinePadding(SettingRequest $request)
@@ -75,12 +76,14 @@ class SettingsController extends Controller
 
     public function websiteSettings()
     {
-        return view('dashboard.settings.website');
+        $settings = Setting::first();
+        return view('dashboard.settings.website', compact('settings'));
     }
 
     public function backupSettings()
     {
-        return view('dashboard.settings.backups');
+        $settings = Setting::first();
+        return view('dashboard.settings.backups', compact('settings'));
     }
 
     public function updateGeneral(SettingRequest $request)

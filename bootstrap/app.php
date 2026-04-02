@@ -24,19 +24,42 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // ✨ تسجيل الـ Middleware المخصصة للـ Dashboard
         $middleware->alias([
-            'admin' => \App\Http\Middleware\CheckAdminAccess::class,
+            'admin'     => \App\Http\Middleware\CheckAdminAccess::class,
             'superadmin' => \App\Http\Middleware\CheckSuperAdminAccess::class,
             'dashboard' => \App\Http\Middleware\CheckDashboardAccess::class,
+            'api.admin' => \App\Http\Middleware\EnsureIsAdminApi::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (AccessDeniedHttpException $e, $request) {
-            if ($request->ajax()) {
-                return response()->json([
-                    'message' => __('auth.unauthorized_action')
-                ], 403);
+            if ($request->is('api/*')) {
+                return response()->json(['success' => false, 'message' => 'This action is unauthorized.'], 403);
             }
-
+            if ($request->ajax()) {
+                return response()->json(['message' => __('auth.unauthorized_action')], 403);
+            }
             return redirect()->route('dashboard.index')->withError(__('auth.forbidden'));
+        });
+
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['success' => false, 'message' => 'Unauthenticated.'], 401);
+            }
+        });
+
+        $exceptions->render(function (\Illuminate\Validation\ValidationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The given data was invalid.',
+                    'errors'  => $e->errors(),
+                ], 422);
+            }
+        });
+
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['success' => false, 'message' => 'Resource not found.'], 404);
+            }
         });
     })->create();

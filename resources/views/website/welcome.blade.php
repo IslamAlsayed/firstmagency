@@ -5,7 +5,7 @@
         .about-section {
             & .text {
                 &::before {
-                    background-image: url('{{ asset('assets/' . $settings->about_us_image2) }}');
+                    background-image: url('{{ optional($settings)->about_us_image2 ? asset('assets/' . optional($settings)->about_us_image2) : '' }}');
                 }
             }
         }

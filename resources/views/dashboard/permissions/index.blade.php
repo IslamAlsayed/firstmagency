@@ -75,7 +75,6 @@
                             <tr>
                                 <th>{{ __('main.permission_name') }}</th>
                                 <th>{{ __('main.guard') }}</th>
-                                <th>{{ __('main.description') }}</th>
                                 <th>{{ __('main.created_at') }}</th>
                                 <th>{{ __('main.actions') }}</th>
                             </tr>
@@ -85,7 +84,7 @@
                                 <tr id="row-{{ $permission->id }}" data-guard="{{ $permission->guard_name }}">
                                     <td>
                                         <span class="entity-primary-text">
-                                            <i class="fas fa-key text-yellow-500"></i> {{ $permission->name }}
+                                            <i class="fas fa-key text-yellow-500"></i> {{ __('main.' . str_replace(' ', '-', str_replace('_', '-', $permission->name))) }}
                                         </span>
                                     </td>
                                     <td>
@@ -93,7 +92,6 @@
                                             {{ $permission->guard_name }}
                                         </span>
                                     </td>
-                                    <td><span class="entity-secondary-text">{{ $permission->description ?? '—' }}</span></td>
                                     <td><span class="entity-secondary-text">{{ $permission->created_at->format('d/m/Y') }}</span></td>
                                     <td>
                                         <div class="entity-actions">

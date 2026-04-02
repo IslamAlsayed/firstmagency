@@ -175,6 +175,7 @@
 
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>

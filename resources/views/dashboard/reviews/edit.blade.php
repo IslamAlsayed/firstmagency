@@ -209,6 +209,7 @@
 @endsection
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script src="https://cdn.jsdelivr.net/npm/wavesurfer.js@6.0.0/dist/wavesurfer.js"></script>
     <script>
         // Audio Tab Switcher

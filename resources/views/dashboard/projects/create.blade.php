@@ -121,6 +121,7 @@
 @endsection
 
 @push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script script src="{{ asset('assets/plugins/tagify/tagify.js') }}"></script>
 
     <script>

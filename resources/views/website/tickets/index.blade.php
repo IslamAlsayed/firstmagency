@@ -92,10 +92,10 @@
 
                                 {{-- Options dropdown --}}
                                 <div class="dept-select-dropdown" role="listbox">
-                                    <div class="dept-select-option" data-value="" data-icon="fas fa-building" data-color="" role="option">
+                                    {{-- <div class="dept-select-option" data-value="" data-icon="fas fa-building" data-color="" role="option">
                                         <span class="dept-opt-icon"><i class="fas fa-building"></i></span>
                                         <span>{{ __('main.department') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     @foreach ($departments as $dept)
                                         @php

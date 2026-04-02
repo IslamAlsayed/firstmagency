@@ -13,7 +13,7 @@
             @csrf
             <div class="grid gap-6 lg:gap-8">
                 {{-- Photo --}}
-                @include('dashboard.components.photo', ['record' => $user, 'columnName' => 'photo'])
+                @include('dashboard.components.photo', ['record' => $user ?? null, 'columnName' => 'photo'])
 
                 {{-- ── Section: Basic Info ────────────────────────────────── --}}
                 <div class="ff-section ff-anim">
@@ -65,7 +65,7 @@
                     {{-- Phone --}}
                     <div class="ff-anim">
                         <div class="ff-group">
-                            <input type="tel" class="ff-input" id="phone" name="phone" placeholder=" " value="{{ old('phone') }}">
+                            <input type="tel" class="ff-input" id="phone" name="phone" placeholder=" " value="{{ old('phone') }}" autocomplete="tel">
                             <label class="ff-label" for="phone">{{ __('main.phone') }}</label>
                             <i class="fas fa-phone ff-icon"></i>
                         </div>
@@ -82,7 +82,9 @@
                                 {{ __('main.password') }} <span class="text-red-400">*</span>
                             </label>
                             <i class="fas fa-lock ff-icon"></i>
-                            <i class="fas fa-eye ff-eye" data-target="password"></i>
+                            <span class="ff-eye" data-target="password">
+                                <i class="fas fa-eye"></i>
+                            </span>
                         </div>
                         <div class="pwd-strength">
                             <div class="pwd-strength-track">
@@ -103,13 +105,14 @@
                                 {{ __('main.confirm_password') }} <span class="text-red-400">*</span>
                             </label>
                             <i class="fas fa-lock-open ff-icon"></i>
-                            <i class="fas fa-eye ff-eye" data-target="password_confirmation"></i>
+                            <span class="ff-eye" data-target="password_confirmation">
+                                <i class="fas fa-eye"></i>
+                            </span>
                         </div>
                         @error('password_confirmation')
                             <div class="ff-err"><i class="fas fa-circle-exclamation"></i> {{ $message }}</div>
                         @enderror
                     </div>
-
                 </div>
 
                 {{-- العنوان والسيرة الذاتية --}}
@@ -186,96 +189,96 @@
 @endsection
 
 @push('scripts')
-    <script>
-        // ── Password visibility toggle ────────────────────────────────
-        document.querySelectorAll('.ff-eye').forEach(function(eye) {
-            eye.addEventListener('click', function() {
-                const input = document.getElementById(this.dataset.target);
-                if (!input) return;
-                const isPass = input.type === 'password';
-                input.type = isPass ? 'text' : 'password';
-                this.classList.toggle('fa-eye', !isPass);
-                this.classList.toggle('fa-eye-slash', isPass);
-            });
-        });
-
-        // ── Password strength meter ────────────────────────────────────
-        (function() {
-            const pwd = document.getElementById('password');
-            const bar = document.getElementById('pwd-bar');
-            const text = document.getElementById('pwd-text');
-            if (!pwd || !bar || !text) return;
-
-            const levels = [{
-                    pct: '0%',
-                    bg: '',
-                    label: ''
-                },
-                {
-                    pct: '25%',
-                    bg: '#ef4444',
-                    label: '{{ __('main.password_weak') }}'
-                },
-                {
-                    pct: '50%',
-                    bg: '#f97316',
-                    label: '{{ __('main.password_fair') }}'
-                },
-                {
-                    pct: '75%',
-                    bg: '#eab308',
-                    label: '{{ __('main.password_good') }}'
-                },
-                {
-                    pct: '100%',
-                    bg: '#22c55e',
-                    label: '{{ __('main.password_strong') }}'
-                },
-            ];
-
-            pwd.addEventListener('input', function() {
-                const v = this.value;
-                let score = 0;
-                if (v.length >= 8) score++;
-                if (/[A-Z]/.test(v)) score++;
-                if (/[0-9]/.test(v)) score++;
-                if (/[^A-Za-z0-9]/.test(v)) score++;
-
-                const levelIndex = v.length ? Math.max(1, score) : 0;
-
-                bar.style.width = levels[levelIndex].pct;
-                bar.style.background = levels[levelIndex].bg;
-                text.textContent = levels[levelIndex].label;
-                text.style.color = levels[levelIndex].bg;
-            });
-        })();
-
-        // ── Role card active state ────────────────────────────────────
-        document.querySelectorAll('#role-cards .role-card').forEach(function(card) {
-            card.addEventListener('change', function() {
-                document.querySelectorAll('#role-cards .role-card').forEach(function(c) {
-                    c.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        // ── Status pill active state ──────────────────────────────────
-        document.querySelectorAll('#status-pills .status-pill').forEach(function(pill) {
-            pill.addEventListener('change', function() {
-                document.querySelectorAll('#status-pills .status-pill').forEach(function(p) {
-                    p.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-    </script>
-@endpush
-
-@push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // ── Password visibility toggle ────────────────────────────────
+            document.querySelectorAll('.ff-eye').forEach(function(eye) {
+                eye.addEventListener('click', function() {
+                    const input = document.getElementById(this.dataset.target);
+                    const icon = this.querySelector('.fa-eye, .fa-eye-slash');
+                    if (!input) return;
+                    const isPass = input.type === 'password';
+                    input.type = isPass ? 'text' : 'password';
+                    icon.classList.toggle('fa-eye-slash');
+                    icon.classList.toggle('fa-eye');
+                    input.focus();
+                });
+            });
+
+            // ── Password strength meter ────────────────────────────────────
+            (function() {
+                const pwd = document.getElementById('password');
+                const bar = document.getElementById('pwd-bar');
+                const text = document.getElementById('pwd-text');
+                if (!pwd || !bar || !text) return;
+
+                const levels = [{
+                        pct: '0%',
+                        bg: '',
+                        label: ''
+                    },
+                    {
+                        pct: '25%',
+                        bg: '#ef4444',
+                        label: '{{ __('main.password_weak') }}'
+                    },
+                    {
+                        pct: '50%',
+                        bg: '#f97316',
+                        label: '{{ __('main.password_fair') }}'
+                    },
+                    {
+                        pct: '75%',
+                        bg: '#eab308',
+                        label: '{{ __('main.password_good') }}'
+                    },
+                    {
+                        pct: '100%',
+                        bg: '#22c55e',
+                        label: '{{ __('main.password_strong') }}'
+                    },
+                ];
+
+                pwd.addEventListener('input', function() {
+                    const v = this.value;
+                    let score = 0;
+                    if (v.length >= 8) score++;
+                    if (/[A-Z]/.test(v)) score++;
+                    if (/[0-9]/.test(v)) score++;
+                    if (/[^A-Za-z0-9]/.test(v)) score++;
+
+                    const levelIndex = v.length ? Math.max(1, score) : 0;
+
+                    bar.style.width = levels[levelIndex].pct;
+                    bar.style.background = levels[levelIndex].bg;
+                    text.textContent = levels[levelIndex].label;
+                    text.style.color = levels[levelIndex].bg;
+                });
+            })();
+
+            // ── Role card active state ────────────────────────────────────
+            document.querySelectorAll('#role-cards .role-card').forEach(function(card) {
+                card.addEventListener('change', function() {
+                    document.querySelectorAll('#role-cards .role-card').forEach(function(c) {
+                        c.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
+            // ── Status pill active state ──────────────────────────────────
+            document.querySelectorAll('#status-pills .status-pill').forEach(function(pill) {
+                pill.addEventListener('change', function() {
+                    document.querySelectorAll('#status-pills .status-pill').forEach(function(p) {
+                        p.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+
             function initCkEditors() {
                 if (window.CKEDITOR) {
                     document.querySelectorAll('textarea.ckeditor').forEach(function(el) {

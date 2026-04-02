@@ -89,7 +89,10 @@
             </div>
         </form>
     </div>
+@endsection
 
+@push('scripts')
+    @include('dashboard.components.drag-drop-images')
     <script>
         function calculateOldPrice() {
             const priceInput = document.querySelector('input[name="price"]');
@@ -117,4 +120,4 @@
             document.querySelector('input[name="discount_percentage"]').addEventListener('input', calculateOldPrice);
         });
     </script>
-@endsection
+@endpush
