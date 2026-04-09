@@ -231,23 +231,69 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const header = document.getElementById('header');
-            header.setAttribute('data-force-scrolled', 'true');
-            header.classList.add('scrolled');
+            if (header) {
+                header.setAttribute('data-force-scrolled', 'true');
+                header.classList.add('scrolled');
+            }
+
+            const addAttachmentBtn = document.getElementById('add-attachment-btn');
+            const attachmentsContainer = document.getElementById('attachments-container');
+
+            // document.getElementById('add-attachment-btn')?.addEventListener('click', function() {
+            //     const container = document.getElementById('attachments-container');
+
+            //     for (let i = 0; i < 2; i++) {
+            //         const div = document.createElement('div');
+            //         div.className = 'input flex';
+            //         div.innerHTML = '<input type="file" name="attachments[]">';
+            //         div.dataset.message = '{{ __('messages.no_file_chosen') }}';
+            //         container.appendChild(div);
+            //     }
+            // });
+
+            addAttachmentBtn?.addEventListener('click', function() {
+                const div = document.createElement('div');
+                div.className = 'input attachment-item flex items-center gap-2 p-2 rounded-[9px]';
+                div.setAttribute('dir', "{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}");
+                div.style = 'text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color);';
+                div.dataset.message = '{{ __('messages.no_file_chosen') }}';
+                div.innerHTML = `
+                    <input type="file" name="attachments[]" class="flex-1">
+                    <button type="button" class="remove-attachment-btn cursor-pointer absolute text-red-600 text-lg leading-none z-999" aria-label="{{ __('main.delete') }}">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                `;
+                div.dataset.message = '{{ __('messages.no_file_chosen') }}';
+                attachmentsContainer?.appendChild(div);
+            });
+
+            attachmentsContainer?.addEventListener('click', function(event) {
+                const removeBtn = event.target.closest('.remove-attachment-btn');
+
+                if (!removeBtn) {
+                    return;
+                }
+
+                const attachmentItem = removeBtn.closest('.attachment-item');
+                if (!attachmentItem) {
+                    return;
+                }
+
+                const allAttachmentItems = attachmentsContainer.querySelectorAll('.attachment-item');
+                if (allAttachmentItems.length == 0) {
+                    const fileInput = attachmentItem.querySelector('input[type="file"]');
+                    if (fileInput) {
+                        fileInput.value = '';
+                    }
+                    return;
+                }
+
+                attachmentItem.remove();
+            });
         });
     </script>
 
     <script>
-        document.getElementById('add-attachment-btn')?.addEventListener('click', function() {
-            const container = document.getElementById('attachments-container');
-
-            for (let i = 0; i < 2; i++) {
-                const div = document.createElement('div');
-                div.className = 'input flex';
-                div.innerHTML = '<input type="file" name="attachments[]">';
-                container.appendChild(div);
-            }
-        });
-
         // Handle verification rotation
         document.querySelector('.regenerateVerify')?.addEventListener('click', function(e) {
             e.preventDefault();

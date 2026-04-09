@@ -219,7 +219,7 @@
                     {{-- Optional Attachment --}}
                     <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
                     <div class="attachments flex flex-col gap-4" id="attachments-container">
-                        <div class="input attachment-item flex items-center gap-2 w-half p-2 rounded-[9px]" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
+                        <div class="input attachment-item flex items-center gap-2 p-2 rounded-[9px]" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
                             data-message="{{ __('messages.no_file_chosen') }}"
                             style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color); @error('attachments') border: 1px solid red !important @enderror">
                             <input type="file" id="attachments" name="attachments[]" class="flex-1">
@@ -254,12 +254,13 @@
 
             addAttachmentBtn?.addEventListener('click', function() {
                 const div = document.createElement('div');
-                div.className = 'input attachment-item flex items-center gap-2 w-half p-2 rounded-[9px]';
+                div.className = 'input attachment-item flex items-center gap-2 p-2 rounded-[9px]';
                 div.setAttribute('dir', "{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}");
                 div.style = 'text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color);';
+                div.dataset.message = '{{ __('messages.no_file_chosen') }}';
                 div.innerHTML = `
                     <input type="file" name="attachments[]" class="flex-1">
-                    <button type="button" class="remove-attachment-btn text-red-600 text-lg leading-none z-999" aria-label="{{ __('main.delete') }}">
+                    <button type="button" class="remove-attachment-btn cursor-pointer absolute text-red-600 text-lg leading-none z-999" aria-label="{{ __('main.delete') }}">
                         <i class="fas fa-xmark"></i>
                     </button>
                 `;
@@ -280,7 +281,7 @@
                 }
 
                 const allAttachmentItems = attachmentsContainer.querySelectorAll('.attachment-item');
-                if (allAttachmentItems.length === 1) {
+                if (allAttachmentItems.length == 0) {
                     const fileInput = attachmentItem.querySelector('input[type="file"]');
                     if (fileInput) {
                         fileInput.value = '';
@@ -511,33 +512,33 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                                                                                                                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                                                                                                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                                                                                                                                                                                                            {{ __('main.attachment') }}
-                                                                                                                                                                                                                                                                                                        </div>`).join('')
+                                                                                                                                                                                                                                                                                                                                                <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                                                                                                                                                                                                                                                    <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                                                                                                                                                                                                                                                    {{ __('main.attachment') }}
+                                                                                                                                                                                                                                                                                                                                                </div>`).join('')
                                     : ''
                                 }
                             </div>
 
                 ${isCustomer ? `
-                                                                                                                                                                                                <div class="edit-form" style="display:none;">
-                                                                                                                                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                                                                                                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                                                                                                                                                                                        <div class="edit-buttons flex gap-2 mt-3">
-                                                                                                                                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                                                                                                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                            </div>` : ''}
+                                                                                                                                                                                                                                        <div class="edit-form" style="display:none;">
+                                                                                                                                                                                                                                            <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                                                                                                                                                                                                                <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                                                                                                                                                                                                                <div class="edit-buttons flex gap-2 mt-3">
+                                                                                                                                                                                                                                                    <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                                                                                                                                                                                                                    <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                    </div>` : ''}
                             </div>
                             </div>
                             
                             ${isCustomer ? `
-                                                                                                                                                                                                            <div class="actions ${ticketStatus}">
-                                                                                                                                                                                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                                                                                                                                                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                        </div>` : ''}
+                                                                                                                                                                                                                                                    <div class="actions ${ticketStatus}">
+                                                                                                                                                                                                                                                        <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                                                                                                                                                                                                        <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                </div>` : ''}
                 `;
 
             // Append message

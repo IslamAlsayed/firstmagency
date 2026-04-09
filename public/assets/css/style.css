@@ -1984,3 +1984,19 @@ footer {
     visibility: hidden !important;
     pointer-events: none !important;
 }
+
+.remove-attachment-btn {
+    width: 40px;
+    height: 100%;
+    left: 0;
+    right: auto;
+    background: #ecebed;
+    border-radius: 10px 0 0 10px;
+}
+
+html[lang="en"] {
+    .remove-attachment-btn {
+        left: auto;
+        right: 0;
+    }
+}

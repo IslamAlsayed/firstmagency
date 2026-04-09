@@ -10,7 +10,7 @@
         {{-- Optional Attachment --}}
         <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
         <div class="attachments flex flex-col gap-4" id="attachments-container">
-            <div class="input flex w-half p-2 rounded-[9px]" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" data-message="{{ __('messages.no_file_chosen') }}"
+            <div class="input flex p-2 rounded-[9px]" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" data-message="{{ __('messages.no_file_chosen') }}"
                 style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color); @error('attachments') border: 1px solid red !important @enderror">
                 <input type="file" id="attachments" name="attachments[]">
             </div>
