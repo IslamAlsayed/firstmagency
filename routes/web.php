@@ -48,9 +48,5 @@ Route::post('/reviews', fn(\Illuminate\Http\Request $request) => response()->jso
     'data' => $request->all()
 ], 200))->name('reviews.store');
 
-// Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
-//     Route::post('/cache/clear', [HomeController::class, 'clearHomepageCache'])->name('admin.cache.clear');
-// });
-
 require __DIR__ . '/dashboard.php';
 require __DIR__ . '/auth.php';

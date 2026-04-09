@@ -4,7 +4,7 @@
 @section('page-title', '✏️ ' . __('main.edit_type', ['type' => __('main.project_step')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.project-steps.update', $projectStep->id) }}">
             @csrf
             @method('PUT')
@@ -106,7 +106,7 @@
 
                 <!-- Update Button -->
                 <div class="flex gap-2 pt-4">
-                    <button type="submit" class="kt-btn kt-btn-primary">
+                    <button type="submit" class="kt-btn kt-btn-primary" toggle-button>
                         <i class="fas fa-save mr-2"></i>{{ __('main.update') }}
                     </button>
                 </div>

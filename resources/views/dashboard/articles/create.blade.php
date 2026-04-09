@@ -8,7 +8,7 @@
 @endpush
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.articles.store') ?? '#' }}" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-4 lg:gap-6">
@@ -78,7 +78,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label for="keywords_ar" class="kt-label">{{ __('main.keywords_ar') }}</label>
-                                <input type="text" name="keywords_ar" id="keywords_ar" class="kt-input h-fit tagify-container" value="{{ old('keywords_ar') }}" placeholder="كلمة">
+                                <input type="text" name="keywords_ar" id="keywords_ar" class="kt-input h-fit tagify-container bg-white" value="{{ old('keywords_ar') }}" placeholder="كلمة">
                                 <span class="text-xs text-gray-500 mt-1">{{ __('main.tagify_desc') }}</span>
                                 @error('keywords_ar')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -126,7 +126,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label for="keywords_en" class="kt-label">{{ __('main.keywords_en') }}</label>
-                                <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container" value="{{ old('keywords_en') }}" placeholder="word">
+                                <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container bg-white" value="{{ old('keywords_en') }}" placeholder="word">
                                 <span class="text-xs text-gray-500 mt-1">{{ __('main.tagify_desc') }}</span>
                                 @error('keywords_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>

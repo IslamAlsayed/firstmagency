@@ -19,7 +19,7 @@
 
             <div class="flex items-center gap-2.5">
                 @can('update', $ticket)
-                    <a href="{{ route('dashboard.tickets.edit', $ticket->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.tickets.edit', $ticket->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
@@ -27,7 +27,7 @@
                 <a href="{{ route('dashboard.tickets.show', $ticket->id) }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
                     {{ __('main.details') }}
                 </a>
-                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
                 </a>
             </div>
@@ -131,26 +131,48 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let addAttachmentBtn = document.getElementById('add-attachment-btn');
-            addAttachmentBtn?.addEventListener('click', function() {
-                const container = document.getElementById('attachments-container');
+            const addAttachmentBtn = document.getElementById('add-attachment-btn');
+            const attachmentsContainer = document.getElementById('attachments-container');
 
-                for (let i = 0; i < 1; i++) {
-                    const div = document.createElement('div');
-                    div.className = 'input flex w-half p-2 rounded-[9px]';
-                    div.style = 'border: 1px solid var(--color-gray-300);';
-                    div.innerHTML = '<input type="file" name="attachments[]">';
-                    container.appendChild(div);
+            addAttachmentBtn?.addEventListener('click', function() {
+                const div = document.createElement('div');
+                div.className = 'input flex w-half p-2 rounded-[9px]';
+                div.setAttribute('dir', "{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}");
+                div.style = 'border: 1px solid var(--color-gray-300);';
+                div.innerHTML = `
+                    <input type="file" name="attachments[]" class="flex-1">
+                    <button type="button" class="remove-attachment-btn text-red-600 text-lg leading-none z-999" aria-label="{{ __('main.delete') }}">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                `;
+                div.dataset.message = '{{ __('messages.no_file_chosen') }}';
+                attachmentsContainer?.appendChild(div);
+            });
+
+            attachmentsContainer?.addEventListener('click', function(event) {
+                const removeBtn = event.target.closest('.remove-attachment-btn');
+
+                if (!removeBtn) {
+                    return;
                 }
+
+                const attachmentItem = removeBtn.closest('.attachment-item');
+                if (!attachmentItem) {
+                    return;
+                }
+
+                const allAttachmentItems = attachmentsContainer.querySelectorAll('.attachment-item');
+                if (allAttachmentItems.length === 1) {
+                    const fileInput = attachmentItem.querySelector('input[type="file"]');
+                    if (fileInput) {
+                        fileInput.value = '';
+                    }
+                    return;
+                }
+
+                attachmentItem.remove();
             });
         });
-
-        // Helper function to strip HTML tags
-        function stripHtmlTags(html) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            return tempDiv.textContent || tempDiv.innerText || '';
-        }
     </script>
 
     @include('dashboard.components.messages-action')
@@ -336,57 +358,58 @@
 
             // Create message HTML
             const messageHtml = `
-                <div class="flex justify-between gap-4 client ${isCustomer ? 'customer' : ''}" data-message-id="${messageData.id}" style="${backgroundColor} ${borderColor} ${borderMainColor}">
-                    <div class="flex gap-4">
-                        <div class="avatar">
-                            <a href="${photoUrl}" class="client-avatar block">
-                                <img decoding="async" src="${photoUrl}" alt="${isCustomer ? '{{ __('main.client_icon') }}' : '{{ __('main.support_icon') }}'}" class="fal-content-img">
-                            </a>
+        <div class="flex justify-between gap-4 client ${isCustomer ? 'customer' : ''}" data-message-id="${messageData.id}" style="${backgroundColor} ${borderColor} ${borderMainColor}">
+            <div class="flex gap-4">
+                <div class="avatar">
+                    <a href="${photoUrl}" class="client-avatar block">
+                        <img decoding="async" src="${photoUrl}" alt="${isCustomer ? '{{ __('main.client_icon') }}' : '{{ __('main.support_icon') }}'}" class="fal-content-img">
+                    </a>
+                </div>
+                <div class="body">
+                    <div class="meta">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="who font-semibold">${displayName}</span>
+                            <span class="time mt-1">${messageData.created_at} - ${messageData.human_readable_date}</span>
                         </div>
-                        <div class="body">
-                            <div class="meta">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="who font-semibold">${displayName}</span>
-                                    <span class="time mt-1">${messageData.created_at} - ${messageData.human_readable_date}</span>
-                                </div>
-                                <div class="flex gap-2">
-                                    <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message" style="${badgeColor}">
-                                        ${senderLabel}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="content">${messageData.message}</div>
-                            <div class="files flex items-center gap-2">
-                                ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
-                                    ? messageData.attachments.map(att => `
-                                                                                                                                                                                                                                                    <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                                                                                                                                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                                                                                                                                                        {{ __('main.attachment') }}
-                                                                                                                                                                                                                                                    </div>`).join('')
-                                    : ''
-                                }
-                            </div>
-
-                    ${!isCustomer ? `
-                                                                                                                                                                                <div class="edit-form" style="display:none;">
-                                                                                                                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                                                                                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                                                                                                                                                                        <div class="edit-buttons flex gap-2 mt-3">
-                                                                                                                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                                                                                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                    </div>
-                                                                                                                                                                                    </div>` : ''}
+                        <div class="flex gap-2">
+                            <span class="w-fit block text-xs px-2 py-1 rounded-full badge-message" style="${badgeColor}">
+                                ${senderLabel}
+                            </span>
                         </div>
+                    </div>
+                    <div class="content">${messageData.message}</div>
+                    <div class="files flex items-center gap-2">
+                        ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
+                        ? messageData.attachments.map(att => `
+                                                                                    <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                        <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                        {{ __('main.attachment') }}
+                                                                                    </div>`).join('')
+                        : ''
+                        }
                     </div>
 
                     ${!isCustomer ? `
-                                                                                                                                                                                                <div class="actions ${ticketStatus}">
-                                                                                                                                                                                                    <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                                                                                                                                                                    <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                            </div>` : ''}
-                `;
+                                                                                <div class="edit-form" style="display:none;">
+                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                                                        <div class="edit-buttons flex gap-2 mt-3">
+                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                                                                                                data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>` : ''}
+                </div>
+            </div>
+
+            ${!isCustomer ? `
+                                                                        <div class="actions ${ticketStatus}">
+                                                                            <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                            <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                        </div>
+                                                                    </div>` : ''}
+        `;
 
             // Append message
             messagesContainer.insertAdjacentHTML('beforeend', messageHtml);

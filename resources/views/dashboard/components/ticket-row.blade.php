@@ -25,7 +25,7 @@
             'availableOptions' => \App\Models\Department::get(['id', 'name', 'name_ar', 'user_id'])->toArray(),
         ])
         <span class="kt-badge text-white" style="background-color: {{ $ticket->department?->border_main_color ?? 'default' }};">
-            {{ __('main.' . str_replace('-', '_', str_replace(' ', '_', $ticket->department?->name ?? 'no_department'))) }}
+            {{ app()->getLocale() == 'ar' ? $ticket->department?->name_ar : $ticket->department?->name ?? 'no_department' }}
         </span>
     </td>
     <td class="p-4 text-sm text-gray-600">
@@ -43,11 +43,11 @@
     <td class="p-4 text-sm text-gray-600">
         <div class="flex items-center gap-2 flex-wrap">
             <a href="{{ route('dashboard.tickets.sendCopyToCustomer', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-500 text-white"
-                title="{{ __('main.send_copy_to_customer') }}">
+                title="{{ __('main.send_copy_to_customer') }}" toggle-button>
                 <i class="fas fa-envelope text-white"></i>
             </a>
             <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-blue-300 text-white"
-                title="{{ __('main.support_reply') }}">
+                title="{{ __('main.support_reply') }}" toggle-button>
                 @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
                     {!! $text ?? __('main.chat') !!}
                 @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')

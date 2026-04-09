@@ -8,6 +8,17 @@
             }
         }
 
+        textarea {
+            min-height: 150px;
+            background-color: #ffffff;
+        }
+
+        textarea:focus,
+        textarea:focus-visible {
+            border: #e7e7e7 1px solid !important;
+            box-shadow: #e7e7e7 0px 0px 0px 1px !important;
+        }
+
         @media print {
             .ticket-show-sections {
                 padding: 15px;
@@ -189,7 +200,41 @@
 
         {{-- Reply Form --}}
         <article class="{{ $ticketData['status'] == \App\Enum\TicketEnums::CLOSED->value ? 'hidden' : '' }}">
-            @include('website.tickets.reply-form', ['ticket' => $ticketData])
+            <form action="{{ route('tickets.message', $ticketData['uuid']) }}" method="POST" enctype="multipart/form-data" class="tickets-message-form">
+                @csrf
+                <div class="{{ isset($classes) ? $classes : '' }}">
+                    <label for="your_reply" class="kt-label mb-2">
+                        {{ __('main.your_reply') }}
+                        @if (isset($placeholder) && $placeholder)
+                            <span class="text-sm text-primary">({{ $placeholder }})</span>
+                        @endif
+                    </label>
+                    <textarea id="your_reply" name="your_reply" class="kt-textarea" required placeholder="{{ __('main.type_placeholder', ['type' => __('main.your_reply')]) }}">{{ old('your_reply') }}</textarea>
+                    @error('your_reply')
+                        <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="group mt-4">
+                    {{-- Optional Attachment --}}
+                    <label for="attachments" class="font-semibold mb-2 block">{{ __('main.contact_form_attachment') }}</label>
+                    <div class="attachments flex flex-col gap-4" id="attachments-container">
+                        <div class="input attachment-item flex items-center gap-2 w-half p-2 rounded-[9px]" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
+                            data-message="{{ __('messages.no_file_chosen') }}"
+                            style="text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color); @error('attachments') border: 1px solid red !important @enderror">
+                            <input type="file" id="attachments" name="attachments[]" class="flex-1">
+                        </div>
+                    </div>
+
+                    <div class="add-attachment-input mt-2" id="add-attachment-btn" style="cursor: pointer;" toggle-button>
+                        {{ __('main.contact_form_add_attachment') }}
+                    </div>
+                </div>
+
+                <button class="submit btn-link light-main-color font-semibold" toggle-button>
+                    {{ __('main.send_reply') }}
+                </button>
+            </form>
         </article>
 
         {{-- Print Ticket --}}
@@ -204,17 +249,46 @@
             header?.setAttribute('data-force-scrolled', 'true');
             header?.classList.add('scrolled');
 
-            let addAttachmentBtn = document.getElementById('add-attachment-btn');
-            addAttachmentBtn?.addEventListener('click', function() {
-                const container = document.getElementById('attachments-container');
+            const addAttachmentBtn = document.getElementById('add-attachment-btn');
+            const attachmentsContainer = document.getElementById('attachments-container');
 
-                for (let i = 0; i < 1; i++) {
-                    const div = document.createElement('div');
-                    div.className = 'input flex w-half p-2 rounded-[9px]';
-                    div.style = 'border: 1px solid var(--dark-muted-color);';
-                    div.innerHTML = '<input type="file" name="attachments[]">';
-                    container.appendChild(div);
+            addAttachmentBtn?.addEventListener('click', function() {
+                const div = document.createElement('div');
+                div.className = 'input attachment-item flex items-center gap-2 w-half p-2 rounded-[9px]';
+                div.setAttribute('dir', "{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}");
+                div.style = 'text-align: {{ app()->getLocale() == 'ar' ? 'end' : 'start' }} !important; border: 1px solid var(--dark-muted-color);';
+                div.innerHTML = `
+                    <input type="file" name="attachments[]" class="flex-1">
+                    <button type="button" class="remove-attachment-btn text-red-600 text-lg leading-none z-999" aria-label="{{ __('main.delete') }}">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                `;
+                div.dataset.message = '{{ __('messages.no_file_chosen') }}';
+                attachmentsContainer?.appendChild(div);
+            });
+
+            attachmentsContainer?.addEventListener('click', function(event) {
+                const removeBtn = event.target.closest('.remove-attachment-btn');
+
+                if (!removeBtn) {
+                    return;
                 }
+
+                const attachmentItem = removeBtn.closest('.attachment-item');
+                if (!attachmentItem) {
+                    return;
+                }
+
+                const allAttachmentItems = attachmentsContainer.querySelectorAll('.attachment-item');
+                if (allAttachmentItems.length === 1) {
+                    const fileInput = attachmentItem.querySelector('input[type="file"]');
+                    if (fileInput) {
+                        fileInput.value = '';
+                    }
+                    return;
+                }
+
+                attachmentItem.remove();
             });
         });
 
@@ -437,33 +511,33 @@
                             <div class="files flex items-center gap-2">
                                 ${messageData.attachments && Array.isArray(messageData.attachments) && messageData.attachments.length > 0
                                     ? messageData.attachments.map(att => `
-                                                                                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
-                                                                                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
-                                                                                                                                                                                            {{ __('main.attachment') }}
-                                                                                                                                                                                        </div>`).join('')
+                                                                                                                                                                                                                                                                                                        <div class="client-attachment flex items-center gap-2 clickable-img" data-src="{{ asset('storage/') }}${att}">
+                                                                                                                                                                                                                                                                                                            <img draggable="false" role="img" alt="📎" src="https://s.w.org/images/core/emoji/17.0.2/svg/1f4ce.svg">
+                                                                                                                                                                                                                                                                                                            {{ __('main.attachment') }}
+                                                                                                                                                                                                                                                                                                        </div>`).join('')
                                     : ''
                                 }
                             </div>
 
                 ${isCustomer ? `
-                                                                                <div class="edit-form" style="display:none;">
-                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
-                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
-                                                                                        <div class="edit-buttons flex gap-2 mt-3">
-                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
-                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
-                                                                                            </div>
-                                                                                            </div>
-                                                                                            </div>` : ''}
+                                                                                                                                                                                                <div class="edit-form" style="display:none;">
+                                                                                                                                                                                                    <div class="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                                                                                                                                                                                                        <textarea class="edit-textarea w-full p-2 border rounded" rows="4">${stripHtmlTags(messageData.message)}</textarea>
+                                                                                                                                                                                                        <div class="edit-buttons flex gap-2 mt-3">
+                                                                                                                                                                                                            <button class="message-save-btn cursor-pointer px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700" data-message-id="${messageData.id}">{{ __('main.save') }}</button>
+                                                                                                                                                                                                            <button class="message-cancel-btn cursor-pointer px-4 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">{{ __('main.cancel') }}</button>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            </div>` : ''}
                             </div>
                             </div>
                             
                             ${isCustomer ? `
-                                                                                            <div class="actions ${ticketStatus}">
-                                                                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
-                                                                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
-                                                                                            </div>
-                                                                                        </div>` : ''}
+                                                                                                                                                                                                            <div class="actions ${ticketStatus}">
+                                                                                                                                                                                                                <button type="button" class="message-edit-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.edit') }}</button>
+                                                                                                                                                                                                                <button type="button" class="message-delete-btn px-4 py-2" data-message-id="${messageData.id}">{{ __('main.delete') }}</button>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                        </div>` : ''}
                 `;
 
             // Append message
@@ -480,31 +554,5 @@
                 });
             }, 100);
         }
-    </script>
-@endpush
-
-@push('scripts')
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function initCkEditors() {
-                if (window.CKEDITOR) {
-                    document.querySelectorAll('textarea.ckeditor').forEach(function(el) {
-                        if (el.id && CKEDITOR.instances[el.id]) {
-                            CKEDITOR.instances[el.id].destroy(true);
-                        }
-                        if (!el.classList.contains('ckeditor-initialized')) {
-                            CKEDITOR.replace(el.id, {
-                                height: 150
-                            });
-                            el.classList.add('ckeditor-initialized');
-                        }
-                    });
-                } else {
-                    setTimeout(initCkEditors, 300);
-                }
-            }
-            initCkEditors();
-        });
     </script>
 @endpush

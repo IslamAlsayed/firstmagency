@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('update', $pestDomain)
-                    <a href="{{ route('dashboard.pest-domains.edit', $pestDomain->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.pest-domains.edit', $pestDomain->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.pest-domains.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.pest-domains.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.pest_domains')]) }}
                 </a>
             </div>
@@ -147,7 +147,7 @@
                         'id' => $pestDomain->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.pest-domains.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.pest-domains.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.pest_domains')]) }}
                 </a>
             </div>

@@ -4,7 +4,7 @@
 @section('page-title', '🏢 ' . __('main.edit_type', ['type' => __('main.company')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.projects.update', $project->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')

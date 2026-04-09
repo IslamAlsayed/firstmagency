@@ -171,13 +171,13 @@
                     </div>
                 </section>
 
-                @if (getActiveUser()->can('dashboard-switch-account'))
+                @if (getActiveUser()->can('dashboard-switchAccount'))
                     <section class="profile-panel profile-animate profile-delay-3">
                         <div class="profile-panel-head">
                             <div class="profile-panel-title">
                                 <div class="profile-panel-icon"><i class="ki-filled ki-arrow-right-left"></i></div>
                                 <div>
-                                    <h3>{{ __('messages.switch_to_anther_user') }}</h3>
+                                    <h3>{{ __('messages.switch_to_another_user') }}</h3>
                                     <p>{{ __('main.account_information') }}</p>
                                 </div>
                             </div>

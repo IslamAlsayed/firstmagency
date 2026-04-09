@@ -12,7 +12,7 @@
         .dashboard-hero {
             background:
                 radial-gradient(circle at top right, #d05423, transparent 24%),
-                linear-gradient({{ getActiveUser()->dashboard_locale == 'en' ? '135deg' : '225deg' }}, #96310e 0%, #f97316 100%);
+                linear-gradient({{ app()->getLocale() == 'en' ? '135deg' : '225deg' }}, #96310e 0%, #f97316 100%);
         }
     </style>
 @endpush
@@ -172,7 +172,7 @@
                                 </div>
                             </div>
                             @can('articles-read')
-                                <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.articles') }}</a>
+                                <a class="panel-link underline" href="{{ route('dashboard.articles.index') }}">{{ __('main.articles') }}</a>
                             @endcan
                         </div>
 
@@ -246,7 +246,7 @@
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.articles') }}</h4>
                                     @can('articles-read')
-                                        <a class="panel-link" href="{{ route('dashboard.articles.index') }}">{{ __('main.content_management') }}</a>
+                                        <a class="panel-link underline" href="{{ route('dashboard.articles.index') }}">{{ __('main.content_management') }}</a>
                                     @endcan
                                 </div>
                                 <ul class="activity-list">
@@ -268,7 +268,7 @@
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.projects') }}</h4>
                                     @can('projects-read')
-                                        <a class="panel-link" href="{{ route('dashboard.projects.index') }}">{{ __('main.projects') }}</a>
+                                        <a class="panel-link underline" href="{{ route('dashboard.projects.index') }}">{{ __('main.projects') }}</a>
                                     @endcan
                                 </div>
                                 <ul class="activity-list">
@@ -289,7 +289,7 @@
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.tickets') }}</h4>
                                     @can('tickets-read')
-                                        <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.ticket_network') }}</a>
+                                        <a class="panel-link underline" href="{{ route('dashboard.tickets.index') }}">{{ __('main.ticket_network') }}</a>
                                     @endcan
                                 </div>
                                 <ul class="activity-list">
@@ -311,7 +311,7 @@
                                 <div class="activity-column-header">
                                     <h4>{{ __('main.reviews') }}</h4>
                                     @can('reviews-read')
-                                        <a class="panel-link" href="{{ route('dashboard.reviews.index') }}">{{ __('main.customer_feedback') }}</a>
+                                        <a class="panel-link underline" href="{{ route('dashboard.reviews.index') }}">{{ __('main.customer_feedback') }}</a>
                                     @endcan
                                 </div>
                                 <ul class="activity-list">
@@ -345,7 +345,7 @@
                                 </div>
                             </div>
                             @can('tickets-read')
-                                <a class="panel-link" href="{{ route('dashboard.tickets.index') }}">{{ __('main.tickets') }}</a>
+                                <a class="panel-link underline" href="{{ route('dashboard.tickets.index') }}">{{ __('main.tickets') }}</a>
                             @endcan
                         </div>
 

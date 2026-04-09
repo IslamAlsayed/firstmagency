@@ -4,7 +4,7 @@
 @section('page-title', '❓ ' . __('main.edit_type', ['type' => __('main.faq')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.faqs.update', $faq) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -116,7 +116,7 @@
                         }
                         if (!el.classList.contains('ckeditor-initialized')) {
                             CKEDITOR.replace(el.id, {
-                                height: 300
+                                height: 150
                             });
                             el.classList.add('ckeditor-initialized');
                         }

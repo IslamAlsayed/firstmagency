@@ -169,7 +169,6 @@ class ArticleSeeder extends Seeder
 
             Article::create([
                 'slug' => Str::slug($data['ar']['title']),
-                'image' => null,
                 'thumbnail' => null,
                 'category_id' => $category?->id,
                 'translations' => [

@@ -222,7 +222,7 @@
                     <input type="file" name="photo" accept="image/*" class="hidden" id="photoInput">
                     <div id="photoPreview" class="w-[80px] h-auto mt-3 hidden">
                         <img id="photoPreviewImg" src="" alt="Preview" class="max-h-40 mx-auto rounded-lg">
-                        <button type="button" id="removephoto" class="kt-btn bg-danger cursor-pointer mt-2 text-sm">
+                        <button type="button" id="removePhoto" class="kt-btn bg-danger cursor-pointer mt-2 text-sm" toggle-button>
                             <i class="fas fa-trash mr-1"></i>{{ __('main.remove') ?? 'إزالة' }}
                         </button>
                     </div>
@@ -261,7 +261,7 @@
                                     <i class="fas fa-check-circle text-green-600"></i>
                                     <span id="audioUploadFileName" class="text-sm text-gray-700 font-medium"></span>
                                 </div>
-                                <button type="button" id="removeAudioUpload" class="kt-btn bg-danger cursor-pointer transition">
+                                <button type="button" id="removeAudioUpload" class="kt-btn bg-danger cursor-pointer transition" toggle-button>
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -299,7 +299,7 @@
                                     <i class="fas fa-check-circle text-blue-600"></i>
                                     <span class="text-sm text-gray-700 font-medium">{{ __('main.recording_completed') ?? 'تم التسجيل بنجاح' }}</span>
                                 </div>
-                                <button type="button" id="removeRecording" class="kt-btn bg-danger cursor-pointer transition">
+                                <button type="button" id="removeRecording" class="kt-btn bg-danger cursor-pointer transition" toggle-button>
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -393,7 +393,7 @@
         const photoInput = document.getElementById('photoInput');
         const photoPreview = document.getElementById('photoPreview');
         const photoPreviewImg = document.getElementById('photoPreviewImg');
-        const removePhotoBtn = document.getElementById('removephoto');
+        const removePhotoBtn = document.getElementById('removePhoto');
 
         photoUploadArea.addEventListener('click', () => photoInput.click());
 

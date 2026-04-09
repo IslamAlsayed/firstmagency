@@ -79,8 +79,8 @@
                         </div>
                     </div>
 
-                    <button class="kt-btn kt-btn-primary login-submit flex justify-center grow stagger-in" type="submit" style="color: var(--text_color); background-color: var(--button_color);"
-                        toggle-button>
+                    <button class="kt-btn kt-btn-primary login-submit flex justify-center grow stagger-in" type="submit" toggle-button
+                        style="color: var(--text_color); background-color: var(--button_color);">
                         {{ __('auth.sign_in') }}
                     </button>
                 </form>

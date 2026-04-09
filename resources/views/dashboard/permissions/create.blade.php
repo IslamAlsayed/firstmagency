@@ -4,7 +4,7 @@
 @section('page-title', '🔑 ' . __('main.create_permission'))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.permissions.store') }}">
             @csrf
             <div class="grid gap-4 lg:gap-6">

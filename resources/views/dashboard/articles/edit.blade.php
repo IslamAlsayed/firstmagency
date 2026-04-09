@@ -4,7 +4,7 @@
 @section('page-title', '📝 ' . __('main.edit_type', ['type' => __('main.article')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.articles.update', $article->id) ?? '#' }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -204,7 +204,7 @@
                         }
                         if (!el.classList.contains('ckeditor-initialized')) {
                             CKEDITOR.replace(el.id, {
-                                height: 500
+                                height: 500,
                             });
                             el.classList.add('ckeditor-initialized');
                         }

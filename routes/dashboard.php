@@ -131,14 +131,4 @@ Route::middleware(['auth', 'dashboard'])->prefix('dashboard')->name('dashboard.'
 
     // Unified force-destroy route for all models
     Route::delete('{modelClass}/{id}/force-destroy', [DashboardController::class, 'forceDestroy'])->name('forceDestroy');
-
-    // any route not found in the dashboard will redirect to the dashboard index (except for api routes)
-    // Route::get('/{any}', function () {
-    //     return redirect()->route('dashboard.index');
-    // })->where('any', '.*');
 });
-
-// any route not found in the website will redirect to the welcome index (except for api routes)
-// Route::get('/{any}', function () {
-//     return redirect()->route('welcome');
-// })->where('any', '.*')->middleware('guest');

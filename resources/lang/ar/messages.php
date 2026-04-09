@@ -223,7 +223,7 @@ return [
     'confirm_approve_role_message' => 'هل أنت متأكد من موافقتك على هذا الطلب؟ سيتم تعيين الدور المطلوب للمستخدم.',
 
     // Account Switching
-    'switch_to_anther_user' => 'التبديل إلى مستخدم اخر',
+    'switch_to_another_user' => 'التبديل إلى مستخدم اخر',
     'switched_to_user' => 'تم التبديل إلى الحساب: :name',
     'dev_account_switcher' => 'ميزة تطويرية - اختبر أدوار مختلفة',
 

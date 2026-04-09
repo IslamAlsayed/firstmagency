@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('update', $programmingCategory)
-                    <a href="{{ route('dashboard.programming-categories.edit', $programmingCategory->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.programming-categories.edit', $programmingCategory->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.programming-categories.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.programming-categories.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.programming_categories')]) }}
                 </a>
             </div>
@@ -100,7 +100,7 @@
                         'id' => $programmingCategory->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.programming-categories.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.programming-categories.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.programming_categories')]) }}
                 </a>
             </div>

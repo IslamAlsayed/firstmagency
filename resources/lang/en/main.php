@@ -82,6 +82,7 @@ return [
     'slug' => 'Slug',
     'type' => 'Type',
 
+    'type_placeholder' => 'Enter :type',
     'search_types_placeholder' => 'Search :types...',
     'types_count' => 'Total :types',
     'type_list' => ':type List',

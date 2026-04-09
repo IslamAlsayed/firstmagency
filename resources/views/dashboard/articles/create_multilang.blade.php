@@ -4,7 +4,7 @@
 @section('page-title', '📝 ' . __('main.create_article'))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.articles.store') ?? '#' }}" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-4 lg:gap-6">

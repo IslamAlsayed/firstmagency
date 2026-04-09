@@ -20,7 +20,7 @@ class UpdateMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required|string|min:5',
+            'message' => 'nullable|string',
         ];
     }
 

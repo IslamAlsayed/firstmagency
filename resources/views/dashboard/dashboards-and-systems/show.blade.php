@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @if (getActiveUser()->can('update', $dashboardsAndSystem))
-                    <a href="{{ route('dashboard.dashboards-and-systems.edit', $dashboardsAndSystem->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.dashboards-and-systems.edit', $dashboardsAndSystem->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endif
-                <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.dashboards_and_apps')]) }}
                 </a>
             </div>
@@ -135,7 +135,7 @@
                         'id' => $dashboardsAndSystem->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.dashboards-and-systems.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.dashboards_and_apps')]) }}
                 </a>
             </div>

@@ -4,7 +4,7 @@
 @section('page-title', '⚙️ ' . __('main.create_line_work'))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.line-works.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-4">

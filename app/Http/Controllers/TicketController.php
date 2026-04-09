@@ -75,24 +75,27 @@ class TicketController extends Controller
         }
 
         // Notify all admins/superadmins about new ticket
-        $notification = new TicketActivityNotification(
-            ticket: $ticket,
-            type: 'new_ticket',
-            body: __('main.customer') . ': ' . $ticket->name,
-        );
         $users = User::whereIn('role', ['superadmin', 'admin'])->get();
         foreach ($users as $user) {
-            $user->notify($notification);
-        }
+            $notification = new TicketActivityNotification(
+                ticket: $ticket,
+                type: 'new_ticket',
+                body: __('main.customer') . ': ' . $ticket->name,
+            );
 
-        $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
-            'type' => 'new_ticket',
-            'subject' => $ticket->subject,
-            'body' => __('main.customer') . ': ' . $ticket->name,
-            'url' => route('dashboard.tickets.show', $ticket->id),
-            'created_at' => now()->toIso8601String(),
-            'created_at_human' => now()->diffForHumans(),
-        ]);
+            $user->notify($notification);
+
+            $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+                'notification_id' => $notification->id,
+                'target_user_id' => $user->id,
+                'type' => 'new_ticket',
+                'subject' => $ticket->subject,
+                'body' => __('main.customer') . ': ' . $ticket->name,
+                'url' => route('dashboard.tickets.support-reply', $ticket->id),
+                'created_at' => now()->toIso8601String(),
+                'created_at_human' => now()->diffForHumans(),
+            ]);
+        }
 
         // Publish new ticket event to Ably
         $ticketData = [
@@ -172,24 +175,27 @@ class TicketController extends Controller
             $this->publishToAbly('ticket-updates', 'new-customer-reply', $messageData);
 
             // Notify all admins/superadmins about customer reply
-            $replyNotification = new TicketActivityNotification(
-                ticket: $ticket,
-                type: 'customer_reply',
-                body: __('main.customer') . ': ' . $ticket->name,
-            );
             $users = User::whereIn('role', ['superadmin', 'admin'])->get();
             foreach ($users as $user) {
-                $user->notify($replyNotification);
-            }
+                $replyNotification = new TicketActivityNotification(
+                    ticket: $ticket,
+                    type: 'customer_reply',
+                    body: __('main.customer') . ': ' . $ticket->name,
+                );
 
-            $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
-                'type' => 'customer_reply',
-                'subject' => $ticket->subject,
-                'body' => __('main.customer') . ': ' . $ticket->name,
-                'url' => request()->getSchemeAndHttpHost() . route('dashboard.tickets.support-reply', $ticket->id, false),
-                'created_at' => now()->toIso8601String(),
-                'created_at_human' => now()->diffForHumans(),
-            ]);
+                $user->notify($replyNotification);
+
+                $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+                    'notification_id' => $replyNotification->id,
+                    'target_user_id' => $user->id,
+                    'type' => 'customer_reply',
+                    'subject' => $ticket->subject,
+                    'body' => __('main.customer') . ': ' . $ticket->name,
+                    'url' => request()->getSchemeAndHttpHost() . route('dashboard.tickets.support-reply', $ticket->id, false),
+                    'created_at' => now()->toIso8601String(),
+                    'created_at_human' => now()->diffForHumans(),
+                ]);
+            }
         }
 
         return redirect()->back()->withSuccess(__('messages.type_created_successfully', ['type' => __('main.message')]));
@@ -337,24 +343,27 @@ class TicketController extends Controller
         ]);
 
         // Notify all admins/superadmins about new rating
-        $ratingNotification = new TicketActivityNotification(
-            ticket: $ticket,
-            type: 'ticket_rated',
-            body: str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
-        );
         $users = User::whereIn('role', ['superadmin', 'admin'])->get();
         foreach ($users as $user) {
-            $user->notify($ratingNotification);
-        }
+            $ratingNotification = new TicketActivityNotification(
+                ticket: $ticket,
+                type: 'ticket_rated',
+                body: str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
+            );
 
-        $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
-            'type' => 'ticket_rated',
-            'subject' => $ticket->subject,
-            'body' => str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
-            'url' => route('dashboard.tickets.show', $ticket->id),
-            'created_at' => now()->toIso8601String(),
-            'created_at_human' => now()->diffForHumans(),
-        ]);
+            $user->notify($ratingNotification);
+
+            $this->publishToAbly('dashboard-notifications', 'ticket-notification', [
+                'notification_id' => $ratingNotification->id,
+                'target_user_id' => $user->id,
+                'type' => 'ticket_rated',
+                'subject' => $ticket->subject,
+                'body' => str_repeat('★', $validated['rating']) . ' - ' . $ticket->name,
+                'url' => route('dashboard.tickets.show', $ticket->id),
+                'created_at' => now()->toIso8601String(),
+                'created_at_human' => now()->diffForHumans(),
+            ]);
+        }
 
         return redirect()->route('tickets.support_pro_rating', [$ticket->uuid, $ticket->token])->withSuccess(__('messages.rating_submitted_successfully'));
         // return redirect()->route('tickets.show', $ticket->uuid)->withSuccess(__('messages.rating_submitted_successfully'));

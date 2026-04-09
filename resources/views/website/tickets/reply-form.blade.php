@@ -16,12 +16,12 @@
             </div>
         </div>
 
-        <div class="add-attachment-input mt-2" id="add-attachment-btn" style="cursor: pointer;">
+        <div class="add-attachment-input mt-2" id="add-attachment-btn" style="cursor: pointer;" toggle-button>
             {{ __('main.contact_form_add_attachment') }}
         </div>
     </div>
 
-    <button class="submit btn-link light-main-color font-semibold" toggle-bottom>
+    <button class="submit btn-link light-main-color font-semibold" toggle-button>
         {{ __('main.send_reply') }}
     </button>
 </form>

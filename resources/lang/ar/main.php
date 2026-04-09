@@ -82,6 +82,7 @@ return [
     'slug' => 'الاسم المستعار',
     'type' => 'الفئة',
 
+    'type_placeholder' => 'أدخل :type',
     'search_types_placeholder' => 'ابحث عن :types...',
     'types_count' => 'عدد :types',
     'type_list' => 'قائمة :type',

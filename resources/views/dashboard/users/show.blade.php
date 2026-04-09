@@ -24,18 +24,18 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('permissions-update')
-                    <a href="{{ route('dashboard.users.editPermissions', $user->id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-pink-500 text-white">
+                    <a href="{{ route('dashboard.users.editPermissions', $user->id) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-pink-500 text-white" toggle-button>
                         <i class="fas fa-key text-white"></i>
                         {{ __('main.permissions') }}
                     </a>
                 @endcan
                 @can('update', $user)
-                    <a href="{{ route('dashboard.users.edit', $user->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.users.edit', $user->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.users')]) }}
                 </a>
             </div>
@@ -124,7 +124,7 @@
                         'id' => $user->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.users.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.users')]) }}
                 </a>
             </div>

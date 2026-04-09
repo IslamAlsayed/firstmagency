@@ -4,7 +4,7 @@
 @section('page-title', '⚙️ ' . __('main.edit_line_work'))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.line-works.update', $lineWork) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')

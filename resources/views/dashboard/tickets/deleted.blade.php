@@ -173,7 +173,7 @@
                                                 <form action="{{ route('dashboard.tickets.restore', $ticket->id) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" title="{{ __('main.restore') }}">
+                                                    <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-green-600 text-white" toggle-button title="{{ __('main.restore') }}">
                                                         <i class="fas fa-trash-restore text-white"></i>
                                                         {{ __('main.restore') }}
                                                     </button>

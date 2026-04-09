@@ -21,7 +21,7 @@
                                 </div>
                             @endif
                             <div class="image-overlay">
-                                <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}" class="kt-btn kt-btn-sm kt-btn-primary">
+                                <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}" class="kt-btn kt-btn-sm kt-btn-primary" toggle-button>
                                     <i class="fas fa-download text-sm me-1"></i>
                                     <span>{{ __('main.download') }}</span>
                                 </a>

@@ -72,7 +72,7 @@
 
             <div class="kt-card-footer flex gap-3">
                 @include('dashboard.components.update-submit')
-                <a href="{{ route('dashboard.about-us.index') }}" class="kt-btn kt-btn-secondary">
+                <a href="{{ route('dashboard.about-us.index') }}" class="kt-btn kt-btn-secondary" toggle-button>
                     {{ __('main.cancel') }}
                 </a>
             </div>

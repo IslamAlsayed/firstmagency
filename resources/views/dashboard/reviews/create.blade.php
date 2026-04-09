@@ -4,7 +4,7 @@
 @section('page-title', '⭐ ' . __('main.create_type', ['type' => __('main.review')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form action="{{ route('dashboard.reviews.store') }}" method="POST" enctype="multipart/form-data" id="reviewForm">
             @csrf
             <div class="grid gap-4 lg:gap-6">
@@ -145,16 +145,16 @@
                                 <div id="audioRecordTab" class="audio-content hidden">
                                     <div class="">
                                         <div id="recorder" class="flex gap-2 items-center justify-start">
-                                            <button type="button" id="startRecording" class="kt-btn kt-btn-success">
+                                            <button type="button" id="startRecording" class="kt-btn kt-btn-success" toggle-button>
                                                 🎙️ {{ __('main.start_recording') }}
                                             </button>
-                                            <button type="button" id="stopRecording" class="kt-btn kt-btn-danger hidden">
+                                            <button type="button" id="stopRecording" class="kt-btn kt-btn-danger hidden" toggle-button>
                                                 ⏹️ {{ __('main.stop_recording') }}
                                             </button>
                                         </div>
                                         <div id="audioPlayback" style="display: none;" class="mt-3">
                                             <audio id="audioPreview" controls class="w-[300px]" style="border: 1px solid #cacacc; border-radius: 50px;"></audio>
-                                            <button type="button" id="removeAudio" class="kt-btn bg-danger mt-2 text-sm">{{ __('main.remove') }}</button>
+                                            <button type="button" id="removeAudio" class="kt-btn bg-danger mt-2 text-sm" toggle-button>{{ __('main.remove') }}</button>
                                         </div>
                                     </div>
 

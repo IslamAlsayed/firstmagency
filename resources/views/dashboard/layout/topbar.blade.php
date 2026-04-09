@@ -54,19 +54,19 @@
                 </button>
 
                 <!-- Notifications Dropdown -->
-                <div id="topbar-notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 radius-md shadow-lg group-hover:opacity-100 z-50">
+                <div id="topbar-notifications-dropdown" class="hidden absolute mt-2 w-80 bg-white dark:bg-slate-800 radius-md shadow-lg group-hover:opacity-100 z-50">
                     <div class="p-4 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
                         <h3 class="font-semibold text-gray-800 dark:text-white">{{ __('main.notifications') }}</h3>
                         @if ($unreadCount > 0)
                             <form method="POST" action="{{ route('dashboard.notifications.readAll') }}">
                                 @csrf
-                                <button type="submit" class="text-xs text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.mark_all_read') }}</button>
+                                <button type="submit" class="cursor-pointer text-xs text-blue-600 dark:text-blue-400 hover:underline">{{ __('main.mark_all_read') }}</button>
                             </form>
                         @endif
                     </div>
                     <div class="max-h-80 overflow-y-auto" id="topbar-notifications-list">
                         @forelse($unreadNotifications as $notification)
-                            <form method="POST" action="{{ route('dashboard.notifications.read', $notification->id) }}">
+                            <form method="POST" action="{{ route('dashboard.notifications.read', $notification->id) }}" class="cursor-pointer">
                                 @csrf
                                 <button type="submit" class="w-full cursor-pointer text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">
                                     <div class="flex items-start gap-3">
@@ -335,6 +335,7 @@
             }
 
             const customerLabel = @json(__('main.customer'));
+            const currentUserId = Number(@json(getActiveUser()->id));
             const markReadBaseUrl = @json(route('dashboard.notifications.read', ['id' => '__ID__']));
 
             const ensureBadge = (hasUnread) => {
@@ -378,7 +379,7 @@
                     emptyNode.remove();
                 }
 
-                const notificationId = payload.id ?? payload.notification_id;
+                const notificationId = payload.notification_id ?? payload.id;
                 const wrapper = document.createElement('form');
 
                 if (notificationId) {
@@ -391,7 +392,7 @@
 
                 wrapper.innerHTML =
                     (notificationId ? '<input type="hidden" name="_token" value="' + csrfToken + '">' : '') +
-                    '<button type="submit" class="w-full text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">' +
+                    '<button type="submit" class="cursor-pointer w-full text-left block p-4 hover:bg-gray-50 dark:hover:bg-slate-700 border-b border-gray-100 dark:border-slate-700">' +
                     '<div class="flex items-start gap-3">' +
                     '<div class="mt-0.5 w-5 text-center">' + notificationIconHtml(payload.type) + '</div>' +
                     '<div class="flex-1 min-w-0 text-start">' +
@@ -428,8 +429,15 @@
             ticketUpdatesChannel.subscribe('ticket-notification', (message) => {
                 const payload = message?.data || {};
 
+                if (payload.target_user_id && Number(payload.target_user_id) !== currentUserId) {
+                    return;
+                }
+
                 prependNotification(payload);
                 ensureBadge(true);
+                window.dispatchEvent(new CustomEvent('dashboard-notification-received', {
+                    detail: payload,
+                }));
             });
         })();
     });

@@ -260,7 +260,8 @@ class TicketController extends Controller
                     'photo' => checkExistFile($supportUser->photo) ? asset('storage/' . $supportUser->photo) : asset('assets/images/avatars/avatar.png'),
                 ],
                 'department' => $department ? [
-                    'name' => __('main.' . str_replace('-', '_', $department?->name ?? 'support')),
+                    'name' => $department?->name ?? 'support_',
+                    'name_ar' => $department?->name_ar ?? 'support_',
                     'bg_color' => $department->bg_color,
                     'border_color' => $department->border_color,
                     'border_main_color' => $department->border_main_color,

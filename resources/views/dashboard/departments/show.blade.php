@@ -18,11 +18,11 @@
                 </div>
             </div>
             <div class="flex items-center gap-2.5">
-                <a href="{{ route('dashboard.departments.edit', $department->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                <a href="{{ route('dashboard.departments.edit', $department->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                     <i class="ki-filled ki-pencil text-sm me-2"></i>
                     {{ __('main.edit') }}
                 </a>
-                <a href="{{ route('dashboard.departments.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.departments.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.departments')]) }}
                 </a>
             </div>
@@ -134,7 +134,7 @@
                         'id' => $department->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.departments.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.departments.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.departments')]) }}
                 </a>
             </div>

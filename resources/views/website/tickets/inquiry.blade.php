@@ -59,7 +59,7 @@
                                         </td>
                                         <td class="text-start p-4 text-sm text-gray-600">{{ $ticket->created_at?->format('d/m/Y') }}</td>
                                         <td class="text-start p-4 text-sm space-x-2 flex items-center gap-2">
-                                            <a href="{{ route('tickets.show', $ticket->uuid) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-orange-500 text-white font-semibold">
+                                            <a href="{{ route('tickets.show', $ticket->uuid) }}" class="kt-btn kt-btn-sm kt-btn-outline m-0 bg-orange-500 text-white font-semibold" toggle-button>
                                                 {{ __('main.open_') }}
                                             </a>
                                         </td>

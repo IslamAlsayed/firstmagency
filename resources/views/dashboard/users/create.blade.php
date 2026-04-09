@@ -8,7 +8,7 @@
 @endpush
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.users.store') ?? '#' }}" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-6 lg:gap-8">

@@ -4,7 +4,7 @@
 @section('page-title', '✏️ ' . __('main.edit_type', ['type' => __('main.programming_category')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.programming-categories.update', $programmingCategory->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')

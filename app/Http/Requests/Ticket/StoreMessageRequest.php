@@ -20,7 +20,7 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'your_reply' => 'required|string|min:5',
+            'your_reply' => 'required|string',
             'attachments' => 'nullable|array',
             'attachments.*' => 'file|mimes:jpeg,png,jpg,gif,webp,pdf,doc,docx|max:5120',
         ];

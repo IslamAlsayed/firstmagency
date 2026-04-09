@@ -4,7 +4,7 @@
 @section('page-title', '📦 ' . __('main.edit_type', ['type' => __('main.marketing_package')]))
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.marketing-packages.update', $marketingPackage->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -61,7 +61,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-4">
                         <h6 class="block text-sm font-medium text-gray-600">{{ __('main.features') }}</h6>
-                        <button type="button" id="addFeatureBtn" class="kt-btn kt-btn-sm kt-btn-outline-primary">
+                        <button type="button" id="addFeatureBtn" class="kt-btn kt-btn-sm kt-btn-outline-primary" toggle-button>
                             <i class="fas fa-plus mr-2"></i> {{ __('main.add_feature') }}
                         </button>
                     </div>
@@ -105,7 +105,7 @@
                 const featureHTML = `
                     <div class="feature-row border border-gray-200 rounded-lg p-4 bg-gray-50" data-index="${index}">
                         <div class="flex justify-end mb-2">
-                            <button type="button" class="remove-feature-btn kt-btn bg-danger text-sm">
+                            <button type="button" class="remove-feature-btn kt-btn bg-danger text-sm" toggle-button>
                                 <i class="fas fa-trash mr-1"></i> {{ __('main.remove') }}
                             </button>
                         </div>

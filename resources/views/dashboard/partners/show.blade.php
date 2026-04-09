@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('update', $partner)
-                    <a href="{{ route('dashboard.partners.edit', $partner->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.partners.edit', $partner->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.partners.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.partners.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.partners')]) }}
                 </a>
             </div>
@@ -177,7 +177,7 @@
                         'id' => $partner->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.partners.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.partners.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.partners')]) }}
                 </a>
             </div>

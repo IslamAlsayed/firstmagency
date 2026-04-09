@@ -9,7 +9,7 @@
             <h3 class="kt-card-title">{{ __('main.view_type', ['type' => __('main.work_us_step')]) }}</h3>
 
             <div class="flex gap-2">
-                <a href="{{ route('dashboard.work-us-step.edit', $workUsStep->id) }}" class="kt-btn kt-btn-outline-info">
+                <a href="{{ route('dashboard.work-us-step.edit', $workUsStep->id) }}" class="kt-btn kt-btn-outline-info" toggle-button>
                     {{ __('main.edit') }}
                 </a>
                 <a href="{{ route('dashboard.work-us-step.index') }}" class="kt-btn kt-btn-outline-primary" style="color: var(--text_color); background-color: var(--button_color);" toggle-button>

@@ -481,7 +481,7 @@
         @endif
 
         <!-- Settings -->
-        @if (auth()->user()->can('settings-read'))
+        @if (auth()->user()->can('settings-read') || auth()->user()->can('settings-inlinePadding') || auth()->user()->can('settings-website') || auth()->user()->can('settings-backupManagement'))
             <li class="relative group submenu-item" data-item-id="settings" title="{{ __('main.settings') }}">
                 <button type="button" data-toggle="submenu" data-label="{{ __('main.settings') }}"
                     class="submenu-btn nav-link w-full flex items-center justify-between cursor-pointer rounded-lg text-slate-300 group-hover:text-white group-hover {{ request()->routeIs('dashboard.settings.*', 'dashboard.settings.inline-padding', 'dashboard.settings.website') ? 'active' : '' }}">
@@ -493,7 +493,7 @@
                 </button>
                 <ul
                     class="submenu-list group-hover:block rounded-lg shadow-sm overflow-hidden {{ request()->routeIs('dashboard.settings.*', 'dashboard.settings.inline-padding', 'dashboard.settings.website') ? 'show' : '' }}">
-                    @if (auth()->user()->can('settings-read'))
+                    @if (auth()->user()->can('settings-read') || auth()->user()->can('settings-update'))
                         <li class="relative" data-sub-id="settings" title="{{ __('main.settings') }}">
                             <a href="{{ route('dashboard.settings.index') }}"
                                 class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.index') ? 'active' : '' }}">
@@ -502,7 +502,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (auth()->user()->can('inline-padding-update'))
+                    @if (auth()->user()->can('settings-inlinePadding'))
                         <li class="relative" data-sub-id="inline-padding" title="{{ __('main.inline_padding') }}">
                             <a href="{{ route('dashboard.settings.inline-padding') }}"
                                 class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.inline-padding') ? 'active' : '' }}">
@@ -511,7 +511,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (auth()->user()->can('website-update'))
+                    @if (auth()->user()->can('settings-website'))
                         <li class="relative" data-sub-id="website" title="{{ __('main.website') }}">
                             <a href="{{ route('dashboard.settings.website') }}"
                                 class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.website') ? 'active' : '' }}">
@@ -520,7 +520,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (auth()->user()->can('backup-management'))
+                    @if (auth()->user()->can('settings-backupManagement'))
                         <li class="relative" data-sub-id="backups" title="{{ __('main.backup_management') }}">
                             <a href="{{ route('dashboard.settings.backups') }}"
                                 class="nav-link flex items-center gap-3 text-slate-300 hover:text-white {{ request()->routeIs('dashboard.settings.backups') ? 'active' : '' }}">

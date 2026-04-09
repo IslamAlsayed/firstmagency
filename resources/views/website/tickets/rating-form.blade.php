@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ __('main.ticket_rating') }}</title>
-    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}"
-        rel="stylesheet">
+    <link href="{{ $settings->font_url ?? 'https://fonts.googleapis.com/css2?family=Tajawal:wght@100;200;300;400;500;600;700;800;900&display=swap' }}" rel="stylesheet">
     <style>
         :root {
             --font-family: "{{ $settings->font_name ?? 'Tajawal' }}", system-ui, -apple-system, Segoe UI, Aria !important;
@@ -278,7 +277,7 @@
 
                 <!-- Submit Button -->
                 <div class="form-actions">
-                    <button type="submit" class="kt-btn kt-btn-outline-primary rounded-full font-semibold" id="submitBtn" disabled>
+                    <button type="submit" class="kt-btn kt-btn-outline-primary rounded-full font-semibold" id="submitBtn" toggle-button disabled>
                         {{ __('main.submit_rating') ?? 'إرسال التقييم' }}
                     </button>
                 </div>

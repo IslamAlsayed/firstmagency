@@ -3,11 +3,11 @@
         <i class="fas fa-check text-sm me-2"></i>
         {{ __('main.save_type', ['type' => __('main.' . (isset($model) ? $model : singularLowerCaseName($models)))]) }}
     </button>
-    <button type="submit" name="save_and_add" value="1" class="kt-btn kt-btn-outline kt-btn-outline-primary">
+    <button type="submit" name="save_and_add" value="1" class="kt-btn kt-btn-outline kt-btn-outline-primary" toggle-button>
         <i class="fas fa-plus text-sm me-2"></i>
         {{ __('main.save_and_add_another') }}
     </button>
-    <a href="{{ route("$models.index") }}" class="kt-btn kt-btn-outline">
+    <a href="{{ route("$models.index") }}" class="kt-btn kt-btn-outline" toggle-button>
         {{ __('main.cancel') }}
     </a>
 </div>

@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('update', $whyUs)
-                    <a href="{{ route('dashboard.why-us.edit', $whyUs->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.why-us.edit', $whyUs->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.why-us.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.why-us.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_why_us') }}
                 </a>
             </div>
@@ -155,14 +155,14 @@
             <!-- Actions -->
             <div class="flex gap-3 mb-6">
                 @can('update', $whyUs)
-                    <a href="{{ route('dashboard.why-us.edit', $whyUs->id) }}" class="kt-btn kt-btn-primary hidden md:inline-flex">
+                    <a href="{{ route('dashboard.why-us.edit', $whyUs->id) }}" class="kt-btn kt-btn-primary hidden md:inline-flex" toggle-button>
                         <i class="ki-filled ki-pencil"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
 
                 @can('delete', $whyUs)
-                    <button type="button" class="kt-btn kt-btn-danger" onclick="confirmDelete('{{ route('dashboard.why-us.destroy', $whyUs->id) }}')">
+                    <button type="button" class="kt-btn kt-btn-danger" onclick="confirmDelete('{{ route('dashboard.why-us.destroy', $whyUs->id) }}')" toggle-button>
                         <i class="ki-filled ki-trash"></i>
                         {{ __('main.delete') }}
                     </button>

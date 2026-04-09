@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @if (getActiveUser()->can('update', $hostingPackage))
-                    <a href="{{ route('dashboard.hosting-packages.edit', $hostingPackage->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.hosting-packages.edit', $hostingPackage->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endif
-                <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.hosting_packages')]) }}
                 </a>
             </div>
@@ -212,7 +212,8 @@
                     ])
                 @endcan
                 @can('delete', $hostingPackage)
-                    <a href="{{ route('dashboard.deleteRecord', ['modelClass' => 'hosting-packages', 'id' => $hostingPackage->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white delete-btn">
+                    <a href="{{ route('dashboard.deleteRecord', ['modelClass' => 'hosting-packages', 'id' => $hostingPackage->id]) }}" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white delete-btn"
+                        toggle-button>
                         @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
                             {{ __('main.delete') }}
                         @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')
@@ -223,7 +224,7 @@
                         @endif
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.hosting-packages.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.hosting_packages')]) }}
                 </a>
             </div>

@@ -17,16 +17,16 @@
 
             <div class="flex items-center gap-2.5">
                 @can('update', $ticket)
-                    <a href="{{ route('dashboard.tickets.edit', $ticket->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.tickets.edit', $ticket->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-outline-primary"
-                    style="color: var(--text_color); background-color: var(--button_color);" toggle-button>
+                <a href="{{ route('dashboard.tickets.support-reply', ['ticketId' => $ticket->id]) }}" class="kt-btn kt-btn-outline-primary" toggle-button
+                    style="color: var(--text_color); background-color: var(--button_color);">
                     {{ __('main.chat') }}
                 </a>
-                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
                 </a>
             </div>
@@ -142,7 +142,7 @@
                                                     </div>
                                                 @endif
                                                 <div class="image-overlay">
-                                                    <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}" class="kt-btn kt-btn-sm kt-btn-primary">
+                                                    <a href="{{ $file ? asset('storage/' . $file) : '#' }}" download="{{ $file }}" toggle-button class="kt-btn kt-btn-sm kt-btn-primary">
                                                         <i class="fas fa-download text-sm me-1"></i>
                                                         <span>{{ __('main.download') }}</span>
                                                     </a>
@@ -175,7 +175,7 @@
                         'id' => $ticket->id,
                     ])
                 @endcan
-                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.tickets.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_types', ['types' => __('main.tickets')]) }}
                 </a>
             </div>

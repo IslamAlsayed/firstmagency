@@ -13,7 +13,7 @@
                 {{ __('main.about_us') }}
             </h1>
             @can('create', App\Models\AboutUs::class)
-                <a href="{{ route('dashboard.about-us.create') }}" class="kt-btn kt-btn-primary">
+                <a href="{{ route('dashboard.about-us.create') }}" class="kt-btn kt-btn-primary" toggle-button>
                     <i class="fas fa-plus"></i>
                     {{ __('main.create_about_us') }}
                 </a>

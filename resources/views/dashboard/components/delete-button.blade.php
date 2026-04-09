@@ -1,7 +1,7 @@
 <form method="POST" action="{{ route('dashboard.deleteRecord', [$model, $modelClass, $id]) }}" style="display:inline;">
     @csrf
     @method('DELETE')
-    <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white">
+    <button type="submit" class="kt-btn kt-btn-sm kt-btn-outline bg-danger text-white" toggle-button>
         @if (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'text')
             {{ __('main.delete') }}
         @elseif (isset(getActiveUser()->button_display_mode) && getActiveUser()->button_display_mode === 'icon')

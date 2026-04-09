@@ -16,12 +16,12 @@
             </div>
             <div class="flex items-center gap-2.5">
                 @can('update', $platformManagement)
-                    <a href="{{ route('dashboard.platform-management.edit', $platformManagement->id) }}" class="kt-btn kt-btn-primary md:hidden">
+                    <a href="{{ route('dashboard.platform-management.edit', $platformManagement->id) }}" class="kt-btn kt-btn-primary md:hidden" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>
                 @endcan
-                <a href="{{ route('dashboard.platform-management.index') }}" class="kt-btn kt-btn-outline">
+                <a href="{{ route('dashboard.platform-management.index') }}" class="kt-btn kt-btn-outline" toggle-button>
                     {{ __('main.back_to_platform_management') }}
                 </a>
             </div>
@@ -139,7 +139,7 @@
             <!-- Actions -->
             <div class="flex gap-3 mb-6">
                 @can('update', $platformManagement)
-                    <a href="{{ route('dashboard.platform-management.edit', $platformManagement->id) }}" class="kt-btn kt-btn-primary hidden md:flex">
+                    <a href="{{ route('dashboard.platform-management.edit', $platformManagement->id) }}" class="kt-btn kt-btn-primary hidden md:flex" toggle-button>
                         <i class="ki-filled ki-pencil text-sm me-2"></i>
                         {{ __('main.edit') }}
                     </a>

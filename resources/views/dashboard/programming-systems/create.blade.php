@@ -8,7 +8,7 @@
 @endpush
 
 @section('content')
-    <div class="shadow-lg radius-lg p-4">
+    <div class="shadow-lg radius-lg p-6">
         <form method="POST" action="{{ route('dashboard.programming-systems.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-4">
@@ -162,7 +162,7 @@
                         }
                         if (!el.classList.contains('ckeditor-initialized')) {
                             CKEDITOR.replace(el.id, {
-                                height: 500
+                                height: 300
                             });
                             el.classList.add('ckeditor-initialized');
                         }

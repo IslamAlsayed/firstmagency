@@ -63,7 +63,7 @@
                     </a>
                 @endcan
 
-                <a href="{{ route('dashboard.about-us.index') }}" class="kt-btn kt-btn-secondary">
+                <a href="{{ route('dashboard.about-us.index') }}" class="kt-btn kt-btn-secondary" toggle-button>
                     {{ __('main.back') }}
                 </a>
             </div>

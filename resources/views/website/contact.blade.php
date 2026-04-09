@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div class="add-attachment-input" id="add-attachment-btn" style="cursor: pointer;">
+                    <div class="add-attachment-input" id="add-attachment-btn" style="cursor: pointer;" toggle-button>
                         {{ __('main.contact_form_add_attachment') }}
                     </div>
                 </div>
