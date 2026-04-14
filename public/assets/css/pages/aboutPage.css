@@ -21,6 +21,18 @@
     & .steps {
         padding: 30px var(--about-us-line-works-steps-section-inline-padding);
 
+        /* & .step:nth(odd) {
+            & .text {
+                transform: translateX(140px);
+            }
+        }
+        
+        & .step:nth(even) {
+            & .text {
+                transform: translateX(-140px);
+            }
+        } */
+
         & .step {
             height: 430px;
             display: flex;
@@ -31,6 +43,16 @@
 
             &:nth-child(even) {
                 flex-direction: row-reverse;
+
+                & .text {
+                    transform: translateX(50px);
+                }
+            }
+
+            &:nth-child(odd) {
+                & .text {
+                    transform: translateX(-140px);
+                }
             }
 
             &:nth-child(3) {
@@ -331,15 +353,16 @@
 }
 
 .blog-show {
+    --side-width: 310px;
     gap: 20px;
     display: flex;
-    padding: 180px 30px 30px;
+    padding: 180px var(--blog-show-inline-padding) 30px;
     background-color: var(--blog-show-background-color);
     --border-radius: 15px;
 
     & .blog-content {
         padding: 20px;
-        width: calc(100% - 310px);
+        width: calc(100% - var(--side-width));
         /* border-radius: var(--border-radius, 15px); */
         background-color: var(--light-color);
         /* border: 1px solid var(--light-muted-color); */
@@ -353,7 +376,7 @@
     }
 
     & .side {
-        width: 310px;
+        width: var(--side-width);
         height: fit-content;
         border-radius: var(--border-radius, 15px);
         gap: 20px;
@@ -554,10 +577,9 @@
             height: fit-content;
             overflow: hidden;
             border-radius: var(--border-radius, 15px);
-            border: 1px solid var(--light-muted-color);
-            border: 1px solid rgba(17, 24, 39, 0.1);
             background-color: var(--light-color);
-            box-shadow: 0 10px calc(var(--fal-shadow) * 1px) rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(17, 24, 39, 0.1);
+            box-shadow: 0 10px calc(30 * 1px) rgba(0, 0, 0, 0.08);
             position: relative;
 
             & .image {

@@ -19,10 +19,10 @@ class UsersSeeder extends Seeder
 
         // Super Admin
         $superadmin = User::firstOrCreate(
-            ['email' => 'superadmin@live4.firstmagency.com'],
+            ['email' => 'info@firstmagency.com'],
             [
-                'name' => 'Super Admin',
-                'password' => 'superadminsystem',
+                'name' => 'Mohammed Fadl',
+                'password' => '12345678',
                 'email_verified_at' => now(),
                 'address' => fake()->address(),
                 'bio' => fake()->text(),
@@ -43,57 +43,57 @@ class UsersSeeder extends Seeder
         );
         $superadmin->assignRole('superadmin');
 
-        // Admin
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@live4.firstmagency.com'],
-            [
-                'name' => 'Admin',
-                'password' => 'adminsystem',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '2.png',
-                'role' => 'admin',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'inactive',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'ar',
-                'dashboard_locale' => 'en',
-            ]
-        );
-        $admin->assignRole('admin');
+        // // Admin
+        // $admin = User::firstOrCreate(
+        //     ['email' => 'admin@live4.firstmagency.com'],
+        //     [
+        //         'name' => 'Admin',
+        //         'password' => 'adminsystem',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '2.png',
+        //         'role' => 'admin',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'inactive',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'ar',
+        //         'dashboard_locale' => 'en',
+        //     ]
+        // );
+        // $admin->assignRole('admin');
 
-        // Content Manager
-        $content_manager = User::firstOrCreate(
-            ['email' => 'contentmanager@live4.firstmagency.com'],
-            [
-                'name' => 'Content Manager',
-                'password' => 'contentmanagersystem',
-                'email_verified_at' => now(),
-                'address' => fake()->address(),
-                'bio' => fake()->text(),
-                'mobile' => fake()->phoneNumber(),
-                'phone' => fake()->phoneNumber(),
-                'photo' => '6.png',
-                'role' => 'content_manager',
-                'last_login_ip' => null,
-                'last_login_at' => null,
-                'password_changed_at' => null,
-                'status' => 'inactive',
-                'is_active' => true,
-                'created_by' => null,
-                'updated_by' => null,
-                'website_locale' => 'ar',
-                'dashboard_locale' => 'ar',
-            ]
-        );
-        $content_manager->assignRole('content_manager');
+        // // Content Manager
+        // $content_manager = User::firstOrCreate(
+        //     ['email' => 'contentmanager@live4.firstmagency.com'],
+        //     [
+        //         'name' => 'Content Manager',
+        //         'password' => 'contentmanagersystem',
+        //         'email_verified_at' => now(),
+        //         'address' => fake()->address(),
+        //         'bio' => fake()->text(),
+        //         'mobile' => fake()->phoneNumber(),
+        //         'phone' => fake()->phoneNumber(),
+        //         'photo' => '6.png',
+        //         'role' => 'content_manager',
+        //         'last_login_ip' => null,
+        //         'last_login_at' => null,
+        //         'password_changed_at' => null,
+        //         'status' => 'inactive',
+        //         'is_active' => true,
+        //         'created_by' => null,
+        //         'updated_by' => null,
+        //         'website_locale' => 'ar',
+        //         'dashboard_locale' => 'ar',
+        //     ]
+        // );
+        // $content_manager->assignRole('content_manager');
 
         // Support - Technical Support
         // $support_technical = User::firstOrCreate(

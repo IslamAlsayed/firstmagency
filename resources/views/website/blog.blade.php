@@ -1,10 +1,21 @@
 @extends('layouts.master')
 
+@push('styles')
+    <style>
+        .articles-section {
+            background-color: var(--articles-background-color);
+            background-size: 5% auto;
+            background-image: url(/assets/images/website/reviews-bg.jpg);
+            transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="articles-page relative">
         <section class="articles-section">
             <div class="heading-title">
-                <div class="title font-semibold">مدونة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
+                <div class="title font-semibold" style="margin-bottom:80px">مدونة <span class="title-badge">{{ __('main.brand_name') }}</span></div>
                 <div class="description"></div>
             </div>
 
@@ -153,7 +164,7 @@
         </section>
 
         @if (isDebugModeEnabled())
-            <div class="debug-flag-badge">🚩 flag-articles</div>
+            <div class="debug-flag-badge">🚩 flag-articles-page</div>
         @endif
     </div>
 @endsection

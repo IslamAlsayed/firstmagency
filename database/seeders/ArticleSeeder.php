@@ -20,14 +20,13 @@ class ArticleSeeder extends Seeder
         Article::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $categories = ProgrammingCategory::all();
         $user = User::where('email', 'content@firstmagency.com')->first() ?? User::first();
 
         if (!$user) return; // لا توجد مستخدمين
 
         $articlesData = [
             [
-                'category' => 'التسويق الرقمي',
+                'category_id' => 6,
                 'ar' => [
                     'title' => 'إعلانات ممولة في مصر',
                     'description' => 'شركة إعلانات ممولة في مصر لماذا تحتاج شركة إعلانات ممولة…',
@@ -44,7 +43,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'استضافة وسيرفرات',
+                'category_id' => 5,
                 'ar' => [
                     'title' => 'استضافة مواقع في مصر',
                     'description' => 'شركة استضافة مواقع في مصر توفر خدمات استضافة عالية الجودة…',
@@ -61,7 +60,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'تطوير الويب',
+                'category_id' => 1,
                 'ar' => [
                     'title' => 'البرمجة في فرست ماركتينج في 2025',
                     'description' => 'البرمجة في فرست ماركتينج تُعد البرمجة جزءًا أساسيًا…',
@@ -78,7 +77,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'التسويق الرقمي',
+                'category_id' => 6,
                 'ar' => [
                     'title' => 'تسويق الكتروني في مصر 2025',
                     'description' => 'شركة تسويق الكتروني في مصر 2025 التسويق الإلكتروني…',
@@ -95,7 +94,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'تطوير الويب',
+                'category_id' => 1,
                 'ar' => [
                     'title' => 'شركة تصميم مواقع',
                     'description' => 'هل تبحث عن شركة تصميم مواقع احترافية…',
@@ -112,7 +111,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'تحسين محركات البحث',
+                'category_id' => 5,
                 'ar' => [
                     'title' => 'كيفية تحسين ترتيب موقعك في محركات البحث',
                     'description' => 'تعرف على أفضل طرق تحسين ترتيب موقعك…',
@@ -129,7 +128,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'الأمان السيبراني',
+                'category_id' => 6,
                 'ar' => [
                     'title' => 'حماية موقعك من الهجمات السيبرانية',
                     'description' => 'نصائح أمان مهمة لحماية موقعك…',
@@ -146,7 +145,7 @@ class ArticleSeeder extends Seeder
                 ],
             ],
             [
-                'category' => 'تطوير التطبيقات',
+                'category_id' => 4,
                 'ar' => [
                     'title' => 'تطوير تطبيقات موبايل احترافية',
                     'description' => 'خطوات تطوير تطبيق موبايل ناجح…',
@@ -164,8 +163,9 @@ class ArticleSeeder extends Seeder
             ],
         ];
 
+        $categories = ProgrammingCategory::all();
         foreach ($articlesData as $data) {
-            $category = $categories->firstWhere('name', $data['category']) ?? $categories->first();
+            $category = $categories->where('id', $data['category_id'])->first() ?? null;
 
             Article::create([
                 'slug' => Str::slug($data['ar']['title']),
@@ -176,7 +176,7 @@ class ArticleSeeder extends Seeder
                     'en' => $data['en'],
                 ],
                 'status' => 'published',
-                'is_active' => true,
+                'is_active' => 1,
                 'visitors' => rand(10, 500),
                 'view_count' => rand(10, 500),
                 'likes_count' => rand(0, 100),

@@ -4,6 +4,7 @@
     <div class="our-services-wrapper">
         <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="15" slides-per-view="5"
             breakpoints='{"320": {"slidesPerView": 1, "spaceBetween": 10}, "640": {"slidesPerView": 2, "spaceBetween": 15}, "1024": {"slidesPerView": 3, "spaceBetween": 15}, "1400": {"slidesPerView": 5, "spaceBetween": 15}}'>
+            {{-- @dd($services->toArray()) --}}
             @if ($services && count($services) > 0)
                 @foreach ($services as $service)
                     <swiper-slide class="service-item">
@@ -21,7 +22,18 @@
                         </div>
                         <div class="service-action">
                             <button class="btn-link main-color font-semibold">
-                                <a href="{{ route('services.marketing') }}">
+                                <a
+                                    href="{{ str_contains($service['slug'], 'mobile') || str_contains($service['slug'], 'app')
+                                        ? route('app.mobile')
+                                        : (str_contains($service['slug'], 'marketing')
+                                            ? route('services.marketing')
+                                            : (str_contains($service['slug'], 'hosting')
+                                                ? route('hosting')
+                                                : (str_contains($service['slug'], 'domain')
+                                                    ? route('domains')
+                                                    : (str_contains($service['slug'], 'web')
+                                                        ? route('website.developer')
+                                                        : '#')))) }}">
                                     {{ __('main.request_now') }}
                                     <i class="icon fa-solid fa-square-arrow-up-right"></i>
                                 </a>

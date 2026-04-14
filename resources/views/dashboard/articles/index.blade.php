@@ -86,6 +86,7 @@
                             <tr>
                                 <th>{{ __('main.image') }}</th>
                                 <th>{{ __('main.title') }}</th>
+                                <th>{{ __('main.category') }}</th>
                                 <th>{{ __('main.active') }}</th>
                                 <th>{{ __('main.status') }}</th>
                                 <th>{{ __('main.views') }}</th>
@@ -111,7 +112,11 @@
                                         <strong class="entity-primary-text block">
                                             {{ limitedText($article->translations[app()->getLocale()]['title'] ?? '', 50) }}
                                         </strong>
-                                        <span class="entity-secondary-text">{{ __('main.article') }} #{{ $article->id }}</span>
+                                    </td>
+                                    <td>
+                                        <strong class="entity-primary-text block">
+                                            {{ limitedText(app()->getLocale() == 'ar' ? $article->category->name_ar : $article->category->name ?? ('null' ?? ''), 50) }}
+                                        </strong>
                                     </td>
                                     <td>
                                         @include('dashboard.components.toggle-hold', [

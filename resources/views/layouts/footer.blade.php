@@ -1,4 +1,6 @@
 <footer class="footer">
+    {{-- <div class="custom-container"></div> --}}
+
     <div class="inner">
         <div class="footer-header flex items-center justify-between gap-4">
             <div class="description">
@@ -26,7 +28,7 @@
 
         <div class="footer-body flex items-end justify-between gap-4">
             <div class="child">
-                <div class="title font-semibold">{{ __('main.footer_offer_new') }}</div>
+                <div class="title font-semibold mb-2">{{ __('main.footer_offer_new') }}</div>
                 <div class="flex items-center gap-4 mb-4">
                     <div class="image">
                         <img src="{{ asset('assets/images/website/google-map.png') }}" alt="">
@@ -72,14 +74,14 @@
                 </ul>
             </div>
         </div>
+    </div>
 
-        <div class="footer-footer flex items-center justify-between gap-4">
-            <div class="description font-semibold">
-                {{ __('main.footer_copyright') }}
-            </div>
-            <div class="payments">
-                <img src="{{ asset('assets/images/website/payments.png') }}" alt="{{ __('main.payments_methods') }}">
-            </div>
+    <div class="footer-footer flex items-center justify-between gap-4">
+        <div class="description font-semibold">
+            {{ __('main.footer_copyright') }}
+        </div>
+        <div class="payments">
+            <img src="{{ asset('assets/images/website/payments.png') }}" alt="{{ __('main.payments_methods') }}">
         </div>
     </div>
 </footer>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="app-developer">
+    <div class="app-developer website-developer">
         {{-- App Developer Section --}}
         @include('sections.app-developer')
 
@@ -25,6 +25,15 @@
                 'desc' => __('main.important_articles_description'),
             ])
         @endif
+
+        {{-- Important Articles Section --}}
+        {{-- @if (isset($data['articles']) && count($data['articles']) > 0)
+            @include('sections.important-articles', [
+                'articles' => $data['articles'] ?? [],
+                'title' => __('main.important_articles_title'),
+                'desc' => __('main.important_articles_description'),
+            ])
+        @endif --}}
     </div>
 @endsection
 

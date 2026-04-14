@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', __('main.about_us'))
+
 @section('content')
     {{-- About Section --}}
     @include('sections.about-us')

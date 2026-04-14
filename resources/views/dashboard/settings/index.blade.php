@@ -149,7 +149,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-gray-600 mb-2">{{ __('main.cache_time') }}</label>
+                                <label class="block text-sm font-semibold text-gray-600 mb-2">{{ __('main.cache_time') }} ({{ __('main.seconds') }})</label>
                                 <input type="number" name="cache_time" min="60" step="60"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
                                     value="{{ $settings->cache_time ?? config('app.cache_time') }}">

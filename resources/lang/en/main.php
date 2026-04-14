@@ -2094,6 +2094,7 @@ return [
     'fixed_support_direct_call' => 'Direct Call',
     'fixed_support_manage_account' => 'Open and Manage Your Account',
     'fixed_support_remaining_time' => 'Remaining time',
+    'fixed_support_out_of_hours' => 'Our support team is currently out of office.',
 
     // ==================== Ticket Assignment ====================
     'ticket_assigned_to_department' => 'New Ticket Assigned to Department: :subject',

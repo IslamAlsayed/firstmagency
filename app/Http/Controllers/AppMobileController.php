@@ -21,9 +21,7 @@ class AppMobileController extends Controller
                 return ProjectStep::ordered()->get();
             }),
 
-            'articles' => Cache::remember('app_mobile_articles', config('app.cache_time'), function () {
-                return Article::active()->forAppMobiles()->limit(4)->get();
-            }),
+            'articles' => Article::active()->published()->forAppMobiles()->limit(4)->get(),
 
             'faqs' => Cache::remember('app_mobile_faqs', config('app.cache_time'), function () {
                 return FAQ::active()->apps()->get();

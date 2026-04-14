@@ -45,8 +45,58 @@
                     </div>
                 </div>
 
+                <!-- English Tab Content -->
+                <div class="language-content" data-lang="en">
+
+                    <div class="grid gap-4">
+                        <div>
+                            <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
+                                value="{{ old('title_en', $article->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
+                            @error('title_en')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-6">
+                            @include('dashboard.components.input-text-editor', [
+                                'name' => 'description_en',
+                                'value' => old('description_en', $article->translations['en']['description'] ?? ''),
+                                'placeholder' => 'Enter description in English',
+                            ])
+
+                            @include('dashboard.components.input-text-editor', [
+                                'name' => 'content_en',
+                                'value' => old('content_en', $article->translations['en']['content'] ?? ''),
+                                'placeholder' => 'Enter content in English',
+                            ])
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="keywords_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_en') }}</label>
+                                <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container"
+                                    value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}" placeholder="word">
+                                @error('keywords_en')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="meta_description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_en"
+                                    name="meta_description_en" value="{{ old('meta_description_en', $article->translations['en']['meta_description'] ?? '') }}" maxlength="300"
+                                    placeholder="Meta description in English">
+                                @error('meta_description_en')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Arabic Tab Content -->
-                <div class="language-content" data-lang="ar">
+                <div class="language-content hidden" data-lang="ar">
 
                     <div class="grid gap-4">
                         <div>
@@ -90,56 +140,6 @@
                                     name="meta_description_ar" value="{{ old('meta_description_ar', $article->translations['ar']['meta_description'] ?? '') }}" maxlength="300"
                                     placeholder="وصف الميتا بالعربية">
                                 @error('meta_description_ar')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- English Tab Content -->
-                <div class="language-content hidden" data-lang="en">
-
-                    <div class="grid gap-4">
-                        <div>
-                            <label for="title_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.title_en') }}</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="title_en" name="title_en"
-                                value="{{ old('title_en', $article->translations['en']['title'] ?? '') }}" placeholder="Enter title in English">
-                            @error('title_en')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="grid grid-cols-1 gap-6">
-                            @include('dashboard.components.input-text-editor', [
-                                'name' => 'description_en',
-                                'value' => old('description_en', $article->translations['en']['description'] ?? ''),
-                                'placeholder' => 'Enter description in English',
-                            ])
-
-                            @include('dashboard.components.input-text-editor', [
-                                'name' => 'content_en',
-                                'value' => old('content_en', $article->translations['en']['content'] ?? ''),
-                                'placeholder' => 'Enter content in English',
-                            ])
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="keywords_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.keywords_en') }}</label>
-                                <input type="text" name="keywords_en" id="keywords_en" class="kt-input h-fit tagify-container"
-                                    value="{{ old('keywords_en', $article->translations['en']['keywords'] ?? '') }}" placeholder="word">
-                                @error('keywords_en')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="meta_description_en" class="block text-sm font-medium text-gray-600 mb-1">{{ __('main.meta_description_en') }}</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500" id="meta_description_en"
-                                    name="meta_description_en" value="{{ old('meta_description_en', $article->translations['en']['meta_description'] ?? '') }}" maxlength="300"
-                                    placeholder="Meta description in English">
-                                @error('meta_description_en')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>

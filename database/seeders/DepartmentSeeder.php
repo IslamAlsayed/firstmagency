@@ -19,23 +19,23 @@ class DepartmentSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         // Get users (they must exist from UsersSeeder)
-        $superadmin = User::where('email', 'superadmin@live4.firstmagency.com')->first();
-        $admin = User::where('email', 'admin@live4.firstmagency.com')->first();
-        $contentManager = User::where('email', 'contentmanager@live4.firstmagency.com')->first();
+        $superadmin = User::where('email', 'info@firstmagency.com')->first();
+        // $admin = User::where('email', 'admin@live4.firstmagency.com')->first();
+        // $contentManager = User::where('email', 'contentmanager@live4.firstmagency.com')->first();
 
-        $adminUser = User::where('email', 'admin@firstmagency.com')->first() ?? User::first();
-        if (!$adminUser) return;
+        // $adminUser = User::where('email', 'admin@firstmagency.com')->first() ?? User::first();
+        // if (!$superadmin) return;
 
         $departments = [
-            [
-                'name' => 'Technical Support',
-                'name_ar' => 'الدعم الفني',
-                'user_id' => $superadmin->id,
-                'bg_color' => '#eff6ff',
-                'border_color' => '#bedbff',
-                'border_main_color' => '#155dfb',
-                'badge_color' => '#155dfb',
-            ],
+            // [
+            //     'name' => 'Technical Support',
+            //     'name_ar' => 'الدعم الفني',
+            //     'user_id' => $superadmin->id,
+            //     'bg_color' => '#eff6ff',
+            //     'border_color' => '#bedbff',
+            //     'border_main_color' => '#155dfb',
+            //     'badge_color' => '#155dfb',
+            // ],
             // [
             //     'name' => 'sales',
             //     'name_ar' => 'المبيعات',
@@ -65,8 +65,8 @@ class DepartmentSeeder extends Seeder
             // ],
         ];
 
-        foreach ($departments as $department) {
-            Department::create([...$department]);
-        }
+        // foreach ($departments as $department) {
+        //     Department::create([...$department]);
+        // }
     }
 }

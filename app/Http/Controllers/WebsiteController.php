@@ -19,9 +19,7 @@ class WebsiteController extends Controller
                 return ProgrammingSystem::active()->orderBy('order')->get();
             }),
 
-            'articles' => Cache::remember('home_articles', config('app.cache_time'), function () {
-                return Article::active()->forWebsites()->limit(4)->get();
-            }),
+            'articles' => Article::active()->published()->forWebsites()->limit(4)->get(),
 
             'website_design' => Cache::remember('website_design_stats', config('app.cache_time'), function () {
                 return [

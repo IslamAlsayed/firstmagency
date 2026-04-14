@@ -2,7 +2,7 @@
     overflow: hidden;
 
     .your-domain-section {
-        height: 100svh;
+        height: 85svh;
         text-align: center;
         padding: 150px var(--your-domain-section-inline-padding) 0;
         position: relative;
@@ -158,6 +158,12 @@
         .title {
             font-size: 48px;
             font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .description {
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .content {
@@ -224,7 +230,6 @@
 
             &:hover {
                 transform: translateY(-3px);
-                border-color: var(--light-main-color);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         }
@@ -402,7 +407,7 @@
             background:
                 radial-gradient(
                     circle at 15% 15%,
-                    rgba(146, 149, 255, 0.18),
+                    rgba(212, 213, 255, 0.18),
                     transparent 55%
                 ),
                 radial-gradient(
@@ -466,7 +471,7 @@
             top: 0;
             right: 0;
             opacity: 0.15;
-            background-image: url(assets/images/website/payments/bg.png);
+            background-image: url(../../images/website/payments/bg.png);
             background-position: right;
             background-size: cover;
             background-repeat: no-repeat;
@@ -493,10 +498,6 @@
             transform: scale(1.05);
             box-shadow: 0 0 0 3px #f9741630;
 
-            img {
-                filter: grayscale(100%) brightness(1.2);
-            }
-
             .payment-label {
                 display: block;
             }
@@ -508,6 +509,7 @@
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid var(--light-muted-color);
+            transition: all 0.3s ease;
             position: relative;
 
             .payment-label {
@@ -529,6 +531,32 @@
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
+            }
+
+            &::after {
+                content: "";
+                width: 100%;
+                height: 200%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                opacity: 0;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    var(--light-color) 50%,
+                    transparent 100%
+                );
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                pointer-events: none;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+
+                &::after {
+                    animation: shineLogo 1s ease-in-out forwards;
+                }
             }
         }
     }

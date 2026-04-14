@@ -41,11 +41,11 @@ class ProjectStepSeeder extends Seeder
             ],
             [
                 'translations_ar' => [
-                    'title' => 'التصميم والنموذج الأولي',
+                    'title' => 'التصميم',
                     'content' => 'يصمم فريقنا الإبداعي واجهات جميلة وسهلة الاستخدام. نقوم بإنشاء نماذج أولية تفاعلية لمراجعتك وملاحظاتك قبل بدء التطوير.',
                 ],
                 'translations_en' => [
-                    'title' => 'Design & Prototyping',
+                    'title' => 'Design',
                     'content' => 'Our creative designers craft beautiful and intuitive interface designs. We create interactive prototypes for your review and feedback before development begins.',
                 ],
                 'icon' => 'fas fa-pencil-ruler',

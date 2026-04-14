@@ -183,23 +183,32 @@
                                     class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->sections_padding['portfolio_section'] ?? '200' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-articles">
+                            <div class="inline-padding-section" data-section="flag-articles-page">
                                 <label for="blog-articles-section" class="flag-text flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">
-                                    <span>flag-articles</span>
+                                    <span>flag-articles-page</span>
                                     <span class="text-blue-600">(px)</span>
                                 </label>
                                 <input type="number" minLength="1" id="blog-articles-section" name="sections_padding[blog_articles_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="60" value="{{ $settings->sections_padding['blog_articles_section'] ?? '60' }}">
                             </div>
-                            <div class="inline-padding-section" data-section="flag-articles-page">
+                            <div class="inline-padding-section" data-section="flag-articles">
                                 <label for="articles-page-section" class="flag-text flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">
-                                    <span>flag-articles-page</span>
+                                    <span>flag-articles</span>
                                     <span>(px)</span>
                                 </label>
                                 <input type="number" minLength="1" id="articles-page-section" name="sections_padding[articles_page_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->sections_padding['articles_page_section'] ?? '200' }}">
+                            </div>
+                            <div class="inline-padding-section" data-section="flag-blog-show">
+                                <label for="blog-show-section" class="flag-text flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">
+                                    <span>flag-blog-show</span>
+                                    <span>(px)</span>
+                                </label>
+                                <input type="number" minLength="1" id="blog-show-section" name="sections_padding[blog_show_section]"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
+                                    placeholder="120" value="{{ $settings->sections_padding['blog_show_section'] ?? '120' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-tickets">
                                 <label for="tickets-page" class="flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">
@@ -281,15 +290,6 @@
                                 <input type="number" minLength="1" id="categories-programming-section" name="sections_padding[categories_programming_section]"
                                     class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
                                     placeholder="200" value="{{ $settings->sections_padding['categories_programming_section'] ?? '200' }}">
-                            </div>
-                            <div class="inline-padding-section" data-section="flag-projects-steps">
-                                <label for="projects-steps-section" class="flag-text flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">
-                                    <span>flag-projects-steps</span>
-                                    <span class="text-blue-600">(px)</span>
-                                </label>
-                                <input type="number" minLength="1" id="projects-steps-section" name="sections_padding[projects_steps_section]"
-                                    class="w-full px-4 py-3 border-2 border-gray-300 radius-lg focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent background text-gray-600 font-medium shadow-sm"
-                                    placeholder="60" value="{{ $settings->sections_padding['projects_steps_section'] ?? '60' }}">
                             </div>
                             <div class="inline-padding-section" data-section="flag-hosting-hero">
                                 <label for="hosting-hero-section" class="flag-text flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 mb-1">

@@ -1,68 +1,77 @@
 @extends('layouts.master')
 
 @push('styles')
-    .system-article {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #374151;
+    <style>
+        .system-article {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-    margin: 20px 0 10px 0;
-    font-weight: 800;
-    color: #1f2937;
-    }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 20px 0 10px 0;
+                font-weight: 800;
+                color: #1f2937;
+            }
 
-    h1 {
-    font-size: 28px;
-    }
+            h1 {
+                font-size: 28px;
+            }
 
-    h2 {
-    font-size: 24px;
-    }
+            h2 {
+                font-size: 24px;
+            }
 
-    h3 {
-    font-size: 20px;
-    }
+            h3 {
+                font-size: 20px;
+            }
 
-    p {
-    margin: 10px 0;
-    }
+            p {
+                margin: 10px 0;
+            }
 
-    ul,
-    ol {
-    margin: 15px 0;
-    padding-right: 30px;
-    }
+            ul,
+            ol {
+                margin: 15px 0;
+                padding-right: 30px;
+            }
 
-    li {
-    margin: 8px 0;
-    }
+            li {
+                margin: 8px 0;
+            }
 
-    a {
-    color: #ff7a00;
-    text-decoration: none;
+            a {
+                color: #ff7a00;
+                text-decoration: none;
 
-    &:hover {
-    text-decoration: underline;
-    }
-    }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
 
-    strong {
-    font-weight: 800;
-    color: #1f2937;
-    }
+            strong {
+                font-weight: 800;
+                color: #1f2937;
+            }
 
-    br {
-    display: block;
-    content: "";
-    margin: 10px 0;
-    }
-    }
+            br {
+                display: block;
+                content: "";
+                margin: 10px 0;
+            }
+        }
+
+        .blog-show {
+            background-color: var(--articles-background-color);
+            background-size: 5% auto;
+            background-image: url(/assets/images/website/reviews-bg.jpg);
+            transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+        }
+    </style>
 @endpush
 
 @if ($article instanceof \App\Models\Article)
@@ -285,4 +294,18 @@
             @endif
         </aside>
     </div>
+
+    @if (isDebugModeEnabled())
+        <div class="debug-flag-badge">🚩 flag-blog-show</div>
+    @endif
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            header.setAttribute('data-force-scrolled', 'true');
+            header.classList.add('scrolled');
+        });
+    </script>
+@endpush

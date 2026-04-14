@@ -10,9 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Cache::remember('home_articles', config('app.cache_time'), function () {
-            return Article::active()->published()->get();
-        });
+        $articles = Article::active()->published()->get();
         return view('website.blog', compact('articles'));
     }
 

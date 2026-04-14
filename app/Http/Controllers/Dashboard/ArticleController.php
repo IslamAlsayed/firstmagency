@@ -21,9 +21,9 @@ class ArticleController extends Controller
         $this->authorize('viewAny', Article::class);
         $isAdmin = in_array(getActiveUser()->role, ['admin', 'superadmin']);
 
-        $articles = Article::select(['id', 'category_id', 'created_by', 'status', 'created_at', 'updated_at', 'deleted_at'])->with(['category', 'creator']);
+        $articles = Article::with(['category', 'creator']);
         if (!$isAdmin) {
-            $articles = $articles->published();
+            $articles = $articles->published()->active();
         }
 
         $articles = $articles->latest()->paginate(15);

@@ -167,7 +167,8 @@ class DepartmentController extends Controller
             'status_label' => __('main.' . str_replace('-', '_', str_replace(' ', '_', $departmentName)), [], getActiveUser()->website_locale),
             'department' => $newDepartment ? [
                 'id' => $newDepartment->id,
-                'name' => $newDepartment->name,
+                'name' => $newDepartment?->name ?? 'support_',
+                'name_ar' => $newDepartment?->name_ar ?? 'support_',
                 'bg_color' => $newDepartment->border_main_color,
             ] : null,
         ]);

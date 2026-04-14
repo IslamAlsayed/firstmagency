@@ -59,11 +59,12 @@
                     <div class="flex flex-col gap-1 stagger-in">
                         <label class="kt-form-label font-normal text-mono mb-1">{{ __('auth.email_label') }}</label>
                         <input class="kt-input h-[48px] login-input" placeholder="e@e.com" type="email" name="email" value="{{ old('email') }}" list="emails" />
-                        {{-- <datalist id="emails">
-                            @foreach (\App\Models\User::get('email') as $email)
-                                <option value="{{ $email->email }}">
-                            @endforeach
-                        </datalist> --}}
+                        <datalist id="emails">
+                            <option value="info@firstmagency.com">
+                                {{-- @foreach (\App\Models\User::get('email') as $email) --}}
+                                {{-- <option value="{{ $email->email }}"> --}}
+                                {{-- @endforeach --}}
+                        </datalist>
                     </div>
 
                     <div class="flex flex-col gap-1 stagger-in">

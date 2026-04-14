@@ -11,7 +11,7 @@
 }
 
 .project-steps .section-subtitle {
-    margin-bottom: 70px;
+    margin-bottom: 10px;
     color: var(--muted-color);
 }
 
@@ -23,7 +23,7 @@
 
     /* line in center from top to bottom */
     &:before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 50%;
@@ -39,39 +39,39 @@
     gap: 10px;
     margin-bottom: 50px;
 
-    &>div:nth-child(2) {
+    & > div:nth-child(2) {
         width: auto;
         min-width: 150px;
         justify-items: center;
     }
 
-    &>div>div {
+    & > div > div {
         width: fit-content;
         text-align: center;
     }
 
-    &>div:first-child,
-    &>div:last-child {
+    & > div:first-child,
+    & > div:last-child {
         width: 40%;
     }
 
-    &>div:first-child {
+    & > div:first-child {
         text-align: end;
     }
 }
 
 .timeline .timeline-item .step-label .label {
-    width: 80%;
+    width: 64%;
     padding: 15px;
     font-size: 24px;
     border-radius: 12px;
     text-wrap: nowrap;
-    box-shadow: 0 10px 26px rgba(244, 180, 42, .28);
+    box-shadow: 0 10px 26px rgba(244, 180, 42, 0.28);
     position: relative;
     z-index: 10;
 
     &:before {
-        content: '';
+        content: "";
         width: 100%;
         height: 100%;
         position: absolute;
@@ -85,7 +85,7 @@
     }
 
     &:after {
-        content: '';
+        content: "";
         width: 30px;
         height: 30px;
         position: absolute;
@@ -134,7 +134,7 @@
     }
 }
 
-html[lang=en] {
+html[lang="en"] {
     .timeline .timeline-item .step-label .label {
         &:after {
             right: auto;
@@ -186,12 +186,12 @@ html[lang=en] {
 
 .timeline .timeline-item .timeline-content {
     padding: 15px;
-    font-size: 22px;
+    font-size: 15px;
     line-height: 1.8;
     border-radius: 20px;
     text-align: start;
     background: var(--light-color);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, .08);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 }
 
 .timeline .timeline-item .timeline-icon {
@@ -214,7 +214,7 @@ html[lang=en] {
     }
 
     &:before {
-        content: '';
+        content: "";
         width: calc(100% - 30px);
         height: calc(100% - 30px);
         position: absolute;
@@ -225,11 +225,11 @@ html[lang=en] {
         border-radius: inherit;
         transform: translate(-50%, -50%);
         background: var(--bg-text);
-        box-shadow: 0 10px 26px rgba(0, 0, 0, .08);
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
     }
 
     &:after {
-        content: '';
+        content: "";
         width: calc(100% + 15px);
         height: calc(100% + 15px);
         position: absolute;
@@ -241,12 +241,12 @@ html[lang=en] {
         transform: translate(-50%, -50%);
         border-style: solid;
         border-width: 7px;
-        border-color: var(--orange-color) var(--orange-color) transparent transparent;
+        border-color: var(--orange-color) var(--orange-color) transparent
+            transparent;
     }
 }
 
 .timeline .timeline-item:hover .timeline-icon {
-
     & i,
     & svg {
         animation: scale 1s linear infinite;
@@ -281,7 +281,7 @@ html[lang=en] {
     }
 }
 
-@media(max-width: 1440px) {
+@media (max-width: 1440px) {
     .timeline {
         width: 90%;
     }
@@ -301,19 +301,19 @@ html[lang=en] {
     }
 }
 
-@media(max-width: 1180px) {
+@media (max-width: 1180px) {
     .timeline {
         width: 100%;
     }
 }
 
-@media(max-width: 1080px) {
+@media (max-width: 1080px) {
     .timeline .timeline-item .step-label .label {
         width: 300px;
     }
 }
 
-@media(max-width: 992px) {
+@media (max-width: 992px) {
     .timeline {
         padding-inline: var(--main-inline-padding);
     }
@@ -340,8 +340,8 @@ html[lang=en] {
         position: relative;
         z-index: 56;
 
-        &>div:first-child,
-        &>div:last-child {
+        & > div:first-child,
+        & > div:last-child {
             width: 100%;
         }
     }
@@ -366,7 +366,7 @@ html[lang=en] {
     }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     .project-steps {
         padding: 100px var(--inline-padding);
     }
@@ -400,16 +400,16 @@ html[lang=en] {
     }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     .timeline {
         padding-inline: 0;
     }
 
     .faqs-section {
-        &>.title {
+        & > .title {
             font-size: 18px;
 
-            &>.title-badge {
+            & > .title-badge {
                 padding: 1px 15px;
 
                 &::before {
@@ -420,7 +420,7 @@ html[lang=en] {
     }
 }
 
-@media(max-width: 425px) {
+@media (max-width: 425px) {
     .project-steps {
         padding: 50px var(--inline-padding);
     }
@@ -464,17 +464,17 @@ html[lang=en] {
     }
 
     .timeline .timeline-item {
-        &>div:first-child {
+        & > div:first-child {
             margin-block: 10px;
         }
 
-        &>div:nth-child(2) {
+        & > div:nth-child(2) {
             order: -1;
         }
     }
 
     .faqs-section {
-        &>.title {
+        & > .title {
             font-size: 12px;
         }
     }

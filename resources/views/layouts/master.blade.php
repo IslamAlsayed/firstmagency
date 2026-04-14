@@ -81,7 +81,8 @@
             </div>
             <div class="fixed-support-footer flex items-center justify-between gap-4">
                 <span id="remaining-time">{{ __('main.fixed_support_remaining_time') }}: 00:00</span>
-                <span class="status"></span>
+                <span class="status" id="status"></span>
+                <span class="fas fa-lock" id="faLock"></span>
             </div>
         </div>
     </div>

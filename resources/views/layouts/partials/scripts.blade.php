@@ -26,6 +26,10 @@
 
     function calculateRemainingTime() {
         if (!endWorkTime) return;
+        let remainingTimeElement = document.getElementById('remaining-time');
+        let status = document.getElementById('status');
+        let faLock = document.getElementById('faLock');
+        if (!remainingTimeElement) return;
 
         const now = new Date();
         const [hours, minutes] = endWorkTime.split(':').map(Number);
@@ -35,18 +39,29 @@
 
         // If end time has passed today, don't show negative time
         if (now > endTime) {
-            document.getElementById('remaining-time').textContent =
-                '{{ __('main.fixed_support_remaining_time') }}: 00:00';
+            remainingTimeElement.parentElement.classList.remove('green');
+            remainingTimeElement.parentElement.classList.add('gray');
+            remainingTimeElement.textContent = '{{ __('main.fixed_support_out_of_hours') }}';
+
+            if (status)
+                status.style.display = 'none';
+            if (faLock)
+                faLock.style.display = 'block';
             return;
+        } else {
+            remainingTimeElement.parentElement.classList.remove('gray');
+            remainingTimeElement.parentElement.classList.add('green');
+            if (status)
+                status.style.display = 'block';
+            if (faLock)
+                faLock.style.display = 'none';
         }
 
         const diff = endTime - now;
         const remainingHours = Math.floor(diff / (1000 * 60 * 60));
         const remainingMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
         const timeString = `${String(remainingHours).padStart(2, '0')}:${String(remainingMinutes).padStart(2, '0')}`;
-        document.getElementById('remaining-time').textContent =
-            '{{ __('main.fixed_support_remaining_time') }}: ' + timeString;
+        remainingTimeElement.textContent = '{{ __('main.fixed_support_remaining_time') }}: ' + timeString;
     }
 
     // تحديث الوقت كل ثانية

@@ -205,7 +205,7 @@ return [
 
     // ==================== Navigation ====================
     'home' => 'الرئيسية',
-    'about_us' => 'عن الشركة',
+    'about_us' => 'من نحن',
     'portfolio' => 'المشاريع',
     'our_works' => 'سابقة اعمالنا',
     'our_services' => 'خدماتنا',
@@ -1517,7 +1517,7 @@ return [
     'padding' => 'المسافة',
     'hero_section' => 'قسم البطل',
     'services_section' => 'قسم الخدمات',
-    'services_description' => 'قسم الخدمات',
+    // 'services_description' => 'قسم الخدمات',
     'top_bottom' => 'الأعلى/الأسفل',
     'left_right' => 'اليسار/اليمين',
 
@@ -2095,6 +2095,7 @@ return [
     'fixed_support_direct_call' => 'اتصال مباشر',
     'fixed_support_manage_account' => 'فتح وادارة حسابك',
     'fixed_support_remaining_time' => 'الوقت المتبقي',
+    'fixed_support_out_of_hours' => 'خارج مواعيد العميل',
 
     // ==================== Ticket Assignment ====================
     'ticket_assigned_to_department' => 'تذكرة جديدة محالة إلى قسم: :subject',

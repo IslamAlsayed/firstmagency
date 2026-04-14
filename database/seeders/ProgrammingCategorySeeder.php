@@ -63,6 +63,13 @@ class ProgrammingCategorySeeder extends Seeder
                 'image' => '5.png',
                 'order' => 5,
             ],
+            [
+                'name' => 'Digital Marketing',
+                'name_ar' => 'التسويق الرقمي',
+                'alt_text' => 'Digital Marketing',
+                'image' => '2.png',
+                'order' => 6,
+            ],
         ];
 
         // Paths configuration
