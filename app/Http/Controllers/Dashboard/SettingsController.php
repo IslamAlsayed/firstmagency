@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingRequest;
 use App\Models\Setting;
 use App\Traits\PhotoUploadTrait;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class SettingsController extends Controller
@@ -22,6 +23,8 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update($request->all());
+        // Clear cache after updating settings
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_fonts_applied'));
     }
 
@@ -29,6 +32,7 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update($request->all());
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_applied'));
     }
 
@@ -36,6 +40,7 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update($request->all());
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_colors_fonts_applied'));
     }
 
@@ -43,7 +48,7 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update($request->all());
-
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_fonts_applied'));
     }
 
@@ -57,6 +62,7 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update($request->all());
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_general_applied'));
     }
 
@@ -70,7 +76,7 @@ class SettingsController extends Controller
         }
 
         $settings->update(['sections_padding' => $defaultSectionsPadding]);
-
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.inline_padding_reset'));
     }
 
@@ -97,6 +103,7 @@ class SettingsController extends Controller
 
         $settings = Setting::first();
         $settings->update($request->all());
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.settings_updated') . ' ' . __('messages.settings_general_applied'));
     }
 
@@ -123,6 +130,7 @@ class SettingsController extends Controller
             $this->uploadSinglePhoto($request, $settings, 'about_us_image2', 'settings/about-us');
         }
 
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.about_us_settings_updated'));
     }
 
@@ -140,6 +148,7 @@ class SettingsController extends Controller
             $this->uploadSinglePhoto($request, $settings, 'website_design_image', 'settings/website-design');
         }
 
+        Cache::clear();
         return redirect()->back()->withSuccess(__('messages.about_us_settings_updated'));
     }
 
@@ -150,6 +159,7 @@ class SettingsController extends Controller
     {
         $settings = Setting::first();
         $settings->update(['debug_mode' => !$settings->debug_mode]);
+        Cache::clear();
         $status = $settings->debug_mode ? 'enabled' : 'disabled';
         return redirect()->back()->withSuccess(str_replace(':status', $status, __('messages.debug_mode_toggled')));
     }
@@ -172,7 +182,7 @@ class SettingsController extends Controller
         }
 
         $settings->update(['debug_ips' => !empty($validated_ips) ? json_encode($validated_ips) : null]);
-
+        Cache::clear();
         return redirect()->back()->withSuccess(str_replace(':count', count($validated_ips), __('messages.debug_ips_saved')));
     }
 
@@ -207,7 +217,7 @@ class SettingsController extends Controller
                 $allowedIps[] = $currentIp;
                 $settings->debug_ips = json_encode($allowedIps);
                 $settings->save();
-
+                Cache::clear();
                 Log::info('IP added successfully', ['ip' => $currentIp, 'all_ips' => $allowedIps]);
 
                 return redirect()->back()->withSuccess(str_replace(':ip', $currentIp, __('messages.your_ip_added')));
