@@ -145,7 +145,7 @@ class DepartmentController extends Controller
 
         // Get the new department details
         $newDepartment = Department::find($department);
-        $departmentName = $newDepartment ? $newDepartment->name : __('main.no_department');
+        $departmentName = $newDepartment ?  (session('website_locale') == 'ar' ? $newDepartment->name_ar : $newDepartment->name) : __('main.no_department');
 
         // Get the user associated with the department
         if ($newDepartment && $newDepartment->user) {
@@ -164,7 +164,7 @@ class DepartmentController extends Controller
             'field' => 'department.id',
             'old_value' => $oldDepartmentId,
             'new_value' => $department,
-            'status_label' => __('main.' . str_replace('-', '_', str_replace(' ', '_', $departmentName)), [], getActiveUser()->website_locale),
+            'status_label' => $departmentName,
             'department' => $newDepartment ? [
                 'id' => $newDepartment->id,
                 'name' => $newDepartment?->name ?? 'support_',

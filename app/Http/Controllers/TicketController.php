@@ -241,6 +241,8 @@ class TicketController extends Controller
 
         $ticketData = $ticket->toArray();
         $ticketData['messages'] = $messagesData;
+        // dd($ticket->toArray(), $ticketData);
+        // dd($ticket->toArray());
 
         return view('website.tickets.show', compact('ticket', 'ticketData'));
     }
